@@ -1,0 +1,283 @@
+<div class="row">
+    <div class="col-8">
+        <h1>Add Item</h1>
+
+        <form novalidate [formGroup]="addItemForm" (ngSubmit)="addItem()">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="form-control">
+                        <input matInput placeholder="Item name" value="" required formControlName="name">
+                    </mat-form-field>
+                    <mat-checkbox formControlName="knownByName">Known by name?</mat-checkbox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <mat-form-field>
+                        <mat-select placeholder="Item type" formControlName="itemType">
+                            <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.name">
+                                {{itemType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field>
+                        <mat-select placeholder="Item slot" formControlName="itemSlotType">
+                            <mat-option *ngFor="let itemSlotType of itemSlotTypes" [value]="itemSlotType.name">
+                                {{itemSlotType.name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Minimum Level" value="" formControlName="minLevel">
+                        <mat-hint align="start"><strong>The level player needs to use this item</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div *ngIf="showWeaponSection">
+                <h2>Weapon</h2>
+                <div class="row">
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-select placeholder="Weapon type" formControlName="weaponType">
+                                <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.id">
+                                    {{weaponType.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+
+                    </div>
+
+                    <div class="col-4">
+                        <mat-form-field>
+                            <mat-select placeholder="Attack type" formControlName="attackType">
+                                <mat-option *ngFor="let attackType of attackTypes" [value]="attackType.id">
+                                    {{attackType.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-4">
+
+                        <mat-form-field>
+                            <mat-select placeholder="Damage type" formControlName="damageType">
+                                <mat-option *ngFor="let damageType of damageTypes" [value]="damageType.name">
+                                    {{damageType.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Minimum Damage" value="" formControlName="minDamage">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-6">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Maximum Damage" value="" formControlName="maxDamage">
+                        </mat-form-field>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div *ngIf="showArmourSection">
+                <h2>Armour</h2>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-select placeholder="Armour type" formControlName="armourType">
+                                <mat-option *ngFor="let armourType of armourTypes" [value]="armourType.id">
+                                    {{armourType.name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-3">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="AC pierce" value="" formControlName="acPierce">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col-3">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="AC bash" value="" formControlName="acBash">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="AC slash" value="" formControlName="acSlash">
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="AC magic" value="" formControlName="acMagic">
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <h2>Modifiers</h2>
+            <div class="row">
+                <div class="col-4">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Hit roll" value="" formControlName="hitRoll">
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Damage roll" value="" formControlName="damRoll">
+                    </mat-form-field>
+                </div>
+                <div class="col-4">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Saves" value="" formControlName="saves">
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="+/- HP" value="" formControlName="hpMod">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="+/- Mana" value="" formControlName="manaMod">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="+/- Moves" value="" formControlName="movesMod">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="+/- Spell Damage" value="" formControlName="spellMod">
+                    </mat-form-field>
+                </div>
+            </div>
+            <h2>Item flags</h2>
+            <div class="row" [formGroup]="addItemForm.get('flags')">
+
+
+                <div class="col-2" *ngFor="let flag of flags">
+                    <mat-checkbox value="{{flag.id}}" [formControlName]="flag.name">{{flag.name}}</mat-checkbox>
+                </div>
+
+            </div>
+
+            <h2>Descriptions</h2>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Item Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="lookDescription"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Examine Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="examDescription"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Room Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="roomDescription"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Smell Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="smellDescription"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Touch Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="touchDescription"></textarea>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <mat-label>Taste Description</mat-label>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="tasteDescription"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <h2>Item room properties</h2>
+            <div class="row">
+                <div class="col-3">
+                    <mat-checkbox>Hidden in room</mat-checkbox>
+                </div>
+                <div class="col-3">
+                    <mat-checkbox>Hidden (discoverable)</mat-checkbox>
+                </div>
+                <div class="col-3">
+                    <mat-checkbox>Stuck in room</mat-checkbox>
+                </div>
+            </div>
+
+            <h2>Miscellaneous Properties</h2>
+
+            <div class="row">
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Condition">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Weight">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Decay delay">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Forage Rank">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+                    <mat-form-field>
+                        <input matInput type="number" placeholder="Item Uses">
+                    </mat-form-field>
+                </div>
+                <div class="col-3">
+
+                    <mat-checkbox>Infinite Use</mat-checkbox>
+
+                </div>
+            </div> -->
+
+            <button mat-raised-button color="primary" type="submit">Add Item</button>
+        </form>
+
+    </div>
+
+    <div class="col-4">
+
+    </div>
+</div>
