@@ -2,7 +2,7 @@
 
 This is the content management system project for ArchaicQuest II.
 
-The main goal is to have all the content for the game managened from the web, this includes:
+The main goal is to have all the content for the game managed from the web, this includes:
 * Items - In progress
 * Mobs
 * Mob Scripts (Responding to events, moving from a to b, other basic AI)
