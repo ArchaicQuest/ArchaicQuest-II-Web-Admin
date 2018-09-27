@@ -130,6 +130,28 @@
                 </div>
             </div>
 
+            <div *ngIf="showBookSection">
+                <h2>Book</h2>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <input matInput type="number" placeholder="Number of pages" value="" formControlName="pageCount">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row" [formGroup]="addItemForm.get('pages')">
+                    <div class="col-12" *ngFor="let page of pages; let i = index;">
+                        <mat-form-field>
+                            <mat-label>Page {{i + 1}}</mat-label>
+                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="page{{i}}"></textarea>
+                        </mat-form-field>
+
+                    </div>
+                    <a href="#" mat-raised-button color="secodary" (click)="addPage()">Add another page</a>
+                </div>
+            </div>
+
 
 
             <h2>Modifiers</h2>

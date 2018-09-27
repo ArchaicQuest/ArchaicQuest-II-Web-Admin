@@ -24,9 +24,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
     attackTypes: ItemType[];
     damageTypes: ItemType[];
     flags: ItemType[];
+    pages: number[] = [];
     showWeaponSection = false;
     showArmourSection = false;
-
+    showBookSection = false;
 
     constructor(private formBuilder: FormBuilder, private ngZone: NgZone, private store: Store<ItemAppState>) { }
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -55,6 +56,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             manaMod: [''],
             movesMod: [''],
             spellMod: [''],
+            pageCount: [''],
+            pages: new FormGroup({}),
             flags: new FormGroup({}),
             lookDescription: ['', Validators.required],
             roomDescription: [''],
@@ -83,7 +86,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
             takeWhile(() => this.componentActive))
             .subscribe(
                 (itemTypes: any) => {
-                    console.log('in component ', itemTypes)
                     this.itemTypes = itemTypes;
                 }
             );
@@ -142,14 +144,30 @@ export class AddItemComponent implements OnDestroy, OnInit {
                     //  console.log(this.addItemForm)
                 }
             );
+
+        this.addPage();
     }
 
     get getFlagControl(): FormArray {
         return this.addItemForm.get('flags') as FormArray;
     }
 
+    get getPageControl(): FormArray {
+        return this.addItemForm.get('pages') as FormArray;
+    }
+
     addFlag() {
         this.getFlagControl.push(this.formBuilder.control(''));
+    }
+
+    addPage() {
+
+        this.pages.push(1);
+        let i = 0;
+        this.pages.forEach(() => {
+            (this.addItemForm.controls['pages'] as FormGroup).addControl(`page${i}`, new FormControl());
+            i++;
+        });
     }
 
     ngOnDestroy(): void {
@@ -165,14 +183,16 @@ export class AddItemComponent implements OnDestroy, OnInit {
     toggleItemSection(event: string) {
         const itemType = event;
 
-        console.log(itemType);
         this.showArmourSection = false;
         this.showWeaponSection = false;
+        this.showBookSection = false;
 
         if (itemType === 'Armour') {
             this.showArmourSection = true;
         } else if (itemType === 'Weapon') {
             this.showWeaponSection = true;
+        } else if (itemType === 'Book') {
+            this.showBookSection = true;
         }
     }
 
