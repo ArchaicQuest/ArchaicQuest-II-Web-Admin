@@ -2,11 +2,14 @@ import { Description } from '../../shared/interfaces/description.interface';
 import { ItemModifier } from './item-modifier.interface';
 import { Damage } from './damage.interface';
 import { ArmourRating } from './armourRating.interface';
+import { Book } from './book.interface';
 
 export interface Item {
+    id?: number;
     name: string;
     knownByName: boolean;
     description: Description;
+    book: Book;
     // Alt selector
     keywords: string[];
     isHiddenInRoom: boolean;

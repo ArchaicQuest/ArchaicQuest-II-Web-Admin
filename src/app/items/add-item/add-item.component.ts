@@ -197,12 +197,24 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     addItem() {
+        const pages: string[] = [];
+
+        Object.keys(this.addItemForm.get('pages').value).forEach(page => {
+
+            console.log(this.addItemForm.get('pages').value[page])
+            pages.push(this.addItemForm.get('pages').value[page])
+        });
         console.log(this.addItemForm.get('roomDescription').value)
         const item: Item = {
             name: this.addItemForm.get('name').value,
-            knownByName: this.addItemForm.get('knownByName').value,
+            knownByName: this.addItemForm.get('knownByName').value || false,
             itemType: this.addItemForm.get('itemType').value,
-            slot: this.addItemForm.get('itemSlotType').value,
+            slot: this.addItemForm.get('itemSlotType').value || 0,
+            book: {
+                pageCount: this.addItemForm.get('pageCount').value || 0,
+                pages: pages,
+                blank: this.addItemForm.get('pages').value.length > 1
+            },
             description: {
                 Room: this.addItemForm.get('roomDescription').value,
                 Exam: this.addItemForm.get('examDescription').value,
@@ -215,15 +227,15 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 armour: this.addItemForm.get('acPierce').value,
                 magic: this.addItemForm.get('acMagic').value,
             },
-            attackType: this.addItemForm.get('attackType').value,
+            attackType: this.addItemForm.get('attackType').value || 0,
             damage: {
-                DiceRoll: this.addItemForm.get('minDamage').value,
-                DieSize: this.addItemForm.get('maxDamage').value
+                DiceRoll: this.addItemForm.get('minDamage').value || 1,
+                DieSize: this.addItemForm.get('maxDamage').value || 1
             },
-            weaponType: this.addItemForm.get('weaponType').value,
+            weaponType: this.addItemForm.get('weaponType').value || 0,
             condition: 1,
             containerItems: [],
-            damageType: this.addItemForm.get('damageType').value,
+            damageType: this.addItemForm.get('damageType').value || 0,
             decayTimer: 2,
             forageRank: 0,
             hidden: false,
