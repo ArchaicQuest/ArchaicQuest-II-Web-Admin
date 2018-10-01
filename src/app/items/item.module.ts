@@ -8,7 +8,8 @@ import { addItemReducer } from './state/add-item.reducer';
 import { AddItemEffects } from './state/add-item.effects';
 import { SharedModule } from '../shared/shared.module';
 import { AddItemComponent } from './add-item/add-item.component';
-import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatButtonModule, MatTableModule, MatPaginatorModule, } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
+     MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule } from '@angular/material';
 import { ViewItemsComponent } from './view-items/view-items.component';
 
 
@@ -26,7 +27,8 @@ import { ViewItemsComponent } from './view-items/view-items.component';
         MatCheckboxModule,
         MatButtonModule,
         MatTableModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatAutocompleteModule
     ],
     declarations: [
         AddItemComponent,

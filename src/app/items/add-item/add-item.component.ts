@@ -2,13 +2,15 @@ import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
-import { takeWhile, take } from 'rxjs/operators';
+import { takeWhile, take, startWith, map } from 'rxjs/operators';
 import { ItemType } from '../interfaces/item-type.interface';
 import { ItemAppState } from '../state/add-item.state';
 import { GetItemTypes, GetItemSlotTypes, GetArmourTypes, PostItem, PostItemSuccess, GetFlags, GetWeaponTypes, GetDamageTypes, GetAttackTypes } from '../state/add-item.actions';
 import { getItemTypes, getItemSlotTypes, getArmourTypes, getFlags, getWeaponTypes, getDamageTypes, getAttackTypes } from '../state/add-item.selector';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Item } from '../interfaces/item.interface';
+import { Observable } from 'rxjs';
+import { ItemService } from './add-item.service';
 
 @Component({
     templateUrl: './add-item.component.html',
@@ -28,8 +30,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
     showWeaponSection = false;
     showArmourSection = false;
     showBookSection = false;
+    showContainerSection = false;
 
-    constructor(private formBuilder: FormBuilder, private ngZone: NgZone, private store: Store<ItemAppState>) { }
+    options: string[] = ['One', 'Two', 'Three'];
+    filteredOptions: Observable<string[]>;
+
+    constructor(private formBuilder: FormBuilder, private ngZone: NgZone,
+        private store: Store<ItemAppState>, private itemService: ItemService) { }
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     ngOnInit() {
@@ -64,8 +71,15 @@ export class AddItemComponent implements OnDestroy, OnInit {
             examDescription: [''],
             smellDescription: [''],
             touchDescription: [''],
-            tasteDescription: ['']
+            tasteDescription: [''],
+            selectContainerItem: ['']
         });
+
+        this.filteredOptions = this.addItemForm.get('selectContainerItem').valueChanges
+            .pipe(
+                startWith(''),
+                map(value => this._filter(value))
+            );
 
 
 
@@ -148,6 +162,21 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.addPage();
     }
 
+
+    private _filter(value: string): string[] {
+
+        const options: string[] = [];
+        this.itemService.autocompleteItems(value).subscribe((items) => {
+
+            items.forEach((i) => {
+                options.push(i.name);
+            });
+
+            return options;
+        });
+        return options;
+    }
+
     get getFlagControl(): FormArray {
         return this.addItemForm.get('flags') as FormArray;
     }
@@ -193,6 +222,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.showWeaponSection = true;
         } else if (itemType === 'Book') {
             this.showBookSection = true;
+        } else if (itemType === 'Container') {
+            this.showContainerSection = true;
         }
     }
 

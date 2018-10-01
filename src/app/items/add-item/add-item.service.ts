@@ -18,6 +18,7 @@ export class ItemService {
     private weaponTypeUrl = `${this.host}item/ReturnWeaponTypes`;
     private flagTypeUrl = `${this.host}item/ReturnFlagTypes`;
     private addItemUrl = `${this.host}item/PostItem`;
+    private autoCompleteUrl = `${this.host}item//FindItems?query=`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -52,6 +53,11 @@ export class ItemService {
     getFlagTypes(): Observable<ItemType[]> {
         return this.http.get<ItemType[]>(this.flagTypeUrl);
     }
+
+    autocompleteItems(query: string): Observable<ItemType[]> {
+        return this.http.get<ItemType[]>(`${this.autoCompleteUrl}${query}`);
+    }
+
 
     addItem(item: Item): any {
         console.log("post this ", item);
