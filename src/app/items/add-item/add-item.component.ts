@@ -210,6 +210,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             knownByName: this.addItemForm.get('knownByName').value || false,
             itemType: this.addItemForm.get('itemType').value,
             slot: this.addItemForm.get('itemSlotType').value || 0,
+            container: null,
             book: {
                 pageCount: this.addItemForm.get('pageCount').value || 0,
                 pages: pages,

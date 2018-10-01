@@ -3,6 +3,7 @@ import { ItemModifier } from './item-modifier.interface';
 import { Damage } from './damage.interface';
 import { ArmourRating } from './armourRating.interface';
 import { Book } from './book.interface';
+import { Container } from '@angular/compiler/src/i18n/i18n_ast';
 
 export interface Item {
     id?: number;
@@ -10,6 +11,7 @@ export interface Item {
     knownByName: boolean;
     description: Description;
     book: Book;
+    container: Container;
     // Alt selector
     keywords: string[];
     isHiddenInRoom: boolean;
