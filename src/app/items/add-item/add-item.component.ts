@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
-import { takeWhile, take, startWith, map } from 'rxjs/operators';
+import { takeWhile, take, startWith, map, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ItemType } from '../interfaces/item-type.interface';
 import { ItemAppState } from '../state/add-item.state';
 import { GetItemTypes, GetItemSlotTypes, GetArmourTypes, PostItem, PostItemSuccess, GetFlags, GetWeaponTypes, GetDamageTypes, GetAttackTypes } from '../state/add-item.actions';
@@ -32,8 +32,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
     showBookSection = false;
     showContainerSection = false;
 
-    options: string[] = ['One', 'Two', 'Three'];
-    filteredOptions: Observable<string[]>;
+    options: Item[] = [];
+    filteredOptions: Observable<Item[]>;
 
     constructor(private formBuilder: FormBuilder, private ngZone: NgZone,
         private store: Store<ItemAppState>, private itemService: ItemService) { }
@@ -77,9 +77,17 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         this.filteredOptions = this.addItemForm.get('selectContainerItem').valueChanges
             .pipe(
-                startWith(''),
-                map(value => this._filter(value))
-            );
+                startWith(null),
+                debounceTime(200),
+                distinctUntilChanged(),
+                switchMap(name => {
+                    if (typeof name !== 'string') {
+                        return;
+                    }
+                    return this._filter(name);
+                }));
+
+
 
 
 
@@ -163,18 +171,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
 
-    private _filter(value: string): string[] {
+    private _filter(value: string): Observable<Item[]> {
+        return this.itemService.autocompleteItems(value);
+    }
 
-        const options: string[] = [];
-        this.itemService.autocompleteItems(value).subscribe((items) => {
-
-            items.forEach((i) => {
-                options.push(i.name);
-            });
-
-            return options;
-        });
-        return options;
+    displayFn(item?: Item): string | undefined {
+        console.log(item)
+        return item ? item.name : undefined;
     }
 
     get getFlagControl(): FormArray {

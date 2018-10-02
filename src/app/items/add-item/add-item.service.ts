@@ -54,8 +54,8 @@ export class ItemService {
         return this.http.get<ItemType[]>(this.flagTypeUrl);
     }
 
-    autocompleteItems(query: string): Observable<ItemType[]> {
-        return this.http.get<ItemType[]>(`${this.autoCompleteUrl}${query}`);
+    autocompleteItems(query: string): Observable<Item[]> {
+        return this.http.get<Item[]>(`${this.autoCompleteUrl}${query}`);
     }
 
 
