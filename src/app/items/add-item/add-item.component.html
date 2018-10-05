@@ -159,9 +159,9 @@
                 <div class="row">
                     <div class="col">
                         <mat-form-field>
-                            <mat-select placeholder="Container size" formControlName="itemType">
-                                <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.name">
-                                    {{itemType.name}}
+                            <mat-select placeholder="Container size" formControlName="containerSize">
+                                <mat-option *ngFor="let size of containerSize" [value]="size.id">
+                                    {{size.name}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -176,16 +176,16 @@
                 <div class="row">
                     <div class="col">
                         <div>
-                            <mat-checkbox formControlName="containerOpen">Is Locked</mat-checkbox>
+                            <mat-checkbox formControlName="containerLocked">Is Locked</mat-checkbox>
                         </div>
 
 
                         <div>
 
                             <mat-form-field class="example-full-width">
-                                <input type="text" placeholder="Associate a key" aria-label="Assignee" matInput formControlName="selectContainerItem" [matAutocomplete]="auto">
+                                <input type="text" placeholder="Associate a key" aria-label="Assignee" matInput formControlName="selectContainerKey" [matAutocomplete]="auto">
                                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    <mat-option *ngFor="let option of findKeyOptions | async" [value]="option">
                                         {{option.name}}
                                     </mat-option>
                                 </mat-autocomplete>
@@ -198,9 +198,9 @@
                 <div class="row">
                     <div class="col">
                         <mat-form-field>
-                            <mat-select placeholder="Lock strength" formControlName="itemType">
-                                <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.name">
-                                    {{itemType.name}}
+                            <mat-select placeholder="Lock strength" formControlName="lockStrength">
+                                <mat-option *ngFor="let lock of lockStrength" [value]="lock.id">
+                                    {{lock.name}}
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -210,9 +210,9 @@
                 <div class="row">
                     <div class="col">
                         <strong>Container Items</strong>
-                        <ul>
-                            <li>A sword x2</li>
-                            <li>A potion</li>
+                        <ul >
+                            <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a href="javascript:void(0)" (click)="removeItemFromContainer(i)">Remove</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -234,7 +234,7 @@
                 <div class="row">
 
                 </div>
-                <a href="javascript:(0)" mat-raised-button color="secodary" (click)="addPage()">Add item</a>
+                <a href="javascript:(0)" mat-raised-button color="secodary" (click)="addItemToContainer()">Add item</a>
             </div>
 
 

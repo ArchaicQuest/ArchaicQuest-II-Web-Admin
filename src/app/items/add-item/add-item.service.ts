@@ -18,7 +18,10 @@ export class ItemService {
     private weaponTypeUrl = `${this.host}item/ReturnWeaponTypes`;
     private flagTypeUrl = `${this.host}item/ReturnFlagTypes`;
     private addItemUrl = `${this.host}item/PostItem`;
-    private autoCompleteUrl = `${this.host}item//FindItems?query=`;
+    private autoCompleteUrl = `${this.host}item/FindItems?query=`;
+    private findKeyUrl = `${this.host}item/FindKeys?query=`;
+    private containerSizeUrl = `${this.host}/item/containersize`;
+    private LockStrengthUrl = `${this.host}/item/LockStrength`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -54,10 +57,21 @@ export class ItemService {
         return this.http.get<ItemType[]>(this.flagTypeUrl);
     }
 
+    getContainerSize(): Observable<ItemType[]> {
+      return this.http.get<ItemType[]>(this.containerSizeUrl);
+    }
+
+    getLockStrength(): Observable<ItemType[]> {
+      return this.http.get<ItemType[]>(this.LockStrengthUrl);
+    }
+
     autocompleteItems(query: string): Observable<Item[]> {
         return this.http.get<Item[]>(`${this.autoCompleteUrl}${query}`);
     }
 
+    findKeyItems(query: string): Observable<Item[]> {
+      return this.http.get<Item[]>(`${this.findKeyUrl}${query}`);
+  }
 
     addItem(item: Item): any {
         console.log("post this ", item);
