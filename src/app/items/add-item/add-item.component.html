@@ -170,48 +170,55 @@
 
                 <div class="row">
                     <div class="col">
-                        <mat-checkbox formControlName="containerOpen">Is Open</mat-checkbox>
+
+                        <mat-checkbox formControlName="containerCanOpen">Can Open</mat-checkbox>
+
+                    </div>
+                    <div class="col">
+                        <mat-checkbox [disabled]="!containerCanBeOpened" formControlName="containerOpen">Is Open</mat-checkbox>
+                    </div>
+
+                    <div class="col">
+                        <mat-checkbox formControlName="containerCanLock">Can Lock</mat-checkbox>
+                    </div>
+                    <div class="col">
+                        <mat-checkbox [disabled]="!containerCanBeLocked" formControlName="containerLocked">Is Locked</mat-checkbox>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <div>
-                            <mat-checkbox formControlName="containerLocked">Is Locked</mat-checkbox>
-                        </div>
-
-
-                        <div>
+                <div [hidden]="!containerCanBeLocked">
+                    <div class="row">
+                        <div class="col">
 
                             <mat-form-field class="example-full-width">
-                                <input type="text" placeholder="Associate a key" aria-label="Assignee" matInput formControlName="selectContainerKey" [matAutocomplete]="auto">
-                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                <input type="text" placeholder="Associate a key" aria-label="Link key to container lock" matInput formControlName="selectContainerKey"
+                                    [matAutocomplete]="autoKeys">
+                                <mat-autocomplete #autoKeys="matAutocomplete" [displayWith]="displayKeys">
                                     <mat-option *ngFor="let option of findKeyOptions | async" [value]="option">
                                         {{option.name}}
                                     </mat-option>
                                 </mat-autocomplete>
                             </mat-form-field>
+
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field>
+                                <mat-select placeholder="Lock strength" formControlName="lockStrength">
+                                    <mat-option *ngFor="let lock of lockStrength" [value]="lock.id">
+                                        {{lock.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </div>
                     </div>
+
                 </div>
-
-
-                <div class="row">
-                    <div class="col">
-                        <mat-form-field>
-                            <mat-select placeholder="Lock strength" formControlName="lockStrength">
-                                <mat-option *ngFor="let lock of lockStrength" [value]="lock.id">
-                                    {{lock.name}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
-                    </div>
-                </div>
-
                 <div class="row">
                     <div class="col">
                         <strong>Container Items</strong>
-                        <ul >
-                            <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a href="javascript:void(0)" (click)="removeItemFromContainer(i)">Remove</a></li>
+                        <ul>
+                            <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a href="javascript:void(0)"
+                                    (click)="removeItemFromContainer(i)">Remove</a></li>
 
                         </ul>
                     </div>
@@ -229,12 +236,18 @@
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
+                        <a href="javascript:(0)" mat-raised-button color="secodary" (click)="addItemToContainer()">Add item</a>
                     </div>
-                </div>
-                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="example-full-width">
+                            <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins" matInput #goldCoins>
+                        </mat-form-field>
+
+                    </div>
 
                 </div>
-                <a href="javascript:(0)" mat-raised-button color="secodary" (click)="addItemToContainer()">Add item</a>
+
+
             </div>
 
 
