@@ -7,6 +7,9 @@
                 <div class="col">
                     <mat-form-field class="form-control">
                         <input matInput placeholder="Item name" value="" required formControlName="name">
+                        <mat-error *ngIf="addItemForm.get('name').hasError('required')">
+                            Item name is required.
+                        </mat-error>
                     </mat-form-field>
                     <mat-checkbox formControlName="knownByName">Known by name?</mat-checkbox>
                 </div>
@@ -14,20 +17,26 @@
             <div class="row">
                 <div class="col-4">
                     <mat-form-field>
-                        <mat-select placeholder="Item type" formControlName="itemType">
+                        <mat-select placeholder="Item type" formControlName="itemType" required>
                             <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.name">
                                 {{itemType.name}}
                             </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="addItemForm.get('itemType').hasError('required')">
+                            Item type is required.
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-4">
                     <mat-form-field>
-                        <mat-select placeholder="Item slot" formControlName="itemSlotType">
+                        <mat-select placeholder="Item slot" formControlName="itemSlotType" required>
                             <mat-option *ngFor="let itemSlotType of itemSlotTypes" [value]="itemSlotType.name">
                                 {{itemSlotType.name}}
                             </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="addItemForm.get('itemType').hasError('required')">
+                            Item slot is required.
+                        </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col-4">
@@ -43,22 +52,28 @@
                 <div class="row">
                     <div class="col-4">
                         <mat-form-field>
-                            <mat-select placeholder="Weapon type" formControlName="weaponType">
+                            <mat-select placeholder="Weapon type" formControlName="weaponType" required>
                                 <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.id">
                                     {{weaponType.name}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="addItemForm.get('weaponType').hasError('required')">
+                                Weapon type is required.
+                            </mat-error>
                         </mat-form-field>
 
                     </div>
 
                     <div class="col-4">
                         <mat-form-field>
-                            <mat-select placeholder="Attack type" formControlName="attackType">
+                            <mat-select placeholder="Attack type" formControlName="attackType" required>
                                 <mat-option *ngFor="let attackType of attackTypes" [value]="attackType.id">
                                     {{attackType.name}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="addItemForm.get('attackType').hasError('required')">
+                                Weapon type is required.
+                            </mat-error>
                         </mat-form-field>
                     </div>
 
@@ -77,13 +92,23 @@
                 <div class="row">
                     <div class="col-6">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="Minimum Damage" value="" formControlName="minDamage">
+                            <input matInput type="number" placeholder="Minimum Damage" value="" formControlName="minDamage"
+                                required>
+                            <mat-error *ngIf="addItemForm.get('minDamage').hasError('required')">
+                                Min damage is required.
+                            </mat-error>
+                            <mat-hint align="start"><strong>can be 1 to 50</strong> </mat-hint>
                         </mat-form-field>
                     </div>
 
                     <div class="col-6">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="Maximum Damage" value="" formControlName="maxDamage">
+                            <input matInput type="number" placeholder="Maximum Damage" value="" formControlName="maxDamage"
+                                required>
+                            <mat-error *ngIf="addItemForm.get('maxDamage').hasError('required')">
+                                Max damage is required.
+                            </mat-error>
+                            <mat-hint align="start"><strong>can be 1 to 100</strong> </mat-hint>
                         </mat-form-field>
                     </div>
                 </div>
@@ -97,11 +122,14 @@
                 <div class="row">
                     <div class="col">
                         <mat-form-field>
-                            <mat-select placeholder="Armour type" formControlName="armourType">
+                            <mat-select placeholder="Armour type" formControlName="armourType" required>
                                 <mat-option *ngFor="let armourType of armourTypes" [value]="armourType.id">
                                     {{armourType.name}}
                                 </mat-option>
                             </mat-select>
+                            <mat-error *ngIf="addItemForm.get('armourType').hasError('required')">
+                                Armour Type is required.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -136,7 +164,11 @@
                 <div class="row">
                     <div class="col">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="Number of pages" value="" formControlName="pageCount">
+                            <input matInput type="number" placeholder="Number of pages" value="" formControlName="pageCount"
+                                required>
+                            <mat-error *ngIf="addItemForm.get('pageCount').hasError('required')">
+                                Number of pages is required.
+                            </mat-error>
                         </mat-form-field>
                     </div>
                 </div>
@@ -144,7 +176,8 @@
                     <div class="col-12" *ngFor="let page of pages; let i = index;">
                         <mat-form-field>
                             <mat-label>Page {{i + 1}}</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="page{{i}}"></textarea>
+                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                                cdkAutosizeMaxRows="20" formControlName="page{{i}}"></textarea>
                         </mat-form-field>
 
                     </div>
@@ -159,7 +192,7 @@
                 <div class="row">
                     <div class="col">
                         <mat-form-field>
-                            <mat-select placeholder="Container size" formControlName="containerSize">
+                            <mat-select placeholder="Container size" formControlName="containerSize" required>
                                 <mat-option *ngFor="let size of containerSize" [value]="size.id">
                                     {{size.name}}
                                 </mat-option>
@@ -190,8 +223,8 @@
                         <div class="col">
 
                             <mat-form-field class="example-full-width">
-                                <input type="text" placeholder="Associate a key" aria-label="Link key to container lock" matInput formControlName="selectContainerKey"
-                                    [matAutocomplete]="autoKeys">
+                                <input type="text" placeholder="Associate a key" aria-label="Link key to container lock"
+                                    matInput formControlName="selectContainerKey" [matAutocomplete]="autoKeys">
                                 <mat-autocomplete #autoKeys="matAutocomplete" [displayWith]="displayKeys">
                                     <mat-option *ngFor="let option of findKeyOptions | async" [value]="option">
                                         {{option.name}}
@@ -228,19 +261,21 @@
                     <div class="col">
 
                         <mat-form-field class="example-full-width">
-                            <input type="text" placeholder="Search for an item" aria-label="Assignee" matInput formControlName="selectContainerItem"
-                                [matAutocomplete]="auto">
+                            <input type="text" placeholder="Search for an item" aria-label="Assignee" matInput
+                                formControlName="selectContainerItem" [matAutocomplete]="auto">
                             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
                                 <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                                     {{option.name}}
                                 </mat-option>
                             </mat-autocomplete>
                         </mat-form-field>
-                        <a href="javascript:(0)" mat-raised-button color="secodary" (click)="addItemToContainer()">Add item</a>
+                        <a href="javascript:(0)" mat-raised-button color="secodary" (click)="addItemToContainer()">Add
+                            item</a>
                     </div>
                     <div class="col">
                         <mat-form-field class="example-full-width">
-                            <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins" matInput #goldCoins>
+                            <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins" matInput
+                                #goldCoins>
                         </mat-form-field>
 
                     </div>
@@ -308,37 +343,43 @@
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Item Description</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="lookDescription"></textarea>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="20" formControlName="lookDescription"></textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Examine Description</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="examDescription"></textarea>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="20" formControlName="examDescription"></textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Room Description</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="roomDescription"></textarea>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="20" formControlName="roomDescription"></textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Smell Description</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="smellDescription"></textarea>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="20" formControlName="smellDescription"></textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Touch Description</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="touchDescription"></textarea>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="20" formControlName="touchDescription"></textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Taste Description</mat-label>
-                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="tasteDescription"></textarea>
+                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                            cdkAutosizeMaxRows="20" formControlName="tasteDescription"></textarea>
                     </mat-form-field>
                 </div>
             </div>
@@ -393,7 +434,7 @@
                 </div>
             </div> -->
 
-            <button mat-raised-button color="primary" type="submit">Add Item</button>
+            <button mat-raised-button color="primary" type="submit" [disabled]="addItemForm.invalid">Add Item</button>
         </form>
 
     </div>

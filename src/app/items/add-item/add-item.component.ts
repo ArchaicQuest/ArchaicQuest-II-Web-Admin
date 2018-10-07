@@ -85,8 +85,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             weaponType: [''],
             attackType: [''],
             damageType: [''],
-            minDamage: [''],
-            maxDamage: [''],
+            minDamage: ['', [Validators.min(1), Validators.max(50)]],
+            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
             armourType: [''],
             acPierce: [''],
             acBash: [''],
@@ -324,17 +324,27 @@ export class AddItemComponent implements OnDestroy, OnInit {
     toggleItemSection(event: string) {
         const itemType = event;
 
+        this.addItemForm.get('armourType').disable();
         this.showArmourSection = false;
+        this.addItemForm.get('weaponType').disable();
+        this.addItemForm.get('attackType').disable();
         this.showWeaponSection = false;
         this.showBookSection = false;
+        this.addItemForm.get('pageCount').disable();
         this.showContainerSection = false;
+
+        this.addItemForm.updateValueAndValidity();
 
         if (itemType === 'Armour') {
             this.showArmourSection = true;
+            this.addItemForm.get('armourType').enable();
         } else if (itemType === 'Weapon') {
             this.showWeaponSection = true;
+            this.addItemForm.get('weaponType').enable();
+            this.addItemForm.get('attackType').enable();
         } else if (itemType === 'Book') {
             this.showBookSection = true;
+            this.addItemForm.get('pageCount').enable();
         } else if (itemType === 'Container') {
             this.showContainerSection = true;
         }
