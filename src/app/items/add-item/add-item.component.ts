@@ -286,6 +286,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     addPage() {
+
         this.pages.push(1);
         let i = 0;
         this.pages.forEach(() => {
@@ -363,7 +364,16 @@ export class AddItemComponent implements OnDestroy, OnInit {
             knownByName: this.addItemForm.get('knownByName').value || false,
             itemType: this.addItemForm.get('itemType').value,
             slot: this.addItemForm.get('itemSlotType').value || 0,
-            container: null,
+            container: {
+                associatedKeyId: this.addItemForm.get('selectContainerKey').value,
+                canLock: this.addItemForm.get('containerCanLock').value || false,
+                canOpen: this.addItemForm.get('containerCanOpen').value || false,
+                LockDifficulty: +this.addItemForm.get('lockStrength').value,
+                items: this.containerItems,
+                size: +this.addItemForm.get('containerSize').value,
+                isLocked: this.addItemForm.get('containerLocked').value || false,
+                isOpen: this.addItemForm.get('containerOpen').value || false,
+            },
             book: {
                 pageCount: this.addItemForm.get('pageCount').value || 0,
                 pages: pages,
