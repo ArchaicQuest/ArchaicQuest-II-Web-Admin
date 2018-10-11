@@ -6,4 +6,5 @@ export const itemRoutes: Routes = [
     { path: '', component: ViewItemsComponent },
     { path: 'items', component: ViewItemsComponent },
     { path: 'add-item', component: AddItemComponent },
+    { path: 'edit-item/:id', component: AddItemComponent },
 ];

@@ -18,7 +18,7 @@
                 <div class="col-4">
                     <mat-form-field>
                         <mat-select placeholder="Item type" formControlName="itemType" required>
-                            <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.name">
+                            <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.id">
                                 {{itemType.name}}
                             </mat-option>
                         </mat-select>
@@ -30,7 +30,7 @@
                 <div class="col-4">
                     <mat-form-field>
                         <mat-select placeholder="Item slot" formControlName="itemSlotType" required>
-                            <mat-option *ngFor="let itemSlotType of itemSlotTypes" [value]="itemSlotType.name">
+                            <mat-option *ngFor="let itemSlotType of itemSlotTypes" [value]="itemSlotType.id">
                                 {{itemSlotType.name}}
                             </mat-option>
                         </mat-select>
@@ -81,7 +81,7 @@
 
                         <mat-form-field>
                             <mat-select placeholder="Damage type" formControlName="damageType">
-                                <mat-option *ngFor="let damageType of damageTypes" [value]="damageType.name">
+                                <mat-option *ngFor="let damageType of damageTypes" [value]="damageType.id">
                                     {{damageType.name}}
                                 </mat-option>
                             </mat-select>

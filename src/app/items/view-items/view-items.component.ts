@@ -9,7 +9,7 @@ import { ViewItemsService } from './view-items.service';
 })
 export class ViewItemsComponent implements OnInit {
     items: Item[] = [];
-    displayedColumns: string[] = ['id', 'name', 'itemType', 'slot', 'description', 'examDesc', 'roomDesc', 'weaponType', 'attackType', 'armourType', 'itemFlag', 'questItem'];
+    displayedColumns: string[] = ['id', 'name', 'itemType', 'slot', 'description', 'examDesc', 'roomDesc', 'weaponType', 'attackType', 'armourType', 'itemFlag', 'questItem', 'actions'];
     dataSource: MatTableDataSource<Item>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -28,10 +28,6 @@ export class ViewItemsComponent implements OnInit {
             this.dataSource.paginator = this.paginator;
             this.dataSource.sort = this.sort;
         })
-
-
-
-
     }
 
     applyFilter(filterValue: string) {
@@ -40,7 +36,6 @@ export class ViewItemsComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
-
-
     }
+
 }
