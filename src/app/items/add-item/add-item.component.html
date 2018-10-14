@@ -339,19 +339,23 @@
             </div>
 
             <h2>Descriptions</h2>
+
+            {{selectedItem.description.Look}}
+            {{selectedItem.description.Look | json}}
+            {{selectedItem | json}}
             <div class="row">
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Item Description</mat-label>
                         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                            cdkAutosizeMaxRows="20" formControlName="lookDescription"></textarea>
+                            cdkAutosizeMaxRows="20" formControlName="lookDescription">{{selectedItem?.description.Look}}</textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">
                     <mat-form-field>
                         <mat-label>Examine Description</mat-label>
                         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                            cdkAutosizeMaxRows="20" formControlName="examDescription"></textarea>
+                            cdkAutosizeMaxRows="20" formControlName="examDescription">>{{selectedItem?.description?.Exam}}</textarea>
                     </mat-form-field>
                 </div>
                 <div class="col-6">

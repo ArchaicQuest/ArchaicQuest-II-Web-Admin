@@ -37,6 +37,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Item } from '../interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from './add-item.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     templateUrl: './add-item.component.html',
@@ -65,17 +66,22 @@ export class AddItemComponent implements OnDestroy, OnInit {
     options: Item[] = [];
     filteredOptions: Observable<Item[]>;
     findKeyOptions: Observable<Item[]>;
+    selectedItem: Item;
 
     constructor(
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
         private store: Store<ItemAppState>,
-        private itemService: ItemService
+        private itemService: ItemService,
+        private route: ActivatedRoute
     ) { }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
 
     ngOnInit() {
+
+
+
         this.addItemForm = this.formBuilder.group({
             name: ['', Validators.required],
             knownByName: [''],
@@ -251,6 +257,54 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.lockStrength = lockStrengthData;
         });
 
+
+        this.itemService.findItemById(this.route.snapshot.params['id']).subscribe(item => {
+            this.selectedItem = item;
+
+            this.selectedItem.description = item.description;
+            console.log(item.description)
+            this.addItemForm.patchValue({
+                name: item.name,
+                knownByName: item.knownByName,
+                itemType: item.itemType,
+                itemSlotType: item.slot,
+                minLevel: item.minLevel,
+                weaponType: item.weaponType,
+                attackType: item.attackType,
+                damageType: item.damageType,
+                minDamage: item.damage ? item.damage.DieSize : 0,
+                maxDamage: item.damage ? item.damage.DieSize : 0,
+                //  armourType: item.armourR,
+                acPierce: item.armourRating ? item.armourRating.armour : 0,
+                acBash: item.armourRating ? item.armourRating.armour : 0,
+                acSlash: item.armourRating ? item.armourRating.armour : 0,
+                acMagic: item.armourRating ? item.armourRating.magic : 0,
+                //  hitRol:,
+                // damRoll: [''],
+                // saves: [''],
+                // hpMod: [''],
+                // manaMod: [''],
+                // movesMod: [''],
+                // spellMod: [''],
+                // pageCount: [''],
+                //  pages: item.,
+                flags: item.itemFlags ? item.itemFlags : [],
+                lookDescription: item.description.Look,
+                roomDescription: item.description.Room,
+                examDescription: item.description.Exam,
+                smellDescription: item.description.Smell,
+                touchDescription: item.description.Touch,
+                tasteDescription: item.description.Taste,
+                selectContainerItem: item.container ? item.container.items : null,
+                containerOpen: item.container ? item.container.isOpen : false,
+                containerLocked: item.container ? item.container.isLocked : false,
+                containerCanLock: item.container ? item.container.canLock : false,
+                containerCanOpen: item.container ? item.container.canOpen : false,
+                lockStrength: item.container ? item.container.LockDifficulty : 0,
+                containerSize: item.container ? item.container.size : 0,
+                selectContainerKey: item.container ? item.container.associatedKeyId : ''
+            });
+        });
         this.addPage();
     }
 
@@ -263,13 +317,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     displayFn(item?: Item): string | undefined {
-        console.log("f", item);
+        console.log('f', item);
         return item != null ? item.name : undefined;
     }
 
     displayKeys(item?: Item): string | undefined {
 
-        console.log("hello", item);
+        console.log('hello', item);
         return item != null ? item.name : undefined;
     }
 

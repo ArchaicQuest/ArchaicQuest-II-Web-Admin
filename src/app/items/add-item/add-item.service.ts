@@ -22,6 +22,7 @@ export class ItemService {
     private findKeyUrl = `${this.host}item/FindKeys?query=`;
     private containerSizeUrl = `${this.host}/item/containersize`;
     private LockStrengthUrl = `${this.host}/item/LockStrength`;
+    private findItemByIdUrl = `${this.host}item/FindItemById?id=`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -58,11 +59,11 @@ export class ItemService {
     }
 
     getContainerSize(): Observable<ItemType[]> {
-      return this.http.get<ItemType[]>(this.containerSizeUrl);
+        return this.http.get<ItemType[]>(this.containerSizeUrl);
     }
 
     getLockStrength(): Observable<ItemType[]> {
-      return this.http.get<ItemType[]>(this.LockStrengthUrl);
+        return this.http.get<ItemType[]>(this.LockStrengthUrl);
     }
 
     autocompleteItems(query: string): Observable<Item[]> {
@@ -70,8 +71,12 @@ export class ItemService {
     }
 
     findKeyItems(query: string): Observable<Item[]> {
-      return this.http.get<Item[]>(`${this.findKeyUrl}${query}`);
-  }
+        return this.http.get<Item[]>(`${this.findKeyUrl}${query}`);
+    }
+
+    findItemById(id: string): Observable<Item> {
+        return this.http.get<Item>(`${this.findItemByIdUrl}${id}`);
+    }
 
     addItem(item: Item): any {
         console.log("post this ", item);
