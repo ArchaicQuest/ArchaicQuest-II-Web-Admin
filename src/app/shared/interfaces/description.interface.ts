@@ -1,9 +1,9 @@
 
 export interface Description {
-    Taste: string;
-    Touch: string;
-    Smell: string;
-    Look: string;
-    Exam: string;
-    Room: string;
+    taste: string;
+    touch: string;
+    smell: string;
+    look: string;
+    exam: string;
+    room: string;
 }

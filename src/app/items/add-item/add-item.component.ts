@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
@@ -69,6 +69,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     selectedItem: Item;
 
     constructor(
+        private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
         private store: Store<ItemAppState>,
@@ -259,10 +260,14 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
         this.itemService.findItemById(this.route.snapshot.params['id']).subscribe(item => {
+
+            if (this.route.snapshot.params['id'] == null) {
+                return;
+            }
+
             this.selectedItem = item;
 
-            this.selectedItem.description = item.description;
-            console.log(item.description)
+            console.log(item.description);
             this.addItemForm.patchValue({
                 name: item.name,
                 knownByName: item.knownByName,
@@ -288,13 +293,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 // spellMod: [''],
                 // pageCount: [''],
                 //  pages: item.,
-                flags: item.itemFlags ? item.itemFlags : [],
-                lookDescription: item.description.Look,
-                roomDescription: item.description.Room,
-                examDescription: item.description.Exam,
-                smellDescription: item.description.Smell,
-                touchDescription: item.description.Touch,
-                tasteDescription: item.description.Taste,
+                //     flags: item.itemFlags ? item.itemFlags : [],
+                'lookDescription': item.description.look,
+                roomDescription: item.description.room,
+                examDescription: item.description.exam,
+                smellDescription: item.description.smell,
+                touchDescription: item.description.touch,
+                tasteDescription: item.description.taste,
                 selectContainerItem: item.container ? item.container.items : null,
                 containerOpen: item.container ? item.container.isOpen : false,
                 containerLocked: item.container ? item.container.isLocked : false,
@@ -303,7 +308,17 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 lockStrength: item.container ? item.container.LockDifficulty : 0,
                 containerSize: item.container ? item.container.size : 0,
                 selectContainerKey: item.container ? item.container.associatedKeyId : ''
+
             });
+
+            this.addItemForm.updateValueAndValidity();
+
+            // this.addItemForm.setValue({
+            //     lookDescription: item.description.Look
+            // });
+
+            this.changeDetector.detectChanges();
+
         });
         this.addPage();
     }
@@ -376,8 +391,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
             .subscribe(() => this.autosize.resizeToFitContent(true));
     }
 
-    toggleItemSection(event: string) {
+    toggleItemSection(event: number) {
         const itemType = event;
+
+        console.log(itemType)
 
         this.addItemForm.get('armourType').disable();
         this.showArmourSection = false;
@@ -390,17 +407,17 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         this.addItemForm.updateValueAndValidity();
 
-        if (itemType === 'Armour') {
+        if (itemType === 0) {
             this.showArmourSection = true;
             this.addItemForm.get('armourType').enable();
-        } else if (itemType === 'Weapon') {
+        } else if (itemType === 11) {
             this.showWeaponSection = true;
             this.addItemForm.get('weaponType').enable();
             this.addItemForm.get('attackType').enable();
-        } else if (itemType === 'Book') {
+        } else if (itemType === 1) {
             this.showBookSection = true;
             this.addItemForm.get('pageCount').enable();
-        } else if (itemType === 'Container') {
+        } else if (itemType === 2) {
             this.showContainerSection = true;
         }
     }
@@ -434,12 +451,12 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 blank: this.addItemForm.get('pages').value.length > 1
             },
             description: {
-                Room: this.addItemForm.get('roomDescription').value,
-                Exam: this.addItemForm.get('examDescription').value,
-                Look: this.addItemForm.get('lookDescription').value,
-                Smell: this.addItemForm.get('smellDescription').value,
-                Taste: this.addItemForm.get('tasteDescription').value,
-                Touch: this.addItemForm.get('touchDescription').value
+                room: this.addItemForm.get('roomDescription').value,
+                exam: this.addItemForm.get('examDescription').value,
+                look: this.addItemForm.get('lookDescription').value,
+                smell: this.addItemForm.get('smellDescription').value,
+                taste: this.addItemForm.get('tasteDescription').value,
+                touch: this.addItemForm.get('touchDescription').value
             },
             armourRating: {
                 armour: this.addItemForm.get('acPierce').value,
