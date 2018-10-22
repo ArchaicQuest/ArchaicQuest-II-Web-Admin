@@ -423,16 +423,18 @@ export class AddItemComponent implements OnDestroy, OnInit {
         const flags: number[] = [];
 
         Object.keys(this.addItemForm.get('pages').value).forEach(page => {
-            console.log(FlagEnum[this.addItemForm.get('pages').value[page]]);
-            pages.push(FlagEnum[this.addItemForm.get('pages').value[page]]);
+            console.log(this.addItemForm.get('pages').value[page]);
+            pages.push(this.addItemForm.get('pages').value[page]);
         });
 
         Object.keys(this.addItemForm.get('flags').value).forEach(flag => {
-console.log(flag)
-         // console.log("flag:", this.addItemForm.get('flags').value[flag].getAttribute('data-flagValue'))
-          console.log(this.addItemForm.get('flags').value);
-        //  flags.push(this.addItemForm.get('flags').value[flag].getAttribute('data-flagValue'));
-      });
+
+
+            console.log(FlagEnum[flag])
+            console.log(typeof FlagEnum[flag])
+            flags.push(FlagEnum[flag]);
+
+        });
 
         console.log(this.addItemForm.get('roomDescription').value);
         const item: Item = {
