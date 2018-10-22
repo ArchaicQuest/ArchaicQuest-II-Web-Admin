@@ -35,4 +35,5 @@ export interface Item {
     infinite: boolean;
     forageRank: number;
     armourRating: ArmourRating;
+    armourType: number;
 }

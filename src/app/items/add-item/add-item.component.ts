@@ -267,7 +267,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.selectedItem = item;
 
-            console.log(item.description);
+            console.log(item.itemFlags);
             this.addItemForm.patchValue({
                 name: item.name,
                 knownByName: item.knownByName,
@@ -279,7 +279,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 damageType: item.damageType,
                 minDamage: item.damage ? item.damage.DieSize : 0,
                 maxDamage: item.damage ? item.damage.DieSize : 0,
-                //  armourType: item.armourR,
+                armourType: item.armourType,
                 acPierce: item.armourRating ? item.armourRating.armour : 0,
                 acBash: item.armourRating ? item.armourRating.armour : 0,
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
@@ -293,7 +293,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 // spellMod: [''],
                 // pageCount: [''],
                 //  pages: item.,
-                //     flags: item.itemFlags ? item.itemFlags : [],
+                flags: item.itemFlags ? item.itemFlags : [],
                 'lookDescription': item.description.look,
                 roomDescription: item.description.room,
                 examDescription: item.description.exam,
@@ -458,6 +458,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 taste: this.addItemForm.get('tasteDescription').value,
                 touch: this.addItemForm.get('touchDescription').value
             },
+            armourType: this.addItemForm.get('armourType').value || 0,
             armourRating: {
                 armour: this.addItemForm.get('acPierce').value,
                 magic: this.addItemForm.get('acMagic').value
