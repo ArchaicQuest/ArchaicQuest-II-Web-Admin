@@ -38,6 +38,7 @@ import { Item } from '../interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from './add-item.service';
 import { ActivatedRoute } from '@angular/router';
+import { FlagEnum } from '../interfaces/flags.enums';
 
 @Component({
     templateUrl: './add-item.component.html',
@@ -312,11 +313,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
             });
 
             this.addItemForm.updateValueAndValidity();
-
-            // this.addItemForm.setValue({
-            //     lookDescription: item.description.Look
-            // });
-
             this.changeDetector.detectChanges();
 
         });
@@ -424,11 +420,20 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     addItem() {
         const pages: string[] = [];
+        const flags: number[] = [];
 
         Object.keys(this.addItemForm.get('pages').value).forEach(page => {
-            console.log(this.addItemForm.get('pages').value[page]);
-            pages.push(this.addItemForm.get('pages').value[page]);
+            console.log(FlagEnum[this.addItemForm.get('pages').value[page]]);
+            pages.push(FlagEnum[this.addItemForm.get('pages').value[page]]);
         });
+
+        Object.keys(this.addItemForm.get('flags').value).forEach(flag => {
+console.log(flag)
+         // console.log("flag:", this.addItemForm.get('flags').value[flag].getAttribute('data-flagValue'))
+          console.log(this.addItemForm.get('flags').value);
+        //  flags.push(this.addItemForm.get('flags').value[flag].getAttribute('data-flagValue'));
+      });
+
         console.log(this.addItemForm.get('roomDescription').value);
         const item: Item = {
             name: this.addItemForm.get('name').value,
@@ -477,7 +482,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             hidden: false,
             infinite: false,
             isHiddenInRoom: false,
-            itemFlags: this.addItemForm.get('flags').value,
+            itemFlags: flags,
             keywords: [],
             minLevel: this.addItemForm.get('minLevel').value,
             modifiers: {},

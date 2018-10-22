@@ -41,7 +41,7 @@
                 </div>
                 <div class="col-4">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="Minimum Level" value="" formControlName="minLevel">
+                        <input matInput type="number" placeholder="Minimum Level" formControlName="minLevel">
                         <mat-hint align="start"><strong>The level player needs to use this item</strong> </mat-hint>
                     </mat-form-field>
                 </div>
@@ -136,23 +136,23 @@
                 <div class="row">
                     <div class="col-3">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="AC pierce" value="" formControlName="acPierce">
+                            <input matInput type="number" placeholder="AC pierce" formControlName="acPierce">
                         </mat-form-field>
                     </div>
 
                     <div class="col-3">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="AC bash" value="" formControlName="acBash">
+                            <input matInput type="number" placeholder="AC bash" formControlName="acBash">
                         </mat-form-field>
                     </div>
                     <div class="col-3">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="AC slash" value="" formControlName="acSlash">
+                            <input matInput type="number" placeholder="AC slash" formControlName="acSlash">
                         </mat-form-field>
                     </div>
                     <div class="col-3">
                         <mat-form-field>
-                            <input matInput type="number" placeholder="AC magic" value="" formControlName="acMagic">
+                            <input matInput type="number" placeholder="AC magic" formControlName="acMagic">
                         </mat-form-field>
                     </div>
                 </div>
@@ -333,7 +333,7 @@
 
 
                 <div class="col-2" *ngFor="let flag of flags">
-                    <mat-checkbox value="{{flag.id}}" [formControlName]="flag.name">{{flag.name}}</mat-checkbox>
+                    <mat-checkbox title="flag.name" [formControlName]="flag.name">{{flag.name}}</mat-checkbox>
                 </div>
 
             </div>
