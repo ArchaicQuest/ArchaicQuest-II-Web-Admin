@@ -268,7 +268,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.selectedItem = item;
 
-            console.log(item.itemFlags);
+            console.log(item.itemFlag);
             this.addItemForm.patchValue({
                 name: item.name,
                 knownByName: item.knownByName,
@@ -294,7 +294,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 // spellMod: [''],
                 // pageCount: [''],
                 //  pages: item.,
-                flags: item.itemFlags ? item.itemFlags : [],
+                flags: item.itemFlag ? item.itemFlag : [],
                 'lookDescription': item.description.look,
                 roomDescription: item.description.room,
                 examDescription: item.description.exam,
@@ -420,19 +420,17 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     addItem() {
         const pages: string[] = [];
-        const flags: number[] = [];
+        let flags: any;
 
         Object.keys(this.addItemForm.get('pages').value).forEach(page => {
             console.log(this.addItemForm.get('pages').value[page]);
             pages.push(this.addItemForm.get('pages').value[page]);
         });
 
-        Object.keys(this.addItemForm.get('flags').value).forEach(flag => {
+        flags = [1, 2, 3].reduce((a, b) => {
 
-
-            console.log(FlagEnum[flag])
-            console.log(typeof FlagEnum[flag])
-            flags.push(FlagEnum[flag]);
+            // tslint:disable-next-line:no-bitwise
+            return a | b;
 
         });
 
@@ -484,7 +482,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             hidden: false,
             infinite: false,
             isHiddenInRoom: false,
-            itemFlags: flags,
+            // tslint:disable-next-line:no-bitwise
+            itemFlag: FlagEnum.Evil | FlagEnum.Bless,
             keywords: [],
             minLevel: this.addItemForm.get('minLevel').value,
             modifiers: {},

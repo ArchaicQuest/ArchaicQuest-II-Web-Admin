@@ -26,7 +26,7 @@ export interface Item {
     modifiers?: ItemModifier;
     containerItems?: Item[];
     damageType: number;
-    itemFlags: number[];
+    itemFlag: number;
     attackType: number;
     weaponType: number;
     damage: Damage;
