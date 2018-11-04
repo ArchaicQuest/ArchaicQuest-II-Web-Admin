@@ -333,7 +333,7 @@
 
 
                 <div class="col-2" *ngFor="let flag of flags">
-                    <mat-checkbox title="flag.name" [formControlName]="flag.name">{{flag.name}}</mat-checkbox>
+                    <mat-checkbox title="flag.name" [formControlName]="flag.name" [checked]=hasFlag(flag.id)>{{flag.name}}</mat-checkbox>
                 </div>
 
             </div>

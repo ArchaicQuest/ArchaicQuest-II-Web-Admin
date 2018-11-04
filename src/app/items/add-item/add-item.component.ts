@@ -68,6 +68,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     filteredOptions: Observable<Item[]>;
     findKeyOptions: Observable<Item[]>;
     selectedItem: Item;
+    selectedFlags: FlagEnum;
 
     constructor(
         private changeDetector: ChangeDetectorRef,
@@ -268,7 +269,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.selectedItem = item;
 
-            console.log(item.itemFlag);
+            console.log("patch", item.itemFlag);
+            this.selectedFlags = item.itemFlag;
             this.addItemForm.patchValue({
                 name: item.name,
                 knownByName: item.knownByName,
@@ -338,6 +340,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         return item != null ? item.name : undefined;
     }
 
+
     get getFlagControl(): FormArray {
         return this.addItemForm.get('flags') as FormArray;
     }
@@ -345,6 +348,30 @@ export class AddItemComponent implements OnDestroy, OnInit {
     get getPageControl(): FormArray {
         return this.addItemForm.get('pages') as FormArray;
     }
+
+
+    hasFlag(flag: number): boolean {
+
+        // tslint:disable-next-line:no-bitwise
+        if (flag === FlagEnum.Bless && this.isFlagSet(this.selectedFlags, FlagEnum.Bless)) {
+            return true;
+        }
+        // tslint:disable-next-line:no-bitwise
+        else if (flag === FlagEnum.Evil && this.isFlagSet(this.selectedFlags, FlagEnum.Evil)) {
+            return true;
+        }
+        else if (flag === FlagEnum.Antievil && this.isFlagSet(this.selectedFlags, FlagEnum.Antievil)) {
+            return true;
+        }
+        // tslint:disable-next-line:no-bitwise
+        return false;
+    }
+
+    isFlagSet(value: number, flag: number): boolean {
+        // tslint:disable-next-line:no-bitwise
+        return (value & flag) !== 0;
+    }
+
 
     addFlag() {
         this.getFlagControl.push(this.formBuilder.control(''));
@@ -483,7 +510,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             infinite: false,
             isHiddenInRoom: false,
             // tslint:disable-next-line:no-bitwise
-            itemFlag: FlagEnum.Evil | FlagEnum.Bless,
+            itemFlag: FlagEnum.Evil + FlagEnum.Bless + FlagEnum.Antievil, //this.addItemForm.get('flags').value.reduce((a, b) => a + b, 0),
             keywords: [],
             minLevel: this.addItemForm.get('minLevel').value,
             modifiers: {},
