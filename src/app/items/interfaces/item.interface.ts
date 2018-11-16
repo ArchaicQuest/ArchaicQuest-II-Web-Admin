@@ -23,7 +23,7 @@ export interface Item {
     itemType: string;
     slot: string;
     minLevel: string;
-    modifiers?: ItemModifier;
+    modifier?: ItemModifier;
     containerItems?: Item[];
     damageType: number;
     itemFlag: number;

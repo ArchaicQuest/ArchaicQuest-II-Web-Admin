@@ -1,6 +1,4 @@
-
 export interface Damage {
-    DiceRoll: number;
-    DieSize: number;
+  Maximum: number;
+  Minimum: number;
 }
-
