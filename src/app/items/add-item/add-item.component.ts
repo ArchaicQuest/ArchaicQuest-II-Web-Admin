@@ -292,13 +292,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 // pageCount: [''],
                 //  pages: item.,
                 modifier: {
-                  damRoll: item.modifier.damRoll,
-                  hitRoll: item.modifier.hitRoll,
-                  hp: item.modifier.hp,
-                  mana: item.modifier.mana,
-                  moves:  item.modifier.moves,
-                  spellDam: item.modifier.spellDam,
-                  saves: item.modifier.saves,
+                    damRoll: item.modifier.damRoll,
+                    hitRoll: item.modifier.hitRoll,
+                    hp: item.modifier.hp,
+                    mana: item.modifier.mana,
+                    moves: item.modifier.moves,
+                    spellDam: item.modifier.spellDam,
+                    saves: item.modifier.saves,
                 },
                 flags: item.itemFlag ? item.itemFlag : [],
                 'lookDescription': item.description.look,
@@ -362,6 +362,34 @@ export class AddItemComponent implements OnDestroy, OnInit {
         } else if (flag === FlagEnum.Evil && this.isFlagSet(this.selectedFlag, FlagEnum.Evil)) {
             return true;
         } else if (flag === FlagEnum.Antievil && this.isFlagSet(this.selectedFlag, FlagEnum.Antievil)) {
+            return true;
+        } else if (flag === FlagEnum.Antigood && this.isFlagSet(this.selectedFlag, FlagEnum.Antigood)) {
+            return true;
+        } else if (flag === FlagEnum.Antineutral && this.isFlagSet(this.selectedFlag, FlagEnum.Antineutral)) {
+            return true;
+        } else if (flag === FlagEnum.Container && this.isFlagSet(this.selectedFlag, FlagEnum.Container)) {
+            return true;
+        } else if (flag === FlagEnum.Cursed && this.isFlagSet(this.selectedFlag, FlagEnum.Cursed)) {
+            return true;
+        } else if (flag === FlagEnum.Equipable && this.isFlagSet(this.selectedFlag, FlagEnum.Equipable)) {
+            return true;
+        } else if (flag === FlagEnum.Glow && this.isFlagSet(this.selectedFlag, FlagEnum.Glow)) {
+            return true;
+        } else if (flag === FlagEnum.Holy && this.isFlagSet(this.selectedFlag, FlagEnum.Holy)) {
+            return true;
+        } else if (flag === FlagEnum.Hum && this.isFlagSet(this.selectedFlag, FlagEnum.Hum)) {
+            return true;
+        } else if (flag === FlagEnum.Invis && this.isFlagSet(this.selectedFlag, FlagEnum.Invis)) {
+            return true;
+        } else if (flag === FlagEnum.Nodrop && this.isFlagSet(this.selectedFlag, FlagEnum.Nodrop)) {
+            return true;
+        } else if (flag === FlagEnum.Nolocate && this.isFlagSet(this.selectedFlag, FlagEnum.Nolocate)) {
+            return true;
+        } else if (flag === FlagEnum.Noremove && this.isFlagSet(this.selectedFlag, FlagEnum.Noremove)) {
+            return true;
+        } else if (flag === FlagEnum.QuestItem && this.isFlagSet(this.selectedFlag, FlagEnum.QuestItem)) {
+            return true;
+        } else if (flag === FlagEnum.Vampric && this.isFlagSet(this.selectedFlag, FlagEnum.Vampric)) {
             return true;
         }
 
@@ -444,17 +472,20 @@ export class AddItemComponent implements OnDestroy, OnInit {
         } else if (itemType === 2) {
             this.showContainerSection = true;
         }
+
+        this.addItemForm.updateValueAndValidity();
+        this.changeDetector.detectChanges();
     }
 
     updateSelectedFlags(flag: number) {
 
-      if (this.selectedFlags.length && this.selectedFlags.includes(flag)) {
-        this.selectedFlags = this.selectedFlags.filter(flagToRemove => flagToRemove !== flag);
-      } else {
-        this.selectedFlags.push(flag);
-      }
+        if (this.selectedFlags.length && this.selectedFlags.includes(flag)) {
+            this.selectedFlags = this.selectedFlags.filter(flagToRemove => flagToRemove !== flag);
+        } else {
+            this.selectedFlags.push(flag);
+        }
 
-      console.log(this.selectedFlags);
+        console.log(this.selectedFlags);
     }
 
     addItem() {
@@ -506,8 +537,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             },
             attackType: this.addItemForm.get('attackType').value || 0,
             damage: {
-              Maximum: this.addItemForm.get('minDamage').value || 1,
-              Minimum: this.addItemForm.get('maxDamage').value || 1
+                Maximum: this.addItemForm.get('minDamage').value || 1,
+                Minimum: this.addItemForm.get('maxDamage').value || 1
             },
             weaponType: this.addItemForm.get('weaponType').value || 0,
             condition: 1,
@@ -523,13 +554,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
             keywords: [],
             minLevel: this.addItemForm.get('minLevel').value,
             modifier: {
-              damRoll: this.addItemForm.get('damRoll').value || 0,
-              hitRoll: this.addItemForm.get('hitRoll').value || 0,
-              hp:  this.addItemForm.get('hpMod').value || 0,
-              mana:  this.addItemForm.get('manaMod').value || 0,
-              moves:  this.addItemForm.get('movesMod').value || 0,
-              spellDam:  this.addItemForm.get('spellMod').value || 0,
-              saves:  this.addItemForm.get('saves').value || 0,
+                damRoll: this.addItemForm.get('damRoll').value || 0,
+                hitRoll: this.addItemForm.get('hitRoll').value || 0,
+                hp: this.addItemForm.get('hpMod').value || 0,
+                mana: this.addItemForm.get('manaMod').value || 0,
+                moves: this.addItemForm.get('movesMod').value || 0,
+                spellDam: this.addItemForm.get('spellMod').value || 0,
+                saves: this.addItemForm.get('saves').value || 0,
             },
             questItem: false,
             stuck: false,
