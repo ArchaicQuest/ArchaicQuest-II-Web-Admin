@@ -68,7 +68,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
     filteredOptions: Observable<Item[]>;
     findKeyOptions: Observable<Item[]>;
     selectedItem: Item;
-    selectedFlags: FlagEnum;
+    selectedFlag: FlagEnum;
+    selectedFlags: FlagEnum[] = [];
 
     constructor(
         private changeDetector: ChangeDetectorRef,
@@ -270,7 +271,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.selectedItem = item;
 
             console.log("patch", item.itemFlag);
-            this.selectedFlags = item.itemFlag;
+            this.selectedFlag = item.itemFlag;
             this.addItemForm.patchValue({
                 name: item.name,
                 knownByName: item.knownByName,
@@ -355,18 +356,15 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     hasFlag(flag: number): boolean {
 
-        // tslint:disable-next-line:no-bitwise
-        if (flag === FlagEnum.Bless && this.isFlagSet(this.selectedFlags, FlagEnum.Bless)) {
+
+        if (flag === FlagEnum.Bless && this.isFlagSet(this.selectedFlag, FlagEnum.Bless)) {
+            return true;
+        } else if (flag === FlagEnum.Evil && this.isFlagSet(this.selectedFlag, FlagEnum.Evil)) {
+            return true;
+        } else if (flag === FlagEnum.Antievil && this.isFlagSet(this.selectedFlag, FlagEnum.Antievil)) {
             return true;
         }
-        // tslint:disable-next-line:no-bitwise
-        else if (flag === FlagEnum.Evil && this.isFlagSet(this.selectedFlags, FlagEnum.Evil)) {
-            return true;
-        }
-        else if (flag === FlagEnum.Antievil && this.isFlagSet(this.selectedFlags, FlagEnum.Antievil)) {
-            return true;
-        }
-        // tslint:disable-next-line:no-bitwise
+
         return false;
     }
 
@@ -448,6 +446,17 @@ export class AddItemComponent implements OnDestroy, OnInit {
         }
     }
 
+    updateSelectedFlags(flag: number) {
+
+      if (this.selectedFlags.length && this.selectedFlags.includes(flag)) {
+        this.selectedFlags = this.selectedFlags.filter(flagToRemove => flagToRemove !== flag);
+      } else {
+        this.selectedFlags.push(flag);
+      }
+
+      console.log(this.selectedFlags);
+    }
+
     addItem() {
         const pages: string[] = [];
         let flags: any;
@@ -457,12 +466,9 @@ export class AddItemComponent implements OnDestroy, OnInit {
             pages.push(this.addItemForm.get('pages').value[page]);
         });
 
-        flags = [1, 2, 3].reduce((a, b) => {
+        flags = this.selectedFlags.reduce((a, b) => a + b, 0);
 
-            // tslint:disable-next-line:no-bitwise
-            return a | b;
-
-        });
+        console.log("FLAGS" + flags);
 
         console.log(this.addItemForm.get('roomDescription').value);
         const item: Item = {
@@ -513,7 +519,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             infinite: false,
             isHiddenInRoom: false,
             // tslint:disable-next-line:no-bitwise
-            itemFlag: FlagEnum.Evil + FlagEnum.Bless + FlagEnum.Antievil, //this.addItemForm.get('flags').value.reduce((a, b) => a + b, 0),
+            itemFlag: flags,
             keywords: [],
             minLevel: this.addItemForm.get('minLevel').value,
             modifier: {
