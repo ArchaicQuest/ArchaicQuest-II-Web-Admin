@@ -397,7 +397,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     isFlagSet(value: number, flag: number): boolean {
-        // tslint:disable-next-line:no-bitwise
         return (value & flag) !== 0;
     }
 
@@ -456,8 +455,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.showBookSection = false;
         this.addItemForm.get('pageCount').disable();
         this.showContainerSection = false;
-
-        this.addItemForm.updateValueAndValidity();
+        this.addItemForm.get('containerSize').disable();
 
         if (itemType === 0) {
             this.showArmourSection = true;
@@ -471,6 +469,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.addItemForm.get('pageCount').enable();
         } else if (itemType === 2) {
             this.showContainerSection = true;
+            this.addItemForm.get('containerSize').enable();
         }
 
         this.addItemForm.updateValueAndValidity();
