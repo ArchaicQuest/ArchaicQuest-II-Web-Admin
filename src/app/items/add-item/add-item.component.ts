@@ -270,7 +270,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.selectedItem = item;
 
-            console.log("patch", item.itemFlag);
+            console.log("patch", item.modifier.damRoll);
             this.selectedFlag = item.itemFlag;
             this.addItemForm.patchValue({
                 name: item.name,
@@ -291,15 +291,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
                 // pageCount: [''],
                 //  pages: item.,
-                modifier: {
-                    damRoll: item.modifier.damRoll,
-                    hitRoll: item.modifier.hitRoll,
-                    hp: item.modifier.hp,
-                    mana: item.modifier.mana,
-                    moves: item.modifier.moves,
-                    spellDam: item.modifier.spellDam,
-                    saves: item.modifier.saves,
-                },
+                hitRoll: item.modifier.hitRoll,
+                damRoll: item.modifier.damRoll,
+                saves: item.modifier.saves,
+                hpMod: item.modifier.hp,
+                manaMod: item.modifier.mana,
+                movesMod: item.modifier.moves,
+                spellMod: item.modifier.spellDam,
                 flags: item.itemFlag ? item.itemFlag : [],
                 'lookDescription': item.description.look,
                 roomDescription: item.description.room,
