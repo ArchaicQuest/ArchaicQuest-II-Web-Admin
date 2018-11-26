@@ -22,7 +22,7 @@ export interface Item {
     questItem: boolean;
     itemType: string;
     slot: string;
-    minLevel: string;
+    level: string;
     modifier?: ItemModifier;
     containerItems?: Item[];
     damageType: number;

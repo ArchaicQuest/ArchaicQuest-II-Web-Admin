@@ -1,4 +1,4 @@
 export interface Damage {
-  Maximum: number;
-  Minimum: number;
+  maximum: number;
+  minimum: number;
 }

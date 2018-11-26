@@ -3,6 +3,8 @@
         <h1>Add Item</h1>
 
         <form novalidate [formGroup]="addItemForm" (ngSubmit)="addItem()">
+            <input type="hidden" formControlName="id">
+
             <div class="row">
                 <div class="col">
                     <mat-form-field class="form-control">
@@ -41,7 +43,7 @@
                 </div>
                 <div class="col-4">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="Minimum Level" formControlName="minLevel">
+                        <input matInput type="number" placeholder="Minimum Level" formControlName="level">
                         <mat-hint align="start"><strong>The level player needs to use this item</strong> </mat-hint>
                     </mat-form-field>
                 </div>

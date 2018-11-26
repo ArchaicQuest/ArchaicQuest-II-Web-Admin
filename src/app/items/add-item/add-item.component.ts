@@ -87,11 +87,12 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
         this.addItemForm = this.formBuilder.group({
+            id: [''],
             name: ['', Validators.required],
             knownByName: [''],
             itemType: [''],
             itemSlotType: [''],
-            minLevel: [''],
+            level: [''],
             weaponType: [''],
             attackType: [''],
             damageType: [''],
@@ -270,19 +271,20 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.selectedItem = item;
 
-            console.log("patch", item.modifier.damRoll);
+            console.log("patch", item.id);
             this.selectedFlag = item.itemFlag;
             this.addItemForm.patchValue({
+                id: item.id,
                 name: item.name,
                 knownByName: item.knownByName,
                 itemType: item.itemType,
                 itemSlotType: item.slot,
-                minLevel: item.minLevel,
+                level: item.level,
                 weaponType: item.weaponType,
                 attackType: item.attackType,
                 damageType: item.damageType,
-                minDamage: item.damage ? item.damage.Minimum : 0,
-                maxDamage: item.damage ? item.damage.Maximum : 0,
+                minDamage: item.damage ? item.damage.minimum : 0,
+                maxDamage: item.damage ? item.damage.maximum : 0,
                 armourType: item.armourType,
                 acPierce: item.armourRating ? item.armourRating.armour : 0,
                 acBash: item.armourRating ? item.armourRating.armour : 0,
@@ -500,6 +502,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         console.log(this.addItemForm.get('roomDescription').value);
         const item: Item = {
+            id: this.addItemForm.get('id').value || null,
             name: this.addItemForm.get('name').value,
             knownByName: this.addItemForm.get('knownByName').value || false,
             itemType: this.addItemForm.get('itemType').value,
@@ -508,9 +511,9 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 associatedKeyId: this.addItemForm.get('selectContainerKey').value,
                 canLock: this.addItemForm.get('containerCanLock').value || false,
                 canOpen: this.addItemForm.get('containerCanOpen').value || false,
-                LockDifficulty: +this.addItemForm.get('lockStrength').value,
+                LockDifficulty: +this.addItemForm.get('lockStrength').value || 0,
                 items: this.containerItems,
-                size: +this.addItemForm.get('containerSize').value,
+                size: +this.addItemForm.get('containerSize').value || 0,
                 isLocked: this.addItemForm.get('containerLocked').value || false,
                 isOpen: this.addItemForm.get('containerOpen').value || false,
             },
@@ -534,8 +537,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             },
             attackType: this.addItemForm.get('attackType').value || 0,
             damage: {
-                Maximum: this.addItemForm.get('minDamage').value || 1,
-                Minimum: this.addItemForm.get('maxDamage').value || 1
+                maximum: this.addItemForm.get('maxDamage').value || 1,
+                minimum: this.addItemForm.get('minDamage').value || 1
             },
             weaponType: this.addItemForm.get('weaponType').value || 0,
             condition: 1,
@@ -549,7 +552,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             // tslint:disable-next-line:no-bitwise
             itemFlag: flags,
             keywords: [],
-            minLevel: this.addItemForm.get('minLevel').value,
+            level: this.addItemForm.get('level').value || 1,
             modifier: {
                 damRoll: this.addItemForm.get('damRoll').value || 0,
                 hitRoll: this.addItemForm.get('hitRoll').value || 0,
