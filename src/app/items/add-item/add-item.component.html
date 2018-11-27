@@ -173,13 +173,15 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>
+                </div>{{pages}}
+
                 <div class="row" [formGroup]="addItemForm.get('pages')">
                     <div class="col-12" *ngFor="let page of pages; let i = index;">
+
                         <mat-form-field>
                             <mat-label>Page {{i + 1}}</mat-label>
                             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                                cdkAutosizeMaxRows="20" formControlName="page{{i}}"></textarea>
+                                cdkAutosizeMaxRows="20" formControlName="page{{i}}" value="{{selectedItem?.book?.pages[i]}}"></textarea>
                         </mat-form-field>
 
                     </div>
@@ -294,12 +296,12 @@
             <div class="row">
                 <div class="col-4">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="Hit roll"  formControlName="hitRoll">
+                        <input matInput type="number" placeholder="Hit roll" formControlName="hitRoll">
                     </mat-form-field>
                 </div>
                 <div class="col-4">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="Damage roll"  formControlName="damRoll">
+                        <input matInput type="number" placeholder="Damage roll" formControlName="damRoll">
                     </mat-form-field>
                 </div>
                 <div class="col-4">
@@ -311,17 +313,17 @@
             <div class="row">
                 <div class="col-3">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="+/- HP"  formControlName="hpMod">
+                        <input matInput type="number" placeholder="+/- HP" formControlName="hpMod">
                     </mat-form-field>
                 </div>
                 <div class="col-3">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="+/- Mana"  formControlName="manaMod">
+                        <input matInput type="number" placeholder="+/- Mana" formControlName="manaMod">
                     </mat-form-field>
                 </div>
                 <div class="col-3">
                     <mat-form-field>
-                        <input matInput type="number" placeholder="+/- Moves"  formControlName="movesMod">
+                        <input matInput type="number" placeholder="+/- Moves" formControlName="movesMod">
                     </mat-form-field>
                 </div>
                 <div class="col-3">

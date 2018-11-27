@@ -273,6 +273,14 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             console.log("patch", item.id);
             this.selectedFlag = item.itemFlag;
+            let pageLength = 0;
+            item.book.pages.forEach(() => {
+                if (pageLength === item.book.pageCount - 1) {
+                    return;
+                }
+                this.addPage();
+                pageLength++;
+            });
             this.addItemForm.patchValue({
                 id: item.id,
                 name: item.name,
@@ -291,8 +299,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
                 acMagic: item.armourRating ? item.armourRating.magic : 0,
 
-                // pageCount: [''],
-                //  pages: item.,
+                pageCount: item.book.pageCount,
+                pages: item.book.pages,
                 hitRoll: item.modifier.hitRoll,
                 damRoll: item.modifier.damRoll,
                 saves: item.modifier.saves,
@@ -502,7 +510,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         console.log(this.addItemForm.get('roomDescription').value);
         const item: Item = {
-            id: this.addItemForm.get('id').value || null,
+            id: this.addItemForm.get('id').value || -1,
             name: this.addItemForm.get('name').value,
             knownByName: this.addItemForm.get('knownByName').value || false,
             itemType: this.addItemForm.get('itemType').value,
@@ -532,8 +540,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             },
             armourType: this.addItemForm.get('armourType').value || 0,
             armourRating: {
-                armour: this.addItemForm.get('acPierce').value,
-                magic: this.addItemForm.get('acMagic').value
+                armour: this.addItemForm.get('acPierce').value || 1,
+                magic: this.addItemForm.get('acMagic').value || 1
             },
             attackType: this.addItemForm.get('attackType').value || 0,
             damage: {
