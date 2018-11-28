@@ -165,15 +165,16 @@
 
                 <div class="row">
                     <div class="col">
+
                         <mat-form-field>
-                            <input matInput type="number" placeholder="Number of pages" value="" formControlName="pageCount"
+                            <input matInput type="number" placeholder="Number of pages"  formControlName="pageCount"
                                 required>
                             <mat-error *ngIf="addItemForm.get('pageCount').hasError('required')">
                                 Number of pages is required.
                             </mat-error>
                         </mat-form-field>
                     </div>
-                </div>{{pages}}
+                </div>
 
                 <div class="row" [formGroup]="addItemForm.get('pages')">
                     <div class="col-12" *ngFor="let page of pages; let i = index;">
@@ -181,7 +182,7 @@
                         <mat-form-field>
                             <mat-label>Page {{i + 1}}</mat-label>
                             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                                cdkAutosizeMaxRows="20" formControlName="page{{i}}" value="{{selectedItem?.book?.pages[i]}}"></textarea>
+                                cdkAutosizeMaxRows="20" formControlName="page{{i}}" [value]="selectedItem?.book?.pages[i]"></textarea>
                         </mat-form-field>
 
                     </div>

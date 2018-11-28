@@ -275,11 +275,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.selectedFlag = item.itemFlag;
             let pageLength = 0;
             item.book.pages.forEach(() => {
-                if (pageLength === item.book.pageCount - 1) {
+              pageLength++;
+
+                if (pageLength === item.book.pages.length - 1) {
                     return;
                 }
+
                 this.addPage();
-                pageLength++;
             });
             this.addItemForm.patchValue({
                 id: item.id,
@@ -299,7 +301,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
                 acMagic: item.armourRating ? item.armourRating.magic : 0,
 
-                pageCount: item.book.pageCount,
+                pageCount:  item.book.pages.length,
                 pages: item.book.pages,
                 hitRoll: item.modifier.hitRoll,
                 damRoll: item.modifier.damRoll,
@@ -330,7 +332,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.changeDetector.detectChanges();
 
         });
-        this.addPage();
+
+        if(this.selectedItem == null) {
+          this.addPage();
+        }
     }
 
     private _filter(value: string): Observable<Item[]> {
@@ -414,13 +419,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     addPage() {
-
+console.log("page count", this.pages.length)
         this.pages.push(1);
         let i = 0;
         this.pages.forEach(() => {
             (this.addItemForm.controls['pages'] as FormGroup).addControl(
                 `page${i}`,
-                new FormControl()
+                new FormControl(this.selectedItem != null ? this.selectedItem.book.pages[i] : '')
             );
             i++;
         });
