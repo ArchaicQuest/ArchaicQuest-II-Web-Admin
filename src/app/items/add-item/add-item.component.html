@@ -167,11 +167,13 @@
                     <div class="col">
 
                         <mat-form-field>
-                            <input matInput type="number" placeholder="Number of pages"  formControlName="pageCount"
+                            <input matInput type="number" placeholder="Number of pages" formControlName="pageCount"
                                 required>
                             <mat-error *ngIf="addItemForm.get('pageCount').hasError('required')">
                                 Number of pages is required.
                             </mat-error>
+                            <mat-hint align="start"><strong>Limits how many pages you're allowed to add</strong>
+                            </mat-hint>
                         </mat-form-field>
                     </div>
                 </div>
@@ -184,9 +186,9 @@
                             <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
                                 cdkAutosizeMaxRows="20" formControlName="page{{i}}" [value]="selectedItem?.book?.pages[i]"></textarea>
                         </mat-form-field>
-
                     </div>
-                    <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addPage()">Add another page</a>
+                    <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addPage()" *ngIf="pages.length + 1 <= addItemForm.get('pageCount').value">Add
+                        another page</a>
                 </div>
             </div>
 

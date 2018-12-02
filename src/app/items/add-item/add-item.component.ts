@@ -110,7 +110,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             manaMod: [''],
             movesMod: [''],
             spellMod: [''],
-            pageCount: [''],
+            pageCount: [1],
             pages: new FormGroup({}),
             flags: new FormGroup({}),
             lookDescription: ['', Validators.required],
@@ -275,7 +275,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.selectedFlag = item.itemFlag;
             let pageLength = 0;
             item.book.pages.forEach(() => {
-              pageLength++;
+                pageLength++;
 
                 if (pageLength === item.book.pages.length - 1) {
                     return;
@@ -301,7 +301,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
                 acMagic: item.armourRating ? item.armourRating.magic : 0,
 
-                pageCount:  item.book.pages.length,
+                pageCount: item.book.pages.length,
                 pages: item.book.pages,
                 hitRoll: item.modifier.hitRoll,
                 damRoll: item.modifier.damRoll,
@@ -333,8 +333,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         });
 
-        if(this.selectedItem == null) {
-          this.addPage();
+        if (this.selectedItem == null) {
+            this.addPage();
         }
     }
 
@@ -419,7 +419,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     addPage() {
-console.log("page count", this.pages.length)
+        console.log("page count", this.pages.length)
         this.pages.push(1);
         let i = 0;
         this.pages.forEach(() => {
