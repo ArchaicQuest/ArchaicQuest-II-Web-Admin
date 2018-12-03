@@ -120,6 +120,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             touchDescription: [''],
             tasteDescription: [''],
             selectContainerItem: [''],
+            containerGP: [''],
             containerOpen: [''],
             containerLocked: [''],
             containerCanLock: [''],
@@ -171,7 +172,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.addItemForm.get('containerCanLock').valueChanges.subscribe(value => {
             this.containerCanBeLocked = !this.containerCanBeLocked;
             if (!this.containerCanBeOpened) {
-                this.addItemForm.get('containerLocked').setValue(false);
+                this.addItemForm.get('containerLocked').setValue(false); //lock issue
             }
         });
 
@@ -283,6 +284,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
                 this.addPage();
             });
+
+            console.log("locked ",  item.container.isLocked);
+            this.containerItems = this.selectedItem.container.items;
+
             this.addItemForm.patchValue({
                 id: item.id,
                 name: item.name,
@@ -322,7 +327,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 containerLocked: item.container ? item.container.isLocked : false,
                 containerCanLock: item.container ? item.container.canLock : false,
                 containerCanOpen: item.container ? item.container.canOpen : false,
-                lockStrength: item.container ? item.container.LockDifficulty : 0,
+                containerGP:  item.container ? item.container.goldPieces : 0,
+                lockStrength: item.container ? item.container.lockDifficulty : 0,
                 containerSize: item.container ? item.container.size : 0,
                 selectContainerKey: item.container ? item.container.associatedKeyId : ''
 
@@ -524,11 +530,12 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 associatedKeyId: this.addItemForm.get('selectContainerKey').value,
                 canLock: this.addItemForm.get('containerCanLock').value || false,
                 canOpen: this.addItemForm.get('containerCanOpen').value || false,
-                LockDifficulty: +this.addItemForm.get('lockStrength').value || 0,
+                lockDifficulty: +this.addItemForm.get('lockStrength').value || 0,
                 items: this.containerItems,
                 size: +this.addItemForm.get('containerSize').value || 0,
                 isLocked: this.addItemForm.get('containerLocked').value || false,
                 isOpen: this.addItemForm.get('containerOpen').value || false,
+                goldPieces: this.addItemForm.get('containerGP').value || 0,
             },
             book: {
                 pageCount: this.addItemForm.get('pageCount').value || 0,
@@ -562,7 +569,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
             hidden: false,
             infinite: false,
             isHiddenInRoom: false,
-            // tslint:disable-next-line:no-bitwise
             itemFlag: flags,
             keywords: [],
             level: this.addItemForm.get('level').value || 1,

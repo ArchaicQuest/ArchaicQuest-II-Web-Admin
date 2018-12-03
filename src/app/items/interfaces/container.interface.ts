@@ -8,5 +8,6 @@ export interface Container {
     canLock: boolean;
     isLocked?: boolean;
     associatedKeyId?: string;
-    LockDifficulty: number;
+    lockDifficulty: number;
+    goldPieces: number;
 }
