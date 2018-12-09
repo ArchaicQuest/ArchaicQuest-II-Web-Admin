@@ -90,7 +90,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             id: [''],
             name: ['', Validators.required],
             knownByName: [''],
-            itemType: [''],
+            itemType: ['', Validators.required],
             itemSlotType: [''],
             level: [''],
             weaponType: [''],
@@ -158,9 +158,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 })
             );
 
-        this.addItemForm.get('itemType').valueChanges.subscribe(value => {
-            this.toggleItemSection(value);
-        });
+
+        // this.addItemForm.get('itemType').valueChanges.subscribe(value => {
+
+        // });
 
         this.addItemForm.get('containerCanOpen').valueChanges.subscribe(value => {
             this.containerCanBeOpened = !this.containerCanBeOpened;
@@ -171,12 +172,12 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         this.addItemForm.get('containerCanLock').valueChanges.subscribe(value => {
             this.containerCanBeLocked = !this.containerCanBeLocked;
-            if (!this.containerCanBeOpened) {
-                this.addItemForm.get('containerLocked').setValue(false); //lock issue
+            if (!this.containerCanBeLocked) {
+                this.addItemForm.get('containerLocked').setValue(false);
             }
         });
 
-        this.store.dispatch(new GetItemTypes());
+        //  this.store.dispatch(new GetItemTypes());
         this.store.dispatch(new GetItemSlotTypes());
         this.store.dispatch(new GetArmourTypes());
         this.store.dispatch(new GetWeaponTypes());
@@ -184,14 +185,14 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.store.dispatch(new GetDamageTypes());
         this.store.dispatch(new GetFlags());
 
-        this.store
-            .pipe(
-                select(getItemTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((itemTypes: any) => {
-                this.itemTypes = itemTypes;
-            });
+        // this.store
+        //     .pipe(
+        //         select(getItemTypes),
+        //         takeWhile(() => this.componentActive)
+        //     )
+        //     .subscribe((itemTypes: any) => {
+        //         this.itemTypes = itemTypes;
+        //     });
 
         this.store
             .pipe(
@@ -272,7 +273,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.selectedItem = item;
 
-            console.log("patch", item.id);
+
+
             this.selectedFlag = item.itemFlag;
             let pageLength = 0;
             item.book.pages.forEach(() => {
@@ -285,8 +287,15 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 this.addPage();
             });
 
-            console.log("locked ",  item.container.isLocked);
+            console.log("locked ", item.container.isLocked);
             this.containerItems = this.selectedItem.container.items;
+
+            let keyName = null;
+            this.itemService.findKeyById(this.selectedItem.keyId).subscribe(key => {
+                this.displayKeys(key);
+                keyName = key;
+                console.log("key", key);
+            });
 
             this.addItemForm.patchValue({
                 id: item.id,
@@ -327,15 +336,18 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 containerLocked: item.container ? item.container.isLocked : false,
                 containerCanLock: item.container ? item.container.canLock : false,
                 containerCanOpen: item.container ? item.container.canOpen : false,
-                containerGP:  item.container ? item.container.goldPieces : 0,
+                containerGP: item.container ? item.container.goldPieces : 0,
                 lockStrength: item.container ? item.container.lockDifficulty : 0,
                 containerSize: item.container ? item.container.size : 0,
-                selectContainerKey: item.container ? item.container.associatedKeyId : ''
+                selectContainerKey: item.container ? keyName.name : ''
 
             });
 
+
+
             this.addItemForm.updateValueAndValidity();
             this.changeDetector.detectChanges();
+
 
         });
 
@@ -370,6 +382,11 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     get getPageControl(): FormArray {
         return this.addItemForm.get('pages') as FormArray;
+    }
+
+
+    onSelectedItemChange(value: number) {
+        this.toggleItemSection(value);
     }
 
 
@@ -527,7 +544,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             itemType: this.addItemForm.get('itemType').value,
             slot: this.addItemForm.get('itemSlotType').value || 0,
             container: {
-                associatedKeyId: this.addItemForm.get('selectContainerKey').value,
+                associatedKeyId: this.addItemForm.get('selectContainerKey').value.keyId,
                 canLock: this.addItemForm.get('containerCanLock').value || false,
                 canOpen: this.addItemForm.get('containerCanOpen').value || false,
                 lockDifficulty: +this.addItemForm.get('lockStrength').value || 0,

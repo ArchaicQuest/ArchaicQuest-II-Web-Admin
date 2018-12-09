@@ -1,0 +1,13 @@
+<mat-form-field>
+    <mat-select [placeholder]="placeholder" #dataSelect required (selectionChange)="onChange($event)" (blur)="onBlur($event)">
+        <mat-option *ngFor="let itemSlotType of itemTypes" [value]="itemSlotType.id">
+            {{itemSlotType.name}}
+        </mat-option>
+    </mat-select>
+    <!-- <mat-error> -->
+    <mat-error class="custom error" *ngIf="control.invalid && !control.pristine">
+        Item slot is required.
+    </mat-error>
+    <!-- </mat-error> -->
+
+</mat-form-field>

@@ -12,7 +12,7 @@ export interface Item {
     description: Description;
     book: Book;
     container: Container;
-    // Alt selector
+    keyId?: string;
     keywords: string[];
     isHiddenInRoom: boolean;
     hidden: boolean;

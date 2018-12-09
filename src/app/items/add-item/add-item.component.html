@@ -18,16 +18,12 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <mat-form-field>
-                        <mat-select placeholder="Item type" formControlName="itemType" required>
-                            <mat-option *ngFor="let itemType of itemTypes" [value]="itemType.id">
-                                {{itemType.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="addItemForm.get('itemType').hasError('required')">
-                            Item type is required.
-                        </mat-error>
-                    </mat-form-field>
+                    <app-item-type-selector formControlName="itemType" [control]="addItemForm.controls['itemType']"
+                        (selectedItemType)="onSelectedItemChange($event)" placeholder="Item Type" hasError="addItemForm.get('itemType').hasError('required')"></app-item-type-selector>
+
+                    {{addItemForm.get('itemType').hasError('required') | json}}
+                    <!-- <span *ngIf="addItemForm.get('itemType').hasError('required')">
+                        Item slot is required.</span> -->
                 </div>
                 <div class="col-4">
                     <mat-form-field>
@@ -215,14 +211,15 @@
 
                     </div>
                     <div class="col">
-                        <mat-checkbox [disabled]="!containerCanBeOpened" formControlName="containerOpen">Is Open</mat-checkbox>
+                        <mat-checkbox [attr.disabled]="!containerCanBeOpened" formControlName="containerOpen">Is Open</mat-checkbox>
                     </div>
 
                     <div class="col">
                         <mat-checkbox formControlName="containerCanLock">Can Lock</mat-checkbox>
                     </div>
                     <div class="col">
-                        <mat-checkbox [disabled]="!containerCanBeLocked" formControlName="containerLocked">Is Locked</mat-checkbox>
+                        <mat-checkbox [attr.disabled]="!containerCanBeLocked" formControlName="containerLocked">Is
+                            Locked</mat-checkbox>
                     </div>
                 </div>
                 <div [hidden]="!containerCanBeLocked">
@@ -232,8 +229,8 @@
                             <mat-form-field class="example-full-width">
                                 <input type="text" placeholder="Associate a key" aria-label="Link key to container lock"
                                     matInput formControlName="selectContainerKey" [matAutocomplete]="autoKeys">
-                                <mat-autocomplete #autoKeys="matAutocomplete" [displayWith]="displayKeys">
-                                    <mat-option *ngFor="let option of findKeyOptions | async" [value]="option">
+                                <mat-autocomplete #autoKeys="matAutocomplete">
+                                    <mat-option *ngFor="let option of findKeyOptions | async" [value]="option.name">
                                         {{option.name}}
                                     </mat-option>
                                 </mat-autocomplete>
@@ -282,7 +279,7 @@
                     <div class="col">
                         <mat-form-field class="example-full-width">
                             <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins" matInput
-                              formControlName="containerGP" >
+                                formControlName="containerGP">
                         </mat-form-field>
 
                     </div>

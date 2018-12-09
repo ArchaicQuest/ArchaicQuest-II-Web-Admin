@@ -23,6 +23,7 @@ export class ItemService {
     private containerSizeUrl = `${this.host}/item/containersize`;
     private LockStrengthUrl = `${this.host}/item/LockStrength`;
     private findItemByIdUrl = `${this.host}item/FindItemById?id=`;
+    private findKeyByIdUrl = `${this.host}item/FindKeyById?id=`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -71,7 +72,17 @@ export class ItemService {
     }
 
     findKeyItems(query: string): Observable<Item[]> {
+        if (query == null) {
+            return;
+        }
         return this.http.get<Item[]>(`${this.findKeyUrl}${query}`);
+    }
+
+    findKeyById(id: string): Observable<Item> {
+        if (id == null) {
+            return;
+        }
+        return this.http.get<Item>(`${this.findKeyByIdUrl}${id}`);
     }
 
     findItemById(id: string): Observable<Item> {

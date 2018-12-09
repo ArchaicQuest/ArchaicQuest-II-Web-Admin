@@ -1,0 +1,5 @@
+:host.ng-invalid.ng-touched select,
+:host-context(.ng-invalid.ng-touched > .catch-validation-events) select {
+ transition: background-color 150ms ease-in-out;
+ background-color: rgba(255, 0, 0, 0.3);
+}
