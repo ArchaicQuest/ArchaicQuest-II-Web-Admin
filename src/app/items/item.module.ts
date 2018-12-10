@@ -14,6 +14,7 @@ import {
 } from '@angular/material';
 import { ViewItemsComponent } from './view-items/view-items.component';
 import { ItemTypeSelectorComponent } from './selectors/item-type-selector.component';
+import { WeaponTypeSelectorComponent } from './selectors/weapon-type/weapon-type-selector.component';
 
 
 
@@ -36,7 +37,8 @@ import { ItemTypeSelectorComponent } from './selectors/item-type-selector.compon
     declarations: [
         AddItemComponent,
         ViewItemsComponent,
-        ItemTypeSelectorComponent
+        ItemTypeSelectorComponent, WeaponTypeSelectorComponent
+
     ],
 })
 export class ItemModule { }

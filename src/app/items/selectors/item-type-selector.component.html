@@ -1,21 +1,10 @@
 <form [formGroup]="itemTypeForm">
-  <mat-form-field>
-    <mat-select
-      formControlName="itemType"
-      placeholder="placeholder"
-      required
-      (selectionChange)="onChange($event)"
-
-    >
-      <mat-option
-        *ngFor="let itemSlotType of itemTypes"
-        [value]="itemSlotType.id"
-      >
-        {{ itemSlotType.name }}
-      </mat-option>
-    </mat-select>
-    <mat-error *ngIf="itemTypeForm.get('itemType').hasError('required')"
-      >This field is required</mat-error
-    >
-  </mat-form-field>
+    <mat-form-field>
+        <mat-select formControlName="itemType" placeholder="Item Type" required (selectionChange)="onChange($event)">
+            <mat-option *ngFor="let itemSlotType of itemTypes" [value]="itemSlotType.id">
+                {{ itemSlotType.name }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="itemTypeForm.get('itemType').hasError('required')">Item type is required</mat-error>
+    </mat-form-field>
 </form>

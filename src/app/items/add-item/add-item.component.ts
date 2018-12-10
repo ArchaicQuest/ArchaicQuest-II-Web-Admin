@@ -177,7 +177,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         //  this.store.dispatch(new GetItemTypes());
         this.store.dispatch(new GetItemSlotTypes());
         this.store.dispatch(new GetArmourTypes());
-        this.store.dispatch(new GetWeaponTypes());
+        //   this.store.dispatch(new GetWeaponTypes());
         this.store.dispatch(new GetAttackTypes());
         this.store.dispatch(new GetDamageTypes());
         this.store.dispatch(new GetFlags());
@@ -209,14 +209,14 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 this.armourTypes = ArmourTypes;
             });
 
-        this.store
-            .pipe(
-                select(getWeaponTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((WeaponTypes: ItemType[]) => {
-                this.weaponTypes = WeaponTypes;
-            });
+        // this.store
+        //     .pipe(
+        //         select(getWeaponTypes),
+        //         takeWhile(() => this.componentActive)
+        //     )
+        //     .subscribe((WeaponTypes: ItemType[]) => {
+        //         this.weaponTypes = WeaponTypes;
+        //     });
 
         this.store
             .pipe(
@@ -337,7 +337,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 containerGP: item.container ? item.container.goldPieces : 0,
                 lockStrength: item.container ? item.container.lockDifficulty : 0,
                 containerSize: item.container ? item.container.size : 0,
-                selectContainerKey: item.container ? keyName.name : ''
+                selectContainerKey: item.container ? keyName != null ? keyName.name : '' : ''
 
             });
 
@@ -355,12 +355,14 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
         this.addItemForm.get('itemType').valueChanges.subscribe(value => {
-          if(value) {
-            console.log("item type val", value);
-           this.toggleItemSection(value);
-          }
+            if (value) {
+                console.log("item type val", value);
+                this.toggleItemSection(value);
+            }
 
-         });
+        });
+
+
     }
 
     private _filter(value: string): Observable<Item[]> {
