@@ -1,110 +1,118 @@
-import { Component, OnInit, OnDestroy, Output, EventEmitter, Input, ViewChild, ElementRef, Renderer2, forwardRef, DoCheck } from '@angular/core';
-import { GetItemTypes } from '../state/add-item.actions';
-import { Store, select } from '@ngrx/store';
-import { ItemAppState } from '../state/add-item.state';
-import { takeWhile } from 'rxjs/operators';
-import { ItemType } from '../interfaces/item-type.interface';
-import { getItemTypes } from '../state/add-item.selector';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormGroup, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { CanUpdateErrorState } from '@angular/material/core';
-import { ErrorStateMatcher } from '@angular/material/core';
-import { Subject } from 'rxjs';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Input,
+  forwardRef,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
+import { GetItemTypes } from "../state/add-item.actions";
+import { Store, select } from "@ngrx/store";
+import { ItemAppState } from "../state/add-item.state";
+import { takeWhile } from "rxjs/operators";
+import { ItemType } from "../interfaces/item-type.interface";
+import { getItemTypes } from "../state/add-item.selector";
+import {
+  ControlValueAccessor,
+  NG_VALUE_ACCESSOR,
+  FormGroup,
+  FormControl,
+  NG_VALIDATORS,
+  FormBuilder
+} from "@angular/forms";
 
+
+// export class CustomSelectorError {
+//   constructor(public hasError?: boolean, public errorMessage?: string) {}
+// }
 
 @Component({
-    selector: 'app-item-type-selector',
-    templateUrl: './item-type-selector.component.html',
-    styleUrls: ['./item-type-selector.component.scss'],
-    providers: [{
-        provide: NG_VALUE_ACCESSOR,
-        useExisting: forwardRef(() => ItemTypeSelectorComponent),
-        multi: true,
-    }]
+  selector: "app-item-type-selector",
+  templateUrl: './item-type-selector.component.html',
+  styleUrls: ["./item-type-selector.component.scss"],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => ItemTypeSelectorComponent),
+      multi: true
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => ItemTypeSelectorComponent),
+      multi: true
+    }
+  ]
 })
-export class ItemTypeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor {
+export class ItemTypeSelectorComponent implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
+  itemTypeForm: FormGroup;
+  componentActive = true;
+  itemTypes: ItemType[];
+  @Input() control: FormGroup;
+  @Input() placeholder = '';
+  @Input() currentValue = '';
 
-    constructor(private store: Store<ItemAppState>, private _renderer: Renderer2) { }
-    componentActive = true;
-    itemTypes: ItemType[];
-    stateChanges = new Subject<void>();
-    errorState = false;
+  itemType: FormControl = new FormControl(this.currentValue);
 
-    @Input() control: FormGroup;
-    @Input() placeholder = '';
-    @Input() hasError = '';
+  constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
+    this.itemTypeForm = this.fb.group({
+      itemType: this.itemType
+    });
+  }
 
-    @Output() selectedItemType = new EventEmitter<ItemType>();
+  ngOnChanges(changes: SimpleChanges) {
+    console.log(changes)
+      this.itemTypeForm.patchValue({
+        itemType: this.currentValue
+      });
+}
 
-    @ViewChild('dataSelect') private _dataSelect: ElementRef;
-    get dataSelect(): ElementRef {
-        return this._dataSelect;
+  ngOnInit() {
+    this.store.dispatch(new GetItemTypes());
+
+    this.store
+      .pipe(
+        select(getItemTypes),
+        takeWhile(() => this.componentActive)
+      )
+      .subscribe((itemTypes: any) => {
+        this.itemTypes = itemTypes;
+        this.itemType.updateValueAndValidity();
+      });
+
+
+  }
+
+  // validate(c: FormControl) {
+  //   if (!this.itemType.value) {
+  //     return { CustomSelectorError: new CustomSelectorError(true) };
+  //   }
+  //   return null;
+  // }
+
+  propagateChange = (_: any) => {
+    return;
+  }
+
+  writeValue(value: any): void {
+    if (value) {
+      this.itemType.setValue(value.eventName);
     }
+  }
 
-    private _onChange = (_: any) => { };
-    private _onTouched = () => { };
+  registerOnChange(fn: any): void {
+    this.propagateChange = fn;
+  }
 
-    setTouched(event): void {
-        this.control.markAsTouched();
+  registerOnTouched(fn: any): void {
+    return;
+  }
 
-        this.control.validator(event.value);
+  ngOnDestroy(): void {
+    this.componentActive = false;
+  }
 
-        this.errorState = this.control.invalid;
-
-        this.stateChanges.next();
-    }
-
-
-
-    writeValue(obj: any): void {
-        this._dataSelect = obj;
-    }
-    registerOnChange(fn: any): void {
-        //        this._onChange = fn;
-        this.propagateChange = fn;
-    }
-    registerOnTouched(fn: any): void {
-        this._onTouched = fn;
-    }
-
-    propagateChange = (value: number) => { };
-
-    setDisabledState?(isDisabled: boolean): void {
-        this._renderer.setProperty(this._dataSelect.nativeElement, 'disabled', isDisabled);
-    }
-
-    ngOnInit() {
-
-        this.store.dispatch(new GetItemTypes());
-
-        this.store
-            .pipe(
-                select(getItemTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((itemTypes: any) => {
-                this.itemTypes = itemTypes;
-            });
-    }
-
-    ngOnDestroy(): void {
-        this.componentActive = false;
-    }
-
-    onChange(event) {
-        this.selectedItemType.emit(event.value);
-        this._onChange(event.value);
-        this.propagateChange(event.value);
-
-    }
-
-    onBlur(event: any) {
-        this.selectedItemType.emit(event.value);
-        this.propagateChange(event.value);
-        this._onTouched();
-        this.setTouched(event.value);
-
-    }
-
-
-
+  onChange(event) {
+    this.propagateChange(event.value);
+  }
 }

@@ -70,7 +70,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     selectedItem: Item;
     selectedFlag: FlagEnum;
     selectedFlags: FlagEnum[] = [];
-
+    currentItemTypeValue: string;
     constructor(
         private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
@@ -159,9 +159,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
             );
 
 
-        // this.addItemForm.get('itemType').valueChanges.subscribe(value => {
-
-        // });
 
         this.addItemForm.get('containerCanOpen').valueChanges.subscribe(value => {
             this.containerCanBeOpened = !this.containerCanBeOpened;
@@ -296,6 +293,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 keyName = key;
                 console.log("key", key);
             });
+            this.currentItemTypeValue = item.itemType;
 
             this.addItemForm.patchValue({
                 id: item.id,
@@ -354,6 +352,15 @@ export class AddItemComponent implements OnDestroy, OnInit {
         if (this.selectedItem == null) {
             this.addPage();
         }
+
+
+        this.addItemForm.get('itemType').valueChanges.subscribe(value => {
+          if(value) {
+            console.log("item type val", value);
+           this.toggleItemSection(value);
+          }
+
+         });
     }
 
     private _filter(value: string): Observable<Item[]> {

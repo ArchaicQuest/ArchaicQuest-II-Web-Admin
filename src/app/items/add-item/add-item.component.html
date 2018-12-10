@@ -18,12 +18,7 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <app-item-type-selector formControlName="itemType" [control]="addItemForm.controls['itemType']"
-                        (selectedItemType)="onSelectedItemChange($event)" placeholder="Item Type" hasError="addItemForm.get('itemType').hasError('required')"></app-item-type-selector>
-
-                    {{addItemForm.get('itemType').hasError('required') | json}}
-                    <!-- <span *ngIf="addItemForm.get('itemType').hasError('required')">
-                        Item slot is required.</span> -->
+                    <app-item-type-selector formControlName="itemType" [currentValue]="currentItemTypeValue"></app-item-type-selector>
                 </div>
                 <div class="col-4">
                     <mat-form-field>
