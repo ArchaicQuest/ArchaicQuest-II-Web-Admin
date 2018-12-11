@@ -51,6 +51,7 @@ export class ItemTypeSelectorComponent implements OnInit, OnDestroy, ControlValu
     @Input() control: FormGroup;
     @Input() placeholder = '';
     @Input() currentValue = '';
+    @Input() isDisabled = false;
 
     itemType: FormControl = new FormControl(this.currentValue);
 
@@ -61,6 +62,9 @@ export class ItemTypeSelectorComponent implements OnInit, OnDestroy, ControlValu
     }
 
     ngOnChanges(changes: SimpleChanges) {
+
+
+
         console.log(changes)
         this.itemTypeForm.patchValue({
             itemType: this.currentValue
