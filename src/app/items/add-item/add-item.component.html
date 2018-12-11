@@ -44,18 +44,7 @@
                 <h2>Weapon</h2>
                 <div class="row">
                     <div class="col-4">
-                        <app-weapon-type-selector formControlName="weaponType" [currentValue]="this.addItemForm.get('weaponType').value"  [isDisabled]="this.addItemForm.get('itemType').disabled"></app-weapon-type-selector>
-                        <!-- <mat-form-field>
-                            <mat-select placeholder="Weapon type" formControlName="weaponType" required>
-                                <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.id">
-                                    {{weaponType.name}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="addItemForm.get('weaponType').hasError('required')">
-                                Weapon type is required.
-                            </mat-error>
-                        </mat-form-field> -->
-
+                        <app-weapon-type-selector formControlName="weaponType" [currentValue]="this.addItemForm.get('weaponType').value"></app-weapon-type-selector>
                     </div>
 
                     <div class="col-4">

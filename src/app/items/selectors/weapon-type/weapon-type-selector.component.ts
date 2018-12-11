@@ -6,7 +6,6 @@ import {
     forwardRef,
     OnChanges,
     SimpleChanges,
-    ChangeDetectorRef
 } from "@angular/core";
 
 
@@ -54,11 +53,11 @@ export class WeaponTypeSelectorComponent implements OnInit, OnDestroy, ControlVa
     @Input() control: FormGroup;
     @Input() placeholder = '';
     @Input() currentValue = '';
-    @Input() isDisabled = false;
+
 
     weaponType: FormControl = new FormControl(this.currentValue);
 
-    constructor(private store: Store<ItemAppState>, private fb: FormBuilder,  private changeDetector: ChangeDetectorRef) {
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
         this.weaponTypeForm = this.fb.group({
             weaponType: this.weaponType
         });
@@ -69,19 +68,6 @@ export class WeaponTypeSelectorComponent implements OnInit, OnDestroy, ControlVa
         this.weaponTypeForm.patchValue({
             weaponType: changes.currentValue.currentValue
         });
-
-        if (changes.isDisabled.currentValue) {
-            this.weaponTypeForm.disable({
-                emitEvent: true,
-                onlySelf: true
-            });
-        } else {
-            this.weaponTypeForm.enable({
-                emitEvent: true,
-                onlySelf: true
-            });
-        }
-
     }
 
     ngOnInit() {
@@ -133,15 +119,6 @@ export class WeaponTypeSelectorComponent implements OnInit, OnDestroy, ControlVa
         this.propagateChange(event.value);
     }
 
-    setDisabledState(isDisabled: boolean): void {
 
-        console.log("wtf", isDisabled)
-        //    this.disabled = isDisabled;
-
-        if (isDisabled) {
-            this.weaponTypeForm.disable();
-            this.weaponTypeForm.updateValueAndValidity();
-        }
-    }
 
 }

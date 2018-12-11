@@ -71,6 +71,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     selectedFlag: FlagEnum;
     selectedFlags: FlagEnum[] = [];
     currentItemTypeValue: string;
+
     constructor(
         private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
@@ -384,7 +385,16 @@ export class AddItemComponent implements OnDestroy, OnInit {
         return item != null ? item.name : undefined;
     }
 
-
+    public findInvalidControls() {
+        const invalid = [];
+        const controls = this.addItemForm.controls;
+        for (const name in controls) {
+            if (controls[name].invalid) {
+                invalid.push(name);
+            }
+        }
+        console.log(invalid);
+    }
     get getFlagControl(): FormArray {
         return this.addItemForm.get('flags') as FormArray;
     }
@@ -496,6 +506,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.showArmourSection = false;
         this.addItemForm.get('weaponType').disable();
         this.addItemForm.get('attackType').disable();
+        this.addItemForm.get('minDamage').disable();
+        this.addItemForm.get('maxDamage').disable();
         this.showWeaponSection = false;
         this.showBookSection = false;
         this.addItemForm.get('pageCount').disable();
@@ -507,8 +519,11 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.addItemForm.get('armourType').enable();
         } else if (itemType === 11) {
             this.showWeaponSection = true;
+
             this.addItemForm.get('weaponType').enable();
             this.addItemForm.get('attackType').enable();
+            this.addItemForm.get('minDamage').enable();
+            this.addItemForm.get('maxDamage').enable();
         } else if (itemType === 1) {
             this.showBookSection = true;
             this.addItemForm.get('pageCount').enable();
@@ -519,6 +534,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         this.addItemForm.updateValueAndValidity();
         this.changeDetector.detectChanges();
+
+        this.findInvalidControls();
     }
 
     updateSelectedFlags(flag: number) {
