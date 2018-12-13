@@ -13,8 +13,9 @@ import {
     MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule
 } from '@angular/material';
 import { ViewItemsComponent } from './view-items/view-items.component';
-import { ItemTypeSelectorComponent } from './selectors/item-type-selector.component';
+import { ItemTypeSelectorComponent } from './selectors/item-type/item-type-selector.component';
 import { WeaponTypeSelectorComponent } from './selectors/weapon-type/weapon-type-selector.component';
+import { AttackTypeSelectorComponent } from './selectors/attack-type/attack-type-selector.component';
 
 
 
@@ -37,7 +38,9 @@ import { WeaponTypeSelectorComponent } from './selectors/weapon-type/weapon-type
     declarations: [
         AddItemComponent,
         ViewItemsComponent,
-        ItemTypeSelectorComponent, WeaponTypeSelectorComponent
+        ItemTypeSelectorComponent,
+        WeaponTypeSelectorComponent,
+        AttackTypeSelectorComponent
 
     ],
 })

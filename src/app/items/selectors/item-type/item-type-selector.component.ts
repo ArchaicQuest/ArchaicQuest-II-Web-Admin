@@ -7,12 +7,12 @@ import {
     OnChanges,
     SimpleChanges
 } from "@angular/core";
-import { GetItemTypes } from "../state/add-item.actions";
+import { GetItemTypes } from "../../state/add-item.actions";
 import { Store, select } from "@ngrx/store";
-import { ItemAppState } from "../state/add-item.state";
+import { ItemAppState } from "../../state/add-item.state";
 import { takeWhile } from "rxjs/operators";
-import { ItemType } from "../interfaces/item-type.interface";
-import { getItemTypes } from "../state/add-item.selector";
+import { ItemType } from "../../interfaces/item-type.interface";
+import { getItemTypes } from "../../state/add-item.selector";
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,

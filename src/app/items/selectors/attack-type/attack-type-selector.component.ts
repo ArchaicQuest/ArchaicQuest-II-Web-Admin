@@ -17,55 +17,55 @@ import {
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from "../../state/add-item.state";
-import { getWeaponTypes } from "../../state/add-item.selector";
+import { getWeaponTypes, getAttackTypes } from "../../state/add-item.selector";
 import { takeWhile } from "rxjs/operators";
-import { GetWeaponTypes } from "../../state/add-item.actions";
+import { GetWeaponTypes, GetAttackTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
 
 @Component({
-  selector: "app-weapon-type-selector",
-  templateUrl: "./weapon-type-selector.component.html",
+  selector: "app-attack-type-selector",
+  templateUrl: "./attack-type-selector.component.html",
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => WeaponTypeSelectorComponent),
+      useExisting: forwardRef(() => AttackTypeSelectorComponent),
       multi: true
     },
     {
       provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => WeaponTypeSelectorComponent),
+      useExisting: forwardRef(() => AttackTypeSelectorComponent),
       multi: true
     }
   ]
 })
-export class WeaponTypeSelectorComponent extends BaseSelectorComponent
+export class AttackTypeSelectorComponent extends BaseSelectorComponent
   implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
   componentActive = true;
-  weaponTypes: ItemType[];
+  attackTypes: ItemType[];
   @Input() currentValue = "";
 
   constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
     super();
 
     this.formGroup = this.fb.group({
-      weaponType: this.control
+      attackType: this.control
     });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    this.updateFormControl('weaponType', changes);
+    this.updateFormControl('attackType', changes);
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetWeaponTypes());
+    this.store.dispatch(new GetAttackTypes());
 
     this.store
       .pipe(
-        select(getWeaponTypes),
+        select(getAttackTypes),
         takeWhile(() => this.componentActive)
       )
-      .subscribe((weaponTypes: any) => {
-        this.weaponTypes = weaponTypes;
+      .subscribe((attackTypes: any) => {
+        this.attackTypes = attackTypes;
         this.control.updateValueAndValidity();
       });
   }

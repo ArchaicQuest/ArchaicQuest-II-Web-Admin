@@ -48,16 +48,7 @@
                     </div>
 
                     <div class="col-4">
-                        <mat-form-field>
-                            <mat-select placeholder="Attack type" formControlName="attackType" required>
-                                <mat-option *ngFor="let attackType of attackTypes" [value]="attackType.id">
-                                    {{attackType.name}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="addItemForm.get('attackType').hasError('required')">
-                                Weapon type is required.
-                            </mat-error>
-                        </mat-form-field>
+                      <app-attack-type-selector formControlName="attackType" [currentValue]="this.addItemForm.get('attackType').value"></app-attack-type-selector>
                     </div>
 
                     <div class="col-4">

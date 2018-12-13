@@ -179,7 +179,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.store.dispatch(new GetItemSlotTypes());
         this.store.dispatch(new GetArmourTypes());
         //   this.store.dispatch(new GetWeaponTypes());
-        this.store.dispatch(new GetAttackTypes());
+       // this.store.dispatch(new GetAttackTypes());
         this.store.dispatch(new GetDamageTypes());
         this.store.dispatch(new GetFlags());
 
@@ -228,14 +228,14 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 this.damageTypes = damageTypes;
             });
 
-        this.store
-            .pipe(
-                select(getAttackTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((attackTypes: ItemType[]) => {
-                this.attackTypes = attackTypes;
-            });
+        // this.store
+        //     .pipe(
+        //         select(getAttackTypes),
+        //         takeWhile(() => this.componentActive)
+        //     )
+        //     .subscribe((attackTypes: ItemType[]) => {
+        //         this.attackTypes = attackTypes;
+        //     });
 
         this.store
             .pipe(

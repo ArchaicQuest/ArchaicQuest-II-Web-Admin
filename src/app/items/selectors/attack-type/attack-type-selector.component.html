@@ -1,0 +1,10 @@
+<form [formGroup]="formGroup">
+    <mat-form-field>
+        <mat-select formControlName="attackType" placeholder="attack Type" required (selectionChange)="onChange($event)">
+            <mat-option *ngFor="let attackType of attackTypes" [value]="attackType.id">
+                {{ attackType.name }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('attackType').hasError('required')">attack type is required</mat-error>
+    </mat-form-field>
+</form>
