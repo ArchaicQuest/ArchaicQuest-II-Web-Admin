@@ -1,18 +1,18 @@
 import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Input,
-  forwardRef,
-  OnChanges,
-  SimpleChanges
+    Component,
+    OnInit,
+    OnDestroy,
+    Input,
+    forwardRef,
+    OnChanges,
+    SimpleChanges
 } from "@angular/core";
 
 import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  FormBuilder
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    NG_VALIDATORS,
+    FormBuilder
 } from "@angular/forms";
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
@@ -23,54 +23,55 @@ import { GetWeaponTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
 
 @Component({
-  selector: "app-weapon-type-selector",
-  templateUrl: "./weapon-type-selector.component.html",
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => WeaponTypeSelectorComponent),
-      multi: true
-    },
-    {
-      provide: NG_VALIDATORS,
-      useExisting: forwardRef(() => WeaponTypeSelectorComponent),
-      multi: true
-    }
-  ]
+    selector: "app-weapon-type-selector",
+    templateUrl: "./weapon-type-selector.component.html",
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => WeaponTypeSelectorComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => WeaponTypeSelectorComponent),
+            multi: true
+        }
+    ]
 })
 export class WeaponTypeSelectorComponent extends BaseSelectorComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
-  componentActive = true;
-  weaponTypes: ItemType[];
-  @Input() currentValue = "";
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
+    componentActive = true;
+    weaponTypes: ItemType[];
+    @Input() currentValue = "";
 
-  constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
-    super();
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
+        super();
 
-    this.formGroup = this.fb.group({
-      weaponType: this.control
-    });
-  }
+        this.formGroup = this.fb.group({
+            weaponType: this.control
+        });
+    }
 
-  ngOnChanges(changes: SimpleChanges) {
-    this.updateFormControl('weaponType', changes);
-  }
+    ngOnChanges(changes: SimpleChanges) {
+        this.updateFormControl('weaponType', changes);
+    }
 
-  ngOnInit() {
-    this.store.dispatch(new GetWeaponTypes());
+    ngOnInit() {
+        this.store.dispatch(new GetWeaponTypes());
 
-    this.store
-      .pipe(
-        select(getWeaponTypes),
-        takeWhile(() => this.componentActive)
-      )
-      .subscribe((weaponTypes: any) => {
-        this.weaponTypes = weaponTypes;
-        this.control.updateValueAndValidity();
-      });
-  }
+        this.store
+            .pipe(
+                select(getWeaponTypes),
+                takeWhile(() => this.componentActive)
+            )
+            .subscribe((weaponTypes: any) => {
+                this.weaponTypes = weaponTypes;
+                this.control.updateValueAndValidity();
+            });
+    }
 
-  ngOnDestroy(): void {
-    this.componentActive = false;
-  }
+    ngOnDestroy(): void {
+        this.componentActive = false;
+    }
 }
+
