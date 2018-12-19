@@ -26,7 +26,7 @@ export abstract class BaseSelectorComponent {
 
     propagateChange = (_: any) => {
         return;
-    };
+    }
 
     writeValue(value: any): void {
         if (value) {
