@@ -11,13 +11,13 @@ import {
 } from '@angular/material';
 import { WeaponTypeSelectorComponent } from './weapon-type-selector.component';
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
-import { ReplaySubject, Observable, from, of } from 'rxjs';
+import { ReplaySubject, Observable, from, of, BehaviorSubject } from 'rxjs';
 import { GetWeaponTypes, GetAttackTypesSuccess, GetWeaponTypesSuccess } from '../../state/add-item.actions';
 import { AddItemEffects } from '../../state/add-item.effects';
 import { AddItemComponent } from '../../add-item/add-item.component';
 import { APP_BASE_HREF } from '@angular/common';
 import { EffectsModule, Effect, Actions } from '@ngrx/effects';
-import { StoreModule } from '@ngrx/store';
+import { StoreModule, Store, select } from '@ngrx/store';
 import { addItemReducer } from '../../state/add-item.reducer';
 import { RouterModule } from '@angular/router';
 import { itemRoutes } from '../../item.routes';
@@ -32,21 +32,20 @@ import { EffectsRunner } from '@ngrx/effects/src/effects_runner';
 import { TestScheduler } from 'rxjs/testing';
 import { hot, cold } from 'jasmine-marbles';
 import { ViewItemsComponent } from '../../view-items/view-items.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, inject, Pipe, PipeTransform } from '@angular/core';
+import { ItemState } from '../../item.state';
+import { map } from 'rxjs/operators';
+import { ItemAppState } from '../../state/add-item.state';
+import { getWeaponTypes } from '../../state/add-item.selector';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { provideMagicalMock, Mock } from 'angular-testing-library';
 
-
-
-describe('BaseSelectorComponent', () => {
+describe('Weapon Selector Component', () => {
     let component: WeaponTypeSelectorComponent;
     let fixture: ComponentFixture<WeaponTypeSelectorComponent>;
-
-
-    function stubService(response: any): any {
-        const service = jasmine.createSpyObj('ItemService', ['loadWeaponTypes']);
-        service.loadWeaponTypes.and.returnValue(of(response));
-        service.loadWeaponTypes.and.returnValue(Promise.resolve(response));
-        return service;
-    }
+    let effects: AddItemEffects;
+    let actions: Observable<any>;
+    let service: Mock<ItemService>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -73,6 +72,8 @@ describe('BaseSelectorComponent', () => {
             ],
             providers: [
                 { provide: APP_BASE_HREF, useValue: '/' },
+                provideMockActions(() => actions),
+                provideMagicalMock(ItemService),
                 AddItemEffects,
 
             ],
@@ -83,29 +84,33 @@ describe('BaseSelectorComponent', () => {
         }).compileComponents();
     }));
 
-
     beforeEach(() => {
+        effects = TestBed.get(AddItemEffects);
+        service = TestBed.get(ItemService);
         fixture = TestBed.createComponent(WeaponTypeSelectorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
+    it('should return list of weapon', async () => {
 
-
-
-
-    fit('should work with effects that only use observables', async () => {
-        const itemTypes: ItemType[] = [{
-            name: "sword",
+        const mockedValue: ItemType[] = [{
+            name: 'sword',
             id: 1
         }];
 
-        const actions = new Actions(cold('-a-|', { a: { type: new GetWeaponTypes().type } }));
-        const service = stubService(itemTypes);
-        const effects = new AddItemEffects(actions, service);
+        const action = new GetWeaponTypes();
+        const result = new GetWeaponTypesSuccess(mockedValue);
 
-        expect(effects.loadItemTypes).toBeObservable(cold('-a-|',
-            { a: { type: new GetWeaponTypesSuccess(itemTypes).type, payload: itemTypes } }));
+        actions = of(action);
+        const response = cold('-a|', { a: mockedValue });
+        const expected = cold('-b|', { b: result });
+
+
+        service.getWeaponTypes.and.returnValue(response);
+
+
+        expect(effects.loadWeaponTypes).toBeObservable(expected);
     });
 
 
