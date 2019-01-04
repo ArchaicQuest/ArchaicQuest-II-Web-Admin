@@ -8,7 +8,7 @@ export const getItemTypes = createSelector(
     state => state.itemTypes
 );
 
-export const getItemSlotTypes = createSelector(
+export const    getItemSlotTypes = createSelector(
     getItemState,
     state => state.itemSlots
 );

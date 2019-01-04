@@ -17,55 +17,55 @@ import {
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from "../../state/add-item.state";
-import { getWeaponTypes, getItemTypes } from "../../state/add-item.selector";
+import { getWeaponTypes, getItemTypes, getItemSlotTypes } from "../../state/add-item.selector";
 import { takeWhile } from "rxjs/operators";
-import { GetItemTypes } from "../../state/add-item.actions";
+import { GetItemTypes, GetItemSlotTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
 
 @Component({
-  selector: "app-item-type-selector",
+  selector: "app-item-slot-selector",
   templateUrl: './item-type-selector.component.html',
   providers: [
       {
           provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => ItemTypeSelectorComponent),
+          useExisting: forwardRef(() => ItemSlotSelectorComponent),
           multi: true
       },
       {
           provide: NG_VALIDATORS,
-          useExisting: forwardRef(() => ItemTypeSelectorComponent),
+          useExisting: forwardRef(() => ItemSlotSelectorComponent),
           multi: true
       }
   ]
 })
-export class ItemTypeSelectorComponent extends BaseSelectorComponent
+export class ItemSlotSelectorComponent extends BaseSelectorComponent
   implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
   componentActive = true;
-  itemTypes: ItemType[];
+  itemSlots: ItemType[];
   @Input() currentValue = "";
 
   constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
       super();
 
       this.formGroup = this.fb.group({
-          itemType: this.control
+        itemSlotType: this.control
       });
   }
 
   ngOnChanges(changes: SimpleChanges) {
-      this.updateFormControl('itemType', changes);
+      this.updateFormControl('itemSlotType', changes);
   }
 
   ngOnInit() {
-      this.store.dispatch(new GetItemTypes());
+      this.store.dispatch(new GetItemSlotTypes());
 
       this.store
           .pipe(
-              select(getItemTypes),
+              select(getItemSlotTypes),
               takeWhile(() => this.componentActive)
           )
-          .subscribe((itemTypes: any) => {
-              this.itemTypes = itemTypes;
+          .subscribe((itemSlots: any) => {
+              this.itemSlots = itemSlots;
               this.control.updateValueAndValidity();
           });
   }

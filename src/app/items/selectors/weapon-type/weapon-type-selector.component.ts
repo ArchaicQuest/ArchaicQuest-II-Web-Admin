@@ -24,7 +24,7 @@ import { BaseSelectorComponent } from "../base-selector.component";
 
 @Component({
     selector: "app-weapon-type-selector",
-    templateUrl: "./weapon-type-selector.component.html",
+    templateUrl: './weapon-type-selector.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,
@@ -42,13 +42,13 @@ export class WeaponTypeSelectorComponent extends BaseSelectorComponent
     implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
     componentActive = true;
     weaponTypes: ItemType[];
-    @Input() currentValue = "";
+    @Input() currentValue = '';
 
     constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
         super();
 
         this.formGroup = this.fb.group({
-            weaponType: this.control
+          weaponType: this.control
         });
     }
 

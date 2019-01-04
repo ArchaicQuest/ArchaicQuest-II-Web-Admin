@@ -175,31 +175,13 @@ export class AddItemComponent implements OnDestroy, OnInit {
             }
         });
 
-        //  this.store.dispatch(new GetItemTypes());
-        this.store.dispatch(new GetItemSlotTypes());
+
         this.store.dispatch(new GetArmourTypes());
-        //   this.store.dispatch(new GetWeaponTypes());
-       // this.store.dispatch(new GetAttackTypes());
+
         this.store.dispatch(new GetDamageTypes());
         this.store.dispatch(new GetFlags());
 
-        // this.store
-        //     .pipe(
-        //         select(getItemTypes),
-        //         takeWhile(() => this.componentActive)
-        //     )
-        //     .subscribe((itemTypes: any) => {
-        //         this.itemTypes = itemTypes;
-        //     });
 
-        this.store
-            .pipe(
-                select(getItemSlotTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((slotTypes: any) => {
-                this.itemSlotTypes = slotTypes;
-            });
 
         this.store
             .pipe(
@@ -210,14 +192,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 this.armourTypes = ArmourTypes;
             });
 
-        // this.store
-        //     .pipe(
-        //         select(getWeaponTypes),
-        //         takeWhile(() => this.componentActive)
-        //     )
-        //     .subscribe((WeaponTypes: ItemType[]) => {
-        //         this.weaponTypes = WeaponTypes;
-        //     });
+
 
         this.store
             .pipe(
@@ -228,14 +203,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 this.damageTypes = damageTypes;
             });
 
-        // this.store
-        //     .pipe(
-        //         select(getAttackTypes),
-        //         takeWhile(() => this.componentActive)
-        //     )
-        //     .subscribe((attackTypes: ItemType[]) => {
-        //         this.attackTypes = attackTypes;
-        //     });
 
         this.store
             .pipe(
@@ -356,11 +323,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
         this.addItemForm.get('itemType').valueChanges.subscribe(value => {
-            if (value) {
                 console.log("item type val", value);
                 this.toggleItemSection(value);
-            }
-
         });
 
 

@@ -17,9 +17,9 @@ import {
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from "../../state/add-item.state";
-import { getWeaponTypes, getAttackTypes } from "../../state/add-item.selector";
+import { getAttackTypes } from "../../state/add-item.selector";
 import { takeWhile } from "rxjs/operators";
-import { GetWeaponTypes, GetAttackTypes } from "../../state/add-item.actions";
+import { GetAttackTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
 
 @Component({

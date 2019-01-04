@@ -18,19 +18,10 @@
             </div>
             <div class="row">
                 <div class="col-4">
-                    <app-item-type-selector formControlName="itemType" [currentValue]="currentItemTypeValue"></app-item-type-selector>
+                    <app-item-type-selector formControlName="itemType" [currentValue]="this.addItemForm.get('itemType').value"></app-item-type-selector>
                 </div>
                 <div class="col-4">
-                    <mat-form-field>
-                        <mat-select placeholder="Item slot" formControlName="itemSlotType" required>
-                            <mat-option *ngFor="let itemSlotType of itemSlotTypes" [value]="itemSlotType.id">
-                                {{itemSlotType.name}}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="addItemForm.get('itemType').hasError('required')">
-                            Item slot is required.
-                        </mat-error>
-                    </mat-form-field>
+                  <app-item-slot-selector formControlName="itemSlotType" [currentValue]="this.addItemForm.get('itemSlotType').value"></app-item-slot-selector>
                 </div>
                 <div class="col-4">
                     <mat-form-field>

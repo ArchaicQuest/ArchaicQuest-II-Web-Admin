@@ -16,6 +16,7 @@ import { ViewItemsComponent } from './view-items/view-items.component';
 import { ItemTypeSelectorComponent } from './selectors/item-type/item-type-selector.component';
 import { WeaponTypeSelectorComponent } from './selectors/weapon-type/weapon-type-selector.component';
 import { AttackTypeSelectorComponent } from './selectors/attack-type/attack-type-selector.component';
+import { ItemSlotSelectorComponent } from './selectors/item-slot/item-type-selector.component';
 
 
 
@@ -40,7 +41,8 @@ import { AttackTypeSelectorComponent } from './selectors/attack-type/attack-type
         ViewItemsComponent,
         ItemTypeSelectorComponent,
         WeaponTypeSelectorComponent,
-        AttackTypeSelectorComponent
+        AttackTypeSelectorComponent,
+        ItemSlotSelectorComponent
 
     ],
 })
