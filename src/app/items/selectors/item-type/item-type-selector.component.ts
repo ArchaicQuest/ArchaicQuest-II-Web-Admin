@@ -12,7 +12,9 @@ import {
   ControlValueAccessor,
   NG_VALUE_ACCESSOR,
   NG_VALIDATORS,
-  FormBuilder
+  FormBuilder,
+  ControlContainer,
+  NgForm
 } from "@angular/forms";
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
@@ -25,6 +27,7 @@ import { BaseSelectorComponent } from "../base-selector.component";
 @Component({
   selector: "app-item-type-selector",
   templateUrl: './item-type-selector.component.html',
+  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ],
   providers: [
       {
           provide: NG_VALUE_ACCESSOR,
@@ -48,7 +51,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
       super();
 
       this.formGroup = this.fb.group({
-          itemType: this.control
+        itemType: this.control
       });
   }
 

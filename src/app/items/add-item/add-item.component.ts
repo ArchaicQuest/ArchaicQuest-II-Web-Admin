@@ -96,7 +96,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             level: [''],
             weaponType: [''],
             attackType: [''],
-            damageType: [''],
+            damageType: ['', Validators.required],
             minDamage: ['', [Validators.min(1), Validators.max(50)]],
             maxDamage: ['', [Validators.min(1), Validators.max(100)]],
             armourType: [''],
@@ -175,33 +175,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             }
         });
 
-
-        this.store.dispatch(new GetArmourTypes());
-
-        this.store.dispatch(new GetDamageTypes());
         this.store.dispatch(new GetFlags());
 
-
-
-        this.store
-            .pipe(
-                select(getArmourTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((ArmourTypes: ItemType[]) => {
-                this.armourTypes = ArmourTypes;
-            });
-
-
-
-        this.store
-            .pipe(
-                select(getDamageTypes),
-                takeWhile(() => this.componentActive)
-            )
-            .subscribe((damageTypes: ItemType[]) => {
-                this.damageTypes = damageTypes;
-            });
 
 
         this.store
@@ -262,6 +237,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 console.log("key", key);
             });
             this.currentItemTypeValue = item.itemType;
+            console.log("item type ", this.currentItemTypeValue)
+
 
             this.addItemForm.patchValue({
                 id: item.id,
@@ -310,10 +287,19 @@ export class AddItemComponent implements OnDestroy, OnInit {
             });
 
 
+            this.addItemForm.markAsDirty();
+            this.addItemForm.markAsTouched();
+            this.addItemForm.markAsPending();
 
-            this.addItemForm.updateValueAndValidity();
+            this.addItemForm.get("itemType").updateValueAndValidity();
+            this.addItemForm.get("itemSlotType").updateValueAndValidity();
+            this.addItemForm.get("weaponType").updateValueAndValidity();
+            this.addItemForm.get("attackType").updateValueAndValidity();
+            this.addItemForm.get("damageType").updateValueAndValidity();
+
+
             this.changeDetector.detectChanges();
-
+            this.addItemForm.updateValueAndValidity();
 
         });
 
@@ -323,11 +309,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
         this.addItemForm.get('itemType').valueChanges.subscribe(value => {
-                console.log("item type val", value);
                 this.toggleItemSection(value);
         });
 
-
+        setInterval(() => this.findInvalidControls(), 5000);
     }
 
     private _filter(value: string): Observable<Item[]> {
@@ -365,11 +350,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     get getPageControl(): FormArray {
         return this.addItemForm.get('pages') as FormArray;
-    }
-
-
-    onSelectedItemChange(value: number) {
-        this.toggleItemSection(value);
     }
 
 
@@ -470,6 +450,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.showArmourSection = false;
         this.addItemForm.get('weaponType').disable();
         this.addItemForm.get('attackType').disable();
+        this.addItemForm.get('damageType').disable();
         this.addItemForm.get('minDamage').disable();
         this.addItemForm.get('maxDamage').disable();
         this.showWeaponSection = false;
@@ -486,6 +467,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             this.addItemForm.get('weaponType').enable();
             this.addItemForm.get('attackType').enable();
+            this.addItemForm.get('damageType').enable();
             this.addItemForm.get('minDamage').enable();
             this.addItemForm.get('maxDamage').enable();
         } else if (itemType === 1) {

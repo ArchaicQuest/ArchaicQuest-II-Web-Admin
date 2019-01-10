@@ -17,6 +17,8 @@ export abstract class BaseSelectorComponent {
         );
     }
 
+
+
     validate(c: FormControl) {
         if (!this.control.value) {
             return { CustomSelectorError: new CustomSelectorError(true) };
@@ -25,6 +27,7 @@ export abstract class BaseSelectorComponent {
     }
 
     propagateChange = (_: any) => {
+
         return;
     }
 
@@ -35,6 +38,7 @@ export abstract class BaseSelectorComponent {
     }
 
     registerOnChange(fn: any): void {
+
         this.propagateChange = fn;
     }
 

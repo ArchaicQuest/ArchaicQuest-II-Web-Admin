@@ -43,14 +43,7 @@
                     </div>
 
                     <div class="col-4">
-
-                        <mat-form-field>
-                            <mat-select placeholder="Damage type" formControlName="damageType">
-                                <mat-option *ngFor="let damageType of damageTypes" [value]="damageType.id">
-                                    {{damageType.name}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-form-field>
+                      <app-damage-type-selector formControlName="damageType" [currentValue]="this.addItemForm.get('damageType').value"></app-damage-type-selector>
                     </div>
                 </div>
 
@@ -86,16 +79,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <mat-form-field>
-                            <mat-select placeholder="Armour type" formControlName="armourType" required>
-                                <mat-option *ngFor="let armourType of armourTypes" [value]="armourType.id">
-                                    {{armourType.name}}
-                                </mat-option>
-                            </mat-select>
-                            <mat-error *ngIf="addItemForm.get('armourType').hasError('required')">
-                                Armour Type is required.
-                            </mat-error>
-                        </mat-form-field>
+                        <app-armour-type-selector formControlName="armourType" [currentValue]="this.addItemForm.get('armourType').value"></app-armour-type-selector>
                     </div>
                 </div>
                 <div class="row">
