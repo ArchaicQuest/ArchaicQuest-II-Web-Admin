@@ -1,5 +1,5 @@
-import { Injectable, SimpleChanges } from "@angular/core";
-import { FormControl, FormGroup } from "@angular/forms";
+import { Injectable, SimpleChanges } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 export class CustomSelectorError {
     constructor(public hasError?: boolean, public errorMessage?: string) { }
@@ -17,17 +17,14 @@ export abstract class BaseSelectorComponent {
         );
     }
 
-
-
     validate(c: FormControl) {
-        if (!this.control.value) {
+        if (this.control.value == null) {
             return { CustomSelectorError: new CustomSelectorError(true) };
         }
         return null;
     }
 
     propagateChange = (_: any) => {
-
         return;
     }
 

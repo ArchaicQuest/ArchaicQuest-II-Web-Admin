@@ -19,6 +19,7 @@ import { AttackTypeSelectorComponent } from './selectors/attack-type/attack-type
 import { ItemSlotSelectorComponent } from './selectors/item-slot/item-slot-selector.component';
 import { DamageTypeSelectorComponent } from './selectors/damage-type/damage-type-selector.component';
 import { ArmourTypeSelectorComponent } from './selectors/armour-type/armour-type-selector.component';
+import { ItemService } from './add-item/add-item.service';
 
 
 
@@ -37,6 +38,9 @@ import { ArmourTypeSelectorComponent } from './selectors/armour-type/armour-type
         MatTableModule,
         MatPaginatorModule,
         MatAutocompleteModule
+    ],
+    providers: [
+        ItemService
     ],
     declarations: [
         AddItemComponent,

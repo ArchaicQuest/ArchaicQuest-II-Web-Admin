@@ -6,24 +6,24 @@ import {
     forwardRef,
     OnChanges,
     SimpleChanges
-} from "@angular/core";
+} from '@angular/core';
 
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
     NG_VALIDATORS,
     FormBuilder
-} from "@angular/forms";
-import { ItemType } from "../../interfaces/item-type.interface";
-import { Store, select } from "@ngrx/store";
-import { ItemAppState } from "../../state/add-item.state";
-import { getWeaponTypes } from "../../state/add-item.selector";
-import { takeWhile } from "rxjs/operators";
-import { GetWeaponTypes } from "../../state/add-item.actions";
-import { BaseSelectorComponent } from "../base-selector.component";
+} from '@angular/forms';
+import { ItemType } from '../../interfaces/item-type.interface';
+import { Store, select } from '@ngrx/store';
+import { ItemAppState } from '../../state/add-item.state';
+import { getWeaponTypes } from '../../state/add-item.selector';
+import { takeWhile } from 'rxjs/operators';
+import { GetWeaponTypes } from '../../state/add-item.actions';
+import { BaseSelectorComponent } from '../base-selector.component';
 
 @Component({
-    selector: "app-weapon-type-selector",
+    selector: 'app-weapon-type-selector',
     templateUrl: './weapon-type-selector.component.html',
     providers: [
         {
@@ -48,7 +48,7 @@ export class WeaponTypeSelectorComponent extends BaseSelectorComponent
         super();
 
         this.formGroup = this.fb.group({
-          weaponType: this.control
+            weaponType: this.control
         });
     }
 

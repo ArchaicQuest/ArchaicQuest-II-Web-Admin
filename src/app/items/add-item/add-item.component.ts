@@ -85,51 +85,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-
-
-        this.addItemForm = this.formBuilder.group({
-            id: [''],
-            name: ['', Validators.required],
-            knownByName: [''],
-            itemType: ['', Validators.required],
-            itemSlotType: [''],
-            level: [''],
-            weaponType: [''],
-            attackType: [''],
-            damageType: ['', Validators.required],
-            minDamage: ['', [Validators.min(1), Validators.max(50)]],
-            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
-            armourType: [''],
-            acPierce: [''],
-            acBash: [''],
-            acSlash: [''],
-            acMagic: [''],
-            hitRoll: [''],
-            damRoll: [''],
-            saves: [''],
-            hpMod: [''],
-            manaMod: [''],
-            movesMod: [''],
-            spellMod: [''],
-            pageCount: [1],
-            pages: new FormGroup({}),
-            flags: new FormGroup({}),
-            lookDescription: ['', Validators.required],
-            roomDescription: [''],
-            examDescription: [''],
-            smellDescription: [''],
-            touchDescription: [''],
-            tasteDescription: [''],
-            selectContainerItem: [''],
-            containerGP: [''],
-            containerOpen: [''],
-            containerLocked: [''],
-            containerCanLock: [''],
-            containerCanOpen: [''],
-            lockStrength: [''],
-            containerSize: [''],
-            selectContainerKey: ['']
-        });
+        this.addItemForm = this.itemService.getAddItemForm();
 
         this.filteredOptions = this.addItemForm
             .get('selectContainerItem')
@@ -309,10 +265,9 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
         this.addItemForm.get('itemType').valueChanges.subscribe(value => {
-                this.toggleItemSection(value);
+            this.toggleItemSection(value);
         });
 
-        setInterval(() => this.findInvalidControls(), 5000);
     }
 
     private _filter(value: string): Observable<Item[]> {
@@ -354,45 +309,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
     hasFlag(flag: number): boolean {
-
-
-        if (flag === FlagEnum.Bless && this.isFlagSet(this.selectedFlag, FlagEnum.Bless)) {
-            return true;
-        } else if (flag === FlagEnum.Evil && this.isFlagSet(this.selectedFlag, FlagEnum.Evil)) {
-            return true;
-        } else if (flag === FlagEnum.Antievil && this.isFlagSet(this.selectedFlag, FlagEnum.Antievil)) {
-            return true;
-        } else if (flag === FlagEnum.Antigood && this.isFlagSet(this.selectedFlag, FlagEnum.Antigood)) {
-            return true;
-        } else if (flag === FlagEnum.Antineutral && this.isFlagSet(this.selectedFlag, FlagEnum.Antineutral)) {
-            return true;
-        } else if (flag === FlagEnum.Container && this.isFlagSet(this.selectedFlag, FlagEnum.Container)) {
-            return true;
-        } else if (flag === FlagEnum.Cursed && this.isFlagSet(this.selectedFlag, FlagEnum.Cursed)) {
-            return true;
-        } else if (flag === FlagEnum.Equipable && this.isFlagSet(this.selectedFlag, FlagEnum.Equipable)) {
-            return true;
-        } else if (flag === FlagEnum.Glow && this.isFlagSet(this.selectedFlag, FlagEnum.Glow)) {
-            return true;
-        } else if (flag === FlagEnum.Holy && this.isFlagSet(this.selectedFlag, FlagEnum.Holy)) {
-            return true;
-        } else if (flag === FlagEnum.Hum && this.isFlagSet(this.selectedFlag, FlagEnum.Hum)) {
-            return true;
-        } else if (flag === FlagEnum.Invis && this.isFlagSet(this.selectedFlag, FlagEnum.Invis)) {
-            return true;
-        } else if (flag === FlagEnum.Nodrop && this.isFlagSet(this.selectedFlag, FlagEnum.Nodrop)) {
-            return true;
-        } else if (flag === FlagEnum.Nolocate && this.isFlagSet(this.selectedFlag, FlagEnum.Nolocate)) {
-            return true;
-        } else if (flag === FlagEnum.Noremove && this.isFlagSet(this.selectedFlag, FlagEnum.Noremove)) {
-            return true;
-        } else if (flag === FlagEnum.QuestItem && this.isFlagSet(this.selectedFlag, FlagEnum.QuestItem)) {
-            return true;
-        } else if (flag === FlagEnum.Vampric && this.isFlagSet(this.selectedFlag, FlagEnum.Vampric)) {
-            return true;
-        }
-
-        return false;
+        return this.itemService.hasFlag(flag, this.selectedFlag);
     }
 
     isFlagSet(value: number, flag: number): boolean {
