@@ -29,7 +29,7 @@ export abstract class BaseSelectorComponent {
     }
 
     writeValue(value: any): void {
-        if (value) {
+        if (value != null) {
             this.control.setValue(value.eventName);
         }
     }
