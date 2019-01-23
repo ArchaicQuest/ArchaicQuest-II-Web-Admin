@@ -14,52 +14,54 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
-
-            <div class="row">
-                <!-- <div class="col">
-                    <mat-form-field>
-                        <mat-select formControlName="gender" placeholder="Gender" required (selectionChange)="onChange($event)">
-                            <mat-option *ngFor="let gender of genders" [value]="gender.id">
-                                {{ gender.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="formGroup.get('gender').hasError('required')">Genders required</mat-error>
-                    </mat-form-field>
-                </div> -->
-
-                <!-- <div class="col">
-                    <mat-form-field>
-                        <mat-select formControlName="race" placeholder="race" required >
-                            <mat-option *ngFor="let race of races" [value]="race.id">
-                                {{ race.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="addMobForm.get('race').hasError('required')">race   required</mat-error>
-                    </mat-form-field>
-                </div>
-
-                <div class="col">
-                    <mat-form-field>
-                        <mat-select formControlName="class" placeholder="class" required>
-                            <mat-option *ngFor="let class of classes" [value]="class.id">
-                                {{ class.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="addMobForm.get('class').hasError('required')">class required</mat-error>
-                    </mat-form-field>
-                </div> -->
-
                 <div class="col">
                     <mat-form-field class="form-control">
-                        <input matInput placeholder="Level" value="" required formControlName="level">
-                        <mat-error *ngIf="addMobForm.get('level').hasError('required')">
-                            level is required.
+                        <input type="number" max="99" min="1" matInput placeholder="Level" value="" required
+                            formControlName="level">
+                        <mat-error *ngIf="addMobForm.get('level').hasError('min') || addMobForm.get('level').hasError('max')">
+                            Mob level must be between 1 and 99.
                         </mat-error>
                     </mat-form-field>
                 </div>
             </div>
 
-            </form>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field>
+                        <mat-select formControlName="gender" placeholder="Gender" required (selectionChange)="selectGender($event)">
+                            <mat-option *ngFor="let gender of genders" [value]="gender.id">
+                                {{ gender.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="addMobForm.get('gender').hasError('required')">Genders required</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field>
+                        <mat-select formControlName="race" placeholder="race" required (selectionChange)="selectRace($event)">
+                            <mat-option *ngFor="let race of races" [value]="race.id" [title]="race.description">
+                                {{ race.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="addMobForm.get('race').hasError('required')">race is required</mat-error>
+                    </mat-form-field>
+                </div>
+
+                <div class="col">
+                    <mat-form-field>
+                        <mat-select formControlName="class" placeholder="class" required (selectionChange)="selectClass($event)">
+                            <mat-option *ngFor="let class of classes" [value]="class.id" [title]="class.description">
+                                {{ class.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="addMobForm.get('class').hasError('required')">class required</mat-error>
+                    </mat-form-field>
+                </div>
+
+
+            </div>
+
+        </form>
     </div>
-  </div>
+</div>
