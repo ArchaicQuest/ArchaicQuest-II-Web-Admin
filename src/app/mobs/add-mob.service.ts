@@ -1,4 +1,4 @@
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Gender } from '../characters/interfaces/gender.interface';
@@ -8,10 +8,20 @@ import { RaceEnums } from '../characters/enums/race.enums';
 
 import { ClassEnums } from '../characters/enums/class.enums';
 import { Class } from '../characters/interfaces/class.interface';
+import { Alignment } from '../characters/interfaces/alignment.interface';
+import { AlignmentEnums } from '../characters/enums/alignment.enum';
 
 @Injectable({
     providedIn: 'root'
 })
+/*
+  todo
+  ----
+  money
+  inventory / Worn / wielded items
+  active affects
+  emotes
+*/
 export class MobService {
     constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
@@ -21,7 +31,22 @@ export class MobService {
         gender: ['', Validators.required],
         race: ['', Validators.required],
         class: ['', Validators.required],
-        level: ['', [Validators.min(1), Validators.max(99)]]
+        alignment: ['', Validators.required],
+        description: ['', Validators.required],
+        level: ['', [Validators.min(1), Validators.max(99)]],
+        stats: new FormGroup({
+          hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
+          manaPoints:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+          movePoints:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+        }),
+        attributes: new FormGroup({
+          strength: new FormControl('', [Validators.min(1), Validators.max(99)]),
+          dexterity:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+          constitution:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+          wisdom: new FormControl('', [Validators.min(1), Validators.max(99)]),
+          intelligence:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+          charisma:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+        }),
     });
 
     getAddMobForm() {
@@ -88,7 +113,7 @@ export class MobService {
         return [{
             name: 'Fighter',
             id: ClassEnums.Fighter,
-            description: `Warriors are able to use any weapon and armour effectively along side their wide range of lethal and defensive combat skills. 
+            description: `Warriors are able to use any weapon and armour effectively along side their wide range of lethal and defensive combat skills.
             They have no need for mana, relying on their sheer strength and endurance alone to overcome opponents.
             Important attributes for Warriors are Strength, Dexterity and Constitution Every race can train to be an effective warrior.
             For beginners we recommend you pick a Human Warrior.`
@@ -99,15 +124,15 @@ export class MobService {
             description: `Rogues are masters at the arts of remaining hidden and delivering devastating blows from the shadows before fleeing
              into the darkness once more. They are strong in combat but can't handle the same amount of damage as a warrior.
              They are also skilled lock and pocket pickers, can set or disarm traps and know how to apply poison to their blade.
-              Rogues are a versatile class. Important attributes for Mages are Dexterity, Constitution and Strength Every race can train 
+              Rogues are a versatile class. Important attributes for Mages are Dexterity, Constitution and Strength Every race can train
               to be an rogue but Mau are one of the best due to their agile nature.`
         },
         {
             name: 'Cleric',
             id: ClassEnums.Cleric,
-            description: `Cleric power comes from the gods they worship, stronger the devotion, stronger the power, 
+            description: `Cleric power comes from the gods they worship, stronger the devotion, stronger the power,
             Clerical spells focus on healing and preserving life rather than destroy it but don't be fooled clerics
-             know powerful offensive spells to rival any mage. They can also wear any armour just like a warrior. 
+             know powerful offensive spells to rival any mage. They can also wear any armour just like a warrior.
              Important attributes for Clerics are Wisdom, Intelligence and Constitution
               Every race can train to be a cleric but Dwarfs are one of the best.`
         },
@@ -123,4 +148,43 @@ export class MobService {
         }
         ];
     }
+
+    getAlignment(): Alignment[] {
+      return [{
+        name: 'Lawful Good',
+        id: AlignmentEnums.LawfulGood
+      },
+      {
+        name: 'Neutral Good',
+        id: AlignmentEnums.NeutralGood
+      },
+      {
+        name: 'Chaotic Good',
+        id: AlignmentEnums.ChaoticGood
+      },
+      {
+        name: 'Lawful Neutral',
+        id: AlignmentEnums.LawfulNeutral
+      },
+      {
+        name: 'Neutral Good',
+        id: AlignmentEnums.Neutral
+      },
+      {
+        name: 'Chaotic Neutral',
+        id: AlignmentEnums.ChaoticNeutral
+      },
+      {
+        name: 'Lawful Evil',
+        id: AlignmentEnums.LawfulEvil
+      },
+      {
+        name: 'Neutral Evil',
+        id: AlignmentEnums.NeutralEvil
+      },
+      {
+        name: 'Chaotic Evil',
+        id: AlignmentEnums.ChaoticEvil
+      }];
+  }
 }

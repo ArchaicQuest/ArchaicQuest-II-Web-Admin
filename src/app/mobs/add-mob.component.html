@@ -60,6 +60,123 @@
                 </div>
 
 
+                <div class="col">
+                  <mat-form-field>
+                      <mat-select formControlName="alignment" placeholder="alignment" required (selectionChange)="selectAlignment($event)">
+                          <mat-option *ngFor="let alignment of alignments" [value]="alignment.id" >
+                              {{ alignment.name }}
+                          </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="addMobForm.get('alignment').hasError('required')">alignment required</mat-error>
+                  </mat-form-field>
+              </div>
+            </div>
+
+            <div class="row" formGroupName="stats">
+              <div class="col">
+                  <mat-form-field class="form-control">
+                      <input matInput type="number"  max="99" min="1" placeholder="Hit points" value="" required formControlName="hitPoints">
+                      <mat-error *ngIf="addMobForm.get('stats').get('hitPoints').hasError('min') || addMobForm.get('stats').get('hitPoints').hasError('max')">
+                        Hit points must be between 1 and 99.
+                    </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                  <mat-form-field class="form-control">
+                      <input type="number" max="99" min="1" matInput placeholder="Mana points" value="" required
+                          formControlName="manaPoints">
+                      <mat-error *ngIf="addMobForm.get('stats').get('manaPoints').hasError('min') || addMobForm.get('stats').get('manaPoints').hasError('max')">
+                        Mana Points must be between 1 and 99.
+                      </mat-error>
+                  </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field class="form-control">
+                    <input type="number" max="99" min="1" matInput placeholder="Move points" value="" required
+                        formControlName="movePoints">
+                    <mat-error *ngIf="addMobForm.get('stats').get('movePoints').hasError('min') ||addMobForm.get('stats').get('movePoints').hasError('max')">
+                      Move Points must be between 1 and 99.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row" formGroupName="attributes">
+            <div class="col-2">
+                <mat-form-field class="form-control">
+                    <input matInput type="number"  max="99" min="1" placeholder="Strength" value="" required formControlName="strength">
+                    <mat-error *ngIf="addMobForm.get('attributes').get('strength').hasError('min') || addMobForm.get('attributes').get('strength').hasError('max')">
+                      strength must be between 1 and 99.
+                  </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+                <mat-form-field class="form-control">
+                    <input type="number" max="99" min="1" matInput placeholder="Dexterity" value="" required
+                        formControlName="dexterity">
+                    <mat-error *ngIf="addMobForm.get('attributes').get('dexterity').hasError('min') || addMobForm.get('attributes').get('dexterity').hasError('max')">
+                      Dexterity must be between 1 and 99.
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="col-2">
+              <mat-form-field class="form-control">
+                  <input type="number" max="99" min="1" matInput placeholder="Constitution" value="" required formControlName="constitution">
+                  <mat-error *ngIf="addMobForm.get('attributes').get('constitution').hasError('min')||addMobForm.get('attributes').get('constitution').hasError('max')">
+                    constitution must be between 1 and 99.
+                  </mat-error>
+              </mat-form-field>
+          </div>
+          <div class="col-2">
+            <mat-form-field class="form-control">
+                <input type="number" max="99" min="1" matInput placeholder="Wisdom" value="" required
+                    formControlName="wisdom">
+                <mat-error *ngIf="addMobForm.get('attributes').get('wisdom').hasError('min') ||addMobForm.get('attributes').get('wisdom').hasError('max')">
+                  wisdom must be between 1 and 99.
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div class="col-2">
+          <mat-form-field class="form-control">
+              <input type="number" max="99" min="1" matInput placeholder="Intelligence" value="" required
+                  formControlName="intelligence">
+              <mat-error *ngIf="addMobForm.get('attributes').get('intelligence').hasError('min') ||addMobForm.get('attributes').get('intelligence').hasError('max')">
+                intelligence must be between 1 and 99.
+              </mat-error>
+          </mat-form-field>
+      </div>
+      <div class="col-2">
+        <mat-form-field class="form-control">
+            <input type="number" max="99" min="1" matInput placeholder="Charisma" value="" required
+                formControlName="charisma">
+            <mat-error *ngIf="addMobForm.get('attributes').get('charisma').hasError('min') ||addMobForm.get('attributes').get('charisma').hasError('max')">
+              charisma must be between 1 and 99.
+            </mat-error>
+        </mat-form-field>
+    </div>
+        </div>
+
+            <div class="row">
+              <div class="col">
+                  <mat-form-field class="form-control">
+                      <textarea  matInput
+                      placeholder="Description"
+                      value=""
+                      required
+                      formControlName="description"
+                      cdkTextareaAutosize
+                      #autosize="cdkTextareaAutosize"
+                      cdkAutosizeMinRows="1"
+                      cdkAutosizeMaxRows="10"
+                      (selectionChange)="triggerDescriptionResize()"
+                      >
+
+                      </textarea>
+                      <mat-error *ngIf="addMobForm.get('description').hasError('required')">
+                          Mob description is required.
+                      </mat-error>
+                  </mat-form-field>
+              </div>
             </div>
 
         </form>
