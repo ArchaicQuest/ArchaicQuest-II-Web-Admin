@@ -1,0 +1,40 @@
+<div [formGroup]="formGroup">
+    <h2>Inventory</h2>
+
+    need to handle if item is worn/ wielded on in inventory
+
+    <div class="row">
+        <div class="col">
+            <ul>
+                <li *ngFor="let item of inventoryItems; let i = index">{{item.name}} <a href="javascript:void(0)"
+                        (click)="removeItemFromInventory(i)">Remove</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <mat-form-field class="example-full-width">
+                <input type="text" placeholder="Search for an item" aria-label="Assignee" matInput formControlName="selectInventoryItem"
+                    [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayItems">
+                    <mat-option *ngFor="let option of filteredItems | async" [value]="option">
+                        {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addItemToInventory()">Add
+                item</a>
+        </div>
+
+        <div class="col">
+            <mat-form-field class="example-full-width">
+                <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins" matInput formControlName="inventoryGP">
+                <mat-error *ngIf="formGroup.get('inventoryGP').hasError('min') || formGroup.get('inventoryGP').hasError('max')">
+                    Gold coins must be between 1 and 10,000.
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+    </div>
+</div>

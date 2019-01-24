@@ -7,8 +7,11 @@ import { MatSelectChange } from '@angular/material';
 import { Race } from '../characters/interfaces/race.interface';
 import { Class } from '../characters/interfaces/class.interface';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { take } from 'rxjs/operators';
+import { take, startWith, debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { Alignment } from '../characters/interfaces/alignment.interface';
+import { Item } from '../items/interfaces/item.interface';
+import { Observable, throwError } from 'rxjs';
+import { ItemService } from '../items/add-item/add-item.service';
 
 
 @Component({
@@ -20,8 +23,11 @@ export class AddMobComponent implements OnInit {
     classes: Class[];
     genders: Gender[];
     alignments: Alignment[];
+    inventoryItems: Item[] = [];
+    filteredItems: Observable<Item[]>;
     constructor(
         private mobService: MobService,
+        private itemService: ItemService,
         private route: ActivatedRoute,
         private ngZone: NgZone
     ) { }
@@ -34,14 +40,15 @@ export class AddMobComponent implements OnInit {
         this.races = this.mobService.getRaces();
         this.classes = this.mobService.getClasses();
         this.alignments = this.mobService.getAlignment();
+
     }
 
 
-  triggerDescriptionResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.ngZone.onStable.pipe(take(1))
-        .subscribe(() => this.autosize.resizeToFitContent(true));
-  }
+    triggerDescriptionResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this.ngZone.onStable.pipe(take(1))
+            .subscribe(() => this.autosize.resizeToFitContent(true));
+    }
 
     selectGender(data: MatSelectChange) {
         console.log('gender', data.value);
@@ -56,8 +63,8 @@ export class AddMobComponent implements OnInit {
     }
 
     selectAlignment(data: MatSelectChange) {
-      console.log('alignment', data.value);
-  }
+        console.log('alignment', data.value);
+    }
 
     addMob() {
 

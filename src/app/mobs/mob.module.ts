@@ -11,6 +11,8 @@ import {
 } from '@angular/material';
 import { MobService } from './add-mob.service';
 import { AddMobComponent } from './add-mob.component';
+import { ItemService } from '../items/add-item/add-item.service';
+import { InventoryComponent } from '../characters/inventory/inventory.component';
 
 
 @NgModule({
@@ -28,10 +30,12 @@ import { AddMobComponent } from './add-mob.component';
         MatAutocompleteModule
     ],
     providers: [
-        MobService
+        MobService,
+        ItemService
     ],
     declarations: [
-      AddMobComponent
+        AddMobComponent,
+        InventoryComponent
     ],
 })
 export class MobModule { }

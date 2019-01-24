@@ -35,17 +35,17 @@ export class MobService {
         description: ['', Validators.required],
         level: ['', [Validators.min(1), Validators.max(99)]],
         stats: new FormGroup({
-          hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
-          manaPoints:  new FormControl('', [Validators.min(1), Validators.max(99)]),
-          movePoints:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+            hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            manaPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            movePoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
         }),
         attributes: new FormGroup({
-          strength: new FormControl('', [Validators.min(1), Validators.max(99)]),
-          dexterity:  new FormControl('', [Validators.min(1), Validators.max(99)]),
-          constitution:  new FormControl('', [Validators.min(1), Validators.max(99)]),
-          wisdom: new FormControl('', [Validators.min(1), Validators.max(99)]),
-          intelligence:  new FormControl('', [Validators.min(1), Validators.max(99)]),
-          charisma:  new FormControl('', [Validators.min(1), Validators.max(99)]),
+            strength: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            dexterity: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            constitution: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            wisdom: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            intelligence: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            charisma: new FormControl('', [Validators.min(1), Validators.max(99)]),
         }),
     });
 
@@ -150,41 +150,41 @@ export class MobService {
     }
 
     getAlignment(): Alignment[] {
-      return [{
-        name: 'Lawful Good',
-        id: AlignmentEnums.LawfulGood
-      },
-      {
-        name: 'Neutral Good',
-        id: AlignmentEnums.NeutralGood
-      },
-      {
-        name: 'Chaotic Good',
-        id: AlignmentEnums.ChaoticGood
-      },
-      {
-        name: 'Lawful Neutral',
-        id: AlignmentEnums.LawfulNeutral
-      },
-      {
-        name: 'Neutral Good',
-        id: AlignmentEnums.Neutral
-      },
-      {
-        name: 'Chaotic Neutral',
-        id: AlignmentEnums.ChaoticNeutral
-      },
-      {
-        name: 'Lawful Evil',
-        id: AlignmentEnums.LawfulEvil
-      },
-      {
-        name: 'Neutral Evil',
-        id: AlignmentEnums.NeutralEvil
-      },
-      {
-        name: 'Chaotic Evil',
-        id: AlignmentEnums.ChaoticEvil
-      }];
-  }
+        return [{
+            name: 'Lawful Good',
+            id: AlignmentEnums.LawfulGood
+        },
+        {
+            name: 'Neutral Good',
+            id: AlignmentEnums.NeutralGood
+        },
+        {
+            name: 'Chaotic Good',
+            id: AlignmentEnums.ChaoticGood
+        },
+        {
+            name: 'Lawful Neutral',
+            id: AlignmentEnums.LawfulNeutral
+        },
+        {
+            name: 'Neutral Good',
+            id: AlignmentEnums.Neutral
+        },
+        {
+            name: 'Chaotic Neutral',
+            id: AlignmentEnums.ChaoticNeutral
+        },
+        {
+            name: 'Lawful Evil',
+            id: AlignmentEnums.LawfulEvil
+        },
+        {
+            name: 'Neutral Evil',
+            id: AlignmentEnums.NeutralEvil
+        },
+        {
+            name: 'Chaotic Evil',
+            id: AlignmentEnums.ChaoticEvil
+        }];
+    }
 }
