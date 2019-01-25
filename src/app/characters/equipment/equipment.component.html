@@ -1,0 +1,18 @@
+<div [formGroup]="formGroup">
+    <h2>Equipment</h2>
+
+
+    <div class="row">
+        <div class="col">
+    <mat-form-field>
+        <mat-select formControlName="headEq" placeholder="Head" required (selectionChange)="equipHead($event)">
+            <mat-option *ngFor="let item of headItems" [value]="item.id">
+                {{ item.name }}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+  </div>
+</div>
+
+
+</div>

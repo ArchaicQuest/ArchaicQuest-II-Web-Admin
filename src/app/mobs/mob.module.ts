@@ -13,6 +13,7 @@ import { MobService } from './add-mob.service';
 import { AddMobComponent } from './add-mob.component';
 import { ItemService } from '../items/add-item/add-item.service';
 import { InventoryComponent } from '../characters/inventory/inventory.component';
+import { characterReducer } from '../characters/state/character.reducer';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { InventoryComponent } from '../characters/inventory/inventory.component'
         SharedModule,
         ReactiveFormsModule,
         RouterModule.forChild(mobRoutes),
+        StoreModule.forFeature('character', characterReducer),
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,

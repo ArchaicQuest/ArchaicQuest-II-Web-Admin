@@ -4,6 +4,9 @@ import { Observable } from 'rxjs';
 import { ItemService } from 'src/app/items/add-item/add-item.service';
 import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
+import { CharacterState } from '../state/character.state';
+import { Store } from '@ngrx/store';
+import { AddToInventory } from '../state/character.actions';
 
 @Component({
     selector: 'app-inventory',
@@ -19,7 +22,8 @@ export class InventoryComponent implements OnInit {
     });
     constructor(
         private itemService: ItemService,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private charStore: Store<CharacterState>,
     ) { }
 
     ngOnInit() {
@@ -45,6 +49,8 @@ export class InventoryComponent implements OnInit {
         }
 
         this.inventoryItems = this.inventoryItems.concat(item);
+
+        this.charStore.dispatch(new AddToInventory(item));
     }
 
     private filterItems(value: string): Observable<Item[]> {
