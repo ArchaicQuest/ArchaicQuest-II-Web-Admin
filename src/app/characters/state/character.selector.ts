@@ -1,11 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { CharacterState } from './character.state';
+import { CharacterState } from '../character.state';
 
 const getCharacterState = createFeatureSelector<CharacterState>('character');
 
-export const getInventory = createSelector(
-  getCharacterState,
-    state => state.character.inventory
-);
-
+export const getInventory = createSelector(getCharacterState, state => state.inventory);
 

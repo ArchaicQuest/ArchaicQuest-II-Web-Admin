@@ -1,35 +1,38 @@
 import {
-  CharacterActionTypes,
-  CharacterActions
+    CharacterActionTypes,
+    CharacterActions
 } from './character.actions';
-import { Item } from '../../items/interfaces/item.interface';
+import { CharacterState } from '../character.state';
 
-export interface ICharacterState {
-  inventory: Item[];
-}
 
-const intitalState: ICharacterState = {
-  inventory: []
+const intitalState: CharacterState = {
+    inventory: []
 };
 
-export function characterReducer(
-  state: ICharacterState = intitalState,
-  action: CharacterActions
+export function characterReducer(state: CharacterState = intitalState,
+    action: CharacterActions
 ) {
-  switch (action.type) {
-    case CharacterActionTypes.AddToInventory: {
-      state.inventory.push(action.payload);
-      return {
-        ...state,
-        inventory: [...state.inventory]
-      };
+    switch (action.type) {
+        case CharacterActionTypes.AddToInventory: {
+            state.inventory.push(action.payload);
+            return {
+                ...state,
+                inventory: [...state.inventory]
+            };
+        }
+        case CharacterActionTypes.RemoveFromInventory: {
+            state.inventory.push(action.payload);
+            return {
+                ...state,
+                inventory: [...state.inventory]
+            };
+        }
+
+        case CharacterActionTypes.UpdateInventorySuccess: {
+            return {
+                ...state,
+                inventory: [...state.inventory]
+            };
+        }
     }
-    case CharacterActionTypes.RemoveFromInventory: {
-      state.inventory.push(action.payload);
-      return {
-        ...state,
-        inventory: [...state.inventory]
-      };
-    }
-  }
 }

@@ -14,6 +14,7 @@ import { AddMobComponent } from './add-mob.component';
 import { ItemService } from '../items/add-item/add-item.service';
 import { InventoryComponent } from '../characters/inventory/inventory.component';
 import { characterReducer } from '../characters/state/character.reducer';
+import { EquipmentComponent } from '../characters/equipment/equipment.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { characterReducer } from '../characters/state/character.reducer';
     ],
     declarations: [
         AddMobComponent,
-        InventoryComponent
+        InventoryComponent,
+        EquipmentComponent
     ],
 })
 export class MobModule { }

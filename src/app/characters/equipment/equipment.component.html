@@ -4,15 +4,24 @@
 
     <div class="row">
         <div class="col">
-    <mat-form-field>
-        <mat-select formControlName="headEq" placeholder="Head" required (selectionChange)="equipHead($event)">
-            <mat-option *ngFor="let item of headItems" [value]="item.id">
-                {{ item.name }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
-  </div>
-</div>
+            <mat-form-field>
+                <mat-select formControlName="headEq" placeholder="Head" required (selectionChange)="equipHead($event)">
+                    <mat-option *ngFor="let item of headItems" [value]="item.id">
+                        {{ item.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-form-field>
+                <mat-select formControlName="wieldEq" placeholder="Wielded">
+                    <mat-option *ngFor="let item of wieldItems" [value]="item.id">
+                        {{ item.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
 
 
 </div>

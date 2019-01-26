@@ -4,6 +4,7 @@ import { Damage } from './damage.interface';
 import { ArmourRating } from './armourRating.interface';
 import { Book } from './book.interface';
 import { Container } from './container.interface';
+import { EqSlot } from 'src/app/characters/equipment/equipment.enum';
 
 export interface Item {
     id?: number;
@@ -21,7 +22,7 @@ export interface Item {
     condition: number;
     questItem: boolean;
     itemType: string;
-    slot: string;
+    slot: EqSlot;
     level: string;
     modifier?: ItemModifier;
     containerItems?: Item[];

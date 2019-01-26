@@ -12,7 +12,6 @@ import { Alignment } from '../characters/interfaces/alignment.interface';
 import { Item } from '../items/interfaces/item.interface';
 import { Observable, throwError } from 'rxjs';
 import { ItemService } from '../items/add-item/add-item.service';
-import { CharacterState } from '../characters/state/character.state';
 import { Store } from '@ngrx/store';
 
 
@@ -31,7 +30,6 @@ export class AddMobComponent implements OnInit {
         private mobService: MobService,
         private itemService: ItemService,
         private route: ActivatedRoute,
-        private charStroe: Store<CharacterState>,
         private ngZone: NgZone
     ) { }
 

@@ -1,6 +1,6 @@
 import { AppState } from '../../state/app.state';
-import { ICharacterState } from './character.reducer';
+import { CharacterState } from '../character.state';
 
-export interface CharacterState extends AppState {
-    character: ICharacterState;
+export interface CharacterAppState extends AppState {
+    character: CharacterState;
 }
