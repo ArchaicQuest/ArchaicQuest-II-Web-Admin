@@ -9,13 +9,14 @@ import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
 import { GetInventory } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
-
+import { v4 } from 'uuid';
 @Component({
     selector: 'app-equipment',
     templateUrl: './equipment.component.html',
 })
 export class EquipmentComponent implements OnInit, OnDestroy {
     componentActive = true;
+    itemId = 0;
     armsItems: Item[] = [];
     bodyItems: Item[] = [];
     faceItems: Item[] = [];
@@ -97,17 +98,21 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
 
     private updateEQArray(item: Item) {
-        const eqItems = [];
-        eqItems.push(item);
 
+        console.log(v4());
+        const x = item;
+        x.uuid = v4();
+        const eqItems = [];
+        eqItems.push(x);
         return eqItems;
     }
 
     private mapEquipmentDropDowns(items: Item[]) {
         this.resetEQArrays();
 
-        items.forEach(item => {
 
+
+        items.forEach(item => {
             this.heldItems = this.heldItems.concat((this.updateEQArray(item)));
 
             switch (item.slot) {
@@ -172,6 +177,9 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     sheathChange(selection) {
 
         if (this.formGroup.get('wieldEq').value === selection.value) {
+            if (this.formGroup.get('wieldEq').value.uuid !== selection.value.uuid) {
+                return;
+            }
             this.formGroup.get('wieldEq').reset();
         }
     }

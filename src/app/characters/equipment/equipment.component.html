@@ -185,8 +185,8 @@
         <div class="col">
             <mat-form-field>
                 <mat-select formControlName="wieldEq" placeholder="Wielded">
-                    <mat-option *ngFor="let item of wieldItems" [value]="item.id">
-                        {{ item.name }}
+                    <mat-option *ngFor="let item of wieldItems" [value]="item">
+                        {{ item.name }} {{item.uuid}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -196,8 +196,8 @@
                 <mat-select formControlName="sheathedEq" placeholder="Sheathed" required (selectionChange)="sheathChange($event)">
                     <mat-option (click)="
                     formGroup.get('sheathedEq').reset()">None</mat-option>
-                    <mat-option *ngFor="let item of wieldItems" [value]="item.id">
-                        {{ item.name }}
+                    <mat-option *ngFor="let item of wieldItems" [value]="item">
+                        {{ item.name }} {{item.id}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

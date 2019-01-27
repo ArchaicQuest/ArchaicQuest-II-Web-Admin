@@ -7,6 +7,7 @@ import { Container } from './container.interface';
 import { EqSlot } from 'src/app/characters/equipment/equipment.enum';
 
 export interface Item {
+    uuid?: any;
     id?: number;
     name: string;
     knownByName: boolean;
