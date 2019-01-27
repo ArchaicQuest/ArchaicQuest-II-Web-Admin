@@ -16,13 +16,47 @@ import { EqSlot } from './equipment.enum';
 })
 export class EquipmentComponent implements OnInit, OnDestroy {
     componentActive = true;
+    armsItems: Item[] = [];
+    bodyItems: Item[] = [];
+    faceItems: Item[] = [];
+    feetItems: Item[] = [];
+    fingerItems: Item[] = [];
+    floatingItems: Item[] = [];
+    handsItems: Item[] = [];
+    heldItems: Item[] = [];
+    legsItems: Item[] = [];
+    lightItems: Item[] = [];
+    neckItems: Item[] = [];
+    shieldItems: Item[] = [];
+    torsoItems: Item[] = [];
+    waistItems: Item[] = [];
+    wristItems: Item[] = [];
     headItems: Item[] = [];
     wieldItems: Item[] = [];
     public formGroup = this.formBuilder.group({
+        armsEq: [''],
+        bodyEq: [''],
+        faceEq: [''],
+        feetEq: [''],
+        fingerEq: [''],
+        finger2Eq: [''],
+        floatingEq: [''],
+        handsEq: [''],
+        heldEq: [''],
+        legsEq: [''],
+        lightEq: [''],
+        neckEq: [''],
+        neck2Eq: [''],
+        shieldEq: [''],
+        torsoEq: [''],
+        waistEq: [''],
+        wristEq: [''],
+        wrist2Eq: [''],
         headEq: [''],
+        sheathedEq: [''],
         wieldEq: ['']
     });
-    inventory$: Observable<Item[]>
+    inventory$: Observable<Item[]>;
     constructor(
         private itemService: ItemService,
         private formBuilder: FormBuilder,
@@ -36,86 +70,110 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
                 console.log(inventory);
-                this.mapEquipmentDropDowns(inventory)
+                this.mapEquipmentDropDowns(inventory);
             });
 
     }
 
-    resetEQArrays() {
+    private resetEQArrays() {
         this.headItems = [];
+        this.armsItems = [];
+        this.bodyItems = [];
+        this.faceItems = [];
+        this.feetItems = [];
+        this.fingerItems = [];
+        this.floatingItems = [];
+        this.handsItems = [];
+        this.heldItems = [];
+        this.lightItems = [];
+        this.legsItems = [];
+        this.neckItems = [];
+        this.shieldItems = [];
+        this.torsoItems = [];
+        this.waistItems = [];
+        this.wristItems = [];
+        this.wieldItems = [];
     }
 
 
-    updateEQArray(item: Item) {
+    private updateEQArray(item: Item) {
         const eqItems = [];
         eqItems.push(item);
 
         return eqItems;
     }
 
-    mapEquipmentDropDowns(items: Item[]) {
+    private mapEquipmentDropDowns(items: Item[]) {
         this.resetEQArrays();
 
         items.forEach(item => {
-            console.log(item.slot === EqSlot.Arms)
+
+            this.heldItems = this.heldItems.concat((this.updateEQArray(item)));
+
             switch (item.slot) {
                 case EqSlot.Arms:
-                    console.log('');
+                    this.armsItems = this.armsItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Body:
-                    console.log('');
+                    this.bodyItems = this.bodyItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Face:
-                    console.log('');
+                    this.faceItems = this.faceItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Feet:
-                    console.log('');
+                    this.feetItems = this.feetItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Finger:
-                    console.log('');
+                    this.fingerItems = this.fingerItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Floating:
-                    console.log('');
+                    this.floatingItems = this.floatingItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Hands:
-                    console.log('');
+                    this.handsItems = this.handsItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Held:
-                    console.log('');
+                    this.heldItems = this.headItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Head:
                     this.headItems = this.headItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Light:
-                    console.log('');
+                    this.lightItems = this.lightItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Legs:
-                    console.log('');
+                    this.legsItems = this.legsItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Neck:
-                    console.log('');
+                    this.neckItems = this.neckItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Shield:
-                    console.log('');
+                    this.shieldItems = this.shieldItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Torso:
-                    console.log('');
+                    this.torsoItems = this.torsoItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Waist:
-                    console.log('');
+                    this.waistItems = this.waistItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Wrist:
-                    console.log('');
+                    this.wristItems = this.wristItems.concat(this.updateEQArray(item));
                     break;
                 case EqSlot.Wielded:
-                    this.wieldItems.push(item);
-                    this.wieldItems = [...this.wieldItems];
+                    this.wieldItems = this.wieldItems.concat(this.updateEQArray(item));
                     break;
                 default:
                     console.log(`item slot ${item.slot} is not found`);
             }
         });
 
+    }
+
+    sheathChange(selection) {
+
+        if (this.formGroup.get('wieldEq').value === selection.value) {
+            this.formGroup.get('wieldEq').reset();
+        }
     }
 
     ngOnDestroy(): void {
