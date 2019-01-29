@@ -77,6 +77,7 @@ describe('Weapon Type Selector Component', () => {
         fixture.detectChanges();
         spyOn(component, 'onChange').and.callThrough();
 
+        fixture.detectChanges();
     });
 
 
@@ -103,7 +104,6 @@ describe('Weapon Type Selector Component', () => {
 
        // expect(effects.loadWeaponTypes).toBeObservable(hot('-a-|', { a: new GetWeaponTypesSuccess(mockedValue) }));
 
-        fixture.detectChanges();
 
         fixture.whenStable().then(() => {
             expect(fixture.componentInstance.weaponTypes.length).toBe(2);
