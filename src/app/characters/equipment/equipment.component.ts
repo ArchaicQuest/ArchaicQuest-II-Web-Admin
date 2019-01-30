@@ -171,22 +171,65 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     }
 
+    private resetEQDupe(itemSlot: string, itemUuid: string) {
+        if (this.formGroup.get(itemSlot).value.uuid === itemUuid) {
+            this.formGroup.get(itemSlot).reset();
+        }
+    }
+
+
     sheathChange(selection) {
+        this.resetEQDupe('wieldEq', selection.value.uuid);
+        this.resetEQDupe('heldEq', selection.value.uuid);
+    }
 
-        if (this.formGroup.get('wieldEq').value === selection.value) {
-            if (this.formGroup.get('wieldEq').value.uuid !== selection.value.uuid) {
-                return;
-            }
-            this.formGroup.get('wieldEq').reset();
-        }
+    wieldChange(selection) {
+        this.resetEQDupe('sheathedEq', selection.value.uuid);
+        this.resetEQDupe('heldEq', selection.value.uuid);
+    }
+
+    heldChange(selection) {
+        this.resetEQDupe('armsEq', selection.value.uuid);
+        this.resetEQDupe('bodyEq', selection.value.uuid);
+        this.resetEQDupe('faceEq', selection.value.uuid);
+        this.resetEQDupe('feetEq', selection.value.uuid);
+        this.resetEQDupe('fingerEq', selection.value.uuid);
+        this.resetEQDupe('finger2Eq', selection.value.uuid);
+        this.resetEQDupe('floatingEq', selection.value.uuid);
+        this.resetEQDupe('handsEq', selection.value.uuid);
+        this.resetEQDupe('legsEq', selection.value.uuid);
+        this.resetEQDupe('lightEq', selection.value.uuid);
+        this.resetEQDupe('neckEq', selection.value.uuid);
+        this.resetEQDupe('neck2Eq', selection.value.uuid);
+        this.resetEQDupe('shieldEq', selection.value.uuid);
+        this.resetEQDupe('torsoEq', selection.value.uuid);
+        this.resetEQDupe('waistEq', selection.value.uuid);
+        this.resetEQDupe('wristEq', selection.value.uuid);
+        this.resetEQDupe('wrist2Eq', selection.value.uuid);
+        this.resetEQDupe('headEq', selection.value.uuid);
+        this.resetEQDupe('sheathedEq', selection.value.uuid);
+        this.resetEQDupe('wieldEq', selection.value.uuid);
+    }
 
 
-        if (this.formGroup.get('heldEq').value === selection.value) {
-            if (this.formGroup.get('heldEq').value.uuid !== selection.value.uuid) {
-                return;
-            }
-            this.formGroup.get('heldEq').reset();
-        }
+    fingerChange(selection) {
+        this.resetEQDupe('finger2Eq', selection.value.uuid);
+        this.resetEQDupe('heldEq', selection.value.uuid);
+    }
+
+    finger2Change(selection) {
+        this.resetEQDupe('fingerEq', selection.value.uuid);
+        this.resetEQDupe('heldEq', selection.value.uuid);
+    }
+
+    neckChange(selection) {
+        this.resetEQDupe('neck2Eq', selection.value.uuid);
+        this.resetEQDupe('heldEq', selection.value.uuid);
+    }
+
+    neck2Change(selection) {
+        this.resetEQDupe('neckEq', selection.value.uuid);
+        this.resetEQDupe('heldEq', selection.value.uuid);
     }
 
     ngOnDestroy(): void {
