@@ -99,11 +99,8 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     private updateEQArray(item: Item) {
 
-        console.log(v4());
-        const x = item;
-        x.uuid = v4();
         const eqItems = [];
-        eqItems.push(x);
+        eqItems.push(item);
         return eqItems;
     }
 
@@ -181,6 +178,14 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                 return;
             }
             this.formGroup.get('wieldEq').reset();
+        }
+
+
+        if (this.formGroup.get('heldEq').value === selection.value) {
+            if (this.formGroup.get('heldEq').value.uuid !== selection.value.uuid) {
+                return;
+            }
+            this.formGroup.get('heldEq').reset();
         }
     }
 

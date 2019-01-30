@@ -8,7 +8,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AddToInventory } from '../state/character.actions';
 import { CharacterAppState } from '../state/character.state';
-
+import { v4 } from 'uuid';
 @Component({
     selector: 'app-inventory',
     templateUrl: './inventory.component.html',
@@ -44,14 +44,18 @@ export class InventoryComponent implements OnInit {
     }
 
     addItemToInventory() {
-        const item = this.formGroup.get('selectInventoryItem').value;
+        const item: Item = this.formGroup.get('selectInventoryItem').value;
         if (item == null) {
             return;
         }
 
+        item.uuid = v4();
+
         this.inventoryItems = this.inventoryItems.concat(item);
 
         this.charStore.dispatch(new AddToInventory(item));
+
+        this.formGroup.get('selectInventoryItem').reset();
     }
 
     private filterItems(value: string): Observable<Item[]> {
