@@ -2,15 +2,15 @@ sudo: required
 dist: trusty
 language: node_js
 node_js:
-  - "9"
+  - "8.11.4"
 branches:
   only:
   - master
 
 before_script:
 - npm install -g angular-cli
+- npm install
 
 script:
-- ng build
 - ng test --watch=false --browsers=ChromeHeadless
  
