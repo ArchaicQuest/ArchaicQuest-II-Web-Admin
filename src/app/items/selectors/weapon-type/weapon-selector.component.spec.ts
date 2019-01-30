@@ -87,7 +87,7 @@ describe('Weapon Type Selector Component', () => {
         return service;
     }
 
-    fit('should return list of weapon types', async () => {
+    fit('should return list of weapon types', async (done: DoneFn) => {
 
         const mockedValue: ItemType[] = [{
             name: 'Long Sword',
@@ -108,6 +108,8 @@ describe('Weapon Type Selector Component', () => {
         fixture.whenStable().then(() => {
             expect(fixture.componentInstance.weaponTypes.length).toBe(2);
         });
+
+        done();
     });
 
 });
