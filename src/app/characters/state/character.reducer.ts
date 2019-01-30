@@ -2,6 +2,7 @@ import {
     CharacterActionTypes,
     CharacterActions
 } from './character.actions';
+import { v4 } from 'uuid';
 import { CharacterState } from '../character.state';
 
 
@@ -15,9 +16,20 @@ export function characterReducer(state: CharacterState = intitalState,
     switch (action.type) {
         case CharacterActionTypes.AddToInventory: {
             state.inventory.push(action.payload);
+
+            const updateUuid = () => {
+                return state.inventory.map(i => {
+                    const temp = {...i};
+                    if (temp.uuid == null) {
+                        temp.uuid = v4();
+                    }
+                    return temp;
+                });
+            };
+       
             return {
                 ...state,
-                inventory: [...state.inventory]
+                inventory: [...updateUuid()]
             };
         }
         case CharacterActionTypes.RemoveFromInventory: {

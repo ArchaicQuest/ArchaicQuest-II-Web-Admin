@@ -197,7 +197,7 @@
                     <mat-option (click)="
                     formGroup.get('sheathedEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of wieldItems" [value]="item">
-                        {{ item.name }} {{item.id}}
+                        {{ item.name }} {{item.uuid}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

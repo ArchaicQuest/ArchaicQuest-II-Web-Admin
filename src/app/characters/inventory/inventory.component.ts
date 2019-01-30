@@ -48,10 +48,9 @@ export class InventoryComponent implements OnInit {
         if (item == null) {
             return;
         }
-
-        item.uuid = v4();
-
         this.inventoryItems = this.inventoryItems.concat(item);
+     
+   
 
         this.charStore.dispatch(new AddToInventory(item));
 

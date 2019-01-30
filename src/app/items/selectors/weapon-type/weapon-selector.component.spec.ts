@@ -102,8 +102,6 @@ describe('Weapon Type Selector Component', () => {
         const service = stubItemService(mockedValue);
         const effects = new AddItemEffects(action, service);
 
-       // expect(effects.loadWeaponTypes).toBeObservable(hot('-a-|', { a: new GetWeaponTypesSuccess(mockedValue) }));
-
 
         fixture.whenStable().then(() => {
             expect(fixture.componentInstance.weaponTypes.length).toBe(2);
