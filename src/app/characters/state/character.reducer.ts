@@ -19,14 +19,14 @@ export function characterReducer(state: CharacterState = intitalState,
 
             const updateUuid = () => {
                 return state.inventory.map(i => {
-                    const temp = {...i};
+                    const temp = { ...i };
                     if (temp.uuid == null) {
                         temp.uuid = v4();
                     }
                     return temp;
                 });
             };
-       
+
             return {
                 ...state,
                 inventory: [...updateUuid()]

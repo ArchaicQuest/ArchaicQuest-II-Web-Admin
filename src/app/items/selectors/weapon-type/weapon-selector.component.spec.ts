@@ -35,7 +35,7 @@ describe('Weapon Type Selector Component', () => {
     let component: WeaponTypeSelectorComponent;
     let fixture: ComponentFixture<WeaponTypeSelectorComponent>;
 
-    beforeEach(async(() => {
+    beforeEach(() => {
         TestBed.configureTestingModule({
             declarations: [WeaponTypeSelectorComponent, ViewItemsComponent, AddItemComponent],
             imports: [
@@ -68,16 +68,13 @@ describe('Weapon Type Selector Component', () => {
             ]
         }).compileComponents();
 
-    }));
-
-
-    beforeEach(() => {
         fixture = TestBed.createComponent(WeaponTypeSelectorComponent);
         component = fixture.componentInstance;
         fixture.detectChanges();
         spyOn(component, 'onChange').and.callThrough();
 
         fixture.detectChanges();
+
     });
 
 
