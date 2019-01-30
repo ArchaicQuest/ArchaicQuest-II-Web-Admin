@@ -18,5 +18,5 @@ before_script:
 
 
 script:
-- ng test --watch=false
+- ng test --watch=false --sourceMap=false
  
