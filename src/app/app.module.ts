@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
+import { Shared } from './shared/shared';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
         MatInputModule,
         MatCheckboxModule
     ],
-    providers: [],
+    providers: [Shared],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

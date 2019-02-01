@@ -236,5 +236,29 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         this.componentActive = false;
     }
 
+    compareOptions(obj: Item, obj2: Item): boolean {
+        return obj.uuid === obj2.uuid;
+    }
+
+    isInventoryEmpty() {
+        return (this.armsItems.length === 0 &&
+            this.bodyItems.length === 0 &&
+            this.faceItems.length === 0 &&
+            this.feetItems.length === 0 &&
+            this.fingerItems.length === 0 &&
+            this.floatingItems.length === 0 &&
+            this.handsItems.length === 0 &&
+            this.heldItems.length === 0 &&
+            this.legsItems.length === 0 &&
+            this.lightItems.length === 0 &&
+            this.neckItems.length === 0 &&
+            this.shieldItems.length === 0 &&
+            this.torsoItems.length === 0 &&
+            this.waistItems.length === 0 &&
+            this.wristItems.length === 0 &&
+            this.headItems.length === 0 &&
+            this.wieldItems.length === 0);
+    }
+
 
 }
