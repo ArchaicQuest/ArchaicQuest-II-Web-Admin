@@ -1,6 +1,6 @@
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Gender } from '../characters/interfaces/gender.interface';
 import { GenderEnum } from '../characters/enums/gender.enum';
 import { Race } from '../characters/interfaces/race.interface';
@@ -10,6 +10,7 @@ import { ClassEnums } from '../characters/enums/class.enums';
 import { Class } from '../characters/interfaces/class.interface';
 import { Alignment } from '../characters/interfaces/alignment.interface';
 import { AlignmentEnums } from '../characters/enums/alignment.enum';
+import { Mob } from './interfaces/mob.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -23,6 +24,12 @@ import { AlignmentEnums } from '../characters/enums/alignment.enum';
   emotes
 */
 export class MobService {
+    private host = 'http://localhost:57814/api/';
+    private saveMobUrl = `${this.host}mob/PostMob`;
+    private headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+    });
+
     constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
     public addMobForm = this.formBuilder.group({
@@ -48,6 +55,13 @@ export class MobService {
             charisma: new FormControl('', [Validators.min(1), Validators.max(99)]),
         }),
     });
+
+    saveMob(mob: Mob) {
+
+        console.log("post this ", mob);
+        return this.http.post(this.saveMobUrl, JSON.stringify(mob), { headers: this.headers, responseType: 'text' });
+
+    }
 
     getAddMobForm() {
         return this.addMobForm;

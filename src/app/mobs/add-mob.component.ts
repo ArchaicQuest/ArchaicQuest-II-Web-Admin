@@ -13,6 +13,9 @@ import { Item } from '../items/interfaces/item.interface';
 import { Observable, throwError } from 'rxjs';
 import { ItemService } from '../items/add-item/add-item.service';
 import { Store } from '@ngrx/store';
+import { Mob } from './interfaces/mob.interface';
+import { CharacterAppState } from '../characters/state/character.state';
+import { SaveChar } from '../characters/state/character.actions';
 
 
 @Component({
@@ -28,7 +31,7 @@ export class AddMobComponent implements OnInit {
     filteredItems: Observable<Item[]>;
     constructor(
         private mobService: MobService,
-        private itemService: ItemService,
+        private store: Store<CharacterAppState>,
         private route: ActivatedRoute,
         private ngZone: NgZone
     ) { }
@@ -69,6 +72,24 @@ export class AddMobComponent implements OnInit {
 
     addMob() {
 
+
+        const mob: Mob = {
+            alignmentScore: 0,
+            armorRating: 0,
+            attributes: this.addMobForm.get('attributes').value,
+            maxAttributes: this.addMobForm.get('attributes').value,
+            className: this.addMobForm.get('class').value,
+            description: this.addMobForm.get('description').value,
+            gender: this.addMobForm.get('gender').value,
+            level: this.addMobForm.get('level').value,
+            stats: this.addMobForm.get('stats').value,
+            maxStats: this.addMobForm.get('stats').value,
+            money: { gold: 0, copper: 0, silver: 0 },
+            name: this.addMobForm.get('name').value,
+            race: this.addMobForm.get('race').value,
+        };
+        console.log(mob)
+        this.store.dispatch(new SaveChar(mob));
     }
 
 }

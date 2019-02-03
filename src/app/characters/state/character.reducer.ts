@@ -46,5 +46,17 @@ export function characterReducer(state: CharacterState = intitalState,
                 inventory: [...state.inventory]
             };
         }
+
+        case CharacterActionTypes.SaveCharacterSuccess: {
+            return {
+                ...state,
+                inventory: [...state.inventory]
+            };
+        }
+
+        default: {
+            return state;
+        }
+
     }
 }

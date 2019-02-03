@@ -107,8 +107,6 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     private mapEquipmentDropDowns(items: Item[]) {
         this.resetEQArrays();
 
-
-
         items.forEach(item => {
             this.heldItems = this.heldItems.concat((this.updateEQArray(item)));
 
