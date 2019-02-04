@@ -94,7 +94,7 @@ export class AddItemEffects {
     @Effect()
     addITem: Observable<Action> = this.actions$.pipe(
         ofType(AddItemActionTypes.PostItem),
-        switchMap((action: PostItem) =>
+        map((action: PostItem) =>
             this.addItemService.addItem(action.payload).pipe(
                 map((item: Item) => (new PostItemSuccess())),
                 catchError(err => of(new PostItemFail(err)))

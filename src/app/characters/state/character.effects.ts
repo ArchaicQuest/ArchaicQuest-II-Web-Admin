@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
 import { CharacterActionTypes, SaveCharSuccess, SaveChar } from './character.actions';
-import { switchMap, map, catchError } from 'rxjs/operators';
+import { switchMap, map, catchError, concatMap, mergeMap } from 'rxjs/operators';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { MobService } from 'src/app/mobs/add-mob.service';
 import { Action } from '@ngrx/store';
@@ -16,9 +16,9 @@ export class CharacterEffects {
     @Effect()
     addMob: Observable<Action> = this.actions$.pipe(
         ofType(CharacterActionTypes.SaveCharacter),
-        switchMap((action: SaveChar) =>
+        map((action: SaveChar) =>
             this.mobService.saveMob(action.payload).pipe(
-                map((item: Mob) => (new SaveCharSuccess())),
+                mergeMap((item: Mob) => (new SaveCharSuccess())),
                 catchError(err => of(new console.log(err)))
             )
         )
