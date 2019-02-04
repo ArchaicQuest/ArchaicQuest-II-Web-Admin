@@ -72,10 +72,15 @@ export class AddMobComponent implements OnInit {
 
     addMob() {
 
+        //todo inventory and EQ
 
         const mob: Mob = {
+            id: -1,
             alignmentScore: 0,
-            armorRating: 0,
+            armorRating: {
+                armour: 0,
+                magic: 0
+            },
             attributes: this.addMobForm.get('attributes').value,
             maxAttributes: this.addMobForm.get('attributes').value,
             className: this.addMobForm.get('class').value,

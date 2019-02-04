@@ -7,7 +7,8 @@ import { CharacterState } from '../character.state';
 
 
 const intitalState: CharacterState = {
-    inventory: []
+    inventory: [],
+    mob: null
 };
 
 export function characterReducer(state: CharacterState = intitalState,
@@ -46,10 +47,16 @@ export function characterReducer(state: CharacterState = intitalState,
                 inventory: [...state.inventory]
             };
         }
-
+        case CharacterActionTypes.SaveCharacter: {
+            return {
+                ...state,
+                mob: action.payload
+            };
+        }
         case CharacterActionTypes.SaveCharacterSuccess: {
             return {
                 ...state,
+                mob: state.mob,
                 inventory: [...state.inventory]
             };
         }

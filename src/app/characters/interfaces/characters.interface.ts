@@ -3,6 +3,7 @@ import { Attributes } from './attributes.interface';
 import { Money } from './money.interface';
 import { Affects } from './affects.interface';
 import { Config } from './config.interface';
+import { ArmourRating } from 'src/app/items/interfaces/armourRating.interface';
 
 export interface Character {
     id?: number;
@@ -21,7 +22,7 @@ export interface Character {
     attributes: Attributes;
     maxAttributes: Attributes;
     targetName?: string;
-    armorRating: number;
+    armorRating: ArmourRating;
     money?: Money;
     qffects?: Affects;
     config?: Config;
