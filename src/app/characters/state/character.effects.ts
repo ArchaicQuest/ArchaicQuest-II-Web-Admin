@@ -16,9 +16,9 @@ export class CharacterEffects {
     @Effect()
     addMob: Observable<Action> = this.actions$.pipe(
         ofType(CharacterActionTypes.SaveCharacter),
-        map((action: SaveChar) =>
+        mergeMap((action: SaveChar) =>
             this.mobService.saveMob(action.payload).pipe(
-                mergeMap((item: Mob) => (new SaveCharSuccess())),
+                map(() => (new SaveCharSuccess())),
                 catchError(err => of(new console.log(err)))
             )
         )
