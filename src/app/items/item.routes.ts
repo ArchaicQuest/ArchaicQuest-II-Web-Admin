@@ -1,6 +1,6 @@
-import { Routes } from "@angular/router";
-import { AddItemComponent } from "./add-item/add-item.component";
-import { ViewItemsComponent } from "./view-items/view-items.component";
+import { Routes } from '@angular/router';
+import { ViewItemsComponent } from './view-items/view-items.component';
+import { AddItemComponent } from './add-item/add-item.component';
 
 export const itemRoutes: Routes = [
     { path: '', component: ViewItemsComponent },
