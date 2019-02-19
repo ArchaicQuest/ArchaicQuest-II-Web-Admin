@@ -183,17 +183,17 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 this.addPage();
             });
 
-            console.log("locked ", item.container.isLocked);
+            console.log('locked ', item.container.isLocked);
             this.containerItems = this.selectedItem.container.items;
 
             let keyName = null;
             this.itemService.findKeyById(this.selectedItem.keyId).subscribe(key => {
                 this.displayKeys(key);
                 keyName = key;
-                console.log("key", key);
+                console.log('key', key);
             });
             this.currentItemTypeValue = item.itemType;
-            console.log("item type ", this.currentItemTypeValue)
+            console.log('item type ', this.currentItemTypeValue);
 
 
             this.addItemForm.patchValue({
@@ -247,11 +247,11 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.addItemForm.markAsTouched();
             this.addItemForm.markAsPending();
 
-            this.addItemForm.get("itemType").updateValueAndValidity();
-            this.addItemForm.get("itemSlotType").updateValueAndValidity();
-            this.addItemForm.get("weaponType").updateValueAndValidity();
-            this.addItemForm.get("attackType").updateValueAndValidity();
-            this.addItemForm.get("damageType").updateValueAndValidity();
+            this.addItemForm.get('itemType').updateValueAndValidity();
+            this.addItemForm.get('itemSlotType').updateValueAndValidity();
+            this.addItemForm.get('weaponType').updateValueAndValidity();
+            this.addItemForm.get('attackType').updateValueAndValidity();
+            this.addItemForm.get('damageType').updateValueAndValidity();
 
 
             this.changeDetector.detectChanges();
@@ -322,7 +322,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     }
 
     addPage() {
-        console.log("page count", this.pages.length)
+        console.log('page count', this.pages.length);
         this.pages.push(1);
         let i = 0;
         this.pages.forEach(() => {
@@ -361,7 +361,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     toggleItemSection(event: number) {
         const itemType = event;
 
-        console.log(itemType)
+        console.log(itemType);
 
         this.addItemForm.get('armourType').disable();
         this.showArmourSection = false;
@@ -423,7 +423,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
         flags = this.selectedFlags.reduce((a, b) => a + b, 0);
 
-        console.log("FLAGS" + flags);
+        console.log('FLAGS' + flags);
 
         console.log(this.addItemForm.get('roomDescription').value);
         const item: Item = {

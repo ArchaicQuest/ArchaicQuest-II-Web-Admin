@@ -32,7 +32,7 @@ import { AttackTypeSelectorComponent } from '../selectors/attack-type/attack-typ
 import { ItemSlotSelectorComponent } from '../selectors/item-slot/item-slot-selector.component';
 import { DamageTypeSelectorComponent } from '../selectors/damage-type/damage-type-selector.component';
 
-fdescribe('AddItemComponent', () => {
+xdescribe('AddItemComponent', () => {
     let component: AddItemComponent;
     let fixture: ComponentFixture<AddItemComponent>;
 
@@ -86,7 +86,7 @@ fdescribe('AddItemComponent', () => {
         it('should have flag Anti Evil', () => {
             const app = component;
             app.selectedFlag = FlagEnum.Antievil;
-            const hasAntiEvilFlag = app.hasFlag(FlagEnum.Antievil);
+            const hasAntiEvilFlag = app.hasFlag(FlagEnum.Antievil)
             expect(hasAntiEvilFlag).toEqual(true);
         });
 
@@ -201,8 +201,6 @@ fdescribe('AddItemComponent', () => {
             const flag = app.hasFlag(FlagEnum.Vampric);
             expect(flag).toEqual(true);
         });
-    });
-
 
     it('should have flag Glow and Hum', () => {
         const app = component;
@@ -214,6 +212,8 @@ fdescribe('AddItemComponent', () => {
         const hasHumFlag = app.hasFlag(FlagEnum.Hum);
         expect(hasHumFlag).toEqual(true);
     });
+
+  });
 
     it('should toggle Armour Section', () => {
         const app = component;
