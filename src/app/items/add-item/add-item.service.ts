@@ -118,16 +118,10 @@ export class ItemService {
     }
 
     findKeyItems(query: string): Observable<Item[]> {
-        if (query == null) {
-            return;
-        }
         return this.http.get<Item[]>(`${this.findKeyUrl}${query}`);
     }
 
     findKeyById(id: string): Observable<Item> {
-        if (id == null) {
-            return;
-        }
         return this.http.get<Item>(`${this.findKeyByIdUrl}${id}`);
     }
 
