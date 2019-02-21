@@ -22,7 +22,7 @@ describe('AppComponent', () => {
     it(`should have as title 'ArchaicQuestII'`, async(() => {
         const fixture = TestBed.createComponent(AppComponent);
         const app = fixture.debugElement.componentInstance;
-        expect(app.title).toEqual('ArchaicQuestII');
+        expect(fixture.componentInstance.title).toEqual('ArchaicQuestII');
     }));
 
 });

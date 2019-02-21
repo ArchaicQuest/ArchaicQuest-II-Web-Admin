@@ -22,8 +22,8 @@ export class ItemService {
     private addItemUrl = `${this.host}item/PostItem`;
     private autoCompleteUrl = `${this.host}item/FindItems?query=`;
     private findKeyUrl = `${this.host}item/FindKeys?query=`;
-    private containerSizeUrl = `${this.host}/item/containersize`;
-    private LockStrengthUrl = `${this.host}/item/LockStrength`;
+    private containerSizeUrl = `${this.host}item/containersize`;
+    private LockStrengthUrl = `${this.host}item/LockStrength`;
     private findItemByIdUrl = `${this.host}item/FindItemById?id=`;
     private findKeyByIdUrl = `${this.host}item/FindKeyById?id=`;
 

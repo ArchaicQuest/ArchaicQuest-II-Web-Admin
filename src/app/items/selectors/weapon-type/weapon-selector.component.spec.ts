@@ -28,7 +28,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ItemType } from '../../interfaces/item-type.interface';
 import { hot, cold } from 'jasmine-marbles';
 import { ViewItemsComponent } from '../../view-items/view-items.component';
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, inject, Pipe, PipeTransform, SimpleChange } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, inject, Pipe, PipeTransform, SimpleChange, SimpleChanges } from '@angular/core';
 import { TestColdObservable } from 'jasmine-marbles/src/test-observables';
 import { ItemService } from '../../add-item/add-item.service';
 
@@ -125,6 +125,28 @@ describe('Weapon Type Selector Component', () => {
 
 
     });
+
+    it('should update control value', () => {
+
+        const changes: SimpleChanges = {
+            currentValue: {
+                currentValue: 'New Value',
+                previousValue: '',
+                firstChange: true,
+                isFirstChange: null
+            },
+
+        };
+
+        fixture.componentInstance.ngOnChanges(changes);
+
+        fixture.detectChanges();
+
+        expect(fixture.componentInstance.formGroup.controls['weaponType'].value).toEqual('New Value');
+
+
+    });
+
 
     //   fit('should call ngOnChanges', () => {
 
