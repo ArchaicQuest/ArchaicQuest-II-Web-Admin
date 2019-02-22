@@ -170,7 +170,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     private resetEQDupe(itemSlot: string, itemUuid: string) {
-        if (this.formGroup.get(itemSlot).value.uuid === itemUuid) {
+        if (this.formGroup.get(itemSlot).value !== null && this.formGroup.get(itemSlot).value.uuid === itemUuid) {
             this.formGroup.get(itemSlot).reset();
         }
     }
@@ -235,7 +235,12 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     compareOptions(obj: Item, obj2: Item): boolean {
+
+      if (!obj == null && !obj2 == null) {
         return obj.uuid === obj2.uuid;
+      }
+
+      return false;
     }
 
     isInventoryEmpty() {

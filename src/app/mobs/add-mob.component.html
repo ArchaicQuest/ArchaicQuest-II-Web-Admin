@@ -113,8 +113,11 @@
                 </div>
             </div>
 
-            <div class="row" formGroupName="attributes">
-                <div class="col-2">
+            <div class="row" formGroupName="attributes"> 
+              <div class="col-12">
+                <button mat-raised-button color="secondary" type="button" (click)="generateStats()">Random Stats</button>
+            </div>
+            <div class="col-2">
                     <mat-form-field class="form-control">
                         <input matInput type="number" max="99" min="1" placeholder="Strength" value="" required
                             formControlName="strength">

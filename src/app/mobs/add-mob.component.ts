@@ -70,6 +70,15 @@ export class AddMobComponent implements OnInit {
         console.log('alignment', data.value);
     }
 
+    generateStats() {
+      this.addMobForm.get('attributes').get('strength').setValue(this.mobService.generateRandomStat());
+      this.addMobForm.get('attributes').get('dexterity').setValue(this.mobService.generateRandomStat());
+      this.addMobForm.get('attributes').get('constitution').setValue(this.mobService.generateRandomStat());
+      this.addMobForm.get('attributes').get('wisdom').setValue(this.mobService.generateRandomStat());
+      this.addMobForm.get('attributes').get('intelligence').setValue(this.mobService.generateRandomStat());
+      this.addMobForm.get('attributes').get('charisma').setValue(this.mobService.generateRandomStat());
+    }
+
     addMob() {
 
         //todo inventory and EQ
