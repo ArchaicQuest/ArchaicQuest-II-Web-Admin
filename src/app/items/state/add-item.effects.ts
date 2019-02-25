@@ -92,13 +92,15 @@ export class AddItemEffects {
     );
 
     @Effect()
-    addITem: Observable<Action> = this.actions$.pipe(
+    addITem: Observable<{}> = this.actions$.pipe(
         ofType(AddItemActionTypes.PostItem),
-        map((action: PostItem) =>
+        switchMap((action: PostItem) =>
             this.addItemService.addItem(action.payload).pipe(
                 map((item: Item) => (new PostItemSuccess())),
                 catchError(err => of(new PostItemFail(err)))
             )
+
         )
-    );
+
+      );
 }

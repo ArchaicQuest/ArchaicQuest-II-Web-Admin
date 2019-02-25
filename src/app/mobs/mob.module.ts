@@ -16,6 +16,7 @@ import { InventoryComponent } from '../characters/inventory/inventory.component'
 import { characterReducer } from '../characters/state/character.reducer';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
 import { CharacterEffects } from '../characters/state/character.effects';
+import { ArmourClassComponent } from '../characters/armour-class/armour-class.component';
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { CharacterEffects } from '../characters/state/character.effects';
     ],
     declarations: [
         AddMobComponent,
+        ArmourClassComponent,
         InventoryComponent,
         EquipmentComponent
     ],
