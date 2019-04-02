@@ -14,7 +14,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { EffectsModule, Actions } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { RouterModule } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder, FormGroup } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from 'src/app/app-routing.module';
@@ -101,19 +101,46 @@ describe('Armour Rating Component', () => {
 
 
         fixture = TestBed.createComponent(ArmourClassComponent);
+
+        fixture.componentInstance.equipment = new FormGroup({
+          lightEq: null
+      });
+      fixture.detectChanges();
     });
 
 
-    
 
-    fit('should return armour rating', () => {
+
+
+
+
+    it('should return armour rating', () => {
       fixture.componentInstance['setArmourRating'](mockItemData);
 
       expect( fixture.componentInstance.Defense).toBe(5);
       expect( fixture.componentInstance.magicDefense).toBe(3);
     });
 
+    // this.equipment.get('lightEq').valueChanges.subscribe((value: Item) => {
+    //   this.setArmourRating(value);
+    // });
 
+
+    fit('should update AC when helmet is equiped', () => {
+      fixture.componentInstance.equipment.get('lightEq').setValue(mockItemData);
+
+      expect( fixture.componentInstance.Defense).toBe(5);
+      expect( fixture.componentInstance.magicDefense).toBe(3);
+    });
+
+
+
+it('should return armour rating', () => {
+      fixture.componentInstance['setArmourRating'](mockItemData);
+
+      expect( fixture.componentInstance.Defense).toBe(5);
+      expect( fixture.componentInstance.magicDefense).toBe(3);
+    });
 
 
 });
