@@ -33,65 +33,65 @@ export class ArmourClassComponent implements OnInit {
             this.setArmourRating(value);
         });
 
-        // this.equipment.get('neck2Eq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('neck2Eq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('bodyEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('bodyEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('torsoEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('torsoEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('waistEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('waistEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('legsEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('legsEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('armsEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('armsEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('wristEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('wristEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('wristEq2').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('wrist2Eq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+       });
 
-        // this.equipment.get('fingerEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('fingerEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('finger2Eq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('finger2Eq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('heldEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('heldEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('shieldEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('shieldEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('wieldEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('wieldEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('sheathedEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('sheathedEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
-        // this.equipment.get('floatingEq').valueChanges.subscribe((value: Item) => {
-        //   this.setArmourRating(value);
-        // });
+        this.equipment.get('floatingEq').valueChanges.subscribe((value: Item) => {
+          this.setArmourRating(value);
+        });
 
     }
 
