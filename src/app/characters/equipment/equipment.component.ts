@@ -7,9 +7,11 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
-import { GetInventory } from '../state/character.actions';
+import { GetInventory, RemoveFromInventory, DecreaseArmour, IncreaseArmour } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
 import { v4 } from 'uuid';
+import { ArmourClassComponent } from '../armour-class/armour-class.component';
+import { Equipment } from '../interfaces/equipment.interface';
 @Component({
     selector: 'app-equipment',
     templateUrl: './equipment.component.html',
@@ -72,7 +74,11 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             .subscribe((inventory: Item[]) => {
                 console.log(inventory);
                 this.mapEquipmentDropDowns(inventory);
+                console.log("change")
+
             });
+
+            this.onEQChange();
 
     }
 
@@ -106,6 +112,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     private mapEquipmentDropDowns(items: Item[]) {
         this.resetEQArrays();
+
 
         items.forEach(item => {
             this.heldItems = this.heldItems.concat((this.updateEQArray(item)));
@@ -171,10 +178,16 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     private resetEQDupe(itemSlot: string, itemUuid: string) {
         if (this.formGroup.get(itemSlot).value !== null && this.formGroup.get(itemSlot).value.uuid === itemUuid) {
-            this.formGroup.get(itemSlot).reset();
+          this.formGroup.get(itemSlot).reset();
+
         }
     }
 
+    onEQChange(): void {
+      this.formGroup.valueChanges.subscribe((val: Equipment) => {
+
+      });
+    }
 
     sheathChange(selection) {
         this.resetEQDupe('wieldEq', selection.value.uuid);
@@ -209,6 +222,9 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         this.resetEQDupe('wieldEq', selection.value.uuid);
     }
 
+    headChange(selection) {
+      this.resetEQDupe('heldEq', selection.value.uuid);
+  }
 
     fingerChange(selection) {
         this.resetEQDupe('finger2Eq', selection.value.uuid);
@@ -236,7 +252,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     compareOptions(obj: Item, obj2: Item): boolean {
 
-      if (!obj == null && !obj2 == null) {
+      if (obj != null && obj2 != null) {
         return obj.uuid === obj2.uuid;
       }
 

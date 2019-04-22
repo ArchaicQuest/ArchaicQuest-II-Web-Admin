@@ -1,6 +1,7 @@
 import {
     CharacterActionTypes,
-    CharacterActions
+    CharacterActions,
+    DecreaseArmour
 } from './character.actions';
 import { v4 } from 'uuid';
 import { CharacterState } from '../character.state';
@@ -8,7 +9,25 @@ import { CharacterState } from '../character.state';
 
 const intitalState: CharacterState = {
     inventory: [],
-    mob: null
+    mob: {
+      armorRating: {
+        armour: 0,
+        magic: 0.
+      },
+      alignmentScore: 0,
+      attributes: null,
+      className: "",
+      description: "",
+      gender: "",
+      level: "1",
+      maxAttributes: null,
+      maxStats: null,
+      name: "",
+      race: "",
+      stats: null,
+
+
+    }
 };
 
 export function characterReducer(state: CharacterState = intitalState,
@@ -34,10 +53,11 @@ export function characterReducer(state: CharacterState = intitalState,
             };
         }
         case CharacterActionTypes.RemoveFromInventory: {
-            state.inventory.push(action.payload);
+
             return {
                 ...state,
-                inventory: [...state.inventory]
+                inventory: [  ...state.inventory.slice(0, action.itemIndex),
+                  ...state.inventory.slice(action.itemIndex + 1)]
             };
         }
 
@@ -60,7 +80,30 @@ export function characterReducer(state: CharacterState = intitalState,
                 inventory: [...state.inventory]
             };
         }
-
+        case CharacterActionTypes.IncreaseArmour: {
+          return {
+              ...state,
+              mob: {
+                ...state.mob,
+                armorRating: {
+                  armour: state.mob.armorRating.armour + action.payload,
+                  magic: 0
+                }
+              }
+          };
+      }
+      case CharacterActionTypes.DecreaseArmour: {
+        return {
+            ...state,
+            mob: {
+              ...state.mob,
+              armorRating: {
+                armour: state.mob.armorRating.armour - action.payload,
+                magic: 0
+              }
+            }
+        };
+    }
         default: {
             return state;
         }

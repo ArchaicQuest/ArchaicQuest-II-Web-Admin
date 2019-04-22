@@ -5,6 +5,8 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 export enum CharacterActionTypes {
     AddToInventory = '[Character] Add Item to Inventory',
     RemoveFromInventory = '[Character] Remove Item from Inventory',
+    IncreaseArmour = '[Character] Increase Armour value',
+    DecreaseArmour = '[Character] Decrease Armour value',
     UpdateInventorySuccess = '[Character] Inventory update success',
     GetInventorySuccess = '[Character] Inventory update success',
     SaveCharacter = '[Character] Save Character',
@@ -17,7 +19,7 @@ export class AddToInventory implements Action {
 }
 export class RemoveFromInventory implements Action {
     readonly type = CharacterActionTypes.RemoveFromInventory;
-    constructor(public payload: Item) { }
+    constructor(public itemIndex: number) { }
 }
 
 export class InventoryUpdateSuccess implements Action {
@@ -38,11 +40,22 @@ export class SaveCharSuccess implements Action {
 
 }
 
+export class IncreaseArmour implements Action {
+  readonly type = CharacterActionTypes.IncreaseArmour;
+  constructor(public payload: number) { }
+}
+export class DecreaseArmour implements Action {
+  readonly type = CharacterActionTypes.DecreaseArmour;
+  constructor(public payload: number) { }
+}
+
 
 export type CharacterActions = AddToInventory
     | RemoveFromInventory
     | InventoryUpdateSuccess
     | GetInventory
     | SaveChar
-    | SaveCharSuccess;
+    | SaveCharSuccess
+    | IncreaseArmour
+    | DecreaseArmour;
 

@@ -147,22 +147,6 @@ describe('Weapon Type Selector Component', () => {
 
     });
 
-
-    //   fit('should call ngOnChanges', () => {
-
-    //     let component = fixture.componentInstance;
-
-    //     expect(component.ngOnChanges).toHaveBeenCalled();
-
-    //     const spy = spyOn(component, 'ngOnChanges');
-
-    //     fixture.componentInstance.control.setValue("1");
-
-    //     fixture.detectChanges();
-
-    //     expect(spy).toHaveBeenCalledTimes(1);
-    // });
-
 });
 
 

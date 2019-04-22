@@ -6,9 +6,10 @@ import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/o
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { AddToInventory } from '../state/character.actions';
+import { AddToInventory, RemoveFromInventory, DecreaseArmour } from '../state/character.actions';
 import { CharacterAppState } from '../state/character.state';
 import { v4 } from 'uuid';
+import { getInventory } from '../state/character.selector';
 @Component({
     selector: 'app-inventory',
     templateUrl: './inventory.component.html',
@@ -41,6 +42,13 @@ export class InventoryComponent implements OnInit {
                     return this.filterItems(name);
                 })
             );
+
+            this.charStore
+            .select(getInventory)
+            .subscribe((inventory: Item[]) => {
+                console.log(inventory);
+                this.inventoryItems = inventory;
+            });
     }
 
     addItemToInventory() {
@@ -49,8 +57,8 @@ export class InventoryComponent implements OnInit {
             return;
         }
         this.inventoryItems = this.inventoryItems.concat(item);
-     
-   
+
+
 
         this.charStore.dispatch(new AddToInventory(item));
 
@@ -65,7 +73,13 @@ export class InventoryComponent implements OnInit {
         return item != null ? item.name : undefined;
     }
     removeItemFromInventory(index: number) {
-        this.inventoryItems.splice(index, 1);
+
+     // const deletedItem:Item = this.inventoryItems.splice(index, 1);
+//let AC = this.inventoryItems.splice(index, 1)[0].armourRating.armour;
+//console.log("AC to remove,", AC)
+      this.charStore.dispatch(new RemoveFromInventory(index));
+    //  this.charStore.dispatch(new DecreaseArmour(AC));
+
     }
 
 }

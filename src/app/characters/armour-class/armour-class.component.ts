@@ -6,6 +6,10 @@ import {
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { Item } from 'src/app/items/interfaces/item.interface';
+import { Store } from '@ngrx/store';
+import { CharacterAppState } from '../state/character.state';
+import { getAC } from '../state/character.selector';
+import { ArmourRating } from 'src/app/items/interfaces/armourRating.interface';
 
 @Component({
     selector: 'app-armour-class',
@@ -17,12 +21,22 @@ export class ArmourClassComponent implements OnInit {
 
     @Input() equipment: FormGroup;
 
-    constructor() { }
+    constructor(private charStore: Store<CharacterAppState>) { }
 
     ngOnInit() {
         this.subscribeToEQChanges();
 
+        this.charStore
+        .select(getAC)
+        .subscribe((ac:any) => {
+            console.log(ac);
+            this.Defense = 0;
+        });
+
     }
+
+
+    //save currecnt ac in memory and use to decrease ac?
 
     subscribeToEQChanges(): void {
         this.equipment.get('lightEq').valueChanges.subscribe((value: Item) => {
@@ -96,10 +110,19 @@ export class ArmourClassComponent implements OnInit {
     }
 
     private setArmourRating(value: Item): void {
-        if (value != null) {
-            this.Defense += value.armourRating.armour;
-            this.magicDefense += value.armourRating.magic;
+      this.Defense = 0;
+
+      Object.keys(this.equipment.controls).forEach(eqSlot => {
+
+        if(this.equipment.get(eqSlot).value !== '' && this.equipment.get(eqSlot).value != null) {
+           console.log(eqSlot+":",(this.equipment.get(eqSlot).value as Item).armourRating.armour )
+        this.Defense += (this.equipment.get(eqSlot).value as Item).armourRating.armour;
         }
+      });
+        // if (value != null) {
+        //     this.Defense += value.armourRating.armour;
+        //     this.magicDefense += value.armourRating.magic;
+        // }
 
     }
 }
