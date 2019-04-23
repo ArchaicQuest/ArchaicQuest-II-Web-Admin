@@ -1,16 +1,13 @@
-import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from 'src/app/items/add-item/add-item.service';
-import { startWith, debounceTime, distinctUntilChanged, switchMap, takeWhile, take } from 'rxjs/operators';
-import { FormBuilder, Validators } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
-import { GetInventory, RemoveFromInventory, DecreaseArmour, IncreaseArmour } from '../state/character.actions';
+import { GetInventory } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
-import { v4 } from 'uuid';
-import { ArmourClassComponent } from '../armour-class/armour-class.component';
 import { Equipment } from '../interfaces/equipment.interface';
 @Component({
     selector: 'app-equipment',

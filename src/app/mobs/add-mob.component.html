@@ -15,7 +15,7 @@
 
         <form novalidate [formGroup]="addMobForm" (ngSubmit)="addMob()">
             <input type="hidden" formControlName="id">
-
+            <h2>General</h2>
             <div class="row">
                 <div class="col">
                     <mat-form-field class="form-control">
@@ -25,6 +25,15 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
+                <div class="col">
+                  <mat-form-field class="form-control">
+                      <input matInput placeholder="Mob long name" value="" required formControlName="name">
+                      <mat-error *ngIf="addMobForm.get('name').hasError('required')">
+                          Mob long name is required.
+                      </mat-error>
+                      <mat-hint align="start"><strong>Shown when player looks in a room. e.g a Goblin is here snarling at you.</strong> </mat-hint>
+                  </mat-form-field>
+              </div>
                 <div class="col">
                     <mat-form-field class="form-control">
                         <input type="number" max="99" min="1" matInput placeholder="Level" value="" required
@@ -83,7 +92,10 @@
                 </div>
             </div>
 
-            <div class="row" formGroupName="stats">
+            <div class="row">
+            <div class="col-6" formGroupName="stats">
+                <h2>Stats</h2>
+                <div class="row">
                 <div class="col">
                     <mat-form-field class="form-control">
                         <input matInput type="number" max="99" min="1" placeholder="Hit points" value="" required
@@ -111,13 +123,16 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
+                </div>
+                          </div>
 
-            <div class="row" formGroupName="attributes"> 
+            <div class="col-6" formGroupName="attributes">
+                <h2>Attributes</h2>
               <div class="col-12">
                 <button mat-raised-button color="secondary" type="button" (click)="generateStats()">Random Stats</button>
             </div>
-            <div class="col-2">
+            <div class="row">
+            <div class="col-6">
                     <mat-form-field class="form-control">
                         <input matInput type="number" max="99" min="1" placeholder="Strength" value="" required
                             formControlName="strength">
@@ -126,7 +141,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-2">
+                <div class="col-6">
                     <mat-form-field class="form-control">
                         <input type="number" max="99" min="1" matInput placeholder="Dexterity" value="" required
                             formControlName="dexterity">
@@ -135,7 +150,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-2">
+                <div class="col-6">
                     <mat-form-field class="form-control">
                         <input type="number" max="99" min="1" matInput placeholder="Constitution" value="" required
                             formControlName="constitution">
@@ -144,7 +159,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-2">
+                <div class="col-6">
                     <mat-form-field class="form-control">
                         <input type="number" max="99" min="1" matInput placeholder="Wisdom" value="" required
                             formControlName="wisdom">
@@ -153,7 +168,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-2">
+                <div class="col-6">
                     <mat-form-field class="form-control">
                         <input type="number" max="99" min="1" matInput placeholder="Intelligence" value="" required
                             formControlName="intelligence">
@@ -162,7 +177,7 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-2">
+                <div class="col-6">
                     <mat-form-field class="form-control">
                         <input type="number" max="99" min="1" matInput placeholder="Charisma" value="" required
                             formControlName="charisma">
@@ -171,7 +186,8 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
+            </div></div>
+          </div>
             <div class="row">
                 <div class="col">
                     <app-equipment></app-equipment>
