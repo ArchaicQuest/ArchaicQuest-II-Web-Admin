@@ -33,6 +33,7 @@ export class AddMobComponent implements OnInit {
     attackTypes: Option[];
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
+    emotes: string[] = [''];
     constructor(
         private mobService: MobService,
         private store: Store<CharacterAppState>,
@@ -76,26 +77,37 @@ export class AddMobComponent implements OnInit {
         console.log('alignment', data.value);
     }
     selectStatus(data: MatSelectChange) {
-      console.log('status', data.value);
-  }
+        console.log('status', data.value);
+    }
     generateStats() {
-      this.addMobForm.get('attributes').get('strength').setValue(this.mobService.generateRandomStat());
-      this.addMobForm.get('attributes').get('dexterity').setValue(this.mobService.generateRandomStat());
-      this.addMobForm.get('attributes').get('constitution').setValue(this.mobService.generateRandomStat());
-      this.addMobForm.get('attributes').get('wisdom').setValue(this.mobService.generateRandomStat());
-      this.addMobForm.get('attributes').get('intelligence').setValue(this.mobService.generateRandomStat());
-      this.addMobForm.get('attributes').get('charisma').setValue(this.mobService.generateRandomStat());
+        this.addMobForm.get('attributes').get('strength').setValue(this.mobService.generateRandomStat());
+        this.addMobForm.get('attributes').get('dexterity').setValue(this.mobService.generateRandomStat());
+        this.addMobForm.get('attributes').get('constitution').setValue(this.mobService.generateRandomStat());
+        this.addMobForm.get('attributes').get('wisdom').setValue(this.mobService.generateRandomStat());
+        this.addMobForm.get('attributes').get('intelligence').setValue(this.mobService.generateRandomStat());
+        this.addMobForm.get('attributes').get('charisma').setValue(this.mobService.generateRandomStat());
     }
 
     get getEmotesControl(): FormArray {
-      return this.addMobForm.get('emotes') as FormArray;
-  }
+        return this.addMobForm.get('emotes') as FormArray;
+    }
 
+    initEmote() {
+        return this.formBuilder.group({
+            emote: ['']
+        });
+    }
 
     addEmote() {
-      console.log(0)
-      this.getEmotesControl.push(this.formBuilder.control(''));
+        const control = <FormArray>this.addMobForm.controls['emotes'];
+        control.push(this.initEmote());
     }
+    removeLink(i: number) {
+        const control = <FormArray>this.addMobForm.controls['emotes'];
+        control.removeAt(i);
+    }
+
+
 
     addMob() {
 

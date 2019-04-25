@@ -102,28 +102,28 @@
                 </div>
 
                 <div class="col">
-                  <mat-form-field appearance="outline" class="form-control">
-                    <mat-label>Status</mat-label>
-                      <mat-select formControlName="status" placeholder="Status" required (selectionChange)="selectStatus($event)">
-                          <mat-option *ngFor="let status of statuses" [value]="status.id">
-                              {{ status.name }}
-                          </mat-option>
-                      </mat-select>
-                      <mat-error *ngIf="addMobForm.get('status').hasError('required')">status required</mat-error>
-                  </mat-form-field>
-              </div>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Status</mat-label>
+                        <mat-select formControlName="status" placeholder="Status" required (selectionChange)="selectStatus($event)">
+                            <mat-option *ngFor="let status of statuses" [value]="status.id">
+                                {{ status.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="addMobForm.get('status').hasError('required')">status required</mat-error>
+                    </mat-form-field>
+                </div>
 
-              <div class="col">
-                <mat-form-field appearance="outline" class="form-control">
-                  <mat-label>Default Attack Type</mat-label>
-                    <mat-select formControlName="attackType" placeholder="Status" required (selectionChange)="selectStatus($event)">
-                        <mat-option *ngFor="let attack of attackTypes" [value]="attack.id">
-                            {{ attack.name }}
-                        </mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="addMobForm.get('attackType').hasError('required')">attack required</mat-error>
-                </mat-form-field>
-            </div>
+                <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Default Attack Type</mat-label>
+                        <mat-select formControlName="attackType" placeholder="Status" required (selectionChange)="selectStatus($event)">
+                            <mat-option *ngFor="let attack of attackTypes" [value]="attack.id">
+                                {{ attack.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="addMobForm.get('attackType').hasError('required')">attack required</mat-error>
+                    </mat-form-field>
+                </div>
             </div>
 
             <div class="row">
@@ -283,23 +283,23 @@
             </div>
 
             <div class="row">
-              <div class="col">
-                  <div class="row align-items-center">
-                      <div class="col">
-                          <h2>Emotes</h2>
-                      </div>
-                  </div>
+                <div class="col">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2>Emotes</h2>
+                        </div>
+                    </div>
 
-                    <!-- <mat-form-field appearance="outline" class="form-control"  *ngFor="let emote of emotes">
-                      <mat-label>Emotes</mat-label>
-                      <input type="text" matInput placeholder="emote" value="" required formControlName="emotes" />
+                    <mat-form-field appearance="outline" class="form-control" *ngFor="let emote of getEmotesControl.controls; let i=index">
+                        <mat-label>Emotes</mat-label>
+                        <input type="text" matInput placeholder="emote" value="{{emote}}" required formControlName="emotes{{i}}" />
 
-                  </mat-form-field> -->
+                    </mat-form-field>
                 </div>
 
-                  <a (click)="this.addEmote()">Add another emote</a>
+                <a (click)="this.addEmote()">Add another emote</a>
 
-          </div>
+            </div>
             <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Save Mob</button>
         </form>
     </div>
