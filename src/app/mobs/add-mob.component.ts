@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { MobService } from './add-mob.service';
 import { ActivatedRoute } from '@angular/router';
 import { Gender } from '../characters/interfaces/gender.interface';
@@ -17,6 +17,7 @@ import { Mob } from './interfaces/mob.interface';
 import { CharacterAppState } from '../characters/state/character.state';
 import { SaveChar } from '../characters/state/character.actions';
 import { Status } from '../characters/interfaces/status.interface';
+import { Option } from '../shared/interfaces/option.interface';
 
 
 @Component({
@@ -29,13 +30,15 @@ export class AddMobComponent implements OnInit {
     genders: Gender[];
     alignments: Alignment[];
     statuses: Status[];
+    attackTypes: Option[];
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
     constructor(
         private mobService: MobService,
         private store: Store<CharacterAppState>,
         private route: ActivatedRoute,
-        private ngZone: NgZone
+        private ngZone: NgZone,
+        private formBuilder: FormBuilder
     ) { }
 
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -47,6 +50,7 @@ export class AddMobComponent implements OnInit {
         this.classes = this.mobService.getClasses();
         this.alignments = this.mobService.getAlignment();
         this.statuses = this.mobService.getStatus();
+        this.attackTypes = this.mobService.getDefaultAttackType();
     }
 
 
@@ -81,6 +85,16 @@ export class AddMobComponent implements OnInit {
       this.addMobForm.get('attributes').get('wisdom').setValue(this.mobService.generateRandomStat());
       this.addMobForm.get('attributes').get('intelligence').setValue(this.mobService.generateRandomStat());
       this.addMobForm.get('attributes').get('charisma').setValue(this.mobService.generateRandomStat());
+    }
+
+    get getEmotesControl(): FormArray {
+      return this.addMobForm.get('emotes') as FormArray;
+  }
+
+
+    addEmote() {
+      console.log(0)
+      this.getEmotesControl.push(this.formBuilder.control(''));
     }
 
     addMob() {

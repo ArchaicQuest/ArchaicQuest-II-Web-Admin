@@ -46,7 +46,10 @@ export class MobService {
     class: ['', Validators.required],
     alignment: ['', Validators.required],
     status: [1, Validators.required],
+    attackType: ['', Validators.required],
     description: ['', Validators.required],
+    greetMessage: [''],
+    emotes: new FormGroup({}),
     level: ['', [Validators.min(1), Validators.max(99)]],
     stats: new FormGroup({
       hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
@@ -268,6 +271,33 @@ export class MobService {
     {
       name: 'Stunned',
       id: 12,
+    }]
+  }
+
+  getDefaultAttackType(): Status[] {
+    return [{
+      name: 'Punch',
+      id: 1,
+    },
+    {
+      name: 'Pound',
+      id: 2,
+    },
+    {
+      name: 'Bite',
+      id: 3,
+    },
+    {
+      name: 'Charge',
+      id: 4,
+    },
+    {
+      name: 'Peck',
+      id: 5,
+    },
+    {
+      name: 'Headbutt',
+      id: 6,
     }]
   }
 

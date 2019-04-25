@@ -15,27 +15,35 @@
 
         <form novalidate [formGroup]="addMobForm" (ngSubmit)="addMob()">
             <input type="hidden" formControlName="id">
-            <h2>General</h2>
+            <h2>Basic Information</h2>
             <div class="row">
                 <div class="col">
-                    <mat-form-field class="form-control">
-                        <input matInput placeholder="Mob name" value="" required formControlName="name">
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Name</mat-label>
+                        <input matInput placeholder="e.g Goblin" value="" required formControlName="name">
                         <mat-error *ngIf="addMobForm.get('name').hasError('required')">
                             Mob name is required.
                         </mat-error>
                     </mat-form-field>
                 </div>
                 <div class="col">
-                  <mat-form-field class="form-control">
-                      <input matInput placeholder="Mob long name" value="" required formControlName="name">
-                      <mat-error *ngIf="addMobForm.get('name').hasError('required')">
-                          Mob long name is required.
-                      </mat-error>
-                      <mat-hint align="start"><strong>Shown when player looks in a room. e.g a Goblin is here snarling at you.</strong> </mat-hint>
-                  </mat-form-field>
-              </div>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Long name</mat-label>
+                        <input matInput placeholder="e.g A Goblin is here snarling at you." value="" required
+                            formControlName="name">
+                        <mat-error *ngIf="addMobForm.get('name').hasError('required')">
+                            Mob long name is required.
+                        </mat-error>
+                        <mat-hint align="start"><strong>Shown when player looks in a room.</strong> </mat-hint>
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+            <div class="row">
                 <div class="col">
-                    <mat-form-field class="form-control">
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Level</mat-label>
                         <input type="number" max="99" min="1" matInput placeholder="Level" value="" required
                             formControlName="level">
                         <mat-error *ngIf="addMobForm.get('level').hasError('min') || addMobForm.get('level').hasError('max')">
@@ -43,11 +51,10 @@
                         </mat-error>
                     </mat-form-field>
                 </div>
-            </div>
-
-            <div class="row">
                 <div class="col">
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Gender</mat-label>
+
                         <mat-select formControlName="gender" placeholder="Gender" required (selectionChange)="selectGender($event)">
                             <mat-option *ngFor="let gender of genders" [value]="gender.id">
                                 {{ gender.name }}
@@ -58,7 +65,8 @@
                 </div>
 
                 <div class="col">
-                    <mat-form-field>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Race</mat-label>
                         <mat-select formControlName="race" placeholder="race" required (selectionChange)="selectRace($event)">
                             <mat-option *ngFor="let race of races" [value]="race.id" [title]="race.description">
                                 {{ race.name }}
@@ -69,7 +77,8 @@
                 </div>
 
                 <div class="col">
-                    <mat-form-field>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Class</mat-label>
                         <mat-select formControlName="class" placeholder="class" required (selectionChange)="selectClass($event)">
                             <mat-option *ngFor="let class of classes" [value]="class.id" [title]="class.description">
                                 {{ class.name }}
@@ -81,7 +90,8 @@
 
 
                 <div class="col">
-                    <mat-form-field>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Alignment</mat-label>
                         <mat-select formControlName="alignment" placeholder="alignment" required (selectionChange)="selectAlignment($event)">
                             <mat-option *ngFor="let alignment of alignments" [value]="alignment.id">
                                 {{ alignment.name }}
@@ -92,7 +102,8 @@
                 </div>
 
                 <div class="col">
-                  <mat-form-field>
+                  <mat-form-field appearance="outline" class="form-control">
+                    <mat-label>Status</mat-label>
                       <mat-select formControlName="status" placeholder="Status" required (selectionChange)="selectStatus($event)">
                           <mat-option *ngFor="let status of statuses" [value]="status.id">
                               {{ status.name }}
@@ -101,116 +112,164 @@
                       <mat-error *ngIf="addMobForm.get('status').hasError('required')">status required</mat-error>
                   </mat-form-field>
               </div>
+
+              <div class="col">
+                <mat-form-field appearance="outline" class="form-control">
+                  <mat-label>Default Attack Type</mat-label>
+                    <mat-select formControlName="attackType" placeholder="Status" required (selectionChange)="selectStatus($event)">
+                        <mat-option *ngFor="let attack of attackTypes" [value]="attack.id">
+                            {{ attack.name }}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addMobForm.get('attackType').hasError('required')">attack required</mat-error>
+                </mat-form-field>
+            </div>
             </div>
 
             <div class="row">
-            <div class="col-6" formGroupName="stats">
-                <h2>Stats</h2>
-                <div class="row">
-                <div class="col">
-                    <mat-form-field class="form-control">
-                        <input matInput type="number" max="99" min="1" placeholder="Hit points" value="" required
-                            formControlName="hitPoints">
-                        <mat-error *ngIf="addMobForm.get('stats').get('hitPoints').hasError('min') || addMobForm.get('stats').get('hitPoints').hasError('max')">
-                            Hit points must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Mana points" value="" required
-                            formControlName="manaPoints">
-                        <mat-error *ngIf="addMobForm.get('stats').get('manaPoints').hasError('min') || addMobForm.get('stats').get('manaPoints').hasError('max')">
-                            Mana Points must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Move points" value="" required
-                            formControlName="movePoints">
-                        <mat-error *ngIf="addMobForm.get('stats').get('movePoints').hasError('min') ||addMobForm.get('stats').get('movePoints').hasError('max')">
-                            Move Points must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                </div>
-                          </div>
 
-            <div class="col-6" formGroupName="attributes">
-                <h2>Attributes</h2>
-              <div class="col-12">
-                <button mat-raised-button color="secondary" type="button" (click)="generateStats()">Random Stats</button>
+                <div class="col" formGroupName="attributes">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2>Attributes</h2>
+                        </div>
+                        <div class="col">
+                            <button mat-raised-button color="secondary" type="button" (click)="generateStats()" class="float-right">Randomise
+                                Attributes</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Strength</mat-label>
+                                <input matInput type="number" max="99" min="1" placeholder="Strength" value="" required
+                                    formControlName="strength">
+                                <mat-error *ngIf="addMobForm.get('attributes').get('strength').hasError('min') || addMobForm.get('attributes').get('strength').hasError('max')">
+                                    strength must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Dexterity</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Dexterity" value=""
+                                    required formControlName="dexterity">
+                                <mat-error *ngIf="addMobForm.get('attributes').get('dexterity').hasError('min') || addMobForm.get('attributes').get('dexterity').hasError('max')">
+                                    Dexterity must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Constitution</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Constitution" value=""
+                                    required formControlName="constitution">
+                                <mat-error *ngIf="addMobForm.get('attributes').get('constitution').hasError('min')||addMobForm.get('attributes').get('constitution').hasError('max')">
+                                    constitution must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Wisdom</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Wisdom" value="" required
+                                    formControlName="wisdom">
+                                <mat-error *ngIf="addMobForm.get('attributes').get('wisdom').hasError('min') ||addMobForm.get('attributes').get('wisdom').hasError('max')">
+                                    wisdom must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Intelligence</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Intelligence" value=""
+                                    required formControlName="intelligence">
+                                <mat-error *ngIf="addMobForm.get('attributes').get('intelligence').hasError('min') ||addMobForm.get('attributes').get('intelligence').hasError('max')">
+                                    intelligence must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Charisma</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Charisma" value="" required
+                                    formControlName="charisma">
+                                <mat-error *ngIf="addMobForm.get('attributes').get('charisma').hasError('min') ||addMobForm.get('attributes').get('charisma').hasError('max')">
+                                    charisma must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col" formGroupName="stats">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2>Stats</h2>
+                        </div>
+                        <div class="col">
+                            <button mat-raised-button color="secondary" type="button" (click)="generateStats()" class="float-right">Randomise
+                                Stats</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Hit points</mat-label>
+                                <input matInput type="number" max="99" min="1" placeholder="Hit points" value=""
+                                    required formControlName="hitPoints">
+                                <mat-error *ngIf="addMobForm.get('stats').get('hitPoints').hasError('min') || addMobForm.get('stats').get('hitPoints').hasError('max')">
+                                    Hit points must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Mana points</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Mana points" value=""
+                                    required formControlName="manaPoints">
+                                <mat-error *ngIf="addMobForm.get('stats').get('manaPoints').hasError('min') || addMobForm.get('stats').get('manaPoints').hasError('max')">
+                                    Mana Points must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Move Points</mat-label>
+                                <input type="number" max="99" min="1" matInput placeholder="Move points" value=""
+                                    required formControlName="movePoints">
+                                <mat-error *ngIf="addMobForm.get('stats').get('movePoints').hasError('min') ||addMobForm.get('stats').get('movePoints').hasError('max')">
+                                    Move Points must be between 1 and 99.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="row">
-            <div class="col-6">
-                    <mat-form-field class="form-control">
-                        <input matInput type="number" max="99" min="1" placeholder="Strength" value="" required
-                            formControlName="strength">
-                        <mat-error *ngIf="addMobForm.get('attributes').get('strength').hasError('min') || addMobForm.get('attributes').get('strength').hasError('max')">
-                            strength must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Dexterity" value="" required
-                            formControlName="dexterity">
-                        <mat-error *ngIf="addMobForm.get('attributes').get('dexterity').hasError('min') || addMobForm.get('attributes').get('dexterity').hasError('max')">
-                            Dexterity must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Constitution" value="" required
-                            formControlName="constitution">
-                        <mat-error *ngIf="addMobForm.get('attributes').get('constitution').hasError('min')||addMobForm.get('attributes').get('constitution').hasError('max')">
-                            constitution must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Wisdom" value="" required
-                            formControlName="wisdom">
-                        <mat-error *ngIf="addMobForm.get('attributes').get('wisdom').hasError('min') ||addMobForm.get('attributes').get('wisdom').hasError('max')">
-                            wisdom must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Intelligence" value="" required
-                            formControlName="intelligence">
-                        <mat-error *ngIf="addMobForm.get('attributes').get('intelligence').hasError('min') ||addMobForm.get('attributes').get('intelligence').hasError('max')">
-                            intelligence must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field class="form-control">
-                        <input type="number" max="99" min="1" matInput placeholder="Charisma" value="" required
-                            formControlName="charisma">
-                        <mat-error *ngIf="addMobForm.get('attributes').get('charisma').hasError('min') ||addMobForm.get('attributes').get('charisma').hasError('max')">
-                            charisma must be between 1 and 99.
-                        </mat-error>
-                    </mat-form-field>
-                </div>
-            </div></div>
-          </div>
-            <div class="row">
-                <div class="col">
-                    <app-equipment></app-equipment>
-                </div>
                 <div class="col">
                     <app-inventory></app-inventory>
                 </div>
+                <div class="col">
+                    <app-equipment></app-equipment>
+                </div>
+
 
             </div>
             <div class="row">
                 <div class="col">
-                    <mat-form-field class="form-control">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h2>Description</h2>
+                        </div>
+                    </div>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Description</mat-label>
                         <textarea matInput placeholder="Description" value="" required formControlName="description"
                             cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
                             cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
@@ -222,6 +281,25 @@
                     </mat-form-field>
                 </div>
             </div>
+
+            <div class="row">
+              <div class="col">
+                  <div class="row align-items-center">
+                      <div class="col">
+                          <h2>Emotes</h2>
+                      </div>
+                  </div>
+
+                    <!-- <mat-form-field appearance="outline" class="form-control"  *ngFor="let emote of emotes">
+                      <mat-label>Emotes</mat-label>
+                      <input type="text" matInput placeholder="emote" value="" required formControlName="emotes" />
+
+                  </mat-form-field> -->
+                </div>
+
+                  <a (click)="this.addEmote()">Add another emote</a>
+
+          </div>
             <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Save Mob</button>
         </form>
     </div>
