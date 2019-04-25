@@ -16,6 +16,7 @@ import { Store } from '@ngrx/store';
 import { Mob } from './interfaces/mob.interface';
 import { CharacterAppState } from '../characters/state/character.state';
 import { SaveChar } from '../characters/state/character.actions';
+import { Status } from '../characters/interfaces/status.interface';
 
 
 @Component({
@@ -27,6 +28,7 @@ export class AddMobComponent implements OnInit {
     classes: Class[];
     genders: Gender[];
     alignments: Alignment[];
+    statuses: Status[];
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
     constructor(
@@ -44,7 +46,7 @@ export class AddMobComponent implements OnInit {
         this.races = this.mobService.getRaces();
         this.classes = this.mobService.getClasses();
         this.alignments = this.mobService.getAlignment();
-
+        this.statuses = this.mobService.getStatus();
     }
 
 
@@ -69,7 +71,9 @@ export class AddMobComponent implements OnInit {
     selectAlignment(data: MatSelectChange) {
         console.log('alignment', data.value);
     }
-
+    selectStatus(data: MatSelectChange) {
+      console.log('status', data.value);
+  }
     generateStats() {
       this.addMobForm.get('attributes').get('strength').setValue(this.mobService.generateRandomStat());
       this.addMobForm.get('attributes').get('dexterity').setValue(this.mobService.generateRandomStat());

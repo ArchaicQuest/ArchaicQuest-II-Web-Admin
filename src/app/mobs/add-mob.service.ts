@@ -16,6 +16,7 @@ import { Class } from '../characters/interfaces/class.interface';
 import { Alignment } from '../characters/interfaces/alignment.interface';
 import { AlignmentEnums } from '../characters/enums/alignment.enum';
 import { Mob } from './interfaces/mob.interface';
+import { Status } from '../characters/interfaces/status.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +45,7 @@ export class MobService {
     race: ['', Validators.required],
     class: ['', Validators.required],
     alignment: ['', Validators.required],
+    status: [1, Validators.required],
     description: ['', Validators.required],
     level: ['', [Validators.min(1), Validators.max(99)]],
     stats: new FormGroup({
@@ -216,6 +218,57 @@ export class MobService {
         id: AlignmentEnums.ChaoticEvil
       }
     ];
+  }
+
+  getStatus(): Status[] {
+    return [{
+      name: 'Sitting',
+      id: 1,
+    },
+    {
+      name: 'Standing',
+      id: 2,
+    },
+    {
+      name: 'Sleeping',
+      id: 3,
+    },
+    {
+      name: 'Fighting',
+      id: 4,
+    },
+    {
+      name: 'Resting',
+      id: 5,
+    },
+    {
+      name: 'Incapitated',
+      id: 6,
+    },
+    {
+      name: 'Dead',
+      id: 7,
+    },
+    {
+      name: 'Ghost',
+      id: 8,
+    },
+    {
+      name: 'Busy',
+      id: 9,
+    },
+    {
+      name: 'Floating',
+      id: 10,
+    },
+    {
+      name: 'Mounted',
+      id: 11,
+    },
+    {
+      name: 'Stunned',
+      id: 12,
+    }]
   }
 
   generateRandomStat(): number {

@@ -90,6 +90,17 @@
                         <mat-error *ngIf="addMobForm.get('alignment').hasError('required')">alignment required</mat-error>
                     </mat-form-field>
                 </div>
+
+                <div class="col">
+                  <mat-form-field>
+                      <mat-select formControlName="status" placeholder="Status" required (selectionChange)="selectStatus($event)">
+                          <mat-option *ngFor="let status of statuses" [value]="status.id">
+                              {{ status.name }}
+                          </mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="addMobForm.get('status').hasError('required')">status required</mat-error>
+                  </mat-form-field>
+              </div>
             </div>
 
             <div class="row">
