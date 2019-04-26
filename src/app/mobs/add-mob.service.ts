@@ -49,9 +49,7 @@ export class MobService {
         attackType: ['', Validators.required],
         description: ['', Validators.required],
         greetMessage: [''],
-        emotes: this.formBuilder.group({
-            emote: ['']
-        }),
+        emotes: this.formBuilder.array([this.initEmote()]),
         level: ['', [Validators.min(1), Validators.max(99)]],
         stats: new FormGroup({
             hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
@@ -85,6 +83,13 @@ export class MobService {
     getAddMobForm() {
         return this.addMobForm;
     }
+
+    initEmote() {
+        return this.formBuilder.group({
+            emote: ''
+        });
+    }
+
 
     getGender(): Gender[] {
         return [

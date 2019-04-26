@@ -289,17 +289,21 @@
                             <h2>Emotes</h2>
                         </div>
                     </div>
+                    <div formArrayName="emotes" *ngFor="let emote of getEmotesControl.controls; let i=index">
 
-                    <mat-form-field appearance="outline" class="form-control" *ngFor="let emote of getEmotesControl.controls; let i=index">
-                        <mat-label>Emotes</mat-label>
-                        <input type="text" matInput placeholder="emote" value="{{emote}}" required formControlName="emotes{{i}}" />
+                        <mat-form-field appearance="outline" class="form-control" [formGroupName]="i">
+                            <mat-label>Emotes</mat-label>
+                            <input type="text" matInput placeholder="emote" formControlName="emote" />
 
-                    </mat-form-field>
+                        </mat-form-field>
+                        <a class="btn btn-danger btn-sm" (click)="removeLink(i)">Remove</a>
+                    </div>
+                    <a (click)="this.addEmote()">Add another emote</a>
+
                 </div>
-
-                <a (click)="this.addEmote()">Add another emote</a>
-
             </div>
+
+
             <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Save Mob</button>
         </form>
     </div>

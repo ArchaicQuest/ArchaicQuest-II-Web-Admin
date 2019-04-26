@@ -92,19 +92,15 @@ export class AddMobComponent implements OnInit {
         return this.addMobForm.get('emotes') as FormArray;
     }
 
-    initEmote() {
-        return this.formBuilder.group({
-            emote: ['']
-        });
-    }
 
     addEmote() {
-        const control = <FormArray>this.addMobForm.controls['emotes'];
-        control.push(this.initEmote());
+        this.getEmotesControl.push(this.mobService.initEmote());
+
+        console.log(this.mobService.addMobForm.value)
     }
+
     removeLink(i: number) {
-        const control = <FormArray>this.addMobForm.controls['emotes'];
-        control.removeAt(i);
+        this.getEmotesControl.removeAt(i);
     }
 
 
