@@ -46,11 +46,19 @@ export class AddMobComponent implements OnInit {
     ngOnInit() {
         this.addMobForm = this.mobService.getAddMobForm();
         this.genders = this.mobService.getGender();
-        this.races = this.mobService.getRaces();
-        this.classes = this.mobService.getClasses();
+
+
         this.alignments = this.mobService.getAlignment();
         this.statuses = this.mobService.getStatus();
         this.attackTypes = this.mobService.getDefaultAttackType();
+
+        this.mobService.getRaces().subscribe((data: Race[]) => {
+          this.races = data;
+         });
+
+         this.mobService.getClasses().subscribe((data: Race[]) => {
+          this.classes = data;
+         });
     }
 
 
