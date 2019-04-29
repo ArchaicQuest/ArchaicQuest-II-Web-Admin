@@ -49,7 +49,24 @@
                             "extractLicenses": true,
                             "vendorChunk": false,
                             "buildOptimizer": true
-                        }
+                        },
+                        "dev": {
+                          "fileReplacements": [
+                              {
+                                  "replace": "src/environments/environment.ts",
+                                  "with": "src/environments/environment.dev.ts"
+                              }
+                          ],
+                          "optimization": true,
+                          "outputHashing": "all",
+                          "sourceMap": true,
+                          "extractCss": true,
+                          "namedChunks": false,
+                          "aot": true,
+                          "extractLicenses": true,
+                          "vendorChunk": false,
+                          "buildOptimizer": true
+                      }
                     }
                 },
                 "serve": {
@@ -60,7 +77,10 @@
                     "configurations": {
                         "production": {
                             "browserTarget": "ArchaicQuestII:build:production"
-                        }
+                        },
+                        "dev": {
+                          "browserTarget": "ArchaicQuestII:build:dev"
+                      }
                     }
                 },
                 "extract-i18n": {
