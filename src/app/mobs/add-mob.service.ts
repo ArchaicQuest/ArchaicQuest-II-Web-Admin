@@ -18,7 +18,8 @@ import { AlignmentEnums } from '../characters/enums/alignment.enum';
 import { Mob } from './interfaces/mob.interface';
 import { Status } from '../characters/interfaces/status.interface';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.staging';
+import { environment } from 'src/environments/environment';
+import { Option } from '../shared/interfaces/option.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -36,6 +37,7 @@ export class MobService {
     private saveMobUrl = `${this.host}mob/PostMob`;
     private getRacesUrl = `${this.host}/Character/Race`;
     private getClassesUrl = `${this.host}/Character/Class`;
+    private getAttackTypesUrl = `${this.host}/Character/AttackType`;
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
     });
@@ -214,31 +216,8 @@ export class MobService {
         }]
     }
 
-    getDefaultAttackType(): Status[] {
-        return [{
-            name: 'Punch',
-            id: 1,
-        },
-        {
-            name: 'Pound',
-            id: 2,
-        },
-        {
-            name: 'Bite',
-            id: 3,
-        },
-        {
-            name: 'Charge',
-            id: 4,
-        },
-        {
-            name: 'Peck',
-            id: 5,
-        },
-        {
-            name: 'Headbutt',
-            id: 6,
-        }]
+    getDefaultAttackType(): Observable<Option[]> {
+        return this.http.get<Array<Option>>(this.getAttackTypesUrl);
     }
 
     generateRandomStat(): number {

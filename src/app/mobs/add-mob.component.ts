@@ -51,15 +51,18 @@ export class AddMobComponent implements OnInit {
 
         this.alignments = this.mobService.getAlignment();
         this.statuses = this.mobService.getStatus();
-        this.attackTypes = this.mobService.getDefaultAttackType();
+
+        this.mobService.getDefaultAttackType().subscribe((data: Option[]) => {
+            this.attackTypes = data;
+        });
 
         this.mobService.getRaces().subscribe((data: Race[]) => {
-          this.races = data;
-         });
+            this.races = data;
+        });
 
-         this.mobService.getClasses().subscribe((data: Race[]) => {
-          this.classes = data;
-         });
+        this.mobService.getClasses().subscribe((data: Race[]) => {
+            this.classes = data;
+        });
     }
 
 
