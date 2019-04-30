@@ -1,8 +1,8 @@
 import {
-  Validators,
-  FormBuilder,
-  FormGroup,
-  FormControl
+    Validators,
+    FormBuilder,
+    FormGroup,
+    FormControl
 } from "@angular/forms";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -22,7 +22,7 @@ import { environment } from "src/environments/environment";
 import { Option } from "../shared/interfaces/option.interface";
 
 @Injectable({
-  providedIn: "root"
+    providedIn: "root"
 })
 /*
   todo
@@ -33,148 +33,112 @@ import { Option } from "../shared/interfaces/option.interface";
   emotes
 */
 export class MobService {
-  private host = `${environment.hostAPI}`;
-  private saveMobUrl = `${this.host}mob/PostMob`;
-  private getRacesUrl = `${this.host}/Character/Race`;
-  private getClassesUrl = `${this.host}/Character/Class`;
-  private getAttackTypesUrl = `${this.host}/Character/AttackType`;
-  private getStatusUrl = `${this.host}/Character/Status`;
+    private host = `${environment.hostAPI}`;
+    private saveMobUrl = `${this.host}mob/PostMob`;
+    private getRacesUrl = `${this.host}/Character/Race`;
+    private getClassesUrl = `${this.host}/Character/Class`;
+    private getAttackTypesUrl = `${this.host}/Character/AttackType`;
+    private getStatusUrl = `${this.host}/Character/Status`;
+    private getAlignmentUrl = `${this.host}/Character/Alignment`;
 
-  private headers = new HttpHeaders({
-    "Content-Type": "application/json"
-  });
-
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
-
-  public addMobForm = this.formBuilder.group({
-    id: [""],
-    name: ["", Validators.required],
-    gender: ["", Validators.required],
-    race: ["", Validators.required],
-    class: ["", Validators.required],
-    alignment: ["", Validators.required],
-    status: [1, Validators.required],
-    attackType: ["", Validators.required],
-    description: ["", Validators.required],
-    greetMessage: [""],
-    emotes: this.formBuilder.array([this.initEmote()]),
-    level: ["", [Validators.min(1), Validators.max(99)]],
-    stats: new FormGroup({
-      hitPoints: new FormControl("", [Validators.min(1), Validators.max(99)]),
-      manaPoints: new FormControl("", [Validators.min(1), Validators.max(99)]),
-      movePoints: new FormControl("", [Validators.min(1), Validators.max(99)])
-    }),
-    attributes: new FormGroup({
-      strength: new FormControl("", [Validators.min(1), Validators.max(99)]),
-      dexterity: new FormControl("", [Validators.min(1), Validators.max(99)]),
-      constitution: new FormControl("", [
-        Validators.min(1),
-        Validators.max(99)
-      ]),
-      wisdom: new FormControl("", [Validators.min(1), Validators.max(99)]),
-      intelligence: new FormControl("", [
-        Validators.min(1),
-        Validators.max(99)
-      ]),
-      charisma: new FormControl("", [Validators.min(1), Validators.max(99)])
-    })
-  });
-
-  saveMob(mob: Mob) {
-    console.log("post this ", mob);
-    return this.http.post(this.saveMobUrl, JSON.stringify(mob), {
-      headers: this.headers,
-      responseType: "text"
+    private headers = new HttpHeaders({
+        "Content-Type": "application/json"
     });
-  }
 
-  getAddMobForm() {
-    return this.addMobForm;
-  }
+    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
-  initEmote() {
-    return this.formBuilder.group({
-      emote: ""
+    public addMobForm = this.formBuilder.group({
+        id: [""],
+        name: ["", Validators.required],
+        gender: ["", Validators.required],
+        race: ["", Validators.required],
+        class: ["", Validators.required],
+        alignment: ["", Validators.required],
+        status: [1, Validators.required],
+        attackType: ["", Validators.required],
+        description: ["", Validators.required],
+        greetMessage: [""],
+        emotes: this.formBuilder.array([this.initEmote()]),
+        level: ["", [Validators.min(1), Validators.max(99)]],
+        stats: new FormGroup({
+            hitPoints: new FormControl("", [Validators.min(1), Validators.max(99)]),
+            manaPoints: new FormControl("", [Validators.min(1), Validators.max(99)]),
+            movePoints: new FormControl("", [Validators.min(1), Validators.max(99)])
+        }),
+        attributes: new FormGroup({
+            strength: new FormControl("", [Validators.min(1), Validators.max(99)]),
+            dexterity: new FormControl("", [Validators.min(1), Validators.max(99)]),
+            constitution: new FormControl("", [
+                Validators.min(1),
+                Validators.max(99)
+            ]),
+            wisdom: new FormControl("", [Validators.min(1), Validators.max(99)]),
+            intelligence: new FormControl("", [
+                Validators.min(1),
+                Validators.max(99)
+            ]),
+            charisma: new FormControl("", [Validators.min(1), Validators.max(99)])
+        })
     });
-  }
 
-  getGender(): Gender[] {
-    return [
-      {
-        name: "None",
-        id: GenderEnum.None
-      },
-      {
-        name: "Male",
-        id: GenderEnum.Male
-      },
-      {
-        name: "Female",
-        id: GenderEnum.Female
-      }
-    ];
-  }
+    saveMob(mob: Mob) {
+        console.log("post this ", mob);
+        return this.http.post(this.saveMobUrl, JSON.stringify(mob), {
+            headers: this.headers,
+            responseType: "text"
+        });
+    }
 
-  getRaces(): Observable<Race[]> {
-    return this.http.get<Array<Race>>(this.getRacesUrl);
-  }
+    getAddMobForm() {
+        return this.addMobForm;
+    }
 
-  getClasses(): Observable<Class[]> {
-    return this.http.get<Array<Class>>(this.getClassesUrl);
-  }
+    initEmote() {
+        return this.formBuilder.group({
+            emote: ""
+        });
+    }
 
-  getAlignment(): Alignment[] {
-    return [
-      {
-        name: "Lawful Good",
-        id: AlignmentEnums.LawfulGood
-      },
-      {
-        name: "Neutral Good",
-        id: AlignmentEnums.NeutralGood
-      },
-      {
-        name: "Chaotic Good",
-        id: AlignmentEnums.ChaoticGood
-      },
-      {
-        name: "Lawful Neutral",
-        id: AlignmentEnums.LawfulNeutral
-      },
-      {
-        name: "Neutral Good",
-        id: AlignmentEnums.Neutral
-      },
-      {
-        name: "Chaotic Neutral",
-        id: AlignmentEnums.ChaoticNeutral
-      },
-      {
-        name: "Lawful Evil",
-        id: AlignmentEnums.LawfulEvil
-      },
-      {
-        name: "Neutral Evil",
-        id: AlignmentEnums.NeutralEvil
-      },
-      {
-        name: "Chaotic Evil",
-        id: AlignmentEnums.ChaoticEvil
-      }
-    ];
-  }
+    getGender(): Gender[] {
+        return [
+            {
+                name: "None",
+                id: GenderEnum.None
+            },
+            {
+                name: "Male",
+                id: GenderEnum.Male
+            },
+            {
+                name: "Female",
+                id: GenderEnum.Female
+            }
+        ];
+    }
 
-  getStatus(): Observable<Option[]> {
-    return this.http.get<Array<Option>>(this.getStatusUrl);
-  }
+    getRaces(): Observable<Race[]> {
+        return this.http.get<Array<Race>>(this.getRacesUrl);
+    }
 
-  getDefaultAttackType(): Observable<Option[]> {
-    return this.http.get<Array<Option>>(this.getAttackTypesUrl);
-  }
+    getClasses(): Observable<Class[]> {
+        return this.http.get<Array<Class>>(this.getClassesUrl);
+    }
 
-  generateRandomStat(): number {
-    const min = 12;
-    const max = 20;
-    return Math.floor(Math.random() * (max - min) + min);
-  }
+    getAlignment(): Observable<Alignment[]> {
+        return this.http.get<Array<Alignment>>(this.getAlignmentUrl);
+    }
+
+    getStatus(): Observable<Option[]> {
+        return this.http.get<Array<Option>>(this.getStatusUrl);
+    }
+
+    getDefaultAttackType(): Observable<Option[]> {
+        return this.http.get<Array<Option>>(this.getAttackTypesUrl);
+    }
+
+    generateRandomStat(): number {
+        const min = 12;
+        const max = 20;
+        return Math.floor(Math.random() * (max - min) + min);
+    }
 }
