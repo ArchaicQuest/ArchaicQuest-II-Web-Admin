@@ -160,6 +160,7 @@ export class AddMobComponent implements OnInit {
             stats: this.addMobForm.get("stats").value,
             maxStats: this.addMobForm.get("stats").value,
             money: { gold: 0, copper: 0, silver: 0 },
+            longName: this.addMobForm.get("longName").value,
             name: this.addMobForm.get("name").value,
             race: this.addMobForm.get("race").value
         };

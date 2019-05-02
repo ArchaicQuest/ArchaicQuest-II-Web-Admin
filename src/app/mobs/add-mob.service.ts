@@ -50,6 +50,7 @@ export class MobService {
     public addMobForm = this.formBuilder.group({
         id: [""],
         name: ["", Validators.required],
+        longName: ["", Validators.required],
         gender: ["", Validators.required],
         race: ["", Validators.required],
         class: ["", Validators.required],

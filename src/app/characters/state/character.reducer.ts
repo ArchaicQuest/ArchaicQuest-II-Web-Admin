@@ -10,21 +10,22 @@ import { CharacterState } from '../character.state';
 const intitalState: CharacterState = {
     inventory: [],
     mob: {
-      armorRating: {
-        armour: 0,
-        magic: 0.
-      },
-      alignmentScore: 0,
-      attributes: null,
-      className: "",
-      description: "",
-      gender: "",
-      level: "1",
-      maxAttributes: null,
-      maxStats: null,
-      name: "",
-      race: "",
-      stats: null,
+        armorRating: {
+            armour: 0,
+            magic: 0.
+        },
+        alignmentScore: 0,
+        attributes: null,
+        className: "",
+        description: "",
+        gender: "",
+        level: "1",
+        maxAttributes: null,
+        maxStats: null,
+        name: "",
+        longName: "",
+        race: "",
+        stats: null,
 
 
     }
@@ -56,8 +57,8 @@ export function characterReducer(state: CharacterState = intitalState,
 
             return {
                 ...state,
-                inventory: [  ...state.inventory.slice(0, action.itemIndex),
-                  ...state.inventory.slice(action.itemIndex + 1)]
+                inventory: [...state.inventory.slice(0, action.itemIndex),
+                ...state.inventory.slice(action.itemIndex + 1)]
             };
         }
 
@@ -81,29 +82,29 @@ export function characterReducer(state: CharacterState = intitalState,
             };
         }
         case CharacterActionTypes.IncreaseArmour: {
-          return {
-              ...state,
-              mob: {
-                ...state.mob,
-                armorRating: {
-                  armour: state.mob.armorRating.armour + action.payload,
-                  magic: 0
+            return {
+                ...state,
+                mob: {
+                    ...state.mob,
+                    armorRating: {
+                        armour: state.mob.armorRating.armour + action.payload,
+                        magic: 0
+                    }
                 }
-              }
-          };
-      }
-      case CharacterActionTypes.DecreaseArmour: {
-        return {
-            ...state,
-            mob: {
-              ...state.mob,
-              armorRating: {
-                armour: state.mob.armorRating.armour - action.payload,
-                magic: 0
-              }
-            }
-        };
-    }
+            };
+        }
+        case CharacterActionTypes.DecreaseArmour: {
+            return {
+                ...state,
+                mob: {
+                    ...state.mob,
+                    armorRating: {
+                        armour: state.mob.armorRating.armour - action.payload,
+                        magic: 0
+                    }
+                }
+            };
+        }
         default: {
             return state;
         }

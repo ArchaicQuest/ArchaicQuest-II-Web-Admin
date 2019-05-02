@@ -30,8 +30,8 @@
                     <mat-form-field appearance="outline" class="form-control">
                         <mat-label>Long name</mat-label>
                         <input matInput placeholder="e.g A Goblin is here snarling at you." value="" required
-                            formControlName="name">
-                        <mat-error *ngIf="addMobForm.get('name').hasError('required')">
+                            formControlName="longName">
+                        <mat-error *ngIf="addMobForm.get('longName').hasError('required')">
                             Mob long name is required.
                         </mat-error>
                         <mat-hint align="start"><strong>Shown when player looks in a room.</strong> </mat-hint>
