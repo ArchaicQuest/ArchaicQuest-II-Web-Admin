@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
-import { GetInventory } from '../state/character.actions';
+import { GetInventory, AddToEquipment, RemoveFromInventory, RemoveFromEquipment, AddToInventory, IncreaseArmour } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
 import { Equipment } from '../interfaces/equipment.interface';
 @Component({
@@ -64,18 +64,22 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     ) { }
 
     ngOnInit() {
-        this.charStore.dispatch(new GetInventory());
 
         this.charStore
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
+
                 console.log(inventory);
-                this.mapEquipmentDropDowns(inventory);
+
                 console.log("change")
 
             });
 
-            this.onEQChange();
+        this.charStore.select(x => x.character.mob.inventory).subscribe(x => {
+            this.mapEquipmentDropDowns(x);
+        });
+
+        this.onEQChange();
 
     }
 
@@ -175,15 +179,14 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     private resetEQDupe(itemSlot: string, itemUuid: string) {
         if (this.formGroup.get(itemSlot).value !== null && this.formGroup.get(itemSlot).value.uuid === itemUuid) {
-          this.formGroup.get(itemSlot).reset();
-
+            this.formGroup.get(itemSlot).reset();
         }
     }
 
     onEQChange(): void {
-      this.formGroup.valueChanges.subscribe((val: Equipment) => {
+        this.formGroup.valueChanges.subscribe((val: Equipment) => {
 
-      });
+        });
     }
 
     sheathChange(selection) {
@@ -220,8 +223,8 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     headChange(selection) {
-      this.resetEQDupe('heldEq', selection.value.uuid);
-  }
+        this.resetEQDupe('heldEq', selection.value.uuid);
+    }
 
     fingerChange(selection) {
         this.resetEQDupe('finger2Eq', selection.value.uuid);
@@ -249,11 +252,11 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     compareOptions(obj: Item, obj2: Item): boolean {
 
-      if (obj != null && obj2 != null) {
-        return obj.uuid === obj2.uuid;
-      }
+        if (obj != null && obj2 != null) {
+            return obj.uuid === obj2.uuid;
+        }
 
-      return false;
+        return false;
     }
 
     isInventoryEmpty() {
@@ -274,6 +277,28 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             this.wristItems.length === 0 &&
             this.headItems.length === 0 &&
             this.wieldItems.length === 0);
+    }
+
+    GetEquipmentItemsFromInventory() {
+
+        let inventory = [];
+        Object.keys(this.formGroup.controls).forEach(key => {
+
+            this.charStore.select(x => x.character.mob.inventory).subscribe(x => {
+                inventory = x;
+            });
+
+            const indexToRemove = inventory.findIndex(i => i === this.formGroup.get(key).value);
+
+            if (indexToRemove > -1) {
+
+                this.charStore.dispatch(new RemoveFromInventory(indexToRemove));
+                this.charStore.dispatch(new AddToEquipment(this.formGroup.get(key).value));
+            }
+
+
+        });
+
     }
 
 

@@ -4,6 +4,7 @@ import { Money } from './money.interface';
 import { Affects } from './affects.interface';
 import { Config } from './config.interface';
 import { ArmourRating } from 'src/app/items/interfaces/armourRating.interface';
+import { Item } from 'src/app/items/interfaces/item.interface';
 
 export interface Character {
     id?: number;
@@ -11,6 +12,8 @@ export interface Character {
     gender: string;
     race: string;
     className: string;
+    inventory: Item[];
+    equipped: Item[];
     level: string;
     description: string;
     alignmentScore: number;
@@ -23,6 +26,7 @@ export interface Character {
     maxAttributes: Attributes;
     targetName?: string;
     armorRating: ArmourRating;
+    status: string;
     money?: Money;
     qffects?: Affects;
     config?: Config;

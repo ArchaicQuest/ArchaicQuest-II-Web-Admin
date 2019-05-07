@@ -8,24 +8,26 @@ import { CharacterState } from '../character.state';
 
 
 const intitalState: CharacterState = {
-    inventory: [],
     mob: {
         armorRating: {
             armour: 0,
             magic: 0.
         },
+        inventory: [],
+        equipped: [],
         alignmentScore: 0,
         attributes: null,
-        className: "",
-        description: "",
-        gender: "",
-        level: "1",
+        className: '',
+        description: '',
+        gender: '',
+        level: '1',
         maxAttributes: null,
         maxStats: null,
-        name: "",
-        longName: "",
-        race: "",
+        name: '',
+        longName: '',
+        race: '',
         stats: null,
+        status: '',
 
 
     }
@@ -36,10 +38,10 @@ export function characterReducer(state: CharacterState = intitalState,
 ) {
     switch (action.type) {
         case CharacterActionTypes.AddToInventory: {
-            state.inventory.push(action.payload);
+            state.mob.inventory.push(action.payload);
 
             const updateUuid = () => {
-                return state.inventory.map(i => {
+                return state.mob.inventory.map(i => {
                     const temp = { ...i };
                     if (temp.uuid == null) {
                         temp.uuid = v4();
@@ -50,22 +52,58 @@ export function characterReducer(state: CharacterState = intitalState,
 
             return {
                 ...state,
-                inventory: [...updateUuid()]
+                mob: {
+                    ...state.mob,
+                    inventory: [...updateUuid()]
+                }
+
             };
         }
         case CharacterActionTypes.RemoveFromInventory: {
 
+
             return {
                 ...state,
-                inventory: [...state.inventory.slice(0, action.itemIndex),
-                ...state.inventory.slice(action.itemIndex + 1)]
+                mob: {
+                    ...state.mob,
+                    inventory: [...state.mob.inventory.slice(0, action.itemIndex),
+                    ...state.mob.inventory.slice(action.itemIndex + 1)],
+                }
+            };
+        }
+        case CharacterActionTypes.AddToEquipment: {
+            state.mob.equipped.push(action.payload);
+
+            return {
+                ...state,
+                mob: {
+                    ...state.mob,
+                    equipped: [...state.mob.equipped]
+                }
+            };
+        }
+        case CharacterActionTypes.RemoveFromEquipment: {
+
+
+
+            return {
+                ...state,
+                mob: {
+                    ...state.mob,
+                    equipped: [...state.mob.equipped.slice(0, action.itemIndex),
+                    ...state.mob.equipped.slice(action.itemIndex + 1)]
+
+                }
             };
         }
 
         case CharacterActionTypes.UpdateInventorySuccess: {
             return {
                 ...state,
-                inventory: [...state.inventory]
+                mob: {
+                    ...state.mob,
+                    inventory: [...state.mob.inventory],
+                }
             };
         }
         case CharacterActionTypes.SaveCharacter: {
@@ -76,9 +114,12 @@ export function characterReducer(state: CharacterState = intitalState,
         }
         case CharacterActionTypes.SaveCharacterSuccess: {
             return {
+
                 ...state,
-                mob: state.mob,
-                inventory: [...state.inventory]
+                mob: {
+                    ...state.mob,
+                    inventory: [...state.mob.inventory]
+                }
             };
         }
         case CharacterActionTypes.IncreaseArmour: {

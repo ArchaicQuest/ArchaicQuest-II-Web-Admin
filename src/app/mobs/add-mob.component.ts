@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild, NgZone } from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, FormArray } from "@angular/forms";
-import { MobService } from "./add-mob.service";
-import { ActivatedRoute } from "@angular/router";
-import { Gender } from "../characters/interfaces/gender.interface";
-import { MatSelectChange } from "@angular/material";
-import { Race } from "../characters/interfaces/race.interface";
-import { Class } from "../characters/interfaces/class.interface";
-import { CdkTextareaAutosize } from "@angular/cdk/text-field";
+import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { MobService } from './add-mob.service';
+import { ActivatedRoute } from '@angular/router';
+import { Gender } from '../characters/interfaces/gender.interface';
+import { MatSelectChange } from '@angular/material';
+import { Race } from '../characters/interfaces/race.interface';
+import { Class } from '../characters/interfaces/class.interface';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
     take,
     startWith,
@@ -14,20 +14,21 @@ import {
     distinctUntilChanged,
     switchMap,
     catchError
-} from "rxjs/operators";
-import { Alignment } from "../characters/interfaces/alignment.interface";
-import { Item } from "../items/interfaces/item.interface";
-import { Observable, throwError } from "rxjs";
-import { ItemService } from "../items/add-item/add-item.service";
-import { Store } from "@ngrx/store";
-import { Mob } from "./interfaces/mob.interface";
-import { CharacterAppState } from "../characters/state/character.state";
-import { SaveChar } from "../characters/state/character.actions";
-import { Status } from "../characters/interfaces/status.interface";
-import { Option } from "../shared/interfaces/option.interface";
+} from 'rxjs/operators';
+import { Alignment } from '../characters/interfaces/alignment.interface';
+import { Item } from '../items/interfaces/item.interface';
+import { Observable, throwError } from 'rxjs';
+import { ItemService } from '../items/add-item/add-item.service';
+import { Store } from '@ngrx/store';
+import { Mob } from './interfaces/mob.interface';
+import { CharacterAppState } from '../characters/state/character.state';
+import { SaveChar } from '../characters/state/character.actions';
+import { Status } from '../characters/interfaces/status.interface';
+import { Option } from '../shared/interfaces/option.interface';
+import { EquipmentComponent } from '../characters/equipment/equipment.component';
 
 @Component({
-    templateUrl: "./add-mob.component.html"
+    templateUrl: './add-mob.component.html'
 })
 export class AddMobComponent implements OnInit {
     addMobForm: FormGroup;
@@ -39,7 +40,7 @@ export class AddMobComponent implements OnInit {
     attackTypes: Option[];
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
-    emotes: string[] = [""];
+    emotes: string[] = [''];
     constructor(
         private mobService: MobService,
         private store: Store<CharacterAppState>,
@@ -47,19 +48,17 @@ export class AddMobComponent implements OnInit {
         private ngZone: NgZone,
         private formBuilder: FormBuilder
     ) { }
-
-    @ViewChild("autosize") autosize: CdkTextareaAutosize;
+    @ViewChild(EquipmentComponent) equipmentComponent: EquipmentComponent;
+    @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     ngOnInit() {
         this.addMobForm = this.mobService.getAddMobForm();
         this.genders = this.mobService.getGender();
 
+        this.statuses = this.mobService.getStatus();
+
         this.mobService.getAlignment().subscribe((data: Alignment[]) => {
             this.alignments = data;
-        });
-
-        this.mobService.getStatus().subscribe((data: Option[]) => {
-            this.statuses = data;
         });
 
         this.mobService.getDefaultAttackType().subscribe((data: Option[]) => {
@@ -83,52 +82,52 @@ export class AddMobComponent implements OnInit {
     }
 
     selectGender(data: MatSelectChange) {
-        console.log("gender", data.value);
+        console.log('gender', data.value);
     }
 
     selectRace(data: MatSelectChange) {
-        console.log("race", data.value);
+        console.log('race', data.value);
     }
 
     selectClass(data: MatSelectChange) {
-        console.log("class", data.value);
+        console.log('class', data.value);
     }
 
     selectAlignment(data: MatSelectChange) {
-        console.log("alignment", data.value);
+        console.log('alignment', data.value);
     }
     selectStatus(data: MatSelectChange) {
-        console.log("status", data.value);
+        console.log('status', data.value);
     }
     generateStats() {
         this.addMobForm
-            .get("attributes")
-            .get("strength")
+            .get('attributes')
+            .get('strength')
             .setValue(this.mobService.generateRandomStat());
         this.addMobForm
-            .get("attributes")
-            .get("dexterity")
+            .get('attributes')
+            .get('dexterity')
             .setValue(this.mobService.generateRandomStat());
         this.addMobForm
-            .get("attributes")
-            .get("constitution")
+            .get('attributes')
+            .get('constitution')
             .setValue(this.mobService.generateRandomStat());
         this.addMobForm
-            .get("attributes")
-            .get("wisdom")
+            .get('attributes')
+            .get('wisdom')
             .setValue(this.mobService.generateRandomStat());
         this.addMobForm
-            .get("attributes")
-            .get("intelligence")
+            .get('attributes')
+            .get('intelligence')
             .setValue(this.mobService.generateRandomStat());
         this.addMobForm
-            .get("attributes")
-            .get("charisma")
+            .get('attributes')
+            .get('charisma')
             .setValue(this.mobService.generateRandomStat());
     }
 
     get getEmotesControl(): FormArray {
-        return this.addMobForm.get("emotes") as FormArray;
+        return this.addMobForm.get('emotes') as FormArray;
     }
 
     addEmote() {
@@ -142,7 +141,9 @@ export class AddMobComponent implements OnInit {
     }
 
     addMob() {
-        //todo inventory and EQ
+        // todo inventory and EQ
+
+        this.equipmentComponent.GetEquipmentItemsFromInventory()
 
         const mob: Mob = {
             id: -1,
@@ -151,19 +152,30 @@ export class AddMobComponent implements OnInit {
                 armour: 0,
                 magic: 0
             },
-            attributes: this.addMobForm.get("attributes").value,
-            maxAttributes: this.addMobForm.get("attributes").value,
-            className: this.addMobForm.get("class").value,
-            description: this.addMobForm.get("description").value,
-            gender: this.addMobForm.get("gender").value,
-            level: this.addMobForm.get("level").value,
-            stats: this.addMobForm.get("stats").value,
-            maxStats: this.addMobForm.get("stats").value,
+            inventory: [],
+            equipped: [], //change store for inv to handle equipped items
+            status: this.addMobForm.get('status').value,
+            attributes: this.addMobForm.get('attributes').value,
+            maxAttributes: this.addMobForm.get('attributes').value,
+            className: this.addMobForm.get('class').value,
+            description: this.addMobForm.get('description').value,
+            gender: this.addMobForm.get('gender').value,
+            level: this.addMobForm.get('level').value,
+            stats: this.addMobForm.get('stats').value,
+            maxStats: this.addMobForm.get('stats').value,
             money: { gold: 0, copper: 0, silver: 0 },
-            longName: this.addMobForm.get("longName").value,
-            name: this.addMobForm.get("name").value,
-            race: this.addMobForm.get("race").value
+            longName: this.addMobForm.get('longName').value,
+            name: this.addMobForm.get('name').value,
+            race: this.addMobForm.get('race').value
         };
+
+        this.store.select(x => x.character.mob.inventory).subscribe(x => {
+            mob.inventory = x;
+        });
+
+        this.store.select(x => x.character.mob.equipped).subscribe(x => {
+            mob.equipped = x;
+        });
         console.log(mob);
         this.store.dispatch(new SaveChar(mob));
     }

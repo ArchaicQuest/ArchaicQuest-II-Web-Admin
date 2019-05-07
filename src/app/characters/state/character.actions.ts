@@ -5,6 +5,8 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 export enum CharacterActionTypes {
     AddToInventory = '[Character] Add Item to Inventory',
     RemoveFromInventory = '[Character] Remove Item from Inventory',
+    AddToEquipment = '[Character] Add Item to equipment',
+    RemoveFromEquipment = '[Character] Remove Item from equipment',
     IncreaseArmour = '[Character] Increase Armour value',
     DecreaseArmour = '[Character] Decrease Armour value',
     UpdateInventorySuccess = '[Character] Inventory update success',
@@ -27,6 +29,14 @@ export class InventoryUpdateSuccess implements Action {
     constructor() { }
 }
 
+export class AddToEquipment implements Action {
+    readonly type = CharacterActionTypes.AddToEquipment;
+    constructor(public payload: Item) { }
+}
+export class RemoveFromEquipment implements Action {
+    readonly type = CharacterActionTypes.RemoveFromEquipment;
+    constructor(public itemIndex: number) { }
+}
 export class GetInventory implements Action {
     readonly type = CharacterActionTypes.UpdateInventorySuccess;
     constructor() { }
@@ -41,18 +51,20 @@ export class SaveCharSuccess implements Action {
 }
 
 export class IncreaseArmour implements Action {
-  readonly type = CharacterActionTypes.IncreaseArmour;
-  constructor(public payload: number) { }
+    readonly type = CharacterActionTypes.IncreaseArmour;
+    constructor(public payload: number) { }
 }
 export class DecreaseArmour implements Action {
-  readonly type = CharacterActionTypes.DecreaseArmour;
-  constructor(public payload: number) { }
+    readonly type = CharacterActionTypes.DecreaseArmour;
+    constructor(public payload: number) { }
 }
 
 
 export type CharacterActions = AddToInventory
     | RemoveFromInventory
     | InventoryUpdateSuccess
+    | AddToEquipment
+    | RemoveFromEquipment
     | GetInventory
     | SaveChar
     | SaveCharSuccess
