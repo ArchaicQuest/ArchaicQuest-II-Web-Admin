@@ -38,4 +38,5 @@ export interface Item {
     forageRank: number;
     armourRating: ArmourRating;
     armourType: number;
+    equipped: boolean;
 }

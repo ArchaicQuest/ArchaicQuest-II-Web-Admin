@@ -490,7 +490,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             questItem: false,
             stuck: false,
             uses: 0,
-            weight: 5
+            weight: 5,
+            equipped: false
         };
 
         this.store.dispatch(new PostItem(item));

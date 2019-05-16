@@ -1,10 +1,12 @@
 import {
     CharacterActionTypes,
     CharacterActions,
-    DecreaseArmour
+    DecreaseArmour,
+    RemoveEquipment
 } from './character.actions';
 import { v4 } from 'uuid';
 import { CharacterState } from '../character.state';
+import { EquipmentComponent } from '../equipment/equipment.component';
 
 
 const intitalState: CharacterState = {
@@ -14,7 +16,29 @@ const intitalState: CharacterState = {
             magic: 0.
         },
         inventory: [],
-        equipped: [],
+        equipped: {
+            armsEq: null,
+            bodyEq: null,
+            faceEq: null,
+            feetEq: null,
+            finger2Eq: null,
+            fingerEq: null,
+            floatingEq: null,
+            handsEq: null,
+            headEq: null,
+            heldEq: null,
+            legsEq: null,
+            lightEq: null,
+            neck2Eq: null,
+            neckEq: null,
+            sheathedEq: null,
+            shieldEq: null,
+            torsoEq: null,
+            waistEq: null,
+            wieldEq: null,
+            wrist2Eq: null,
+            wristEq: null
+        },
         alignmentScore: 0,
         attributes: null,
         className: '',
@@ -71,28 +95,50 @@ export function characterReducer(state: CharacterState = intitalState,
                 }
             };
         }
-        case CharacterActionTypes.AddToEquipment: {
-            state.mob.equipped.push(action.payload);
+        case CharacterActionTypes.UpdateEquipment: {
+
+            console.log("wtf")
+            debugger;
+            const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
+
+
+
+            const inventory = state.mob.inventory;
+            const itemIndex = inventory.findIndex(x => x.id === action.payload.item.id);
+            inventory[itemIndex].equipped = true;
+
 
             return {
                 ...state,
                 mob: {
                     ...state.mob,
-                    equipped: [...state.mob.equipped]
+                    inventory: [...inventory],
+                    equipped: updatedEquipment
                 }
             };
         }
-        case CharacterActionTypes.RemoveFromEquipment: {
+
+        case CharacterActionTypes.RemoveEquipment: {
+
+            debugger;
+            const getItem = EquipmentComponent.returnEQ(action.payload.slot, state.mob.equipped)
+            const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
 
 
+
+            const inventory = state.mob.inventory;
+
+            if (getItem != null) {
+                const itemIndex = inventory.findIndex(x => x.id === getItem.id);
+                inventory[itemIndex].equipped = false;
+            }
 
             return {
                 ...state,
                 mob: {
                     ...state.mob,
-                    equipped: [...state.mob.equipped.slice(0, action.itemIndex),
-                    ...state.mob.equipped.slice(action.itemIndex + 1)]
-
+                    inventory: [...inventory],
+                    equipped: updatedEquipment
                 }
             };
         }
@@ -117,7 +163,6 @@ export function characterReducer(state: CharacterState = intitalState,
 
                 ...state,
                 mob: {
-                    ...state.mob,
                     inventory: [...state.mob.inventory]
                 }
             };
@@ -126,7 +171,6 @@ export function characterReducer(state: CharacterState = intitalState,
             return {
                 ...state,
                 mob: {
-                    ...state.mob,
                     armorRating: {
                         armour: state.mob.armorRating.armour + action.payload,
                         magic: 0
@@ -138,7 +182,6 @@ export function characterReducer(state: CharacterState = intitalState,
             return {
                 ...state,
                 mob: {
-                    ...state.mob,
                     armorRating: {
                         armour: state.mob.armorRating.armour - action.payload,
                         magic: 0

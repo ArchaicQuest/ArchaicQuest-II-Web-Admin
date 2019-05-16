@@ -5,6 +5,7 @@ import { Affects } from './affects.interface';
 import { Config } from './config.interface';
 import { ArmourRating } from 'src/app/items/interfaces/armourRating.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
+import { Equipment } from './equipment.interface';
 
 export interface Character {
     id?: number;
@@ -13,7 +14,7 @@ export interface Character {
     race: string;
     className: string;
     inventory: Item[];
-    equipped: Item[];
+    equipped: Equipment;
     level: string;
     description: string;
     alignmentScore: number;

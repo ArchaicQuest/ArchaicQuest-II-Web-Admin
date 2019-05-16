@@ -3,10 +3,10 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from 'src/app/items/add-item/add-item.service';
 import { FormBuilder } from '@angular/forms';
-import { Store } from '@ngrx/store';
+import { Store, State } from '@ngrx/store';
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
-import { GetInventory, AddToEquipment, RemoveFromInventory, RemoveFromEquipment, AddToInventory, IncreaseArmour } from '../state/character.actions';
+import { GetInventory, AddToEquipment, RemoveFromInventory, RemoveFromEquipment, AddToInventory, IncreaseArmour, UpdateEquipment, RemoveEquipment } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
 import { Equipment } from '../interfaces/equipment.interface';
 @Component({
@@ -63,6 +63,109 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         private charStore: Store<CharacterAppState>,
     ) { }
 
+    static mapItemToEQSlot(EQSlot: EqSlot, item: Item, equipped: Equipment): Equipment {
+        switch (EQSlot) {
+            case EqSlot.Arms:
+                equipped.armsEq = item;
+                break;
+            case EqSlot.Body:
+                equipped.bodyEq = item;
+                break;
+            case EqSlot.Face:
+                equipped.faceEq = item;
+                break;
+            case EqSlot.Feet:
+                equipped.feetEq = item;
+                break;
+            case EqSlot.Finger: //2
+                equipped.fingerEq = item;
+                break;
+            case EqSlot.Floating:
+                equipped.floatingEq = item;
+                break;
+            case EqSlot.Hands:
+                equipped.handsEq = item;
+                break;
+            case EqSlot.Held:
+                equipped.heldEq = item;
+                break;
+            case EqSlot.Head:
+                equipped.headEq = item;
+                break;
+            case EqSlot.Light:
+                equipped.lightEq = item;
+                break;
+            case EqSlot.Legs:
+                equipped.legsEq = item;
+                break;
+            case EqSlot.Neck:
+                equipped.neckEq = item;
+                break;
+            case EqSlot.Shield:
+                equipped.shieldEq = item;
+                break;
+            case EqSlot.Torso:
+                equipped.torsoEq = item;
+                break;
+            case EqSlot.Waist:
+                equipped.waistEq = item;
+                break;
+            case EqSlot.Wrist: //2
+                equipped.wristEq = item;
+                break;
+            case EqSlot.Wielded:
+                equipped.wieldEq = item;
+                break;
+            default:
+                equipped.heldEq = item;
+                break;
+        }
+
+        return equipped;
+    }
+
+    static returnEQ(EQSlot: EqSlot, equipped: Equipment): Item {
+        switch (EQSlot) {
+            case EqSlot.Arms:
+                return equipped.armsEq;
+            case EqSlot.Body:
+                return equipped.bodyEq;
+            case EqSlot.Face:
+                return equipped.faceEq;
+            case EqSlot.Feet:
+                return equipped.feetEq;
+            case EqSlot.Finger: //2
+                return equipped.fingerEq;
+            case EqSlot.Floating:
+                return equipped.floatingEq;
+            case EqSlot.Hands:
+                return equipped.handsEq;
+            case EqSlot.Held:
+                return equipped.heldEq;
+            case EqSlot.Head:
+                return equipped.headEq;
+            case EqSlot.Light:
+                return equipped.lightEq;
+            case EqSlot.Legs:
+                return equipped.legsEq;
+            case EqSlot.Neck:
+                return equipped.neckEq;
+            case EqSlot.Shield:
+                return equipped.shieldEq;
+            case EqSlot.Torso:
+                return equipped.torsoEq;
+            case EqSlot.Waist:
+                return equipped.waistEq;
+            case EqSlot.Wrist: //2
+                return equipped.wristEq;
+            case EqSlot.Wielded:
+                return equipped.wieldEq;
+            default:
+                return equipped.heldEq;
+        }
+    }
+
+    get eqslot() { return EqSlot; }
     ngOnInit() {
 
         this.charStore
@@ -79,7 +182,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             this.mapEquipmentDropDowns(x);
         });
 
-        this.onEQChange();
+
 
     }
 
@@ -116,7 +219,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
 
         items.forEach(item => {
-            this.heldItems = this.heldItems.concat((this.updateEQArray(item)));
+
 
             switch (item.slot) {
                 case EqSlot.Arms:
@@ -179,71 +282,75 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     private resetEQDupe(itemSlot: string, itemUuid: string) {
         if (this.formGroup.get(itemSlot).value !== null && this.formGroup.get(itemSlot).value.uuid === itemUuid) {
+            this.charStore.dispatch(new RemoveEquipment({
+                slot: (this.formGroup.get(itemSlot).value as Item).slot,
+                item: null
+            }));
             this.formGroup.get(itemSlot).reset();
+
         }
     }
 
-    onEQChange(): void {
-        this.formGroup.valueChanges.subscribe((val: Equipment) => {
+    onEQChange(selection, slot): void {
+        debugger;
+        if (selection.value === '' || selection.value == null) {
+            this.charStore.dispatch(new RemoveEquipment({
+                slot: slot,
+                item: selection.value
+            }));
 
-        });
+            return;
+        }
+
+
+        this.charStore.dispatch(new UpdateEquipment({
+            slot: (selection.value as Item).slot,
+            item: selection.value
+        }));
     }
 
     sheathChange(selection) {
         this.resetEQDupe('wieldEq', selection.value.uuid);
-        this.resetEQDupe('heldEq', selection.value.uuid);
+        this.onEQChange(selection, EqSlot.Wielded);
     }
 
     wieldChange(selection) {
         this.resetEQDupe('sheathedEq', selection.value.uuid);
-        this.resetEQDupe('heldEq', selection.value.uuid);
+        this.onEQChange(selection, EqSlot.Wielded);
     }
 
     heldChange(selection) {
-        this.resetEQDupe('armsEq', selection.value.uuid);
-        this.resetEQDupe('bodyEq', selection.value.uuid);
-        this.resetEQDupe('faceEq', selection.value.uuid);
-        this.resetEQDupe('feetEq', selection.value.uuid);
-        this.resetEQDupe('fingerEq', selection.value.uuid);
-        this.resetEQDupe('finger2Eq', selection.value.uuid);
-        this.resetEQDupe('floatingEq', selection.value.uuid);
-        this.resetEQDupe('handsEq', selection.value.uuid);
-        this.resetEQDupe('legsEq', selection.value.uuid);
-        this.resetEQDupe('lightEq', selection.value.uuid);
-        this.resetEQDupe('neckEq', selection.value.uuid);
-        this.resetEQDupe('neck2Eq', selection.value.uuid);
-        this.resetEQDupe('shieldEq', selection.value.uuid);
-        this.resetEQDupe('torsoEq', selection.value.uuid);
-        this.resetEQDupe('waistEq', selection.value.uuid);
-        this.resetEQDupe('wristEq', selection.value.uuid);
-        this.resetEQDupe('wrist2Eq', selection.value.uuid);
-        this.resetEQDupe('headEq', selection.value.uuid);
-        this.resetEQDupe('sheathedEq', selection.value.uuid);
-        this.resetEQDupe('wieldEq', selection.value.uuid);
+
+        this.onEQChange(selection, EqSlot.Held);
     }
 
     headChange(selection) {
         this.resetEQDupe('heldEq', selection.value.uuid);
+        this.onEQChange(selection, EqSlot.Head);
     }
 
     fingerChange(selection) {
         this.resetEQDupe('finger2Eq', selection.value.uuid);
-        this.resetEQDupe('heldEq', selection.value.uuid);
+
+        this.onEQChange(selection, EqSlot.Finger);
     }
 
     finger2Change(selection) {
         this.resetEQDupe('fingerEq', selection.value.uuid);
-        this.resetEQDupe('heldEq', selection.value.uuid);
+
+        this.onEQChange(selection, EqSlot.Finger);
     }
 
     neckChange(selection) {
         this.resetEQDupe('neck2Eq', selection.value.uuid);
-        this.resetEQDupe('heldEq', selection.value.uuid);
+
+        this.onEQChange(selection, EqSlot.Neck);
     }
 
     neck2Change(selection) {
         this.resetEQDupe('neckEq', selection.value.uuid);
-        this.resetEQDupe('heldEq', selection.value.uuid);
+
+        this.onEQChange(selection, EqSlot.Neck);
     }
 
     ngOnDestroy(): void {
@@ -300,6 +407,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         });
 
     }
+
 
 
 }

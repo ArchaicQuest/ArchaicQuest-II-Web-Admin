@@ -6,7 +6,7 @@ import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/o
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { AddToInventory, RemoveFromInventory, DecreaseArmour } from '../state/character.actions';
+import { AddToInventory, RemoveFromInventory, DecreaseArmour, RemoveEquipment } from '../state/character.actions';
 import { CharacterAppState } from '../state/character.state';
 import { v4 } from 'uuid';
 import { getInventory } from '../state/character.selector';
@@ -43,7 +43,7 @@ export class InventoryComponent implements OnInit {
                 })
             );
 
-            this.charStore
+        this.charStore
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
                 console.log(inventory);
@@ -74,11 +74,20 @@ export class InventoryComponent implements OnInit {
     }
     removeItemFromInventory(index: number) {
 
-     // const deletedItem:Item = this.inventoryItems.splice(index, 1);
-//let AC = this.inventoryItems.splice(index, 1)[0].armourRating.armour;
-//console.log("AC to remove,", AC)
-      this.charStore.dispatch(new RemoveFromInventory(index));
-    //  this.charStore.dispatch(new DecreaseArmour(AC));
+        const item: Item = this.inventoryItems[index];
+
+        this.charStore.dispatch(new RemoveEquipment({
+            slot: item.slot,
+            item: null
+        }));
+
+
+        // const deletedItem:Item = this.inventoryItems.splice(index, 1);
+        //let AC = this.inventoryItems.splice(index, 1)[0].armourRating.armour;
+        //console.log("AC to remove,", AC)
+        this.charStore.dispatch(new RemoveFromInventory(index));
+        //  this.charStore.dispatch(new DecreaseArmour(AC));
+
 
     }
 

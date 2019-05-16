@@ -14,8 +14,10 @@
 
     <div class="row">
         <div class="col" *ngIf="lightItems.length">
-            <mat-form-field>
-                <mat-select formControlName="lightEq" placeholder="Light" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Light</mat-label>
+                <mat-select formControlName="lightEq" placeholder="Light" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Light)">
                     <mat-option (click)="formGroup.get('lightEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of lightItems" [value]="item">
                         {{ item.name }}
@@ -24,8 +26,10 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="headItems.length">
-            <mat-form-field>
-                <mat-select formControlName="headEq" placeholder="Head" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Head</mat-label>
+                <mat-select formControlName="headEq" placeholder="Head" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Head)">
                     <mat-option (click)="formGroup.get('headEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of headItems" [value]="item">
                         {{ item.name }}
@@ -34,7 +38,8 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="neckItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Neck 1</mat-label>
                 <mat-select formControlName="neckEq" placeholder="Neck 1" [compareWith]="compareOptions"
                     (selectionChange)="neckChange($event)">
                     <mat-option (click)="formGroup.get('neckEq').reset()">None</mat-option>
@@ -45,7 +50,8 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="neckItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Neck 2</mat-label>
                 <mat-select formControlName="neck2Eq" placeholder="Neck 2" [compareWith]="compareOptions"
                     (selectionChange)="neck2Change($event)">
                     <mat-option (click)="formGroup.get('neck2Eq').reset()">None</mat-option>
@@ -58,8 +64,10 @@
     </div>
     <div class="row">
         <div class="col" *ngIf="bodyItems.length">
-            <mat-form-field>
-                <mat-select formControlName="bodyEq" placeholder="Worn about body" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Worn about Body</mat-label>
+                <mat-select formControlName="bodyEq" placeholder="Worn about body" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event)">
                     <mat-option (click)="formGroup.get('bodyEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of bodyItems" [value]="item">
                         {{ item.name }}
@@ -68,8 +76,10 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="torsoItems.length">
-            <mat-form-field>
-                <mat-select formControlName="torsoEq" placeholder="Torso" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Torso</mat-label>
+                <mat-select formControlName="torsoEq" placeholder="Torso" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Torso)">
                     <mat-option (click)="formGroup.get('torsoEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of torsoItems" [value]="item">
                         {{ item.name }}
@@ -78,8 +88,10 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="waistItems.length">
-            <mat-form-field>
-                <mat-select formControlName="waistEq" placeholder="Worn about waist" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Worn about waist</mat-label>
+                <mat-select formControlName="waistEq" placeholder="Worn about waist" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Waist)">
                     <mat-option (click)="formGroup.get('wasitEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of waistItems" [value]="item">
                         {{ item.name }}
@@ -88,8 +100,10 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="legsItems.length">
-            <mat-form-field>
-                <mat-select formControlName="legsEq" placeholder="Legs" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Legs</mat-label>
+                <mat-select formControlName="legsEq" placeholder="Legs" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Legs)">
                     <mat-option (click)="formGroup.get('legsEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of legsItems" [value]="item">
                         {{ item.name }}
@@ -100,8 +114,10 @@
     </div>
     <div class="row">
         <div class="col" *ngIf="feetItems.length">
-            <mat-form-field>
-                <mat-select formControlName="feetEq" placeholder="Feet" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Feet</mat-label>
+                <mat-select formControlName="feetEq" placeholder="Feet" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Feet)">
                     <mat-option (click)="formGroup.get('feetEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of feetItems" [value]="item">
                         {{ item.name }}
@@ -110,8 +126,10 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="armsItems.length">
-            <mat-form-field>
-                <mat-select formControlName="armsEq" placeholder="Arms" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Arms</mat-label>
+                <mat-select formControlName="armsEq" placeholder="Arms" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Arms)">
                     <mat-option (click)="formGroup.get('armsEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of armsItems" [value]="item">
                         {{ item.name }}
@@ -120,8 +138,10 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="handsItems.length">
-            <mat-form-field>
-                <mat-select formControlName="armsEq" placeholder="Hands" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Hands</mat-label>
+                <mat-select formControlName="handsEq" placeholder="Hands" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Hands)">
                     <mat-option (click)="formGroup.get('handsEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of handsItems" [value]="item">
                         {{ item.name }}
@@ -130,7 +150,8 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="wristItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Wrist 1</mat-label>
                 <mat-select formControlName="wristEq" placeholder="Wrist 1" [compareWith]="compareOptions">
                     <mat-option (click)="formGroup.get('wristEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of wristItems" [value]="item">
@@ -142,7 +163,8 @@
     </div>
     <div class="row">
         <div class="col" *ngIf="wristItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Wrist 2 - broken</mat-label>
                 <mat-select formControlName="wrist2Eq" placeholder="Wrist 2" [compareWith]="compareOptions">
                     <mat-option (click)="formGroup.get('wrist2Eq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of wristItems" [value]="item">
@@ -152,7 +174,8 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="fingerItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Finger</mat-label>
                 <mat-select formControlName="fingerEq" placeholder="Finger" [compareWith]="compareOptions"
                     (selectionChange)="fingerChange($event)">
                     <mat-option (click)="formGroup.get('fingerEq').reset()">None</mat-option>
@@ -163,7 +186,8 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="fingerItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Finger 2</mat-label>
                 <mat-select formControlName="finger2Eq" placeholder="Finger 2" [compareWith]="compareOptions"
                     (selectionChange)="finger2Change($event)">
                     <mat-option (click)="formGroup.get('finger2Eq').reset()">None</mat-option>
@@ -174,10 +198,11 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="heldItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Held</mat-label>
                 <mat-select formControlName="heldEq" placeholder="Held" (selectionChange)="heldChange($event)"
                     [compareWith]="compareOptions">
-                    <mat-option (click)="formGroup.get('heldEq').reset()">None</mat-option>
+                    <mat-option (click)="formGroup.get('heldEq').reset()" value="">None</mat-option>
                     <mat-option *ngFor="let item of heldItems" [value]="item">
                         {{ item.name }} {{item.uuid}}
                     </mat-option>
@@ -187,8 +212,10 @@
     </div>
     <div class="row">
         <div class="col" *ngIf="shieldItems.length">
-            <mat-form-field>
-                <mat-select formControlName="shieldEq" placeholder="Shield" [compareWith]="compareOptions">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Shield</mat-label>
+                <mat-select formControlName="shieldEq" placeholder="Shield" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Shield)">
                     <mat-option (click)="formGroup.get('shieldEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of shieldItems" [value]="item">
                         {{ item.name }}
@@ -198,9 +225,12 @@
         </div>
 
         <div class="col" *ngIf="wieldItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Wielded</mat-label>
                 <mat-select formControlName="wieldEq" placeholder="Wielded" (selectionChange)="wieldChange($event)"
-                    [compareWith]="compareOptions">
+                    [compareWith]="compareOptions" [value]="item?.uuid === item?.uuid">
+                    <mat-option (click)="
+                    formGroup.get('wieldEq').reset()" value="">None</mat-option>
                     <mat-option *ngFor="let item of wieldItems" [value]="item">
                         {{ item.name }} {{item.uuid}}
                     </mat-option>
@@ -208,11 +238,13 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="wieldItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Sheathed</mat-label>
                 <mat-select formControlName="sheathedEq" placeholder="Sheathed" [compareWith]="compareOptions"
                     (selectionChange)="sheathChange($event)" [value]="item?.uuid === item?.uuid">
                     <mat-option (click)="
-                    formGroup.get('sheathedEq').reset()">None</mat-option>
+                    formGroup.get('sheathedEq').reset()" value="">None</mat-option>
+
                     <mat-option *ngFor="let item of wieldItems" [value]="item">
                         {{ item.name }} {{item.uuid}}
                     </mat-option>
@@ -220,7 +252,8 @@
             </mat-form-field>
         </div>
         <div class="col" *ngIf="floatingItems.length">
-            <mat-form-field>
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Floating</mat-label>
                 <mat-select formControlName="floatingEq" placeholder="Floating" [compareWith]="compareOptions">
                     <mat-option (click)="formGroup.get('floatingEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of floatingItems" [value]="item">

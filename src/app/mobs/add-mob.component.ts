@@ -153,7 +153,7 @@ export class AddMobComponent implements OnInit {
                 magic: 0
             },
             inventory: [],
-            equipped: [], //change store for inv to handle equipped items
+            equipped: null, //change store for inv to handle equipped items
             status: this.addMobForm.get('status').value,
             attributes: this.addMobForm.get('attributes').value,
             maxAttributes: this.addMobForm.get('attributes').value,

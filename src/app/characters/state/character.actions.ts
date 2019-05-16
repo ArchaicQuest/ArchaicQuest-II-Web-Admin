@@ -1,11 +1,14 @@
 import { Action } from '@ngrx/store';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { EqSlot } from '../equipment/equipment.enum';
 
 export enum CharacterActionTypes {
     AddToInventory = '[Character] Add Item to Inventory',
     RemoveFromInventory = '[Character] Remove Item from Inventory',
     AddToEquipment = '[Character] Add Item to equipment',
+    UpdateEquipment = '[Character] Update equipment',
+    RemoveEquipment = '[Character] Remove equipment',
     RemoveFromEquipment = '[Character] Remove Item from equipment',
     IncreaseArmour = '[Character] Increase Armour value',
     DecreaseArmour = '[Character] Decrease Armour value',
@@ -28,7 +31,21 @@ export class InventoryUpdateSuccess implements Action {
     readonly type = CharacterActionTypes.UpdateInventorySuccess;
     constructor() { }
 }
+export class UpdateEquipment implements Action {
+    readonly type = CharacterActionTypes.UpdateEquipment;
+    constructor(public payload: {
+        slot: EqSlot,
+        item: Item
+    }) { }
+}
 
+export class RemoveEquipment implements Action {
+    readonly type = CharacterActionTypes.RemoveEquipment;
+    constructor(public payload: {
+        slot: EqSlot,
+        item: Item
+    }) { }
+}
 export class AddToEquipment implements Action {
     readonly type = CharacterActionTypes.AddToEquipment;
     constructor(public payload: Item) { }
@@ -65,6 +82,8 @@ export type CharacterActions = AddToInventory
     | InventoryUpdateSuccess
     | AddToEquipment
     | RemoveFromEquipment
+    | UpdateEquipment
+    | RemoveEquipment
     | GetInventory
     | SaveChar
     | SaveCharSuccess
