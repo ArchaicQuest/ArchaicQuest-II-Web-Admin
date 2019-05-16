@@ -1,27 +1,27 @@
 import { Item } from 'src/app/items/interfaces/item.interface';
 
 export interface Equipment {
-    armsEq: Item;
-    bodyEq: Item;
-    faceEq: Item;
-    feetEq: Item;
-    finger2Eq: Item;
-    fingerEq: Item;
-    floatingEq: Item;
-    handsEq: Item;
-    headEq: Item;
-    heldEq: Item;
-    legsEq: Item;
-    lightEq: Item;
-    neck2Eq: Item;
-    neckEq: Item;
-    sheathedEq: Item;
-    shieldEq: Item;
-    torsoEq: Item;
-    waistEq: Item;
-    wieldEq: Item;
-    wrist2Eq: Item;
-    wristEq: Item;
+    arms: Item;
+    body: Item;
+    face: Item;
+    feet: Item;
+    finger2: Item;
+    finger: Item;
+    floating: Item;
+    hands: Item;
+    head: Item;
+    held: Item;
+    legs: Item;
+    light: Item;
+    neck2: Item;
+    neck: Item;
+    sheathed: Item;
+    shield: Item;
+    torso: Item;
+    waist: Item;
+    wield: Item;
+    wrist2: Item;
+    wrist: Item;
 
 }
 

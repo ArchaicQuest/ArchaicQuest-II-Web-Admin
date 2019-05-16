@@ -143,7 +143,7 @@ export class AddMobComponent implements OnInit {
     addMob() {
         // todo inventory and EQ
 
-        this.equipmentComponent.GetEquipmentItemsFromInventory()
+        // this.equipmentComponent.GetEquipmentItemsFromInventory()
 
         const mob: Mob = {
             id: -1,

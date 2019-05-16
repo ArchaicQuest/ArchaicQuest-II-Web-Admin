@@ -66,61 +66,61 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     static mapItemToEQSlot(EQSlot: EqSlot, item: Item, equipped: Equipment): Equipment {
         switch (EQSlot) {
             case EqSlot.Arms:
-                equipped.armsEq = item;
+                equipped.arms = item;
                 break;
             case EqSlot.Body:
-                equipped.bodyEq = item;
+                equipped.body = item;
                 break;
             case EqSlot.Face:
-                equipped.faceEq = item;
+                equipped.face = item;
                 break;
             case EqSlot.Feet:
-                equipped.feetEq = item;
+                equipped.feet = item;
                 break;
             case EqSlot.Finger: //2
-                equipped.fingerEq = item;
+                equipped.finger = item;
                 break;
             case EqSlot.Floating:
-                equipped.floatingEq = item;
+                equipped.floating = item;
                 break;
             case EqSlot.Hands:
-                equipped.handsEq = item;
+                equipped.hands = item;
                 break;
             case EqSlot.Held:
-                equipped.heldEq = item;
+                equipped.held = item;
                 break;
             case EqSlot.Head:
-                equipped.headEq = item;
+                equipped.head = item;
                 break;
             case EqSlot.Light:
-                equipped.lightEq = item;
+                equipped.light = item;
                 break;
             case EqSlot.Legs:
-                equipped.legsEq = item;
+                equipped.legs = item;
                 break;
             case EqSlot.Neck:
-                equipped.neckEq = item;
+                equipped.neck = item;
                 break;
             case EqSlot.Shield:
-                equipped.shieldEq = item;
+                equipped.shield = item;
                 break;
             case EqSlot.Torso:
-                equipped.torsoEq = item;
+                equipped.torso = item;
                 break;
             case EqSlot.Waist:
-                equipped.waistEq = item;
+                equipped.waist = item;
                 break;
             case EqSlot.Wrist: //2
-                equipped.wristEq = item;
+                equipped.wrist = item;
                 break;
             case EqSlot.Wielded:
-                equipped.wieldEq = item;
+                equipped.wield = item;
                 break;
             case EqSlot.Sheathed:
-                equipped.sheathedEq = item;
+                equipped.sheathed = item;
                 break;
             default:
-                equipped.heldEq = item;
+                equipped.held = item;
                 break;
         }
 
@@ -130,43 +130,43 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     static returnEQ(EQSlot: EqSlot, equipped: Equipment): Item {
         switch (EQSlot) {
             case EqSlot.Arms:
-                return equipped.armsEq;
+                return equipped.arms;
             case EqSlot.Body:
-                return equipped.bodyEq;
+                return equipped.body;
             case EqSlot.Face:
-                return equipped.faceEq;
+                return equipped.face;
             case EqSlot.Feet:
-                return equipped.feetEq;
+                return equipped.feet;
             case EqSlot.Finger: //2
-                return equipped.fingerEq;
+                return equipped.finger;
             case EqSlot.Floating:
-                return equipped.floatingEq;
+                return equipped.floating;
             case EqSlot.Hands:
-                return equipped.handsEq;
+                return equipped.hands;
             case EqSlot.Held:
-                return equipped.heldEq;
+                return equipped.held;
             case EqSlot.Head:
-                return equipped.headEq;
+                return equipped.head;
             case EqSlot.Light:
-                return equipped.lightEq;
+                return equipped.light;
             case EqSlot.Legs:
-                return equipped.legsEq;
+                return equipped.legs;
             case EqSlot.Neck:
-                return equipped.neckEq;
+                return equipped.neck;
             case EqSlot.Shield:
-                return equipped.shieldEq;
+                return equipped.shield;
             case EqSlot.Torso:
-                return equipped.torsoEq;
+                return equipped.torso;
             case EqSlot.Waist:
-                return equipped.waistEq;
+                return equipped.waist;
             case EqSlot.Wrist: //2
-                return equipped.wristEq;
+                return equipped.wrist;
             case EqSlot.Wielded:
-                return equipped.wieldEq;
+                return equipped.wield;
             case EqSlot.Sheathed:
-                return equipped.sheathedEq;
+                return equipped.sheathed;
             default:
-                return equipped.heldEq;
+                return equipped.held;
         }
     }
 
@@ -277,9 +277,6 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                     break;
                 case EqSlot.Wielded:
                     this.wieldItems = this.wieldItems.concat(this.updateEQArray(item));
-                    break;
-                case EqSlot.Sheathed:
-                    this.shieldItems = this.shieldItems.concat(this.updateEQArray(item));
                     break;
                 //sheathedEq
                 default:
@@ -395,27 +392,27 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             this.wieldItems.length === 0);
     }
 
-    GetEquipmentItemsFromInventory() {
+    // GetEquipmentItemsFromInventory() {
 
-        let inventory = [];
-        Object.keys(this.formGroup.controls).forEach(key => {
+    //     let inventory = [];
+    //     Object.keys(this.formGroup.controls).forEach(key => {
 
-            this.charStore.select(x => x.character.mob.inventory).subscribe(x => {
-                inventory = x;
-            });
+    //         this.charStore.select(x => x.character.mob.inventory).subscribe(x => {
+    //             inventory = x;
+    //         });
 
-            const indexToRemove = inventory.findIndex(i => i === this.formGroup.get(key).value);
+    //         const indexToRemove = inventory.findIndex(i => i === this.formGroup.get(key).value);
 
-            if (indexToRemove > -1) {
+    //         if (indexToRemove > -1) {
 
-                this.charStore.dispatch(new RemoveFromInventory(indexToRemove));
-                this.charStore.dispatch(new AddToEquipment(this.formGroup.get(key).value));
-            }
+    //             this.charStore.dispatch(new RemoveFromInventory(indexToRemove));
+    //             this.charStore.dispatch(new AddToEquipment(this.formGroup.get(key).value));
+    //         }
 
 
-        });
+    //     });
 
-    }
+    // }
 
 
 

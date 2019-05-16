@@ -7,6 +7,7 @@ import {
 import { v4 } from 'uuid';
 import { CharacterState } from '../character.state';
 import { EquipmentComponent } from '../equipment/equipment.component';
+import { EqSlot } from '../equipment/equipment.enum';
 
 
 const intitalState: CharacterState = {
@@ -17,27 +18,27 @@ const intitalState: CharacterState = {
         },
         inventory: [],
         equipped: {
-            armsEq: null,
-            bodyEq: null,
-            faceEq: null,
-            feetEq: null,
-            finger2Eq: null,
-            fingerEq: null,
-            floatingEq: null,
-            handsEq: null,
-            headEq: null,
-            heldEq: null,
-            legsEq: null,
-            lightEq: null,
-            neck2Eq: null,
-            neckEq: null,
-            sheathedEq: null,
-            shieldEq: null,
-            torsoEq: null,
-            waistEq: null,
-            wieldEq: null,
-            wrist2Eq: null,
-            wristEq: null
+            arms: null,
+            body: null,
+            face: null,
+            feet: null,
+            finger2: null,
+            finger: null,
+            floating: null,
+            hands: null,
+            head: null,
+            held: null,
+            legs: null,
+            light: null,
+            neck2: null,
+            neck: null,
+            sheathed: null,
+            shield: null,
+            torso: null,
+            waist: null,
+            wield: null,
+            wrist2: null,
+            wrist: null
         },
         alignmentScore: 0,
         attributes: null,
@@ -121,9 +122,13 @@ export function characterReducer(state: CharacterState = intitalState,
         case CharacterActionTypes.RemoveEquipment: {
 
             debugger;
-            const getItem = EquipmentComponent.returnEQ(action.payload.slot, state.mob.equipped)
-            const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
+            let getItem = EquipmentComponent.returnEQ(action.payload.slot, state.mob.equipped)
+            let updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
 
+            if (action.payload.slot === EqSlot.Wielded && getItem == null) {
+                getItem = EquipmentComponent.returnEQ(EqSlot.Sheathed, state.mob.equipped);
+                updatedEquipment = EquipmentComponent.mapItemToEQSlot(EqSlot.Sheathed, action.payload.item, state.mob.equipped);
+            }
 
 
             const inventory = state.mob.inventory;

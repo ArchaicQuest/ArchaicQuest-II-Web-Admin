@@ -16,5 +16,5 @@ export enum EqSlot {
     Waist = 14,
     Wielded = 15,
     Wrist = 16,
-    Sheathed = 16
+    Sheathed = 17
 }

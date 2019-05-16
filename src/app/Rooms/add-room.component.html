@@ -1,0 +1,15 @@
+<div class="row">
+    <div class="col-8">
+        <h1>Add Room</h1>
+
+        TODO:<br />
+
+
+        <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addRoom()">
+
+
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">Save Room</button>
+        </form>
+    </div>
+</div>
