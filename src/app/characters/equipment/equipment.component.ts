@@ -116,6 +116,9 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             case EqSlot.Wielded:
                 equipped.wieldEq = item;
                 break;
+            case EqSlot.Sheathed:
+                equipped.sheathedEq = item;
+                break;
             default:
                 equipped.heldEq = item;
                 break;
@@ -160,6 +163,8 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                 return equipped.wristEq;
             case EqSlot.Wielded:
                 return equipped.wieldEq;
+            case EqSlot.Sheathed:
+                return equipped.sheathedEq;
             default:
                 return equipped.heldEq;
         }
@@ -273,6 +278,10 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                 case EqSlot.Wielded:
                     this.wieldItems = this.wieldItems.concat(this.updateEQArray(item));
                     break;
+                case EqSlot.Sheathed:
+                    this.shieldItems = this.shieldItems.concat(this.updateEQArray(item));
+                    break;
+                //sheathedEq
                 default:
                     console.log(`item slot ${item.slot} is not found`);
             }
@@ -304,14 +313,14 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
 
         this.charStore.dispatch(new UpdateEquipment({
-            slot: (selection.value as Item).slot,
+            slot: slot,
             item: selection.value
         }));
     }
 
     sheathChange(selection) {
         this.resetEQDupe('wieldEq', selection.value.uuid);
-        this.onEQChange(selection, EqSlot.Wielded);
+        this.onEQChange(selection, EqSlot.Sheathed);
     }
 
     wieldChange(selection) {
