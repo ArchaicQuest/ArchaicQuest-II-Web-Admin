@@ -1,0 +1,36 @@
+<div class="row">
+    <div class="col-8">
+        <h1>Add Area</h1>
+
+        <p>Area's contain rooms, to add new rooms to the game you need to use an existing area or create a new area.</p>
+
+        <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addArea()">
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Title</mat-label>
+                        <input matInput placeholder="Title" value="" required formControlName="title" />
+                        <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                            Area title is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput placeholder="Title" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                            cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" required
+                            formControlName="description"></textarea>
+                        <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                            Area description is required.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">Save Area</button>
+        </form>
+    </div>
+</div>

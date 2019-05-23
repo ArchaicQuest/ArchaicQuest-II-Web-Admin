@@ -9,8 +9,6 @@ import {
 } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
-import { CharacterAppState } from '../characters/state/character.state';
-
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -19,10 +17,8 @@ export class AddRoomComponent implements OnInit {
     addRoomForm: FormGroup;
     constructor(
         private roomServices: RoomService,
-        private store: Store<CharacterAppState>,
-        private route: ActivatedRoute,
         private ngZone: NgZone,
-        private formBuilder: FormBuilder
+
     ) { }
 
     @ViewChild('autosize') autosize: CdkTextareaAutosize;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { roomRoutes } from './room.routes';
+import { worldRoutes } from './world.routes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from '../shared/shared.module';
@@ -14,17 +14,20 @@ import { characterReducer } from '../characters/state/character.reducer';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
 import { CharacterEffects } from '../characters/state/character.effects';
 import { ArmourClassComponent } from '../characters/armour-class/armour-class.component';
-import { RoomService } from './add-room.service';
-import { AddRoomComponent } from './add-room.component';
+import { AreaService } from './area/add-area/add-area.service';
+import { AddAreaComponent } from './area/add-area/add-area.component';
+import { AddRoomComponent } from './rooms/add-room.component';
+import { RoomService } from './rooms/add-room.service';
+import { ViewAreasComponent } from './area/view-areas/view-areas.component';
+
 
 
 @NgModule({
     imports: [
         SharedModule,
-        ReactiveFormsModule,
-        RouterModule.forChild(roomRoutes),
-        StoreModule.forFeature('character', characterReducer),
-        EffectsModule.forFeature([CharacterEffects]),
+        RouterModule.forChild(worldRoutes),
+        // StoreModule.forFeature('character', characterReducer),
+        // EffectsModule.forFeature([CharacterEffects]),
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
@@ -35,11 +38,14 @@ import { AddRoomComponent } from './add-room.component';
         MatAutocompleteModule
     ],
     providers: [
-        RoomService,
+        AreaService,
+        RoomService
     ],
     declarations: [
+        AddAreaComponent,
         AddRoomComponent,
+        ViewAreasComponent
 
     ],
 })
-export class RoomModule { }
+export class WorldModule { }

@@ -9,9 +9,10 @@ const routes: Routes = [
     {
         path: '',
         loadChildren: './mobs/mob.module#MobModule'
-    }, {
+    },
+    {
         path: '',
-        loadChildren: './Rooms/room.module#RoomModule'
+        loadChildren: './World/world.module#WorldModule'
     },
 ];
 
