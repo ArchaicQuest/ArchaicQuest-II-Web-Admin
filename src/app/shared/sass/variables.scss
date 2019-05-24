@@ -1,0 +1,107 @@
+@import "./mixins";
+
+// Brand colours
+$primaryBrandColor: #432651;
+$secondaryBrandColor: #6a3089;
+
+// Available colors, add new ones as necessary, but: Don't use them directly!
+$green: #28a745;
+$blue: #007bff;
+$yellow: #ffc107;
+$red: #dc3545;
+
+// Grays -- from bootstrap
+$white: #fff;
+$gray100: #f8f9fa;
+$gray200: #e9ecef;
+$gray300: #dee2e6;
+$gray400: #ced4da;
+$gray500: #adb5bd;
+$gray600: #6c757d;
+$gray700: #495057;
+$gray800: #343a40;
+$gray900: #212529;
+$black: #000;
+
+// Fonts
+$fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  "Helvetica Neue", Arial, sans-serif; // From bootstrap
+
+$fontSizeXS: rem(12);
+$fontSizeSM: rem(14);
+$fontSize: 1rem;
+$fontSizeLG: rem(18);
+$fontSizeXL: rem(20);
+
+// Headings
+$h1FontSize: rem(40);
+$h2FontSize: rem(32);
+$h3FontSize: rem(28);
+$h4FontSize: rem(24);
+$h5FontSize: rem(20);
+$h6FontSize: 1rem;
+
+// Breakpoints
+$breakpoints: (
+  "small": 480px,
+  "medium": 768px,
+  "large": 992px,
+  "extraLarge": 1200px
+);
+
+// Forms
+$borderColor: $gray400;
+
+// Sidebar
+$sidebarWidthOpen: 100px;
+$sidebarWidthClosed: 64px;
+
+// Datetime
+$errorColor: $red;
+
+// Employee
+$employeeStatusGoodColor: $green;
+$employeeStatusBadColor: $yellow;
+
+// Quick Links
+$quickLinkDefaultLinkColor: $gray600;
+$quickLinkEditColor: $green;
+$quickLinkDeleteColor: $red;
+$quickLinkAddColor: $secondaryBrandColor;
+
+
+// ***********
+// Synchronize colors and breakpoints with bootstrap and material
+
+// Bootstrap breakpoints
+$grid-breakpoints: (
+  xs: 0,
+  sm: map-get($breakpoints, "small"),
+  md: map-get($breakpoints, "medium"),
+  lg: map-get($breakpoints, "large"),
+  xl: map-get($breakpoints, "extraLarge")
+);
+
+// Bootstrap colors
+$primary: $primaryBrandColor;
+$secondary: $secondaryBrandColor;
+$success: $green;
+$info: $blue;
+$warning: $yellow;
+$danger: $red;
+$light: $gray100;
+$dark: $gray800;
+
+$gray-100: $gray100;
+$gray-200: $gray200;
+$gray-300: $gray300;
+$gray-400: $gray400;
+$gray-500: $gray500;
+$gray-600: $gray600;
+$gray-700: $gray700;
+$gray-800: $gray800;
+$gray-900: $gray900;
+
+
+// Bootstrap font family
+$font-family-base: $fontFamily;

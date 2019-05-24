@@ -1,0 +1,35 @@
+/* usage
+    @include breakpoint(medium) {
+        // style for small desktop || tablet only
+    }
+
+    @include breakpoint(1400) {
+        // style for min-width of 1400px and up
+    }
+*/
+
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @each $label, $value in $breakpoints {
+      @if $breakpoint == $label {
+        @media (min-width: $value) {
+          @content;
+        }
+      }
+    }
+  } @else {
+    @if type-of($breakpoint) != "number" {
+      @warn "This breakpoint does not exist:  #{$breakpoint}";
+    }
+
+    @media (min-width: #{$breakpoint}px) {
+      @content;
+    }
+  }
+}
+
+
+// Quickly calculate rem value
+@function rem($unit) {
+  @return $unit / 16 * 1rem;
+}

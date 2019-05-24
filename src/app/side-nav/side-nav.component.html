@@ -1,4 +1,4 @@
-<nav>
+<!-- <nav>
     <h2>ArchaicQuest II</h2>
 
     <ul>
@@ -9,4 +9,64 @@
         <li> <a href="nav-link" [routerLink]="['/list-areas']">List Areas</a></li>
         <li> <a class="nav-link" [routerLink]="['/add-area']">Areas</a> </li>
     </ul>
-</nav>
+</nav> -->
+
+
+<mat-sidenav-container class="sidebar" [ngClass]="(expanded$ | async) ? 'sidebar--open' : 'sidebar--close'">
+  <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="showNav">
+    <a class="sidebar__logo" [routerLink]="'/'">
+      <img src="/assets/Ten MAID_white.svg" alt="Ten MAID" />
+    </a>
+
+    <mat-accordion>
+      <mat-expansion-panel (click)="toggleSidenav(true)">
+        <mat-expansion-panel-header matTooltip="Dashboard" matTooltipPosition="right">
+          <i class="fa fa-home" aria-hidden="true"></i>
+          <span *ngIf="expanded$ | async">Home</span>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>
+            <a [routerLink]="['/']">
+              <i class="fa fa-tachometer" aria-hidden="true"></i>
+              <span *ngIf="expanded$ | async">Dashboard</span>
+            </a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+      <mat-expansion-panel (click)="toggleSidenav(true)">
+        <mat-expansion-panel-header matTooltip="Items" matTooltipPosition="right">
+          <i class="fa fa-shield" aria-hidden="true"></i>
+          <span *ngIf="expanded$ | async">Items</span>
+        </mat-expansion-panel-header>
+        <ul>
+          <li>
+            <a [routerLink]="['/items']">
+              <i class="fa fa-search" aria-hidden="true"></i>
+              <span *ngIf="expanded$ | async">View Items</span>
+            </a>
+          </li>
+          <li>
+            <a [routerLink]="['/items']">
+              <i class="fa fa-plus" aria-hidden="true"></i>
+              <span *ngIf="expanded$ | async">Create Item</span>
+            </a>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+    <div class="sideNav__footer">
+
+      <a href="#0" class="sideNav__footer-item sideNav__footer-item--link" (click)="logout($event)" matTooltip="Log out"
+        matTooltipPosition="right">
+        <i class="fa fa-sign-out" aria-hidden="true"></i>
+        <span *ngIf="expanded$ | async">Log out</span>
+      </a>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>

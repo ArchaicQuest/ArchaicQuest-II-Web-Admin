@@ -2,8 +2,11 @@
 @import "./vendors/normalize/normalize";
 @import "./node_modules/bootstrap/scss/bootstrap-grid";
 
-@import "./app/shared/forms.scss";
+@import "./app/shared/sass/forms.scss";
 
+body {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
 .float-right {
     float:right;
 }

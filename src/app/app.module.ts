@@ -10,8 +10,10 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { HttpClientModule } from '@angular/common/http';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatButtonModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatButtonModule, MatSidenavModule, MatExpansionModule, MatTooltipModule } from '@angular/material';
 import { Shared } from './shared/shared';
+import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -35,7 +37,11 @@ import { Shared } from './shared/shared';
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatSidenavModule,
+        MatExpansionModule,
+        MatTooltipModule,
+        SidenavStoreModule,
     ],
     providers: [Shared],
     bootstrap: [AppComponent]
