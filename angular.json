@@ -29,7 +29,8 @@
                         "styles": [
                             "src/styles.scss",
                             "node_modules/font-awesome/css/font-awesome.css",
-                            "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"
+                            "node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+                            "node_modules/rpg-awesome/css/rpg-awesome.min.css"
                         ],
                         "scripts": []
                     },
@@ -52,22 +53,22 @@
                             "buildOptimizer": true
                         },
                         "dev": {
-                          "fileReplacements": [
-                              {
-                                  "replace": "src/environments/environment.ts",
-                                  "with": "src/environments/environment.dev.ts"
-                              }
-                          ],
-                          "optimization": true,
-                          "outputHashing": "all",
-                          "sourceMap": true,
-                          "extractCss": true,
-                          "namedChunks": false,
-                          "aot": true,
-                          "extractLicenses": true,
-                          "vendorChunk": false,
-                          "buildOptimizer": true
-                      }
+                            "fileReplacements": [
+                                {
+                                    "replace": "src/environments/environment.ts",
+                                    "with": "src/environments/environment.dev.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": true,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "aot": true,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true
+                        }
                     }
                 },
                 "serve": {
@@ -80,8 +81,8 @@
                             "browserTarget": "ArchaicQuestII:build:production"
                         },
                         "dev": {
-                          "browserTarget": "ArchaicQuestII:build:dev"
-                      }
+                            "browserTarget": "ArchaicQuestII:build:dev"
+                        }
                     }
                 },
                 "extract-i18n": {

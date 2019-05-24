@@ -13,60 +13,100 @@
 
 
 <mat-sidenav-container class="sidebar" [ngClass]="(expanded$ | async) ? 'sidebar--open' : 'sidebar--close'">
-  <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="showNav">
-    <a class="sidebar__logo" [routerLink]="'/'">
-      <img src="/assets/Ten MAID_white.svg" alt="Ten MAID" />
-    </a>
+    <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="showNav">
+        <a class="sidebar__logo" [routerLink]="'/'">
+            <img src="http://www.archaicquest.com/UI/Images/archaic-quest.png" alt="ArchaicQuest II" />
+        </a>
 
-    <mat-accordion>
-      <mat-expansion-panel (click)="toggleSidenav(true)">
-        <mat-expansion-panel-header matTooltip="Dashboard" matTooltipPosition="right">
-          <i class="fa fa-home" aria-hidden="true"></i>
-          <span *ngIf="expanded$ | async">Home</span>
-        </mat-expansion-panel-header>
-        <ul>
-          <li>
-            <a [routerLink]="['/']">
-              <i class="fa fa-tachometer" aria-hidden="true"></i>
-              <span *ngIf="expanded$ | async">Dashboard</span>
+        <mat-accordion>
+            <mat-expansion-panel (click)="toggleSidenav(true)">
+                <mat-expansion-panel-header matTooltip="Dashboard" matTooltipPosition="right">
+                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Home</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/']">
+                            <i class="fa fa-tachometer" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Dashboard</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+            <mat-expansion-panel (click)="toggleSidenav(true)">
+                <mat-expansion-panel-header matTooltip="Areas" matTooltipPosition="right">
+                    <i class="fa fa-map-signs" aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Areas</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/list-areas']">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View Areas</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/add-area']">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Create Area</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+            <mat-expansion-panel (click)="toggleSidenav(true)">
+                <mat-expansion-panel-header matTooltip="Items" matTooltipPosition="right">
+                    <i class="fa fa-shield" aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Items</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/items']">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View Items</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/add-item']">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Create Item</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+            <mat-expansion-panel (click)="toggleSidenav(true)">
+                <mat-expansion-panel-header matTooltip="Mobs" matTooltipPosition="right">
+                    <i class="ra ra-fox " aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Mobs</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/add-mob']">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View Mobs</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/add-mob']">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Create Mob</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+        </mat-accordion>
+
+        <div class="sideNav__footer">
+
+            <a href="#0" class="sideNav__footer-item sideNav__footer-item--link" (click)="logout($event)"
+                matTooltip="Log out" matTooltipPosition="right">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                <span *ngIf="expanded$ | async">Log out</span>
             </a>
-          </li>
-        </ul>
-      </mat-expansion-panel>
-      <mat-expansion-panel (click)="toggleSidenav(true)">
-        <mat-expansion-panel-header matTooltip="Items" matTooltipPosition="right">
-          <i class="fa fa-shield" aria-hidden="true"></i>
-          <span *ngIf="expanded$ | async">Items</span>
-        </mat-expansion-panel-header>
-        <ul>
-          <li>
-            <a [routerLink]="['/items']">
-              <i class="fa fa-search" aria-hidden="true"></i>
-              <span *ngIf="expanded$ | async">View Items</span>
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="['/items']">
-              <i class="fa fa-plus" aria-hidden="true"></i>
-              <span *ngIf="expanded$ | async">Create Item</span>
-            </a>
-          </li>
-        </ul>
-      </mat-expansion-panel>
-    </mat-accordion>
+        </div>
+    </mat-sidenav>
 
-    <div class="sideNav__footer">
-
-      <a href="#0" class="sideNav__footer-item sideNav__footer-item--link" (click)="logout($event)" matTooltip="Log out"
-        matTooltipPosition="right">
-        <i class="fa fa-sign-out" aria-hidden="true"></i>
-        <span *ngIf="expanded$ | async">Log out</span>
-      </a>
-    </div>
-  </mat-sidenav>
-
-  <mat-sidenav-content>
-    <ng-content></ng-content>
-  </mat-sidenav-content>
+    <mat-sidenav-content>
+        <ng-content></ng-content>
+    </mat-sidenav-content>
 
 </mat-sidenav-container>

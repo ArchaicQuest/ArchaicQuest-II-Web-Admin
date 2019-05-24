@@ -3,6 +3,10 @@
 .sidebar {
   height: 100%;
 
+  .mat-drawer-container {
+      background: #fff;
+  }
+
   .mat-drawer-content {
     scroll-behavior: smooth;
     height: calc(100% - 65px);
@@ -11,6 +15,7 @@
   ::ng-deep  header {
     padding: 0 50px;
     height: 65px;
+    background-color: #fff;
   }
 
   .sidebar__logo {
@@ -28,7 +33,7 @@
   &.sidebar--close {
     .sidebar__logo {
       transition: height 0.3s;
-      background-image: url("/assets/Ten_Logo_White.png");
+      background-image: url("https://avatars3.githubusercontent.com/u/43520111");
       background-repeat: no-repeat;
       background-position: center center;
       background-size: contain;
@@ -66,9 +71,10 @@
     }
 
     .sidebar__logo img {
-      height: 56px;
+      max-width:100%;
       margin: auto;
       display: block;
+      margin-top:11px;
     }
 
     ::ng-deep .mat-sidenav-content {
@@ -102,11 +108,11 @@
       min-width: 50px;
     }
 
-    .mat-expansion-panel-header .fa {
+    .mat-expansion-panel-header .fa,   .mat-expansion-panel-header .ra {
       margin-right: 9px;
     }
 
-    .mat-expansion-panel-body .fa {
+    .mat-expansion-panel-body .fa, .mat-expansion-panel-body .ra {
       margin-right: 10px;
     }
 
@@ -120,7 +126,7 @@
 
     .mat-expansion-panel {
       box-shadow: none;
-      border-bottom: 1px solid #351e40;
+      border-bottom: 1px solid #222;
       border-radius: 0px;
       background: $primaryBrandColor;
       color: #fff;
@@ -132,7 +138,7 @@
   }
 
   ::ng-deep .mat-expansion-panel-content {
-    background-color: #331d3d;
+    background-color: #222;
 
     ul {
       list-style-type: none;
@@ -148,7 +154,7 @@
 
         &:hover {
           left: 10px;
-          color: #d8bae8;
+          color: #f6d437;
           transition: left 0.3s, color 0.3s;
         }
       }
@@ -177,7 +183,7 @@
 
     &--link {
       &:hover {
-        color: #d8bae8;
+        color: #f6d437;
       }
     }
 
