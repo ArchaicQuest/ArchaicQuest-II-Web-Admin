@@ -6,10 +6,17 @@
 
 body {
   font-family: Roboto,"Helvetica Neue",sans-serif;
+  height: 100vh;
 }
 a {
     text-decoration: none;
 }
 .float-right {
     float:right;
+}
+
+.panel {
+    background-color: #fff;
+    border: 1px solid #eee;
+    padding: 25px 50px 50px 50px;
 }
