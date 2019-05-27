@@ -19,6 +19,8 @@ import { AddAreaComponent } from './area/add-area/add-area.component';
 import { AddRoomComponent } from './rooms/add-room.component';
 import { RoomService } from './rooms/add-room.service';
 import { ViewAreasComponent } from './area/view-areas/view-areas.component';
+import { EditAreaComponent } from './area/edit-area/edit-area.component';
+import { EditService } from './area/edit-area/edit-area.service';
 
 
 
@@ -39,12 +41,14 @@ import { ViewAreasComponent } from './area/view-areas/view-areas.component';
     ],
     providers: [
         AreaService,
+        EditService,
         RoomService
     ],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
-        ViewAreasComponent
+        ViewAreasComponent,
+        EditAreaComponent
 
     ],
 })

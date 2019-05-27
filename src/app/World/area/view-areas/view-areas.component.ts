@@ -10,7 +10,7 @@ import { ViewAreasService } from './view-areas.service';
 })
 export class ViewAreasComponent implements OnInit {
     areas: Area[] = [];
-    displayedColumns: string[] = ['title', 'description', 'rooms', 'actions'];
+    displayedColumns: string[] = ['title', 'description', 'rooms', 'dateUpdated', 'actions'];
     dataSource: MatTableDataSource<Area>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
