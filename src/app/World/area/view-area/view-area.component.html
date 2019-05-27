@@ -1,0 +1,234 @@
+<div class="container-fluid view-area">
+    <app-header>Area: {{area.title}}</app-header>
+    <div class="row">
+        <div class="col-8">
+            <div class="panel">
+
+
+                <div class="row">
+                    <div class="col">
+                        <b>{{area.title}}</b>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+
+                        <p>{{area.description}}</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <br />
+                        <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]">Edit
+                            Area</button>
+
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel">
+                <h2>Room Layout</h2>
+
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th style="min-width:100px"
+                                *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">header {{i}}</th>
+
+                        </tr>
+                        <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
+                            <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
+
+                                <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <hr />
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th style="min-width:100px"></th>
+                            <th style="min-width:100px"></th>
+                            <th style="min-width:100px"></th>
+
+                        </tr>
+                        <tr>
+                            <td> <button mat-raised-button color="accent"
+                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+                            <td> <button mat-raised-button color="primary"
+                                    [routerLink]="['/add-area',area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+                            <td> <button mat-raised-button color="accent"
+                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td> <button mat-raised-button color="accent"
+                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+                            <td> <button mat-raised-button color="primary"
+                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+                            <td> <button mat-raised-button color="primary"
+                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td> <button mat-raised-button color="accent"
+                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                    Room</button>
+                            </td>
+
+                        </tr>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 
+<table class="table">
+        <tr>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+            <th style="min-width:100px"></th>
+
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td>22</td>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td>22</td>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td>22</td>
+            <td>23</td>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+            <td>30</td>
+        </tr>
+    </table> -->
