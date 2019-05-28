@@ -9,15 +9,19 @@ import {
 } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
+import { Coords } from 'src/app/shared/interfaces/coords.interface';
 
 @Component({
     templateUrl: './add-room.component.html'
 })
 export class AddRoomComponent implements OnInit {
     addRoomForm: FormGroup;
+    id: number;
+    coords: Coords;
     constructor(
         private roomServices: RoomService,
         private ngZone: NgZone,
+        private route: ActivatedRoute
 
     ) { }
 
@@ -25,6 +29,14 @@ export class AddRoomComponent implements OnInit {
 
     ngOnInit() {
         this.addRoomForm = this.roomServices.addRoomForm;
+
+        this.id = this.route.snapshot.params['id'];
+        this.coords = {
+            x: this.route.snapshot.params['x'],
+            y: this.route.snapshot.params['y'],
+            z: this.route.snapshot.params['z'],
+        };
+
     }
 
     triggerDescriptionResize() {

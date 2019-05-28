@@ -11,7 +11,7 @@ const routes: Routes = [
         loadChildren: './mobs/mob.module#MobModule'
     },
     {
-        path: '',
+        path: 'world',
         loadChildren: './World/world.module#WorldModule'
     },
 ];

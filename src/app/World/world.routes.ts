@@ -8,8 +8,12 @@ import { ViewAreaComponent } from './area/view-area/view-area.component';
 export const worldRoutes: Routes = [
     { path: 'list-areas', component: ViewAreasComponent },
     { path: 'area/:id', component: ViewAreaComponent },
+    { path: 'area/:id/add-room/:x/:y/:z', component: AddRoomComponent, },
     { path: 'add-area', component: AddAreaComponent },
     { path: 'edit-area/:id', component: EditAreaComponent },
-    { path: 'add-room', component: AddRoomComponent },
-    { path: 'edit-room/:id', component: AddRoomComponent },
+    { path: 'add-room/:id/:x/:y/:z', component: AddRoomComponent },
+
+    { path: 'edit-room/:id/:x-:y-:z', component: AddRoomComponent },
+
+    //http://localhost:1337/world/area/2/add-room/-1/3/0
 ];

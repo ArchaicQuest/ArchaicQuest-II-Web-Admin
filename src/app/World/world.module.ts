@@ -23,6 +23,8 @@ import { EditAreaComponent } from './area/edit-area/edit-area.component';
 import { EditService } from './area/edit-area/edit-area.service';
 import { ViewAreaComponent } from './area/view-area/view-area.component';
 import { ViewAreaService } from './area/view-area/view-area.service';
+import { AppRoutingModule } from '../app-routing.module';
+import { APP_BASE_HREF } from '@angular/common';
 
 
 
@@ -45,7 +47,7 @@ import { ViewAreaService } from './area/view-area/view-area.service';
         AreaService,
         ViewAreaService,
         EditService,
-        RoomService
+        RoomService,
     ],
     declarations: [
         AddAreaComponent,

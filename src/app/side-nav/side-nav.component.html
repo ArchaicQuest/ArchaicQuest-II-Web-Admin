@@ -40,13 +40,13 @@
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
-                        <a [routerLink]="['/list-areas']">
+                        <a [routerLink]="['/world/list-areas']">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">View Areas</span>
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="['/add-area']">
+                        <a [routerLink]="['/world/add-area']">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Create Area</span>
                         </a>

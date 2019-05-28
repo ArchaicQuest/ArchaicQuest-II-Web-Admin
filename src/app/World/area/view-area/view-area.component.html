@@ -40,12 +40,15 @@
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
-                                <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]"
+
+                                <button mat-raised-button
+                                    [routerLink]="['/world/area/area.id/add-area', area.id ? '' : area.id]"
                                     *ngIf="isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"
                                     color="primary">Example
                                     Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
 
-                                <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]"
+                                <button mat-raised-button
+                                    [routerLink]="['/world/area/1/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
                                     *ngIf="!isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">Add
                                     Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
                             </td>
