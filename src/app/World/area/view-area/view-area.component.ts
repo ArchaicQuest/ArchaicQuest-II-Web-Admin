@@ -22,7 +22,7 @@ export class ViewAreaComponent implements OnInit {
     minValueOfY: number;
     totalCol: number;
     totalRow: number;
-
+    rooms: Coords[];
     constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute) {
 
     }
@@ -116,16 +116,16 @@ export class ViewAreaComponent implements OnInit {
             z: 0
         };
 
-        const rooms = [room1, north, east, south, west, north1, north2, west1, west2, east1, east2,
+        this.rooms = [room1, north, east, south, west, north1, north2, west1, west2, east1, east2,
             west3, south2];
 
 
 
-        this.maxValueOfX = Math.max(...rooms.map(coord => coord.x), 0);
-        this.maxValueOfY = Math.max(...rooms.map(coord => coord.y), 0);
+        this.maxValueOfX = Math.max(...this.rooms.map(coord => coord.x), 0) + 1;
+        this.maxValueOfY = Math.max(...this.rooms.map(coord => coord.y), 0) + 1;
 
-        this.minValueOfX = Math.min(...rooms.map(coord => coord.x), 0);
-        this.minValueOfY = Math.min(...rooms.map(coord => coord.y), 0);
+        this.minValueOfX = Math.min(...this.rooms.map(coord => coord.x), 0) - 1;
+        this.minValueOfY = Math.min(...this.rooms.map(coord => coord.y), 0) - 1;
 
         console.log("mx x", this.maxValueOfX)
         console.log("mx y", this.maxValueOfY)
@@ -138,7 +138,12 @@ export class ViewAreaComponent implements OnInit {
 
         console.log("totalRow", this.totalRow)
         console.log("totalCol", this.totalCol)
-        const roomCount = 5;
+
+    }
+
+    isRoom(coords: Coords) {
+        // debugger;
+        return this.rooms.find(x => x.x === coords.x && x.y === coords.y);
     }
 
 

@@ -34,19 +34,25 @@
                     <table class="table">
                         <tr>
                             <th style="min-width:100px"
-                                *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">header {{i}}</th>
+                                *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index"></th>
 
                         </tr>
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
-                                <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]">Add
+                                <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]"
+                                    *ngIf="isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"
+                                    color="primary">Example
+                                    Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
+
+                                <button mat-raised-button [routerLink]="['/add-area', area.id ? '' : area.id]"
+                                    *ngIf="!isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">Add
                                     Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <hr />
+                <!-- <hr />
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
@@ -94,7 +100,7 @@
                         </tr>
 
                     </table>
-                </div>
+                </div> -->
 
             </div>
         </div>
