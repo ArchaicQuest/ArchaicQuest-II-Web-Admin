@@ -56,3 +56,36 @@ P:last-of-type {
     }
 }
 
+.client {
+    font-family: monospace, monospace;
+    font-size: 1em;
+background: #333;
+height: 100%;
+margin: 0;
+padding: 15px;
+min-height: 91vh;
+
+> * {
+    max-width: 72ch;
+}
+}
+
+
+.room__title {
+    color: #2ecc71;
+    border-bottom: 1px dashed #555;
+    padding-bottom: 5px;
+    margin-top:0px;
+     white-space: normal;
+}
+
+.room__description {
+    color: #fff;
+ margin: 0;
+     white-space: pre-line;
+     line-height: 1.3;
+}
+
+.echo {
+    color:#999;
+}

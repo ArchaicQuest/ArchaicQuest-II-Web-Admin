@@ -1,17 +1,163 @@
 <app-header>Add new room</app-header>
 <div class="row">
-    <div class="col-8">
+    <div class="col-7">
+        <div class="panel">
+
+            <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addRoom()">
+                <h2>Room Information:</h2>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>Title</mat-label>
+                            <input matInput placeholder="Title" value="" required formControlName="title" />
+                            <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                                Room title is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>Description</mat-label>
+                            <textarea matInput placeholder="Title" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" required
+                                formControlName="description"></textarea>
+                            <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                                Room description is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <h2>Room Objects:</h2>
+                <p>These are used to add more Information about key items highlighted in the description.</p>
+                <div class="row">
+                    <div class="col">
+                        <div formArrayName="roomObjects"
+                            *ngFor="let roomObject of getRoomObjectsControl.controls; let i=index">
+                            <div [formGroupName]="i">
+
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Keyword</mat-label>
+                                    <input type="text" matInput placeholder="Keyword" formControlName="title" />
+
+                                </mat-form-field>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Description</mat-label>
+                                            <textarea matInput placeholder="Basic description" cdkTextareaAutosize
+                                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                                                cdkAutosizeMaxRows="20" formControlName="description"></textarea>
+
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Examine</mat-label>
+                                            <textarea matInput placeholder="Detailed Description" cdkTextareaAutosize
+                                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                                                cdkAutosizeMaxRows="20" formControlName="examine"></textarea>
+
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="row">
 
 
-        <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addRoom()">
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Touch</mat-label>
+                                            <textarea matInput placeholder="How does the object feel?"
+                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                formControlName="touch"></textarea>
 
-            areaid: {{id}}
-            x:{{coords.x}}
-            y: {{coords.y}}
-            z: {{coords.z}}
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Taste</mat-label>
+                                            <textarea matInput placeholder="How does the object taste?"
+                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                formControlName="taste"></textarea>
+
+                                        </mat-form-field>
+                                    </div>
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Smell</mat-label>
+                                            <textarea matInput placeholder="How does the object smell?"
+                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                formControlName="smell"></textarea>
+
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <a class="btn btn-danger btn-sm" (click)="removeRoomObject(i)">Remove</a>
+                        </div>
+                        <a (click)="this.addRoomObject()">Add another Room Object</a>
+                    </div>
+                </div>
+
+                <h2>Coords:</h2>
+                <p>These are automatically set based on the map on the area page. You should rarely need to manually
+                    change these but you have the option to do so.</p>
+                <div class="row">
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>X:</mat-label>
+                            <input matInput placeholder="X Coord" required formControlName="CoordX" />
+                            <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
+                                X coord is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>Y:</mat-label>
+                            <input matInput placeholder="Y Coord" required formControlName="CoordY" />
+                            <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                                y coord is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col">
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>Z:</mat-label>
+                            <input matInput placeholder="Z Coord" required formControlName="CoordZ" />
+                            <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                                z coord is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
 
 
-            <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">Save Room</button>
-        </form>
+                <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">Save
+                    Room</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="client">
+            <p class="room__description">Room Preview:</p>
+            <p class="echo">> look</p>
+            <p class="room__title">
+                {{addRoomForm.get('title').value === '' ? 'This is the room title' : addRoomForm.get('title').value}}
+            </p>
+            <p class="room__description">
+                {{addRoomForm.get('description').value === '' ? 'Your beautifully written room description shown here.' : addRoomForm.get('description').value}}
+            </p>
+        </div>
     </div>
 </div>

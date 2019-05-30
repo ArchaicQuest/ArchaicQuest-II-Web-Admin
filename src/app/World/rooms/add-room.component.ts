@@ -37,6 +37,10 @@ export class AddRoomComponent implements OnInit {
             z: this.route.snapshot.params['z'],
         };
 
+        this.addRoomForm.get('CoordX').setValue(this.coords.x);
+        this.addRoomForm.get('CoordY').setValue(this.coords.y);
+        this.addRoomForm.get('CoordZ').setValue(this.coords.z);
+
     }
 
     triggerDescriptionResize() {
@@ -44,6 +48,20 @@ export class AddRoomComponent implements OnInit {
         this.ngZone.onStable
             .pipe(take(1))
             .subscribe(() => this.autosize.resizeToFitContent(true));
+    }
+
+    get getRoomObjectsControl(): FormArray {
+        return this.addRoomForm.get('roomObjects') as FormArray;
+    }
+
+    addRoomObject() {
+        this.getRoomObjectsControl.push(this.roomServices.initRoomObject());
+
+        console.log(this.roomServices.addRoomForm.value);
+    }
+
+    removeRoomObject(i: number) {
+        this.getRoomObjectsControl.removeAt(i);
     }
 
     addRoom() { }
