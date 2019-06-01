@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { RoomService } from './add-room.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange, MatDialogRef, MatDialog } from '@angular/material';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
     take,
@@ -11,6 +11,7 @@ import {
 import { Store } from '@ngrx/store';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
+import { ManageContainerItemsComponent } from './manage-container-items/manage-container-items.component';
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -23,7 +24,8 @@ export class AddRoomComponent implements OnInit {
     constructor(
         private roomServices: RoomService,
         private ngZone: NgZone,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public dialog: MatDialog
 
     ) { }
 
@@ -70,6 +72,24 @@ export class AddRoomComponent implements OnInit {
         console.log(item);
         this.items.push(item);
     }
+
+    // closeDialog() {
+    //     this.dialogRef.close('Pizza!');
+    // }
+    openDialog(item: Item): void {
+        const dialogRef = this.dialog.open(ManageContainerItemsComponent, {
+            width: '250px',
+            data: item
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+
+
+        });
+    }
+
+
+
     addRoom() { }
 
 

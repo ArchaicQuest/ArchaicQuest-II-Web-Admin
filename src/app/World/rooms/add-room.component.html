@@ -114,7 +114,9 @@
                         <p>todo: </p>
                         <p>Click manage to open modal to manage items in container</p>
                         <ul>
-                            <li *ngFor="let item of items; let i=index">{{item.name}} <a href="#">Manage</a>
+                            <li *ngFor="let item of items; let i=index">{{item.name}} {{item.itemType}} <a
+                                    href="javascript:void(0)" *ngIf="item.itemType == '2'"
+                                    (click)="openDialog(item)">Manage</a>
                                 <br />
                                 <ul>
                                     <li *ngFor="let containerItems of item.container.items; let i=index">

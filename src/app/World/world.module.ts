@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from '../shared/shared.module';
 import {
     MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
-    MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule
+    MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule, MatDialogModule
 } from '@angular/material';
 import { InventoryComponent } from '../characters/inventory/inventory.component';
 import { characterReducer } from '../characters/state/character.reducer';
@@ -27,6 +27,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-selector.component';
 import { ItemService } from '../items/add-item/add-item.service';
+import { ManageContainerItemsComponent } from './rooms/manage-container-items/manage-container-items.component';
 
 
 
@@ -44,7 +45,8 @@ import { ItemService } from '../items/add-item/add-item.service';
         MatButtonModule,
         MatTableModule,
         MatPaginatorModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatDialogModule
     ],
     providers: [
         AreaService,
@@ -53,13 +55,16 @@ import { ItemService } from '../items/add-item/add-item.service';
         RoomService,
         ItemService
     ],
+    entryComponents: [ManageContainerItemsComponent],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
         ViewAreasComponent,
         ViewAreaComponent,
         EditAreaComponent,
-        ItemSelectorComponent
+        ItemSelectorComponent,
+        ManageContainerItemsComponent
+
 
     ],
 })
