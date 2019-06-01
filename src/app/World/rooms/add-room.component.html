@@ -106,6 +106,32 @@
                     </div>
                 </div>
 
+                <h2>Items</h2>
+
+                <div class="row">
+                    <div class="col">
+                        <p>Added Items:</p>
+                        <p>todo: </p>
+                        <p>Click manage to open modal to manage items in container</p>
+                        <ul>
+                            <li *ngFor="let item of items; let i=index">{{item.name}} <a href="#">Manage</a>
+                                <br />
+                                <ul>
+                                    <li *ngFor="let containerItems of item.container.items; let i=index">
+
+                                        {{containerItems.name}}
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <app-item-selector (sendItemToParent)="addItem($event)"></app-item-selector>
+                    </div>
+                </div>
+
+
+
                 <h2>Coords:</h2>
                 <p>These are automatically set based on the map on the area page. You should rarely need to manually
                     change these but you have the option to do so.</p>
@@ -158,6 +184,8 @@
             <p class="room__description">
                 {{addRoomForm.get('description').value === '' ? 'Your beautifully written room description shown here.' : addRoomForm.get('description').value}}
             </p>
+
+            <p class="room__description" *ngFor="let item of items; let i=index">{{item.name}} lies here.</p>
         </div>
     </div>
 </div>

@@ -25,12 +25,15 @@ import { ViewAreaComponent } from './area/view-area/view-area.component';
 import { ViewAreaService } from './area/view-area/view-area.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
+import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-selector.component';
+import { ItemService } from '../items/add-item/add-item.service';
 
 
 
 @NgModule({
     imports: [
         SharedModule,
+        ReactiveFormsModule,
         RouterModule.forChild(worldRoutes),
         // StoreModule.forFeature('character', characterReducer),
         // EffectsModule.forFeature([CharacterEffects]),
@@ -48,13 +51,15 @@ import { APP_BASE_HREF } from '@angular/common';
         ViewAreaService,
         EditService,
         RoomService,
+        ItemService
     ],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
         ViewAreasComponent,
         ViewAreaComponent,
-        EditAreaComponent
+        EditAreaComponent,
+        ItemSelectorComponent
 
     ],
 })

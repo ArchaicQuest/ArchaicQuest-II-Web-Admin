@@ -1,0 +1,18 @@
+<form [formGroup]="formGroup">
+    <div class="row">
+        <div class="col">
+            <mat-form-field appearance="outline" class="form-control">
+                <mat-label>Add item to room</mat-label>
+                <input type="text" placeholder="Search for an item" aria-label="Assignee" matInput
+                    formControlName="itemSearch" [matAutocomplete]="auto">
+                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayItems">
+                    <mat-option *ngFor="let option of filteredItems | async" [value]="option">
+                        {{option.name}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+            <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addItem()">Add
+                item</a>
+        </div>
+    </div>
+</form>

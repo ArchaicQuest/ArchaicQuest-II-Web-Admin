@@ -14,15 +14,16 @@ import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
 import { Shared } from './shared/shared';
 import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
 import { HeaderComponent } from './header/header.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
     declarations: [
         AppComponent,
         SideNavComponent,
-
     ],
     imports: [
+        //  ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,

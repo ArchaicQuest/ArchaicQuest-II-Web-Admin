@@ -5,8 +5,8 @@ import { HeaderComponent } from "../header/header.component";
 import { SideNavComponent } from "../side-nav/side-nav.component";
 
 @NgModule({
-  declarations: [HeaderComponent],
-  imports: [CommonModule],
-  exports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent]
+    declarations: [HeaderComponent],
+    imports: [CommonModule],
+    exports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent]
 })
-export class SharedModule {}
+export class SharedModule { }

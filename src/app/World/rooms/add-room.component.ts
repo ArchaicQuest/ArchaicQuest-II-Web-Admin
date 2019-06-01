@@ -10,6 +10,7 @@ import {
 
 import { Store } from '@ngrx/store';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Item } from 'src/app/items/interfaces/item.interface';
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -18,6 +19,7 @@ export class AddRoomComponent implements OnInit {
     addRoomForm: FormGroup;
     id: number;
     coords: Coords;
+    items: Item[] = [];
     constructor(
         private roomServices: RoomService,
         private ngZone: NgZone,
@@ -64,6 +66,10 @@ export class AddRoomComponent implements OnInit {
         this.getRoomObjectsControl.removeAt(i);
     }
 
+    addItem(item: Item) {
+        console.log(item);
+        this.items.push(item);
+    }
     addRoom() { }
 
 
