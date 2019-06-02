@@ -1,6 +1,10 @@
-<div class="row">
-    <div class="col">
-        test
-        <app-item-selector (sendItemToParent)="addItemToContainer($event)"></app-item-selector>
+<h1 mat-dialog-title>Manage Container Items</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+
+            <app-item-selector (sendItemToParent)="addItemToContainer($event)"></app-item-selector>
+        </div>
     </div>
+
 </div>

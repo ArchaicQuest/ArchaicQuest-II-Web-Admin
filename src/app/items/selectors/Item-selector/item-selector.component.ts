@@ -85,6 +85,7 @@ export class ItemSelectorComponent extends BaseSelectorComponent
     }
 
     addItem() {
+        //  const newObj = Object.create(this.control.value);
         this.sendItemToParent.emit(this.control.value);
     }
 

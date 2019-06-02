@@ -12,6 +12,7 @@ import { Store } from '@ngrx/store';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { ManageContainerItemsComponent } from './manage-container-items/manage-container-items.component';
+import { ItemModule } from 'src/app/items/item.module';
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -69,17 +70,20 @@ export class AddRoomComponent implements OnInit {
     }
 
     addItem(item: Item) {
-        console.log(item);
-        this.items.push(item);
+        this.items.push(JSON.parse(JSON.stringify(item)));
     }
 
     // closeDialog() {
     //     this.dialogRef.close('Pizza!');
     // }
-    openDialog(item: Item): void {
+    openDialog(item: Item, index: number): void {
         const dialogRef = this.dialog.open(ManageContainerItemsComponent, {
-            width: '250px',
-            data: item
+            width: '450px',
+            data: {
+                item: item,
+                items: this.items,
+                containerIndex: index--
+            }
         });
 
         dialogRef.afterClosed().subscribe(result => {
@@ -87,6 +91,12 @@ export class AddRoomComponent implements OnInit {
 
         });
     }
+
+    removeItemFromContainer(container: Item, item: Item) {
+        const foundIndex = container.container.items.findIndex(x => x.id === item.id);
+        container.container.items.splice(foundIndex, 1);
+    }
+
 
 
 

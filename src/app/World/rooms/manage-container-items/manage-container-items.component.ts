@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { RoomService } from './add-room.service';
 import { ActivatedRoute } from '@angular/router';
 import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -14,9 +13,13 @@ export class ManageContainerItemsComponent implements OnInit {
 
     constructor(
         public dialogRef: MatDialogRef<ManageContainerItemsComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: Item) { }
+        @Inject(MAT_DIALOG_DATA) public data: {
+            item: Item,
+            items: Item,
+            containerIndex: number
+        }) { }
 
-    onNoClick(): void {
+    onClose(): void {
         this.dialogRef.close();
     }
 
@@ -25,8 +28,9 @@ export class ManageContainerItemsComponent implements OnInit {
     }
 
 
-    addItemToContainer(item) {
-        this.data.container.items.push(item);
+    addItemToContainer(item: Item) {
+        this.data.items[this.data.containerIndex].container.items.push(item);
+
     }
 
 

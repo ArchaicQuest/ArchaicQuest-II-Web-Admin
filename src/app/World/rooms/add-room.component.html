@@ -111,17 +111,17 @@
                 <div class="row">
                     <div class="col">
                         <p>Added Items:</p>
-                        <p>todo: </p>
-                        <p>Click manage to open modal to manage items in container</p>
+
                         <ul>
                             <li *ngFor="let item of items; let i=index">{{item.name}} {{item.itemType}} <a
                                     href="javascript:void(0)" *ngIf="item.itemType == '2'"
-                                    (click)="openDialog(item)">Manage</a>
+                                    (click)="openDialog(item, i)">Manage</a>
                                 <br />
                                 <ul>
-                                    <li *ngFor="let containerItems of item.container.items; let i=index">
+                                    <li *ngFor="let containerItem of item.container.items; let i=index">
 
-                                        {{containerItems.name}}
+                                        {{containerItem.name}} <a href="javascript:void(0)"
+                                            (click)="removeItemFromContainer(item, containerItem)">Remove</a>
                                     </li>
                                 </ul>
                             </li>
