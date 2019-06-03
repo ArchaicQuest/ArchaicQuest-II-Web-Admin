@@ -14,6 +14,7 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { ManageContainerItemsComponent } from './manage-container-items/manage-container-items.component';
 import { ItemModule } from 'src/app/items/item.module';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { ManageMobComponent } from './manage-mob/manage-mob.component';
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -76,8 +77,8 @@ export class AddRoomComponent implements OnInit {
     }
 
     addMob(mob: Mob) {
-      this.mobs.push(JSON.parse(JSON.stringify(mob)));
-  }
+        this.mobs.push(JSON.parse(JSON.stringify(mob)));
+    }
 
     // closeDialog() {
     //     this.dialogRef.close('Pizza!');
@@ -87,7 +88,7 @@ export class AddRoomComponent implements OnInit {
             width: '450px',
             data: {
                 item: item,
-                items: this.items,
+                items: this.mobs,
                 containerIndex: index--
             }
         });
@@ -103,11 +104,33 @@ export class AddRoomComponent implements OnInit {
         container.container.items.splice(foundIndex, 1);
     }
 
+    removeItem(index: number) {
+        this.items.splice(index, 1);
+    }
+
+    openMobDialog(mob: Mob): void {
+        const dialogRef = this.dialog.open(ManageMobComponent, {
+            width: '450px',
+            data: {
+                inventory: mob.inventory,
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+
+
+        });
+    }
 
     removeItemFromMob(inventory: Item[], item: Item) {
-      const foundIndex = inventory.findIndex(x => x.id === item.id);
-      inventory.splice(foundIndex, 1);
-  }
+        const foundIndex = inventory.findIndex(x => x.id === item.id);
+        inventory.splice(foundIndex, 1);
+    }
+
+    removeMob(index: number) {
+        this.mobs.splice(index, 1);
+    }
+
 
 
 

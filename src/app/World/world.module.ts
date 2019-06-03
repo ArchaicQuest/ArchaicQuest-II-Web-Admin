@@ -29,6 +29,7 @@ import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-sel
 import { ItemService } from '../items/add-item/add-item.service';
 import { ManageContainerItemsComponent } from './rooms/manage-container-items/manage-container-items.component';
 import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.component';
+import { ManageMobComponent } from './rooms/manage-mob/manage-mob.component';
 
 
 
@@ -56,7 +57,7 @@ import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.componen
         RoomService,
         ItemService
     ],
-    entryComponents: [ManageContainerItemsComponent],
+    entryComponents: [ManageContainerItemsComponent, ManageMobComponent],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
@@ -65,7 +66,8 @@ import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.componen
         EditAreaComponent,
         ItemSelectorComponent,
         MobSelectorComponent,
-        ManageContainerItemsComponent
+        ManageContainerItemsComponent,
+        ManageMobComponent
 
 
     ],

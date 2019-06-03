@@ -124,6 +124,7 @@
                                             (click)="removeItemFromContainer(item, containerItem)">Remove</a>
                                     </li>
                                 </ul>
+                                <a href="javascript:void(0)" (click)="removeItem(i)">Remove</a>
                             </li>
                         </ul>
                     </div>
@@ -139,8 +140,8 @@
                         <p>Added Mobs:</p>
 
                         <ul>
-                            <li *ngFor="let mob of mobs; let i=index">{{mob.name}} <a
-                                    href="javascript:void(0)" (click)="openDialog(mob, i)">Manage</a>
+                            <li *ngFor="let mob of mobs; let i=index">{{mob.name}} <a href="javascript:void(0)"
+                                    (click)="openMobDialog(mob)">Manage</a>
                                 <br />
                                 <ul>
                                     <li *ngFor="let item of mob.inventory; let i=index">
@@ -149,6 +150,7 @@
                                             (click)="removeItemFromMob(mob.inventory, item)">Remove</a>
                                     </li>
                                 </ul>
+                                <a href="javascript:void(0)" (click)="removeMob(i)">Remove</a>
                             </li>
                         </ul>
                     </div>
@@ -211,6 +213,8 @@
             </p>
 
             <p class="room__description" *ngFor="let item of items; let i=index">{{item.name}} lies here.</p>
+            <p class="room__description" *ngFor="let mob of mobs; let i=index">
+                {{mob.longName == null ? mob.name + ' is here' : mob.longName}}.</p>
         </div>
     </div>
 </div>
