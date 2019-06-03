@@ -132,7 +132,30 @@
                     </div>
                 </div>
 
+                <h2>Mobs</h2>
 
+                <div class="row">
+                    <div class="col">
+                        <p>Added Mobs:</p>
+
+                        <ul>
+                            <li *ngFor="let mob of mobs; let i=index">{{mob.name}} <a
+                                    href="javascript:void(0)" (click)="openDialog(mob, i)">Manage</a>
+                                <br />
+                                <ul>
+                                    <li *ngFor="let item of mob.inventory; let i=index">
+
+                                        {{item.name}} <a href="javascript:void(0)"
+                                            (click)="removeItemFromMob(mob.inventory, item)">Remove</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col">
+                        <app-mob-selector (sendMobToParent)="addMob($event)"></app-mob-selector>
+                    </div>
+                </div>
 
                 <h2>Coords:</h2>
                 <p>These are automatically set based on the map on the area page. You should rarely need to manually

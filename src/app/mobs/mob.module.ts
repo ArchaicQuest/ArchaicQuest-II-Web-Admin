@@ -9,7 +9,7 @@ import {
     MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
     MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule
 } from '@angular/material';
-import { MobService } from './add-mob.service';
+import {  AddMobService } from './add-mob.service';
 import { AddMobComponent } from './add-mob.component';
 import { ItemService } from '../items/add-item/add-item.service';
 import { InventoryComponent } from '../characters/inventory/inventory.component';
@@ -17,6 +17,7 @@ import { characterReducer } from '../characters/state/character.reducer';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
 import { CharacterEffects } from '../characters/state/character.effects';
 import { ArmourClassComponent } from '../characters/armour-class/armour-class.component';
+import { MobService } from './mob.service';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { ArmourClassComponent } from '../characters/armour-class/armour-class.co
     ],
     providers: [
         MobService,
+        AddMobService,
         ItemService
     ],
     declarations: [

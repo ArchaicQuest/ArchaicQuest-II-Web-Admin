@@ -13,6 +13,7 @@ import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { ManageContainerItemsComponent } from './manage-container-items/manage-container-items.component';
 import { ItemModule } from 'src/app/items/item.module';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -22,6 +23,7 @@ export class AddRoomComponent implements OnInit {
     id: number;
     coords: Coords;
     items: Item[] = [];
+    mobs: Mob[] = [];
     constructor(
         private roomServices: RoomService,
         private ngZone: NgZone,
@@ -73,6 +75,10 @@ export class AddRoomComponent implements OnInit {
         this.items.push(JSON.parse(JSON.stringify(item)));
     }
 
+    addMob(mob: Mob) {
+      this.mobs.push(JSON.parse(JSON.stringify(mob)));
+  }
+
     // closeDialog() {
     //     this.dialogRef.close('Pizza!');
     // }
@@ -97,6 +103,11 @@ export class AddRoomComponent implements OnInit {
         container.container.items.splice(foundIndex, 1);
     }
 
+
+    removeItemFromMob(inventory: Item[], item: Item) {
+      const foundIndex = inventory.findIndex(x => x.id === item.id);
+      inventory.splice(foundIndex, 1);
+  }
 
 
 

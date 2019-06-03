@@ -5,13 +5,14 @@ import { Observable, of } from 'rxjs';
 import { CharacterActionTypes, SaveCharSuccess, SaveChar } from './character.actions';
 import { switchMap, map, catchError, concatMap, mergeMap } from 'rxjs/operators';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
-import { MobService } from 'src/app/mobs/add-mob.service';
+
 import { Action } from '@ngrx/store';
+import { AddMobService } from 'src/app/mobs/add-mob.service';
 
 
 @Injectable()
 export class CharacterEffects {
-    constructor(private actions$: Actions, private mobService: MobService, ) { }
+    constructor(private actions$: Actions, private mobService: AddMobService, ) { }
 
     @Effect()
     addMob: Observable<Action> = this.actions$.pipe(

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { MobService } from './add-mob.service';
+import {  AddMobService } from './add-mob.service';
 import { ActivatedRoute } from '@angular/router';
 import { Gender } from '../characters/interfaces/gender.interface';
 import { MatSelectChange } from '@angular/material';
@@ -42,7 +42,7 @@ export class AddMobComponent implements OnInit {
     filteredItems: Observable<Item[]>;
     emotes: string[] = [''];
     constructor(
-        private mobService: MobService,
+        private mobService: AddMobService,
         private store: Store<CharacterAppState>,
         private route: ActivatedRoute,
         private ngZone: NgZone,

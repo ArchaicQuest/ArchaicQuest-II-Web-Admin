@@ -28,6 +28,7 @@ import { APP_BASE_HREF } from '@angular/common';
 import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-selector.component';
 import { ItemService } from '../items/add-item/add-item.service';
 import { ManageContainerItemsComponent } from './rooms/manage-container-items/manage-container-items.component';
+import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.component';
 
 
 
@@ -63,6 +64,7 @@ import { ManageContainerItemsComponent } from './rooms/manage-container-items/ma
         ViewAreaComponent,
         EditAreaComponent,
         ItemSelectorComponent,
+        MobSelectorComponent,
         ManageContainerItemsComponent
 
 

@@ -32,7 +32,7 @@ import { Option } from '../shared/interfaces/option.interface';
   active affects
   emotes
 */
-export class MobService {
+export class AddMobService {
     private host = `${environment.hostAPI}`;
     private saveMobUrl = `${this.host}Character/Mob`;
     private getRacesUrl = `${this.host}/Character/Race`;
