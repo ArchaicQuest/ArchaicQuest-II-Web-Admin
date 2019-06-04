@@ -1,220 +1,466 @@
 <app-header>Add new room</app-header>
 <div class="row">
-    <div class="col-7">
-        <div class="panel">
-
-            <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addRoom()">
-                <h2>Room Information:</h2>
-                <div class="row">
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>Title</mat-label>
-                            <input matInput placeholder="Title" value="" required formControlName="title" />
-                            <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
-                                Room title is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>Description</mat-label>
-                            <textarea matInput placeholder="Title" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" required
-                                formControlName="description"></textarea>
-                            <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
-                                Room description is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <h2>Room Objects:</h2>
-                <p>These are used to add more Information about key items highlighted in the description.</p>
-                <div class="row">
-                    <div class="col">
-                        <div formArrayName="roomObjects"
-                            *ngFor="let roomObject of getRoomObjectsControl.controls; let i=index">
-                            <div [formGroupName]="i">
-
-                                <mat-form-field appearance="outline" class="form-control">
-                                    <mat-label>Keyword</mat-label>
-                                    <input type="text" matInput placeholder="Keyword" formControlName="title" />
-
-                                </mat-form-field>
-
-                                <div class="row">
-                                    <div class="col">
-                                        <mat-form-field appearance="outline" class="form-control">
-                                            <mat-label>Description</mat-label>
-                                            <textarea matInput placeholder="Basic description" cdkTextareaAutosize
-                                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                                                cdkAutosizeMaxRows="20" formControlName="description"></textarea>
-
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col">
-                                        <mat-form-field appearance="outline" class="form-control">
-                                            <mat-label>Examine</mat-label>
-                                            <textarea matInput placeholder="Detailed Description" cdkTextareaAutosize
-                                                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                                                cdkAutosizeMaxRows="20" formControlName="examine"></textarea>
-
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-                                <div class="row">
-
-
-                                    <div class="col">
-                                        <mat-form-field appearance="outline" class="form-control">
-                                            <mat-label>Touch</mat-label>
-                                            <textarea matInput placeholder="How does the object feel?"
-                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                formControlName="touch"></textarea>
-
-                                        </mat-form-field>
-                                    </div>
-
-                                    <div class="col">
-                                        <mat-form-field appearance="outline" class="form-control">
-                                            <mat-label>Taste</mat-label>
-                                            <textarea matInput placeholder="How does the object taste?"
-                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                formControlName="taste"></textarea>
-
-                                        </mat-form-field>
-                                    </div>
-                                    <div class="col">
-                                        <mat-form-field appearance="outline" class="form-control">
-                                            <mat-label>Smell</mat-label>
-                                            <textarea matInput placeholder="How does the object smell?"
-                                                cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                formControlName="smell"></textarea>
-
-                                        </mat-form-field>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <a class="btn btn-danger btn-sm" (click)="removeRoomObject(i)">Remove</a>
-                        </div>
-                        <a (click)="this.addRoomObject()">Add another Room Object</a>
-                    </div>
-                </div>
-
-                <h2>Items</h2>
-
-                <div class="row">
-                    <div class="col">
-                        <p>Added Items:</p>
-
-                        <ul>
-                            <li *ngFor="let item of items; let i=index">{{item.name}} {{item.itemType}} <a
-                                    href="javascript:void(0)" *ngIf="item.itemType == '2'"
-                                    (click)="openDialog(item, i)">Manage</a>
-                                <br />
-                                <ul>
-                                    <li *ngFor="let containerItem of item.container.items; let i=index">
-
-                                        {{containerItem.name}} <a href="javascript:void(0)"
-                                            (click)="removeItemFromContainer(item, containerItem)">Remove</a>
-                                    </li>
-                                </ul>
-                                <a href="javascript:void(0)" (click)="removeItem(i)">Remove</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <app-item-selector (sendItemToParent)="addItem($event)"></app-item-selector>
-                    </div>
-                </div>
-
-                <h2>Mobs</h2>
-
-                <div class="row">
-                    <div class="col">
-                        <p>Added Mobs:</p>
-
-                        <ul>
-                            <li *ngFor="let mob of mobs; let i=index">{{mob.name}} <a href="javascript:void(0)"
-                                    (click)="openMobDialog(mob)">Manage</a>
-                                <br />
-                                <ul>
-                                    <li *ngFor="let item of mob.inventory; let i=index">
-
-                                        {{item.name}} <a href="javascript:void(0)"
-                                            (click)="removeItemFromMob(mob.inventory, item)">Remove</a>
-                                    </li>
-                                </ul>
-                                <a href="javascript:void(0)" (click)="removeMob(i)">Remove</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <app-mob-selector (sendMobToParent)="addMob($event)"></app-mob-selector>
-                    </div>
-                </div>
-
-                <h2>Coords:</h2>
-                <p>These are automatically set based on the map on the area page. You should rarely need to manually
-                    change these but you have the option to do so.</p>
-                <div class="row">
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>X:</mat-label>
-                            <input matInput placeholder="X Coord" required formControlName="CoordX" />
-                            <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
-                                X coord is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>Y:</mat-label>
-                            <input matInput placeholder="Y Coord" required formControlName="CoordY" />
-                            <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                                y coord is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>Z:</mat-label>
-                            <input matInput placeholder="Z Coord" required formControlName="CoordZ" />
-                            <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                                z coord is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-                </div>
-
-
-                <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">Save
-                    Room</button>
-            </form>
+  <div class="col-7">
+    <div class="panel">
+      <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addRoom()">
+        <h2>Room Information:</h2>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="form-control">
+              <mat-label>Title</mat-label>
+              <input
+                matInput
+                placeholder="Title"
+                value=""
+                required
+                formControlName="title"
+              />
+              <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                Room title is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
-    </div>
-
-    <div class="col-5">
-        <div class="client">
-            <p class="room__description">Room Preview:</p>
-            <p class="echo">> look</p>
-            <p class="room__title">
-                {{addRoomForm.get('title').value === '' ? 'This is the room title' : addRoomForm.get('title').value}}
-            </p>
-            <p class="room__description">
-                {{addRoomForm.get('description').value === '' ? 'Your beautifully written room description shown here.' : addRoomForm.get('description').value}}
-            </p>
-
-            <p class="room__description" *ngFor="let item of items; let i=index">{{item.name}} lies here.</p>
-            <p class="room__description" *ngFor="let mob of mobs; let i=index">
-                {{mob.longName == null ? mob.name + ' is here' : mob.longName}}.</p>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="form-control">
+              <mat-label>Description</mat-label>
+              <textarea
+                matInput
+                placeholder="Title"
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="2"
+                cdkAutosizeMaxRows="20"
+                required
+                formControlName="description"
+              ></textarea>
+              <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                Room description is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
         </div>
+        <h2>Room Objects:</h2>
+        <p>
+          These are used to add more Information about key items highlighted in
+          the description.
+        </p>
+        <div class="row">
+          <div class="col">
+            <div
+              formArrayName="roomObjects"
+              *ngFor="
+                let roomObject of getRoomObjectsControl.controls;
+                let i = index
+              "
+            >
+              <div [formGroupName]="i">
+                <mat-form-field appearance="outline" class="form-control">
+                  <mat-label>Keyword</mat-label>
+                  <input
+                    type="text"
+                    matInput
+                    placeholder="Keyword"
+                    formControlName="title"
+                  />
+                </mat-form-field>
+
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                      <mat-label>Description</mat-label>
+                      <textarea
+                        matInput
+                        placeholder="Basic description"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="20"
+                        formControlName="description"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                      <mat-label>Examine</mat-label>
+                      <textarea
+                        matInput
+                        placeholder="Detailed Description"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="20"
+                        formControlName="examine"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                      <mat-label>Touch</mat-label>
+                      <textarea
+                        matInput
+                        placeholder="How does the object feel?"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="20"
+                        formControlName="touch"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+
+                  <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                      <mat-label>Taste</mat-label>
+                      <textarea
+                        matInput
+                        placeholder="How does the object taste?"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="20"
+                        formControlName="taste"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                  <div class="col">
+                    <mat-form-field appearance="outline" class="form-control">
+                      <mat-label>Smell</mat-label>
+                      <textarea
+                        matInput
+                        placeholder="How does the object smell?"
+                        cdkTextareaAutosize
+                        #autosize="cdkTextareaAutosize"
+                        cdkAutosizeMinRows="2"
+                        cdkAutosizeMaxRows="20"
+                        formControlName="smell"
+                      ></textarea>
+                    </mat-form-field>
+                  </div>
+                </div>
+              </div>
+              <a class="btn btn-danger btn-sm" (click)="removeRoomObject(i)"
+                >Remove</a
+              >
+            </div>
+            <a (click)="this.addRoomObject()">Add another Room Object</a>
+          </div>
+        </div>
+
+        <h2>Items</h2>
+
+        <div class="row">
+          <div class="col">
+            <p>Added Items:</p>
+
+            <ul>
+              <li *ngFor="let item of items; let i = index">
+                {{ item.name }} {{ item.itemType }}
+                <a
+                  href="javascript:void(0)"
+                  *ngIf="item.itemType == '2'"
+                  (click)="openDialog(item, i)"
+                  >Manage</a
+                >
+                <br />
+                <ul>
+                  <li
+                    *ngFor="
+                      let containerItem of item.container.items;
+                      let i = index
+                    "
+                  >
+                    {{ containerItem.name }}
+                    <a
+                      href="javascript:void(0)"
+                      (click)="removeItemFromContainer(item, containerItem)"
+                      >Remove</a
+                    >
+                  </li>
+                </ul>
+                <a href="javascript:void(0)" (click)="removeItem(i)">Remove</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col">
+            <app-item-selector
+              (sendItemToParent)="addItem($event)"
+            ></app-item-selector>
+          </div>
+        </div>
+
+        <h2>Mobs</h2>
+
+        <div class="row">
+          <div class="col">
+            <p>Added Mobs:</p>
+
+            <ul>
+              <li *ngFor="let mob of mobs; let i = index">
+                {{ mob.name }}
+                <a href="javascript:void(0)" (click)="openMobDialog(mob)"
+                  >Manage</a
+                >
+                <br />
+                <ul>
+                  <li *ngFor="let item of mob.inventory; let i = index">
+                    {{ item.name }}
+                    <a
+                      href="javascript:void(0)"
+                      (click)="removeItemFromMob(mob.inventory, item)"
+                      >Remove</a
+                    >
+                  </li>
+                </ul>
+                <a href="javascript:void(0)" (click)="removeMob(i)">Remove</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col">
+            <app-mob-selector
+              (sendMobToParent)="addMob($event)"
+            ></app-mob-selector>
+          </div>
+        </div>
+
+        <h2>Exits:</h2>
+        <p>
+          Exits will appear here when adjacent rooms exist. However you can add
+          a custom exit to any room in the zone if you want to make a horrible
+          maze or a nice shortcut
+        </p>
+        <div class="row">
+          <div class="col">
+            <h3>North:</h3>
+            <p>The North Room</p>
+            <p>Is Open</p>
+
+            <hr />
+            <a href="javascript:void(0)">Remove</a> |
+            <a href="javascript:void(0)">Change</a>
+          </div>
+
+          <div class="col">
+            <h3>East:</h3>
+            <p>The east Room</p>
+
+            <hr />
+            <a href="javascript:void(0)">Remove</a> |
+            <a href="javascript:void(0)">Change</a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <h3>South:</h3>
+            <button mat-raised-button color="secondary" type="button">
+              Add exit to the South Room (-1, 1, 0)
+            </button>
+            <br />
+            <br />
+            <hr />
+            <br />
+            <div class="row">
+              <div class="col">
+                <mat-form-field appearance="outline" class="form-control">
+                  <mat-label>X:</mat-label>
+                  <input
+                    matInput
+                    placeholder="X Coord"
+                    required
+                    formControlName="CoordX"
+                  />
+                  <mat-error
+                    *ngIf="addRoomForm.get('CoordX').hasError('required')"
+                  >
+                    X coord is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col">
+                <mat-form-field appearance="outline" class="form-control">
+                  <mat-label>Y:</mat-label>
+                  <input
+                    matInput
+                    placeholder="Y Coord"
+                    required
+                    formControlName="CoordY"
+                  />
+                  <mat-error
+                    *ngIf="addRoomForm.get('CoordY').hasError('required')"
+                  >
+                    y coord is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col">
+                <mat-form-field appearance="outline" class="form-control">
+                  <mat-label>Z:</mat-label>
+                  <input
+                    matInput
+                    placeholder="Z Coord"
+                    required
+                    formControlName="CoordZ"
+                  />
+                  <mat-error
+                    *ngIf="addRoomForm.get('CoordY').hasError('required')"
+                  >
+                    z coord is required.
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <button mat-raised-button color="secondary" type="button">
+              Add custom exit
+            </button>
+          </div>
+
+          <div class="col">
+            <h3>West:</h3>
+            <p>The west Room</p>
+            <p>Is Closed and locked requires keyID 1</p>
+            <hr />
+            <a href="javascript:void(0)">Remove</a> |
+            <a href="javascript:void(0)">Change</a>
+          </div>
+        </div>
+
+        <h2>Coords:</h2>
+        <p>
+          These are automatically set based on the map on the area page. You
+          should rarely need to manually change these but you have the option to
+          do so.
+        </p>
+        <div class="row">
+          <div class="col">
+            <mat-form-field appearance="outline" class="form-control">
+              <mat-label>X:</mat-label>
+              <input
+                matInput
+                placeholder="X Coord"
+                required
+                formControlName="CoordX"
+              />
+              <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
+                X coord is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field appearance="outline" class="form-control">
+              <mat-label>Y:</mat-label>
+              <input
+                matInput
+                placeholder="Y Coord"
+                required
+                formControlName="CoordY"
+              />
+              <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                y coord is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <div class="col">
+            <mat-form-field appearance="outline" class="form-control">
+              <mat-label>Z:</mat-label>
+              <input
+                matInput
+                placeholder="Z Coord"
+                required
+                formControlName="CoordZ"
+              />
+              <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                z coord is required.
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <button
+          mat-raised-button
+          color="primary"
+          type="submit"
+          [disabled]="addRoomForm.invalid"
+        >
+          Save Room
+        </button>
+      </form>
     </div>
+  </div>
+
+  <div class="col-5">
+    <div class="client">
+      <p class="room__description">Room Preview:</p>
+      <p class="echo">> look</p>
+      <p class="room__title">
+        {{
+          addRoomForm.get("title").value === ""
+            ? "This is the room title"
+            : addRoomForm.get("title").value
+        }}
+      </p>
+      <p class="room__description">
+        {{
+          addRoomForm.get("description").value === ""
+            ? "Your beautifully written room description shown here."
+            : addRoomForm.get("description").value
+        }}
+      </p>
+
+      <p class="room__description" *ngFor="let item of items; let i = index">
+        {{ item.name }} lies here.
+      </p>
+      <p class="room__description" *ngFor="let mob of mobs; let i = index">
+        {{ mob.longName == null ? mob.name + " is here" : mob.longName }}.
+      </p>
+      <br />
+      <p class="room__description">Room Keywords Preview:</p>
+
+      <div
+        *ngFor="let roomObject of getRoomObjectsControl.controls; let i = index"
+        style="border-bottom: 1px dashed #555; padding-bottom: 10px"
+      >
+        <div *ngIf="roomObject.value.description">
+          <p class="echo">> look {{ roomObject.value.title }}</p>
+
+          <p class="room__description">
+            {{ roomObject.value.description }}
+          </p>
+        </div>
+
+        <div *ngIf="roomObject.value.examine">
+          <p class="echo">> examine {{ roomObject.value.title }}</p>
+
+          <p class="room__description">
+            {{ roomObject.value.examine }}
+          </p>
+        </div>
+        <div *ngIf="roomObject.value.touch">
+          <p class="echo">> touch {{ roomObject.value.title }}</p>
+
+          <p class="room__description">
+            {{ roomObject.value.touch }}
+          </p>
+        </div>
+        <div *ngIf="roomObject.value.taste">
+          <p class="echo">> taste {{ roomObject.value.title }}</p>
+
+          <p class="room__description">
+            {{ roomObject.value.taste }}
+          </p>
+        </div>
+        <div *ngIf="roomObject.value.smell">
+          <p class="echo">> smell {{ roomObject.value.title }}</p>
+
+          <p class="room__description">
+            {{ roomObject.value.smell }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
