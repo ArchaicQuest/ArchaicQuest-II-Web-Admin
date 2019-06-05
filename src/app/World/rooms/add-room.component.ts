@@ -15,6 +15,7 @@ import { ManageContainerItemsComponent } from './manage-container-items/manage-c
 import { ItemModule } from 'src/app/items/item.module';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { ManageMobComponent } from './manage-mob/manage-mob.component';
+import { ManageExitsComponent } from './modals/modals/room-exits/manage-exits.component';
 
 @Component({
     templateUrl: './add-room.component.html'
@@ -132,7 +133,17 @@ export class AddRoomComponent implements OnInit {
     }
 
 
+    openExitDialog(): void {
+      const dialogRef = this.dialog.open(ManageExitsComponent, {
+          width: '450px',
 
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+
+      });
+  }
 
     addRoom() { }
 

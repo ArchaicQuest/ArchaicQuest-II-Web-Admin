@@ -30,6 +30,7 @@ import { ItemService } from '../items/add-item/add-item.service';
 import { ManageContainerItemsComponent } from './rooms/manage-container-items/manage-container-items.component';
 import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.component';
 import { ManageMobComponent } from './rooms/manage-mob/manage-mob.component';
+import { ManageExitsComponent } from './rooms/modals/modals/room-exits/manage-exits.component';
 
 
 
@@ -57,7 +58,7 @@ import { ManageMobComponent } from './rooms/manage-mob/manage-mob.component';
         RoomService,
         ItemService
     ],
-    entryComponents: [ManageContainerItemsComponent, ManageMobComponent],
+    entryComponents: [ManageContainerItemsComponent, ManageMobComponent, ManageExitsComponent],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
@@ -67,7 +68,8 @@ import { ManageMobComponent } from './rooms/manage-mob/manage-mob.component';
         ItemSelectorComponent,
         MobSelectorComponent,
         ManageContainerItemsComponent,
-        ManageMobComponent
+        ManageMobComponent,
+        ManageExitsComponent
 
 
     ],

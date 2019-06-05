@@ -165,101 +165,85 @@
                     maze or a nice shortcut
                 </p>
                 <div class="row">
+
+                    <div class="col">
+                        <h3>North West:</h3>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
+                    </div>
                     <div class="col">
                         <h3>North:</h3>
-                        <p>The North Room</p>
-                        <p>Is Open</p>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
+                    </div>
 
-                        <hr />
-                        <a href="javascript:void(0)">Remove</a> |
-                        <a href="javascript:void(0)">Change</a>
+                    <div class="col">
+                        <h3>North East:</h3>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col">
+                        <h3>West:</h3>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
+                    </div>
+
+                    <div class="col">
+                        &nbsp;
                     </div>
 
                     <div class="col">
                         <h3>East:</h3>
-                        <p>The east Room</p>
-
-                        <hr />
-                        <a href="javascript:void(0)">Remove</a> |
-                        <a href="javascript:void(0)">Change</a>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
+                            <h3>South west:</h3>
+                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                                Add Room
+                            </button>
+                    </div>
+                    <div class="col">
                         <h3>South:</h3>
-                        <button mat-raised-button color="secondary" type="button">
-                            Add exit to the South Room (-1, 1, 0)
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
                         </button>
-                        <br />
-                        <br />
-                        <hr />
-                        <br />
-                        <div class="row">
-                            <div class="col">
-                                <mat-form-field appearance="outline" class="form-control">
-                                    <mat-label>Exit Name</mat-label>
-                                    <input matInput placeholder="Exit name" required formControlName="CoordX" />
-                                    <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
-                                        X coord is required.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+                    </div>
 
-                        </div>
 
-                        <div class="row">
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="form-control">
-                                    <mat-label>X:</mat-label>
-                                    <input matInput placeholder="X Coord" required formControlName="CoordX" />
-                                    <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
-                                        X coord is required.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="form-control">
-                                    <mat-label>Y:</mat-label>
-                                    <input matInput placeholder="Y Coord" required formControlName="CoordY" />
-                                    <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                                        y coord is required.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
+                    <div class="col">
+                        <h3>South East:</h3>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
+                    </div>
 
-                            <div class="col-4">
-                                <mat-form-field appearance="outline" class="form-control">
-                                    <mat-label>Z:</mat-label>
-                                    <input matInput placeholder="Z Coord" required formControlName="CoordZ" />
-                                    <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                                        z coord is required.
-                                    </mat-error>
-                                </mat-form-field>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col">
-                                <mat-checkbox>Closed</mat-checkbox>
-                            </div>
-                            <div class="col">
-                                <mat-checkbox>Locked</mat-checkbox>
-                            </div>
-
-                        </div>
-
-                        <button mat-raised-button color="secondary" type="button">
-                            Add custom exit
+                </div>
+              
+                <div class="row">
+                    <div class="col">
+                        <h3>Up:</h3>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
                         </button>
                     </div>
 
                     <div class="col">
-                        <h3>West:</h3>
-                        <p>The west Room</p>
-                        <p>Is Closed and locked requires keyID 1</p>
-                        <hr />
-                        <a href="javascript:void(0)">Remove</a> |
-                        <a href="javascript:void(0)">Change</a>
+                        <h3>Down:</h3>
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add Room
+                        </button>
                     </div>
                 </div>
 
