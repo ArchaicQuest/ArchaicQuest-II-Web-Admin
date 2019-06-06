@@ -102,6 +102,52 @@
 
                 <h2>Items</h2>
 
+                <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+                    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                        <div *ngIf="column == 'actions'">
+                            <td mat-cell *matCellDef="let element"> <button mat-button>
+                                    Edit
+                                </button></td>
+                        </div>
+
+                        <div *ngIf="column != 'actions'">
+                            <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                        </div>
+                    </ng-container>
+
+
+
+
+
+                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                            <div class="example-element-detail"
+                                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                                <div class="example-element-diagram">
+                                    <div class="example-element-position"> {{element.name}} </div>
+                                    <div class="example-element-symbol"> {{element.slot}} </div>
+                                    <div class="example-element-name"> {{element.itemType}} </div>
+                                    <div class="example-element-weight"> {{element.questItem}} </div>
+
+                                </div>
+                                <div class="example-element-description">
+                                    {{element.description}}
+                                    <span class="example-element-description-attribution"> -- Wikipedia </span>
+                                </div>
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+                    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+                        [class.example-expanded-row]="expandedElement === element"
+                        (click)="expandedElement = expandedElement === element ? null : element">
+                    </tr>
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                </table>
+
                 <div class="row">
                     <div class="col">
                         <p>Added Items:</p>
@@ -167,22 +213,22 @@
                 <div class="row">
 
                     <div class="col">
-                        <h3>North West:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add North West Exit
                         </button>
                     </div>
                     <div class="col">
-                        <h3>North:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add North Exit
                         </button>
                     </div>
 
                     <div class="col">
-                        <h3>North East:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add North East Exit
                         </button>
                     </div>
                 </div>
@@ -190,9 +236,9 @@
                 <div class="row">
 
                     <div class="col">
-                        <h3>West:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add West Exit
                         </button>
                     </div>
 
@@ -201,36 +247,36 @@
                     </div>
 
                     <div class="col">
-                        <h3>East:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add East Exit
                         </button>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                            <h3>South west:</h3>
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add Room
-                            </button>
+
+                        <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
+                            Add South West Exit
+                        </button>
                     </div>
                     <div class="col">
-                        <h3>South:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add South Exit
                         </button>
                     </div>
 
 
                     <div class="col">
-                        <h3>South East:</h3>
+
                         <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                            Add Room
+                            Add South East Exit
                         </button>
                     </div>
 
                 </div>
-              
+
                 <div class="row">
                     <div class="col">
                         <h3>Up:</h3>

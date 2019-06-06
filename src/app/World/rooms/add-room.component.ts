@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { RoomService } from './add-room.service';
 import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange, MatDialogRef, MatDialog } from '@angular/material';
+import { MatSelectChange, MatDialogRef, MatDialog, MatTableDataSource } from '@angular/material';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
     take,
@@ -16,9 +16,17 @@ import { ItemModule } from 'src/app/items/item.module';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { ManageMobComponent } from './manage-mob/manage-mob.component';
 import { ManageExitsComponent } from './modals/modals/room-exits/manage-exits.component';
+import { trigger, state, style, animate, transition } from '@angular/animations';
 
 @Component({
-    templateUrl: './add-room.component.html'
+    templateUrl: './add-room.component.html',
+    styleUrls: ['./add-room.component.scss'],
+    animations: [
+        trigger('detailExpand', [
+            state('collapsed', style({ height: '0px', minHeight: '0' })),
+            state('expanded', style({ height: '*' })),
+            transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+        ])]
 })
 export class AddRoomComponent implements OnInit {
     addRoomForm: FormGroup;
@@ -26,6 +34,10 @@ export class AddRoomComponent implements OnInit {
     coords: Coords;
     items: Item[] = [];
     mobs: Mob[] = [];
+    //move
+    dataSource = this.items;
+    columnsToDisplay = ['name', 'slot', 'itemType', 'questItem', 'container', 'actions'];
+    expandedElement: Item | null;
     constructor(
         private roomServices: RoomService,
         private ngZone: NgZone,
@@ -74,7 +86,13 @@ export class AddRoomComponent implements OnInit {
     }
 
     addItem(item: Item) {
-        this.items.push(JSON.parse(JSON.stringify(item)));
+        //  this.items.push());
+        // this.dataSource = new MatTableDataSource(this.items)
+
+        //  this.dataSource.push(JSON.parse(JSON.stringify(item));
+        let temp = this.dataSource.slice();
+        temp.push(JSON.parse(JSON.stringify(item)));
+        this.dataSource = temp;
     }
 
     addMob(mob: Mob) {
@@ -134,16 +152,26 @@ export class AddRoomComponent implements OnInit {
 
 
     openExitDialog(): void {
-      const dialogRef = this.dialog.open(ManageExitsComponent, {
-          width: '450px',
+        const dialogRef = this.dialog.open(ManageExitsComponent, {
+            width: '450px',
 
-      });
+        });
 
-      dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe(result => {
 
 
-      });
-  }
+        });
+    }
+
+    // tslint:disable-next-line:use-life-cycle-interface
+    ngAfterViewInit() {
+        this.dataSource = this.items;
+
+        // If the user changes the sort order, reset back to the first page.
+        //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+
+    }
 
     addRoom() { }
 
