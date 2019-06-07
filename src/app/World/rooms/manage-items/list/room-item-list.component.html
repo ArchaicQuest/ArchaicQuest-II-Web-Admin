@@ -1,0 +1,48 @@
+
+
+<div class="alert alert-primary" role="alert"*ngIf="dataSource.length == 0">
+  No items in room
+<div>
+  <button mat-button color="primary"  (click)="t()">
+      Add item
+  </button>
+</div>
+</div>
+
+
+<table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+      <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+      <div *ngIf="column == 'actions'">
+          <td mat-cell *matCellDef="let element"> <button mat-button (click)="t()">
+                  Edit
+              </button></td>
+      </div>
+
+      <div *ngIf="column != 'actions'">
+          <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+      </div>
+  </ng-container>
+
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+      <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+          <div class="example-element-detail"
+              [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <h2> Container Items</h2>
+
+                  <app-item-selector (sendItemToParent)="addItem($event)"></app-item-selector>
+
+          </div>
+      </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>

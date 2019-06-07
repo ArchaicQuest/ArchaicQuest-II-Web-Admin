@@ -23,7 +23,7 @@ export interface Item {
     condition: number;
     questItem: boolean;
     itemType: string;
-    slot: EqSlot;
+    slot: EqSlot | any;
     level: string;
     modifier?: ItemModifier;
     containerItems?: Item[];

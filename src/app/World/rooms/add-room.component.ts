@@ -17,6 +17,7 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { ManageMobComponent } from './manage-mob/manage-mob.component';
 import { ManageExitsComponent } from './modals/modals/room-exits/manage-exits.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
+import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 
 @Component({
     templateUrl: './add-room.component.html',
@@ -36,7 +37,7 @@ export class AddRoomComponent implements OnInit {
     mobs: Mob[] = [];
     //move
     dataSource = this.items;
-    columnsToDisplay = ['name', 'slot', 'itemType', 'questItem', 'container', 'actions'];
+    columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
     expandedElement: Item | null;
     constructor(
         private roomServices: RoomService,
@@ -86,13 +87,12 @@ export class AddRoomComponent implements OnInit {
     }
 
     addItem(item: Item) {
-        //  this.items.push());
-        // this.dataSource = new MatTableDataSource(this.items)
 
-        //  this.dataSource.push(JSON.parse(JSON.stringify(item));
+        item.slot = this.mapSlot(item.slot);
         let temp = this.dataSource.slice();
         temp.push(JSON.parse(JSON.stringify(item)));
         this.dataSource = temp;
+        console.log(this.dataSource)
     }
 
     addMob(mob: Mob) {
@@ -163,6 +163,10 @@ export class AddRoomComponent implements OnInit {
         });
     }
 
+    mapSlot(id: number) {
+      return ItemSlotEnum[id];
+    }
+
     // tslint:disable-next-line:use-life-cycle-interface
     ngAfterViewInit() {
         this.dataSource = this.items;
@@ -171,6 +175,10 @@ export class AddRoomComponent implements OnInit {
         //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
 
+    }
+
+    t() {
+      console.log("t");
     }
 
     addRoom() { }
