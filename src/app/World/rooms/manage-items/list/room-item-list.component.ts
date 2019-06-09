@@ -4,10 +4,13 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { MatDialog } from '@angular/material';
 import { ManageContainerItemsComponent } from '../../manage-container-items/manage-container-items.component';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
+import { ItemSelectorComponent } from 'src/app/items/selectors/Item-selector/item-selector.component';
+import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
+import { container } from '@angular/core/src/render3';
 
 
 @Component({
-  selector: 'app-item-list',
+    selector: 'app-item-list',
     templateUrl: './room-item-list.component.html',
     styleUrls: ['./room-item-list.component.scss'],
     animations: [
@@ -18,7 +21,8 @@ import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
         ])]
 })
 export class RoomItemListComponent implements OnInit, OnChanges {
-  @Input() data: Item[];
+    @Input() data: Item[];
+    @Input() container: Item;
 
     items: Item[] = [];
 
@@ -30,11 +34,11 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
 
     ngOnInit() {
-      console.log(this.data)
-     }
+        console.log(this.data)
+    }
 
-     ngOnChanges() {
-      this.dataSource  = this.data;
+    ngOnChanges() {
+        this.dataSource = this.data;
     }
 
 
@@ -47,13 +51,12 @@ export class RoomItemListComponent implements OnInit, OnChanges {
     }
 
 
-    openDialog(item: Item, index: number): void {
-        const dialogRef = this.dialog.open(ManageContainerItemsComponent, {
+    openDialog(): void {
+        //   debugger;
+        const dialogRef = this.dialog.open(ManageRoomItemsComponent, {
             width: '450px',
             data: {
-                item: item,
-                items: this.items,
-                containerIndex: index--
+                container: this.container
             }
         });
 
@@ -70,7 +73,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
 
     mapSlot(id: number) {
-      return ItemSlotEnum[id];
+        return ItemSlotEnum[id];
     }
 
 
@@ -80,7 +83,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
     }
 
     t() {
-      console.log("t");
+        console.log("t");
     }
 
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { RoomService } from './add-room.service';
 import { ActivatedRoute } from '@angular/router';
@@ -29,14 +29,15 @@ import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
             transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
         ])]
 })
-export class AddRoomComponent implements OnInit {
+export class AddRoomComponent implements OnInit, OnDestroy {
+    componentActive = true;
     addRoomForm: FormGroup;
     id: number;
     coords: Coords;
     items: Item[] = [];
     mobs: Mob[] = [];
     //move
-    dataSource = this.items;
+    // dataSource = this.items;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
     expandedElement: Item | null;
     constructor(
@@ -63,6 +64,14 @@ export class AddRoomComponent implements OnInit {
         this.addRoomForm.get('CoordY').setValue(this.coords.y);
         this.addRoomForm.get('CoordZ').setValue(this.coords.z);
 
+        this.roomServices.getRroomItems();
+
+        this.roomServices.items.subscribe((value: Item[]) => {
+            console.log(value);
+            this.items = value;
+
+        });
+
     }
 
     triggerDescriptionResize() {
@@ -86,14 +95,14 @@ export class AddRoomComponent implements OnInit {
         this.getRoomObjectsControl.removeAt(i);
     }
 
-    addItem(item: Item) {
+    // addItem(item: Item) {
 
-        item.slot = this.mapSlot(item.slot);
-        let temp = this.dataSource.slice();
-        temp.push(JSON.parse(JSON.stringify(item)));
-        this.dataSource = temp;
-        console.log(this.dataSource)
-    }
+    //     item.slot = this.mapSlot(item.slot);
+    //     let temp = this.items.slice();
+    //     temp.push(JSON.parse(JSON.stringify(item)));
+    //     this.items = temp;
+    //     console.log(this.items)
+    // }
 
     addMob(mob: Mob) {
         this.mobs.push(JSON.parse(JSON.stringify(mob)));
@@ -164,12 +173,12 @@ export class AddRoomComponent implements OnInit {
     }
 
     mapSlot(id: number) {
-      return ItemSlotEnum[id];
+        return ItemSlotEnum[id];
     }
 
     // tslint:disable-next-line:use-life-cycle-interface
     ngAfterViewInit() {
-        this.dataSource = this.items;
+        //this.dataSource = this.items;
 
         // If the user changes the sort order, reset back to the first page.
         //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -178,8 +187,15 @@ export class AddRoomComponent implements OnInit {
     }
 
     t() {
-      console.log("t");
+        console.log("t");
     }
+
+    ngOnDestroy(): void {
+        this.componentActive = false;
+        this.roomServices.clearCache();
+    }
+
+
 
     addRoom() { }
 

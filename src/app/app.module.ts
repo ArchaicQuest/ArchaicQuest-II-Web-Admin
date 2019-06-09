@@ -16,6 +16,7 @@ import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
 import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
     declarations: [
@@ -43,6 +44,9 @@ import { ReactiveFormsModule } from '@angular/forms';
         MatExpansionModule,
         MatTooltipModule,
         SidenavStoreModule,
+        ToastrModule.forRoot({
+            positionClass: 'toast-bottom-center'
+        })
     ],
     providers: [Shared],
     bootstrap: [AppComponent]

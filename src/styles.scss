@@ -4,6 +4,8 @@
 
 @import "./app/shared/sass/forms.scss";
 
+@import '~ngx-toastr/toastr';
+
 body {
   font-family: Roboto,"Helvetica Neue",sans-serif;
   height: 100vh;
