@@ -60,17 +60,20 @@ export class RoomService {
     }
 
     roomItemsUpdate(item: Item) {
-
+console.log("item: ", item);
         const foundIndex = this.items.getValue().findIndex(x => x.id == item.id);
 
-        let newArr = this.items.getValue();//[foundIndex] = item;
-        newArr[foundIndex].container.items.concat(item);
-        this.items.next(newArr);
+        let newArr = this.items.getValue();
+        newArr[foundIndex] = item;
 
+
+        console.log("item in arr: ", newArr[foundIndex]);
+        this.items.next(JSON.parse(JSON.stringify(this.items.getValue())));
         //return item;
     }
 
     roomItems(item: Item) {
+      debugger;
         this.items.next([...this.items.getValue(), item]);
 
         //return item;

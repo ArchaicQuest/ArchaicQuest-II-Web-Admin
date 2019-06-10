@@ -45,13 +45,11 @@ export class ManageRoomItemsComponent implements OnInit {
     }
 
     addItemToRoom(item: Item) {
-        console.log(item)
-
-        // debugger;
 
         if (this.data.container != null && this.data.container.itemType == '2') {
 
             this.addItemToContainer(item, this.data.container);
+            return;
         }
 
         this.roomServices.roomItems(item);
