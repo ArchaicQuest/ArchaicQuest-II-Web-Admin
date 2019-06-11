@@ -7,7 +7,7 @@ import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { ItemSelectorComponent } from 'src/app/items/selectors/Item-selector/item-selector.component';
 import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
 import { container } from '@angular/core/src/render3';
-import { removeItem, Helpers } from 'src/app/shared/helpers/helpers';
+import { Shared } from 'src/app/shared/shared';
 
 
 @Component({
@@ -31,7 +31,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
     dataSource = this.data;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
     expandedElement: Item | null;
-    constructor(public dialog: MatDialog, public helpers: Helpers) { }
+    constructor(public dialog: MatDialog, public helpers: Shared) { }
 
 
     ngOnInit() {
@@ -69,8 +69,8 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
 
     removeItem(array: Item[], index: number) {
-      debugger;
-      this.helpers.removeItem(array, index);
+        debugger;
+        this.helpers.removeItem(array, index);
     }
 
 
