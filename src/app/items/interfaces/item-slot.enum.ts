@@ -16,6 +16,7 @@ export enum ItemSlotEnum {
   Waist = 14,
   Wielded = 15,
   Wrist = 16,
+  None = 17
 }
 
 

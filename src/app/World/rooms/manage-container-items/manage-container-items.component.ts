@@ -29,6 +29,7 @@ export class ManageContainerItemsComponent implements OnInit {
 
 
     addItemToContainer(item: Item) {
+
         this.data.items[this.data.containerIndex].container.items.push(item);
 
     }
