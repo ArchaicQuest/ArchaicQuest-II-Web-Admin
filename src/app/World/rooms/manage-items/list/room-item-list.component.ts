@@ -69,8 +69,8 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
 
     removeItem(array: Item[], index: number) {
-        debugger;
         this.helpers.removeItem(array, index);
+        this.dataSource = JSON.parse(JSON.stringify(array));
     }
 
 
