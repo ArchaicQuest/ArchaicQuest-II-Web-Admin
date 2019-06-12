@@ -91,3 +91,48 @@ min-height: 91vh;
 .echo {
     color:#999;
 }
+
+
+/* material table */
+.mat-header-row {
+    background-color: #333!important;
+
+    .mat-header-cell {
+    color:#fff!important;
+    }
+  }
+  
+  .mat-table {
+      border:1px solid #ccc;
+  }
+  
+mat-header-cell,
+.mat-header-cell {
+  color: #fff;
+  font-weight: bold;
+}
+
+mat-row,
+.mat-row {
+  min-height: 36px;
+  background: #fff;
+}
+
+mat-row.selected,
+.mat-row.selected {
+  background:#fff!important;
+}
+ 
+mat-row:nth-child(odd),
+.example-element-row.mat-row:nth-child(odd) {
+  background: #fff!important;
+}
+
+mat-row:nth-child(even),
+.example-element-row.mat-row:nth-child(even) {
+  background: #eee!important;
+}
+ 
+ 
+ 
+/* END - material table */
