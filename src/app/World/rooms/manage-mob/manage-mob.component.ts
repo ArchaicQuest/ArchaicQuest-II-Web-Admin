@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Item } from 'src/app/items/interfaces/item.interface';
+import {MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Component({
     templateUrl: './manage-mob.component.html'
@@ -11,7 +10,7 @@ export class ManageMobComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<ManageMobComponent>,
         @Inject(MAT_DIALOG_DATA) public data: {
-            inventory: Item[],
+            mobs: Mob[],
         }) { }
 
     onClose(): void {
@@ -23,8 +22,8 @@ export class ManageMobComponent implements OnInit {
     }
 
 
-    addItemToInventory(item: Item) {
-        this.data.inventory.push(item);
+    addMobToRoom(mob: Mob) {
+        this.data.mobs.push(mob);
 
     }
 

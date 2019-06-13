@@ -7,19 +7,19 @@ import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { RoomService } from '../../add-room.service';
 import { ToastrService } from 'ngx-toastr';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Component({
-    templateUrl: './manage-room-items.component.html'
+    templateUrl: './manage-room-mobs.component.html'
 })
-export class ManageRoomItemsComponent implements OnInit {
+export class ManageRoomMobsComponent implements OnInit {
 
     constructor(
         public roomServices: RoomService,
-        public dialogRef: MatDialogRef<ManageRoomItemsComponent>,
+        public dialogRef: MatDialogRef<ManageRoomMobsComponent>,
         private toastr: ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: {
-            item: Item,
-            container: Item,
+            mob: Mob,
             // containerIndex: number
         }) { }
 
@@ -31,30 +31,12 @@ export class ManageRoomItemsComponent implements OnInit {
 
     }
 
-    addItemToContainer(item: Item, container: Item) {
-        console.log(item)
 
-        container.container.items.push(item);
+    addMobToRoom(data: Mob) {
+debugger;
+        this.roomServices.roomMobs(data);
 
-        this.roomServices.roomItemsUpdate(container);
-
-        this.toastr.success(`${item.name} added successfully to ${container.name}.`);
-
-        this.dialogRef.close();
-
-    }
-
-    addItemToRoom(item: Item) {
-
-        if (this.data.container != null && this.data.container.itemType == '2') {
-
-            this.addItemToContainer(item, this.data.container);
-            return;
-        }
-
-        this.roomServices.roomItems(item);
-
-        this.toastr.success(`${item.name} added successfully.`);
+        this.toastr.success(`${data.name} added successfully.`);
 
         this.dialogRef.close();
 

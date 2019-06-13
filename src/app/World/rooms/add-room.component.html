@@ -105,38 +105,11 @@
                 <app-item-list [data]="items"></app-item-list>
 
 
-                <!-- <div class="row">
-                    <div class="col">
-                        <p>Added Items:</p>
-
-                        <ul>
-                            <li *ngFor="let item of items; let i = index">
-                                {{ item.name }} {{ item.itemType }}
-                                <a href="javascript:void(0)" *ngIf="item.itemType == '2'"
-                                    (click)="openDialog(item, i)">Manage</a>
-                                <br />
-                                <ul>
-                                    <li *ngFor="
-                      let containerItem of item.container.items;
-                      let i = index
-                    ">
-                                        {{ containerItem.name }}
-                                        <a href="javascript:void(0)"
-                                            (click)="removeItemFromContainer(item, containerItem)">Remove</a>
-                                    </li>
-                                </ul>
-                                <a href="javascript:void(0)" (click)="removeItem(i)">Remove</a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col">
-                        <app-item-selector (sendItemToParent)="addItem($event)"></app-item-selector>
-                    </div>
-                </div> -->
-
                 <h2>Mobs</h2>
 
-                <div class="row">
+                <app-mob-list [data]="mobs"></app-mob-list>
+
+                <!-- <div class="row">
                     <div class="col">
                         <p>Added Mobs:</p>
 
@@ -159,7 +132,7 @@
                     <div class="col">
                         <app-mob-selector (sendMobToParent)="addMob($event)"></app-mob-selector>
                     </div>
-                </div>
+                </div> -->
 
                 <h2>Exits:</h2>
                 <p>

@@ -40,6 +40,8 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     // dataSource = this.items;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
     expandedElement: Item | null;
+    mobColumnsToDisplay = ['name', 'level', 'actions'];
+    mobExpandedElement: Mob | null;
     constructor(
         private roomServices: RoomService,
         private ngZone: NgZone,
@@ -64,13 +66,18 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         this.addRoomForm.get('CoordY').setValue(this.coords.y);
         this.addRoomForm.get('CoordZ').setValue(this.coords.z);
 
-        this.roomServices.getRroomItems();
-
         this.roomServices.items.subscribe((value: Item[]) => {
             console.log(value);
             this.items = value;
 
         });
+
+
+        this.roomServices.mobs.subscribe((value: Mob[]) => {
+          console.log(value);
+          this.mobs = value;
+
+      });
 
     }
 

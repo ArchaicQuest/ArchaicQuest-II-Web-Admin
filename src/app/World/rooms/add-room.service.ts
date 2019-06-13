@@ -10,6 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { BehaviorSubject } from 'rxjs';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,7 @@ export class RoomService {
     constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
     items: BehaviorSubject<Item[]> = new BehaviorSubject([]);
+    mobs: BehaviorSubject<Mob[]> = new BehaviorSubject([]);
     public addRoomForm = this.formBuilder.group({
         id: [''],
         title: ['', Validators.required],
@@ -84,6 +86,13 @@ console.log("item: ", item);
     }
     getRroomItems() {
         console.log(this.items)
+    }
+
+
+    roomMobs(mob: Mob) {
+
+        this.mobs.next([...this.mobs.getValue(), mob]);
+
     }
     // saveMob(mob: Mob) {
     //     console.log('post this ', mob);
