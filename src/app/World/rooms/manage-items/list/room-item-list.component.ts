@@ -23,19 +23,21 @@ import { Shared } from 'src/app/shared/shared';
 })
 export class RoomItemListComponent implements OnInit, OnChanges {
     @Input() data: Item[];
-    @Input() container: Item;
+    @Input() container: Item | Item[];
+    @Input() isInventory: Boolean;
 
     items: Item[] = [];
 
     //move
-    dataSource = this.data;
+    dataSource = this.data || this.items;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
     expandedElement: Item | null;
     constructor(public dialog: MatDialog, public helpers: Shared) { }
 
 
     ngOnInit() {
-        console.log(this.data)
+        console.log(this.data || this.items)
+        debugger;
     }
 
     ngOnChanges() {
@@ -57,7 +59,8 @@ export class RoomItemListComponent implements OnInit, OnChanges {
         const dialogRef = this.dialog.open(ManageRoomItemsComponent, {
             width: '450px',
             data: {
-                container: this.container
+                container: this.container,
+                isInventory: this.isInventory
             }
         });
 

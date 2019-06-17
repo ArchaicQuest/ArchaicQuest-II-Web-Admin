@@ -44,6 +44,7 @@
                     [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
                     <h2> Container Items</h2>
                     <div>
+                        {{element | json }}
                         <app-item-list [data]="element.container.items" [container]="element"></app-item-list>
                     </div>
                 </div>

@@ -88,6 +88,18 @@ console.log("item: ", item);
         console.log(this.items)
     }
 
+    updateMobInventory(item: Item, mob: Item|Mob) {
+
+      const foundIndex = this.mobs.getValue().findIndex(x => x.id == mob.id);
+
+      let newArr = this.mobs.getValue();
+      newArr[foundIndex].inventory.push(item);
+
+      this.mobs.next(JSON.parse(JSON.stringify(this.mobs.getValue())));
+
+
+    }
+
 
     roomMobs(mob: Mob) {
 

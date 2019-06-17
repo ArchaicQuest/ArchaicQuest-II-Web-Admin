@@ -7,6 +7,7 @@ import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { RoomService } from '../../add-room.service';
 import { ToastrService } from 'ngx-toastr';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Component({
     templateUrl: './manage-room-items.component.html'
@@ -19,7 +20,8 @@ export class ManageRoomItemsComponent implements OnInit {
         private toastr: ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: {
             item: Item,
-            container: Item,
+            container: Item|Mob,
+            isInventory: Boolean
             // containerIndex: number
         }) { }
 
@@ -46,11 +48,17 @@ export class ManageRoomItemsComponent implements OnInit {
 
     addItemToRoom(item: Item) {
 
-        if (this.data.container != null && this.data.container.itemType == '2') {
+        if (this.data.isInventory) {
+          this.addItemToMob(item);
+          return;
+        }
 
-            this.addItemToContainer(item, this.data.container);
+        if (this.data.container != null && (this.data.container as Item).itemType == '2') {
+
+            this.addItemToContainer(item, (this.data.container as Item));
             return;
         }
+
 
         this.roomServices.roomItems(item);
 
@@ -60,6 +68,15 @@ export class ManageRoomItemsComponent implements OnInit {
 
     }
 
+    addItemToMob(item: Item) {
+
+      this.roomServices.updateMobInventory(item, this.data.container);
+
+      this.toastr.success(`${item.name} added successfully.`);
+
+      this.dialogRef.close();
+
+  }
 
 }
 
