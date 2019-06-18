@@ -25,6 +25,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
     @Input() data: Item[];
     @Input() container: Item | Item[];
     @Input() isInventory: Boolean;
+    @Input() disableContainerItems: Boolean = false;
 
     items: Item[] = [];
 
