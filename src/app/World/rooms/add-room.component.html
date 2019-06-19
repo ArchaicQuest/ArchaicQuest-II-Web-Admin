@@ -133,25 +133,27 @@
                         maze or a nice shortcut
                     </p>
 
+                    <div class="addRoom__exits">
+
                     <div class="row">
 
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add North West Exit
+                            <button title="Add North West Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                                North West
                             </button>
                         </div>
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add North Exit
+                            <button title="Add North Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                                 North
                             </button>
                         </div>
 
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add North East Exit
+                            <button title=" Add North East Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                               North East
                             </button>
                         </div>
                     </div>
@@ -160,41 +162,43 @@
 
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add West Exit
+                            <button title="Add West Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                                 West
                             </button>
                         </div>
 
                         <div class="col">
-                            &nbsp;
+                          <button mat-raised-button type="button" disabled="true">
+                            Current Room
+                        </button>
                         </div>
 
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add East Exit
+                            <button title="Add East Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                               East
                             </button>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add South West Exit
+                            <button title="Add South West Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                                 South West
                             </button>
                         </div>
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add South Exit
+                            <button title="Add South Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                                 South
                             </button>
                         </div>
 
 
                         <div class="col">
 
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add South East Exit
+                            <button title="Add South East Exit" mat-raised-button type="button" (click)="openExitDialog()">
+                               South East
                             </button>
                         </div>
 
@@ -202,19 +206,19 @@
 
                     <div class="row">
                         <div class="col">
-                            <h3>Up:</h3>
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add Room
+                            <button mat-raised-button type="button" (click)="openExitDialog()">
+                               Up
                             </button>
                         </div>
 
-                        <div class="col">
-                            <h3>Down:</h3>
-                            <button mat-raised-button color="primary" type="button" (click)="openExitDialog()">
-                                Add Room
+                        <div class="col">   
+                            <button mat-raised-button type="button" (click)="openExitDialog()">
+                               Down
                             </button>
                         </div>
                     </div>
+
+                  </div>
                 </div>
                 <div class="section">
                     <h2>Coords:</h2>
