@@ -33,9 +33,9 @@
                     These are used to add more Information about key items highlighted in
                     the description.
                 </p>
-                <div class="row">
+                <div class="row room__addObjects">
                     <div class="col">
-                        <div formArrayName="roomObjects" *ngFor="
+                        <div class="room__addObjects__section" formArrayName="roomObjects" *ngFor="
                 let roomObject of getRoomObjectsControl.controls;
                 let i = index
               ">
@@ -94,9 +94,18 @@
                                     </div>
                                 </div>
                             </div>
-                            <a class="btn btn-danger btn-sm" (click)="removeRoomObject(i)">Remove</a>
+                            <button mat-raised-button (click)="removeRoomObject(i)">Remove</button>
                         </div>
-                        <a (click)="this.addRoomObject()">Add another Room Object</a>
+
+
+                        <div class="row">
+                            <div class="col">
+                                <button mat-raised-button color="primary" (click)="this.addRoomObject()">Add another
+                                    Room
+                                    Object</button>
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
