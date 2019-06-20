@@ -17,7 +17,7 @@ export class ManageExitsComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: {
             inventory: Item[],
         }) {
-        this.form = this.exitService.addRoomForm;
+        this.form = this.exitService.addExitForm;
     }
 
 
@@ -31,8 +31,8 @@ export class ManageExitsComponent implements OnInit {
     }
 
 
-    addItemToInventory(item: Item) {
-        this.data.inventory.push(item);
+    addExit( ) {
+
 
     }
 

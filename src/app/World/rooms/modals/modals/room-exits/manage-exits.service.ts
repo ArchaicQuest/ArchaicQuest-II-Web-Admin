@@ -14,15 +14,16 @@ export class RoomExitService {
 
     constructor(private formBuilder: FormBuilder) { }
 
-    public addRoomForm = this.formBuilder.group({
+    public addExitForm = this.formBuilder.group({
         coordX: ['', Validators.required],
         coordY: ['', Validators.required],
         coordZ: ['', Validators.required],
         open: [false],
         canOpen: [false],
         locked: [false],
-        canLocked: [false],
+        canLock: [false],
         lockId: [''],
+        name: [''],
     });
 
 

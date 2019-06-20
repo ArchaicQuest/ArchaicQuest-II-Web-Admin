@@ -1,5 +1,6 @@
 <h1 mat-dialog-title>Manage Exit</h1>
 <div mat-dialog-content>
+    <form novalidate [formGroup]="form" (ngSubmit)="addExit()">
     <div class="row">
         <div class="col">
 
@@ -8,9 +9,9 @@
                 <div class="col">
                     <mat-form-field appearance="outline" class="form-control">
                         <mat-label>Exit Name</mat-label>
-                        <input matInput placeholder="Exit name" required formControlName="CoordX" />
-                        <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
-                            X coord is required.
+                        <input matInput placeholder="Exit name" required formControlName="name" />
+                        <mat-error *ngIf="form.get('name').hasError('required')">
+                          name is required.
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -18,40 +19,35 @@
             </div>
 
             <div class="row">
-                <div class="col-3">
-                    <mat-form-field appearance="outline" class="form-control">
-                        <mat-label>Area Id:</mat-label>
-                        <input matInput placeholder="Z Coord" required formControlName="CoordZ" />
-                        <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                            z coord is required.
-                        </mat-error>
-                    </mat-form-field>
+                <div class="col">
+              <h2>Coordinates</h2>
                 </div>
-                <div class="col-3">
+              </div>
+              <div class="row">
+                <div class="col-4">
                     <mat-form-field appearance="outline" class="form-control">
                         <mat-label>X:</mat-label>
-                        <input matInput placeholder="X Coord" required formControlName="CoordX" />
-                        <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
-                            X coord is required.
+                        <input matInput placeholder="X Coord" required formControlName="coordX" />
+                        <mat-error *ngIf="form.get('coordX').hasError('required')">
+                           X coord is required.
                         </mat-error>
                     </mat-form-field>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <mat-form-field appearance="outline" class="form-control">
                         <mat-label>Y:</mat-label>
-                        <input matInput placeholder="Y Coord" required formControlName="CoordY" />
-                        <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                            y coord is required.
+                        <input matInput placeholder="Y Coord" required formControlName="coordY" />
+                        <mat-error *ngIf="form.get('coordY').hasError('required')">
+                            Y coord is required.
                         </mat-error>
                     </mat-form-field>
                 </div>
-
-                <div class="col-3">
+                <div class="col-4">
                     <mat-form-field appearance="outline" class="form-control">
                         <mat-label>Z:</mat-label>
-                        <input matInput placeholder="Z Coord" required formControlName="CoordZ" />
-                        <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
-                            z coord is required.
+                        <input matInput placeholder="Z Coord" required formControlName="coordZ" />
+                        <mat-error *ngIf="form.get('coordZ').hasError('required')">
+                            Z coord is required.
                         </mat-error>
                     </mat-form-field>
                 </div>
@@ -59,15 +55,23 @@
 
             <div class="row">
                 <div class="col">
-                    <mat-checkbox>Open</mat-checkbox>
-                </div> <div class="col">
-                    <mat-checkbox>Can Open</mat-checkbox>
+                    <mat-checkbox formControlName="open">Open</mat-checkbox>
                 </div>
                 <div class="col">
-                    <mat-checkbox>Can Lock</mat-checkbox>
+                    <mat-checkbox formControlName="canOpen">Can Open</mat-checkbox>
                 </div>
                 <div class="col">
-                    <mat-checkbox>Locked</mat-checkbox>
+                    <mat-checkbox formControlName="canLock">Can Lock</mat-checkbox>
+                </div>
+                <div class="col">
+                    <mat-checkbox formControlName="locked">Locked</mat-checkbox>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Key Id:</mat-label>
+                        <input matInput placeholder="ID of key to unlock" required formControlName="lockId" />
+                        <mat-error *ngIf="form.get('lockId').hasError('required')">
+                            key id is required.
+                        </mat-error>
+                    </mat-form-field>
                 </div>
 
             </div>
@@ -77,5 +81,5 @@
             </button>
         </div>
     </div>
-
+  </form>
 </div>
