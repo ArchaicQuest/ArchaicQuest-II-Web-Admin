@@ -74,10 +74,10 @@ export class AddRoomComponent implements OnInit, OnDestroy {
 
 
         this.roomServices.mobs.subscribe((value: Mob[]) => {
-          console.log(value);
-          this.mobs = value;
+            console.log(value);
+            this.mobs = value;
 
-      });
+        });
 
     }
 
@@ -167,9 +167,10 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     }
 
 
-    openExitDialog(): void {
+    openExitDialog(exitDirection: string): void {
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
+            data: { exit: exitDirection }
 
         });
 

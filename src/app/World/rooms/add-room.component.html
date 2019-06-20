@@ -135,90 +135,98 @@
 
                     <div class="addRoom__exits">
 
-                    <div class="row">
+                        <div class="row">
 
-                        <div class="col">
+                            <div class="col">
 
-                            <button title="Add North West Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                                North West
-                            </button>
+                                <button title="Add North West Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('North West')">
+                                    North West
+                                </button>
+                            </div>
+                            <div class="col">
+
+                                <button title="Add North Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('North')">
+                                    North
+                                </button>
+                            </div>
+
+                            <div class="col">
+
+                                <button title=" Add North East Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('North East')">
+                                    North East
+                                </button>
+                            </div>
                         </div>
-                        <div class="col">
 
-                            <button title="Add North Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                                 North
-                            </button>
+                        <div class="row">
+
+                            <div class="col">
+
+                                <button title="Add West Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('West')">
+                                    West
+                                </button>
+                            </div>
+
+                            <div class="col">
+                                <button mat-raised-button type="button" disabled="true">
+                                    Current Room
+                                </button>
+                            </div>
+
+                            <div class="col">
+
+                                <button title="Add East Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('East')">
+                                    East
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+
+                                <button title="Add South West Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('South West')">
+                                    South West
+                                </button>
+                            </div>
+                            <div class="col">
+
+                                <button title="Add South Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('South')">
+                                    South
+                                </button>
+                            </div>
+
+
+                            <div class="col">
+
+                                <button title="Add South East Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('South East')">
+                                    South East
+                                </button>
+                            </div>
+
                         </div>
 
-                        <div class="col">
+                        <div class="row">
+                            <div class="col">
+                                <button mat-raised-button type="button" (click)="openExitDialog('Up')">
+                                    Up
+                                </button>
+                            </div>
 
-                            <button title=" Add North East Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                               North East
-                            </button>
+                            <div class="col">
+                                <button mat-raised-button type="button" (click)="openExitDialog('Down')">
+                                    Down
+                                </button>
+                            </div>
                         </div>
+
                     </div>
-
-                    <div class="row">
-
-                        <div class="col">
-
-                            <button title="Add West Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                                 West
-                            </button>
-                        </div>
-
-                        <div class="col">
-                          <button mat-raised-button type="button" disabled="true">
-                            Current Room
-                        </button>
-                        </div>
-
-                        <div class="col">
-
-                            <button title="Add East Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                               East
-                            </button>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-
-                            <button title="Add South West Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                                 South West
-                            </button>
-                        </div>
-                        <div class="col">
-
-                            <button title="Add South Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                                 South
-                            </button>
-                        </div>
-
-
-                        <div class="col">
-
-                            <button title="Add South East Exit" mat-raised-button type="button" (click)="openExitDialog()">
-                               South East
-                            </button>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button mat-raised-button type="button" (click)="openExitDialog()">
-                               Up
-                            </button>
-                        </div>
-
-                        <div class="col">   
-                            <button mat-raised-button type="button" (click)="openExitDialog()">
-                               Down
-                            </button>
-                        </div>
-                    </div>
-
-                  </div>
                 </div>
                 <div class="section">
                     <h2>Coords:</h2>

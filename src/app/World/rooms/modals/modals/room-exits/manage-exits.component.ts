@@ -9,13 +9,13 @@ import { FormGroup } from '@angular/forms';
     templateUrl: './manage-exits.component.html'
 })
 export class ManageExitsComponent implements OnInit {
-
+    public exitDirection: string;
     public form: FormGroup;
     constructor(
         public dialogRef: MatDialogRef<ManageExitsComponent>,
         public exitService: RoomExitService,
         @Inject(MAT_DIALOG_DATA) public data: {
-            inventory: Item[],
+            exit: string,
         }) {
         this.form = this.exitService.addExitForm;
     }
@@ -27,11 +27,11 @@ export class ManageExitsComponent implements OnInit {
     }
 
     ngOnInit() {
-
+        this.exitDirection = this.data.exit;
     }
 
 
-    addExit( ) {
+    addExit() {
 
 
     }
