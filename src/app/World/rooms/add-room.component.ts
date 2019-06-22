@@ -20,6 +20,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { Exit } from './interfaces/exit.interface';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
+import { RoomExit } from './interfaces/roomExit.interface';
 
 @Component({
     templateUrl: './add-room.component.html',
@@ -38,9 +39,19 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     coords: Coords;
     items: Item[] = [];
     mobs: Mob[] = [];
-    exits: {
-        north: Exit;
+    exits: RoomExit = {
+        north: null,
+        down: null,
+        east: null,
+        northEast: null,
+        northWest: null,
+        south: null,
+        southEast: null,
+        southWest: null,
+        up: null,
+        west: null
     };
+
     //move
     // dataSource = this.items;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
@@ -175,7 +186,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     openExitDialog(exitDirection: string): void {
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
-            data: { exit: exitDirection }
+            data: { exit: exitDirection, currentCoord: this.coords }
 
         });
 
@@ -185,7 +196,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             //  this.addRoomForm.get('exits.north').setValue(result);
 
             this.exits.north = result;
-            { { console.log(this.exits.north) } }
+            console.log("exit ", this.exits);
             console.log(result);
 
         });

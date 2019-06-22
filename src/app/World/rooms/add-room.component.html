@@ -130,10 +130,10 @@
                 <div class="section">
                     <h2>Exits:</h2>
                     <p>
-                        Exits will appear here when adjacent rooms exist. However you can add
-                        a custom exit to any room in the zone if you want to make a horrible
-                        maze or a nice shortcut
+                        Exits will need to be added to both rooms to be two way,
+                        and share the same key for any doors, all properties must match too.
                     </p>
+                    <p>Coordinates shown are (x,y,z)</p>
 
                     <div class="addRoom__exits">
 
@@ -148,7 +148,7 @@
                             </div>
                             <div class="col">
                                 {{addRoomForm.get('exits.north').value | json}}
-                                {{exits | json}}
+                                {{exits}}
                                 <button *ngIf="addRoomForm.get('exits.north').value == ''" title="Add North Exit"
                                     mat-raised-button type="button" (click)="openExitDialog('North')">
                                     North
@@ -158,10 +158,9 @@
                                     title="Add North Exit" mat-raised-button type="button"
                                     (click)="openExitDialog('North')">
                                     North
-
-
-                                    (x: {{exits.coords?.x}}, y: {{exits.coords?.y}}, z:
-                                    {{exits.coords?.z}} )
+                                    <span class="addRoom__exits__coords">({{exits.north.coords?.x}},
+                                        {{exits.north.coords?.y}},
+                                        {{exits.north.coords?.z}})</span>
                                 </button>
                             </div>
 
@@ -187,6 +186,9 @@
                             <div class="col">
                                 <button mat-raised-button type="button" disabled="true">
                                     Current Room
+                                    <span class="addRoom__exits__coords">({{coords?.x}},
+                                        {{coords?.y}},
+                                        {{coords.z}})</span>
                                 </button>
                             </div>
 
