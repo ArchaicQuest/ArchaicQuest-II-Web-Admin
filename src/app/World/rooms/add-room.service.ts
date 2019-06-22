@@ -39,7 +39,15 @@ export class RoomService {
         CoordY: ['', Validators.required],
         CoordZ: ['', Validators.required],
         exits: this.formBuilder.group({
-            north: ['']
+            north: [''],
+            northEast: [''],
+            east: [''],
+            southEast: [''],
+            south: [''],
+            southWest: [''],
+            west: [''],
+            northWest: ['']
+
         }),
 
 

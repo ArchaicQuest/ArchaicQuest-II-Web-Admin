@@ -191,6 +191,10 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((result: Exit) => {
+            console.log(result)
+            if (result == null) {
+                return;
+            }
 
             this.addRoomForm.patchValue({ exits: { north: result } });
             //  this.addRoomForm.get('exits.north').setValue(result);

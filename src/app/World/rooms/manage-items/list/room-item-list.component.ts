@@ -38,7 +38,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
     ngOnInit() {
         console.log(this.data || this.items)
-        debugger;
+        
     }
 
     ngOnChanges() {

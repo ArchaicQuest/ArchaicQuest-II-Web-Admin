@@ -43,11 +43,11 @@ export class RoomExitService {
     setExitCoord(exitDirection: string, currentCoord: Coords) {
         switch (exitDirection) {
             case 'North':
-                (currentCoord.y++).toString();
+                currentCoord.y++;
                 break;
             case 'North East':
-                (currentCoord.y++).toString();
-                (currentCoord.x++).toString();
+                currentCoord.y++;
+                currentCoord.x++;
                 break;
             case 'East':
                 currentCoord.x++;

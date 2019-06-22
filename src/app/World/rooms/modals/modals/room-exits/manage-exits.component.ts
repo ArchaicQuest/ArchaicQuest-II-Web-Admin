@@ -13,6 +13,7 @@ import { Coords } from 'src/app/shared/interfaces/coords.interface';
 export class ManageExitsComponent implements OnInit {
     public exitDirection: string;
     public currentCoord: Coords;
+    public exitCoord: Coords;
     public form: FormGroup;
     constructor(
         public dialogRef: MatDialogRef<ManageExitsComponent>,
@@ -35,9 +36,13 @@ export class ManageExitsComponent implements OnInit {
         this.exitDirection = this.data.exit;
         this.currentCoord = JSON.parse(JSON.stringify(this.data.currentCoord));
 
-        console.log(this.data.currentCoord);
+        this.exitCoord = this.exitService.setExitCoord(this.exitDirection, this.currentCoord);
+        console.log(this.exitCoord);
 
-        console.log(this.exitService.setExitCoord(this.exitDirection, this.currentCoord));
+        this.form.get('coordX').setValue(this.exitCoord.x);
+        this.form.get('coordY').setValue(this.exitCoord.y);
+        this.form.get('coordZ').setValue(this.exitCoord.z);
+
     }
 
 
