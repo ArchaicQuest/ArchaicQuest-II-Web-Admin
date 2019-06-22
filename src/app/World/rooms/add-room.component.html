@@ -125,6 +125,8 @@
                     <app-mob-list [data]="mobs"></app-mob-list>
                 </div>
 
+
+
                 <div class="section">
                     <h2>Exits:</h2>
                     <p>
@@ -145,10 +147,21 @@
                                 </button>
                             </div>
                             <div class="col">
+                                {{addRoomForm.get('exits.north').value | json}}
+                                {{exits | json}}
+                                <button *ngIf="addRoomForm.get('exits.north').value == ''" title="Add North Exit"
+                                    mat-raised-button type="button" (click)="openExitDialog('North')">
+                                    North
+                                </button>
 
-                                <button title="Add North Exit" mat-raised-button type="button"
+                                <button *ngIf="addRoomForm.get('exits.north').value != ''" color="primary"
+                                    title="Add North Exit" mat-raised-button type="button"
                                     (click)="openExitDialog('North')">
                                     North
+
+
+                                    (x: {{exits.coords?.x}}, y: {{exits.coords?.y}}, z:
+                                    {{exits.coords?.z}} )
                                 </button>
                             </div>
 

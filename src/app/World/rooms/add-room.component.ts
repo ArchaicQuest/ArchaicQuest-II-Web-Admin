@@ -18,6 +18,8 @@ import { ManageMobComponent } from './manage-mob/manage-mob.component';
 import { ManageExitsComponent } from './modals/modals/room-exits/manage-exits.component';
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
+import { Exit } from './interfaces/exit.interface';
+import { jsonpCallbackContext } from '@angular/common/http/src/module';
 
 @Component({
     templateUrl: './add-room.component.html',
@@ -36,6 +38,9 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     coords: Coords;
     items: Item[] = [];
     mobs: Mob[] = [];
+    exits: {
+        north: Exit;
+    };
     //move
     // dataSource = this.items;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
@@ -174,8 +179,14 @@ export class AddRoomComponent implements OnInit, OnDestroy {
 
         });
 
-        dialogRef.afterClosed().subscribe(result => {
+        dialogRef.afterClosed().subscribe((result: Exit) => {
 
+            this.addRoomForm.patchValue({ exits: { north: result } });
+            //  this.addRoomForm.get('exits.north').setValue(result);
+
+            this.exits.north = result;
+            { { console.log(this.exits.north) } }
+            console.log(result);
 
         });
     }

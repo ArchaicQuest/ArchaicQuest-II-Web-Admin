@@ -5,6 +5,7 @@ import {
 
 } from '@angular/forms';
 import { Injectable } from '@angular/core';
+import { Exit } from '../../../interfaces/exit.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,18 @@ export class RoomExitService {
         lockId: [''],
         name: [''],
     });
+
+    returnExitObj(): Exit {
+        return {
+            AreaId: 0,
+            Name: this.addExitForm.get('name').value,
+            coords: {
+                x: this.addExitForm.get('coordX').value,
+                y: this.addExitForm.get('coordY').value,
+                z: this.addExitForm.get('coordZ').value
+            },
+        };
+    }
 
 
 

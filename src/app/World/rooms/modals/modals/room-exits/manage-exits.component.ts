@@ -4,6 +4,7 @@ import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/materia
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { RoomExitService } from './manage-exits.service';
 import { FormGroup } from '@angular/forms';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Component({
     templateUrl: './manage-exits.component.html'
@@ -14,6 +15,7 @@ export class ManageExitsComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<ManageExitsComponent>,
         public exitService: RoomExitService,
+        public toastr: ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: {
             exit: string,
         }) {
@@ -33,6 +35,9 @@ export class ManageExitsComponent implements OnInit {
 
     addExit() {
 
+        this.toastr.success(`Exit added successfully.`);
+
+        this.dialogRef.close(this.exitService.returnExitObj());
 
     }
 
