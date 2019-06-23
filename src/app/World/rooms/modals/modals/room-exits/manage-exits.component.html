@@ -6,19 +6,6 @@
             <div class="col">
 
 
-                <div class="row">
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>Exit Name</mat-label>
-                            <input matInput placeholder="Defaults to exit direction, use for hidden exits" required
-                                formControlName="name" />
-                            <mat-error *ngIf="form.get('name').hasError('required')">
-                                name is required.
-                            </mat-error>
-                        </mat-form-field>
-                    </div>
-
-                </div>
 
                 <div class="row">
                     <div class="col">
@@ -55,6 +42,8 @@
                     </div>
                 </div>
 
+
+
                 <div class="row">
                     <div class="col">
                         <h2>Exit Properties</h2>
@@ -63,44 +52,88 @@
 
                 <div class="row">
                     <div class="col">
-                        <mat-checkbox formControlName="open">Open</mat-checkbox>
-                    </div>
-                    <div class="col">
-                        <mat-checkbox formControlName="canOpen">Can Open</mat-checkbox>
+                        <mat-checkbox formControlName="door">Door</mat-checkbox>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
-                        <mat-checkbox formControlName="canLock">Can Lock</mat-checkbox>
+                <br />
+                <div *ngIf="form.get('door').value">
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Defaults to exit direction, use for hidden exits" required
+                                    formControlName="name" />
+                                <mat-error *ngIf="form.get('name').hasError('required')">
+                                    Name is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Keywords</mat-label>
+                                <input matInput placeholder="Defaults to exit direction, use for hidden exits" required
+                                    formControlName="keyword" />
+                                <mat-error *ngIf="form.get('keyword').hasError('required')">
+                                    keyword is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
                     </div>
-                    <div class="col">
-                        <mat-checkbox formControlName="locked">Locked</mat-checkbox>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-checkbox formControlName="closed">Closed</mat-checkbox>
+                        </div>
+                        <div class="col">
+                            <mat-checkbox formControlName="canLock">Locked</mat-checkbox>
+                        </div>
+                        <div class="col">
+                            <mat-checkbox formControlName="pickProof">Pick Proof</mat-checkbox>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col">
+                            <mat-checkbox formControlName="noPass">No pass</mat-checkbox>
+
+                        </div>
+                        <div class="col">
+                            <mat-checkbox formControlName="noScan">No Scan</mat-checkbox>
+
+                        </div>
+                        <div class="col">
+                            <mat-checkbox formControlName="hidden">Hidden</mat-checkbox>
+
+                        </div>
 
                     </div>
 
+
+                    <div *ngIf="form.get('locked').value">
+
+                        <div class="row">
+                            <div class="col">
+                                <h2>Unlock Key</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Key Id:</mat-label>
+                                    <input matInput placeholder="ID of key to unlock" required
+                                        formControlName="lockId" />
+                                    <mat-error *ngIf="form.get('lockId').hasError('required')">
+                                        key id is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-
-                <div class="row">
-                    <div class="col">
-                        <h2>Unlock Key</h2>
-                    </div>
-                </div>
-                <div class="row">
-
-                    <div class="col">
-                        <mat-form-field appearance="outline" class="form-control">
-                            <mat-label>Key Id:</mat-label>
-                            <input matInput placeholder="ID of key to unlock" required formControlName="lockId" />
-                            <mat-error *ngIf="form.get('lockId').hasError('required')">
-                                key id is required.
-                            </mat-error>
-                        </mat-form-field>
-
-                    </div>
-
-                </div>
-
-
 
 
 

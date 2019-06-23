@@ -20,12 +20,16 @@ export class RoomExitService {
         coordX: ['', Validators.required],
         coordY: ['', Validators.required],
         coordZ: ['', Validators.required],
-        open: [false],
-        canOpen: [false],
+        door: [false],
+        closed: [false],
         locked: [false],
-        canLock: [false],
+        pickProof: [false],
+        noPass: [false],
+        noScan: [false],
+        hidden: [false],
         lockId: [''],
-        name: [''],
+        keyword: [''],
+        name: ['']
     });
 
     returnExitObj(): Exit {
