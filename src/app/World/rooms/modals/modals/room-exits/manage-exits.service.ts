@@ -69,6 +69,14 @@ export class RoomExitService {
             case 'North West':
                 currentCoord.y++;
                 currentCoord.x--;
+                break;
+            case 'Up':
+                currentCoord.z++;
+                break;
+            case 'Down':
+                currentCoord.z--;
+                break;
+
         }
 
         return currentCoord;

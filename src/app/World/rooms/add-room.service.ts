@@ -46,7 +46,9 @@ export class RoomService {
             south: [''],
             southWest: [''],
             west: [''],
-            northWest: ['']
+            northWest: [''],
+            up: [''],
+            down: ['']
 
         }),
 
