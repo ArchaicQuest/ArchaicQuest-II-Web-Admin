@@ -6,20 +6,7 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { Description } from 'src/app/shared/interfaces/description.interface';
 import { RoomExit } from './roomExit.interface';
 import { FormArray } from '@angular/forms';
-import { RoomObject } from './roomObject.interface';
 
-export interface Room {
- id?: number;
- areaId?: number;
- title: string;
- description: string;
- exits: RoomExit;
- coords: Coords;
- players: Player[];
- mobs: Mob[];
- items: Item[];
- emotes: string[];
- RoomObjects: RoomObject[];
- updateMessage: string;
- instantRepop: boolean;
+export interface RoomObject {
+
 }

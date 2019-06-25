@@ -11,6 +11,7 @@ import { environment } from 'src/environments/environment';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { BehaviorSubject } from 'rxjs';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { Room } from './interfaces/room.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -18,6 +19,7 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 export class RoomService {
     private host = `${environment.hostAPI}`;
+    private saveRoomUrl = `${this.host}/room/post`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
@@ -117,13 +119,14 @@ export class RoomService {
         this.mobs.next([...this.mobs.getValue(), mob]);
 
     }
-    // saveMob(mob: Mob) {
-    //     console.log('post this ', mob);
-    //     return this.http.post(this.saveMobUrl, JSON.stringify(mob), {
-    //         headers: this.headers,
-    //         responseType: 'text'
-    //     });
-    // }
+
+    saveRoom(data: Room) {
+        console.log('post this ', data);
+        return this.http.post(this.saveRoomUrl, JSON.stringify(data), {
+            headers: this.headers,
+            responseType: 'text'
+        });
+    }
 
 
 }

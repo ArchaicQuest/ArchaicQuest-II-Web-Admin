@@ -2,7 +2,7 @@
 <div class="row">
     <div class="col-7">
         <div class="panel">
-            <form novalidate [formGroup]="addRoomForm" (ngSubmit)="addRoom()">
+            <form novalidate [formGroup]="addRoomForm" (ngSubmit)="saveRoom()">
                 <h2>Room Information:</h2>
                 <div class="section">
                     <div class="row">
@@ -23,7 +23,7 @@
                                 <textarea matInput placeholder="Title" cdkTextareaAutosize
                                     #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
                                     required formControlName="description"></textarea>
-                                <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                                <mat-error *ngIf="addRoomForm.get('description').hasError('required')">
                                     Room description is required.
                                 </mat-error>
                             </mat-form-field>
