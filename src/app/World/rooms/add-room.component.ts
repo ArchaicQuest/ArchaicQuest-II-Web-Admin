@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { RoomService } from './add-room.service';
 import { ActivatedRoute } from '@angular/router';
@@ -32,6 +32,7 @@ import { jsonpCallbackContext } from '@angular/common/http/src/module';
 import { RoomExit } from './interfaces/roomExit.interface';
 import { Room } from './interfaces/room.interface';
 import { RoomObject } from './interfaces/roomObject.interface';
+import { Shared } from 'src/app/shared/shared';
 
 @Component({
     templateUrl: './add-room.component.html',
@@ -84,7 +85,9 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         private roomServices: RoomService,
         private ngZone: NgZone,
         private route: ActivatedRoute,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        public shared: Shared,
+        private cdRef: ChangeDetectorRef,
     ) { }
 
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -190,15 +193,55 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         });
 
         dialogRef.afterClosed().subscribe((result: Exit) => {
-            console.log(result);
+
             if (result == null) {
                 return;
             }
 
-            this.addRoomForm.patchValue({ exits: { north: result } });
-            //  this.addRoomForm.get('exits.north').setValue(result);
+            switch (result.Name) {
+                case 'North':
+                    this.exits.north = result;
+                    this.addRoomForm.get('exits.north').setValue(result);
+                    break;
+                case 'North East':
+                    this.exits.northEast = result;
+                    this.addRoomForm.get('exits.northEast').setValue(result);
+                    break;
+                case 'East':
+                    this.exits.east = result;
+                    this.addRoomForm.get('exits.east').setValue(result);
+                    break;
+                case 'South East':
+                    this.exits.southEast = result;
+                    this.addRoomForm.get('exits.southEast').setValue(result);
+                    break;
+                case 'South':
+                    this.exits.south = result;
+                    this.addRoomForm.get('exits.south').setValue(result);
+                    break;
+                case 'South West':
+                    this.exits.southWest = result;
+                    this.addRoomForm.get('exits.southWest').setValue(result);
+                    break;
+                case 'West':
+                    this.exits.west = result;
+                    this.addRoomForm.get('exits.west').setValue(result);
+                    break;
+                case 'North West':
+                    this.exits.northWest = result;
+                    this.addRoomForm.get('exits.northWest').setValue(result);
+                    break;
+                case 'Up':
+                    this.exits.up = result;
+                    this.addRoomForm.get('exits.up').setValue(result);
+                    break;
+                case 'Down':
+                    this.exits.down = result;
+                    this.addRoomForm.get('exits.down').setValue(result);
+                    break;
+            }
 
-            this.exits.north = result;
+
             console.log('exit ', this.exits);
             console.log(result);
         });
@@ -254,7 +297,18 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             items: this.items,
             mobs: this.mobs,
             emotes: [],
-            exits: null,
+            exits: {
+                north: this.addRoomForm.get('exits.north').value,
+                northEast: this.addRoomForm.get('exits.northEast').value,
+                east: this.addRoomForm.get('exits.east').value,
+                southEast: this.addRoomForm.get('exits.southEast').value,
+                south: this.addRoomForm.get('exits.south').value,
+                southWest: this.addRoomForm.get('exits.southWest').value,
+                west: this.addRoomForm.get('exits.west').value,
+                northWest: this.addRoomForm.get('exits.northWest').value,
+                up: this.addRoomForm.get('exits.up').value,
+                down: this.addRoomForm.get('exits.down').value,
+            },
             instantRepop: false,
             players: null,
             updateMessage: 'nothing'

@@ -38,7 +38,7 @@ export class ManageExitsComponent implements OnInit {
 
         this.exitCoord = this.exitService.setExitCoord(this.exitDirection, this.currentCoord);
         console.log(this.exitCoord);
-
+        this.form.get('name').setValue(this.data.exit);
         this.form.get('coordX').setValue(this.exitCoord.x);
         this.form.get('coordY').setValue(this.exitCoord.y);
         this.form.get('coordZ').setValue(this.exitCoord.z);

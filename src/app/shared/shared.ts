@@ -12,4 +12,8 @@ export class Shared {
         array.splice(index, 1);
     }
 
+    createNewObj<T>(obj: T) {
+        return JSON.parse(JSON.stringify(obj));
+    }
+
 }
