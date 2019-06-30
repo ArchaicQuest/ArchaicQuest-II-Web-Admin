@@ -6,6 +6,7 @@ import { ViewAreaService } from './view-area.service';
 import { ActivatedRoute } from '@angular/router';
 import { EditService } from '../edit-area/edit-area.service';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Room } from '../../rooms/interfaces/room.interface';
 
 @Component({
     templateUrl: './view-area.component.html',
@@ -22,7 +23,7 @@ export class ViewAreaComponent implements OnInit {
     minValueOfY: number;
     totalCol: number;
     totalRow: number;
-    rooms: Coords[];
+    rooms: Room[] = [];
     constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute) {
 
     }
@@ -30,6 +31,36 @@ export class ViewAreaComponent implements OnInit {
     ngOnInit() {
 
         this.editAreaServices.getArea(this.route.snapshot.params['id']).subscribe(data => {
+
+            const startingCoords: Coords = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+
+            const startingRoom: Room = {
+                coords: startingCoords,
+                title: 'add room',
+                RoomObjects: null,
+                description: '',
+                exits: null,
+                emotes: null,
+                items: null,
+                players: null,
+                mobs: null,
+                instantRepop: false,
+                updateMessage: '',
+            };
+
+
+
+            debugger;
+            if (data.rooms.length == 0) {
+                this.rooms.push(startingRoom);
+            } else {
+
+                this.rooms = data.rooms;
+            }
 
             this.area = {
                 'id': data.id,
@@ -39,8 +70,27 @@ export class ViewAreaComponent implements OnInit {
                 'dateUpdated': data.dateUpdated,
                 'createdBy': data.createdBy,
                 'modifiedBy': null,
-                'rooms': data.rooms
+                'rooms': this.rooms
             };
+
+            this.maxValueOfX = Math.max(...this.rooms.map(room => room.coords.x), 0) + 1;
+            this.maxValueOfY = Math.max(...this.rooms.map(room => room.coords.y), 0) + 1;
+
+            this.minValueOfX = Math.min(...this.rooms.map(room => room.coords.x), 0) - 1;
+            this.minValueOfY = Math.min(...this.rooms.map(room => room.coords.y), 0) - 1;
+
+            console.log("mx x", this.maxValueOfX)
+            console.log("mx y", this.maxValueOfY)
+
+            console.log("mn x", this.minValueOfX)
+            console.log("mn y", this.minValueOfY)
+
+            this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
+            this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
+
+            console.log("totalRow", this.totalRow)
+            console.log("totalCol", this.totalCol)
+
         });
 
         //  this.GenerateRoomLayout();
@@ -141,9 +191,10 @@ export class ViewAreaComponent implements OnInit {
 
     // }
 
-    isRoom(coords: Coords) {
+
+    isRoom(room: Coords) {
         // debugger;
-        return this.rooms.find(x => x.x === coords.x && x.y === coords.y);
+        return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y);
     }
 
 

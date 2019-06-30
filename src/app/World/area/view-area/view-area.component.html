@@ -1,7 +1,7 @@
 <div class="container-fluid view-area">
     <app-header>Area: {{area.title}}</app-header>
     <div class="row">
-        <div class="col-8">
+        <div class="col">
             <div class="panel">
 
 
@@ -44,8 +44,8 @@
                                 <button mat-raised-button
                                     [routerLink]="['/world/area/area.id/add-area', area.id ? '' : area.id]"
                                     *ngIf="isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"
-                                    color="primary">Example
-                                    Room <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}} )</button>
+                                    color="primary">{{isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).title}}
+                                    <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}} )</button>
 
                                 <button mat-raised-button
                                     [routerLink]="['/world/area/1/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
@@ -55,55 +55,6 @@
                         </tr>
                     </table>
                 </div>
-                <!-- <hr />
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th style="min-width:100px"></th>
-                            <th style="min-width:100px"></th>
-                            <th style="min-width:100px"></th>
-
-                        </tr>
-                        <tr>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="primary"
-                                    [routerLink]="['/add-area',area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="primary"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="primary"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-
-                        </tr>
-
-                    </table>
-                </div> -->
 
             </div>
         </div>
