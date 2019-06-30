@@ -1,7 +1,7 @@
 <div class="alert alert-primary" role="alert" *ngIf="dataSource.length == 0">
     <b>Items will be displayed here.</b> Click the 'add item' button to find an item to add if you wish to do so.
     <div style="margin-top:15px">
-        <button mat-raised-button color="primary" (click)="openDialog()">
+        <button mat-raised-button color="primary" type="button" (click)="openDialog()">
             Add item
         </button>
     </div>
@@ -15,7 +15,8 @@
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>
             <div *ngIf="column == 'actions'">
-                <td mat-cell *matCellDef="let k = dataIndex"> <button mat-button (click)="removeItem(dataSource, k)">{{k}}
+                <td mat-cell *matCellDef="let k = dataIndex"> <button mat-button
+                        (click)="removeItem(dataSource, k)">{{k}}
                         Edit</button> | <button mat-button (click)="removeItem(dataSource, k)">Remove
                     </button></td>
             </div>
@@ -60,7 +61,7 @@
         <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
     </table>
 
-    <button class="add-button" mat-raised-button color="primary" (click)="openDialog()">
+    <button class="add-button" type="button" mat-raised-button color="primary" (click)="openDialog()">
         Add item
     </button>
 

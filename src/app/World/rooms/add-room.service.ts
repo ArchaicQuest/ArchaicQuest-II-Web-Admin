@@ -12,14 +12,15 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { BehaviorSubject } from 'rxjs';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { Room } from './interfaces/room.interface';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root'
 })
 
 export class RoomService {
-    private host = `${environment.hostAPI}`;
-    private saveRoomUrl = `${this.host}/room/post`;
+    private host = 'http://localhost:57814/api/'; // `${environment.hostAPI}`;
+    private saveRoomUrl = `${this.host}room/post`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
@@ -121,11 +122,11 @@ export class RoomService {
     }
 
     saveRoom(data: Room) {
-        console.log('post this ', data);
-        return this.http.post(this.saveRoomUrl, JSON.stringify(data), {
-            headers: this.headers,
-            responseType: 'text'
-        });
+        return this.http.post(this.saveRoomUrl, JSON.stringify(data),
+            { headers: this.headers, responseType: 'text' }).pipe(
+                tap(x => console.log(x))
+            ).subscribe();
+
     }
 
 

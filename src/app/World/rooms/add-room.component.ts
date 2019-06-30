@@ -287,6 +287,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
 
         const data: Room = {
             RoomObjects: [],
+            areaId: this.id,
             coords: {
                 x: this.addRoomForm.get('CoordX').value,
                 y: this.addRoomForm.get('CoordY').value,
@@ -319,7 +320,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         });
 
 
-        console.log(data);
+
 
         this.roomServices.saveRoom(data);
     }
