@@ -6,7 +6,86 @@ table {
     font-size: 14px;
     width: 100%;
   }
+
+  td {
+
+    padding:0 20px;
+
+    button {
+        width:100%;
+    }
+
+    .exit {
+    content: "";
+    border: 1px solid #ccc;
+    position: absolute;
+    margin: 0 auto;
+    left: 50%;
+    height: 24px;
+    top: -12px;
+
+    &.exit--north {
+        left: 50%;
+        height: 24px;
+        top: -12px;
+    
+    }
+    &.exit--northEast {
+        left: 100%;
+        height: 40px;
+        top: -20%;
+        transform: rotate(-130deg);
+    }
+    
+    
+    &.exit--east {
+        left: 100%;
+        height: 24px;
+        top: 43%;
+        transform: rotate(90deg);
+    
+    }
+    &.exit--southEast {
+        left: 100%;
+        height: 40px;
+        top: 81%;
+        transform: rotate(130deg);
+    }
+    &.exit--south {
+        left: 50%;
+        height: 24px;
+        top: 100%;
+    
+    }
+    &.exit--southWest {
+        left: 0%;
+        height: 40px;
+        top: 81%;
+        transform: rotate(-130deg);
+    }
+
+    &.exit--west {
+        left: 0%;
+        height: 24px;
+        top: 43%;
+        transform: rotate(90deg);
+    
+    }
+
+    &.exit--northWest {
+        left: 0%;
+    height: 40px;
+    top: -20%;
+    transform: rotate(130deg);
+}
+    
+    
+}
+    
+}
+  
   
   td, th {
     width: 25%;
+    position:relative;
   }
