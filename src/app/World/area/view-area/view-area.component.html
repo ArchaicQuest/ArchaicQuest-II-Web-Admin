@@ -40,16 +40,25 @@
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
-                                <div class="exit exit--north"></div>
-                                <div class="exit exit--northEast"></div>
+                                <div class="exit exit--north"
+                                    *ngIf="hasNorthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
 
-                                <div class="exit exit--east"></div>
-                                <div class="exit exit--southEast"></div>
+                                <!-- Two way {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})}} -->
+                                <div class="exit exit--northEast"
+                                    *ngIf="hasNorthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
 
-                                <div class="exit exit--south"></div>
-                                <div class="exit exit--southWest"></div>
+                                <div class="exit exit--east"
+                                    *ngIf="hasEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+                                <div class="exit exit--southEast"
+                                    *ngIf="hasSouthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
+
+                                <div class="exit exit--south"
+                                    *ngIf="hasSouthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+                                <!-- <div class="exit exit--southWest"></div>
                                 <div class="exit exit--west"></div>
-                                <div class="exit exit--northWest"></div>
+                                <div class="exit exit--northWest"></div> -->
 
 
 

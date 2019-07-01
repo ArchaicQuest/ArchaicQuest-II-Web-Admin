@@ -11,3 +11,7 @@ export interface Area {
     modifiedBy?: string[];
     rooms: Room[];
 }
+
+export interface RoomTable {
+    [key: string]: Room;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
-import { Area } from '../interface/area.interface';
+import { Area, RoomTable } from '../interface/area.interface';
 import { ViewAreaService } from './view-area.service';
 import { ActivatedRoute } from '@angular/router';
 import { EditService } from '../edit-area/edit-area.service';
@@ -14,7 +14,7 @@ import { Room } from '../../rooms/interfaces/room.interface';
 })
 export class ViewAreaComponent implements OnInit {
     area: Area;
-
+    roomTable: RoomTable = {};
     roomCount: 5;
     maxValueOfX: number;
     maxValueOfY: number;
@@ -30,6 +30,8 @@ export class ViewAreaComponent implements OnInit {
 
     ngOnInit() {
 
+
+
         this.editAreaServices.getArea(this.route.snapshot.params['id']).subscribe(data => {
 
             const startingCoords: Coords = {
@@ -38,7 +40,7 @@ export class ViewAreaComponent implements OnInit {
                 z: 0
             };
 
-            const startingRoom: Room = {
+            let startingRoom: Room = {
                 coords: startingCoords,
                 title: 'add room',
                 RoomObjects: null,
@@ -54,12 +56,19 @@ export class ViewAreaComponent implements OnInit {
 
 
 
+
             debugger;
             if (data.rooms.length == 0) {
                 this.rooms.push(startingRoom);
             } else {
 
                 this.rooms = data.rooms;
+
+                data.rooms.forEach(room => {
+                    this.roomTable[JSON.stringify(room.coords).toString()] = room;
+                });
+
+                console.log(JSON.stringify(this.roomTable)) //https://stackoverflow.com/questions/11233498/json-stringify-without-quotes-on-properties
             }
 
             this.area = {
@@ -193,9 +202,38 @@ export class ViewAreaComponent implements OnInit {
 
 
     isRoom(room: Coords) {
-        // debugger;
         return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y);
     }
+
+    hasNorthExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasNorthExit(this.rooms, currentRoom);
+    }
+    hasNorthEastExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasNorthEastExit(this.rooms, currentRoom);
+    }
+    hasEastExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasEastExit(this.rooms, currentRoom);
+    }
+    hasSouthEastExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.rooms, currentRoom);
+    }
+    hasSouthExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasSouthExit(this.rooms, currentRoom);
+    }
+    hasSouthWestExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.rooms, currentRoom);
+    }
+    hasWestExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasWestExit(this.rooms, currentRoom);
+    }
+    hasNorthWestExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasNorthWestExit(this.rooms, currentRoom);
+    }
+
+    isTwoWayExit(rooms: Room[], currentRoom: Coords) {
+        this.service.isTwoWayExit(rooms, currentRoom);
+    }
+
 
 
 }
