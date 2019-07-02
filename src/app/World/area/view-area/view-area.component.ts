@@ -65,10 +65,13 @@ export class ViewAreaComponent implements OnInit {
                 this.rooms = data.rooms;
 
                 data.rooms.forEach(room => {
-                    this.roomTable[JSON.stringify(room.coords).toString()] = room;
+                    this.roomTable[this.service.getRoomID(room.coords)] = room;
                 });
 
-                console.log(JSON.stringify(this.roomTable)) //https://stackoverflow.com/questions/11233498/json-stringify-without-quotes-on-properties
+
+                console.log(this.roomTable["{x:0,y:1,z:0}"])
+                console.log("-----------------------------------------------")
+                console.log(this.roomTable["{x:1,y:1,z:0}"])
             }
 
             this.area = {
@@ -206,7 +209,7 @@ export class ViewAreaComponent implements OnInit {
     }
 
     hasNorthExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasNorthExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasNorthExit(this.roomTable, currentRoom);
     }
     hasNorthEastExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasNorthEastExit(this.rooms, currentRoom);
@@ -215,13 +218,13 @@ export class ViewAreaComponent implements OnInit {
         return this.isRoom(currentRoom) && this.service.hasEastExit(this.rooms, currentRoom);
     }
     hasSouthEastExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.roomTable, currentRoom);
     }
     hasSouthExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasSouthExit(this.rooms, currentRoom);
     }
     hasSouthWestExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.roomTable, currentRoom);
     }
     hasWestExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasWestExit(this.rooms, currentRoom);
@@ -230,9 +233,9 @@ export class ViewAreaComponent implements OnInit {
         return this.isRoom(currentRoom) && this.service.hasNorthWestExit(this.rooms, currentRoom);
     }
 
-    isTwoWayExit(rooms: Room[], currentRoom: Coords) {
-        this.service.isTwoWayExit(rooms, currentRoom);
-    }
+    // isTwoWayExit(rooms: Room[], currentRoom: Coords) {
+    //     this.service.isTwoWayExit(rooms, currentRoom);
+    // }
 
 
 
