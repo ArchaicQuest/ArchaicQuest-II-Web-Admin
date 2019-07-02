@@ -22,43 +22,71 @@ export class ViewAreaService {
 
     getRoomID(coords: Coords) {
 
-      if (coords == null ) { return; }
+        if (coords == null) { return; }
 
-      return JSON.stringify(coords).replace(/\"([^(\")"]+)\":/g, '$1:');
+        return JSON.stringify(coords).replace(/\"([^(\")"]+)\":/g, '$1:');
     }
 
-    // isTwoWayExit(rooms: RoomTable, currentRoom: Coords, exit: string) {
+    oppositExit(exit: string) {
+        switch (exit) {
+            case 'North':
+                return 'South';
+            case 'NorthEast':
+                return 'SouthWest';
+            case 'East':
+                return 'West';
+            case 'SouthEast':
+                return 'NorthWest';
+            case 'South':
+                return 'North';
+            case 'SouthWest':
+                return 'NorthEast';
+            case 'West':
+                return 'East';
+            case 'NorthWest':
+                return 'SouthEast';
+        }
+    }
 
-    //   const room = rooms[this.getRoomID(currentRoom)];
+    isTwoWayExit(rooms: RoomTable, currentRoom: Coords, exit: string) {
+        console.log(exit)
 
+        const room = rooms[this.getRoomID(currentRoom)];
 
+        if (room.exits[exit] != null) {
 
-    //     if (room.exits[exit] != null) {
-    //       const newRoomCoords: Coords = {
-    //         x: (room.exits[exit] as Exit).coords.x,
-    //         y: (room.exits[exit] as Exit).coords.y,
-    //         z: (room.exits[exit] as Exit).coords.z
-    //     };
-    //     }
+            const newRoomCoords: Coords = {
+                x: (room.exits[exit] as Exit).coords.x,
+                y: (room.exits[exit] as Exit).coords.y,
+                z: (room.exits[exit] as Exit).coords.z
+            };
 
-    //     return this.hasNorthExit(rooms, currentRoom) && this.hasSouthExit(rooms, coords);
-    // }
+            const targetRoom = rooms[this.getRoomID(newRoomCoords)];
+
+            if (targetRoom.exits[this.oppositExit(exit)] != null) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
 
     isRoom(rooms: RoomTable, roomCoords: Coords) {
-      const room = rooms[this.getRoomID(roomCoords)];
+        const room = rooms[this.getRoomID(roomCoords)];
 
-      if (room == null) {
-         return false;
-      }
+        if (room == null) {
+            return false;
+        }
 
-      return true;
+        return true;
     }
     hasNorthExit(rooms: RoomTable, currentRoom: Coords) {
 
-      const room = rooms[this.getRoomID(currentRoom)];
+        const room = rooms[this.getRoomID(currentRoom)];
 
         if (room.exits.north == null) {
-           return;
+            return;
         }
 
         //Check if room north exists (show line as red and mention areas)
@@ -74,10 +102,10 @@ export class ViewAreaService {
     }
     hasSouthEastExit(rooms: RoomTable, currentRoom: Coords) {
 
-      const room = rooms[this.getRoomID(currentRoom)];
+        const room = rooms[this.getRoomID(currentRoom)];
 
         if (room.exits.southEast == null) {
-           return;
+            return;
         }
 
         return true;
