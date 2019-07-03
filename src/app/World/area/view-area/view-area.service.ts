@@ -53,6 +53,40 @@ export class ViewAreaService {
 
         const room = rooms[this.getRoomID(currentRoom)];
 
+        if (room == null) {
+            return;
+        }
+
+        if (room.exits[exit] != null) {
+
+            const newRoomCoords: Coords = {
+                x: (room.exits[exit] as Exit).coords.x,
+                y: (room.exits[exit] as Exit).coords.y,
+                z: (room.exits[exit] as Exit).coords.z
+            };
+
+            const targetRoom = rooms[this.getRoomID(newRoomCoords)];
+            if (targetRoom == null) {
+                return;
+            }
+            if (targetRoom.exits[this.oppositExit(exit)] != null) {
+                return true;
+            }
+
+        }
+
+        return false;
+    }
+
+    HasValidExit(rooms: RoomTable, currentRoom: Coords, exit: string) {
+        console.log(exit)
+
+        const room = rooms[this.getRoomID(currentRoom)];
+
+        if (room == null) {
+            return;
+        }
+
         if (room.exits[exit] != null) {
 
             const newRoomCoords: Coords = {
@@ -63,8 +97,10 @@ export class ViewAreaService {
 
             const targetRoom = rooms[this.getRoomID(newRoomCoords)];
 
-            if (targetRoom.exits[this.oppositExit(exit)] != null) {
+            if (targetRoom != null) {
                 return true;
+            } else {
+                return false;
             }
 
         }
@@ -85,13 +121,9 @@ export class ViewAreaService {
 
         const room = rooms[this.getRoomID(currentRoom)];
 
-        if (room.exits.north == null) {
+        if (room != null && room.exits.north == null) {
             return;
         }
-
-        //Check if room north exists (show line as red and mention areas)
-        // check if two way
-
         return true;
     }
     hasNorthEastExit(rooms: Room[], currentRoom: Coords) {
@@ -104,7 +136,7 @@ export class ViewAreaService {
 
         const room = rooms[this.getRoomID(currentRoom)];
 
-        if (room.exits.southEast == null) {
+        if (room != null && room.exits.southEast == null) {
             return;
         }
 

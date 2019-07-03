@@ -28,6 +28,13 @@
             </div>
 
             <div class="panel">
+                <h2>Errors</h2>
+                <div *ngFor="let error of errors; let i = index;  trackBy: trackByFn">
+                    error {{error}}
+                </div>
+            </div>
+
+            <div class="panel">
                 <h2>Room Layout</h2>
 
                 <div class="table-responsive">
@@ -40,7 +47,9 @@
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
-                                <div class="exit exit--north"
+                                <div class="exit exit--north 
+                                {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north') ? 'exit--north--twoWay' : 'exit--north--oneWay' }}
+                                {{isValidExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north') ? 'exit--valid' : 'exit--invalid' }}"
                                     *ngIf="hasNorthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
 
                                 <!-- Two way {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})}} -->
