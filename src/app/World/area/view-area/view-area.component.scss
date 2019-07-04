@@ -24,10 +24,26 @@ table {
     height: 24px;
     top: -12px;
 
+    &.exit--invalid {
+        border: 1px solid red;
+    }
+
     &.exit--north {
         left: 50%;
         height: 24px;
         top: -12px;
+
+      &.exit--north--oneWay:after{
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 10px 13px 10px;
+        border-color: transparent transparent #222 transparent;
+        content: "";
+        position: absolute;
+        top: 4px;
+        left: -10px;
+      }
     
     }
     &.exit--northEast {

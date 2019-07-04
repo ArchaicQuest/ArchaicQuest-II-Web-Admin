@@ -47,27 +47,32 @@
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
-                                <div class="exit exit--north 
-                                {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north') ? 'exit--north--twoWay' : 'exit--north--oneWay' }}
-                                {{isValidExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north') ? 'exit--valid' : 'exit--invalid' }}"
+                                <div class="exit exit--north  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north')}}"
                                     *ngIf="hasNorthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
 
                                 <!-- Two way {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})}} -->
-                                <div class="exit exit--northEast"
+                                <div class="exit exit--northEast  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'northEast')}}"
                                     *ngIf="hasNorthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
                                 </div>
 
-                                <div class="exit exit--east"
+                                <div class="exit exit--east  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'east')}}"
                                     *ngIf="hasEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
                                 <div class="exit exit--southEast"
                                     *ngIf="hasSouthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
                                 </div>
 
-                                <div class="exit exit--south"
+                                <div class="exit exit--south {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'south')}}"
                                     *ngIf="hasSouthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
-                                <!-- <div class="exit exit--southWest"></div>
-                                <div class="exit exit--west"></div>
-                                <div class="exit exit--northWest"></div> -->
+
+                                <div class="exit exit--southWest {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'southWest')}}"
+                                    *ngIf="hasSouthWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
+
+                                <div class="exit exit--west {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'west')}}"
+                                    *ngIf="hasWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+
+                                <div class="exit exit--northWest {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'northWest')}}"
+                                    *ngIf="hasWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
 
 
 

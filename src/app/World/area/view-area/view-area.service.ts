@@ -57,7 +57,7 @@ export class ViewAreaService {
             return;
         }
 
-        if (room.exits[exit] != null) {
+        if (!!room.exits[exit]) {
 
             const newRoomCoords: Coords = {
                 x: (room.exits[exit] as Exit).coords.x,
@@ -87,7 +87,7 @@ export class ViewAreaService {
             return;
         }
 
-        if (room.exits[exit] != null) {
+        if (!!room.exits[exit]) {
 
             const newRoomCoords: Coords = {
                 x: (room.exits[exit] as Exit).coords.x,
