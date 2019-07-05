@@ -108,10 +108,6 @@ export class ViewAreaComponent implements OnInit {
         //  this.GenerateRoomLayout();
     }
 
-    trackByFn(index, item) {
-        return index;
-    }
-
 
     isRoom(room: Coords) {
         return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y);
@@ -124,12 +120,6 @@ export class ViewAreaComponent implements OnInit {
     isValidExit(room: Coords, exitDir: string) {
 
         const validExit = this.service.HasValidExit(this.roomTable, room, exitDir);
-
-        if (!validExit) {
-            const roomErr = this.roomTable[this.service.getRoomID(room)];
-            this.errors.push(`${roomErr.title} at ${JSON.stringify(roomErr.coords)} has an invalid exit ${exitDir}. Room does not exist!!`);
-
-        }
 
         return validExit;
     }
@@ -162,7 +152,7 @@ export class ViewAreaComponent implements OnInit {
     setRoomClass(coord: Coords, exitDirection: string): string {
         let exitClass = '';
 
-        exitClass += this.isTwoWayExit(coord, exitDirection) ? ' exit--north--twoWay ' : ' exit--north--oneWay ';
+        exitClass += this.isTwoWayExit(coord, exitDirection) ? ` exit--${exitDirection}--twoWay ` : ` exit--${exitDirection}--oneWay `;
         exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';
 
         return exitClass;
