@@ -58,7 +58,6 @@ export class ViewAreaService {
         }
 
         if (!!room.exits[exit]) {
-
             const newRoomCoords: Coords = {
                 x: (room.exits[exit] as Exit).coords.x,
                 y: (room.exits[exit] as Exit).coords.y,
@@ -105,7 +104,7 @@ export class ViewAreaService {
 
         }
 
-        return false;
+        return;
     }
 
     isRoom(rooms: RoomTable, roomCoords: Coords) {
@@ -121,7 +120,7 @@ export class ViewAreaService {
 
         const room = rooms[this.getRoomID(currentRoom)];
 
-        if (room != null && room.exits.north == null) {
+        if (room == null || room != null && room.exits.north == null) {
             return;
         }
         return true;
@@ -136,7 +135,7 @@ export class ViewAreaService {
 
         const room = rooms[this.getRoomID(currentRoom)];
 
-        if (room != null && room.exits.southEast == null) {
+        if (room == null || room != null && room.exits.southEast == null) {
             return;
         }
 
