@@ -131,7 +131,7 @@ export class ViewAreaComponent implements OnInit {
         return this.isRoom(currentRoom) && this.service.hasNorthEastExit(this.rooms, currentRoom);
     }
     hasEastExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasEastExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasEastExit(this.roomTable, currentRoom);
     }
     hasSouthEastExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.roomTable, currentRoom);
@@ -140,7 +140,7 @@ export class ViewAreaComponent implements OnInit {
         return this.isRoom(currentRoom) && this.service.hasSouthExit(this.rooms, currentRoom);
     }
     hasSouthWestExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.roomTable, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasSouthWestExit(this.roomTable, currentRoom);
     }
     hasWestExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasWestExit(this.rooms, currentRoom);
@@ -152,8 +152,8 @@ export class ViewAreaComponent implements OnInit {
     setRoomClass(coord: Coords, exitDirection: string): string {
         let exitClass = '';
 
-         exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';
-         exitClass += this.isTwoWayExit(coord, exitDirection) ? ` exit--${exitDirection}--twoWay ` : ` exit--${exitDirection}--oneWay `;
+        exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';
+        exitClass += this.isTwoWayExit(coord, exitDirection) ? ` exit--${exitDirection}--twoWay ` : ` exit--${exitDirection}--oneWay `;
 
         return exitClass;
     }

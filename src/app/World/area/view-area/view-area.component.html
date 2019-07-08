@@ -52,7 +52,7 @@
 
                                 <div class="exit exit--east  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'east')}}"
                                     *ngIf="hasEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
-                                <div class="exit exit--southEast"
+                                <div class="exit exit--southEast  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'southEast')}}"
                                     *ngIf="hasSouthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
                                 </div>
 
