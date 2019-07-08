@@ -24,6 +24,16 @@ td {
     height: 24px;
     top: -12px;
     width: 5px;
+    &[class*="--oneWay"]:after {
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 0 10px 13px 10px;
+      border-color: transparent transparent #222 transparent;
+      content: "";
+      position: absolute;
+    }
+
     &.exit--invalid {
       border: 1px solid red;
       background: red;
@@ -35,15 +45,8 @@ td {
       top: -12px;
 
       &.exit--north--oneWay:after {
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 10px 13px 10px;
-        border-color: transparent transparent #222 transparent;
-        content: "";
-        position: absolute;
         top: 4px;
-        left: -10px;
+        left: -8px;
       }
     }
     &.exit--northEast {
@@ -51,6 +54,12 @@ td {
       height: 40px;
       top: -20%;
       transform: rotate(-130deg);
+
+      &.exit--northEast--oneWay:after {
+        top: 14px;
+        left: -9px;
+        transform: rotate(180deg);
+      }
     }
 
     &.exit--east {
@@ -58,12 +67,24 @@ td {
       height: 24px;
       top: 43%;
       transform: rotate(90deg);
+
+      &.exit--east--oneWay:after {
+        top: 14px;
+        left: -9px;
+        transform: rotate(180deg);
+      }
     }
     &.exit--southEast {
       left: 100%;
       height: 40px;
       top: 81%;
       transform: rotate(130deg);
+
+      &.exit--southEast--oneWay:after {
+        top: 14px;
+        left: -9px;
+        transform: rotate(180deg);
+      }
     }
     &.exit--south {
       left: 50%;
@@ -71,26 +92,24 @@ td {
       top: 86%;
       width: 5px;
 
-      &.exit--south--oneway:after {
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 0 10px 13px 10px;
-        border-color: transparent transparent #222 transparent;
-        content: "";
-        position: absolute;
-        top: 4px;
-        left: -10px;
+      &.exit--south--oneWay:after {
+        top: 7px;
+        left: -9px;
         transform: rotate(180deg);
       }
-
-
     }
     &.exit--southWest {
       left: 0%;
       height: 40px;
       top: 81%;
       transform: rotate(-130deg);
+
+      &.exit--southWest--oneWay:after {
+        top: 4px;
+        left: -10px;
+        transform: rotate(180deg);
+      }
+
     }
 
     &.exit--west {
@@ -98,6 +117,12 @@ td {
       height: 24px;
       top: 43%;
       transform: rotate(90deg);
+
+      &.exit--west--oneWay:after {
+        top: 5px;
+        left: -9px;
+        transform: rotate(180deg);
+      }
     }
 
     &.exit--northWest {
@@ -105,6 +130,12 @@ td {
       height: 40px;
       top: -20%;
       transform: rotate(130deg);
+
+      &.exit--northWest--oneWay:after {
+        top: 4px;
+        left: -10px;
+        transform: rotate(180deg);
+      }
     }
   }
 }

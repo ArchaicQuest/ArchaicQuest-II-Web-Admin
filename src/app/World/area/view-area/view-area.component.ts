@@ -152,24 +152,12 @@ export class ViewAreaComponent implements OnInit {
     setRoomClass(coord: Coords, exitDirection: string): string {
         let exitClass = '';
 
-        const room = this.rooms[this.service.getRoomID(coord)];
-
-        if (room == null) {
-            return;
-        }
-
-        if (!!room.exits[exitDirection]) {
-
-            exitClass += this.isTwoWayExit(coord, exitDirection) ? ` exit--${exitDirection}--twoWay ` : ` exit--${exitDirection}--oneWay `;
-            exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';
-        }
+         exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';
+         exitClass += this.isTwoWayExit(coord, exitDirection) ? ` exit--${exitDirection}--twoWay ` : ` exit--${exitDirection}--oneWay `;
 
         return exitClass;
     }
 
-    // isTwoWayExit(rooms: Room[], currentRoom: Coords) {
-    //     this.service.isTwoWayExit(rooms, currentRoom);
-    // }
 
 
 

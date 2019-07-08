@@ -82,9 +82,6 @@ export class ViewAreaService {
 
         const room = rooms[this.getRoomID(currentRoom)];
 
-        if (room == null) {
-            return;
-        }
 
         if (!!room.exits[exit]) {
 
