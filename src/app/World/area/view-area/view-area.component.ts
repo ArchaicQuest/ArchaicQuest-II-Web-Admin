@@ -128,7 +128,7 @@ export class ViewAreaComponent implements OnInit {
         return this.isRoom(currentRoom) && this.service.hasNorthExit(this.roomTable, currentRoom);
     }
     hasNorthEastExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasNorthEastExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasNorthEastExit(this.roomTable, currentRoom);
     }
     hasEastExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasEastExit(this.roomTable, currentRoom);
@@ -137,16 +137,16 @@ export class ViewAreaComponent implements OnInit {
         return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.roomTable, currentRoom);
     }
     hasSouthExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasSouthExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasSouthExit(this.roomTable, currentRoom);
     }
     hasSouthWestExit(currentRoom: Coords) {
         return this.isRoom(currentRoom) && this.service.hasSouthWestExit(this.roomTable, currentRoom);
     }
     hasWestExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasWestExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasWestExit(this.roomTable, currentRoom);
     }
     hasNorthWestExit(currentRoom: Coords) {
-        return this.isRoom(currentRoom) && this.service.hasNorthWestExit(this.rooms, currentRoom);
+        return this.isRoom(currentRoom) && this.service.hasNorthWestExit(this.roomTable, currentRoom);
     }
 
     setRoomClass(coord: Coords, exitDirection: string): string {

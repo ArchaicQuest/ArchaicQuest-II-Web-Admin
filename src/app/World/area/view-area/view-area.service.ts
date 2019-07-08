@@ -122,8 +122,14 @@ export class ViewAreaService {
         }
         return true;
     }
-    hasNorthEastExit(rooms: Room[], currentRoom: Coords) {
-        return rooms.find(x => x.coords.x === currentRoom.x + 1 && x.coords.y === currentRoom.y + 1);
+    hasNorthEastExit(rooms: RoomTable, currentRoom: Coords) {
+        const room = rooms[this.getRoomID(currentRoom)];
+
+        if (room == null || room != null && room.exits.northEast.coords == null) {
+            return;
+        }
+
+        return true;
     }
     hasEastExit(rooms: RoomTable, currentRoom: Coords) {
         const room = rooms[this.getRoomID(currentRoom)];
@@ -144,8 +150,14 @@ export class ViewAreaService {
 
         return true;
     }
-    hasSouthExit(rooms: Room[], currentRoom: Coords) {
-        return rooms.find(x => x.coords.x === currentRoom.x && x.coords.y === currentRoom.y - 1);
+    hasSouthExit(rooms: RoomTable, currentRoom: Coords) {
+        const room = rooms[this.getRoomID(currentRoom)];
+
+        if (room == null || room != null && room.exits.south.coords == null) {
+            return;
+        }
+
+        return true;
     }
     hasSouthWestExit(rooms: RoomTable, currentRoom: Coords) {
         const room = rooms[this.getRoomID(currentRoom)];
@@ -156,10 +168,22 @@ export class ViewAreaService {
 
         return true;
     }
-    hasWestExit(rooms: Room[], currentRoom: Coords) {
-        return rooms.find(x => x.coords.x === currentRoom.x - 1 && x.coords.y === currentRoom.y);
+    hasWestExit(rooms: RoomTable, currentRoom: Coords) {
+        const room = rooms[this.getRoomID(currentRoom)];
+
+        if (room == null || room != null && room.exits.west.coords == null) {
+            return;
+        }
+
+        return true;
     }
-    hasNorthWestExit(rooms: Room[], currentRoom: Coords) {
-        return rooms.find(x => x.coords.x === currentRoom.x - 1 && x.coords.y === currentRoom.y + 1);
+    hasNorthWestExit(rooms: RoomTable, currentRoom: Coords) {
+        const room = rooms[this.getRoomID(currentRoom)];
+
+        if (room == null || room != null && room.exits.northWest.coords == null) {
+            return;
+        }
+
+        return true;
     }
 }
