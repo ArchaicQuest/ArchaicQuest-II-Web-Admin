@@ -8,7 +8,7 @@ table {
 }
 
 td {
-  padding: 0 20px;
+  padding: 20px;
 
   button {
     width: 100%;
@@ -23,40 +23,46 @@ td {
     left: 50%;
     height: 24px;
     top: -12px;
-    width: 5px;
+    width: 4px;
     &[class*="--oneWay"]:after {
       width: 0;
       height: 0;
       border-style: solid;
-      border-width: 0 10px 13px 10px;
-      border-color: transparent transparent #222 transparent;
+      border-width: 0 10px 10px 10px;
+      border-color: transparent transparent #ccc transparent;
       content: "";
       position: absolute;
-    }
 
+
+    }
+    
     &.exit--invalid {
       border: 1px solid red;
       background: red;
+
+      &:after {
+        border-color: transparent transparent red transparent
+    }
     }
 
     &.exit--north {
-      left: 50%;
-      height: 24px;
-      top: -12px;
+        left: 50%;
+        height: 24px;
+        top: -7px;
 
       &.exit--north--oneWay:after {
-        top: 4px;
-        left: -8px;
+        top: -11px;
+        left: -9px;
       }
     }
     &.exit--northEast {
-      left: 100%;
-      height: 40px;
-      top: -20%;
-      transform: rotate(-130deg);
+        left: 99%;
+        height: 40px;
+        top: -14%;
+        transform: rotate(-134deg);
 
       &.exit--northEast--oneWay:after {
-        top: 14px;
+        top: 38px;
         left: -9px;
         transform: rotate(180deg);
       }
@@ -78,10 +84,10 @@ td {
       left: 100%;
       height: 40px;
       top: 81%;
-      transform: rotate(130deg);
+      transform: rotate(-44deg);
 
       &.exit--southEast--oneWay:after {
-        top: 14px;
+        top: 38px;
         left: -9px;
         transform: rotate(180deg);
       }
@@ -90,10 +96,10 @@ td {
       left: 50%;
       height: 30px;
       top: 86%;
-      width: 5px;
+   
 
       &.exit--south--oneWay:after {
-        top: 7px;
+        top: 26px;
         left: -9px;
         transform: rotate(180deg);
       }
@@ -102,10 +108,10 @@ td {
       left: 0%;
       height: 40px;
       top: 81%;
-      transform: rotate(-130deg);
+      transform: rotate(44deg);
 
       &.exit--southWest--oneWay:after {
-        top: 4px;
+        top: 38px;
         left: -10px;
         transform: rotate(180deg);
       }
