@@ -36,6 +36,7 @@ import { ManageRoomItemsComponent } from './rooms/manage-items/add/manage-room-i
 import { RoomMobListComponent } from './rooms/manage-mob/list/room-mob-list.component';
 import { ManageRoomMobsComponent } from './rooms/manage-mob/add/manage-room-mobs.component';
 import { RoomExitService } from './rooms/modals/modals/room-exits/manage-exits.service';
+import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
 
 
 
@@ -69,6 +70,7 @@ import { RoomExitService } from './rooms/modals/modals/room-exits/manage-exits.s
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
+        EditRoomComponent,
         ViewAreasComponent,
         ViewAreaComponent,
         EditAreaComponent,

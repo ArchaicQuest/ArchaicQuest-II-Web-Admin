@@ -4,6 +4,7 @@ import { AddRoomComponent } from './rooms/add-room.component';
 import { ViewAreasComponent } from './area/view-areas/view-areas.component';
 import { EditAreaComponent } from './area/edit-area/edit-area.component';
 import { ViewAreaComponent } from './area/view-area/view-area.component';
+import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
 
 export const worldRoutes: Routes = [
     { path: 'list-areas', component: ViewAreasComponent },
@@ -13,7 +14,7 @@ export const worldRoutes: Routes = [
     { path: 'edit-area/:id', component: EditAreaComponent },
     { path: 'add-room/:id/:x/:y/:z', component: AddRoomComponent },
 
-    { path: 'edit-room/:id/:x-:y-:z', component: AddRoomComponent },
+    { path: 'edit-room/:id', component: EditRoomComponent },
 
     //http://localhost:1337/world/area/2/add-room/-1/3/0
 ];

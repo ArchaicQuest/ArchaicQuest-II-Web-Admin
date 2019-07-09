@@ -73,13 +73,13 @@
 
 
                                 <button mat-raised-button
-                                    [routerLink]="['/world/area/area.id/add-area', area.id ? '' : area.id]"
+                                    [routerLink]="['/world/area/' + area.id + '/edit-room',isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).id]"
                                     *ngIf="isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"
                                     color="primary">{{isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).title}}
                                     <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}} )</button>
 
                                 <button mat-raised-button
-                                    [routerLink]="['/world/area/1/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
+                                    [routerLink]="['/world/area/' + area.id + '/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
                                     *ngIf="!isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">Add
                                     Room <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}})</button>
                             </td>
