@@ -17,8 +17,6 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { ManageContainerItemsComponent } from '../shared/manage-container-items/manage-container-items.component';
 import { ItemModule } from 'src/app/items/item.module';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
-import { ManageMobComponent } from './../manage-mob/manage-mob.component';
-import { ManageExitsComponent } from './../modals/modals/room-exits/manage-exits.component';
 import {
     trigger,
     state,
@@ -33,10 +31,11 @@ import { RoomExit } from './../interfaces/roomExit.interface';
 import { Room } from './../interfaces/room.interface';
 import { RoomObject } from './../interfaces/roomObject.interface';
 import { Shared } from 'src/app/shared/shared';
+import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
+import { ManageExitsComponent } from '../shared/room-exits/manage-exits.component';
 
 @Component({
     templateUrl: './edit-room.component.html',
-    styleUrls: ['./../add-room.component.scss'],
     animations: [
         trigger('detailExpand', [
             state('collapsed', style({ height: '0px', minHeight: '0' })),

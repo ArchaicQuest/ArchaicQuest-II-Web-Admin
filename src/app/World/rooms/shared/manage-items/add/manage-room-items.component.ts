@@ -5,7 +5,7 @@ import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/materia
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
-import { RoomService } from '../../add-room/add-room.service';
+import { RoomService } from '../../../add-room/add-room.service';
 import { ToastrService } from 'ngx-toastr';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
@@ -20,7 +20,7 @@ export class ManageRoomItemsComponent implements OnInit {
         private toastr: ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: {
             item: Item,
-            container: Item|Mob,
+            container: Item | Mob,
             isInventory: Boolean
             // containerIndex: number
         }) { }
@@ -49,8 +49,8 @@ export class ManageRoomItemsComponent implements OnInit {
     addItemToRoom(item: Item) {
 
         if (this.data.isInventory) {
-          this.addItemToMob(item);
-          return;
+            this.addItemToMob(item);
+            return;
         }
 
         if (this.data.container != null && (this.data.container as Item).itemType == '2') {
@@ -70,13 +70,13 @@ export class ManageRoomItemsComponent implements OnInit {
 
     addItemToMob(item: Item) {
 
-      this.roomServices.updateMobInventory(item, this.data.container);
+        this.roomServices.updateMobInventory(item, this.data.container);
 
-      this.toastr.success(`${item.name} added successfully.`);
+        this.toastr.success(`${item.name} added successfully.`);
 
-      this.dialogRef.close();
+        this.dialogRef.close();
 
-  }
+    }
 
 }
 

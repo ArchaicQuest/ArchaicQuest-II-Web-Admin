@@ -1,10 +1,6 @@
 import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Coords } from '../add-room/node_modules/src/app/shared/interfaces/coords.interface';
-import { Item } from '../add-room/node_modules/src/app/items/interfaces/item.interface';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Item } from 'src/app/items/interfaces/item.interface';
 
 @Component({
     templateUrl: './manage-container-items.component.html'

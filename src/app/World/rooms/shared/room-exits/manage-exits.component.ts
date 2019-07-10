@@ -1,11 +1,10 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Item } from '../../../add-room/node_modules/src/app/items/interfaces/item.interface';
+import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';;
 import { RoomExitService } from './manage-exits.service';
 import { FormGroup } from '@angular/forms';
 import { Toast, ToastrService } from 'ngx-toastr';
-import { Coords } from '../../../add-room/node_modules/src/app/shared/interfaces/coords.interface';
+import { Coords } from 'src/app/shared/interfaces/coords.interface';
 
 @Component({
     templateUrl: './manage-exits.component.html'

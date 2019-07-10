@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angu
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { MatDialog } from '@angular/material';
-import { ManageContainerItemsComponent } from '../../shared/manage-container-items/manage-container-items.component';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { ItemSelectorComponent } from 'src/app/items/selectors/Item-selector/item-selector.component';
 import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
