@@ -12,13 +12,13 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 
 import { Store } from '@ngrx/store';
-import { Coords } from 'src/app/shared/interfaces/coords.interface';
-import { Item } from 'src/app/items/interfaces/item.interface';
-import { ManageContainerItemsComponent } from './manage-container-items/manage-container-items.component';
-import { ItemModule } from 'src/app/items/item.module';
-import { Mob } from 'src/app/mobs/interfaces/mob.interface';
-import { ManageMobComponent } from './manage-mob/manage-mob.component';
-import { ManageExitsComponent } from './modals/modals/room-exits/manage-exits.component';
+import { Coords } from './node_modules/src/app/shared/interfaces/coords.interface';
+import { Item } from './node_modules/src/app/items/interfaces/item.interface';
+import { ManageContainerItemsComponent } from '../manage-container-items/manage-container-items.component';
+import { ItemModule } from './node_modules/src/app/items/item.module';
+import { Mob } from './node_modules/src/app/mobs/interfaces/mob.interface';
+import { ManageMobComponent } from '../manage-mob/manage-mob.component';
+import { ManageExitsComponent } from '../modals/modals/room-exits/manage-exits.component';
 import {
     trigger,
     state,
@@ -26,13 +26,13 @@ import {
     animate,
     transition
 } from '@angular/animations';
-import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
-import { Exit } from './interfaces/exit.interface';
+import { ItemSlotEnum } from './node_modules/src/app/items/interfaces/item-slot.enum';
+import { Exit } from '../interfaces/exit.interface';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
-import { RoomExit } from './interfaces/roomExit.interface';
-import { Room } from './interfaces/room.interface';
-import { RoomObject } from './interfaces/roomObject.interface';
-import { Shared } from 'src/app/shared/shared';
+import { RoomExit } from '../interfaces/roomExit.interface';
+import { Room } from '../interfaces/room.interface';
+import { RoomObject } from '../interfaces/roomObject.interface';
+import { Shared } from './node_modules/src/app/shared/shared';
 
 @Component({
     templateUrl: './add-room.component.html',
@@ -273,14 +273,14 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         /*
         Create room object interface, loop over this.getRoomObjectsControl
         can then push data to room object array
-    
+
         return Exits and save
-    
+
         Missing room emotes
          - you hear a deathly scream in the distance
-    
+
         missing Instant repop and Update message (Generic message for when room repops)
-    
+
         WTF is Players?
         */
 

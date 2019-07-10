@@ -6,7 +6,7 @@ import {
 } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { Exit } from '../../../interfaces/exit.interface';
-import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Coords } from '../../../add-room/node_modules/src/app/shared/interfaces/coords.interface';
 
 @Injectable({
     providedIn: 'root'

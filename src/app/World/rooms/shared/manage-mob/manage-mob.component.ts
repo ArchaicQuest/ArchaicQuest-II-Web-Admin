@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { Mob } from '../add-room/node_modules/src/app/mobs/interfaces/mob.interface';
 
 @Component({
     templateUrl: './manage-mob.component.html'

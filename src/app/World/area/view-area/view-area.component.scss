@@ -35,7 +35,7 @@ td {
 
 
     }
-    
+
     &.exit--invalid {
       border: 1px solid red;
       background: red;
@@ -48,7 +48,7 @@ td {
     &.exit--north {
         left: 50%;
         height: 24px;
-        top: -7px;
+        top: -10px;
 
       &.exit--north--oneWay:after {
         top: -11px;
@@ -96,7 +96,7 @@ td {
       left: 50%;
       height: 30px;
       top: 86%;
-   
+
 
       &.exit--south--oneWay:after {
         top: 26px;
@@ -121,7 +121,7 @@ td {
     &.exit--west {
       left: 0%;
       height: 24px;
-      top: 43%;
+      top: 41%;
       transform: rotate(90deg);
 
       &.exit--west--oneWay:after {

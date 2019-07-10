@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { RoomService } from '../add-room/add-room.service';
+import { RoomService } from './add-room.service';
 import { ActivatedRoute } from '@angular/router';
 import {
     MatSelectChange,
@@ -17,8 +17,8 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { ManageContainerItemsComponent } from '../shared/manage-container-items/manage-container-items.component';
 import { ItemModule } from 'src/app/items/item.module';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
-import { ManageMobComponent } from './../manage-mob/manage-mob.component';
-import { ManageExitsComponent } from './../modals/modals/room-exits/manage-exits.component';
+import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
+import { ManageExitsComponent } from '../shared/room-exits/manage-exits.component';
 import {
     trigger,
     state,
@@ -27,16 +27,16 @@ import {
     transition
 } from '@angular/animations';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
-import { Exit } from './../interfaces/exit.interface';
+import { Exit } from '../interfaces/exit.interface';
 import { jsonpCallbackContext } from '@angular/common/http/src/module';
-import { RoomExit } from './../interfaces/roomExit.interface';
-import { Room } from './../interfaces/room.interface';
-import { RoomObject } from './../interfaces/roomObject.interface';
+import { RoomExit } from '../interfaces/roomExit.interface';
+import { Room } from '../interfaces/room.interface';
+import { RoomObject } from '../interfaces/roomObject.interface';
 import { Shared } from 'src/app/shared/shared';
 
 @Component({
-    templateUrl: './edit-room.component.html',
-    styleUrls: ['./../add-room.component.scss'],
+    templateUrl: './add-room.component.html',
+    styleUrls: ['./add-room.component.scss'],
     animations: [
         trigger('detailExpand', [
             state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -48,7 +48,7 @@ import { Shared } from 'src/app/shared/shared';
         ])
     ]
 })
-export class EditRoomComponent implements OnInit, OnDestroy {
+export class AddRoomComponent implements OnInit, OnDestroy {
     componentActive = true;
     addRoomForm: FormGroup;
     id: number;

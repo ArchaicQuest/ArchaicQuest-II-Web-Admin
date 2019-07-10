@@ -5,7 +5,7 @@ import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/materia
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
-import { RoomService } from '../../add-room.service';
+import { RoomService } from '../../add-room/add-room.service';
 import { ToastrService } from 'ngx-toastr';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 

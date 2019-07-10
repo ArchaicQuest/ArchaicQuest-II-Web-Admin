@@ -7,11 +7,11 @@ import {
 } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
-import { Item } from 'src/app/items/interfaces/item.interface';
+import { environment } from './node_modules/src/environments/environment';
+import { Item } from './node_modules/src/app/items/interfaces/item.interface';
 import { BehaviorSubject } from 'rxjs';
-import { Mob } from 'src/app/mobs/interfaces/mob.interface';
-import { Room } from './interfaces/room.interface';
+import { Mob } from './node_modules/src/app/mobs/interfaces/mob.interface';
+import { Room } from '../interfaces/room.interface';
 import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
