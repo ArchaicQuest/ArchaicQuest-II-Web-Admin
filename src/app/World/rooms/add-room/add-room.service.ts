@@ -20,7 +20,7 @@ import { tap, catchError } from 'rxjs/operators';
 
 export class RoomService {
     private host = 'http://localhost:57814/api/'; // `${environment.hostAPI}`;
-    private saveRoomUrl = `${this.host}room/post`;
+    private saveRoomUrl = `${this.host}World/Room/`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
