@@ -16,8 +16,8 @@ import { CharacterEffects } from '../characters/state/character.effects';
 import { ArmourClassComponent } from '../characters/armour-class/armour-class.component';
 import { AreaService } from './area/add-area/add-area.service';
 import { AddAreaComponent } from './area/add-area/add-area.component';
-import { AddRoomComponent } from './rooms/add-room.component';
-import { RoomService } from './rooms/add-room.service';
+import { AddRoomComponent } from './rooms/add-room/add-room.component';
+import { RoomService } from './rooms/add-room/add-room.service';
 import { ViewAreasComponent } from './area/view-areas/view-areas.component';
 import { EditAreaComponent } from './area/edit-area/edit-area.component';
 import { EditService } from './area/edit-area/edit-area.service';
@@ -27,10 +27,17 @@ import { AppRoutingModule } from '../app-routing.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-selector.component';
 import { ItemService } from '../items/add-item/add-item.service';
-import { ManageContainerItemsComponent } from './rooms/manage-container-items/manage-container-items.component';
+import { ManageContainerItemsComponent } from './rooms/shared/manage-container-items/manage-container-items.component';
 import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.component';
-import { ManageMobComponent } from './rooms/manage-mob/manage-mob.component';
-import { ManageExitsComponent } from './rooms/modals/modals/room-exits/manage-exits.component';
+import { EditRoomComponent } from './rooms/edit-room/edit-room.component';
+import { RoomExitService } from './rooms/shared/room-exits/manage-exits.service';
+import { ManageRoomItemsComponent } from './rooms/shared/manage-items/add/manage-room-items.component';
+import { ManageRoomMobsComponent } from './rooms/shared/manage-mob/add/manage-room-mobs.component';
+import { RoomMobListComponent } from './rooms/shared/manage-mob/list/room-mob-list.component';
+import { RoomItemListComponent } from './rooms/shared/manage-items/list/room-item-list.component';
+import { ManageMobComponent } from './rooms/shared/manage-mob/manage-mob.component';
+import { ManageExitsComponent } from './rooms/shared/room-exits/manage-exits.component';
+import { EditRoomService } from './rooms/edit-room/edit-room.service';
 
 
 
@@ -55,13 +62,17 @@ import { ManageExitsComponent } from './rooms/modals/modals/room-exits/manage-ex
         AreaService,
         ViewAreaService,
         EditService,
+        EditRoomService,
         RoomService,
-        ItemService
+        ItemService,
+        RoomExitService
     ],
-    entryComponents: [ManageContainerItemsComponent, ManageMobComponent, ManageExitsComponent],
+    entryComponents: [ManageContainerItemsComponent, ManageRoomItemsComponent, ManageRoomMobsComponent, RoomMobListComponent,
+        RoomItemListComponent, ManageMobComponent, ManageExitsComponent, ItemSelectorComponent],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
+        EditRoomComponent,
         ViewAreasComponent,
         ViewAreaComponent,
         EditAreaComponent,
@@ -69,8 +80,11 @@ import { ManageExitsComponent } from './rooms/modals/modals/room-exits/manage-ex
         MobSelectorComponent,
         ManageContainerItemsComponent,
         ManageMobComponent,
-        ManageExitsComponent
-
+        ManageExitsComponent,
+        RoomItemListComponent,
+        ManageRoomItemsComponent,
+        ManageRoomMobsComponent,
+        RoomMobListComponent
 
     ],
 })

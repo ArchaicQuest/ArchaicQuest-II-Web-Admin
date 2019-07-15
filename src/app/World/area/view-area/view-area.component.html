@@ -1,7 +1,7 @@
 <div class="container-fluid view-area">
     <app-header>Area: {{area.title}}</app-header>
     <div class="row">
-        <div class="col-8">
+        <div class="col">
             <div class="panel">
 
 
@@ -27,6 +27,8 @@
 
             </div>
 
+
+
             <div class="panel">
                 <h2>Room Layout</h2>
 
@@ -40,77 +42,57 @@
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
+                                <div class="exit exit--north  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north')}}"
+                                    *ngIf="hasNorthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+
+                                <!-- Two way {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})}} -->
+                                <div class="exit exit--northEast  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'northEast')}}"
+                                    *ngIf="hasNorthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
+
+                                <div class="exit exit--east  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'east')}}"
+                                    *ngIf="hasEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+                                <div class="exit exit--southEast  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'southEast')}}"
+                                    *ngIf="hasSouthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
+
+                                <div class="exit exit--south {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'south')}}"
+                                    *ngIf="hasSouthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+
+                                <div class="exit exit--southWest {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'southWest')}}"
+                                    *ngIf="hasSouthWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
+
+                                <div class="exit exit--west {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'west')}}"
+                                    *ngIf="hasWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+
+                                <div class="exit exit--northWest {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'northWest')}}"
+                                    *ngIf="hasNorthWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                </div>
+
+
 
                                 <button mat-raised-button
-                                    [routerLink]="['/world/area/area.id/add-area', area.id ? '' : area.id]"
+                                    [routerLink]="['/world/area/' + area.id + '/edit-room',isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).id]"
                                     *ngIf="isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"
-                                    color="primary">Example
-                                    Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
+                                    color="primary">{{isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).title}}
+                                    <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}} )</button>
 
                                 <button mat-raised-button
-                                    [routerLink]="['/world/area/1/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
+                                    [routerLink]="['/world/area/' + area.id + '/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
                                     *ngIf="!isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">Add
-                                    Room <br /> ({{this.maxValueOfY - y}}, {{ i + this.minValueOfX}})</button>
+                                    Room <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}})</button>
                             </td>
                         </tr>
                     </table>
                 </div>
-                <!-- <hr />
-                <div class="table-responsive">
-                    <table class="table">
-                        <tr>
-                            <th style="min-width:100px"></th>
-                            <th style="min-width:100px"></th>
-                            <th style="min-width:100px"></th>
-
-                        </tr>
-                        <tr>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="primary"
-                                    [routerLink]="['/add-area',area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="primary"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-                            <td> <button mat-raised-button color="primary"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td> <button mat-raised-button color="accent"
-                                    [routerLink]="['/add-area', area.id ? '' : area.id]">Add
-                                    Room</button>
-                            </td>
-
-                        </tr>
-
-                    </table>
-                </div> -->
 
             </div>
         </div>
     </div>
 </div>
 
-<!-- 
+<!--
 <table class="table">
         <tr>
             <th style="min-width:100px"></th>

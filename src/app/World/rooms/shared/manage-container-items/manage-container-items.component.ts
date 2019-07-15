@@ -1,9 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Item } from 'src/app/items/interfaces/item.interface';
 
 @Component({
@@ -29,6 +25,7 @@ export class ManageContainerItemsComponent implements OnInit {
 
 
     addItemToContainer(item: Item) {
+
         this.data.items[this.data.containerIndex].container.items.push(item);
 
     }

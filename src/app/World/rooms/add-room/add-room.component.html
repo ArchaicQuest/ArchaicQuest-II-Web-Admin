@@ -1,0 +1,447 @@
+<app-header>Add new room</app-header>
+<div class="row">
+    <div class="col-7">
+        <div class="panel">
+            <form novalidate [formGroup]="addRoomForm" (ngSubmit)="saveRoom()">
+                <h2>Room Information:</h2>
+                <div class="section">
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Title</mat-label>
+                                <input matInput placeholder="Title" value="" required formControlName="title" />
+                                <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                                    Room title is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput placeholder="Title" cdkTextareaAutosize
+                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                    required formControlName="description"></textarea>
+                                <mat-error *ngIf="addRoomForm.get('description').hasError('required')">
+                                    Room description is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <h2>Room Objects:</h2>
+                <p>
+                    These are used to add more Information about key items highlighted in
+                    the description.
+                </p>
+                <div class="section">
+                    <div class="row room__addObjects">
+                        <div class="col">
+                            <div class="room__addObjects__section" formArrayName="roomObjects" *ngFor="
+                let roomObject of getRoomObjectsControl.controls;
+                let i = index
+              ">
+                                <div [formGroupName]="i">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Keyword</mat-label>
+                                        <input type="text" matInput placeholder="Keyword" formControlName="title" />
+                                    </mat-form-field>
+
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-form-field appearance="outline" class="form-control">
+                                                <mat-label>Description</mat-label>
+                                                <textarea matInput placeholder="Basic description" cdkTextareaAutosize
+                                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
+                                                    cdkAutosizeMaxRows="20" formControlName="description"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                            <mat-form-field appearance="outline" class="form-control">
+                                                <mat-label>Examine</mat-label>
+                                                <textarea matInput placeholder="Detailed Description"
+                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                    formControlName="examine"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-form-field appearance="outline" class="form-control">
+                                                <mat-label>Touch</mat-label>
+                                                <textarea matInput placeholder="How does the object feel?"
+                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                    formControlName="touch"></textarea>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col">
+                                            <mat-form-field appearance="outline" class="form-control">
+                                                <mat-label>Taste</mat-label>
+                                                <textarea matInput placeholder="How does the object taste?"
+                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                    formControlName="taste"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                            <mat-form-field appearance="outline" class="form-control">
+                                                <mat-label>Smell</mat-label>
+                                                <textarea matInput placeholder="How does the object smell?"
+                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                    formControlName="smell"></textarea>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button mat-raised-button (click)="removeRoomObject(i)">Remove</button>
+                            </div>
+
+
+                            <div class="row">
+                                <div class="col">
+                                    <button mat-raised-button color="primary" (click)="this.addRoomObject()">Add another
+                                        Room
+                                        Object</button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Items</h2>
+
+                    <app-item-list [data]="items"></app-item-list>
+                </div>
+
+                <div class="section">
+                    <h2>Mobs</h2>
+
+                    <app-mob-list [data]="mobs"></app-mob-list>
+                </div>
+
+
+
+                <div class="section">
+                    <h2>Exits:</h2>
+                    <p>
+                        Exits will need to be added to both rooms to be two way,
+                        and share the same key for any doors, all properties must match too.
+                    </p>
+                    <p>Coordinates shown are (x,y,z)</p>
+
+                    <div class="addRoom__exits">
+                        {{this.exits | json}}
+                        <div class="row">
+
+                            <div class="col">
+
+                                <button title="Add North West Exit"
+                                    *ngIf="addRoomForm.get('exits.northWest').value == ''" mat-raised-button
+                                    type="button" (click)="openExitDialog('North West')">
+                                    North West
+                                </button>
+
+                                <button title="Add North West Exit"
+                                    *ngIf="addRoomForm.get('exits.northWest').value != ''" mat-raised-button
+                                    type="button" color="primary" (click)="openExitDialog('North West')">
+                                    North West
+                                    <span class="addRoom__exits__coords">({{exits.northWest.coords?.x}},
+                                        {{exits.northWest.coords?.y}},
+                                        {{exits.northWest.coords?.z}})</span>
+                                </button>
+                            </div>
+                            <div class="col">
+
+                                <button *ngIf="addRoomForm.get('exits.north').value == ''" title="Add North Exit"
+                                    mat-raised-button type="button" (click)="openExitDialog('North')">
+                                    North
+                                </button>
+
+                                <button *ngIf="addRoomForm.get('exits.north').value != ''" color="primary"
+                                    title="Add North Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('North')">
+                                    North
+                                    <span class="addRoom__exits__coords">({{exits.north.coords?.x}},
+                                        {{exits.north.coords?.y}},
+                                        {{exits.north.coords?.z}})</span>
+                                </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.north').value != ''">Remove
+                                    exit</a>
+                            </div>
+
+                            <div class="col">
+
+                                <button title=" Add North East Exit"
+                                    *ngIf="addRoomForm.get('exits.northEast').value == ''" mat-raised-button
+                                    type="button" (click)="openExitDialog('North East')">
+                                    North East
+
+                                </button>
+                                <button title=" Add North East Exit"
+                                    *ngIf="addRoomForm.get('exits.northEast').value != ''" mat-raised-button
+                                    color="primary" type="button" (click)="openExitDialog('North East')">
+                                    North East
+                                    <span class="addRoom__exits__coords">({{exits.northEast.coords?.x}},
+                                        {{exits.northEast.coords?.y}},
+                                        {{exits.northEast.coords?.z}})</span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col">
+
+                                <button title="Add West Exit" *ngIf="addRoomForm.get('exits.west').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('West')">
+                                    West
+                                </button>
+                                <button title="Add West Exit" *ngIf="addRoomForm.get('exits.west').value != ''"
+                                    color="primary" mat-raised-button type="button" (click)="openExitDialog('West')">
+                                    West
+                                    <span class="addRoom__exits__coords">({{exits.west.coords?.x}},
+                                        {{exits.west.coords?.y}},
+                                        {{exits.west.coords?.z}})</span>
+                                </button>
+                            </div>
+
+                            <div class="col">
+                                <button mat-raised-button type="button" disabled="true">
+                                    Current Room
+                                    <span class="addRoom__exits__coords">({{coords?.x}},
+                                        {{coords?.y}},
+                                        {{coords.z}})</span>
+                                </button>
+                            </div>
+
+                            <div class="col">
+
+                                <button title="Add East Exit" *ngIf="addRoomForm.get('exits.east').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('East')">
+                                    East
+                                </button>
+
+                                <button title="Add East Exit" *ngIf="addRoomForm.get('exits.east').value != ''"
+                                    color="primary" mat-raised-button type="button" (click)="openExitDialog('East')">
+                                    East
+                                    <span class="addRoom__exits__coords">({{exits.east.coords?.x}},
+                                        {{exits.east.coords?.y}},
+                                        {{exits.east.coords?.z}})</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+
+                                <button title="Add South West Exit"
+                                    *ngIf="addRoomForm.get('exits.southWest').value == ''" mat-raised-button
+                                    type="button" (click)="openExitDialog('South West')">
+                                    South West
+                                </button>
+
+                                <button title="Add South West Exit"
+                                    *ngIf="addRoomForm.get('exits.southWest').value != ''" mat-raised-button
+                                    type="button" color="primary" (click)="openExitDialog('South West')">
+                                    South West
+                                    <span class="addRoom__exits__coords">({{exits.southWest.coords?.x}},
+                                        {{exits.southWest.coords?.y}},
+                                        {{exits.southWest.coords?.z}})</span>
+                                </button>
+                            </div>
+                            <div class="col">
+
+                                <button title="Add South Exit" *ngIf="addRoomForm.get('exits.south').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('South')">
+                                    South
+                                </button>
+
+                                <button title="Add South Exit" *ngIf="addRoomForm.get('exits.south').value != ''"
+                                    mat-raised-button color="primary" type="button" (click)="openExitDialog('South')">
+                                    South
+                                    <span class="addRoom__exits__coords">({{exits.south.coords?.x}},
+                                        {{exits.south.coords?.y}},
+                                        {{exits.south.coords?.z}})</span>
+                                </button>
+                            </div>
+
+
+                            <div class="col">
+
+                                <button title="Add South East Exit"
+                                    *ngIf="addRoomForm.get('exits.southEast').value == ''" mat-raised-button
+                                    type="button" (click)="openExitDialog('South East')">
+                                    South East
+                                </button>
+
+                                <button title="Add South East Exit"
+                                    *ngIf="addRoomForm.get('exits.southEast').value != ''" mat-raised-button
+                                    type="button" color="primary" (click)="openExitDialog('South East')">
+                                    South East
+
+                                    <span class="addRoom__exits__coords">({{exits.southEast.coords?.x}},
+                                        {{exits.southEast.coords?.y}},
+                                        {{exits.southEast.coords?.z}})</span>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <button mat-raised-button type="button" *ngIf="addRoomForm.get('exits.up').value == ''"
+                                    (click)="openExitDialog('Up')">
+                                    Up
+                                </button>
+
+                                <button mat-raised-button type="button" color="primary"
+                                    *ngIf="addRoomForm.get('exits.up').value != ''" (click)="openExitDialog('Up')">
+                                    Up
+                                    <span class="addRoom__exits__coords">({{exits.up.coords?.x}},
+                                        {{exits.up.coords?.y}},
+                                        {{exits.up.coords?.z}})</span>
+                                </button>
+                            </div>
+
+                            <div class="col">
+                                <button mat-raised-button type="button"
+                                    *ngIf="addRoomForm.get('exits.down').value == ''" (click)="openExitDialog('Down')">
+                                    Down
+                                </button>
+
+                                <button mat-raised-button type="button"
+                                    *ngIf="addRoomForm.get('exits.down').value != ''" color="primary"
+                                    (click)="openExitDialog('Down')">
+                                    Down
+                                    <span class="addRoom__exits__coords">({{exits.down.coords?.x}},
+                                        {{exits.down.coords?.y}},
+                                        {{exits.down.coords?.z}})</span>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="section">
+                    <h2>Coords:</h2>
+                    <p>
+                        These are automatically set based on the map on the area page. You
+                        should rarely need to manually change these but you have the option to
+                        do so.
+                    </p>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>X:</mat-label>
+                                <input matInput placeholder="X Coord" required formControlName="CoordX" />
+                                <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
+                                    X coord is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Y:</mat-label>
+                                <input matInput placeholder="Y Coord" required formControlName="CoordY" />
+                                <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                                    y coord is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Z:</mat-label>
+                                <input matInput placeholder="Z Coord" required formControlName="CoordZ" />
+                                <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                                    z coord is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">
+                    Save Room
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <div class="col-5">
+        <div class="client">
+            <p class="room__description">Room Preview:</p>
+            <p class="echo">> look</p>
+            <p class="room__title">
+                {{
+          addRoomForm.get("title").value === ""
+            ? "This is the room title"
+            : addRoomForm.get("title").value
+        }}
+            </p>
+            <p class="room__description">
+                {{
+          addRoomForm.get("description").value === ""
+            ? "Your beautifully written room description shown here."
+            : addRoomForm.get("description").value
+        }}
+            </p>
+
+            <p class="room__description" *ngFor="let item of items; let i = index">
+                {{ item.name }} lies here.
+            </p>
+            <p class="room__description" *ngFor="let mob of mobs; let i = index">
+                {{ mob.longName == null ? mob.name + " is here" : mob.longName }}.
+            </p>
+            <br />
+            <p class="room__description">Room Keywords Preview:</p>
+
+            <div *ngFor="let roomObject of getRoomObjectsControl.controls; let i = index"
+                style="border-bottom: 1px dashed #555; padding-bottom: 10px">
+                <div *ngIf="roomObject.value.description">
+                    <p class="echo">> look {{ roomObject.value.title }}</p>
+
+                    <p class="room__description">
+                        {{ roomObject.value.description }}
+                    </p>
+                </div>
+
+                <div *ngIf="roomObject.value.examine">
+                    <p class="echo">> examine {{ roomObject.value.title }}</p>
+
+                    <p class="room__description">
+                        {{ roomObject.value.examine }}
+                    </p>
+                </div>
+                <div *ngIf="roomObject.value.touch">
+                    <p class="echo">> touch {{ roomObject.value.title }}</p>
+
+                    <p class="room__description">
+                        {{ roomObject.value.touch }}
+                    </p>
+                </div>
+                <div *ngIf="roomObject.value.taste">
+                    <p class="echo">> taste {{ roomObject.value.title }}</p>
+
+                    <p class="room__description">
+                        {{ roomObject.value.taste }}
+                    </p>
+                </div>
+                <div *ngIf="roomObject.value.smell">
+                    <p class="echo">> smell {{ roomObject.value.title }}</p>
+
+                    <p class="room__description">
+                        {{ roomObject.value.smell }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

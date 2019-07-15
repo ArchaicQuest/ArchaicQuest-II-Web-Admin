@@ -29,6 +29,8 @@
         "bootstrap-sass": "^3.4.1",
         "core-js": "^2.6.5",
         "font-awesome": "^4.7.0",
+        "ngx-toastr": "^10.0.4",
+        "npm": "^6.9.0",
         "rpg-awesome": "^0.2.0",
         "rxjs": "^6.4.0",
         "tslib": "^1.9.0",

@@ -1,0 +1,70 @@
+<div class="alert alert-primary" role="alert" *ngIf="dataSource.length == 0">
+    <b>Mobs will be displayed here.</b> Click the 'add mob' button to find a mob to add if you wish to do so.
+    <div style="margin-top:15px">
+        <button mat-raised-button color="primary" type="button" (click)="openDialog()">
+            Add item
+        </button>
+    </div>
+</div>
+
+<div *ngIf="dataSource.length != 0">
+
+    <table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" multiTemplateDataRows
+        class="mat-elevation-z8">
+
+        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;">
+            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+            <div *ngIf="column == 'actions'">
+                <td mat-cell *matCellDef="let k = dataIndex"> <button mat-button
+                        (click)="removeItem(dataSource, k)">{{k}}
+                        Edit</button> | <button mat-button (click)="removeItem(dataSource, k)">Remove
+                    </button></td>
+            </div>
+            <div *ngIf="column == 'container'">
+                <td mat-cell *matCellDef="let element">
+                    {{element.itemType == '2' ? 'True' : 'False'}}
+                </td>
+            </div>
+
+            <div *ngIf="column == 'slot'">
+                <td mat-cell *matCellDef="let element">
+                    {{mapSlot(element.slot)}} {{element.slot}}
+                </td>
+            </div>
+
+            <div *ngIf="column != 'actions' || column != 'container' || column != 'slot'">
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </div>
+        </ng-container>
+
+
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td mat-cell *matCellDef="let element; let i = dataIndex" [attr.colspan]="columnsToDisplay.length">
+
+                <div class="example-element-detail" *ngIf="element?.inventory[i]?.itemType != '2'"
+                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                    <h2>Inventory</h2>
+                    <div>
+
+                        <app-item-list [data]="element.inventory" [container]="element" [isInventory]="true"
+                            [disableContainerItems]="true"></app-item-list>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+
+
+        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+            [class.example-expanded-row]="expandedElement === element"
+            (click)="expandedElement = expandedElement === element ? null : element">
+        </tr>
+        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+    </table>
+
+    <button class="add-button" type="button" mat-raised-button color="primary" (click)="openDialog()">
+        Add mob
+    </button>
+
+</div>

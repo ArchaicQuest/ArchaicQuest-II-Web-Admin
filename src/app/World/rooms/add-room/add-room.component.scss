@@ -1,0 +1,44 @@
+.room__addObjects {
+    margin-bottom: 30px;
+
+}
+
+.room__addObjects__section {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 30px;
+}
+
+.addRoom__exits {
+    a {
+        display: none;
+    }
+  .mat-raised-button {
+    margin: 25px 0;
+    width:100%;
+    height: 60px;
+border: 1px solid #ccc;
+box-shadow: none;
+    &:hover {
+      background: #673ab7;
+      color:#fff;
+    }
+  }
+
+  .addRoom__exits__coords {
+      font-size: 12px;
+      margin-top: -18px;
+      display: block;
+  }
+
+  .col:hover {
+      a {
+          display: inline;
+      }
+  }
+}
+
+
+.section {
+    margin-bottom: 30px;
+}

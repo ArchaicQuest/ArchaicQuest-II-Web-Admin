@@ -1,11 +1,13 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
-import { Area } from '../interface/area.interface';
+import { Area, RoomTable } from '../interface/area.interface';
 import { ViewAreaService } from './view-area.service';
 import { ActivatedRoute } from '@angular/router';
 import { EditService } from '../edit-area/edit-area.service';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Room } from '../../rooms/interfaces/room.interface';
+import { debug } from 'util';
 
 @Component({
     templateUrl: './view-area.component.html',
@@ -13,7 +15,7 @@ import { Coords } from 'src/app/shared/interfaces/coords.interface';
 })
 export class ViewAreaComponent implements OnInit {
     area: Area;
-
+    roomTable: RoomTable = {};
     roomCount: 5;
     maxValueOfX: number;
     maxValueOfY: number;
@@ -22,14 +24,55 @@ export class ViewAreaComponent implements OnInit {
     minValueOfY: number;
     totalCol: number;
     totalRow: number;
-    rooms: Coords[];
-    constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute) {
+    rooms: Room[] = [];
+    errors: string[] = [];
+    constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute, private cd: ChangeDetectorRef) {
 
     }
 
     ngOnInit() {
 
+
+
         this.editAreaServices.getArea(this.route.snapshot.params['id']).subscribe(data => {
+
+            const startingCoords: Coords = {
+                x: 0,
+                y: 0,
+                z: 0
+            };
+
+            let startingRoom: Room = {
+                coords: startingCoords,
+                title: 'add room',
+                RoomObjects: null,
+                description: '',
+                exits: null,
+                emotes: null,
+                items: null,
+                players: null,
+                mobs: null,
+                instantRepop: false,
+                updateMessage: '',
+            };
+
+
+
+            if (data.rooms.length == 0) {
+                this.rooms.push(startingRoom);
+            } else {
+
+                this.rooms = data.rooms;
+
+                data.rooms.forEach(room => {
+                    this.roomTable[this.service.getRoomID(room.coords)] = room;
+                });
+
+
+                console.log(this.roomTable["{x:0,y:1,z:0}"])
+                console.log("-----------------------------------------------")
+                console.log(this.roomTable["{x:1,y:1,z:0}"])
+            }
 
             this.area = {
                 'id': data.id,
@@ -39,112 +82,83 @@ export class ViewAreaComponent implements OnInit {
                 'dateUpdated': data.dateUpdated,
                 'createdBy': data.createdBy,
                 'modifiedBy': null,
-                'rooms': data.rooms
+                'rooms': this.rooms
             };
+
+            this.maxValueOfX = Math.max(...this.rooms.map(room => room.coords.x), 0) + 1;
+            this.maxValueOfY = Math.max(...this.rooms.map(room => room.coords.y), 0) + 1;
+
+            this.minValueOfX = Math.min(...this.rooms.map(room => room.coords.x), 0) - 1;
+            this.minValueOfY = Math.min(...this.rooms.map(room => room.coords.y), 0) - 1;
+
+            console.log("mx x", this.maxValueOfX)
+            console.log("mx y", this.maxValueOfY)
+
+            console.log("mn x", this.minValueOfX)
+            console.log("mn y", this.minValueOfY)
+
+            this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
+            this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
+
+            console.log("totalRow", this.totalRow)
+            console.log("totalCol", this.totalCol)
+
         });
 
-        this.GenerateRoomLayout();
+        //  this.GenerateRoomLayout();
     }
 
-    GenerateRoomLayout() {
-        const startingCoords: Coords = {
-            x: 0,
-            y: 0,
-            z: 0
-        };
 
-        const room1 = startingCoords;
-        const north = {
-            x: 0,
-            y: 1,
-            z: 0
-        };
-        const east = {
-            x: 1,
-            y: 0,
-            z: 0
-        };
-        const east1 = {
-            x: 2,
-            y: 0,
-            z: 0
-        };
-        const east2 = {
-            x: 3,
-            y: 0,
-            z: 0
-        };
-        const south = {
-            x: 0,
-            y: -1,
-            z: 0
-        };
-        const south2 = {
-            x: 0,
-            y: -2,
-            z: 0
-        };
-        const west = {
-            x: -1,
-            y: 0,
-            z: 0
-        };
-        const west1 = {
-            x: -2,
-            y: 0,
-            z: 0
-        };
-        const west2 = {
-            x: -3,
-            y: 0,
-            z: 0
-        };
-        const west3 = {
-            x: -4,
-            y: 0,
-            z: 0
-        };
-
-        const north1 = {
-            x: 0,
-            y: 2,
-            z: 0
-        };
-        const north2 = {
-            x: 0,
-            y: 3,
-            z: 0
-        };
-
-        this.rooms = [room1, north, east, south, west, north1, north2, west1, west2, east1, east2,
-            west3, south2];
-
-
-
-        this.maxValueOfX = Math.max(...this.rooms.map(coord => coord.x), 0) + 1;
-        this.maxValueOfY = Math.max(...this.rooms.map(coord => coord.y), 0) + 1;
-
-        this.minValueOfX = Math.min(...this.rooms.map(coord => coord.x), 0) - 1;
-        this.minValueOfY = Math.min(...this.rooms.map(coord => coord.y), 0) - 1;
-
-        console.log("mx x", this.maxValueOfX)
-        console.log("mx y", this.maxValueOfY)
-
-        console.log("mn x", this.minValueOfX)
-        console.log("mn y", this.minValueOfY)
-
-        this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
-        this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
-
-        console.log("totalRow", this.totalRow)
-        console.log("totalCol", this.totalCol)
-
+    isRoom(room: Coords) {
+        return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y);
     }
 
-    isRoom(coords: Coords) {
-        // debugger;
-        return this.rooms.find(x => x.x === coords.x && x.y === coords.y);
+    isTwoWayExit(room: Coords, exitDir: string) {
+        return this.service.isTwoWayExit(this.roomTable, room, exitDir);
     }
+
+    isValidExit(room: Coords, exitDir: string) {
+
+        const validExit = this.service.HasValidExit(this.roomTable, room, exitDir);
+
+        return validExit;
+    }
+
+    hasNorthExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasNorthExit(this.roomTable, currentRoom);
+    }
+    hasNorthEastExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasNorthEastExit(this.roomTable, currentRoom);
+    }
+    hasEastExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasEastExit(this.roomTable, currentRoom);
+    }
+    hasSouthEastExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasSouthEastExit(this.roomTable, currentRoom);
+    }
+    hasSouthExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasSouthExit(this.roomTable, currentRoom);
+    }
+    hasSouthWestExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasSouthWestExit(this.roomTable, currentRoom);
+    }
+    hasWestExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasWestExit(this.roomTable, currentRoom);
+    }
+    hasNorthWestExit(currentRoom: Coords) {
+        return this.isRoom(currentRoom) && this.service.hasNorthWestExit(this.roomTable, currentRoom);
+    }
+
+    setRoomClass(coord: Coords, exitDirection: string): string {
+        let exitClass = '';
+
+        exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';
+        exitClass += this.isTwoWayExit(coord, exitDirection) ? ` exit--${exitDirection}--twoWay ` : ` exit--${exitDirection}--oneWay `;
+
+        return exitClass;
+    }
+
+
 
 
 }

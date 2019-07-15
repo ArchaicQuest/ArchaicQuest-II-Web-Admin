@@ -1,3 +1,6 @@
+import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Room } from '../../rooms/interfaces/room.interface';
+
 export interface Area {
     id: number;
     title: string;
@@ -6,5 +9,9 @@ export interface Area {
     dateUpdated?: string;
     createdBy?: string;
     modifiedBy?: string[];
-    rooms: any[];
+    rooms: Room[];
+}
+
+export interface RoomTable {
+    [key: string]: Room;
 }
