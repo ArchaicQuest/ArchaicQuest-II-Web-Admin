@@ -37,6 +37,7 @@ import { RoomMobListComponent } from './rooms/shared/manage-mob/list/room-mob-li
 import { RoomItemListComponent } from './rooms/shared/manage-items/list/room-item-list.component';
 import { ManageMobComponent } from './rooms/shared/manage-mob/manage-mob.component';
 import { ManageExitsComponent } from './rooms/shared/room-exits/manage-exits.component';
+import { EditRoomService } from './rooms/edit-room/edit-room.service';
 
 
 
@@ -61,6 +62,7 @@ import { ManageExitsComponent } from './rooms/shared/room-exits/manage-exits.com
         AreaService,
         ViewAreaService,
         EditService,
+        EditRoomService,
         RoomService,
         ItemService,
         RoomExitService

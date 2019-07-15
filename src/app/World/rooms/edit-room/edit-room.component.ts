@@ -33,6 +33,8 @@ import { RoomObject } from './../interfaces/roomObject.interface';
 import { Shared } from 'src/app/shared/shared';
 import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
 import { ManageExitsComponent } from '../shared/room-exits/manage-exits.component';
+import { EditService } from '../../area/edit-area/edit-area.service';
+import { EditRoomService } from './edit-room.service';
 
 @Component({
     templateUrl: './edit-room.component.html',
@@ -51,6 +53,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     componentActive = true;
     addRoomForm: FormGroup;
     id: number;
+    roomId: number;
     coords: Coords;
     items: Item[] = [];
     mobs: Mob[] = [];
@@ -82,6 +85,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     mobExpandedElement: Mob | null;
     constructor(
         private roomServices: RoomService,
+        private editRoomService: EditRoomService,
         private ngZone: NgZone,
         private route: ActivatedRoute,
         public dialog: MatDialog,
@@ -93,8 +97,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.addRoomForm = this.roomServices.addRoomForm;
-
+        console.log(this.route.snapshot.params)
         this.id = this.route.snapshot.params['id'];
+        this.roomId = this.route.snapshot.params['id'];
         this.coords = {
             x: this.route.snapshot.params['x'],
             y: this.route.snapshot.params['y'],
@@ -106,13 +111,18 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         this.addRoomForm.get('CoordZ').setValue(this.coords.z);
 
         this.roomServices.items.subscribe((value: Item[]) => {
-            console.log(value);
             this.items = value;
         });
 
         this.roomServices.mobs.subscribe((value: Mob[]) => {
-            console.log(value);
             this.mobs = value;
+        });
+
+        this.editRoomService.getRoom(this.roomId).subscribe((value: Room) => {
+            this.addRoomForm.get('title').setValue(value.title);
+            this.addRoomForm.get('exits.north').setValue(value.exits.north);
+            this.exits = value.exits;
+
         });
     }
 
