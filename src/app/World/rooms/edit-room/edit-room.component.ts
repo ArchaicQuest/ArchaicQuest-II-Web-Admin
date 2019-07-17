@@ -125,24 +125,25 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             this.addRoomForm.get('title').setValue(value.title);
             this.addRoomForm.get('description').setValue(value.description);
 
-            this.addRoomForm.get('exits.north').setValue(value.exits.north);
-            this.addRoomForm.get('exits.northEast').setValue(value.exits.northWest);
-            this.addRoomForm.get('exits.east').setValue(value.exits.east);
-            this.addRoomForm.get('exits.southEast').setValue(value.exits.southEast);
-            this.addRoomForm.get('exits.south').setValue(value.exits.south);
-            this.addRoomForm.get('exits.southWest').setValue(value.exits.southWest);
-            this.addRoomForm.get('exits.west').setValue(value.exits.west);
-            this.addRoomForm.get('exits.northWest').setValue(value.exits.northWest);
+            // this.addRoomForm.get('exits.north').setValue(value.exits.north);
+            // this.addRoomForm.get('exits.northEast').setValue(value.exits.northWest);
+            // this.addRoomForm.get('exits.east').setValue(value.exits.east);
+            // this.addRoomForm.get('exits.southEast').setValue(value.exits.southEast);
+            // this.addRoomForm.get('exits.south').setValue(value.exits.south);
+            // this.addRoomForm.get('exits.southWest').setValue(value.exits.southWest);
+            // this.addRoomForm.get('exits.west').setValue(value.exits.west);
+            // this.addRoomForm.get('exits.northWest').setValue(value.exits.northWest);
 
 
-            value.RoomObjects.forEach(x => {
-                this.addRoomObject();
-            });
-            this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
+            if (value.roomObjects.length) {
 
-                //data.RoomObjects.push(roomObj);
-            });
+                for (let index = 0; index < value.roomObjects.length - 1; index++) {
+                    this.addRoomObject();
 
+                }
+
+                (<FormArray>this.addRoomForm.controls['roomObjects']).setValue(value.roomObjects);
+            }
 
         });
     }
@@ -316,7 +317,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
 
         const data: Room = {
-            RoomObjects: [],
+            roomObjects: [],
             areaId: this.id,
             coords: {
                 x: this.addRoomForm.get('CoordX').value,
@@ -346,7 +347,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         };
 
         this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
-            data.RoomObjects.push(roomObj);
+            data.roomObjects.push(roomObj);
         });
 
 

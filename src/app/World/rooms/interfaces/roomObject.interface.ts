@@ -1,5 +1,5 @@
 export interface RoomObject {
-    Keyword: string;
+    name: string;
     taste: string;
     touch: string;
     smell: string;

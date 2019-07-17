@@ -45,16 +45,16 @@
                                 <div [formGroupName]="i">
                                     <mat-form-field appearance="outline" class="form-control">
                                         <mat-label>Keyword</mat-label>
-                                        <input type="text" matInput placeholder="Keyword" formControlName="title" />
+                                        <input type="text" matInput placeholder="Keyword" formControlName="name" />
                                     </mat-form-field>
 
                                     <div class="row">
                                         <div class="col">
                                             <mat-form-field appearance="outline" class="form-control">
-                                                <mat-label>Description</mat-label>
+                                                <mat-label>Look</mat-label>
                                                 <textarea matInput placeholder="Basic description" cdkTextareaAutosize
                                                     #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                                                    cdkAutosizeMaxRows="20" formControlName="description"></textarea>
+                                                    cdkAutosizeMaxRows="20" formControlName="look"></textarea>
                                             </mat-form-field>
                                         </div>
                                         <div class="col">

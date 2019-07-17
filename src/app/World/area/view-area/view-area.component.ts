@@ -45,7 +45,7 @@ export class ViewAreaComponent implements OnInit {
             let startingRoom: Room = {
                 coords: startingCoords,
                 title: 'add room',
-                RoomObjects: null,
+                roomObjects: null,
                 description: '',
                 exits: null,
                 emotes: null,

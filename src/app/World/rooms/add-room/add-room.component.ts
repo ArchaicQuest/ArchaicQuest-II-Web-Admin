@@ -286,7 +286,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
 
 
         const data: Room = {
-            RoomObjects: [],
+            roomObjects: [],
             areaId: this.id,
             coords: {
                 x: this.addRoomForm.get('CoordX').value,
@@ -316,7 +316,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         };
 
         this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
-            data.RoomObjects.push(roomObj);
+            data.roomObjects.push(roomObj);
         });
 
 

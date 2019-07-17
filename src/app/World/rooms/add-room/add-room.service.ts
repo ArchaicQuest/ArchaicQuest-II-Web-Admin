@@ -65,8 +65,8 @@ export class RoomService {
 
     initRoomObject() {
         return this.formBuilder.group({
-            title: new FormControl(''),
-            description: new FormControl(''),
+            name: new FormControl(''),
+            look: new FormControl(''),
             examine: new FormControl(''),
             touch: new FormControl(''),
             smell: new FormControl(''),

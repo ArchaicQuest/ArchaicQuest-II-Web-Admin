@@ -19,7 +19,7 @@ export interface Room {
     mobs: Mob[];
     items: Item[];
     emotes: string[];
-    RoomObjects: RoomObject[];
+    roomObjects: RoomObject[];
     updateMessage: string;
     instantRepop: boolean;
 }
