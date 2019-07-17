@@ -140,7 +140,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             });
             this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
 
-                data.RoomObjects.push(roomObj);
+                //data.RoomObjects.push(roomObj);
             });
 
 
