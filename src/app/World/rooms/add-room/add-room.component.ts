@@ -198,7 +198,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
                 return;
             }
 
-            switch (result.Name) {
+            switch (result.name) {
                 case 'North':
                     this.exits.north = result;
                     this.addRoomForm.get('exits.north').setValue(result);

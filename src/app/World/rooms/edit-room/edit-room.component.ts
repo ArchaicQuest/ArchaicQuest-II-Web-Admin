@@ -120,20 +120,51 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
         this.editRoomService.getRoom(this.roomId).subscribe((value: Room) => {
             this.exits = value.exits;
-            // this.mobs = value.mobs;
-            // this.items = value.items;
+            this.mobs = value.mobs;
+            this.items = value.items;
             this.addRoomForm.get('title').setValue(value.title);
             this.addRoomForm.get('description').setValue(value.description);
 
-            // this.addRoomForm.get('exits.north').setValue(value.exits.north);
-            // this.addRoomForm.get('exits.northEast').setValue(value.exits.northWest);
-            // this.addRoomForm.get('exits.east').setValue(value.exits.east);
-            // this.addRoomForm.get('exits.southEast').setValue(value.exits.southEast);
-            // this.addRoomForm.get('exits.south').setValue(value.exits.south);
-            // this.addRoomForm.get('exits.southWest').setValue(value.exits.southWest);
-            // this.addRoomForm.get('exits.west').setValue(value.exits.west);
-            // this.addRoomForm.get('exits.northWest').setValue(value.exits.northWest);
+            this.coords = {
+                x: value.coords.x,
+                y: value.coords.y,
+                z: value.coords.z,
+            };
 
+            this.addRoomForm.get('CoordX').setValue(value.coords.x);
+            this.addRoomForm.get('CoordY').setValue(value.coords.y);
+            this.addRoomForm.get('CoordZ').setValue(value.coords.z);
+
+            if (value.exits.north) {
+                this.addRoomForm.get('exits.north').setValue(value.exits.north);
+            }
+            if (value.exits.northWest) {
+                this.addRoomForm.get('exits.northEast').setValue(value.exits.northWest);
+            }
+            if (value.exits.east) {
+                this.addRoomForm.get('exits.east').setValue(value.exits.east);
+            }
+            if (value.exits.southEast) {
+                this.addRoomForm.get('exits.southEast').setValue(value.exits.southEast);
+            }
+            if (value.exits.south) {
+                this.addRoomForm.get('exits.south').setValue(value.exits.south);
+            }
+            if (value.exits.southWest) {
+                this.addRoomForm.get('exits.southWest').setValue(value.exits.southWest);
+            }
+            if (value.exits.west) {
+                this.addRoomForm.get('exits.west').setValue(value.exits.west);
+            }
+            if (value.exits.northWest) {
+                this.addRoomForm.get('exits.northWest').setValue(value.exits.northWest);
+            }
+            if (value.exits.up) {
+                this.addRoomForm.get('exits.up').setValue(value.exits.up);
+            }
+            if (value.exits.down) {
+                this.addRoomForm.get('exits.down').setValue(value.exits.down);
+            }
 
             if (value.roomObjects.length) {
 
@@ -229,7 +260,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 return;
             }
 
-            switch (result.Name) {
+            switch (result.name) {
                 case 'North':
                     this.exits.north = result;
                     this.addRoomForm.get('exits.north').setValue(result);
