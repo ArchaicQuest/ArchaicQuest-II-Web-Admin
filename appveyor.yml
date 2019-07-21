@@ -15,7 +15,7 @@ before_build:
   # Display .NET Core version
 build_script:
   # output will be in ./src/bin/debug/netcoreapp1.1/publish
-  - ps: npm run build
+  - ps: npm run build --base-href=/admin/
 after_build:
   #- ng test --watch=false --source-map=false
 artifacts:

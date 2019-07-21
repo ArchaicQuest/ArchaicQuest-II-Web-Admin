@@ -4,7 +4,7 @@
     "newProjectRoot": "projects",
     "projects": {
         "ArchaicQuestII": {
-            "root": "/admin",
+            "root": "",
             "sourceRoot": "src",
             "projectType": "application",
             "prefix": "app",
