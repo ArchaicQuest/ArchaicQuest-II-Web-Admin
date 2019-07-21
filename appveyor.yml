@@ -19,7 +19,7 @@ build_script:
 after_build:
   #- ng test --watch=false --source-map=false
 artifacts:
- - path: '\admin'
+ - path: '\dist\ArchaicQuestII'
    name: WebSite
    type: WebDeployPackage
 clone_depth: 1
