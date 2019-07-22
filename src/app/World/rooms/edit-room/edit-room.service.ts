@@ -18,7 +18,7 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 })
 
 export class EditRoomService {
-    private host = 'http://localhost:57814/api/'; // `${environment.hostAPI}`;
+    private host = `${environment.hostAPI}`;
     private saveRoomUrl = `${this.host}room/post`;
     private getRoomUrl = `${this.host}/world/room`;
     private headers = new HttpHeaders({
