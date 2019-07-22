@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 import { Item } from '../interfaces/item.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FlagEnum } from '../interfaces/flags.enums';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'

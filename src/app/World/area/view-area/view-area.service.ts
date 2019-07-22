@@ -6,7 +6,7 @@ import { Area, RoomTable } from '../interface/area.interface';
 import { Room } from '../../rooms/interfaces/room.interface';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Exit } from '../../rooms/interfaces/exit.interface';
-import { environment } from 'src/environments/environment.dev';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'

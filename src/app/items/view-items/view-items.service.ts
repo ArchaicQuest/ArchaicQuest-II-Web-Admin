@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { ItemType } from '../interfaces/item-type.interface';
 import { Observable } from 'rxjs';
 import { Item } from '../interfaces/item.interface';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'

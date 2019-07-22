@@ -12,6 +12,7 @@ import { Room } from '../interfaces/room.interface';
 import { tap, catchError } from 'rxjs/operators';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
