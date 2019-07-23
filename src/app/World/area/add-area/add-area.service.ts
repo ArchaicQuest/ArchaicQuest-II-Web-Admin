@@ -9,6 +9,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Area } from '../interface/area.interface';
 import { Observable } from 'rxjs/internal/Observable';
+import { Toast, ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root'
@@ -22,7 +23,7 @@ export class AreaService {
         'Content-Type': 'application/json'
     });
 
-    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+    constructor(private http: HttpClient, private formBuilder: FormBuilder, private toast: ToastrService) { }
 
     public addAreaForm = this.formBuilder.group({
         title: ['', Validators.required],
@@ -34,7 +35,9 @@ export class AreaService {
         console.log('post this ', this.saveAreaUrl, data);
         this.http.post(this.saveAreaUrl, JSON.stringify(data), { headers: this.headers, responseType: 'text' })
             .subscribe(
-                response => console.log(response),
+                response => {
+                    this.toast.success(`Area ${data.title} saved successfully.`);
+                },
                 err => console.log(err)
             );
     }
