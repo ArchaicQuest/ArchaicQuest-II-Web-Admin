@@ -5,6 +5,7 @@
         "ng": "ng",
         "start": "ng serve --port 1337",
         "build": "ng build",
+        "buildProd": "ng build  --prod --base-href //play.archaicquest.com/admin/",
         "test": "ng test --no-watch --code-coverage",
         "lint": "ng lint",
         "e2e": "ng e2e"

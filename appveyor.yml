@@ -1,0 +1,32 @@
+version: 0.0.{build}
+image: Visual Studio 2017
+branches:
+  only:
+  - master
+init:
+  # Good practise, because Windows line endings are different from Unix/Linux ones
+  - cmd: git config --global core.autocrlf true
+install:
+  - ps:  Install-Product node 10.15
+  - npm install -g npm
+  - npm install -g @angular/cli
+  - npm install
+before_build:
+  # Display .NET Core version
+build_script:
+  # output will be in ./src/bin/debug/netcoreapp1.1/publish
+  - ps: npm run buildProd
+after_build:
+  #- ng test --watch=false --source-map=false
+artifacts:
+ - path: '\dist\ArchaicQuestII'
+   name: WebSite
+   type: WebDeployPackage
+clone_depth: 1
+deploy:
+- provider: FTP
+  host: play.archaicquest.com
+  protocol: ftp
+  username: aqplay
+  password:
+    secure: ZGStMKS6y1nYRyUlDv79IA==

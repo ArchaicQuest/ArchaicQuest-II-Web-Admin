@@ -6,12 +6,13 @@ import { Area, RoomTable } from '../interface/area.interface';
 import { Room } from '../../rooms/interfaces/room.interface';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Exit } from '../../rooms/interfaces/exit.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ViewAreaService {
-    private host = 'http://localhost:57814/api/';
+    private host = environment.hostAPI;
     private getAreasUrl = `${this.host}World/Area`;
 
     constructor(private http: HttpClient) { }

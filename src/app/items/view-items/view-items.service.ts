@@ -4,12 +4,13 @@ import { Injectable } from '@angular/core';
 import { ItemType } from '../interfaces/item-type.interface';
 import { Observable } from 'rxjs';
 import { Item } from '../interfaces/item.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ViewItemsService {
-    private host = 'http://localhost:57814/api/';
+    private host = environment.hostAPI;
     private getItemsUrl = `${this.host}Item/Get`;
 
     constructor(private http: HttpClient) { }

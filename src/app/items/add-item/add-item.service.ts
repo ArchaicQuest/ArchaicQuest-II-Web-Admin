@@ -6,12 +6,13 @@ import { Observable } from 'rxjs';
 import { Item } from '../interfaces/item.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FlagEnum } from '../interfaces/flags.enums';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ItemService {
-    private host = 'http://localhost:57814/api/';
+    private host = environment.hostAPI;
     private armourTypeUrl = `${this.host}item/ReturnArmourTypes`;
     private attackTypeUrl = `${this.host}item/ReturnAttackTypes`;
     private damageTypeUrl = `${this.host}item/ReturnDamageTypes`;
