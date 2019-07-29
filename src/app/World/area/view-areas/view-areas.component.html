@@ -2,7 +2,7 @@
     <app-header>View Areas</app-header>
 
     <div class="">
-        <button mat-flat-button color="primary" routerLink="/add-item">Add a new area</button>
+        <button mat-flat-button color="primary" routerLink="/world/add-area">Add a new area</button>
         <br />
         <br />
 
@@ -38,7 +38,7 @@
                 <!-- QuestItem Column -->
                 <ng-container matColumnDef="rooms">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> No. of Rooms</th>
-                    <td mat-cell *matCellDef="let row"> {{row.Rooms == null ? 0 : row.rooms.length}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.rooms == null ? 0 : row.rooms.length}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="dateUpdated">

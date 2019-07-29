@@ -110,7 +110,7 @@ export class ViewAreaComponent implements OnInit {
 
 
     isRoom(room: Coords) {
-        return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y);
+        return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y && x.title !== 'add room');
     }
 
     isTwoWayExit(room: Coords, exitDir: string) {
