@@ -41,6 +41,15 @@ export class RoomExitService {
                 y: this.addExitForm.get('coordY').value,
                 z: this.addExitForm.get('coordZ').value
             },
+            door: this.addExitForm.get('door').value,
+            closed: this.addExitForm.get('closed').value,
+            hidden: this.addExitForm.get('hidden').value,
+            noPass: this.addExitForm.get('noPass').value,
+            noScan: this.addExitForm.get('noScan').value,
+            keyword: this.addExitForm.get('keyword').value,
+            locked: this.addExitForm.get('locked').value,
+            lockId: this.addExitForm.get('lockId').value,
+            pickProof: this.addExitForm.get('pickProof').value,
         };
     }
 

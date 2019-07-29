@@ -5,6 +5,7 @@ export interface Exit {
     coords: Coords;
     areaId: number;
     name: string;
+    keyword?: string;
     door?: boolean;
     closed?: boolean;
     locked?: boolean;

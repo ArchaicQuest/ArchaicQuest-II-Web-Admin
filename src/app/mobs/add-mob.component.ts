@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import {  AddMobService } from './add-mob.service';
+import { AddMobService } from './add-mob.service';
 import { ActivatedRoute } from '@angular/router';
 import { Gender } from '../characters/interfaces/gender.interface';
 import { MatSelectChange } from '@angular/material';

@@ -72,11 +72,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Keywords</mat-label>
-                                <input matInput placeholder="Defaults to exit direction, use for hidden exits" required
+                                <input matInput placeholder="Defaults to exit direction, use for hidden exits"
                                     formControlName="keyword" />
-                                <mat-error *ngIf="form.get('keyword').hasError('required')">
-                                    keyword is required.
-                                </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
@@ -86,7 +83,7 @@
                             <mat-checkbox formControlName="closed">Closed</mat-checkbox>
                         </div>
                         <div class="col">
-                            <mat-checkbox formControlName="Locked">Locked</mat-checkbox>
+                            <mat-checkbox formControlName="locked">Locked</mat-checkbox>
                         </div>
                         <div class="col">
                             <mat-checkbox formControlName="pickProof">Pick Proof</mat-checkbox>
