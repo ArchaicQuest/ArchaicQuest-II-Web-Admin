@@ -53,6 +53,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     componentActive = true;
     addRoomForm: FormGroup;
     id: number;
+    areaId: number;
     roomId: number;
     coords: Coords;
     items: Item[] = [];
@@ -100,6 +101,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         console.log(this.route.snapshot.params)
         this.id = this.route.snapshot.params['id'];
         this.roomId = this.route.snapshot.params['id'];
+        this.areaId = -1;
         this.coords = {
             x: this.route.snapshot.params['x'],
             y: this.route.snapshot.params['y'],
@@ -122,6 +124,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             this.exits = value.exits;
             this.mobs = value.mobs;
             this.items = value.items;
+            this.areaId = value.areaId;
             this.addRoomForm.get('title').setValue(value.title);
             this.addRoomForm.get('description').setValue(value.description);
 
@@ -251,7 +254,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     openExitDialog(exitDirection: string): void {
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
-            data: { exit: exitDirection, currentCoord: this.coords }
+            data: { exit: exitDirection, currentCoord: this.coords, areaId: this.areaId }
         });
 
         dialogRef.afterClosed().subscribe((result: Exit) => {

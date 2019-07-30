@@ -17,6 +17,7 @@ export class RoomExitService {
     constructor(private formBuilder: FormBuilder) { }
 
     public addExitForm = this.formBuilder.group({
+        areaId: ['', Validators.required],
         coordX: ['', Validators.required],
         coordY: ['', Validators.required],
         coordZ: ['', Validators.required],
@@ -34,7 +35,7 @@ export class RoomExitService {
 
     returnExitObj(): Exit {
         return {
-            areaId: 0,
+            areaId: this.addExitForm.get('areaId').value,
             name: this.addExitForm.get('name').value,
             coords: {
                 x: this.addExitForm.get('coordX').value,

@@ -189,7 +189,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     openExitDialog(exitDirection: string): void {
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
-            data: { exit: exitDirection, currentCoord: this.coords }
+            data: { exit: exitDirection, currentCoord: this.coords, areaId: this.id }
         });
 
         dialogRef.afterClosed().subscribe((result: Exit) => {

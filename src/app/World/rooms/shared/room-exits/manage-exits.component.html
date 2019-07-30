@@ -13,7 +13,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-4">
+                    <div class="col-3">
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>Area Id:</mat-label>
+                            <input matInput placeholder="Area Id" required formControlName="areaId" />
+                            <mat-error *ngIf="form.get('areaId').hasError('required')">
+                                areaId is required.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="form-control">
                             <mat-label>X:</mat-label>
                             <input matInput placeholder="X Coord" required formControlName="coordX" />
@@ -22,7 +31,7 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="form-control">
                             <mat-label>Y:</mat-label>
                             <input matInput placeholder="Y Coord" required formControlName="coordY" />
@@ -31,7 +40,7 @@
                             </mat-error>
                         </mat-form-field>
                     </div>
-                    <div class="col-4">
+                    <div class="col-3">
                         <mat-form-field appearance="outline" class="form-control">
                             <mat-label>Z:</mat-label>
                             <input matInput placeholder="Z Coord" required formControlName="coordZ" />

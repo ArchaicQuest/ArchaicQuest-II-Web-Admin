@@ -20,7 +20,8 @@ export class ManageExitsComponent implements OnInit {
         public toastr: ToastrService,
         @Inject(MAT_DIALOG_DATA) public data: {
             exit: string,
-            currentCoord: Coords
+            currentCoord: Coords,
+            areaId: number
         }) {
         this.form = this.exitService.addExitForm;
     }
@@ -37,6 +38,7 @@ export class ManageExitsComponent implements OnInit {
 
         this.exitCoord = this.exitService.setExitCoord(this.exitDirection, this.currentCoord);
         console.log(this.exitCoord);
+        this.form.get('areaId').setValue(this.data.areaId);
         this.form.get('name').setValue(this.data.exit);
         this.form.get('coordX').setValue(this.exitCoord.x);
         this.form.get('coordY').setValue(this.exitCoord.y);
