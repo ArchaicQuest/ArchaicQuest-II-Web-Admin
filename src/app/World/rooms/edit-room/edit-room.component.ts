@@ -38,6 +38,7 @@ import { EditRoomService } from './edit-room.service';
 
 @Component({
     templateUrl: './edit-room.component.html',
+    styleUrls: ['../add-room/add-room.component.scss'],
     animations: [
         trigger('detailExpand', [
             state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -330,6 +331,18 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.componentActive = false;
         this.roomServices.clearCache();
+        this.exits = {
+          north: null,
+          down: null,
+          east: null,
+          northEast: null,
+          northWest: null,
+          south: null,
+          southEast: null,
+          southWest: null,
+          up: null,
+          west: null
+      };
     }
 
     saveRoom() {
@@ -387,6 +400,6 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
 
 
-        this.roomServices.saveRoom(data);
+        this.roomServices.updateRoom(data);
     }
 }

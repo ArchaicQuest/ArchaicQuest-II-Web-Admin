@@ -97,6 +97,18 @@ export class RoomService {
 
     clearCache() {
         this.items.next([]);
+        this.mobs.next([]);
+        this.addRoomForm.reset();
+        this.addRoomForm.get('exits.northWest').setValue('')
+        this.addRoomForm.get('exits.north').setValue('')
+        this.addRoomForm.get('exits.northEast').setValue('')
+        this.addRoomForm.get('exits.west').setValue('')
+        this.addRoomForm.get('exits.east').setValue('')
+        this.addRoomForm.get('exits.southWest').setValue('')
+        this.addRoomForm.get('exits.south').setValue('')
+        this.addRoomForm.get('exits.southEast').setValue('')
+        this.addRoomForm.get('exits.up').setValue('')
+        this.addRoomForm.get('exits.down').setValue('')
     }
     getRroomItems() {
         console.log(this.items);
@@ -128,6 +140,12 @@ export class RoomService {
             ).subscribe();
 
     }
+    updateRoom(data: Room) {
+      return this.http.put(`${this.saveRoomUrl}/${data.id}`, JSON.stringify(data),
+          { headers: this.headers, responseType: 'text' }).pipe(
+              tap(x => console.log(x))
+          ).subscribe();
 
+  }
 
 }
