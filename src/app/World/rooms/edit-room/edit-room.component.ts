@@ -102,7 +102,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         console.log(this.route.snapshot.params)
         this.id = this.route.snapshot.params['id'];
         this.roomId = this.route.snapshot.params['id'];
-        this.areaId = -1;
+
         this.coords = {
             x: this.route.snapshot.params['x'],
             y: this.route.snapshot.params['y'],
@@ -332,17 +332,17 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         this.componentActive = false;
         this.roomServices.clearCache();
         this.exits = {
-          north: null,
-          down: null,
-          east: null,
-          northEast: null,
-          northWest: null,
-          south: null,
-          southEast: null,
-          southWest: null,
-          up: null,
-          west: null
-      };
+            north: null,
+            down: null,
+            east: null,
+            northEast: null,
+            northWest: null,
+            south: null,
+            southEast: null,
+            southWest: null,
+            up: null,
+            west: null
+        };
     }
 
     saveRoom() {
@@ -364,8 +364,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
 
         const data: Room = {
+            id: this.roomId,
             roomObjects: [],
-            areaId: this.id,
+            areaId: this.areaId,
             coords: {
                 x: this.addRoomForm.get('CoordX').value,
                 y: this.addRoomForm.get('CoordY').value,
