@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder, FormArray, AbstractControl } from '@angular/forms';
 import { RoomService } from '../add-room/add-room.service';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -324,8 +324,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
     }
 
-    t() {
-        console.log('t');
+    removeExit(control: AbstractControl) {
+        control.setValue('');
+
     }
 
     ngOnDestroy(): void {

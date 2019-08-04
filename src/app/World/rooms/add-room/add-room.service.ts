@@ -141,11 +141,15 @@ export class RoomService {
 
     }
     updateRoom(data: Room) {
-      return this.http.put(`${this.saveRoomUrl}/${data.id}`, JSON.stringify(data),
-          { headers: this.headers, responseType: 'text' }).pipe(
-              tap(x => console.log(x))
-          ).subscribe();
+        return this.http.put(`${this.saveRoomUrl}/${data.id}`, JSON.stringify(data),
+            { headers: this.headers, responseType: 'text' }).pipe(
+                tap(x => console.log(x))
+            ).subscribe();
 
-  }
+    }
+
+    removeExit(exit: string) {
+        this.addRoomForm.get('exits.north').setValue('')
+    }
 
 }

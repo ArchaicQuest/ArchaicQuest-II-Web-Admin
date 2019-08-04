@@ -173,8 +173,8 @@
                                         {{exits.north?.coords?.z}})</span>
                                 </button>
 
-                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.north').value != ''">Remove
-                                    exit</a>
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.north').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.north'))">Remove exit</a>
                             </div>
 
                             <div class="col">
@@ -185,6 +185,7 @@
                                     North East
 
                                 </button>
+
                                 <button title=" Add North East Exit"
                                     *ngIf="addRoomForm.get('exits.northEast').value != ''" mat-raised-button
                                     color="primary" type="button" (click)="openExitDialog('North East')">
@@ -193,6 +194,9 @@
                                         {{exits.northEast?.coords?.y}},
                                         {{exits.northEast?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.northEast').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.northEast'))">Remove exit</a>
                             </div>
                         </div>
 
