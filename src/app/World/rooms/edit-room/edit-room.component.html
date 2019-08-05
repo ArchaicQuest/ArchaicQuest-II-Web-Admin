@@ -156,6 +156,10 @@
                                         {{exits.northWest?.coords?.y}},
                                         {{exits.northWest?.coords?.z}})</span>
                                 </button>
+
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.northWest').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.northWest'))">Remove exit</a>
                             </div>
                             <div class="col">
 
@@ -215,6 +219,9 @@
                                         {{exits.west?.coords?.y}},
                                         {{exits.west?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.west').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.west'))">Remove exit</a>
                             </div>
 
                             <div class="col">
@@ -240,6 +247,9 @@
                                         {{exits.east?.coords?.y}},
                                         {{exits.east?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.east').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.east'))">Remove exit</a>
                             </div>
                         </div>
                         <div class="row">
@@ -259,6 +269,9 @@
                                         {{exits.southWest?.coords?.y}},
                                         {{exits.southWest?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.southWest').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.southWest'))">Remove exit</a>
                             </div>
                             <div class="col">
 
@@ -274,6 +287,9 @@
                                         {{exits.south?.coords?.y}},
                                         {{exits.south?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.south').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.south'))">Remove exit</a>
                             </div>
 
 
@@ -293,6 +309,9 @@
                                         {{exits.southEast?.coords?.y}},
                                         {{exits.southEast?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.southEast').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.southEast'))">Remove exit</a>
                             </div>
 
                         </div>
@@ -311,6 +330,9 @@
                                         {{exits.up?.coords?.y}},
                                         {{exits.up?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.up').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.up'))">Remove exit</a>
                             </div>
 
                             <div class="col">
@@ -327,6 +349,9 @@
                                         {{exits.down?.coords?.y}},
                                         {{exits.down?.coords?.z}})</span>
                                 </button>
+
+                                <a href="javascript:(0)" *ngIf="addRoomForm.get('exits.down').value != ''"
+                                    (click)="removeExit(addRoomForm.get('exits.down'))">Remove exit</a>
                             </div>
                         </div>
 
