@@ -12,6 +12,9 @@
 .addRoom__exits {
     a {
         display: none;
+        position: absolute;
+    bottom: 0px;
+    left: 15px;
     }
   .mat-raised-button {
     margin: 25px 0;

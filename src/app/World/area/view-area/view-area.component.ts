@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 import { Area, RoomTable } from '../interface/area.interface';
@@ -19,19 +19,24 @@ export class ViewAreaComponent implements OnInit {
     roomCount: 5;
     maxValueOfX: number;
     maxValueOfY: number;
-
     minValueOfX: number;
     minValueOfY: number;
     totalCol: number;
     totalRow: number;
     rooms: Room[] = [];
     errors: string[] = [];
+
+    displayedColumns: string[] = ['id', 'name', 'coords'];
+    dataSource: MatTableDataSource<Room>;
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
     constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute, private cd: ChangeDetectorRef) {
 
     }
 
     ngOnInit() {
-
+        console.log("wtf")
 
 
         this.editAreaServices.getArea(this.route.snapshot.params['id']).subscribe(data => {
@@ -63,6 +68,9 @@ export class ViewAreaComponent implements OnInit {
             } else {
 
                 this.rooms = data.rooms;
+                this.dataSource = new MatTableDataSource(this.rooms);
+                this.dataSource.paginator = this.paginator;
+                this.dataSource.sort = this.sort;
 
                 data.rooms.forEach(room => {
                     this.roomTable[this.service.getRoomID(room.coords)] = room;
@@ -106,6 +114,14 @@ export class ViewAreaComponent implements OnInit {
         });
 
         //  this.GenerateRoomLayout();
+    }
+
+    applyFilter(filterValue: string) {
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
     }
 
 
