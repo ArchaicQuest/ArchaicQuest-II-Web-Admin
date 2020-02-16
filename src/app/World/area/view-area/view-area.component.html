@@ -92,9 +92,12 @@
 
             <div class="panel">
                 <h2>Rooms</h2>
-                <mat-form-field>
+                <mat-form-field appearance="outline" class="form-control">
+                    <mat-label>Filter Rooms</mat-label>
                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter rooms">
                 </mat-form-field>
+
+
 
                 <div class="mat-elevation-z8">
                     <table mat-table [dataSource]="dataSource" matSort>

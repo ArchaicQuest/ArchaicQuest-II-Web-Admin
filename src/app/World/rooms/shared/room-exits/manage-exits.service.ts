@@ -36,6 +36,7 @@ export class RoomExitService {
     returnExitObj(): Exit {
         return {
             areaId: this.addExitForm.get('areaId').value,
+            roomId: -1,
             name: this.addExitForm.get('name').value,
             coords: {
                 x: this.addExitForm.get('coordX').value,
