@@ -35,6 +35,7 @@ import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
 import { ManageExitsComponent } from '../shared/room-exits/manage-exits.component';
 import { EditService } from '../../area/edit-area/edit-area.service';
 import { EditRoomService } from './edit-room.service';
+import { RoomExitService } from '../shared/room-exits/manage-exits.service';
 
 @Component({
     templateUrl: './edit-room.component.html',
@@ -72,6 +73,8 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         west: null
     };
 
+    northWestValid: false;
+
     //move
     // dataSource = this.items;
     columnsToDisplay = [
@@ -85,6 +88,15 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     expandedElement: Item | null;
     mobColumnsToDisplay = ['name', 'level', 'actions'];
     mobExpandedElement: Mob | null;
+    northWestValidExit = false;
+    northValidExit = false;
+    northEastValidExit = false;
+    eastValidExit = false;
+    southEastValidExit = false;
+    southValidExit = false;
+    southWestValidExit = false;
+    westValidExit = false;
+
     constructor(
         private roomServices: RoomService,
         private editRoomService: EditRoomService,
@@ -93,6 +105,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         public dialog: MatDialog,
         public shared: Shared,
         private cdRef: ChangeDetectorRef,
+        private exitService: RoomExitService
     ) { }
 
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -180,7 +193,30 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 (<FormArray>this.addRoomForm.controls['roomObjects']).setValue(value.roomObjects);
             }
 
+
+
+            this.northWestValidExit = this.isExitValid('North West') == 'true';
+            this.northValidExit = this.isExitValid('North') == 'true';
+            this.northEastValidExit = this.isExitValid('North East') == 'true';
+            this.eastValidExit = this.isExitValid('East') == 'true';
+            this.southEastValidExit = this.isExitValid('South East') == 'true';
+            this.southValidExit = this.isExitValid('South') == 'true';
+            this.southWestValidExit = this.isExitValid('South West') == 'true';
+            this.westValidExit = this.isExitValid('South West') == 'true';
+
         });
+    }
+
+    isExitValid(direction: string): string {
+        console.log(this.coords)
+        const coords = this.exitService.setExitCoord(direction, this.coords);
+        this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1).subscribe({
+            next: x => {
+                return x;
+            }
+        });
+
+        return 'false';
     }
 
     triggerDescriptionResize() {

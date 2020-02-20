@@ -1,19 +1,19 @@
 import {
-  Component,
-  OnInit,
-  ViewChild,
-  NgZone,
-  OnDestroy,
-  ChangeDetectorRef
+    Component,
+    OnInit,
+    ViewChild,
+    NgZone,
+    OnDestroy,
+    ChangeDetectorRef
 } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, FormArray } from "@angular/forms";
 import { RoomService } from "./add-room.service";
 import { ActivatedRoute } from "@angular/router";
 import {
-  MatSelectChange,
-  MatDialogRef,
-  MatDialog,
-  MatTableDataSource
+    MatSelectChange,
+    MatDialogRef,
+    MatDialog,
+    MatTableDataSource
 } from "@angular/material";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
 import { take } from "rxjs/operators";
@@ -27,11 +27,11 @@ import { Mob } from "src/app/mobs/interfaces/mob.interface";
 import { ManageMobComponent } from "../shared/manage-mob/manage-mob.component";
 import { ManageExitsComponent } from "../shared/room-exits/manage-exits.component";
 import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition
+    trigger,
+    state,
+    style,
+    animate,
+    transition
 } from "@angular/animations";
 import { ItemSlotEnum } from "src/app/items/interfaces/item-slot.enum";
 import { Exit } from "../interfaces/exit.interface";
@@ -43,293 +43,321 @@ import { Shared } from "src/app/shared/shared";
 import { RoomExitService } from "../shared/room-exits/manage-exits.service";
 
 @Component({
-  templateUrl: "./add-room.component.html",
-  styleUrls: ["./add-room.component.scss"],
-  animations: [
-    trigger("detailExpand", [
-      state("collapsed", style({ height: "0px", minHeight: "0" })),
-      state("expanded", style({ height: "*" })),
-      transition(
-        "expanded <=> collapsed",
-        animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
-      )
-    ])
-  ]
+    templateUrl: "./add-room.component.html",
+    styleUrls: ["./add-room.component.scss"],
+    animations: [
+        trigger("detailExpand", [
+            state("collapsed", style({ height: "0px", minHeight: "0" })),
+            state("expanded", style({ height: "*" })),
+            transition(
+                "expanded <=> collapsed",
+                animate("225ms cubic-bezier(0.4, 0.0, 0.2, 1)")
+            )
+        ])
+    ]
 })
 export class AddRoomComponent implements OnInit, OnDestroy {
-  componentActive = true;
-  addRoomForm: FormGroup;
-  id: number;
-  coords: Coords;
-  items: Item[] = [];
-  mobs: Mob[] = [];
-  exits: RoomExit = {
-    north: null,
-    down: null,
-    east: null,
-    northEast: null,
-    northWest: null,
-    south: null,
-    southEast: null,
-    southWest: null,
-    up: null,
-    west: null
-  };
-
-  //move
-  // dataSource = this.items;
-  columnsToDisplay = [
-    "name",
-    "slot",
-    "level",
-    "questItem",
-    "container",
-    "actions"
-  ];
-  expandedElement: Item | null;
-  mobColumnsToDisplay = ["name", "level", "actions"];
-  mobExpandedElement: Mob | null;
-  constructor(
-    private roomServices: RoomService,
-    private ngZone: NgZone,
-    private route: ActivatedRoute,
-    public dialog: MatDialog,
-    public shared: Shared,
-    private cdRef: ChangeDetectorRef,
-    private exitService: RoomExitService
-  ) {}
-
-  @ViewChild("autosize") autosize: CdkTextareaAutosize;
-
-  ngOnInit() {
-    this.addRoomForm = this.roomServices.addRoomForm;
-
-    this.id = this.route.snapshot.params["id"];
-    this.coords = {
-      x: this.route.snapshot.params["x"],
-      y: this.route.snapshot.params["y"],
-      z: this.route.snapshot.params["z"]
+    componentActive = true;
+    addRoomForm: FormGroup;
+    id: number;
+    coords: Coords;
+    items: Item[] = [];
+    mobs: Mob[] = [];
+    exits: RoomExit = {
+        north: null,
+        down: null,
+        east: null,
+        northEast: null,
+        northWest: null,
+        south: null,
+        southEast: null,
+        southWest: null,
+        up: null,
+        west: null
     };
 
-    this.addRoomForm.get("CoordX").setValue(this.coords.x);
-    this.addRoomForm.get("CoordY").setValue(this.coords.y);
-    this.addRoomForm.get("CoordZ").setValue(this.coords.z);
+    northWestValidExit = false;
+    northValidExit = false;
+    northEastValidExit = false;
+    eastValidExit = false;
+    southEastValidExit = false;
+    southValidExit = false;
+    southWestValidExit = false;
+    westValidExit = false;
 
-    this.roomServices.items.subscribe((value: Item[]) => {
-      console.log(value);
-      this.items = value;
-    });
 
-    this.roomServices.mobs.subscribe((value: Mob[]) => {
-      console.log(value);
-      this.mobs = value;
-    });
-  }
+    //move
+    // dataSource = this.items;
+    columnsToDisplay = [
+        "name",
+        "slot",
+        "level",
+        "questItem",
+        "container",
+        "actions"
+    ];
+    expandedElement: Item | null;
+    mobColumnsToDisplay = ["name", "level", "actions"];
+    mobExpandedElement: Mob | null;
+    constructor(
+        private roomServices: RoomService,
+        private ngZone: NgZone,
+        private route: ActivatedRoute,
+        public dialog: MatDialog,
+        public shared: Shared,
+        private cdRef: ChangeDetectorRef,
+        private exitService: RoomExitService
+    ) { }
 
-  triggerDescriptionResize() {
-    // Wait for changes to be applied, then trigger textarea resize.
-    this.ngZone.onStable
-      .pipe(take(1))
-      .subscribe(() => this.autosize.resizeToFitContent(true));
-  }
+    @ViewChild("autosize") autosize: CdkTextareaAutosize;
 
-  get getRoomObjectsControl(): FormArray {
-    return this.addRoomForm.get("roomObjects") as FormArray;
-  }
+    ngOnInit() {
+        this.addRoomForm = this.roomServices.addRoomForm;
 
-  addRoomObject() {
-    this.getRoomObjectsControl.push(this.roomServices.initRoomObject());
+        this.id = this.route.snapshot.params["id"];
+        this.coords = {
+            x: this.route.snapshot.params["x"],
+            y: this.route.snapshot.params["y"],
+            z: this.route.snapshot.params["z"]
+        };
 
-    console.log(this.roomServices.addRoomForm.value);
-  }
+        this.addRoomForm.get("CoordX").setValue(this.coords.x);
+        this.addRoomForm.get("CoordY").setValue(this.coords.y);
+        this.addRoomForm.get("CoordZ").setValue(this.coords.z);
 
-  removeRoomObject(i: number) {
-    this.getRoomObjectsControl.removeAt(i);
-  }
+        this.roomServices.items.subscribe((value: Item[]) => {
+            console.log(value);
+            this.items = value;
+        });
 
-  addMob(mob: Mob) {
-    this.mobs.push(JSON.parse(JSON.stringify(mob)));
-  }
+        this.roomServices.mobs.subscribe((value: Mob[]) => {
+            console.log(value);
+            this.mobs = value;
+        });
 
-  openDialog(item: Item, index: number): void {
-    const dialogRef = this.dialog.open(ManageContainerItemsComponent, {
-      width: "450px",
-      data: {
-        item: item,
-        items: this.mobs,
-        containerIndex: index--
-      }
-    });
 
-    dialogRef.afterClosed().subscribe(result => {});
-  }
 
-  removeItemFromContainer(container: Item, item: Item) {
-    const foundIndex = container.container.items.findIndex(
-      x => x.id === item.id
-    );
-    container.container.items.splice(foundIndex, 1);
-  }
+        this.northWestValidExit = this.isExitValid('North West') == 'true';
+        this.northValidExit = this.isExitValid('North') == 'true';
+        this.northEastValidExit = this.isExitValid('North East') == 'true';
+        this.eastValidExit = this.isExitValid('East') == 'true';
+        this.southEastValidExit = this.isExitValid('South East') == 'true';
+        this.southValidExit = this.isExitValid('South') == 'true';
+        this.southWestValidExit = this.isExitValid('South West') == 'true';
+        this.westValidExit = this.isExitValid('South West') == 'true';
 
-  removeItem(index: number) {
-    this.items.splice(index, 1);
-  }
+    }
 
-  openMobDialog(mob: Mob): void {
-    const dialogRef = this.dialog.open(ManageMobComponent, {
-      width: "450px",
-      data: {
-        inventory: mob.inventory
-      }
-    });
+    triggerDescriptionResize() {
+        // Wait for changes to be applied, then trigger textarea resize.
+        this.ngZone.onStable
+            .pipe(take(1))
+            .subscribe(() => this.autosize.resizeToFitContent(true));
+    }
 
-    dialogRef.afterClosed().subscribe(result => {});
-  }
+    get getRoomObjectsControl(): FormArray {
+        return this.addRoomForm.get("roomObjects") as FormArray;
+    }
 
-  removeItemFromMob(inventory: Item[], item: Item) {
-    const foundIndex = inventory.findIndex(x => x.id === item.id);
-    inventory.splice(foundIndex, 1);
-  }
+    addRoomObject() {
+        this.getRoomObjectsControl.push(this.roomServices.initRoomObject());
 
-  removeMob(index: number) {
-    this.mobs.splice(index, 1);
-  }
+        console.log(this.roomServices.addRoomForm.value);
+    }
 
-  isExitValid(direction: string) {
-    debugger;
-    const coords = this.exitService.setExitCoord(direction, this.coords);
-    return this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1)
-  }
+    removeRoomObject(i: number) {
+        this.getRoomObjectsControl.removeAt(i);
+    }
 
-  openExitDialog(exitDirection: string): void {
-    const dialogRef = this.dialog.open(ManageExitsComponent, {
-      width: "450px",
-      data: { exit: exitDirection, currentCoord: this.coords, areaId: this.id }
-    });
+    addMob(mob: Mob) {
+        this.mobs.push(JSON.parse(JSON.stringify(mob)));
+    }
 
-    dialogRef.afterClosed().subscribe((result: Exit) => {
-      if (result == null) {
-        return;
-      }
+    openDialog(item: Item, index: number): void {
+        const dialogRef = this.dialog.open(ManageContainerItemsComponent, {
+            width: "450px",
+            data: {
+                item: item,
+                items: this.mobs,
+                containerIndex: index--
+            }
+        });
 
-      switch (result.name) {
-        case "North":
-          this.exits.north = result;
-          this.addRoomForm.get("exits.north").setValue(result);
-          break;
-        case "North East":
-          this.exits.northEast = result;
-          this.addRoomForm.get("exits.northEast").setValue(result);
-          break;
-        case "East":
-          this.exits.east = result;
-          this.addRoomForm.get("exits.east").setValue(result);
-          break;
-        case "South East":
-          this.exits.southEast = result;
-          this.addRoomForm.get("exits.southEast").setValue(result);
-          break;
-        case "South":
-          this.exits.south = result;
-          this.addRoomForm.get("exits.south").setValue(result);
-          break;
-        case "South West":
-          this.exits.southWest = result;
-          this.addRoomForm.get("exits.southWest").setValue(result);
-          break;
-        case "West":
-          this.exits.west = result;
-          this.addRoomForm.get("exits.west").setValue(result);
-          break;
-        case "North West":
-          this.exits.northWest = result;
-          this.addRoomForm.get("exits.northWest").setValue(result);
-          break;
-        case "Up":
-          this.exits.up = result;
-          this.addRoomForm.get("exits.up").setValue(result);
-          break;
-        case "Down":
-          this.exits.down = result;
-          this.addRoomForm.get("exits.down").setValue(result);
-          break;
-      }
+        dialogRef.afterClosed().subscribe(result => { });
+    }
 
-      console.log("exit ", this.exits);
-      console.log(result);
-    });
-  }
+    removeItemFromContainer(container: Item, item: Item) {
+        const foundIndex = container.container.items.findIndex(
+            x => x.id === item.id
+        );
+        container.container.items.splice(foundIndex, 1);
+    }
 
-  mapSlot(id: number) {
-    return ItemSlotEnum[id];
-  }
+    removeItem(index: number) {
+        this.items.splice(index, 1);
+    }
 
-  // tslint:disable-next-line:use-life-cycle-interface
-  ngAfterViewInit() {
-    //this.dataSource = this.items;
-    // If the user changes the sort order, reset back to the first page.
-    //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-  }
+    openMobDialog(mob: Mob): void {
+        const dialogRef = this.dialog.open(ManageMobComponent, {
+            width: "450px",
+            data: {
+                inventory: mob.inventory
+            }
+        });
 
-  t() {
-    console.log("t");
-  }
+        dialogRef.afterClosed().subscribe(result => { });
+    }
 
-  ngOnDestroy(): void {
-    this.componentActive = false;
-    this.roomServices.clearCache();
-  }
+    removeItemFromMob(inventory: Item[], item: Item) {
+        const foundIndex = inventory.findIndex(x => x.id === item.id);
+        inventory.splice(foundIndex, 1);
+    }
 
-  saveRoom() {
-    //TODO
-    /*
-        Create room object interface, loop over this.getRoomObjectsControl
-        can then push data to room object array
+    removeMob(index: number) {
+        this.mobs.splice(index, 1);
+    }
 
-        return Exits and save
+    isExitValid(direction: string): string {
+        console.log(this.coords)
+        const coords = this.exitService.setExitCoord(direction, this.coords);
+        this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1).subscribe({
+            next: x => {
+                return x;
+            }
+        });
 
-        Missing room emotes
-         - you hear a deathly scream in the distance
+        return 'false';
+    }
 
-        missing Instant repop and Update message (Generic message for when room repops)
+    openExitDialog(exitDirection: string): void {
+        const dialogRef = this.dialog.open(ManageExitsComponent, {
+            width: "450px",
+            data: { exit: exitDirection, currentCoord: this.coords, areaId: this.id }
+        });
 
-        WTF is Players?
-        */
+        dialogRef.afterClosed().subscribe((result: Exit) => {
+            if (result == null) {
+                return;
+            }
 
-    const data: Room = {
-      roomObjects: [],
-      areaId: this.id,
-      coords: {
-        x: this.addRoomForm.get("CoordX").value,
-        y: this.addRoomForm.get("CoordY").value,
-        z: this.addRoomForm.get("CoordZ").value
-      },
-      description: this.addRoomForm.get("description").value,
-      title: this.addRoomForm.get("title").value,
-      items: this.items,
-      mobs: this.mobs,
-      emotes: [],
-      exits: {
-        north: this.addRoomForm.get("exits.north").value,
-        northEast: this.addRoomForm.get("exits.northEast").value,
-        east: this.addRoomForm.get("exits.east").value,
-        southEast: this.addRoomForm.get("exits.southEast").value,
-        south: this.addRoomForm.get("exits.south").value,
-        southWest: this.addRoomForm.get("exits.southWest").value,
-        west: this.addRoomForm.get("exits.west").value,
-        northWest: this.addRoomForm.get("exits.northWest").value,
-        up: this.addRoomForm.get("exits.up").value,
-        down: this.addRoomForm.get("exits.down").value
-      },
-      instantRepop: false,
-      players: null,
-      updateMessage: "nothing"
-    };
+            switch (result.name) {
+                case "North":
+                    this.exits.north = result;
+                    this.addRoomForm.get("exits.north").setValue(result);
+                    break;
+                case "North East":
+                    this.exits.northEast = result;
+                    this.addRoomForm.get("exits.northEast").setValue(result);
+                    break;
+                case "East":
+                    this.exits.east = result;
+                    this.addRoomForm.get("exits.east").setValue(result);
+                    break;
+                case "South East":
+                    this.exits.southEast = result;
+                    this.addRoomForm.get("exits.southEast").setValue(result);
+                    break;
+                case "South":
+                    this.exits.south = result;
+                    this.addRoomForm.get("exits.south").setValue(result);
+                    break;
+                case "South West":
+                    this.exits.southWest = result;
+                    this.addRoomForm.get("exits.southWest").setValue(result);
+                    break;
+                case "West":
+                    this.exits.west = result;
+                    this.addRoomForm.get("exits.west").setValue(result);
+                    break;
+                case "North West":
+                    this.exits.northWest = result;
+                    this.addRoomForm.get("exits.northWest").setValue(result);
+                    break;
+                case "Up":
+                    this.exits.up = result;
+                    this.addRoomForm.get("exits.up").setValue(result);
+                    break;
+                case "Down":
+                    this.exits.down = result;
+                    this.addRoomForm.get("exits.down").setValue(result);
+                    break;
+            }
 
-    this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
-      data.roomObjects.push(roomObj);
-    });
+            console.log("exit ", this.exits);
+            console.log(result);
+        });
+    }
 
-    this.roomServices.saveRoom(data);
-  }
+    mapSlot(id: number) {
+        return ItemSlotEnum[id];
+    }
+
+    // tslint:disable-next-line:use-life-cycle-interface
+    ngAfterViewInit() {
+        //this.dataSource = this.items;
+        // If the user changes the sort order, reset back to the first page.
+        //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    }
+
+    t() {
+        console.log("t");
+    }
+
+    ngOnDestroy(): void {
+        this.componentActive = false;
+        this.roomServices.clearCache();
+    }
+
+    saveRoom() {
+        //TODO
+        /*
+            Create room object interface, loop over this.getRoomObjectsControl
+            can then push data to room object array
+    
+            return Exits and save
+    
+            Missing room emotes
+             - you hear a deathly scream in the distance
+    
+            missing Instant repop and Update message (Generic message for when room repops)
+    
+            WTF is Players?
+            */
+
+        const data: Room = {
+            roomObjects: [],
+            areaId: this.id,
+            coords: {
+                x: this.addRoomForm.get("CoordX").value,
+                y: this.addRoomForm.get("CoordY").value,
+                z: this.addRoomForm.get("CoordZ").value
+            },
+            description: this.addRoomForm.get("description").value,
+            title: this.addRoomForm.get("title").value,
+            items: this.items,
+            mobs: this.mobs,
+            emotes: [],
+            exits: {
+                north: this.addRoomForm.get("exits.north").value,
+                northEast: this.addRoomForm.get("exits.northEast").value,
+                east: this.addRoomForm.get("exits.east").value,
+                southEast: this.addRoomForm.get("exits.southEast").value,
+                south: this.addRoomForm.get("exits.south").value,
+                southWest: this.addRoomForm.get("exits.southWest").value,
+                west: this.addRoomForm.get("exits.west").value,
+                northWest: this.addRoomForm.get("exits.northWest").value,
+                up: this.addRoomForm.get("exits.up").value,
+                down: this.addRoomForm.get("exits.down").value
+            },
+            instantRepop: false,
+            players: null,
+            updateMessage: "nothing"
+        };
+
+        this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
+            data.roomObjects.push(roomObj);
+        });
+
+        this.roomServices.saveRoom(data);
+    }
 }

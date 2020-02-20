@@ -139,11 +139,12 @@
                         {{this.exits | json}}
                         <div class="row">
 
+
                             <div class="col">
 
                                 <button title="Add North West Exit"
-                                    *ngIf="isExitValid('North West') && addRoomForm.get('exits.northWest').value == ''" mat-raised-button
-                                    type="button" (click)="openExitDialog('North West')">
+                                    *ngIf="northWestValidExit && addRoomForm.get('exits.northWest').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('North West')">
                                     North West
                                 </button>
 
@@ -158,8 +159,9 @@
                             </div>
                             <div class="col">
 
-                                <button *ngIf="addRoomForm.get('exits.north').value == ''" title="Add North Exit"
-                                    mat-raised-button type="button" (click)="openExitDialog('North')">
+                                <button *ngIf="northValidExit && addRoomForm.get('exits.north').value == ''"
+                                    title="Add North Exit" mat-raised-button type="button"
+                                    (click)="openExitDialog('North')">
                                     North
                                 </button>
 
@@ -179,8 +181,8 @@
                             <div class="col">
 
                                 <button title=" Add North East Exit"
-                                    *ngIf="addRoomForm.get('exits.northEast').value == ''" mat-raised-button
-                                    type="button" (click)="openExitDialog('North East')">
+                                    *ngIf="northEastValidExit && addRoomForm.get('exits.northEast').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('North East')">
                                     North East
 
                                 </button>
@@ -199,8 +201,9 @@
 
                             <div class="col">
 
-                                <button title="Add West Exit" *ngIf="addRoomForm.get('exits.west').value == ''"
-                                    mat-raised-button type="button" (click)="openExitDialog('West')">
+                                <button title="Add West Exit"
+                                    *ngIf="westValidExit && addRoomForm.get('exits.west').value == ''" mat-raised-button
+                                    type="button" (click)="openExitDialog('West')">
                                     West
                                 </button>
                                 <button title="Add West Exit" *ngIf="addRoomForm.get('exits.west').value != ''"
@@ -223,8 +226,9 @@
 
                             <div class="col">
 
-                                <button title="Add East Exit" *ngIf="addRoomForm.get('exits.east').value == ''"
-                                    mat-raised-button type="button" (click)="openExitDialog('East')">
+                                <button title="Add East Exit"
+                                    *ngIf="eastValidExit && addRoomForm.get('exits.east').value == ''" mat-raised-button
+                                    type="button" (click)="openExitDialog('East')">
                                     East
                                 </button>
 
@@ -241,8 +245,8 @@
                             <div class="col">
 
                                 <button title="Add South West Exit"
-                                    *ngIf="addRoomForm.get('exits.southWest').value == ''" mat-raised-button
-                                    type="button" (click)="openExitDialog('South West')">
+                                    *ngIf="southWestValidExit && addRoomForm.get('exits.southWest').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('South West')">
                                     South West
                                 </button>
 
@@ -257,7 +261,8 @@
                             </div>
                             <div class="col">
 
-                                <button title="Add South Exit" *ngIf="addRoomForm.get('exits.south').value == ''"
+                                <button title="Add South Exit"
+                                    *ngIf="southValidExit &&  addRoomForm.get('exits.south').value == ''"
                                     mat-raised-button type="button" (click)="openExitDialog('South')">
                                     South
                                 </button>
@@ -275,8 +280,8 @@
                             <div class="col">
 
                                 <button title="Add South East Exit"
-                                    *ngIf="addRoomForm.get('exits.southEast').value == ''" mat-raised-button
-                                    type="button" (click)="openExitDialog('South East')">
+                                    *ngIf="southEastValidExit &&  addRoomForm.get('exits.southEast').value == ''"
+                                    mat-raised-button type="button" (click)="openExitDialog('South East')">
                                     South East
                                 </button>
 

@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
 export class EditRoomService {
     private host = `${environment.hostAPI}`;
     private saveRoomUrl = `${this.host}room/post`;
-    private getRoomUrl = `${this.host}/world/room`;
+    private getRoomUrl = `${this.host}world/room`;
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
     });

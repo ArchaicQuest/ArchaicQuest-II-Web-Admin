@@ -1,9 +1,9 @@
 import {
-  Validators,
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  FormArray
+    Validators,
+    FormBuilder,
+    FormGroup,
+    FormControl,
+    FormArray
 } from "@angular/forms";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
@@ -15,140 +15,140 @@ import { Room } from "../interfaces/room.interface";
 import { tap, catchError } from "rxjs/operators";
 
 @Injectable({
-  providedIn: "root"
+    providedIn: "root"
 })
 export class RoomService {
-  private host = `${environment.hostAPI}`;
-  private saveRoomUrl = `${this.host}World/Room/`;
-  private validExitUrl = `${this.host}World/Room/`;
+    private host = `${environment.hostAPI}`;
+    private saveRoomUrl = `${this.host}World/Room/`;
+    private validExitUrl = `${this.host}World/Room/`;
 
-  private headers = new HttpHeaders({
-    "Content-Type": "application/json"
-  });
-
-  constructor(private http: HttpClient, private formBuilder: FormBuilder) {}
-
-  items: BehaviorSubject<Item[]> = new BehaviorSubject([]);
-  mobs: BehaviorSubject<Mob[]> = new BehaviorSubject([]);
-  public addRoomForm = this.formBuilder.group({
-    id: [""],
-    title: ["", Validators.required],
-    description: ["", Validators.required],
-    roomObjects: this.formBuilder.array([this.initRoomObject()]),
-    updateMessage: [""],
-    instantRepop: [false],
-    mobs: [],
-    CoordX: ["", Validators.required],
-    CoordY: ["", Validators.required],
-    CoordZ: ["", Validators.required],
-    exits: this.formBuilder.group({
-      north: [""],
-      northEast: [""],
-      east: [""],
-      southEast: [""],
-      south: [""],
-      southWest: [""],
-      west: [""],
-      northWest: [""],
-      up: [""],
-      down: [""]
-    })
-  });
-
-  // return this.formBuilder.group({
-  //     emote: ''
-  // });
-
-  initRoomObject() {
-    return this.formBuilder.group({
-      name: new FormControl(""),
-      look: new FormControl(""),
-      examine: new FormControl(""),
-      touch: new FormControl(""),
-      smell: new FormControl(""),
-      taste: new FormControl("")
+    private headers = new HttpHeaders({
+        "Content-Type": "application/json"
     });
-  }
 
-  roomItemsUpdate(item: Item) {
-    console.log("item: ", item);
-    const foundIndex = this.items.getValue().findIndex(x => x.id === item.id);
+    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
 
-    const newArr = this.items.getValue();
-    newArr[foundIndex] = item;
+    items: BehaviorSubject<Item[]> = new BehaviorSubject([]);
+    mobs: BehaviorSubject<Mob[]> = new BehaviorSubject([]);
+    public addRoomForm = this.formBuilder.group({
+        id: [""],
+        title: ["", Validators.required],
+        description: ["", Validators.required],
+        roomObjects: this.formBuilder.array([this.initRoomObject()]),
+        updateMessage: [""],
+        instantRepop: [false],
+        mobs: [],
+        CoordX: ["", Validators.required],
+        CoordY: ["", Validators.required],
+        CoordZ: ["", Validators.required],
+        exits: this.formBuilder.group({
+            north: [""],
+            northEast: [""],
+            east: [""],
+            southEast: [""],
+            south: [""],
+            southWest: [""],
+            west: [""],
+            northWest: [""],
+            up: [""],
+            down: [""]
+        })
+    });
 
-    console.log("item in arr: ", newArr[foundIndex]);
-    this.items.next(JSON.parse(JSON.stringify(this.items.getValue())));
-    // return item;
-  }
+    // return this.formBuilder.group({
+    //     emote: ''
+    // });
 
-  roomItems(item: Item) {
-    this.items.next([...this.items.getValue(), item]);
+    initRoomObject() {
+        return this.formBuilder.group({
+            name: new FormControl(""),
+            look: new FormControl(""),
+            examine: new FormControl(""),
+            touch: new FormControl(""),
+            smell: new FormControl(""),
+            taste: new FormControl("")
+        });
+    }
 
-    // return item;
-  }
+    roomItemsUpdate(item: Item) {
+        console.log("item: ", item);
+        const foundIndex = this.items.getValue().findIndex(x => x.id === item.id);
 
-  clearCache() {
-    this.items.next([]);
-    this.mobs.next([]);
-    this.addRoomForm.reset();
-    this.addRoomForm.get("exits.northWest").setValue("");
-    this.addRoomForm.get("exits.north").setValue("");
-    this.addRoomForm.get("exits.northEast").setValue("");
-    this.addRoomForm.get("exits.west").setValue("");
-    this.addRoomForm.get("exits.east").setValue("");
-    this.addRoomForm.get("exits.southWest").setValue("");
-    this.addRoomForm.get("exits.south").setValue("");
-    this.addRoomForm.get("exits.southEast").setValue("");
-    this.addRoomForm.get("exits.up").setValue("");
-    this.addRoomForm.get("exits.down").setValue("");
-  }
-  getRroomItems() {
-    console.log(this.items);
-  }
+        const newArr = this.items.getValue();
+        newArr[foundIndex] = item;
 
-  updateMobInventory(item: Item, mob: Item | Mob) {
-    const foundIndex = this.mobs.getValue().findIndex(x => x.id === mob.id);
+        console.log("item in arr: ", newArr[foundIndex]);
+        this.items.next(JSON.parse(JSON.stringify(this.items.getValue())));
+        // return item;
+    }
 
-    const newArr = this.mobs.getValue();
-    newArr[foundIndex].inventory.push(item);
+    roomItems(item: Item) {
+        this.items.next([...this.items.getValue(), item]);
 
-    this.mobs.next(JSON.parse(JSON.stringify(this.mobs.getValue())));
-  }
+        // return item;
+    }
 
-  roomMobs(mob: Mob) {
-    this.mobs.next([...this.mobs.getValue(), mob]);
-  }
+    clearCache() {
+        this.items.next([]);
+        this.mobs.next([]);
+        this.addRoomForm.reset();
+        this.addRoomForm.get("exits.northWest").setValue("");
+        this.addRoomForm.get("exits.north").setValue("");
+        this.addRoomForm.get("exits.northEast").setValue("");
+        this.addRoomForm.get("exits.west").setValue("");
+        this.addRoomForm.get("exits.east").setValue("");
+        this.addRoomForm.get("exits.southWest").setValue("");
+        this.addRoomForm.get("exits.south").setValue("");
+        this.addRoomForm.get("exits.southEast").setValue("");
+        this.addRoomForm.get("exits.up").setValue("");
+        this.addRoomForm.get("exits.down").setValue("");
+    }
+    getRroomItems() {
+        console.log(this.items);
+    }
 
-  saveRoom(data: Room) {
-    return this.http
-      .post(this.saveRoomUrl, JSON.stringify(data), {
-        headers: this.headers,
-        responseType: "text"
-      })
-      .pipe(tap(x => console.log(x)))
-      .subscribe();
-  }
-  updateRoom(data: Room) {
-    return this.http
-      .put(`${this.saveRoomUrl}/${data.id}`, JSON.stringify(data), {
-        headers: this.headers,
-        responseType: "text"
-      })
-      .pipe(tap(x => console.log(x)))
-      .subscribe();
-  }
+    updateMobInventory(item: Item, mob: Item | Mob) {
+        const foundIndex = this.mobs.getValue().findIndex(x => x.id === mob.id);
 
-  isValidExit(x: number, y: number, z: number, areaId: number) {
-    return this.http
-      .get(`${this.validExitUrl}${x}/${y}/${z}/${areaId}`, {
-        headers: this.headers,
-        responseType: "text"
-      })
-      .subscribe();
-  }
+        const newArr = this.mobs.getValue();
+        newArr[foundIndex].inventory.push(item);
 
-  removeExit(exit: string) {
-    this.addRoomForm.get("exits.north").setValue("");
-  }
+        this.mobs.next(JSON.parse(JSON.stringify(this.mobs.getValue())));
+    }
+
+    roomMobs(mob: Mob) {
+        this.mobs.next([...this.mobs.getValue(), mob]);
+    }
+
+    saveRoom(data: Room) {
+        return this.http
+            .post(this.saveRoomUrl, JSON.stringify(data), {
+                headers: this.headers,
+                responseType: "text"
+            })
+            .pipe(tap(x => console.log(x)))
+            .subscribe();
+    }
+    updateRoom(data: Room) {
+        return this.http
+            .put(`${this.saveRoomUrl}/${data.id}`, JSON.stringify(data), {
+                headers: this.headers,
+                responseType: "text"
+            })
+            .pipe(tap(x => console.log(x)))
+            .subscribe();
+    }
+
+    isValidExit(x: number, y: number, z: number, areaId: number) {
+        return this.http
+            .get(`${this.validExitUrl}${x}/${y}/${z}/${areaId}`, {
+                headers: this.headers,
+                responseType: "text"
+            });
+
+    }
+
+    removeExit(exit: string) {
+        this.addRoomForm.get("exits.north").setValue("");
+    }
 }
