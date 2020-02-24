@@ -116,15 +116,15 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         this.id = this.route.snapshot.params['id'];
         this.roomId = this.route.snapshot.params['id'];
 
-        this.coords = {
-            x: this.route.snapshot.params['x'],
-            y: this.route.snapshot.params['y'],
-            z: this.route.snapshot.params['z']
-        };
+        // this.coords = {
+        //     x: this.route.snapshot.params['x'],
+        //     y: this.route.snapshot.params['y'],
+        //     z: this.route.snapshot.params['z']
+        // };
 
-        this.addRoomForm.get('CoordX').setValue(this.coords.x);
-        this.addRoomForm.get('CoordY').setValue(this.coords.y);
-        this.addRoomForm.get('CoordZ').setValue(this.coords.z);
+        // this.addRoomForm.get('CoordX').setValue(this.coords.x);
+        // this.addRoomForm.get('CoordY').setValue(this.coords.y);
+        // this.addRoomForm.get('CoordZ').setValue(this.coords.z);
 
         this.roomServices.items.subscribe((value: Item[]) => {
             this.items = value;
@@ -147,6 +147,8 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 y: value.coords.y,
                 z: value.coords.z,
             };
+
+            console.log("real", this.coords)
 
             this.addRoomForm.get('CoordX').setValue(value.coords.x);
             this.addRoomForm.get('CoordY').setValue(value.coords.y);
@@ -208,15 +210,17 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     }
 
     isExitValid(direction: string): string {
-        console.log(this.coords)
+
         const coords = this.exitService.setExitCoord(direction, this.coords);
+        let canHaveExit = 'false';
         this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1).subscribe({
             next: x => {
-                return x;
+                console.log(direction, coords, x)
+                canHaveExit = x.toString();
             }
         });
 
-        return 'false';
+        return canHaveExit;
     }
 
     triggerDescriptionResize() {

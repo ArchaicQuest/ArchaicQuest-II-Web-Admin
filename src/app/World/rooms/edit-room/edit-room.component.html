@@ -159,15 +159,15 @@
                                 </button>
                             </div>
                             <div class="col">
-
+                                valid {{northValidExit}}
                                 <button *ngIf="northValidExit && addRoomForm.get('exits.north').value == ''"
                                     title="Add North Exit" mat-raised-button type="button"
                                     (click)="openExitDialog('North')">
                                     North
                                 </button>
 
-                                <button *ngIf="addRoomForm.get('exits.north').value != ''" color="primary"
-                                    title="Add North Exit" mat-raised-button type="button"
+                                <button *ngIf="northValidExit || addRoomForm.get('exits.north').value != ''"
+                                    color="primary" title="Add North Exit" mat-raised-button type="button"
                                     (click)="openExitDialog('North')">
                                     North
                                     <span class="addRoom__exits__coords">({{exits.north.coords?.x}},
@@ -218,10 +218,10 @@
 
                             <div class="col">
                                 <button mat-raised-button type="button" disabled="true">
-                                    Current Room
+                                    Current Room {{coords | json}}
                                     <span class="addRoom__exits__coords">({{coords?.x}},
                                         {{coords?.y}},
-                                        {{coords.z}})</span>
+                                        {{coords?.z}})</span>
                                 </button>
                             </div>
 

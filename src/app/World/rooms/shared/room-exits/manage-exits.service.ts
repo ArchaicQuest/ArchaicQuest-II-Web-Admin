@@ -55,45 +55,46 @@ export class RoomExitService {
     }
 
     setExitCoord(exitDirection: string, currentCoord: Coords) {
+        let newCoord = { ...currentCoord };
         switch (exitDirection) {
             case 'North':
-                currentCoord.y++;
+                newCoord.y++;
                 break;
             case 'North East':
-                currentCoord.y++;
-                currentCoord.x++;
+                newCoord.y++;
+                newCoord.x++;
                 break;
             case 'East':
-                currentCoord.x++;
+                newCoord.x++;
                 break;
             case 'South East':
-                currentCoord.y--;
-                currentCoord.x++;
+                newCoord.y--;
+                newCoord.x++;
                 break;
             case 'South':
-                currentCoord.y--;
+                newCoord.y--;
                 break;
             case 'South West':
-                currentCoord.y--;
-                currentCoord.x--;
+                newCoord.y--;
+                newCoord.x--;
                 break;
             case 'West':
-                currentCoord.x--;
+                newCoord.x--;
                 break;
             case 'North West':
-                currentCoord.y++;
-                currentCoord.x--;
+                newCoord.y++;
+                newCoord.x--;
                 break;
             case 'Up':
-                currentCoord.z++;
+                newCoord.z++;
                 break;
             case 'Down':
-                currentCoord.z--;
+                newCoord.z--;
                 break;
 
         }
 
-        return currentCoord;
+        return newCoord;
     }
 
 
