@@ -38,6 +38,7 @@ import { RoomItemListComponent } from './rooms/shared/manage-items/list/room-ite
 import { ManageMobComponent } from './rooms/shared/manage-mob/manage-mob.component';
 import { ManageExitsComponent } from './rooms/shared/room-exits/manage-exits.component';
 import { EditRoomService } from './rooms/edit-room/edit-room.service';
+import { ExitComponent } from './rooms/exits/exit.component';
 
 
 
@@ -84,7 +85,8 @@ import { EditRoomService } from './rooms/edit-room/edit-room.service';
         RoomItemListComponent,
         ManageRoomItemsComponent,
         ManageRoomMobsComponent,
-        RoomMobListComponent
+        RoomMobListComponent,
+        ExitComponent
 
     ],
 })
