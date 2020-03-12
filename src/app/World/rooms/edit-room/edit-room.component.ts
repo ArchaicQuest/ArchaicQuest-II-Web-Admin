@@ -126,6 +126,8 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.addRoomForm = this.roomServices.addRoomForm;
+
+        console.log(this.roomServices.addRoomForm)
         console.log(this.route.snapshot.params);
         this.id = this.route.snapshot.params["id"];
         this.roomId = this.route.snapshot.params["id"];

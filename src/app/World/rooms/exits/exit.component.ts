@@ -118,36 +118,36 @@ export class ExitComponent implements OnInit, OnDestroy {
                 this.addRoomForm.get('CoordY').setValue(value.coords.y);
                 this.addRoomForm.get('CoordZ').setValue(value.coords.z);
 
-                if (value.exits.north) {
-                    this.addRoomForm.get('north').setValue(value.exits.north);
-                }
-                if (value.exits.northWest) {
-                    this.addRoomForm.get('northEast').setValue(value.exits.northWest);
-                }
-                if (value.exits.east) {
-                    this.addRoomForm.get('east').setValue(value.exits.east);
-                }
-                if (value.exits.southEast) {
-                    this.addRoomForm.get('southEast').setValue(value.exits.southEast);
-                }
-                if (value.exits.south) {
-                    this.addRoomForm.get('south').setValue(value.exits.south);
-                }
-                if (value.exits.southWest) {
-                    this.addRoomForm.get('southWest').setValue(value.exits.southWest);
-                }
-                if (value.exits.west) {
-                    this.addRoomForm.get('west').setValue(value.exits.west);
-                }
-                if (value.exits.northWest) {
-                    this.addRoomForm.get('northWest').setValue(value.exits.northWest);
-                }
-                if (value.exits.up) {
-                    this.addRoomForm.get('up').setValue(value.exits.up);
-                }
-                if (value.exits.down) {
-                    this.addRoomForm.get('down').setValue(value.exits.down);
-                }
+                // if (value.exits.north) {
+                //     this.addRoomForm.get('north').setValue(value.exits.north);
+                // }
+                // if (value.exits.northWest) {
+                //     this.addRoomForm.get('northEast').setValue(value.exits.northWest);
+                // }
+                // if (value.exits.east) {
+                //     this.addRoomForm.get('east').setValue(value.exits.east);
+                // }
+                // if (value.exits.southEast) {
+                //     this.addRoomForm.get('southEast').setValue(value.exits.southEast);
+                // }
+                // if (value.exits.south) {
+                //     this.addRoomForm.get('south').setValue(value.exits.south);
+                // }
+                // if (value.exits.southWest) {
+                //     this.addRoomForm.get('southWest').setValue(value.exits.southWest);
+                // }
+                // if (value.exits.west) {
+                //     this.addRoomForm.get('west').setValue(value.exits.west);
+                // }
+                // if (value.exits.northWest) {
+                //     this.addRoomForm.get('northWest').setValue(value.exits.northWest);
+                // }
+                // if (value.exits.up) {
+                //     this.addRoomForm.get('up').setValue(value.exits.up);
+                // }
+                // if (value.exits.down) {
+                //     this.addRoomForm.get('down').setValue(value.exits.down);
+                // }
 
 
                 this.isExitValid('North West').subscribe({
