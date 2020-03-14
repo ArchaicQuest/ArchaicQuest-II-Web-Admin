@@ -115,15 +115,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         this.addRoomForm = this.roomServices.addRoomForm;
 
         this.id = this.route.snapshot.params["id"];
-        this.coords = {
-            x: this.route.snapshot.params["x"],
-            y: this.route.snapshot.params["y"],
-            z: this.route.snapshot.params["z"]
-        };
 
-        this.addRoomForm.get("CoordX").setValue(this.coords.x);
-        this.addRoomForm.get("CoordY").setValue(this.coords.y);
-        this.addRoomForm.get("CoordZ").setValue(this.coords.z);
 
         this.roomServices.items.subscribe((value: Item[]) => {
             console.log(value);
@@ -137,14 +129,14 @@ export class AddRoomComponent implements OnInit, OnDestroy {
 
 
 
-        this.northWestValidExit = this.isExitValid('North West') == 'true';
-        this.northValidExit = this.isExitValid('North') == 'true';
-        this.northEastValidExit = this.isExitValid('North East') == 'true';
-        this.eastValidExit = this.isExitValid('East') == 'true';
-        this.southEastValidExit = this.isExitValid('South East') == 'true';
-        this.southValidExit = this.isExitValid('South') == 'true';
-        this.southWestValidExit = this.isExitValid('South West') == 'true';
-        this.westValidExit = this.isExitValid('South West') == 'true';
+        // this.northWestValidExit = this.isExitValid('North West') == 'true';
+        // this.northValidExit = this.isExitValid('North') == 'true';
+        // this.northEastValidExit = this.isExitValid('North East') == 'true';
+        // this.eastValidExit = this.isExitValid('East') == 'true';
+        // this.southEastValidExit = this.isExitValid('South East') == 'true';
+        // this.southValidExit = this.isExitValid('South') == 'true';
+        // this.southWestValidExit = this.isExitValid('South West') == 'true';
+        // this.westValidExit = this.isExitValid('South West') == 'true';
 
     }
 

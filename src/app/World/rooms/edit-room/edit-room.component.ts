@@ -130,7 +130,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         console.log(this.roomServices.addRoomForm)
         console.log(this.route.snapshot.params);
         this.id = this.route.snapshot.params["id"];
-        this.roomId = this.route.snapshot.params["id"];
+        this.roomId = this.route.snapshot.params["roomId"];
 
         // this.coords = {
         //     x: this.route.snapshot.params['x'],

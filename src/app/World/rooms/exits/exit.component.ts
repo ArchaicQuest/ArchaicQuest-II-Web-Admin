@@ -6,7 +6,8 @@ import {
     OnDestroy,
     ChangeDetectorRef,
     Input,
-    AfterViewInit
+    AfterViewInit,
+    AfterContentInit
 } from '@angular/core';
 import {
     FormGroup,
@@ -53,7 +54,7 @@ import { EditRoomService } from '../edit-room/edit-room.service';
     ]
 })
 
-export class ExitComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
     @Input() addRoomForm: FormGroup;
     componentActive = true;
     id: number;
@@ -97,16 +98,15 @@ export class ExitComponent implements OnInit, OnDestroy, AfterViewInit {
     ngOnInit() {
         this.addRoomForm = <FormGroup>this.controlContainer.control;
         console.log(this.route.snapshot.params);
-        this.id = this.route.snapshot.params['id'];
-        this.roomId = this.route.snapshot.params['id'];
+        this.roomId = this.route.snapshot.params['roomId'];
 
 
     }
 
-    ngAfterViewInit() {
+    ngAfterContentInit() {
 
         if (this.roomId != null) {
-            this.editRoomService.getRoom(this.roomId).subscribe((value: Room) => {
+            this.editRoomService.getRoom(+this.roomId).subscribe((value: Room) => {
                 this.exits = value.exits;
 
                 this.areaId = value.areaId;
@@ -156,7 +156,6 @@ export class ExitComponent implements OnInit, OnDestroy, AfterViewInit {
                     this.addRoomForm.get('exits.down').setValue(value.exits.down);
                 }
 
-
                 this.isExitValid('North West').subscribe({
                     next: res => {
                         this.northWestValidExit = res === 'true';
@@ -202,8 +201,70 @@ export class ExitComponent implements OnInit, OnDestroy, AfterViewInit {
                         this.westValidExit = res === 'true';
                     }
                 });
+
+
+            });
+        } else {
+            this.coords = {
+                x: this.route.snapshot.params["x"],
+                y: this.route.snapshot.params["y"],
+                z: this.route.snapshot.params["z"]
+            };
+
+            console.log("add", this.coords)
+
+            this.addRoomForm.get("CoordX").setValue(this.coords.x);
+            this.addRoomForm.get("CoordY").setValue(this.coords.y);
+            this.addRoomForm.get("CoordZ").setValue(this.coords.z);
+
+            this.isExitValid('North West').subscribe({
+                next: res => {
+                    this.northWestValidExit = res === 'true';
+                }
+            });
+            this.isExitValid('North').subscribe({
+                next: res => {
+                    this.northValidExit = res === 'true';
+                }
+            });
+            this.isExitValid('North East').subscribe({
+                next: res => {
+                    this.northEastValidExit = res === 'true';
+                }
+            });
+
+            this.isExitValid('East').subscribe({
+                next: res => {
+                    this.eastValidExit = res === 'true';
+                }
+            });
+
+            this.isExitValid('South East').subscribe({
+                next: res => {
+                    this.southEastValidExit = res === 'true';
+                }
+            });
+
+            this.isExitValid('South').subscribe({
+                next: res => {
+                    this.southValidExit = res === 'true';
+                }
+            });
+
+            this.isExitValid('South West').subscribe({
+                next: res => {
+                    this.southWestValidExit = res === 'true';
+                }
+            });
+
+            this.isExitValid('West').subscribe({
+                next: res => {
+                    this.westValidExit = res === 'true';
+                }
             });
         }
+
+
         console.log(this.southValidExit);
     }
 
@@ -215,6 +276,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterViewInit {
 
     isExitValid(direction: string): Observable<string> {
         const coords = this.exitService.setExitCoord(direction, this.coords);
+
         return this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1);
     }
 
