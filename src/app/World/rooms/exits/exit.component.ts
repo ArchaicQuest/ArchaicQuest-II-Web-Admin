@@ -5,7 +5,8 @@ import {
     NgZone,
     OnDestroy,
     ChangeDetectorRef,
-    Input
+    Input,
+    AfterViewInit
 } from '@angular/core';
 import {
     FormGroup,
@@ -52,7 +53,7 @@ import { EditRoomService } from '../edit-room/edit-room.service';
     ]
 })
 
-export class ExitComponent implements OnInit, OnDestroy {
+export class ExitComponent implements OnInit, OnDestroy, AfterViewInit {
     @Input() addRoomForm: FormGroup;
     componentActive = true;
     id: number;
@@ -89,7 +90,7 @@ export class ExitComponent implements OnInit, OnDestroy {
         public dialog: MatDialog,
         public shared: Shared,
         private exitService: RoomExitService,
-        private controlContainer: ControlContainer
+        private controlContainer: ControlContainer,
     ) { }
 
 
@@ -99,6 +100,10 @@ export class ExitComponent implements OnInit, OnDestroy {
         this.id = this.route.snapshot.params['id'];
         this.roomId = this.route.snapshot.params['id'];
 
+
+    }
+
+    ngAfterViewInit() {
 
         if (this.roomId != null) {
             this.editRoomService.getRoom(this.roomId).subscribe((value: Room) => {
@@ -114,40 +119,42 @@ export class ExitComponent implements OnInit, OnDestroy {
 
                 console.log('real', this.coords);
 
+                console.log(this.addRoomForm)
+
                 this.addRoomForm.get('CoordX').setValue(value.coords.x);
                 this.addRoomForm.get('CoordY').setValue(value.coords.y);
                 this.addRoomForm.get('CoordZ').setValue(value.coords.z);
 
-                // if (value.exits.north) {
-                //     this.addRoomForm.get('north').setValue(value.exits.north);
-                // }
-                // if (value.exits.northWest) {
-                //     this.addRoomForm.get('northEast').setValue(value.exits.northWest);
-                // }
-                // if (value.exits.east) {
-                //     this.addRoomForm.get('east').setValue(value.exits.east);
-                // }
-                // if (value.exits.southEast) {
-                //     this.addRoomForm.get('southEast').setValue(value.exits.southEast);
-                // }
-                // if (value.exits.south) {
-                //     this.addRoomForm.get('south').setValue(value.exits.south);
-                // }
-                // if (value.exits.southWest) {
-                //     this.addRoomForm.get('southWest').setValue(value.exits.southWest);
-                // }
-                // if (value.exits.west) {
-                //     this.addRoomForm.get('west').setValue(value.exits.west);
-                // }
-                // if (value.exits.northWest) {
-                //     this.addRoomForm.get('northWest').setValue(value.exits.northWest);
-                // }
-                // if (value.exits.up) {
-                //     this.addRoomForm.get('up').setValue(value.exits.up);
-                // }
-                // if (value.exits.down) {
-                //     this.addRoomForm.get('down').setValue(value.exits.down);
-                // }
+                if (value.exits.north) {
+                    this.addRoomForm.get('exits.north').setValue(value.exits.north);
+                }
+                if (value.exits.northWest) {
+                    this.addRoomForm.get('exits.northEast').setValue(value.exits.northWest);
+                }
+                if (value.exits.east) {
+                    this.addRoomForm.get('exits.east').setValue(value.exits.east);
+                }
+                if (value.exits.southEast) {
+                    this.addRoomForm.get('exits.southEast').setValue(value.exits.southEast);
+                }
+                if (value.exits.south) {
+                    this.addRoomForm.get('exits.south').setValue(value.exits.south);
+                }
+                if (value.exits.southWest) {
+                    this.addRoomForm.get('exits.southWest').setValue(value.exits.southWest);
+                }
+                if (value.exits.west) {
+                    this.addRoomForm.get('exits.west').setValue(value.exits.west);
+                }
+                if (value.exits.northWest) {
+                    this.addRoomForm.get('exits.northWest').setValue(value.exits.northWest);
+                }
+                if (value.exits.up) {
+                    this.addRoomForm.get('exits.up').setValue(value.exits.up);
+                }
+                if (value.exits.down) {
+                    this.addRoomForm.get('exits.down').setValue(value.exits.down);
+                }
 
 
                 this.isExitValid('North West').subscribe({
@@ -200,6 +207,12 @@ export class ExitComponent implements OnInit, OnDestroy {
         console.log(this.southValidExit);
     }
 
+    displayCoord(direction: string) {
+        const coords = this.exitService.setExitCoord(direction, this.coords);
+
+        return `(${coords.x}, ${coords.y}, ${coords.z})`;
+    }
+
     isExitValid(direction: string): Observable<string> {
         const coords = this.exitService.setExitCoord(direction, this.coords);
         return this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1);
@@ -225,43 +238,43 @@ export class ExitComponent implements OnInit, OnDestroy {
             switch (result.name) {
                 case 'North':
                     this.exits.north = result;
-                    this.addRoomForm.get('north').setValue(result);
+                    this.addRoomForm.get('exits.north').setValue(result);
                     break;
                 case 'North East':
                     this.exits.northEast = result;
-                    this.addRoomForm.get('northEast').setValue(result);
+                    this.addRoomForm.get('exits.northEast').setValue(result);
                     break;
                 case 'East':
                     this.exits.east = result;
-                    this.addRoomForm.get('east').setValue(result);
+                    this.addRoomForm.get('exits.east').setValue(result);
                     break;
                 case 'South East':
                     this.exits.southEast = result;
-                    this.addRoomForm.get('southEast').setValue(result);
+                    this.addRoomForm.get('exits.southEast').setValue(result);
                     break;
                 case 'South':
                     this.exits.south = result;
-                    this.addRoomForm.get('south').setValue(result);
+                    this.addRoomForm.get('exits.south').setValue(result);
                     break;
                 case 'South West':
                     this.exits.southWest = result;
-                    this.addRoomForm.get('southWest').setValue(result);
+                    this.addRoomForm.get('exits.southWest').setValue(result);
                     break;
                 case 'West':
                     this.exits.west = result;
-                    this.addRoomForm.get('west').setValue(result);
+                    this.addRoomForm.get('exits.west').setValue(result);
                     break;
                 case 'North West':
                     this.exits.northWest = result;
-                    this.addRoomForm.get('northWest').setValue(result);
+                    this.addRoomForm.get('exits.northWest').setValue(result);
                     break;
                 case 'Up':
                     this.exits.up = result;
-                    this.addRoomForm.get('up').setValue(result);
+                    this.addRoomForm.get('exits.up').setValue(result);
                     break;
                 case 'Down':
                     this.exits.down = result;
-                    this.addRoomForm.get('down').setValue(result);
+                    this.addRoomForm.get('exits.down').setValue(result);
                     break;
             }
 
@@ -273,11 +286,7 @@ export class ExitComponent implements OnInit, OnDestroy {
 
 
     // tslint:disable-next-line:use-life-cycle-interface
-    ngAfterViewInit() {
-        //this.dataSource = this.items;
-        // If the user changes the sort order, reset back to the first page.
-        //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-    }
+
 
     removeExit(control: AbstractControl) {
         control.setValue('');

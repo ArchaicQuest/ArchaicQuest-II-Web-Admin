@@ -15,33 +15,34 @@
 
             <div class="col">
 
-                <button title="Add North West Exit" *ngIf="northWestValidExit && exits.northWest == null"
-                    mat-raised-button type="button" (click)="openExitDialog('North West')">
-                    North West
-                </button>
+                <button title="Add North West Exit" [disabled]="!northWestValidExit && exits.northWest == null"
+                    mat-raised-button type="button" (click)="openExitDialog('North West')"
+                    [color]="exits.northWest != null ? 'primary' : ''">
+                    North west
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('North West', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button title="Add North West Exit" *ngIf="exits.northWest  != null" mat-raised-button type="button"
-                    color="primary" (click)="openExitDialog('North West')">
-                    North West
-                    <span class="addRoom__exits__coords">({{exits.northWest.coords?.x}},
+                    <span *ngIf="exits.northWest  != null"
+                        class="addRoom__exits__coords">({{exits.northWest.coords?.x}},
                         {{exits.northWest.coords?.y}},
                         {{exits.northWest.coords?.z}})</span>
                 </button>
+
+
             </div>
             <div class="col">
-                valid {{northValidExit}}
-                <button *ngIf="northValidExit && exits.north == null" title="Add North Exit" mat-raised-button
-                    type="button" (click)="openExitDialog('North')">
+                <button [disabled]="!northValidExit && exits.north == null" title="Add North Exit" mat-raised-button
+                    type="button" (click)="openExitDialog('North')" [color]="exits.north != null ? 'primary' : ''">
                     North
-                </button>
-
-                <button *ngIf="northValidExit || exits.north  != null" color="primary" title="Add North Exit"
-                    mat-raised-button type="button" (click)="openExitDialog('North')">
-                    North
-                    <span class="addRoom__exits__coords">({{exits.north.coords?.x}},
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('North', coords?.x, coords?.y, coords?.z)}}
+                    </span>
+                    <span *ngIf=" exits.north != null" class="addRoom__exits__coords">({{exits.north.coords?.x}},
                         {{exits.north.coords?.y}},
                         {{exits.north.coords?.z}})</span>
                 </button>
+
 
                 <a href="javascript:(0)" *ngIf=" exits.north != null">Remove
                     exit</a>
@@ -49,18 +50,18 @@
 
             <div class="col">
 
-                <button title=" Add North East Exit" *ngIf="northEastValidExit && exits.northEast == null"
-                    mat-raised-button type="button" (click)="openExitDialog('North East')">
+                <button title=" Add North East Exit" [disabled]="!northEastValidExit && exits.northEast == null"
+                    mat-raised-button type="button" (click)="openExitDialog('North East')"
+                    [color]="exits.northEast != null ? 'primary' : ''">
                     North East
-
-                </button>
-                <button title=" Add North East Exit" *ngIf="exits.northEast" mat-raised-button color="primary"
-                    type="button" (click)="openExitDialog('North East')">
-                    North East
-                    <span class="addRoom__exits__coords">({{exits.northEast.coords?.x}},
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('North East', coords?.x, coords?.y, coords?.z)}}
+                    </span>
+                    <span *ngIf="exits.northEast != null" class="addRoom__exits__coords">({{exits.northEast.coords?.x}},
                         {{exits.northEast.coords?.y}},
                         {{exits.northEast.coords?.z}})</span>
                 </button>
+
             </div>
         </div>
 
@@ -68,17 +69,18 @@
 
             <div class="col">
 
-                <button title="Add West Exit" *ngIf="westValidExit && exits.west == null" mat-raised-button
-                    type="button" (click)="openExitDialog('West')">
+                <button title="Add West Exit" [disabled]="!westValidExit && exits.west == null" mat-raised-button
+                    type="button" (click)="openExitDialog('West')" [color]="exits.west != null ? 'primary' : ''">
                     West
-                </button>
-                <button title="Add West Exit" *ngIf="exits.west != null" color="primary" mat-raised-button type="button"
-                    (click)="openExitDialog('West')">
-                    West
-                    <span class="addRoom__exits__coords">({{exits.west.coords?.x}},
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('West', coords?.x, coords?.y, coords?.z)}}
+                    </span>
+
+                    <span *ngIf="exits.west != null" class="addRoom__exits__coords">({{exits.west.coords?.x}},
                         {{exits.west.coords?.y}},
                         {{exits.west.coords?.z}})</span>
                 </button>
+
             </div>
 
             <div class="col">
@@ -92,99 +94,106 @@
 
             <div class="col">
 
-                <button title="Add East Exit" *ngIf="eastValidExit && exits.east == null" mat-raised-button
-                    type="button" (click)="openExitDialog('East')">
+                <button title="Add East Exit" [disabled]="!eastValidExit && exits.east == null" mat-raised-button
+                    [color]="exits.east != null ? 'primary' : ''" type="button" (click)="openExitDialog('East')">
                     East
-                </button>
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('East', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button title="Add East Exit" *ngIf="exits.east != null" color="primary" mat-raised-button type="button"
-                    (click)="openExitDialog('East')">
-                    East
-                    <span class="addRoom__exits__coords">({{exits.east.coords?.x}},
+                    <span *ngIf="exits.east != null" class="addRoom__exits__coords">({{exits.east.coords?.x}},
                         {{exits.east.coords?.y}},
                         {{exits.east.coords?.z}})</span>
                 </button>
+
             </div>
         </div>
         <div class="row">
             <div class="col">
 
-                <button title="Add South West Exit" *ngIf="southWestValidExit && exits.southWest == null"
-                    mat-raised-button type="button" (click)="openExitDialog('South West')">
+                <button title="Add South West Exit" [disabled]="!southWestValidExit && exits.southWest == null"
+                    mat-raised-button type="button" (click)="openExitDialog('South West')"
+                    [color]="exits.southWest != null ? 'primary' : ''">
                     South West
-                </button>
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('South West', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button title="Add South West Exit" *ngIf="exits.southWest != null" mat-raised-button type="button"
-                    color="primary" (click)="openExitDialog('South West')">
-                    South West
-                    <span class="addRoom__exits__coords">({{exits.southWest.coords?.x}},
+                    <span *ngIf="exits.southWest != null" class="addRoom__exits__coords">({{exits.southWest.coords?.x}},
                         {{exits.southWest.coords?.y}},
                         {{exits.southWest.coords?.z}})</span>
                 </button>
+
+
             </div>
             <div class="col">
 
-                <button title="Add South Exit" *ngIf="southValidExit && exits.south == null" mat-raised-button
-                    type="button" (click)="openExitDialog('South')">
+                <button title="Add South Exit" [disabled]="!southValidExit && exits.south == null" mat-raised-button
+                    type="button" (click)="openExitDialog('South')" [color]="exits.south != null ? 'primary' : ''">
                     South
-                </button>
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('South', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button title="Add South Exit" *ngIf="exits.south != null" mat-raised-button color="primary"
-                    type="button" (click)="openExitDialog('South')">
-                    South
-                    <span class="addRoom__exits__coords">({{exits.south.coords?.x}},
+                    <span *ngIf="exits.south != null" class="addRoom__exits__coords">({{exits.south.coords?.x}},
                         {{exits.south.coords?.y}},
                         {{exits.south.coords?.z}})</span>
                 </button>
+
+
             </div>
 
 
             <div class="col">
 
-                <button title="Add South East Exit" *ngIf="southEastValidExit && exits.southEast == null"
-                    mat-raised-button type="button" (click)="openExitDialog('South East')">
+                <button title="Add South East Exit" [disabled]="!southEastValidExit && exits.southEast == null"
+                    mat-raised-button type="button" (click)="openExitDialog('South East')"
+                    [color]="exits.southEast != null ? 'primary' : ''">
                     South East
-                </button>
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('South East', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button title="Add South East Exit" *ngIf="exits.southEast != null" mat-raised-button type="button"
-                    color="primary" (click)="openExitDialog('South East')">
-                    South East
-
-                    <span class="addRoom__exits__coords">({{exits.southEast.coords?.x}},
+                    <span *ngIf="exits.southEast != null" class="addRoom__exits__coords">({{exits.southEast.coords?.x}},
                         {{exits.southEast.coords?.y}},
                         {{exits.southEast.coords?.z}})</span>
                 </button>
+
+
             </div>
 
         </div>
 
         <div class="row">
             <div class="col">
-                <button mat-raised-button type="button" *ngIf="exits.up == null" (click)="openExitDialog('Up')">
+                <button mat-raised-button type="button" [disabled]="exits.up == null" (click)="openExitDialog('Up')"
+                    [color]="exits.up != null ? 'primary' : ''">
                     Up
-                </button>
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('Up', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button mat-raised-button type="button" color="primary" *ngIf="exits.up != null"
-                    (click)="openExitDialog('Up')">
-                    Up
-                    <span class="addRoom__exits__coords">({{exits.up.coords?.x}},
+                    <span *ngIf="exits.up != null" class="addRoom__exits__coords">({{exits.up.coords?.x}},
                         {{exits.up.coords?.y}},
                         {{exits.up.coords?.z}})</span>
                 </button>
+
+
             </div>
 
             <div class="col">
-                <button mat-raised-button type="button" *ngIf="exits.down == null" (click)="openExitDialog('Down')">
+                <button mat-raised-button type="button" [disabled]="exits.down == null" (click)="openExitDialog('Down')"
+                    [color]="exits.down != null ? 'primary' : ''">
                     Down
-                </button>
+                    <span class="addRoom__exits__coords">
+                        {{displayCoord('Down', coords?.x, coords?.y, coords?.z)}}
+                    </span>
 
-                <button mat-raised-button type="button" *ngIf="exits.down != null" color="primary"
-                    (click)="openExitDialog('Down')">
-                    Down
-                    <span class="addRoom__exits__coords">({{exits.down.coords?.x}},
+                    <span *ngIf="exits.down != null" class="addRoom__exits__coords">({{exits.down.coords?.x}},
                         {{exits.down.coords?.y}},
                         {{exits.down.coords?.z}})</span>
                 </button>
+
             </div>
         </div>
 
