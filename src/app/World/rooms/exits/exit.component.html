@@ -22,11 +22,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('North West', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.northWest  != null"
-                        class="addRoom__exits__coords">({{exits.northWest.coords?.x}},
-                        {{exits.northWest.coords?.y}},
-                        {{exits.northWest.coords?.z}})</span>
                 </button>
 
 
@@ -38,10 +33,8 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('North', coords?.x, coords?.y, coords?.z)}}
                     </span>
-                    <span *ngIf=" exits.north != null" class="addRoom__exits__coords">({{exits.north.coords?.x}},
-                        {{exits.north.coords?.y}},
-                        {{exits.north.coords?.z}})</span>
                 </button>
+
 
 
                 <a href="javascript:(0)" *ngIf=" exits.north != null">Remove
@@ -57,9 +50,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('North East', coords?.x, coords?.y, coords?.z)}}
                     </span>
-                    <span *ngIf="exits.northEast != null" class="addRoom__exits__coords">({{exits.northEast.coords?.x}},
-                        {{exits.northEast.coords?.y}},
-                        {{exits.northEast.coords?.z}})</span>
                 </button>
 
             </div>
@@ -75,10 +65,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('West', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.west != null" class="addRoom__exits__coords">({{exits.west.coords?.x}},
-                        {{exits.west.coords?.y}},
-                        {{exits.west.coords?.z}})</span>
                 </button>
 
             </div>
@@ -100,10 +86,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('East', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.east != null" class="addRoom__exits__coords">({{exits.east.coords?.x}},
-                        {{exits.east.coords?.y}},
-                        {{exits.east.coords?.z}})</span>
                 </button>
 
             </div>
@@ -118,10 +100,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('South West', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.southWest != null" class="addRoom__exits__coords">({{exits.southWest.coords?.x}},
-                        {{exits.southWest.coords?.y}},
-                        {{exits.southWest.coords?.z}})</span>
                 </button>
 
 
@@ -134,10 +112,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('South', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.south != null" class="addRoom__exits__coords">({{exits.south.coords?.x}},
-                        {{exits.south.coords?.y}},
-                        {{exits.south.coords?.z}})</span>
                 </button>
 
 
@@ -153,10 +127,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('South East', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.southEast != null" class="addRoom__exits__coords">({{exits.southEast.coords?.x}},
-                        {{exits.southEast.coords?.y}},
-                        {{exits.southEast.coords?.z}})</span>
                 </button>
 
 
@@ -172,10 +142,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('Up', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.up != null" class="addRoom__exits__coords">({{exits.up.coords?.x}},
-                        {{exits.up.coords?.y}},
-                        {{exits.up.coords?.z}})</span>
                 </button>
 
 
@@ -188,10 +154,6 @@
                     <span class="addRoom__exits__coords">
                         {{displayCoord('Down', coords?.x, coords?.y, coords?.z)}}
                     </span>
-
-                    <span *ngIf="exits.down != null" class="addRoom__exits__coords">({{exits.down.coords?.x}},
-                        {{exits.down.coords?.y}},
-                        {{exits.down.coords?.z}})</span>
                 </button>
 
             </div>
