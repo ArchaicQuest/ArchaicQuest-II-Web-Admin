@@ -205,11 +205,12 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
             });
         } else {
-            this.coords = {
-                x: this.route.snapshot.params["x"],
-                y: this.route.snapshot.params["y"],
-                z: this.route.snapshot.params["z"]
-            };
+            this.areaId = this.route.snapshot.params["id"],
+                this.coords = {
+                    x: this.route.snapshot.params["x"],
+                    y: this.route.snapshot.params["y"],
+                    z: this.route.snapshot.params["z"]
+                };
 
             console.log("add", this.coords)
 

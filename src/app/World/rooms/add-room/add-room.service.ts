@@ -131,7 +131,7 @@ export class RoomService {
     }
     updateRoom(data: Room) {
         return this.http
-            .put(`${this.saveRoomUrl}/${data.id}`, JSON.stringify(data), {
+            .put(`${this.saveRoomUrl}${data.id}`, JSON.stringify(data), {
                 headers: this.headers,
                 responseType: "text"
             })

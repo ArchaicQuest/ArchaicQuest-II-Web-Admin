@@ -4,7 +4,8 @@ import {
     ViewChild,
     NgZone,
     OnDestroy,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    SimpleChanges
 } from "@angular/core";
 import { FormGroup, FormControl, FormBuilder, FormArray } from "@angular/forms";
 import { RoomService } from "./add-room.service";
@@ -221,64 +222,66 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         return 'false';
     }
 
-    openExitDialog(exitDirection: string): void {
-        const dialogRef = this.dialog.open(ManageExitsComponent, {
-            width: "450px",
-            data: { exit: exitDirection, currentCoord: this.coords, areaId: this.id }
-        });
+    // openExitDialog(exitDirection: string): void {
+    //     const dialogRef = this.dialog.open(ManageExitsComponent, {
+    //         width: "450px",
+    //         data: { exit: exitDirection, currentCoord: this.coords, areaId: this.id }
+    //     });
 
-        dialogRef.afterClosed().subscribe((result: Exit) => {
-            if (result == null) {
-                return;
-            }
+    //     dialogRef.afterClosed().subscribe((result: Exit) => {
+    //         if (result == null) {
+    //             return;
+    //         }
 
-            switch (result.name) {
-                case "North":
-                    this.exits.north = result;
-                    this.addRoomForm.get("exits.north").setValue(result);
-                    break;
-                case "North East":
-                    this.exits.northEast = result;
-                    this.addRoomForm.get("exits.northEast").setValue(result);
-                    break;
-                case "East":
-                    this.exits.east = result;
-                    this.addRoomForm.get("exits.east").setValue(result);
-                    break;
-                case "South East":
-                    this.exits.southEast = result;
-                    this.addRoomForm.get("exits.southEast").setValue(result);
-                    break;
-                case "South":
-                    this.exits.south = result;
-                    this.addRoomForm.get("exits.south").setValue(result);
-                    break;
-                case "South West":
-                    this.exits.southWest = result;
-                    this.addRoomForm.get("exits.southWest").setValue(result);
-                    break;
-                case "West":
-                    this.exits.west = result;
-                    this.addRoomForm.get("exits.west").setValue(result);
-                    break;
-                case "North West":
-                    this.exits.northWest = result;
-                    this.addRoomForm.get("exits.northWest").setValue(result);
-                    break;
-                case "Up":
-                    this.exits.up = result;
-                    this.addRoomForm.get("exits.up").setValue(result);
-                    break;
-                case "Down":
-                    this.exits.down = result;
-                    this.addRoomForm.get("exits.down").setValue(result);
-                    break;
-            }
+    //         switch (result.name) {
+    //             case "North":
+    //                 this.exits.north = result;
+    //                 this.addRoomForm.get("exits.north").setValue(result);
+    //                 break;
+    //             case "North East":
+    //                 this.exits.northEast = result;
+    //                 this.addRoomForm.get("exits.northEast").setValue(result);
+    //                 break;
+    //             case "East":
+    //                 this.exits.east = result;
+    //                 this.addRoomForm.get("exits.east").setValue(result);
+    //                 break;
+    //             case "South East":
+    //                 this.exits.southEast = result;
+    //                 this.addRoomForm.get("exits.southEast").setValue(result);
+    //                 break;
+    //             case "South":
+    //                 this.exits.south = result;
+    //                 this.addRoomForm.get("exits.south").setValue(result);
+    //                 break;
+    //             case "South West":
+    //                 this.exits.southWest = result;
+    //                 this.addRoomForm.get("exits.southWest").setValue(result);
+    //                 break;
+    //             case "West":
+    //                 this.exits.west = result;
+    //                 this.addRoomForm.get("exits.west").setValue(result);
+    //                 break;
+    //             case "North West":
+    //                 this.exits.northWest = result;
+    //                 this.addRoomForm.get("exits.northWest").setValue(result);
+    //                 break;
+    //             case "Up":
+    //                 this.exits.up = result;
+    //                 this.addRoomForm.get("exits.up").setValue(result);
+    //                 break;
+    //             case "Down":
+    //                 this.exits.down = result;
+    //                 this.addRoomForm.get("exits.down").setValue(result);
+    //                 break;
+    //         }
 
-            console.log("exit ", this.exits);
-            console.log(result);
-        });
-    }
+    //         console.log("exit ", this.exits);
+    //         console.log(result);
+    //     });
+    // }
+
+
 
     mapSlot(id: number) {
         return ItemSlotEnum[id];
