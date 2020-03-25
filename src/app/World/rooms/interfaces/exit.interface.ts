@@ -1,4 +1,3 @@
-
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 
 export interface Exit {

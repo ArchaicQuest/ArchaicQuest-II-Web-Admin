@@ -50,6 +50,7 @@ export class RoomPreviewComponent implements OnInit, OnDestroy {
     @Input() items: any;
     @Input() mobs: any;
     @Input() roomObjects: any;
+
     componentActive = true;
 
     constructor(

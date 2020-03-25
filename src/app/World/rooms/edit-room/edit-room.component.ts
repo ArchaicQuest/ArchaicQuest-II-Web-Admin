@@ -8,27 +8,19 @@ import {
 } from "@angular/core";
 import {
     FormGroup,
-    FormControl,
-    FormBuilder,
-    FormArray,
-    AbstractControl
+    FormArray
 } from "@angular/forms";
 import { RoomService } from "../add-room/add-room.service";
 import { ActivatedRoute } from "@angular/router";
 import {
-    MatSelectChange,
-    MatDialogRef,
-    MatDialog,
-    MatTableDataSource
+    MatDialog
 } from "@angular/material";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
 import { take } from "rxjs/operators";
 
-import { Store } from "@ngrx/store";
 import { Coords } from "src/app/shared/interfaces/coords.interface";
 import { Item } from "src/app/items/interfaces/item.interface";
 import { ManageContainerItemsComponent } from "../shared/manage-container-items/manage-container-items.component";
-import { ItemModule } from "src/app/items/item.module";
 import { Mob } from "src/app/mobs/interfaces/mob.interface";
 import {
     trigger,
@@ -38,18 +30,12 @@ import {
     transition
 } from "@angular/animations";
 import { ItemSlotEnum } from "src/app/items/interfaces/item-slot.enum";
-import { Exit } from "./../interfaces/exit.interface";
-import { jsonpCallbackContext } from "@angular/common/http/src/module";
 import { RoomExit } from "./../interfaces/roomExit.interface";
 import { Room } from "./../interfaces/room.interface";
 import { RoomObject } from "./../interfaces/roomObject.interface";
 import { Shared } from "src/app/shared/shared";
 import { ManageMobComponent } from "../shared/manage-mob/manage-mob.component";
-import { ManageExitsComponent } from "../shared/room-exits/manage-exits.component";
-import { EditService } from "../../area/edit-area/edit-area.service";
 import { EditRoomService } from "./edit-room.service";
-import { RoomExitService } from "../shared/room-exits/manage-exits.service";
-import { Observable } from "rxjs";
 
 @Component({
     templateUrl: "./edit-room.component.html",
@@ -117,10 +103,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         private ngZone: NgZone,
         private route: ActivatedRoute,
         public dialog: MatDialog,
-        public shared: Shared,
-        private cdRef: ChangeDetectorRef,
-        private exitService: RoomExitService
-    ) { }
+        public shared: Shared) { }
 
     @ViewChild("autosize") autosize: CdkTextareaAutosize;
 
@@ -131,18 +114,6 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         console.log(this.route.snapshot.params);
         this.id = this.route.snapshot.params["id"];
         this.roomId = this.route.snapshot.params["roomId"];
-
-        console.log("room", this.roomId)
-
-        // this.coords = {
-        //     x: this.route.snapshot.params['x'],
-        //     y: this.route.snapshot.params['y'],
-        //     z: this.route.snapshot.params['z']
-        // };
-
-        // this.addRoomForm.get('CoordX').setValue(this.coords.x);
-        // this.addRoomForm.get('CoordY').setValue(this.coords.y);
-        // this.addRoomForm.get('CoordZ').setValue(this.coords.z);
 
         this.roomServices.items.subscribe((value: Item[]) => {
             this.items = value;
@@ -156,6 +127,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             this.mobs = value.mobs;
             this.items = value.items;
             this.areaId = value.areaId;
+            this.exits = value.exits;
             this.addRoomForm.get("title").setValue(value.title);
             this.addRoomForm.get("description").setValue(value.description);
 
@@ -164,10 +136,6 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 y: value.coords.y,
                 z: value.coords.z
             };
-
-            console.log("real", this.coords);
-
-
 
             if (value.roomObjects.length) {
                 for (let index = 0; index < value.roomObjects.length - 1; index++) {
@@ -178,9 +146,6 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                     value.roomObjects
                 );
             }
-
-
-
 
         });
 
@@ -223,7 +188,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             }
         });
 
-        dialogRef.afterClosed().subscribe(result => { });
+        dialogRef.afterClosed().subscribe(() => { });
     }
 
     removeItemFromContainer(container: Item, item: Item) {
@@ -245,7 +210,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             }
         });
 
-        dialogRef.afterClosed().subscribe(result => { });
+        dialogRef.afterClosed().subscribe(() => { });
     }
 
     removeItemFromMob(inventory: Item[], item: Item) {
@@ -261,14 +226,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         return ItemSlotEnum[id];
     }
 
-    // tslint:disable-next-line:use-life-cycle-interface
-    ngAfterViewInit() {
-        //this.dataSource = this.items;
-        // If the user changes the sort order, reset back to the first page.
-        //  this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+    onExitValueChange(newValue) {
+        this.exits = newValue;
     }
-
-
 
     ngOnDestroy(): void {
         this.componentActive = false;

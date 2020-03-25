@@ -20,6 +20,8 @@ import { ItemSlotSelectorComponent } from './selectors/item-slot/item-slot-selec
 import { DamageTypeSelectorComponent } from './selectors/damage-type/damage-type-selector.component';
 import { ArmourTypeSelectorComponent } from './selectors/armour-type/armour-type-selector.component';
 import { ItemService } from './add-item/add-item.service';
+import { ItemPreviewComponent } from './item-preview/item-preview.component';
+
 
 
 
@@ -50,7 +52,8 @@ import { ItemService } from './add-item/add-item.service';
         AttackTypeSelectorComponent,
         ItemSlotSelectorComponent,
         DamageTypeSelectorComponent,
-        ArmourTypeSelectorComponent
+        ArmourTypeSelectorComponent,
+        ItemPreviewComponent
 
     ],
 })

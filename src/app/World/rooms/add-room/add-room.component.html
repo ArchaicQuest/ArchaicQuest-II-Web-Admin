@@ -128,7 +128,8 @@
 
 
                 <div class="section">
-                    <app-exit-component [addRoomForm]="this.addRoomForm"></app-exit-component>
+                    <app-exit-component (exitValueChange)="onExitValueChange($event)" [addRoomForm]="this.addRoomForm">
+                    </app-exit-component>
                 </div>
                 <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">
                     Save Room
@@ -138,7 +139,6 @@
     </div>
 
     <div class="col-5">
-        {{exits | json}}
         <app-room-preview-component [addRoomForm]="this.addRoomForm" [exits]="exits" [mobs]="mobs" [items]="items"
             [roomObjects]="getRoomObjectsControl.controls">
         </app-room-preview-component>

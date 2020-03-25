@@ -7,7 +7,9 @@ import {
     ChangeDetectorRef,
     Input,
     AfterViewInit,
-    AfterContentInit
+    AfterContentInit,
+    EventEmitter,
+    Output
 } from '@angular/core';
 import {
     FormGroup,
@@ -56,6 +58,7 @@ import { EditRoomService } from '../edit-room/edit-room.service';
 
 export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
     @Input() addRoomForm: FormGroup;
+    @Output() exitValueChange = new EventEmitter();
     componentActive = true;
     id: number;
     areaId: number;
@@ -343,6 +346,9 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
             console.log('exit ', this.exits);
             console.log(result);
+
+            // Subscribed in the add-room component
+            this.exitValueChange.emit(this.exits);
         });
     }
 

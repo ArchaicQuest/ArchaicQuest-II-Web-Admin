@@ -112,6 +112,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
 
     @ViewChild("autosize") autosize: CdkTextareaAutosize;
 
+
     ngOnInit() {
         this.addRoomForm = this.roomServices.addRoomForm;
 
@@ -128,17 +129,10 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             this.mobs = value;
         });
 
+    }
 
-
-        // this.northWestValidExit = this.isExitValid('North West') == 'true';
-        // this.northValidExit = this.isExitValid('North') == 'true';
-        // this.northEastValidExit = this.isExitValid('North East') == 'true';
-        // this.eastValidExit = this.isExitValid('East') == 'true';
-        // this.southEastValidExit = this.isExitValid('South East') == 'true';
-        // this.southValidExit = this.isExitValid('South') == 'true';
-        // this.southWestValidExit = this.isExitValid('South West') == 'true';
-        // this.westValidExit = this.isExitValid('South West') == 'true';
-
+    onExitValueChange(newValue) {
+        this.exits = newValue;
     }
 
     triggerDescriptionResize() {
