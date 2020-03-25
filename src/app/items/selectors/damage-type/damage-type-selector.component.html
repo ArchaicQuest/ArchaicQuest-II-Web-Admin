@@ -1,10 +1,12 @@
 <form [formGroup]="formGroup">
-  <mat-form-field>
-      <mat-select formControlName="damageType" placeholder="Damage Type" required (selectionChange)="onChange($event)">
-          <mat-option *ngFor="let damageType of damageTypes" [value]="damageType.id">
-              {{ damageType.name }}
-          </mat-option>
-      </mat-select>
-      <mat-error *ngIf="formGroup.get('damageType').hasError('required')">damage type is required</mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Damage Type</mat-label>
+        <mat-select formControlName="damageType" placeholder="Damage Type" required
+            (selectionChange)="onChange($event)">
+            <mat-option *ngFor="let damageType of damageTypes" [value]="damageType.id">
+                {{ damageType.name }}
+            </mat-option>
+        </mat-select>
+        <mat-error *ngIf="formGroup.get('damageType').hasError('required')">damage type is required</mat-error>
+    </mat-form-field>
 </form>

@@ -1,6 +1,8 @@
 <form [formGroup]="formGroup">
-    <mat-form-field>
-        <mat-select formControlName="armourType" placeholder="armour Type" required (selectionChange)="onChange($event)">
+    <mat-form-field appearance="outline">
+        <mat-label>Armour Type</mat-label>
+        <mat-select formControlName="armourType" placeholder="armour Type" required
+            (selectionChange)="onChange($event)">
             <mat-option *ngFor="let armourType of armourTypes" [value]="armourType.id">
                 {{ armourType.name }}
             </mat-option>

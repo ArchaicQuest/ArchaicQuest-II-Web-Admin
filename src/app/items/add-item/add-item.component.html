@@ -4,405 +4,459 @@
     <div class="row">
         <div class="col-8">
 
-
-            <form novalidate [formGroup]="addItemForm" (ngSubmit)="addItem()">
-                <input type="hidden" formControlName="id">
-
-                <div class="row">
-                    <div class="col">
-                        <mat-form-field class="form-control">
-                            <input matInput placeholder="Item name" value="" required formControlName="name">
-                            <mat-error *ngIf="addItemForm.get('name').hasError('required')">
-                                Item name is required.
-                            </mat-error>
-                        </mat-form-field>
-                        <mat-checkbox formControlName="knownByName">Known by name?</mat-checkbox>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-4">
-                        <app-item-type-selector formControlName="itemType"
-                            [currentValue]="this.addItemForm.get('itemType').value"></app-item-type-selector>
-                    </div>
-                    <div class="col-4">
-                        <app-item-slot-selector formControlName="itemSlotType"
-                            [currentValue]="this.addItemForm.get('itemSlotType').value"></app-item-slot-selector>
-
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Minimum Level" formControlName="level">
-                            <mat-hint align="start"><strong>The level player needs to use this item</strong> </mat-hint>
-                        </mat-form-field>
-                    </div>
-                </div>
-
-                <div *ngIf="showWeaponSection">
-                    <h2>Weapon</h2>
-                    <div class="row">
-                        <div class="col-4">
-                            <app-weapon-type-selector formControlName="weaponType"
-                                [currentValue]="this.addItemForm.get('weaponType').value"></app-weapon-type-selector>
-                        </div>
-
-                        <div class="col-4">
-                            <app-attack-type-selector formControlName="attackType"
-                                [currentValue]="this.addItemForm.get('attackType').value"></app-attack-type-selector>
-                        </div>
-
-                        <div class="col-4">
-                            <app-damage-type-selector formControlName="damageType"
-                                [currentValue]="this.addItemForm.get('damageType').value"></app-damage-type-selector>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-6">
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="Minimum Damage" value=""
-                                    formControlName="minDamage" required>
-                                <mat-error *ngIf="addItemForm.get('minDamage').hasError('required')">
-                                    Min damage is required.
-                                </mat-error>
-                                <mat-hint align="start"><strong>can be 1 to 50</strong> </mat-hint>
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-6">
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="Maximum Damage" value=""
-                                    formControlName="maxDamage" required>
-                                <mat-error *ngIf="addItemForm.get('maxDamage').hasError('required')">
-                                    Max damage is required.
-                                </mat-error>
-                                <mat-hint align="start"><strong>can be 1 to 100</strong> </mat-hint>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div *ngIf="showArmourSection">
-                    <h2>Armour</h2>
-
-                    <div class="row">
-                        <div class="col">
-                            <app-armour-type-selector formControlName="armourType"
-                                [currentValue]="this.addItemForm.get('armourType').value"></app-armour-type-selector>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-3">
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="AC pierce" formControlName="acPierce">
-                            </mat-form-field>
-                        </div>
-
-                        <div class="col-3">
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="AC bash" formControlName="acBash">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-3">
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="AC slash" formControlName="acSlash">
-                            </mat-form-field>
-                        </div>
-                        <div class="col-3">
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="AC magic" formControlName="acMagic">
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-
-                <div *ngIf="showBookSection">
-                    <h2>Book</h2>
-
-                    <div class="row">
-                        <div class="col">
-
-                            <mat-form-field>
-                                <input matInput type="number" placeholder="Number of pages" formControlName="pageCount"
-                                    required>
-                                <mat-error *ngIf="addItemForm.get('pageCount').hasError('required')">
-                                    Number of pages is required.
-                                </mat-error>
-                                <mat-hint align="start"><strong>Limits how many pages you're allowed to add</strong>
-                                </mat-hint>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="row" [formGroup]="addItemForm.get('pages')">
-                        <div class="col-12" *ngFor="let page of pages; let i = index;">
-
-                            <mat-form-field>
-                                <mat-label>Page {{i + 1}}</mat-label>
-                                <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="page{{i}}"
-                                    [value]="selectedItem?.book?.pages[i]"></textarea>
-                            </mat-form-field>
-                        </div>
-                        <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addPage()"
-                            *ngIf="pages.length + 1 <= addItemForm.get('pageCount').value">Add
-                            another page</a>
-                    </div>
-                </div>
-
-
-                <div *ngIf="showContainerSection">
-                    <h2>Container</h2>
-
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field>
-                                <mat-select placeholder="Container size" formControlName="containerSize" required>
-                                    <mat-option *ngFor="let size of containerSize" [value]="size.id">
-                                        {{size.name}}
-                                    </mat-option>
-                                </mat-select>
-                            </mat-form-field>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-
-                            <mat-checkbox formControlName="containerCanOpen">Can Open</mat-checkbox>
-
-                        </div>
-                        <div class="col">
-                            <mat-checkbox [attr.disabled]="!containerCanBeOpened" formControlName="containerOpen">Is
-                                Open
-                            </mat-checkbox>
-                        </div>
-
-                        <div class="col">
-                            <mat-checkbox formControlName="containerCanLock">Can Lock</mat-checkbox>
-                        </div>
-                        <div class="col">
-                            <mat-checkbox [attr.disabled]="!containerCanBeLocked" formControlName="containerLocked">Is
-                                Locked</mat-checkbox>
-                        </div>
-                    </div>
-                    <div [hidden]="!containerCanBeLocked">
+            <div class="panel">
+                <form novalidate [formGroup]="addItemForm" (ngSubmit)="addItem()">
+                    <input type="hidden" formControlName="id">
+                    <h2>Item Information:</h2>
+                    <div class="section">
                         <div class="row">
                             <div class="col">
-
-                                <mat-form-field class="example-full-width">
-                                    <input type="text" placeholder="Associate a key"
-                                        aria-label="Link key to container lock" matInput
-                                        formControlName="selectContainerKey" [matAutocomplete]="autoKeys">
-                                    <mat-autocomplete #autoKeys="matAutocomplete">
-                                        <mat-option *ngFor="let option of findKeyOptions | async" [value]="option.name">
-                                            {{option.name}}
-                                        </mat-option>
-                                    </mat-autocomplete>
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Item name" value="" required formControlName="name">
+                                    <mat-error *ngIf="addItemForm.get('name').hasError('required')">
+                                        Item name is required.
+                                    </mat-error>
                                 </mat-form-field>
-
-                            </div>
-
-                            <div class="col">
-                                <mat-form-field>
-                                    <mat-select placeholder="Lock strength" formControlName="lockStrength">
-                                        <mat-option *ngFor="let lock of lockStrength" [value]="lock.id">
-                                            {{lock.name}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                <mat-checkbox formControlName="knownByName">Known by name?</mat-checkbox>
                             </div>
                         </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <app-item-type-selector formControlName="itemType"
+                                    [currentValue]="this.addItemForm.get('itemType').value"></app-item-type-selector>
+                            </div>
+                            <div class="col-4">
+                                <app-item-slot-selector formControlName="itemSlotType"
+                                    [currentValue]="this.addItemForm.get('itemSlotType').value">
+                                </app-item-slot-selector>
 
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <strong>Container Items</strong>
-                            <ul>
-                                <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a
-                                        href="javascript:void(0)" (click)="removeItemFromContainer(i)">Remove</a></li>
-
-                            </ul>
+                            </div>
+                            <div class="col-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Minimum Level</mat-label>
+                                    <input matInput type="number" placeholder="Minimum Level" formControlName="level">
+                                    <mat-hint align="start"><strong>The level player needs to use this item</strong>
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="row">
-                        <div class="col">
+                    <div *ngIf="showWeaponSection">
+                        <h2>Weapon</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col-4">
+                                    <app-weapon-type-selector formControlName="weaponType"
+                                        [currentValue]="this.addItemForm.get('weaponType').value">
+                                    </app-weapon-type-selector>
+                                </div>
 
-                            <mat-form-field class="example-full-width">
-                                <input type="text" placeholder="Search for an item" aria-label="Assignee" matInput
-                                    formControlName="selectContainerItem" [matAutocomplete]="auto">
-                                <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                    <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                        {{option.name}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                            <a href="javascript:(0)" mat-raised-button color="secodary"
-                                (click)="addItemToContainer()">Add
-                                item</a>
+                                <div class="col-4">
+                                    <app-attack-type-selector formControlName="attackType"
+                                        [currentValue]="this.addItemForm.get('attackType').value">
+                                    </app-attack-type-selector>
+                                </div>
+
+                                <div class="col-4">
+                                    <app-damage-type-selector formControlName="damageType"
+                                        [currentValue]="this.addItemForm.get('damageType').value">
+                                    </app-damage-type-selector>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Min Damage</mat-label>
+                                        <input matInput type="number" placeholder="Minimum Damage" value=""
+                                            formControlName="minDamage" required>
+                                        <mat-error *ngIf="addItemForm.get('minDamage').hasError('required')">
+                                            Min damage is required.
+                                        </mat-error>
+                                        <mat-hint align="start"><strong>can be 1 to 50</strong> </mat-hint>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Max Damage</mat-label>
+                                        <input matInput type="number" placeholder="Maximum Damage" value=""
+                                            formControlName="maxDamage" required>
+                                        <mat-error *ngIf="addItemForm.get('maxDamage').hasError('required')">
+                                            Max damage is required.
+                                        </mat-error>
+                                        <mat-hint align="start"><strong>can be 1 to 100</strong> </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col">
-                            <mat-form-field class="example-full-width">
-                                <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins" matInput
-                                    formControlName="containerGP">
-                            </mat-form-field>
 
+
+                    </div>
+
+                    <div *ngIf="showArmourSection">
+                        <h2>Armour</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col">
+                                    <app-armour-type-selector formControlName="armourType"
+                                        [currentValue]="this.addItemForm.get('armourType').value">
+                                    </app-armour-type-selector>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>AC pierce</mat-label>
+                                        <input matInput type="number" placeholder="AC pierce"
+                                            formControlName="acPierce">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>AC bash</mat-label>
+                                        <input matInput type="number" placeholder="AC bash" formControlName="acBash">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>AC slash</mat-label>
+                                        <input matInput type="number" placeholder="AC slash" formControlName="acSlash">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-3">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>AC magic</mat-label>
+                                        <input matInput type="number" placeholder="AC magic" formControlName="acMagic">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngIf="showBookSection">
+                        <h2>Book</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col">
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Number of pages</mat-label>
+                                        <input matInput type="number" placeholder="Number of pages"
+                                            formControlName="pageCount" required>
+                                        <mat-error *ngIf="addItemForm.get('pageCount').hasError('required')">
+                                            Number of pages is required.
+                                        </mat-error>
+                                        <mat-hint align="start"><strong>Limits how many pages you're allowed to
+                                                add</strong>
+                                        </mat-hint>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row" [formGroup]="addItemForm.get('pages')">
+                                <div class="col-12" *ngFor="let page of pages; let i = index;">
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Page {{i + 1}}</mat-label>
+                                        <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                            cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="page{{i}}"
+                                            [value]="selectedItem?.book?.pages[i]"></textarea>
+                                    </mat-form-field>
+                                </div>
+                                <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addPage()"
+                                    *ngIf="pages.length + 1 <= addItemForm.get('pageCount').value">Add
+                                    another page</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div *ngIf="showContainerSection">
+                        <h2>Container</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Container size</mat-label>
+                                        <mat-select placeholder="Container size" formControlName="containerSize"
+                                            required>
+                                            <mat-option *ngFor="let size of containerSize" [value]="size.id">
+                                                {{size.name}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+
+                                    <mat-checkbox formControlName="containerCanOpen">Can Open</mat-checkbox>
+
+                                </div>
+                                <div class="col">
+                                    <mat-checkbox [attr.disabled]="!containerCanBeOpened"
+                                        formControlName="containerOpen">Is
+                                        Open
+                                    </mat-checkbox>
+                                </div>
+
+                                <div class="col">
+                                    <mat-checkbox formControlName="containerCanLock">Can Lock</mat-checkbox>
+                                </div>
+                                <div class="col">
+                                    <mat-checkbox [attr.disabled]="!containerCanBeLocked"
+                                        formControlName="containerLocked">
+                                        Is
+                                        Locked</mat-checkbox>
+                                </div>
+                            </div>
+                            <div [hidden]="!containerCanBeLocked">
+                                <div class="row">
+                                    <div class="col">
+
+                                        <mat-form-field class="example-full-width" appearance="outline">
+                                            <mat-label>Associate a key</mat-label>
+                                            <input type="text" placeholder="Associate a key"
+                                                aria-label="Link key to container lock" matInput
+                                                formControlName="selectContainerKey" [matAutocomplete]="autoKeys">
+                                            <mat-autocomplete #autoKeys="matAutocomplete">
+                                                <mat-option *ngFor="let option of findKeyOptions | async"
+                                                    [value]="option.name">
+                                                    {{option.name}}
+                                                </mat-option>
+                                            </mat-autocomplete>
+                                        </mat-form-field>
+
+                                    </div>
+
+                                    <div class="col">
+                                        <mat-form-field appearance="outline">
+                                            <mat-label>Lock strength</mat-label>
+                                            <mat-select placeholder="Lock strength" formControlName="lockStrength">
+                                                <mat-option *ngFor="let lock of lockStrength" [value]="lock.id">
+                                                    {{lock.name}}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <strong>Container Items</strong>
+                                    <ul>
+                                        <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a
+                                                href="javascript:void(0)"
+                                                (click)="removeItemFromContainer(i)">Remove</a>
+                                        </li>
+
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col">
+
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>Search for an item</mat-label>
+                                        <input type="text" placeholder="Search for an item" aria-label="Assignee"
+                                            matInput formControlName="selectContainerItem" [matAutocomplete]="auto">
+                                        <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{option.name}}
+                                            </mat-option>
+                                        </mat-autocomplete>
+                                    </mat-form-field>
+                                    <a href="javascript:(0)" mat-raised-button color="secodary"
+                                        (click)="addItemToContainer()">Add
+                                        item</a>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field class="example-full-width" appearance="outline">
+                                        <mat-label>dd Gold pieces</mat-label>
+                                        <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins"
+                                            matInput formControlName="containerGP">
+                                    </mat-form-field>
+
+                                </div>
+
+                            </div>
                         </div>
 
                     </div>
 
 
-                </div>
 
 
+                    <h2>Modifiers</h2>
+                    <div class="section">
+                        <div class="row">
+                            <div class="col-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Hit roll</mat-label>
+                                    <input matInput type="number" placeholder="Hit roll" formControlName="hitRoll">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Damage roll</mat-label>
+                                    <input matInput type="number" placeholder="Damage roll" formControlName="damRoll">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-4">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Saves</mat-label>
+                                    <input matInput type="number" placeholder="Saves" formControlName="saves">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>+/- HP</mat-label>
+                                    <input matInput type="number" placeholder="+/- HP" formControlName="hpMod">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>+/- Mana</mat-label>
+                                    <input matInput type="number" placeholder="+/- Mana" formControlName="manaMod">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>+/- Moves</mat-label>
+                                    <input matInput type="number" placeholder="+/- Moves" formControlName="movesMod">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>+/- Spell Damage</mat-label>
+                                    <input matInput type="number" placeholder="+/- Spell Damage"
+                                        formControlName="spellMod">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
 
 
-                <h2>Modifiers</h2>
-                <div class="row">
-                    <div class="col-4">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Hit roll" formControlName="hitRoll">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Damage roll" formControlName="damRoll">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-4">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Saves" formControlName="saves">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="+/- HP" formControlName="hpMod">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="+/- Mana" formControlName="manaMod">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="+/- Moves" formControlName="movesMod">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="+/- Spell Damage" formControlName="spellMod">
-                        </mat-form-field>
-                    </div>
-                </div>
-                <h2>Item flags</h2>
-                <div class="row" [formGroup]="addItemForm.get('flags')">
+                    <h2>Item flags</h2>
+                    <div class="section section--check-box">
+                        <div class="row" [formGroup]="addItemForm.get('flags')">
 
 
-                    <div class="col-2" *ngFor="let flag of flags">
-                        <mat-checkbox title="flag.name" [formControlName]="flag.name" [checked]=hasFlag(flag.id)
-                            (change)=updateSelectedFlags(flag.id)>{{flag.name}}</mat-checkbox>
+                            <div class="col-2" *ngFor="let flag of flags">
+                                <mat-checkbox title="flag.name" [formControlName]="flag.name" [checked]=hasFlag(flag.id)
+                                    (change)=updateSelectedFlags(flag.id)>{{flag.name}}</mat-checkbox>
+                            </div>
+                        </div>
                     </div>
 
-                </div>
+                    <h2>Descriptions</h2>
+                    <div class="section">
+                        <div class="row">
+                            <div class="col-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Item Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="lookDescription"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Examine Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="examDescription">>{{selectedItem?.name}}</textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Room Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="roomDescription"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Smell Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="smellDescription"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Touch Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="touchDescription"></textarea>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-6">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Taste Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="tasteDescription"></textarea>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
 
-                <h2>Descriptions</h2>
+                    <h2>Item room properties</h2>
+                    <div class="section section--check-box">
+                        <div class="row">
+                            <div class="col-3">
+                                <mat-checkbox>Hidden in room</mat-checkbox>
+                            </div>
+                            <div class="col-3">
+                                <mat-checkbox>Hidden (discoverable)</mat-checkbox>
+                            </div>
+                            <div class="col-3">
+                                <mat-checkbox>Stuck in room</mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
 
-                <div class="row">
-                    <div class="col-6">
-                        <mat-form-field>
-                            <mat-label>Item Description</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                formControlName="lookDescription"></textarea>
-                        </mat-form-field>
+                    <h2>Miscellaneous Properties</h2>
+                    <div class="section">
+                        <div class="row">
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Condition</mat-label>
+                                    <input matInput type="number" placeholder="Condition">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Weight</mat-label>
+                                    <input matInput type="number" placeholder="Weight">
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Decay delay</mat-label>
+                                    <input matInput type="number" placeholder="Decay delay">
+                                </mat-form-field>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-6">
-                        <mat-form-field>
-                            <mat-label>Examine Description</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                formControlName="examDescription">>{{selectedItem?.name}}</textarea>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field>
-                            <mat-label>Room Description</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                formControlName="roomDescription"></textarea>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field>
-                            <mat-label>Smell Description</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                formControlName="smellDescription"></textarea>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field>
-                            <mat-label>Touch Description</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                formControlName="touchDescription"></textarea>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-6">
-                        <mat-form-field>
-                            <mat-label>Taste Description</mat-label>
-                            <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                formControlName="tasteDescription"></textarea>
-                        </mat-form-field>
-                    </div>
-                </div>
-                <h2>Item room properties</h2>
-                <div class="row">
-                    <div class="col-3">
-                        <mat-checkbox>Hidden in room</mat-checkbox>
-                    </div>
-                    <div class="col-3">
-                        <mat-checkbox>Hidden (discoverable)</mat-checkbox>
-                    </div>
-                    <div class="col-3">
-                        <mat-checkbox>Stuck in room</mat-checkbox>
-                    </div>
-                </div>
 
-                <h2>Miscellaneous Properties</h2>
-
-                <div class="row">
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Condition">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Weight">
-                        </mat-form-field>
-                    </div>
-                    <div class="col-3">
-                        <mat-form-field>
-                            <input matInput type="number" placeholder="Decay delay">
-                        </mat-form-field>
-                    </div>
-                </div>
-
-                <!-- <div class="row">
+                    <!-- <div class="row">
                 <div class="col-3">
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
                         <input matInput type="number" placeholder="Forage Rank">
                     </mat-form-field>
                 </div>
                 <div class="col-3">
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
                         <input matInput type="number" placeholder="Item Uses">
                     </mat-form-field>
                 </div>
@@ -413,12 +467,11 @@
                 </div>
             </div> -->
 
-                <button mat-raised-button color="primary" type="submit" [disabled]="addItemForm.invalid">Add
-                    Item</button>
-            </form>
-
+                    <button mat-raised-button color="primary" type="submit" [disabled]="addItemForm.invalid">Add
+                        Item</button>
+                </form>
+            </div>
         </div>
-
         <div class="col-4">
             <app-item-preview-component></app-item-preview-component>
         </div>
