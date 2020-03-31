@@ -358,8 +358,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             .subscribe(() => this.autosize.resizeToFitContent(true));
     }
 
-    toggleItemSection(event: number) {
-        const itemType = event;
+    toggleItemSection(event: any) {
+        const itemType = event.id;
 
         console.log(itemType);
 
@@ -430,8 +430,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
             id: this.addItemForm.get('id').value || -1,
             name: this.addItemForm.get('name').value,
             knownByName: this.addItemForm.get('knownByName').value || false,
-            itemType: this.addItemForm.get('itemType').value,
-            slot: this.addItemForm.get('itemSlotType').value || 0,
+            itemType: this.addItemForm.get('itemType').value.id,
+            slot: this.addItemForm.get('itemSlotType').value.id || 0,
             container: {
                 associatedKeyId: this.addItemForm.get('selectContainerKey').value.keyId,
                 canLock: this.addItemForm.get('containerCanLock').value || false,

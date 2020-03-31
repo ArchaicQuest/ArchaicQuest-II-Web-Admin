@@ -1,5 +1,46 @@
 <div class="client" [formGroup]="addItemForm">
     <p class="room__description">Item Preview:</p>
-    <p class="echo">> look</p>
 
+    <table *ngIf="addItemForm.get('name').value">
+        <tr>
+            <td>Keywords</td>
+            <td>{{addItemForm.get('name').value}}</td>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{addItemForm.get('name').value}}</td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td> {{addItemForm.get('itemType').value.name}}</td>
+        </tr>
+        <tr>
+            <td>Level</td>
+            <td> {{addItemForm.get('level').value}}</td>
+        </tr>
+        <tr>
+            <td>Weight</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>Material</td>
+            <td>
+                Glass
+            </td>
+        </tr>
+        <tr class="stat-line">
+            <td>stat Mods</td>
+            <td>
+                Hit roll +2
+            </td>
+        </tr>
+    </table>
+
+    <p class="echo">> look</p>
+    <p>
+
+
+        {{addItemForm.get('itemSlotType').value.name}}
+
+        {{addItemForm.get('level').value}}</p>
 </div>

@@ -3,7 +3,7 @@
         <mat-label>Item Slot</mat-label>
         <mat-select formControlName="itemSlotType" placeholder="Item Slot" required
             (selectionChange)="onChange($event)">
-            <mat-option *ngFor="let itemSlotType of itemSlots" [value]="itemSlotType.id">
+            <mat-option *ngFor="let itemSlotType of itemSlots" [value]="itemSlotType">
                 {{ itemSlotType.name }} {{itemSlotType.id}}
             </mat-option>
         </mat-select>

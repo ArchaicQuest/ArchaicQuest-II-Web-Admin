@@ -1,0 +1,16 @@
+table {
+    color: #fff;
+
+    td {
+        padding: 3px 10px;
+
+        &:first-of-type {
+            border-right: 1px white dashed;
+        }
+    }
+    border: 1px white dashed;
+
+    .stat-line td {
+        border-top: 1px white dashed;
+    }
+}

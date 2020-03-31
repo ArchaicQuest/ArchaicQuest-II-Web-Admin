@@ -2,7 +2,7 @@
     <mat-form-field appearance="outline">
         <mat-label>Item Type</mat-label>
         <mat-select formControlName="itemType" placeholder="Item Type" required (selectionChange)="onChange($event)">
-            <mat-option *ngFor="let itemSlotType of itemTypes" [value]="itemSlotType.id">
+            <mat-option *ngFor="let itemSlotType of itemTypes" [value]="itemSlotType">
                 {{ itemSlotType.name }}
             </mat-option>
         </mat-select>
