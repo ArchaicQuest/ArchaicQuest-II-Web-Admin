@@ -134,6 +134,28 @@ export class ItemService {
         return this.addItemForm;
     }
 
+    averageDamage(minDam: number, maxDam: number) {
+
+        function getRandomInt(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        let diceSum = 0;
+        let average = 0;
+
+        for (let i = 1; i <= 100; i++) {
+
+
+            diceSum += getRandomInt(minDam, maxDam);
+
+
+        }
+
+        average += diceSum / 100;
+        //  debugger;
+        return Math.floor(average);
+    }
+
     hasFlag(flag: number, selectedFlag: FlagEnum): boolean {
 
 

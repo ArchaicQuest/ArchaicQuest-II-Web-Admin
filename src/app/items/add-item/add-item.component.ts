@@ -412,6 +412,10 @@ export class AddItemComponent implements OnDestroy, OnInit {
         console.log(this.selectedFlags);
     }
 
+    calculateAverageDamage(min = 1, max = 1) {
+        return this.itemService.averageDamage(min, max);
+    }
+
     addItem() {
         const pages: string[] = [];
         let flags: any;

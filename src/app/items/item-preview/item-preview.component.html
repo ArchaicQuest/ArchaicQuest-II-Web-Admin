@@ -1,7 +1,8 @@
 <div class="client" [formGroup]="addItemForm">
     <p class="room__description">Item Preview:</p>
 
-    <table *ngIf="addItemForm.get('name').value">
+    <table>
+        <!-- *ngIf="addItemForm.get('name').value" -->
         <tr>
             <td>Keywords</td>
             <td>{{addItemForm.get('name').value}}</td>
@@ -15,24 +16,251 @@
             <td> {{addItemForm.get('itemType').value.name}}</td>
         </tr>
         <tr>
+            <td>Slot</td>
+            <td> {{addItemForm.get('itemSlotType').value.name}}</td>
+        </tr>
+        <tr>
             <td>Level</td>
             <td> {{addItemForm.get('level').value}}</td>
         </tr>
         <tr>
             <td>Weight</td>
-            <td>2</td>
+            <td> {{addItemForm.get('level').value}}</td>
         </tr>
         <tr>
-            <td>Material</td>
+            <td>Condition</td>
             <td>
-                Glass
+                99%
             </td>
         </tr>
         <tr class="stat-line">
             <td>stat Mods</td>
             <td>
-                Hit roll +2
+                Hit roll
             </td>
+            <td> {{addItemForm.get('hitRoll').value}}</td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td>
+                Dam roll
+            </td>
+            <td> {{addItemForm.get('damRoll').value}}</td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td>
+                Saves
+            </td>
+            <td> {{addItemForm.get('saves').value}}</td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td>
+                HP mod
+            </td>
+            <td> {{addItemForm.get('hpMod').value}}</td>
+        </tr>
+
+        <tr>
+            <td> </td>
+            <td>
+                Mana mod
+            </td>
+            <td> {{addItemForm.get('manaMod').value}}</td>
+        </tr>
+        <tr>
+            <td> </td>
+            <td>
+                Moves mod
+            </td>
+            <td> {{addItemForm.get('movesMod').value}}</td>
+        </tr>
+        <tr class="stat-line">
+            <td>Armor Type</td>
+            <td>
+                {{addItemForm.get('armourType').value }}
+            </td>
+
+            <td></td>
+        </tr>
+        <tr>
+            <td>Armor Class</td>
+            <td>
+                13
+            </td>
+
+            <td></td>
+        </tr>
+        <tr>
+            <td>AC vs magic</td>
+            <td>
+                8
+            </td>
+
+            <td></td>
+        </tr>
+        <tr class="stat-line">
+            <td>Weapon Type</td>
+            <td>
+                {{addItemForm.get('armourType').value }}
+            </td>
+
+            <td></td>
+        </tr>
+        <tr>
+            <td>Attack Type</td>
+            <td>
+                13
+            </td>
+
+            <td></td>
+        </tr>
+        <tr>
+            <td>Damage Type</td>
+            <td>
+                8
+            </td>
+
+            <td></td>
+        </tr>
+        <tr>
+            <td>Damage</td>
+            <td>
+                {{calculateAverageDamage(8, 20)}}
+            </td>
+
+            <td></td>
+        </tr>
+
+        <tr class="stat-line">
+            <td>flags</td>
+            <td>
+                <span *ngIf="addItemForm.get('flags.Antievil').value">
+                    Anti Evil
+                </span>
+            </td>
+
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <span *ngIf="addItemForm.get('flags.Antigood').value">Anti Good</span>
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Antineutral').value">
+            <td></td>
+            <td>
+                Anti Neutral
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Bless').value">
+            <td></td>
+            <td>
+                Bless
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Container').value">
+            <td></td>
+            <td>
+                Container
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Container').value">
+            <td></td>
+            <td>
+                Container
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Cursed').value">
+            <td></td>
+            <td>
+                Cursed
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Equipable').value">
+            <td></td>
+            <td>
+                Equipable
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Evil').value">
+            <td></td>
+            <td>
+                Evil
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Glow').value">
+            <td></td>
+            <td>
+                Glow
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Holy').value">
+            <td></td>
+            <td>
+                Holy
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Hum').value">
+            <td></td>
+            <td>
+                Hum
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Invis').value">
+            <td></td>
+            <td>
+                Invis
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Nodrop').value">
+            <td></td>
+            <td>
+                No Drop
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Nolocate').value">
+            <td></td>
+            <td>
+                No Locate
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Noremove').value">
+            <td></td>
+            <td>
+                No Remove
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.QuestItem').value">
+            <td></td>
+            <td>
+                Quest Item
+            </td>
+            <td></td>
+        </tr>
+        <tr *ngIf="addItemForm.get('flags.Vampric').value">
+            <td></td>
+            <td>
+                Vampric
+            </td>
+            <td></td>
         </tr>
     </table>
 

@@ -5,6 +5,7 @@ import {
     Input,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { ItemService } from '../add-item/add-item.service';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class ItemPreviewComponent implements OnInit, OnDestroy {
     @Input() addItemForm: FormGroup;
     componentActive = true;
 
-    constructor(
+    constructor(private itemService: ItemService,
     ) { }
 
 
@@ -26,6 +27,10 @@ export class ItemPreviewComponent implements OnInit, OnDestroy {
 
     ngOnDestroy(): void {
         this.componentActive = false;
+    }
+
+    calculateAverageDamage(min = 1, max = 1) {
+        return this.itemService.averageDamage(min, max);
     }
 
 }
