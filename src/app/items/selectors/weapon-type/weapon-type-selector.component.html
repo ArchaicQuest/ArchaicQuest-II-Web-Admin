@@ -4,7 +4,7 @@
         <mat-select formControlName="weaponType" placeholder="weapon Type" required
             (selectionChange)="onChange($event)">
             <mat-option *ngFor="let weaponType of weaponTypes" [value]="weaponType.id">
-                {{ weaponType.name }}
+                {{ weaponType.id | weaponType: weaponType.id  }}
             </mat-option>
         </mat-select>
         <mat-error *ngIf="formGroup.get('weaponType').hasError('required')">weapon type is required</mat-error>

@@ -79,7 +79,7 @@
         <tr class="stat-line">
             <td>Armor Type</td>
             <td>
-                {{addItemForm.get('armourType').value }}
+                {{addItemForm.get('armourType').value | armourType: addItemForm.get('armourType').value  }}
             </td>
 
             <td></td>
@@ -103,7 +103,7 @@
         <tr class="stat-line">
             <td>Weapon Type</td>
             <td>
-                {{addItemForm.get('armourType').value }}
+                {{addItemForm.get('weaponType').value | weaponType: addItemForm.get('weaponType').value }}
             </td>
 
             <td></td>
@@ -111,7 +111,7 @@
         <tr>
             <td>Attack Type</td>
             <td>
-                13
+                {{addItemForm.get('attackType').value | attackType: addItemForm.get('attackType').value  }}
             </td>
 
             <td></td>
@@ -119,7 +119,7 @@
         <tr>
             <td>Damage Type</td>
             <td>
-                8
+                {{addItemForm.get('damageType').value | damageType: addItemForm.get('damageType').value}}
             </td>
 
             <td></td>
@@ -127,7 +127,7 @@
         <tr>
             <td>Damage</td>
             <td>
-                {{calculateAverageDamage(8, 20)}}
+                {{ addItemForm.get('minDamage').value || 0}}-{{addItemForm.get('maxDamage').value || 0}}({{ addItemForm.get('minDamage').value | averageDamage: addItemForm.get('maxDamage').value }})
             </td>
 
             <td></td>

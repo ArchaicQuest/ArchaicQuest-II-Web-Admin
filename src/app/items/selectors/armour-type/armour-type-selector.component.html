@@ -4,7 +4,7 @@
         <mat-select formControlName="armourType" placeholder="armour Type" required
             (selectionChange)="onChange($event)">
             <mat-option *ngFor="let armourType of armourTypes" [value]="armourType.id">
-                {{ armourType.name }}
+                {{ armourType.id | armourType: armourType.id}}
             </mat-option>
         </mat-select>
         <mat-error *ngIf="formGroup.get('armourType').hasError('required')">attack type is required</mat-error>

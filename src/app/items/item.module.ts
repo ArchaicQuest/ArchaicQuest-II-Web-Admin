@@ -21,6 +21,11 @@ import { DamageTypeSelectorComponent } from './selectors/damage-type/damage-type
 import { ArmourTypeSelectorComponent } from './selectors/armour-type/armour-type-selector.component';
 import { ItemService } from './add-item/add-item.service';
 import { ItemPreviewComponent } from './item-preview/item-preview.component';
+import { AverageDamagePipe } from '../shared/pipes/average-damage.pipe';
+import { WeaponTypePipe } from './pipes/weapon-type.pipe';
+import { AttackTypePipe } from './pipes/attack-type.pipe';
+import { DamageTypePipe } from './pipes/damage-type.pipe';
+import { ArmourTypePipe } from './pipes/armour-type.pipe';
 
 
 
@@ -53,7 +58,12 @@ import { ItemPreviewComponent } from './item-preview/item-preview.component';
         ItemSlotSelectorComponent,
         DamageTypeSelectorComponent,
         ArmourTypeSelectorComponent,
-        ItemPreviewComponent
+        ItemPreviewComponent,
+        AverageDamagePipe,
+        WeaponTypePipe,
+        AttackTypePipe,
+        DamageTypePipe,
+        ArmourTypePipe
 
     ],
 })
