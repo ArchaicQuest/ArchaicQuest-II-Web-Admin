@@ -3,10 +3,10 @@
 
     <table>
         <!-- *ngIf="addItemForm.get('name').value" -->
-        <tr>
+        <!-- <tr>
             <td>Keywords</td>
             <td>{{addItemForm.get('name').value}}</td>
-        </tr>
+        </tr> -->
         <tr>
             <td>Name</td>
             <td>{{addItemForm.get('name').value}}</td>
@@ -23,7 +23,7 @@
             <td>Level</td>
             <td> {{addItemForm.get('level').value}}</td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td>Weight</td>
             <td> {{addItemForm.get('level').value}}</td>
         </tr>
@@ -32,8 +32,8 @@
             <td>
                 99%
             </td>
-        </tr>
-        <tr class="stat-line">
+        </tr> -->
+        <!-- <tr class="stat-line">
             <td>stat Mods</td>
             <td>
                 Hit roll
@@ -75,8 +75,9 @@
                 Moves mod
             </td>
             <td> {{addItemForm.get('movesMod').value}}</td>
-        </tr>
-        <tr class="stat-line">
+        </tr> -->
+
+        <tr class="stat-line" *ngIf="addItemForm.get('itemType').value.id == 0">
             <td>Armor Type</td>
             <td>
                 {{addItemForm.get('armourType').value | armourType: addItemForm.get('armourType').value  }}
@@ -84,7 +85,7 @@
 
             <td></td>
         </tr>
-        <tr>
+        <tr *ngIf="addItemForm.get('itemType').value.id == 0">
             <td>Armor</td>
             <td>
                 {{addItemForm.get('acPierce').value}}
@@ -93,7 +94,7 @@
             <td></td>
         </tr>
 
-        <tr>
+        <tr *ngIf="addItemForm.get('itemType').value.id == 0">
             <td>Spell Protection</td>
             <td>
                 {{addItemForm.get('acMagic').value}}
@@ -101,7 +102,7 @@
 
             <td></td>
         </tr>
-        <tr class="stat-line">
+        <tr class="stat-line" *ngIf="addItemForm.get('itemType').value.id == 11">
             <td>Weapon Type</td>
             <td>
                 {{addItemForm.get('weaponType').value | weaponType: addItemForm.get('weaponType').value }}
@@ -109,7 +110,7 @@
 
             <td></td>
         </tr>
-        <tr>
+        <tr *ngIf="addItemForm.get('itemType').value.id == 11">
             <td>Attack Type</td>
             <td>
                 {{addItemForm.get('attackType').value | attackType: addItemForm.get('attackType').value  }}
@@ -117,7 +118,7 @@
 
             <td></td>
         </tr>
-        <tr>
+        <tr *ngIf="addItemForm.get('itemType').value.id == 11">
             <td>Damage Type</td>
             <td>
                 {{addItemForm.get('damageType').value | damageType: addItemForm.get('damageType').value}}
@@ -125,7 +126,7 @@
 
             <td></td>
         </tr>
-        <tr>
+        <tr *ngIf="addItemForm.get('itemType').value.id == 11">
             <td>Damage</td>
             <td>
                 {{ addItemForm.get('minDamage').value || 0}}-{{addItemForm.get('maxDamage').value || 0}}({{ addItemForm.get('minDamage').value | averageDamage: addItemForm.get('maxDamage').value }})
@@ -133,7 +134,7 @@
 
             <td></td>
         </tr>
-        <tr class="stat-line">
+        <tr class="stat-line" *ngIf="addItemForm.get('itemType').value.id == 1">
             <td>Number of pages</td>
             <td>
                 {{addItemForm.get('pageCount').value}}
@@ -141,7 +142,7 @@
 
             <td></td>
         </tr>
-        <tr class="stat-line">
+        <tr class="stat-line" *ngIf="addItemForm.get('itemType').value.id == 2">
             <td>Container Size</td>
             <td>
                 {{addItemForm.get('containerSize').value | containerSize: addItemForm.get('containerSize').value}}
@@ -282,15 +283,16 @@
     </table>
 
     <p class="echo">> look</p>
-    <p>{{addItemForm.get('lookDescription').value}}</p>
+
+    <p class="room__description">{{addItemForm.get('lookDescription').value}}</p>
     <p class="echo">> exam</p>
-    <p>{{addItemForm.get('examDescription').value}}</p>
+    <p class="room__description">{{addItemForm.get('examDescription').value}}</p>
     <p class="echo">> room</p>
-    <p>{{addItemForm.get('roomDescription').value}}</p>
+    <p class="room__description">{{addItemForm.get('roomDescription').value}}</p>
     <p class="echo">> smell</p>
-    <p>{{addItemForm.get('smellDescription').value}}</p>
+    <p class="room__description">{{addItemForm.get('smellDescription').value}}</p>
     <p class="echo">> touch</p>
-    <p>{{addItemForm.get('touchDescription').value}}</p>
+    <p class="room__description">{{addItemForm.get('touchDescription').value}}</p>
     <p class="echo">> taste</p>
-    <p>{{addItemForm.get('tasteDescription').value}}</p>
+    <p class="room__description">{{addItemForm.get('tasteDescription').value}}</p>
 </div>

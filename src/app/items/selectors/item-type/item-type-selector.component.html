@@ -3,7 +3,7 @@
         <mat-label>Item Type</mat-label>
         <mat-select formControlName="itemType" placeholder="Item Type" required (selectionChange)="onChange($event)">
             <mat-option *ngFor="let itemSlotType of itemTypes" [value]="itemSlotType">
-                {{ itemSlotType.name }}
+                {{ itemSlotType.name }} {{itemSlotType.id }}
             </mat-option>
         </mat-select>
         <mat-error *ngIf="formGroup.get('itemType').hasError('required')">Item type is required</mat-error>
