@@ -107,30 +107,20 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-3">
+                                <div class="col">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>AC pierce</mat-label>
-                                        <input matInput type="number" placeholder="AC pierce"
-                                            formControlName="acPierce">
+                                        <mat-label>Armour</mat-label>
+                                        <input matInput type="number" placeholder="Armour" formControlName="acPierce">
                                     </mat-form-field>
                                 </div>
 
-                                <div class="col-3">
+                                <div class="col">
                                     <mat-form-field appearance="outline">
-                                        <mat-label>AC bash</mat-label>
-                                        <input matInput type="number" placeholder="AC bash" formControlName="acBash">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-3">
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>AC slash</mat-label>
-                                        <input matInput type="number" placeholder="AC slash" formControlName="acSlash">
-                                    </mat-form-field>
-                                </div>
-                                <div class="col-3">
-                                    <mat-form-field appearance="outline">
-                                        <mat-label>AC magic</mat-label>
-                                        <input matInput type="number" placeholder="AC magic" formControlName="acMagic">
+                                        <mat-label>Spell Protection</mat-label>
+                                        <input matInput readonly type="number" placeholder="AC magic"
+                                            formControlName="acMagic"
+                                            [value]="calculateSpellProtection(this.addItemForm.get('acPierce').value)">
+                                        <mat-hint align="start"><strong>Half of armour protection</strong> </mat-hint>
                                     </mat-form-field>
                                 </div>
                             </div>

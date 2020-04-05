@@ -416,6 +416,12 @@ export class AddItemComponent implements OnDestroy, OnInit {
         return this.itemService.averageDamage(min, max);
     }
 
+    calculateSpellProtection(armour: number) {
+        const protection = Math.floor(armour / 2) || 0;
+        this.addItemForm.get('acMagic').setValue(protection);
+        return protection;
+    }
+
     addItem() {
         const pages: string[] = [];
         let flags: any;
@@ -463,7 +469,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             armourType: this.addItemForm.get('armourType').value || 0,
             armourRating: {
                 armour: this.addItemForm.get('acPierce').value || 1,
-                magic: this.addItemForm.get('acMagic').value || 1
+                magic: Math.floor(this.addItemForm.get('acPierce').value / 2) || 0
             },
             attackType: this.addItemForm.get('attackType').value || 0,
             damage: {
