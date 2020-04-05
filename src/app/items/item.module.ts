@@ -26,6 +26,7 @@ import { WeaponTypePipe } from './pipes/weapon-type.pipe';
 import { AttackTypePipe } from './pipes/attack-type.pipe';
 import { DamageTypePipe } from './pipes/damage-type.pipe';
 import { ArmourTypePipe } from './pipes/armour-type.pipe';
+import { ContainerSizePipe } from './pipes/container-size.pipe';
 
 
 
@@ -63,7 +64,8 @@ import { ArmourTypePipe } from './pipes/armour-type.pipe';
         WeaponTypePipe,
         AttackTypePipe,
         DamageTypePipe,
-        ArmourTypePipe
+        ArmourTypePipe,
+        ContainerSizePipe
 
     ],
 })

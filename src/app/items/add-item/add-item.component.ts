@@ -125,6 +125,8 @@ export class AddItemComponent implements OnDestroy, OnInit {
         });
 
         this.addItemForm.get('containerCanLock').valueChanges.subscribe(value => {
+
+            console.log("container", value)
             this.containerCanBeLocked = !this.containerCanBeLocked;
             if (!this.containerCanBeLocked) {
                 this.addItemForm.get('containerLocked').setValue(false);

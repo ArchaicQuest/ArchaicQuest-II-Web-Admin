@@ -173,7 +173,7 @@
                                         <mat-select placeholder="Container size" formControlName="containerSize"
                                             required>
                                             <mat-option *ngFor="let size of containerSize" [value]="size.id">
-                                                {{size.name}}
+                                                {{size.id | containerSize: addItemForm.get('containerSize').value}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -203,6 +203,7 @@
                                         Locked</mat-checkbox>
                                 </div>
                             </div>
+                            {{containerCanBeLocked}}
                             <div [hidden]="!containerCanBeLocked">
                                 <div class="row">
                                     <div class="col">

@@ -133,6 +133,22 @@
 
             <td></td>
         </tr>
+        <tr class="stat-line">
+            <td>Number of pages</td>
+            <td>
+                {{addItemForm.get('pageCount').value}}
+            </td>
+
+            <td></td>
+        </tr>
+        <tr class="stat-line">
+            <td>Container Size</td>
+            <td>
+                {{addItemForm.get('containerSize').value | containerSize: addItemForm.get('containerSize').value}}
+            </td>
+
+            <td></td>
+        </tr>
 
         <tr class="stat-line">
             <td>flags</td>
@@ -266,10 +282,15 @@
     </table>
 
     <p class="echo">> look</p>
-    <p>
-
-
-        {{addItemForm.get('itemSlotType').value.name}}
-
-        {{addItemForm.get('level').value}}</p>
+    <p>{{addItemForm.get('lookDescription').value}}</p>
+    <p class="echo">> exam</p>
+    <p>{{addItemForm.get('examDescription').value}}</p>
+    <p class="echo">> room</p>
+    <p>{{addItemForm.get('roomDescription').value}}</p>
+    <p class="echo">> smell</p>
+    <p>{{addItemForm.get('smellDescription').value}}</p>
+    <p class="echo">> touch</p>
+    <p>{{addItemForm.get('touchDescription').value}}</p>
+    <p class="echo">> taste</p>
+    <p>{{addItemForm.get('tasteDescription').value}}</p>
 </div>
