@@ -1,18 +1,19 @@
 import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Input,
-  forwardRef,
-  OnChanges,
-  SimpleChanges
+    Component,
+    OnInit,
+    OnDestroy,
+    Input,
+    forwardRef,
+    OnChanges,
+    SimpleChanges,
+    AfterContentInit
 } from "@angular/core";
 
 import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  FormBuilder
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    NG_VALIDATORS,
+    FormBuilder
 } from "@angular/forms";
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
@@ -23,55 +24,66 @@ import { GetItemTypes, GetItemSlotTypes } from '../../state/add-item.actions';
 import { BaseSelectorComponent } from '../base-selector.component';
 
 @Component({
-  selector: 'app-item-slot-selector',
-  templateUrl: './item-slot-selector.component.html',
-  providers: [
-      {
-          provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => ItemSlotSelectorComponent),
-          multi: true
-      },
-      {
-          provide: NG_VALIDATORS,
-          useExisting: forwardRef(() => ItemSlotSelectorComponent),
-          multi: true
-      }
-  ]
+    selector: 'app-item-slot-selector',
+    templateUrl: './item-slot-selector.component.html',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ItemSlotSelectorComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => ItemSlotSelectorComponent),
+            multi: true
+        }
+    ]
 })
 export class ItemSlotSelectorComponent extends BaseSelectorComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
-  componentActive = true;
-  itemSlots: ItemType[];
-  @Input() currentValue = '';
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentInit {
+    componentActive = true;
+    itemSlots: ItemType[];
+    @Input() currentValue = null;
 
-  constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
-      super();
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
+        super();
 
-      this.formGroup = this.fb.group({
-        itemSlotType: this.control
-      });
-  }
+        this.formGroup = this.fb.group({
+            itemSlotType: this.control
+        });
+    }
 
-  ngOnChanges(changes: SimpleChanges) {
-      this.updateFormControl('itemSlotType', changes);
-  }
+    ngOnChanges(changes: SimpleChanges) {
+        this.updateFormControl('itemSlotType', changes);
+    }
 
-  ngOnInit() {
-      this.store.dispatch(new GetItemSlotTypes());
+    ngOnInit() {
+        this.store.dispatch(new GetItemSlotTypes());
 
-      this.store
-          .pipe(
-              select(getItemSlotTypes),
-              takeWhile(() => this.componentActive)
-          )
-          .subscribe((itemSlots: any) => {
-              this.itemSlots = itemSlots;
-              this.control.updateValueAndValidity();
-          });
-  }
+        this.store
+            .pipe(
+                select(getItemSlotTypes),
+                takeWhile(() => this.componentActive)
+            )
+            .subscribe((itemSlots: any) => {
+                this.itemSlots = itemSlots;
 
-  ngOnDestroy(): void {
-      this.componentActive = false;
-  }
+                this.control.updateValueAndValidity();
+            });
+    }
+
+    ngAfterContentInit(): void {
+        setTimeout(() => {
+            const selectedObj = this.itemSlots.find(x => x.id === this.currentValue);
+            this.control.setValue(selectedObj);
+
+            this.control.updateValueAndValidity();
+        });
+
+    }
+
+    ngOnDestroy(): void {
+        this.componentActive = false;
+    }
 }
 

@@ -5,7 +5,8 @@ import {
     Input,
     forwardRef,
     OnChanges,
-    SimpleChanges
+    SimpleChanges,
+    AfterContentInit
 } from '@angular/core';
 
 import {
@@ -39,10 +40,10 @@ import { BaseSelectorComponent } from '../base-selector.component';
     ]
 })
 export class WeaponTypeSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentInit {
     componentActive = true;
     weaponTypes: ItemType[];
-    @Input() currentValue = '';
+    @Input() currentValue = null;
 
     constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
         super();
@@ -66,8 +67,20 @@ export class WeaponTypeSelectorComponent extends BaseSelectorComponent
             )
             .subscribe((weaponTypes: any) => {
                 this.weaponTypes = weaponTypes;
+
                 this.control.updateValueAndValidity();
             });
+    }
+
+
+    ngAfterContentInit(): void {
+        setTimeout(() => {
+            const selectedObj = this.weaponTypes.find(x => x.id === this.currentValue);
+            this.control.setValue(selectedObj);
+
+            this.control.updateValueAndValidity();
+        });
+
     }
 
     ngOnDestroy(): void {

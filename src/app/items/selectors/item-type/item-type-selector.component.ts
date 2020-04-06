@@ -1,20 +1,24 @@
 import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Input,
-  forwardRef,
-  OnChanges,
-  SimpleChanges
+    Component,
+    OnInit,
+    OnDestroy,
+    Input,
+    forwardRef,
+    OnChanges,
+    SimpleChanges,
+    AfterContentInit,
+    ChangeDetectorRef,
+    AfterViewInit,
+    AfterViewChecked
 } from "@angular/core";
 
 import {
-  ControlValueAccessor,
-  NG_VALUE_ACCESSOR,
-  NG_VALIDATORS,
-  FormBuilder,
-  ControlContainer,
-  NgForm
+    ControlValueAccessor,
+    NG_VALUE_ACCESSOR,
+    NG_VALIDATORS,
+    FormBuilder,
+    ControlContainer,
+    NgForm
 } from "@angular/forms";
 import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
@@ -25,56 +29,75 @@ import { GetItemTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
 
 @Component({
-  selector: "app-item-type-selector",
-  templateUrl: './item-type-selector.component.html',
-  viewProviders: [ { provide: ControlContainer, useExisting: NgForm } ],
-  providers: [
-      {
-          provide: NG_VALUE_ACCESSOR,
-          useExisting: forwardRef(() => ItemTypeSelectorComponent),
-          multi: true
-      },
-      {
-          provide: NG_VALIDATORS,
-          useExisting: forwardRef(() => ItemTypeSelectorComponent),
-          multi: true
-      }
-  ]
+    selector: "app-item-type-selector",
+    templateUrl: './item-type-selector.component.html',
+    viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => ItemTypeSelectorComponent),
+            multi: true
+        },
+        {
+            provide: NG_VALIDATORS,
+            useExisting: forwardRef(() => ItemTypeSelectorComponent),
+            multi: true
+        }
+    ]
 })
 export class ItemTypeSelectorComponent extends BaseSelectorComponent
-  implements OnInit, OnDestroy, ControlValueAccessor, OnChanges {
-  componentActive = true;
-  itemTypes: ItemType[];
-  @Input() currentValue = "";
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewChecked {
+    componentActive = true;
+    itemTypes: ItemType[];
+    @Input() currentValue = null;
 
-  constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
-      super();
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef, ) {
+        super();
 
-      this.formGroup = this.fb.group({
-        itemType: this.control
-      });
-  }
+        this.formGroup = this.fb.group({
+            itemType: this.control
+        });
+    }
 
-  ngOnChanges(changes: SimpleChanges) {
-      this.updateFormControl('itemType', changes);
-  }
+    ngOnChanges(changes: SimpleChanges) {
 
-  ngOnInit() {
-      this.store.dispatch(new GetItemTypes());
+        this.updateFormControl('itemType', changes);
+    }
 
-      this.store
-          .pipe(
-              select(getItemTypes),
-              takeWhile(() => this.componentActive)
-          )
-          .subscribe((itemTypes: any) => {
-              this.itemTypes = itemTypes;
-              this.control.updateValueAndValidity();
-          });
-  }
+    ngOnInit() {
+        this.store.dispatch(new GetItemTypes());
 
-  ngOnDestroy(): void {
-      this.componentActive = false;
-  }
+        this.store
+            .pipe(
+                select(getItemTypes),
+                takeWhile(() => this.componentActive)
+            )
+            .subscribe((itemTypes: any[]) => {
+                this.itemTypes = itemTypes;
+
+
+                this.control.setValue(this.currentValue);
+                this.control.updateValueAndValidity();
+                this.changeDetector.detectChanges();
+            });
+    }
+
+    ngAfterViewChecked(): void {
+        setTimeout(() => {
+
+            // this.control.setValue(this.currentValue);
+            // this.formGroup.get('itemType').setValue(this.currentValue);
+            // this.control.updateValueAndValidity();
+            // this.formGroup.get('itemType').updateValueAndValidity();
+            // this.changeDetector.detectChanges();
+        });
+
+    }
+
+
+
+    ngOnDestroy(): void {
+        this.componentActive = false;
+    }
 }
 

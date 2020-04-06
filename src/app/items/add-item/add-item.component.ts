@@ -172,6 +172,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.selectedItem = item;
 
 
+            console.log("selectedItem", item)
 
             this.selectedFlag = item.itemFlag;
             let pageLength = 0;
@@ -196,13 +197,30 @@ export class AddItemComponent implements OnDestroy, OnInit {
             });
             this.currentItemTypeValue = item.itemType;
             console.log('item type ', this.currentItemTypeValue);
+            let selectedItemObj = null;
+
+            this.store.dispatch(new GetItemTypes());
+
+            this.store
+                .pipe(
+                    select(getItemTypes),
+                    takeWhile(() => this.componentActive)
+                )
+                .subscribe((itemTypes: any[]) => {
+                    this.itemTypes = itemTypes;
+
+                    selectedItemObj = this.itemTypes.find(x => x.id === +item.itemType);
+
+
+
+                });
 
 
             this.addItemForm.patchValue({
                 id: item.id,
                 name: item.name,
                 knownByName: item.knownByName,
-                itemType: item.itemType,
+                itemType: selectedItemObj,
                 itemSlotType: item.slot,
                 level: item.level,
                 weaponType: item.weaponType,
@@ -226,7 +244,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 movesMod: item.modifier.moves,
                 spellMod: item.modifier.spellDam,
                 flags: item.itemFlag ? item.itemFlag : [],
-                'lookDescription': item.description.look,
+                lookDescription: item.description.look,
                 roomDescription: item.description.room,
                 examDescription: item.description.exam,
                 smellDescription: item.description.smell,
@@ -244,20 +262,22 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
             });
 
+            setTimeout(() => {
+                this.addItemForm.markAsDirty();
+                this.addItemForm.markAsTouched();
+                this.addItemForm.markAsPending();
 
-            this.addItemForm.markAsDirty();
-            this.addItemForm.markAsTouched();
-            this.addItemForm.markAsPending();
-
-            this.addItemForm.get('itemType').updateValueAndValidity();
-            this.addItemForm.get('itemSlotType').updateValueAndValidity();
-            this.addItemForm.get('weaponType').updateValueAndValidity();
-            this.addItemForm.get('attackType').updateValueAndValidity();
-            this.addItemForm.get('damageType').updateValueAndValidity();
+                this.addItemForm.get('itemType').updateValueAndValidity();
+                this.addItemForm.get('itemSlotType').updateValueAndValidity();
+                this.addItemForm.get('weaponType').updateValueAndValidity();
+                this.addItemForm.get('attackType').updateValueAndValidity();
+                this.addItemForm.get('damageType').updateValueAndValidity();
 
 
-            this.changeDetector.detectChanges();
-            this.addItemForm.updateValueAndValidity();
+
+                this.addItemForm.updateValueAndValidity();
+                this.changeDetector.detectChanges();
+            });
 
         });
 
