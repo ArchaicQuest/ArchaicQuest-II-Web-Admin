@@ -27,6 +27,7 @@ import { AttackTypePipe } from './pipes/attack-type.pipe';
 import { DamageTypePipe } from './pipes/damage-type.pipe';
 import { ArmourTypePipe } from './pipes/armour-type.pipe';
 import { ContainerSizePipe } from './pipes/container-size.pipe';
+import { EditItemComponent } from './edit-item/edit-item.component';
 
 
 
@@ -52,6 +53,7 @@ import { ContainerSizePipe } from './pipes/container-size.pipe';
     ],
     declarations: [
         AddItemComponent,
+        EditItemComponent,
         ViewItemsComponent,
         ItemTypeSelectorComponent,
         WeaponTypeSelectorComponent,

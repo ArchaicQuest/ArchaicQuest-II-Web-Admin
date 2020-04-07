@@ -1,5 +1,5 @@
 <div class="container-fluid view-items">
-    <app-header>Add Item</app-header>
+    <app-header>Edit Item</app-header>
 
     <div class="row">
         <div class="col-8">
@@ -26,9 +26,9 @@
                                 <app-item-type-selector formControlName="itemType"
                                     [currentValue]="currentItemTypeValue"></app-item-type-selector>
                             </div>
-                            <div class="col-4">
+                            <div class="col-4"> {{currentItemSlotValue | json}}
                                 <app-item-slot-selector formControlName="itemSlotType"
-                                    [currentValue]="this.itemForm.get('itemSlotType').value">
+                                    [currentValue]="currentItemSlotValue">
                                 </app-item-slot-selector>
 
                             </div>

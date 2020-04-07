@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import {
     takeWhile,
     take,
     startWith,
-    map,
     switchMap,
     debounceTime,
     distinctUntilChanged
@@ -15,36 +14,27 @@ import { ItemType } from '../interfaces/item-type.interface';
 import { ItemAppState } from '../state/add-item.state';
 import {
     GetItemTypes,
-    GetItemSlotTypes,
-    GetArmourTypes,
     PostItem,
-    PostItemSuccess,
     GetFlags,
-    GetWeaponTypes,
-    GetDamageTypes,
-    GetAttackTypes
 } from '../state/add-item.actions';
 import {
     getItemTypes,
-    getItemSlotTypes,
-    getArmourTypes,
     getFlags,
-    getWeaponTypes,
-    getDamageTypes,
-    getAttackTypes
+    getItemSlotTypes
 } from '../state/add-item.selector';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Item } from '../interfaces/item.interface';
 import { Observable } from 'rxjs';
-import { ItemService } from './add-item.service';
+
 import { ActivatedRoute } from '@angular/router';
 import { FlagEnum } from '../interfaces/flags.enums';
+import { ItemService } from '../add-item/add-item.service';
 
 @Component({
-    templateUrl: './add-item.component.html',
-    styleUrls: ['./add-item.component.scss']
+    templateUrl: './edit-item.component.html',
+    styleUrls: ['./edit-item.component.scss']
 })
-export class AddItemComponent implements OnDestroy, OnInit {
+export class EditItemComponent implements OnDestroy, OnInit {
     componentActive = true;
     itemForm: FormGroup;
     itemTypes: ItemType[];
@@ -71,6 +61,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
     selectedFlag: FlagEnum;
     selectedFlags: FlagEnum[] = [];
     currentItemTypeValue: any;
+    currentItemSlotValue: any;
 
     constructor(
         private changeDetector: ChangeDetectorRef,
@@ -212,12 +203,25 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 });
 
 
+
+            this.store
+                .pipe(
+                    select(getItemSlotTypes),
+                    takeWhile(() => this.componentActive)
+                )
+                .subscribe((itemSlots: any) => {
+
+                    this.currentItemSlotValue = itemSlots.find(x => x.id === +item.slot);
+
+                });
+
+
             this.itemForm.patchValue({
                 id: item.id,
                 name: item.name,
                 knownByName: item.knownByName,
                 itemType: this.currentItemTypeValue,
-                itemSlotType: item.slot,
+                itemSlotType: this.currentItemSlotValue,
                 level: item.level,
                 weaponType: item.weaponType,
                 attackType: item.attackType,

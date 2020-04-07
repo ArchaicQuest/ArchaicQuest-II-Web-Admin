@@ -28,12 +28,12 @@ export class ItemService {
     private findItemByIdUrl = `${this.host}item/FindItemById?id=`;
     private findKeyByIdUrl = `${this.host}item/FindKeyById?id=`;
 
-    public addItemForm = this.formBuilder.group({
+    public itemForm = this.formBuilder.group({
         id: [''],
         name: ['', Validators.required],
         knownByName: [''],
-        itemType: ['', Validators.required],
-        itemSlotType: [''],
+        itemType: [null, Validators.required],
+        itemSlotType: [null],
         level: [''],
         weaponType: [''],
         attackType: [''],
@@ -131,7 +131,7 @@ export class ItemService {
     }
 
     getAddItemForm() {
-        return this.addItemForm;
+        return this.itemForm;
     }
 
     averageDamage(minDam: number, maxDam: number) {

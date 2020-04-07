@@ -54,7 +54,8 @@ describe('AddItemComponent', () => {
             slot: 1,
             stuck: false,
             weaponType: 1,
-            weight: 0
+            weight: 0,
+            equipped: false
         }
     ];
     beforeEach(async(() => {

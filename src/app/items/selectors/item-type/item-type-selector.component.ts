@@ -75,7 +75,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
             .subscribe((itemTypes: any[]) => {
                 this.itemTypes = itemTypes;
 
-
+                //   debugger;
                 this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
                 this.changeDetector.detectChanges();
@@ -87,9 +87,9 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
 
             // this.control.setValue(this.currentValue);
             // this.formGroup.get('itemType').setValue(this.currentValue);
-            // this.control.updateValueAndValidity();
+            this.control.updateValueAndValidity();
             // this.formGroup.get('itemType').updateValueAndValidity();
-            // this.changeDetector.detectChanges();
+            this.changeDetector.detectChanges();
         });
 
     }

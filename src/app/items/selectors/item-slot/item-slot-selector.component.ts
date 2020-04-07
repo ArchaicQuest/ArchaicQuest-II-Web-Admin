@@ -6,7 +6,9 @@ import {
     forwardRef,
     OnChanges,
     SimpleChanges,
-    AfterContentInit
+    AfterContentInit,
+    ChangeDetectorRef,
+    AfterViewChecked
 } from "@angular/core";
 
 import {
@@ -40,12 +42,12 @@ import { BaseSelectorComponent } from '../base-selector.component';
     ]
 })
 export class ItemSlotSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentInit {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewChecked {
     componentActive = true;
     itemSlots: ItemType[];
     @Input() currentValue = null;
 
-    constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef, ) {
         super();
 
         this.formGroup = this.fb.group({
@@ -68,16 +70,22 @@ export class ItemSlotSelectorComponent extends BaseSelectorComponent
             .subscribe((itemSlots: any) => {
                 this.itemSlots = itemSlots;
 
+                this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
+                this.changeDetector.detectChanges();
             });
     }
 
-    ngAfterContentInit(): void {
-        setTimeout(() => {
-            const selectedObj = this.itemSlots.find(x => x.id === this.currentValue);
-            this.control.setValue(selectedObj);
 
+
+    ngAfterViewChecked(): void {
+        setTimeout(() => {
+
+            // this.control.setValue(this.currentValue);
+            // this.formGroup.get('itemType').setValue(this.currentValue);
             this.control.updateValueAndValidity();
+            // this.formGroup.get('itemType').updateValueAndValidity();
+            this.changeDetector.detectChanges();
         });
 
     }
