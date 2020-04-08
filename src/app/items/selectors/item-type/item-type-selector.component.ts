@@ -78,7 +78,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
                 //   debugger;
                 this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
-                this.changeDetector.detectChanges();
+                //  this.changeDetector.markForCheck();
             });
     }
 
@@ -89,7 +89,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
             // this.formGroup.get('itemType').setValue(this.currentValue);
             this.control.updateValueAndValidity();
             // this.formGroup.get('itemType').updateValueAndValidity();
-            this.changeDetector.detectChanges();
+            //    this.changeDetector.markForCheck();
         });
 
     }

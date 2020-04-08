@@ -85,7 +85,50 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        this.itemForm = this.itemService.getAddItemForm();
+        this.itemForm = this.formBuilder.group({
+            id: [''],
+            name: ['', Validators.required],
+            knownByName: [''],
+            itemType: [null, Validators.required],
+            itemSlotType: [null],
+            level: [''],
+            weaponType: [''],
+            attackType: [''],
+            damageType: ['', Validators.required],
+            minDamage: ['', [Validators.min(1), Validators.max(50)]],
+            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
+            armourType: [''],
+            acPierce: [''],
+            acBash: [''],
+            acSlash: [''],
+            acMagic: [''],
+            hitRoll: [''],
+            damRoll: [''],
+            saves: [''],
+            hpMod: [''],
+            manaMod: [''],
+            movesMod: [''],
+            spellMod: [''],
+            pageCount: [1],
+            pages: new FormGroup({}),
+            flags: new FormGroup({}),
+            lookDescription: ['', Validators.required],
+            roomDescription: [''],
+            examDescription: [''],
+            smellDescription: [''],
+            touchDescription: [''],
+            tasteDescription: [''],
+            selectContainerItem: [''],
+            containerGP: [''],
+            containerOpen: [''],
+            containerLocked: [''],
+            containerCanLock: [''],
+            containerCanOpen: [''],
+            lockStrength: [''],
+            containerSize: [''],
+            selectContainerKey: ['']
+        });
+
 
         this.filteredOptions = this.itemForm
             .get('selectContainerItem')
@@ -136,7 +179,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
         this.store.dispatch(new GetFlags());
 
 
-
         this.store
             .pipe(
                 select(getFlags),
@@ -162,120 +204,6 @@ export class AddItemComponent implements OnDestroy, OnInit {
             this.lockStrength = lockStrengthData;
         });
 
-
-        this.itemService.findItemById(this.route.snapshot.params['id']).subscribe(item => {
-
-            if (this.route.snapshot.params['id'] == null) {
-                return;
-            }
-
-            this.selectedItem = item;
-
-
-            console.log("selectedItem", item)
-
-            this.selectedFlag = item.itemFlag;
-            let pageLength = 0;
-            item.book.pages.forEach(() => {
-                pageLength++;
-
-                if (pageLength === item.book.pages.length - 1) {
-                    return;
-                }
-
-                this.addPage();
-            });
-
-            console.log('locked ', item.container.isLocked);
-            this.containerItems = this.selectedItem.container.items;
-
-            let keyName = null;
-            this.itemService.findKeyById(this.selectedItem.keyId).subscribe(key => {
-                this.displayKeys(key);
-                keyName = key;
-                console.log('key', key);
-            });
-
-
-            this.store.dispatch(new GetItemTypes());
-
-            this.store
-                .pipe(
-                    select(getItemTypes),
-                    takeWhile(() => this.componentActive)
-                )
-                .subscribe((itemTypes: any[]) => {
-                    this.itemTypes = itemTypes;
-
-                    this.currentItemTypeValue = this.itemTypes.find(x => x.id === +item.itemType);
-
-                });
-
-
-            this.itemForm.patchValue({
-                id: item.id,
-                name: item.name,
-                knownByName: item.knownByName,
-                itemType: this.currentItemTypeValue,
-                itemSlotType: item.slot,
-                level: item.level,
-                weaponType: item.weaponType,
-                attackType: item.attackType,
-                damageType: item.damageType,
-                minDamage: item.damage ? item.damage.minimum : 0,
-                maxDamage: item.damage ? item.damage.maximum : 0,
-                armourType: item.armourType,
-                acPierce: item.armourRating ? item.armourRating.armour : 0,
-                acBash: item.armourRating ? item.armourRating.armour : 0,
-                acSlash: item.armourRating ? item.armourRating.armour : 0,
-                acMagic: item.armourRating ? item.armourRating.magic : 0,
-
-                pageCount: item.book.pages.length,
-                pages: item.book.pages,
-                hitRoll: item.modifier.hitRoll,
-                damRoll: item.modifier.damRoll,
-                saves: item.modifier.saves,
-                hpMod: item.modifier.hp,
-                manaMod: item.modifier.mana,
-                movesMod: item.modifier.moves,
-                spellMod: item.modifier.spellDam,
-                flags: item.itemFlag ? item.itemFlag : [],
-                lookDescription: item.description.look,
-                roomDescription: item.description.room,
-                examDescription: item.description.exam,
-                smellDescription: item.description.smell,
-                touchDescription: item.description.touch,
-                tasteDescription: item.description.taste,
-                selectContainerItem: item.container ? item.container.items : null,
-                containerOpen: item.container ? item.container.isOpen : false,
-                containerLocked: item.container ? item.container.isLocked : false,
-                containerCanLock: item.container ? item.container.canLock : false,
-                containerCanOpen: item.container ? item.container.canOpen : false,
-                containerGP: item.container ? item.container.goldPieces : 0,
-                lockStrength: item.container ? item.container.lockDifficulty : 0,
-                containerSize: item.container ? item.container.size : 0,
-                selectContainerKey: item.container ? keyName != null ? keyName.name : '' : ''
-
-            });
-
-            setTimeout(() => {
-                this.itemForm.markAsDirty();
-                this.itemForm.markAsTouched();
-                this.itemForm.markAsPending();
-
-                this.itemForm.get('itemType').updateValueAndValidity();
-                this.itemForm.get('itemSlotType').updateValueAndValidity();
-                this.itemForm.get('weaponType').updateValueAndValidity();
-                this.itemForm.get('attackType').updateValueAndValidity();
-                this.itemForm.get('damageType').updateValueAndValidity();
-
-
-
-                this.itemForm.updateValueAndValidity();
-                this.changeDetector.detectChanges();
-            });
-
-        });
 
         if (this.selectedItem == null) {
             this.addPage();
@@ -367,6 +295,9 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     ngOnDestroy(): void {
         this.componentActive = false;
+        this.changeDetector.detach();
+        this.itemForm = null;
+        console.log("??")
     }
 
     triggerResize() {
@@ -419,7 +350,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
         }
 
         this.itemForm.updateValueAndValidity();
-        this.changeDetector.detectChanges();
+        this.changeDetector.markForCheck();
 
         this.findInvalidControls();
     }
@@ -489,7 +420,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 taste: this.itemForm.get('tasteDescription').value,
                 touch: this.itemForm.get('touchDescription').value
             },
-            armourType: this.itemForm.get('armourType').value || 0,
+            armourType: this.itemForm.get('armourType').value.id || 0,
             armourRating: {
                 armour: this.itemForm.get('acPierce').value || 1,
                 magic: Math.floor(this.itemForm.get('acPierce').value / 2) || 0

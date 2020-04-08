@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import {
@@ -20,7 +20,8 @@ import {
 import {
     getItemTypes,
     getFlags,
-    getItemSlotTypes
+    getItemSlotTypes,
+    getArmourTypes
 } from '../state/add-item.selector';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Item } from '../interfaces/item.interface';
@@ -62,6 +63,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
     selectedFlags: FlagEnum[] = [];
     currentItemTypeValue: any;
     currentItemSlotValue: any;
+    currentArmourTypeValue: any;
 
     constructor(
         private changeDetector: ChangeDetectorRef,
@@ -76,7 +78,50 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        this.itemForm = this.itemService.getAddItemForm();
+        this.itemForm = this.formBuilder.group({
+            id: [''],
+            name: ['', Validators.required],
+            knownByName: [''],
+            itemType: [null, Validators.required],
+            itemSlotType: [null],
+            level: [''],
+            weaponType: [''],
+            attackType: [''],
+            damageType: ['', Validators.required],
+            minDamage: ['', [Validators.min(1), Validators.max(50)]],
+            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
+            armourType: [''],
+            acPierce: [''],
+            acBash: [''],
+            acSlash: [''],
+            acMagic: [''],
+            hitRoll: [''],
+            damRoll: [''],
+            saves: [''],
+            hpMod: [''],
+            manaMod: [''],
+            movesMod: [''],
+            spellMod: [''],
+            pageCount: [1],
+            pages: new FormGroup({}),
+            flags: new FormGroup({}),
+            lookDescription: ['', Validators.required],
+            roomDescription: [''],
+            examDescription: [''],
+            smellDescription: [''],
+            touchDescription: [''],
+            tasteDescription: [''],
+            selectContainerItem: [''],
+            containerGP: [''],
+            containerOpen: [''],
+            containerLocked: [''],
+            containerCanLock: [''],
+            containerCanOpen: [''],
+            lockStrength: [''],
+            containerSize: [''],
+            selectContainerKey: ['']
+        });
+
 
         this.filteredOptions = this.itemForm
             .get('selectContainerItem')
@@ -199,7 +244,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
                     this.itemTypes = itemTypes;
 
                     this.currentItemTypeValue = this.itemTypes.find(x => x.id === +item.itemType);
-
+                    this.itemForm.patchValue({ itemType: this.currentItemTypeValue });
                 });
 
 
@@ -213,9 +258,28 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
                     this.currentItemSlotValue = itemSlots.find(x => x.id === +item.slot);
 
+                    this.itemForm.patchValue({ itemSlotType: this.currentItemSlotValue });
+
                 });
 
+            this.store
+                .pipe(
+                    select(getArmourTypes),
+                    takeWhile(() => this.componentActive)
+                )
+                .subscribe((armourType: any) => {
 
+                    this.currentArmourTypeValue = armourType.find(x => x.id === +item.armourType);
+
+                    this.itemForm.patchValue({ armourType: this.currentArmourTypeValue });
+
+                });
+
+            console.log("current item", this.currentItemTypeValue)
+            console.log("current slot", this.currentItemSlotValue)
+            console.log("flags", item.itemFlag)
+
+            this.updateSelectedFlags(item.itemFlag);
             this.itemForm.patchValue({
                 id: item.id,
                 name: item.name,
@@ -276,7 +340,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
 
                 this.itemForm.updateValueAndValidity();
-                this.changeDetector.detectChanges();
+                this.changeDetector.markForCheck();
             });
 
         });
@@ -371,6 +435,9 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
     ngOnDestroy(): void {
         this.componentActive = false;
+        this.changeDetector.detach();
+        this.itemForm = null;
+        console.log("??")
     }
 
     triggerResize() {
@@ -429,14 +496,13 @@ export class EditItemComponent implements OnDestroy, OnInit {
     }
 
     updateSelectedFlags(flag: number) {
-
         if (this.selectedFlags.length && this.selectedFlags.includes(flag)) {
             this.selectedFlags = this.selectedFlags.filter(flagToRemove => flagToRemove !== flag);
         } else {
             this.selectedFlags.push(flag);
         }
 
-        console.log(this.selectedFlags);
+        console.log("selected flags", this.selectedFlags);
     }
 
     calculateAverageDamage(min = 1, max = 1) {

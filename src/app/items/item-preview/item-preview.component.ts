@@ -31,14 +31,17 @@ export class ItemPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChang
 
     ngOnDestroy(): void {
         this.componentActive = false;
+        this.itemForm = null;
+        this._changeRef.detach();
     }
 
     ngDoCheck() {
-        this._changeRef.markForCheck();
+        if (!this._changeRef['destroyed']) {
+            this._changeRef.markForCheck();
+        }
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        console.log("form", changes['itemForm'].currentValue)
         this.itemForm = changes['itemForm'].currentValue;
 
     }

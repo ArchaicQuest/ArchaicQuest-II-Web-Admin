@@ -12,13 +12,14 @@
             <td>{{itemForm.get('name').value}}</td>
         </tr>
         <tr>
-            <td>Type</td>{{itemForm.get('itemType').value | json}}
-            <td> {{itemForm.get('itemType').value?.name}}</td>
+            <td>Type</td>
+            <td> {{itemForm.get('itemType').value != null ? itemForm.get('itemType').value.name : 'undefined'}}</td>
         </tr>
         <tr>
             <td>Slot</td>
-            {{itemForm.get('itemSlotType').value | json}}
-            <td> {{itemForm.get('itemSlotType').value?.name}}</td>
+
+            <td> {{itemForm.get('itemSlotType').value != null ? itemForm.get('itemSlotType').value.name : 'undefined'}}
+            </td>
         </tr>
         <tr>
             <td>Level</td>
@@ -81,7 +82,7 @@
         <tr class="stat-line" *ngIf="itemForm.get('itemType').value?.id == 0">
             <td>Armor Type</td>
             <td>
-                {{itemForm.get('armourType').value | armourType: itemForm.get('armourType').value  }}
+                {{itemForm.get('armourType').value.id | armourType: itemForm.get('armourType').value.id  }}
             </td>
 
             <td></td>
@@ -198,14 +199,15 @@
             <td></td>
         </tr>
         <tr *ngIf="itemForm.get('flags.Cursed').value">
-            <td></td>
+            <td>{{itemForm.get('flags.Cursed').value}}</td>
             <td>
                 Cursed
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Equipable').value">
-            <td></td>
+        {{itemForm.get('flags.Equipable').value}}
+        <tr *ngIf="itemForm.get('flags.Equipable').value != null">
+            <td>{{itemForm.get('flags.Equipable').value}}</td>
             <td>
                 Equipable
             </td>

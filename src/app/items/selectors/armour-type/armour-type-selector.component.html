@@ -3,7 +3,7 @@
         <mat-label>Armour Type</mat-label>
         <mat-select formControlName="armourType" placeholder="armour Type" required
             (selectionChange)="onChange($event)">
-            <mat-option *ngFor="let armourType of armourTypes" [value]="armourType.id">
+            <mat-option *ngFor="let armourType of armourTypes" [value]="armourType">
                 {{ armourType.id | armourType: armourType.id}}
             </mat-option>
         </mat-select>

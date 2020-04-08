@@ -72,7 +72,7 @@ export class ItemSlotSelectorComponent extends BaseSelectorComponent
 
                 this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
-                this.changeDetector.detectChanges();
+                //   this.changeDetector.markForCheck();
             });
     }
 
@@ -85,7 +85,7 @@ export class ItemSlotSelectorComponent extends BaseSelectorComponent
             // this.formGroup.get('itemType').setValue(this.currentValue);
             this.control.updateValueAndValidity();
             // this.formGroup.get('itemType').updateValueAndValidity();
-            this.changeDetector.detectChanges();
+            //   this.changeDetector.markForCheck();
         });
 
     }

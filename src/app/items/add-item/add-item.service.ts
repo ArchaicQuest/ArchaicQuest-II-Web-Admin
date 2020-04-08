@@ -130,9 +130,9 @@ export class ItemService {
         return this.http.get<Item>(`${this.findItemByIdUrl}${id}`);
     }
 
-    getAddItemForm() {
-        return this.itemForm;
-    }
+    // getAddItemForm() {
+    //     return this.itemForm;
+    // }
 
     averageDamage(minDam: number, maxDam: number) {
 

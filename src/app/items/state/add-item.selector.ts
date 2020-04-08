@@ -5,35 +5,35 @@ const getItemState = createFeatureSelector<ItemState>('item');
 
 export const getItemTypes = createSelector(
     getItemState,
-    state => state.itemTypes
+    state => state.itemTypes || null
 );
 
-export const    getItemSlotTypes = createSelector(
+export const getItemSlotTypes = createSelector(
     getItemState,
-    state => state.itemSlots
+    state => state.itemSlots || null
 );
 
 export const getArmourTypes = createSelector(
     getItemState,
-    state => state.armourTypes
+    state => state.armourTypes || null
 );
 
 export const getWeaponTypes = createSelector(
     getItemState,
-    state => state.weaponTypes
+    state => state.weaponTypes || null
 );
 
 export const getAttackTypes = createSelector(
     getItemState,
-    state => state.attackTypes
+    state => state.attackTypes || null
 );
 
 export const getDamageTypes = createSelector(
     getItemState,
-    state => state.damageTypes
+    state => state.damageTypes || null
 );
 
 export const getFlags = createSelector(
     getItemState,
-    state => state.flags
+    state => state.flags || null
 );

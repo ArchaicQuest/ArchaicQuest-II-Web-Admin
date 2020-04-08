@@ -6,7 +6,9 @@ import {
     forwardRef,
     OnChanges,
     SimpleChanges,
-    AfterContentInit
+    AfterContentInit,
+    AfterViewChecked,
+    ChangeDetectorRef
 } from '@angular/core';
 
 import {
@@ -40,12 +42,12 @@ import { BaseSelectorComponent } from '../base-selector.component';
     ]
 })
 export class ArmourTypeSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentInit {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewChecked {
     componentActive = true;
     armourTypes: ItemType[];
     @Input() currentValue = null;
 
-    constructor(private store: Store<ItemAppState>, private fb: FormBuilder) {
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef) {
         super();
 
         this.formGroup = this.fb.group({
@@ -69,22 +71,24 @@ export class ArmourTypeSelectorComponent extends BaseSelectorComponent
                 this.armourTypes = armourTypes;
 
 
+                this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
+                //    this.changeDetector.detectChanges();
             });
     }
 
 
-    ngAfterContentInit(): void {
+    ngAfterViewChecked(): void {
         setTimeout(() => {
-            const selectedObj = this.armourTypes.find(x => x.id === this.currentValue);
-            this.control.setValue(selectedObj);
 
             this.control.updateValueAndValidity();
+            // this.changeDetector.markForCheck();
         });
 
     }
 
     ngOnDestroy(): void {
         this.componentActive = false;
+
     }
 }
