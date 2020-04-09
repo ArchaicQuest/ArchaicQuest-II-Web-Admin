@@ -9,7 +9,8 @@ import {
     switchMap,
     debounceTime,
     distinctUntilChanged,
-    takeUntil
+    takeUntil,
+    filter
 } from 'rxjs/operators';
 import { ItemType } from '../interfaces/item-type.interface';
 import { ItemAppState } from '../state/add-item.state';
@@ -80,7 +81,49 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        this.itemForm = this.itemForm = this.itemService.getAddItemForm();
+        this.itemForm = this.formBuilder.group({
+            id: [''],
+            name: ['', Validators.required],
+            knownByName: [''],
+            itemType: [null, Validators.required],
+            itemSlotType: [null],
+            level: [''],
+            weaponType: [''],
+            attackType: [''],
+            damageType: ['', Validators.required],
+            minDamage: ['', [Validators.min(1), Validators.max(50)]],
+            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
+            armourType: [''],
+            acPierce: [''],
+            acBash: [''],
+            acSlash: [''],
+            acMagic: [''],
+            hitRoll: [''],
+            damRoll: [''],
+            saves: [''],
+            hpMod: [''],
+            manaMod: [''],
+            movesMod: [''],
+            spellMod: [''],
+            pageCount: [1],
+            pages: new FormGroup({}),
+            flags: new FormGroup({}),
+            lookDescription: ['', Validators.required],
+            roomDescription: [''],
+            examDescription: [''],
+            smellDescription: [''],
+            touchDescription: [''],
+            tasteDescription: [''],
+            selectContainerItem: [''],
+            containerGP: [''],
+            containerOpen: [''],
+            containerLocked: [''],
+            containerCanLock: [''],
+            containerCanOpen: [''],
+            lockStrength: [''],
+            containerSize: [''],
+            selectContainerKey: ['']
+        });
 
 
         this.filteredOptions = this.itemForm
@@ -137,22 +180,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
 
 
-        this.store
-            .pipe(
-                select(getFlags),
-                takeUntil(componentDestroyed(this))
-            )
-            .subscribe((flagArr: ItemType[]) => {
-                this.flags = flagArr;
 
-                this.flags.forEach(flag => {
-                    (this.itemForm.controls['flags'] as FormGroup).addControl(
-                        flag.name,
-                        new FormControl()
-                    );
-                });
-                //  console.log(this.itemForm)
-            });
 
         this.itemService.getContainerSize().pipe(
             takeUntil(componentDestroyed(this))
@@ -181,6 +209,30 @@ export class EditItemComponent implements OnDestroy, OnInit {
             console.log("selectedItem", item)
 
             this.selectedFlag = item.itemFlag;
+
+            this.store
+                .pipe(
+                    select(getFlags),
+                    filter(val => val != null || val.length > 0),
+                    takeUntil(componentDestroyed(this))
+                )
+                .subscribe((flagArr: ItemType[]) => {
+                    this.flags = flagArr;
+
+                    this.flags.forEach(flag => {
+                        console.log(flag.name, this.hasFlag({ id: flag.id, name: '' }));
+                        (this.itemForm.controls['flags'] as FormGroup).addControl(
+                            flag.name,
+                            new FormControl(false)
+                        );
+                    });
+
+                    this.flags.forEach(flag => {
+                        this.hasFlag({ id: flag.id, name: flag.name });
+                    });
+
+                });
+
             let pageLength = 0;
             item.book.pages.forEach(() => {
                 pageLength++;
@@ -368,8 +420,11 @@ export class EditItemComponent implements OnDestroy, OnInit {
     }
 
 
-    hasFlag(flag: number): boolean {
-        return this.itemService.hasFlag(flag, this.selectedFlag);
+    hasFlag(flag: { id: number, name: string }): boolean {
+        if (flag.name !== '') {
+            this.itemForm.get(['flags', flag.name]).setValue(this.itemService.hasFlag(flag.id, this.selectedFlag));
+        }
+        return this.itemService.hasFlag(flag.id, this.selectedFlag);
     }
 
     isFlagSet(value: number, flag: number): boolean {

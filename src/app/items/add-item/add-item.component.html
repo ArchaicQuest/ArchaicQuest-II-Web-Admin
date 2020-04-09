@@ -203,8 +203,8 @@
                                         Locked</mat-checkbox>
                                 </div>
                             </div>
-                            {{containerCanBeLocked}}
-                            <div [hidden]="!containerCanBeLocked">
+
+                            <div *ngIf="!containerCanBeLocked">
                                 <div class="row">
                                     <div class="col">
 
@@ -252,7 +252,7 @@
                             <div class="row">
                                 <div class="col">
 
-                                    <mat-form-field class="example-full-width" appearance="outline">
+                                    <!-- <mat-form-field class="example-full-width" appearance="outline">
                                         <mat-label>Search for an item</mat-label>
                                         <input type="text" placeholder="Search for an item" aria-label="Assignee"
                                             matInput formControlName="selectContainerItem" [matAutocomplete]="auto">
@@ -261,7 +261,7 @@
                                                 {{option.name}}
                                             </mat-option>
                                         </mat-autocomplete>
-                                    </mat-form-field>
+                                    </mat-form-field> -->
                                     <a href="javascript:(0)" mat-raised-button color="secodary"
                                         (click)="addItemToContainer()">Add
                                         item</a>
@@ -340,7 +340,7 @@
                         <div class="row" [formGroup]="itemForm.get('flags')">
 
 
-                            <div class="col-2" *ngFor="let flag of flags">
+                            <div class="col-2" *ngFor="let flag of flags; trackBy:flag?.id">
                                 <mat-checkbox [title]="flag.name" [formControlName]="flag.name"
                                     [checked]=hasFlag(flag.id) (change)=updateSelectedFlags(flag.id)>{{flag.name}}
                                 </mat-checkbox>

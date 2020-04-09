@@ -46,7 +46,8 @@ import { EditItemComponent } from './edit-item/edit-item.component';
         MatButtonModule,
         MatTableModule,
         MatPaginatorModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+
     ],
     providers: [
         ItemService

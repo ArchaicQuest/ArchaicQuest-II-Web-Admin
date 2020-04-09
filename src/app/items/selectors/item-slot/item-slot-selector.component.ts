@@ -8,7 +8,9 @@ import {
     SimpleChanges,
     AfterContentInit,
     ChangeDetectorRef,
-    AfterViewChecked
+    AfterViewChecked,
+    AfterViewInit,
+    AfterContentChecked
 } from "@angular/core";
 
 import {
@@ -21,7 +23,7 @@ import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from '../../state/add-item.state';
 import { getWeaponTypes, getItemTypes, getItemSlotTypes } from '../../state/add-item.selector';
-import { takeWhile, takeUntil } from 'rxjs/operators';
+import { takeWhile, takeUntil, take } from 'rxjs/operators';
 import { GetItemTypes, GetItemSlotTypes } from '../../state/add-item.actions';
 import { BaseSelectorComponent } from '../base-selector.component';
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
@@ -43,7 +45,7 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
     ]
 })
 export class ItemSlotSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewChecked {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentChecked {
     componentActive = true;
     itemSlots: ItemType[];
     @Input() currentValue = null;
@@ -73,26 +75,34 @@ export class ItemSlotSelectorComponent extends BaseSelectorComponent
 
                 this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
-                //   this.changeDetector.markForCheck();
+                this.changeDetector.detectChanges();
             });
     }
 
 
 
-    ngAfterViewChecked(): void {
-        setTimeout(() => {
+    ngAfterContentChecked(): void {
+        this.control.setValue(this.currentValue);
 
-            // this.control.setValue(this.currentValue);
-            // this.formGroup.get('itemType').setValue(this.currentValue);
-            this.control.updateValueAndValidity();
-            // this.formGroup.get('itemType').updateValueAndValidity();
-            //   this.changeDetector.markForCheck();
-        });
+        this.control.updateValueAndValidity();
 
     }
 
+    // ngAfterViewChecked(): void {
+    //     setTimeout(() => {
+
+    //         // this.control.setValue(this.currentValue);
+    //         // this.formGroup.get('itemType').setValue(this.currentValue);
+    //         this.control.updateValueAndValidity();
+    //         // this.formGroup.get('itemType').updateValueAndValidity();
+    //         //   this.changeDetector.markForCheck();
+    //     });
+
+    // }
+
     ngOnDestroy(): void {
         this.componentActive = false;
+        this.changeDetector.detach();
     }
 }
 

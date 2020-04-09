@@ -24,7 +24,7 @@ import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from "../../state/add-item.state";
 import { getWeaponTypes, getItemTypes } from "../../state/add-item.selector";
-import { takeWhile, takeUntil } from "rxjs/operators";
+import { takeWhile, takeUntil, take } from "rxjs/operators";
 import { GetItemTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
@@ -47,7 +47,7 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
     ]
 })
 export class ItemTypeSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewChecked {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewInit {
     componentActive = true;
     itemTypes: ItemType[];
     @Input() currentValue = null;
@@ -83,17 +83,14 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
             });
     }
 
-    ngAfterViewChecked(): void {
-        setTimeout(() => {
 
-            // this.control.setValue(this.currentValue);
-            // this.formGroup.get('itemType').setValue(this.currentValue);
-            this.control.updateValueAndValidity();
-            // this.formGroup.get('itemType').updateValueAndValidity();
-            //    this.changeDetector.markForCheck();
-        });
+    ngAfterViewInit(): void {
+        this.control.setValue(this.currentValue);
+
+        this.control.updateValueAndValidity();
 
     }
+
 
 
 

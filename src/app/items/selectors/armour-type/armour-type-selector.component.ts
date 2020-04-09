@@ -8,7 +8,8 @@ import {
     SimpleChanges,
     AfterContentInit,
     AfterViewChecked,
-    ChangeDetectorRef
+    ChangeDetectorRef,
+    AfterContentChecked
 } from '@angular/core';
 
 import {
@@ -43,7 +44,7 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
     ]
 })
 export class ArmourTypeSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewChecked {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentChecked {
     componentActive = true;
     armourTypes: ItemType[];
     @Input() currentValue = null;
@@ -79,12 +80,10 @@ export class ArmourTypeSelectorComponent extends BaseSelectorComponent
     }
 
 
-    ngAfterViewChecked(): void {
-        setTimeout(() => {
+    ngAfterContentChecked(): void {
+        this.control.setValue(this.currentValue);
 
-            this.control.updateValueAndValidity();
-            // this.changeDetector.markForCheck();
-        });
+        this.control.updateValueAndValidity();
 
     }
 

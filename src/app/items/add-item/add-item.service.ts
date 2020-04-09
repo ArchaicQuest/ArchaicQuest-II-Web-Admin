@@ -199,6 +199,7 @@ export class ItemService {
     }
 
     private isFlagSet(value: number, flag: number): boolean {
+        debugger;
         return (value & flag) !== 0;
     }
 

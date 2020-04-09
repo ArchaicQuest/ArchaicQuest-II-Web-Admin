@@ -46,7 +46,7 @@ import { componentDestroyed } from "@w11k/ngx-componentdestroyed";
 
 @Component({
     templateUrl: './add-item.component.html',
-    styleUrls: ['./add-item.component.scss']
+    styleUrls: ['./add-item.component.scss'],
 })
 export class AddItemComponent implements OnDestroy, OnInit {
     componentActive = true;
@@ -89,7 +89,49 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        this.itemForm = this.itemService.getAddItemForm();
+        this.itemForm = this.formBuilder.group({
+            id: [''],
+            name: ['', Validators.required],
+            knownByName: [''],
+            itemType: [null, Validators.required],
+            itemSlotType: [null],
+            level: [''],
+            weaponType: [''],
+            attackType: [''],
+            damageType: ['', Validators.required],
+            minDamage: ['', [Validators.min(1), Validators.max(50)]],
+            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
+            armourType: [''],
+            acPierce: [''],
+            acBash: [''],
+            acSlash: [''],
+            acMagic: [''],
+            hitRoll: [''],
+            damRoll: [''],
+            saves: [''],
+            hpMod: [''],
+            manaMod: [''],
+            movesMod: [''],
+            spellMod: [''],
+            pageCount: [1],
+            pages: new FormGroup({}),
+            flags: new FormGroup({}),
+            lookDescription: ['', Validators.required],
+            roomDescription: [''],
+            examDescription: [''],
+            smellDescription: [''],
+            touchDescription: [''],
+            tasteDescription: [''],
+            selectContainerItem: [''],
+            containerGP: [''],
+            containerOpen: [''],
+            containerLocked: [''],
+            containerCanLock: [''],
+            containerCanOpen: [''],
+            lockStrength: [''],
+            containerSize: [''],
+            selectContainerKey: ['']
+        });
 
 
         this.filteredOptions = this.itemForm
@@ -98,6 +140,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 startWith(''),
                 debounceTime(200),
                 distinctUntilChanged(),
+                takeUntil(componentDestroyed(this)),
                 switchMap(name => {
                     if (typeof name !== 'string' || name == null) {
                         return;
@@ -112,6 +155,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 startWith(''),
                 debounceTime(200),
                 distinctUntilChanged(),
+                takeUntil(componentDestroyed(this)),
                 switchMap(name => {
                     if (typeof name !== 'string' || name == null) {
                         return;
