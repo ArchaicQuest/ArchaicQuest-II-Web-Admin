@@ -70,7 +70,7 @@
                                 <div class="col-6">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Min Damage</mat-label>
-                                        <input matInput type="number" placeholder="Minimum Damage" value=""
+                                        <input matInput type="number" placeholder="Minimum Damage"
                                             formControlName="minDamage" required>
                                         <mat-error *ngIf="itemForm.get('minDamage').hasError('required')">
                                             Min damage is required.
@@ -82,7 +82,7 @@
                                 <div class="col-6">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Max Damage</mat-label>
-                                        <input matInput type="number" placeholder="Maximum Damage" value=""
+                                        <input matInput type="number" placeholder="Maximum Damage"
                                             formControlName="maxDamage" required>
                                         <mat-error *ngIf="itemForm.get('maxDamage').hasError('required')">
                                             Max damage is required.
@@ -268,7 +268,7 @@
                                 </div>
                                 <div class="col">
                                     <mat-form-field class="example-full-width" appearance="outline">
-                                        <mat-label>dd Gold pieces</mat-label>
+                                        <mat-label>Gold pieces</mat-label>
                                         <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins"
                                             matInput formControlName="containerGP">
                                     </mat-form-field>

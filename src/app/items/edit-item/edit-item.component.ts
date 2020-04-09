@@ -85,8 +85,8 @@ export class EditItemComponent implements OnDestroy, OnInit {
             id: [''],
             name: ['', Validators.required],
             knownByName: [''],
-            itemType: [null, Validators.required],
-            itemSlotType: [null],
+            itemType: [''],
+            itemSlotType: [''],
             level: [''],
             weaponType: [''],
             attackType: [''],
@@ -355,6 +355,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
                 this.itemForm.markAsTouched();
                 this.itemForm.markAsPending();
 
+
                 this.itemForm.get('itemType').updateValueAndValidity();
                 this.itemForm.get('itemSlotType').updateValueAndValidity();
                 this.itemForm.get('weaponType').updateValueAndValidity();
@@ -409,7 +410,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
                 invalid.push(name);
             }
         }
-        console.log(invalid);
+        console.log("invalid:", invalid);
     }
     get getFlagControl(): FormArray {
         return this.itemForm.get('flags') as FormArray;
@@ -485,6 +486,8 @@ export class EditItemComponent implements OnDestroy, OnInit {
         const itemType = event.id;
 
         console.log(itemType);
+
+
 
         this.itemForm.get('armourType').disable();
         this.showArmourSection = false;

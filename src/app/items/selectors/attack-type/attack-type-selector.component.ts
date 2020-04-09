@@ -6,7 +6,8 @@ import {
     forwardRef,
     OnChanges,
     SimpleChanges,
-    AfterContentInit
+    AfterContentInit,
+    AfterViewInit
 } from "@angular/core";
 
 import {
@@ -19,9 +20,11 @@ import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from "../../state/add-item.state";
 import { getAttackTypes } from "../../state/add-item.selector";
-import { takeWhile } from "rxjs/operators";
+import { takeWhile, takeUntil } from "rxjs/operators";
 import { GetAttackTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
+import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+
 
 @Component({
     selector: "app-attack-type-selector",
@@ -40,7 +43,7 @@ import { BaseSelectorComponent } from "../base-selector.component";
     ]
 })
 export class AttackTypeSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentInit {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewInit {
     componentActive = true;
     attackTypes: ItemType[];
     @Input() currentValue = null;
@@ -63,24 +66,22 @@ export class AttackTypeSelectorComponent extends BaseSelectorComponent
         this.store
             .pipe(
                 select(getAttackTypes),
-                takeWhile(() => this.componentActive)
+                takeUntil(componentDestroyed(this))
             )
             .subscribe((attackTypes: any) => {
                 this.attackTypes = attackTypes;
 
+                this.control.setValue(this.currentValue);
                 this.control.updateValueAndValidity();
 
 
             });
     }
 
-    ngAfterContentInit(): void {
-        setTimeout(() => {
-            const selectedObj = this.attackTypes.find(x => x.id === this.currentValue);
-            this.control.setValue(selectedObj);
+    ngAfterViewInit(): void {
+        this.control.setValue(this.currentValue);
 
-            this.control.updateValueAndValidity();
-        });
+        this.control.updateValueAndValidity();
 
     }
 
