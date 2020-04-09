@@ -21,9 +21,10 @@ import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from '../../state/add-item.state';
 import { getWeaponTypes, getItemTypes, getItemSlotTypes } from '../../state/add-item.selector';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, takeUntil } from 'rxjs/operators';
 import { GetItemTypes, GetItemSlotTypes } from '../../state/add-item.actions';
 import { BaseSelectorComponent } from '../base-selector.component';
+import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 
 @Component({
     selector: 'app-item-slot-selector',
@@ -65,7 +66,7 @@ export class ItemSlotSelectorComponent extends BaseSelectorComponent
         this.store
             .pipe(
                 select(getItemSlotTypes),
-                takeWhile(() => this.componentActive)
+                takeUntil(componentDestroyed(this))
             )
             .subscribe((itemSlots: any) => {
                 this.itemSlots = itemSlots;

@@ -21,9 +21,10 @@ import { ItemType } from '../../interfaces/item-type.interface';
 import { Store, select } from '@ngrx/store';
 import { ItemAppState } from '../../state/add-item.state';
 import { getAttackTypes, getArmourTypes } from '../../state/add-item.selector';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, takeUntil } from 'rxjs/operators';
 import { GetAttackTypes, GetArmourTypes } from '../../state/add-item.actions';
 import { BaseSelectorComponent } from '../base-selector.component';
+import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 
 @Component({
     selector: 'app-armour-type-selector',
@@ -65,7 +66,7 @@ export class ArmourTypeSelectorComponent extends BaseSelectorComponent
         this.store
             .pipe(
                 select(getArmourTypes),
-                takeWhile(() => this.componentActive)
+                takeUntil(componentDestroyed(this))
             )
             .subscribe((armourTypes: any) => {
                 this.armourTypes = armourTypes;

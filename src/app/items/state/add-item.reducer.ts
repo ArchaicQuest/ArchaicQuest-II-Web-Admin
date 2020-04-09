@@ -112,6 +112,12 @@ export function addItemReducer(state: ItemState = intitalState, action: AddItemA
                 loading: false
             };
         }
+        default: {
+            return {
+                ...state,
+                loading: true
+            };
+        }
 
     }
 }

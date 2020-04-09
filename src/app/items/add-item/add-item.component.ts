@@ -9,7 +9,9 @@ import {
     map,
     switchMap,
     debounceTime,
-    distinctUntilChanged
+    distinctUntilChanged,
+    filter,
+    takeUntil
 } from 'rxjs/operators';
 import { ItemType } from '../interfaces/item-type.interface';
 import { ItemAppState } from '../state/add-item.state';
@@ -39,6 +41,8 @@ import { Observable } from 'rxjs';
 import { ItemService } from './add-item.service';
 import { ActivatedRoute } from '@angular/router';
 import { FlagEnum } from '../interfaces/flags.enums';
+import { componentDestroyed } from "@w11k/ngx-componentdestroyed";
+
 
 @Component({
     templateUrl: './add-item.component.html',
@@ -85,49 +89,7 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
     ngOnInit() {
 
-        this.itemForm = this.formBuilder.group({
-            id: [''],
-            name: ['', Validators.required],
-            knownByName: [''],
-            itemType: [null, Validators.required],
-            itemSlotType: [null],
-            level: [''],
-            weaponType: [''],
-            attackType: [''],
-            damageType: ['', Validators.required],
-            minDamage: ['', [Validators.min(1), Validators.max(50)]],
-            maxDamage: ['', [Validators.min(1), Validators.max(100)]],
-            armourType: [''],
-            acPierce: [''],
-            acBash: [''],
-            acSlash: [''],
-            acMagic: [''],
-            hitRoll: [''],
-            damRoll: [''],
-            saves: [''],
-            hpMod: [''],
-            manaMod: [''],
-            movesMod: [''],
-            spellMod: [''],
-            pageCount: [1],
-            pages: new FormGroup({}),
-            flags: new FormGroup({}),
-            lookDescription: ['', Validators.required],
-            roomDescription: [''],
-            examDescription: [''],
-            smellDescription: [''],
-            touchDescription: [''],
-            tasteDescription: [''],
-            selectContainerItem: [''],
-            containerGP: [''],
-            containerOpen: [''],
-            containerLocked: [''],
-            containerCanLock: [''],
-            containerCanOpen: [''],
-            lockStrength: [''],
-            containerSize: [''],
-            selectContainerKey: ['']
-        });
+        this.itemForm = this.itemService.getAddItemForm();
 
 
         this.filteredOptions = this.itemForm
@@ -160,29 +122,35 @@ export class AddItemComponent implements OnDestroy, OnInit {
 
 
 
-        this.itemForm.get('containerCanOpen').valueChanges.subscribe(value => {
-            this.containerCanBeOpened = !this.containerCanBeOpened;
-            if (!this.containerCanBeOpened) {
-                this.itemForm.get('containerOpen').setValue(false);
-            }
-        });
+        this.itemForm.get('containerCanOpen').valueChanges
+            .pipe(
+                takeUntil(componentDestroyed(this))
+            ).subscribe(value => {
+                this.containerCanBeOpened = !this.containerCanBeOpened;
+                if (!this.containerCanBeOpened) {
+                    this.itemForm.get('containerOpen').setValue(false);
+                }
+            });
 
-        this.itemForm.get('containerCanLock').valueChanges.subscribe(value => {
-
-            console.log("container", value)
-            this.containerCanBeLocked = !this.containerCanBeLocked;
-            if (!this.containerCanBeLocked) {
-                this.itemForm.get('containerLocked').setValue(false);
-            }
-        });
+        this.itemForm.get('containerCanLock').valueChanges
+            .pipe(
+                takeUntil(componentDestroyed(this))
+            ).subscribe(value => {
+                console.log("container", value)
+                this.containerCanBeLocked = !this.containerCanBeLocked;
+                if (!this.containerCanBeLocked) {
+                    this.itemForm.get('containerLocked').setValue(false);
+                }
+            });
 
         this.store.dispatch(new GetFlags());
 
 
-        this.store
+        this.store.select(getFlags)
             .pipe(
-                select(getFlags),
-                takeWhile(() => this.componentActive)
+                takeUntil(componentDestroyed(this)),
+                filter((res) => res != null),
+                takeWhile(() => this.componentActive),
             )
             .subscribe((flagArr: ItemType[]) => {
                 this.flags = flagArr;
@@ -196,11 +164,15 @@ export class AddItemComponent implements OnDestroy, OnInit {
                 //  console.log(this.itemForm)
             });
 
-        this.itemService.getContainerSize().subscribe(containerSizeData => {
+        this.itemService.getContainerSize().pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(containerSizeData => {
             this.containerSize = containerSizeData;
         });
 
-        this.itemService.getLockStrength().subscribe(lockStrengthData => {
+        this.itemService.getLockStrength().pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(lockStrengthData => {
             this.lockStrength = lockStrengthData;
         });
 
@@ -210,7 +182,9 @@ export class AddItemComponent implements OnDestroy, OnInit {
         }
 
 
-        this.itemForm.get('itemType').valueChanges.subscribe(value => {
+        this.itemForm.get('itemType').valueChanges.pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(value => {
             this.toggleItemSection(value);
         });
 

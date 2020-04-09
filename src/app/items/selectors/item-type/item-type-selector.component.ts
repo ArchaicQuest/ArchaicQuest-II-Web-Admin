@@ -24,9 +24,10 @@ import { ItemType } from "../../interfaces/item-type.interface";
 import { Store, select } from "@ngrx/store";
 import { ItemAppState } from "../../state/add-item.state";
 import { getWeaponTypes, getItemTypes } from "../../state/add-item.selector";
-import { takeWhile } from "rxjs/operators";
+import { takeWhile, takeUntil } from "rxjs/operators";
 import { GetItemTypes } from "../../state/add-item.actions";
 import { BaseSelectorComponent } from "../base-selector.component";
+import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 
 @Component({
     selector: "app-item-type-selector",
@@ -70,7 +71,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
         this.store
             .pipe(
                 select(getItemTypes),
-                takeWhile(() => this.componentActive)
+                takeUntil(componentDestroyed(this))
             )
             .subscribe((itemTypes: any[]) => {
                 this.itemTypes = itemTypes;
