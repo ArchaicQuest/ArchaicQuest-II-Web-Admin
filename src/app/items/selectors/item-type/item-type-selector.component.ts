@@ -63,6 +63,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
     ngOnChanges(changes: SimpleChanges) {
 
         this.updateFormControl('itemType', changes);
+        this.control.updateValueAndValidity();
     }
 
     ngOnInit() {
@@ -77,7 +78,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
                 this.itemTypes = itemTypes;
 
                 //   debugger;
-                this.control.setValue(this.currentValue);
+                this.control.setValue(this.currentValue, { emitEvent: true });
                 this.control.updateValueAndValidity();
 
             });
@@ -85,7 +86,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
 
 
     ngAfterViewInit(): void {
-        this.control.setValue(this.currentValue);
+        this.control.setValue(this.currentValue, { emitEvent: true });
 
         this.control.updateValueAndValidity();
 

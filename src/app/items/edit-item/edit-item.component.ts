@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef, AfterViewInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
@@ -38,7 +38,7 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
     templateUrl: './edit-item.component.html',
     styleUrls: ['./edit-item.component.scss']
 })
-export class EditItemComponent implements OnDestroy, OnInit {
+export class EditItemComponent implements OnDestroy, OnInit, AfterViewInit {
     componentActive = true;
     itemForm: FormGroup;
     itemTypes: ItemType[];
@@ -85,8 +85,8 @@ export class EditItemComponent implements OnDestroy, OnInit {
             id: [''],
             name: ['', Validators.required],
             knownByName: [''],
-            itemType: [''],
-            itemSlotType: [''],
+            itemType: ['', Validators.required],
+            itemSlotType: ['', Validators.required],
             level: [''],
             weaponType: [''],
             attackType: [''],
@@ -244,7 +244,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
                 this.addPage();
             });
 
-            console.log('locked ', item.container.isLocked);
+
             this.containerItems = this.selectedItem.container.items;
 
             let keyName = null;
@@ -253,7 +253,7 @@ export class EditItemComponent implements OnDestroy, OnInit {
             ).subscribe(key => {
                 this.displayKeys(key);
                 keyName = key;
-                console.log('key', key);
+
             });
 
 
@@ -268,7 +268,8 @@ export class EditItemComponent implements OnDestroy, OnInit {
                     this.itemTypes = itemTypes;
 
                     this.currentItemTypeValue = this.itemTypes.find(x => x.id === +item.itemType);
-                    this.itemForm.patchValue({ itemType: this.currentItemTypeValue });
+                    this.itemForm.get('itemType').setValue(this.currentItemTypeValue);
+                    this.itemForm.get('itemType').updateValueAndValidity();
                 });
 
 
@@ -282,7 +283,8 @@ export class EditItemComponent implements OnDestroy, OnInit {
 
                     this.currentItemSlotValue = itemSlots.find(x => x.id === +item.slot);
 
-                    this.itemForm.patchValue({ itemSlotType: this.currentItemSlotValue });
+                    this.itemForm.get('itemSlotType').setValue(this.currentItemSlotValue);
+                    this.itemForm.get('itemSlotType').updateValueAndValidity();
 
                 });
 
@@ -294,16 +296,16 @@ export class EditItemComponent implements OnDestroy, OnInit {
                 .subscribe((armourType: any) => {
 
                     this.currentArmourTypeValue = armourType.find(x => x.id === +item.armourType);
-
-                    this.itemForm.patchValue({ armourType: this.currentArmourTypeValue });
+                    this.itemForm.get('armourType').setValue(this.currentArmourTypeValue);
+                    this.itemForm.get('armourType').updateValueAndValidity();
 
                 });
 
-            console.log("current item", this.currentItemTypeValue)
-            console.log("current slot", this.currentItemSlotValue)
-            console.log("flags", item.itemFlag)
+            this.itemForm.get('itemType').valueChanges.subscribe(() => this.itemForm.get('itemType').updateValueAndValidity());
+            this.itemForm.get('itemSlotType').valueChanges.subscribe(() => this.itemForm.get('itemSlotType').updateValueAndValidity());
 
-            this.updateSelectedFlags(item.itemFlag);
+
+
             this.itemForm.patchValue({
                 id: item.id,
                 name: item.name,
@@ -351,12 +353,13 @@ export class EditItemComponent implements OnDestroy, OnInit {
             });
 
             setTimeout(() => {
-                this.itemForm.markAsDirty();
-                this.itemForm.markAsTouched();
-                this.itemForm.markAsPending();
+                // this.itemForm.markAsDirty();
+                // this.itemForm.markAsTouched();
+                // this.itemForm.markAsPending();
 
 
                 this.itemForm.get('itemType').updateValueAndValidity();
+                this.itemForm.get('armourType').updateValueAndValidity();
                 this.itemForm.get('itemSlotType').updateValueAndValidity();
                 this.itemForm.get('weaponType').updateValueAndValidity();
                 this.itemForm.get('attackType').updateValueAndValidity();
@@ -381,6 +384,17 @@ export class EditItemComponent implements OnDestroy, OnInit {
             this.toggleItemSection(value);
         });
 
+    }
+
+    ngAfterViewInit() {
+        this.itemForm.get('itemType').updateValueAndValidity();
+        this.itemForm.get('armourType').updateValueAndValidity();
+        this.itemForm.get('itemSlotType').updateValueAndValidity();
+        this.itemForm.get('weaponType').updateValueAndValidity();
+        this.itemForm.get('attackType').updateValueAndValidity();
+        this.itemForm.get('damageType').updateValueAndValidity();
+
+        this.itemForm.updateValueAndValidity();
     }
 
     private _filter(value: string): Observable<Item[]> {
@@ -520,11 +534,12 @@ export class EditItemComponent implements OnDestroy, OnInit {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
         }
+        setTimeout(() => {
+            this.itemForm.updateValueAndValidity();
 
-        this.itemForm.updateValueAndValidity();
-        this.changeDetector.detectChanges();
 
-        this.findInvalidControls();
+            this.findInvalidControls();
+        });
     }
 
     updateSelectedFlags(flag: number) {

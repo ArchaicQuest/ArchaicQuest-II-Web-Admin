@@ -199,14 +199,14 @@
             <td></td>
         </tr>
         <tr *ngIf="itemForm.get('flags.Cursed').value">
-            <td>{{itemForm.get('flags.Cursed').value}}</td>
+            <td></td>
             <td>
                 Cursed
             </td>
             <td></td>
         </tr>
 
-        <tr *ngIf="itemForm.get('flags.Equipable').value != null">
+        <tr *ngIf="itemForm.get('flags.Equipable').value">
             <td></td>
             <td>
                 Equipable
