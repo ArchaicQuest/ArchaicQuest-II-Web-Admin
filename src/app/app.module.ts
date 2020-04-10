@@ -17,6 +17,7 @@ import { HeaderComponent } from './header/header.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ToastrModule } from 'ngx-toastr';
+import { SharedService } from './shared/shared.service';
 
 @NgModule({
     declarations: [
@@ -48,7 +49,7 @@ import { ToastrModule } from 'ngx-toastr';
             positionClass: 'toast-bottom-center'
         })
     ],
-    providers: [Shared],
+    providers: [Shared, SharedService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

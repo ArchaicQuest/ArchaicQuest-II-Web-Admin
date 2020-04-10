@@ -131,8 +131,8 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
                 if (value.exits.north) {
                     this.addRoomForm.get('exits.north').setValue(value.exits.north);
                 }
-                if (value.exits.northWest) {
-                    this.addRoomForm.get('exits.northEast').setValue(value.exits.northWest);
+                if (value.exits.northEast) {
+                    this.addRoomForm.get('exits.northEast').setValue(value.exits.northEast);
                 }
                 if (value.exits.east) {
                     this.addRoomForm.get('exits.east').setValue(value.exits.east);

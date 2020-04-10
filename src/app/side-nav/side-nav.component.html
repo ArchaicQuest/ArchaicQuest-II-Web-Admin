@@ -51,6 +51,13 @@
                             <span *ngIf="expanded$ | async">Create Area</span>
                         </a>
                     </li>
+                    <li>
+                        <a (click)="clearRoomCache()">
+                            <i class="fa fa-database" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Clear Cache</span>
+                        </a>
+
+                    </li>
                 </ul>
             </mat-expansion-panel>
             <mat-expansion-panel (click)="toggleSidenav(true)">
