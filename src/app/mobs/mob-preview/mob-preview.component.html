@@ -1,0 +1,154 @@
+<div class="client" [formGroup]="mobForm">
+    <p class="room__description">Item Preview:</p>
+
+
+    <p class="echo">> look</p>
+
+    <p class="room__description">{{mobForm.get('name').value}}</p>
+
+    <p class="echo">> room</p>
+    <p class="room__description">{{mobForm.get('name').value}} is here.</p>
+
+
+
+    <p class="room__title"> Score for {{mobForm.get('name').value}}.</p>
+
+    <table>
+        <tr>
+            <td class="cell-title">Level:</td>
+            <td>{{mobForm.get('level').value}}</td>
+            <td class="cell-title">Race:</td>
+            <td>Tiefling</td>
+            <td class="cell-title">Born on:</td>
+            <td>04/11/2020</td>
+        </tr>
+        <tr>
+            <td class="cell-title">Years:</td>
+            <td>18</td>
+            <td class="cell-title">Class:</td>
+            <td>Warrior</td>
+            <td class="cell-title">Played:</td>
+            <td>S0 hours</td>
+        </tr>
+        <tr>
+            <td class="cell-title">STR:</td>
+            <td>{{mobForm.get('attributes').get('strength').value || 0}}({{mobForm.get('attributes').get('strength').value || 0}})
+            </td>
+            <td class="cell-title">HitRoll:</td>
+            <td>5</td>
+            <td class="cell-title">Sex:</td>
+            <td>Male</td>
+        </tr>
+        <tr>
+            <td class="cell-title">DEX:</td>
+            <td>{{mobForm.get('attributes').get('dexterity').value || 0}}({{mobForm.get('attributes').get('dexterity').value || 0}})
+            <td class="cell-title">Damroll:</td>
+            <td>10</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="cell-title">Con:</td>
+            <td>{{mobForm.get('attributes').get('constitution').value || 0}}({{mobForm.get('attributes').get('constitution').value || 0}})
+            <td class="cell-title">Align:</td>
+            <td>1000</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="cell-title">Int:</td>
+            <td>{{mobForm.get('attributes').get('intelligence').value || 0}}({{mobForm.get('attributes').get('intelligence').value || 0}})
+            <td class="cell-title">Wimpy:</td>
+            <td>15</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="cell-title">Wis:</td>
+            <td>{{mobForm.get('attributes').get('wisdom').value || 0}}({{mobForm.get('attributes').get('wisdom').value || 0}})
+            <td class="cell-title">Armour:</td>
+            <td>well-crafted</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td class="cell-title">Cha:</td>
+            <td>{{mobForm.get('attributes').get('charisma').value || 0}}({{mobForm.get('attributes').get('charisma').value || 0}})
+            <td class="cell-title">Pos'n:</td>
+            <td>Standing</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td class="cell-title">Style:</td>
+            <td>Standard</td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="cell-title">Items:</td>
+            <td>1000 (max 2000)</td>
+        </tr>
+        <tr>
+            <td class="cell-title">Qpoints</td>
+            <td>240</td>
+            <td class="cell-title">HP</td>
+            <td>4000/4000</td>
+            <td class="cell-title">weight:</td>
+            <td>30 (max: 100)</td>
+        </tr>
+        <tr>
+            <td class="cell-title">Pract:</td>
+            <td>240</td>
+            <td class="cell-title">Mana</td>
+            <td>2000/4000</td>
+            <td class="cell-title">weight:</td>
+            <td>30 (max: 100)</td>
+        </tr>
+        <tr>
+            <td class="cell-title">Train:</td>
+            <td>240</td>
+            <td class="cell-title">Moves</td>
+            <td>3000/2789</td>
+            <td class="cell-title">Mkills:</td>
+            <td>30000</td>
+        </tr>
+        <tr>
+            <td class="cell-title">Gold:</td>
+            <td>24000</td>
+            <td class="cell-title">Moves</td>
+            <td>3000/2789</td>
+            <td class="cell-title">MDeaths:</td>
+            <td>30000</td>
+        </tr>
+        <tr>
+            <td class="cell-title">Bank:</td>
+            <td>1000</td>
+            <td class="cell-title">XP</td>
+            <td>3,000,000</td>
+            <td class="cell-title">TNL:</td>
+            <td>30,000</td>
+        </tr>
+    </table>
+
+
+
+
+
+    <!-- <p class="echo">> exam</p>
+    <p class="room__description">{{itemForm.get('examDescription').value}}</p>
+    <p class="echo">> room</p>
+    <p class="room__description">{{itemForm.get('roomDescription').value}}</p>
+    <p class="echo">> smell</p>
+    <p class="room__description">{{itemForm.get('smellDescription').value}}</p>
+    <p class="echo">> touch</p>
+    <p class="room__description">{{itemForm.get('touchDescription').value}}</p>
+    <p class="echo">> taste</p>
+    <p class="room__description">{{itemForm.get('tasteDescription').value}}</p> --> -->
+</div>

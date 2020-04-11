@@ -9,7 +9,7 @@ import {
     MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
     MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule
 } from '@angular/material';
-import {  AddMobService } from './add-mob.service';
+import { AddMobService } from './add-mob.service';
 import { AddMobComponent } from './add-mob.component';
 import { ItemService } from '../items/add-item/add-item.service';
 import { InventoryComponent } from '../characters/inventory/inventory.component';
@@ -18,6 +18,7 @@ import { EquipmentComponent } from '../characters/equipment/equipment.component'
 import { CharacterEffects } from '../characters/state/character.effects';
 import { ArmourClassComponent } from '../characters/armour-class/armour-class.component';
 import { MobService } from './mob.service';
+import { MobPreviewComponent } from './mob-preview/mob-preview.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MobService } from './mob.service';
         AddMobComponent,
         ArmourClassComponent,
         InventoryComponent,
-        EquipmentComponent
+        EquipmentComponent,
+        MobPreviewComponent
     ],
 })
 export class MobModule { }
