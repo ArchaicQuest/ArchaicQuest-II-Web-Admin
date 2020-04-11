@@ -301,9 +301,6 @@ export class EditItemComponent implements OnDestroy, OnInit, AfterViewInit {
 
                 });
 
-            this.itemForm.get('itemType').valueChanges.subscribe(() => this.itemForm.get('itemType').updateValueAndValidity());
-            this.itemForm.get('itemSlotType').valueChanges.subscribe(() => this.itemForm.get('itemSlotType').updateValueAndValidity());
-
 
 
             this.itemForm.patchValue({
@@ -368,7 +365,12 @@ export class EditItemComponent implements OnDestroy, OnInit, AfterViewInit {
 
 
                 this.itemForm.updateValueAndValidity();
-                this.changeDetector.markForCheck();
+                // tslint:disable-next-line: forin
+                for (const i in this.itemForm.controls) {
+                    this.itemForm.controls[i].markAsTouched();
+                    this.itemForm.controls[i].updateValueAndValidity();
+                }
+
             });
 
         });
