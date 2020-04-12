@@ -35,11 +35,11 @@ import { Option } from '../shared/interfaces/option.interface';
 export class AddMobService {
     private host = `${environment.hostAPI}`;
     private saveMobUrl = `${this.host}Character/Mob`;
-    private getRacesUrl = `${this.host}/Character/Race`;
-    private getClassesUrl = `${this.host}/Character/Class`;
-    private getAttackTypesUrl = `${this.host}/Character/AttackType`;
+    private getRacesUrl = `${this.host}Character/Race`;
+    private getClassesUrl = `${this.host}Character/Class`;
+    private getAttackTypesUrl = `${this.host}Character/AttackType`;
     private getStatusUrl = '/src/app/mobs/data/status.api.json';
-    private getAlignmentUrl = `${this.host}/Character/Alignment`;
+    private getAlignmentUrl = `${this.host}Character/Alignment`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'

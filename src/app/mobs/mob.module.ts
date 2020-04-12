@@ -19,6 +19,10 @@ import { CharacterEffects } from '../characters/state/character.effects';
 import { ArmourClassComponent } from '../characters/armour-class/armour-class.component';
 import { MobService } from './mob.service';
 import { MobPreviewComponent } from './mob-preview/mob-preview.component';
+import { HPFormulaPipe } from './pipes/hp-formula.pipe';
+import { ManaFormulaPipe } from './pipes/mana-formula.pipe';
+import { MovesFormulaPipe } from './pipes/moves-formula.pipe';
+import { EncumbranceFormulaPipe } from './pipes/encumbrance-formula.pipe';
 
 
 @NgModule({
@@ -47,7 +51,11 @@ import { MobPreviewComponent } from './mob-preview/mob-preview.component';
         ArmourClassComponent,
         InventoryComponent,
         EquipmentComponent,
-        MobPreviewComponent
+        MobPreviewComponent,
+        HPFormulaPipe,
+        ManaFormulaPipe,
+        MovesFormulaPipe,
+        EncumbranceFormulaPipe
     ],
 })
 export class MobModule { }

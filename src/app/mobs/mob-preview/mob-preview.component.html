@@ -18,17 +18,17 @@
             <td class="cell-title">Level:</td>
             <td>{{mobForm.get('level').value}}</td>
             <td class="cell-title">Race:</td>
-            <td>Tiefling</td>
+            <td>{{mobForm.get('race').value}}</td>
             <td class="cell-title">Born on:</td>
             <td>04/11/2020</td>
         </tr>
         <tr>
             <td class="cell-title">Years:</td>
-            <td>18</td>
+            <td>n/a</td>
             <td class="cell-title">Class:</td>
-            <td>Warrior</td>
+            <td>{{mobForm.get('class').value}}</td>
             <td class="cell-title">Played:</td>
-            <td>S0 hours</td>
+            <td>0 hours</td>
         </tr>
         <tr>
             <td class="cell-title">STR:</td>
@@ -37,7 +37,7 @@
             <td class="cell-title">HitRoll:</td>
             <td>5</td>
             <td class="cell-title">Sex:</td>
-            <td>Male</td>
+            <td>{{mobForm.get('gender').value}}</td>
         </tr>
         <tr>
             <td class="cell-title">DEX:</td>
@@ -99,23 +99,35 @@
             <td class="cell-title">Qpoints</td>
             <td>240</td>
             <td class="cell-title">HP</td>
-            <td>4000/4000</td>
+            <td>{{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('constitution').value || 1}} /
+                {{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('constitution').value || 1}}
+            </td>
             <td class="cell-title">weight:</td>
-            <td>30 (max: 100)</td>
+            <td> {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance: mobForm.get('attributes').get('strength').value || 1 }}
+                (max:
+                {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance: mobForm.get('attributes').get('strength').value || 1 }})
+            </td>
         </tr>
         <tr>
             <td class="cell-title">Pract:</td>
             <td>240</td>
             <td class="cell-title">Mana</td>
-            <td>2000/4000</td>
+            <td>{{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('intelligence').value || 1}} /
+                {{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('intelligence').value || 1}}
+            </td>
             <td class="cell-title">weight:</td>
-            <td>30 (max: 100)</td>
+            <td> {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance: mobForm.get('attributes').get('strength').value || 1 }}
+                (max:
+                {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance: mobForm.get('attributes').get('strength').value || 1 }})
+            </td>
         </tr>
         <tr>
             <td class="cell-title">Train:</td>
             <td>240</td>
             <td class="cell-title">Moves</td>
-            <td>3000/2789</td>
+            <td>{{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('dexterity').value || 1}} /
+                {{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('dexterity').value || 1}}
+            </td>
             <td class="cell-title">Mkills:</td>
             <td>30000</td>
         </tr>
