@@ -108,7 +108,7 @@
                                 <mat-label>Alignment</mat-label>
                                 <mat-select formControlName="alignment" placeholder="alignment" required
                                     (selectionChange)="selectAlignment($event)">
-                                    <mat-option *ngFor="let alignment of alignments" [value]="alignment.id">
+                                    <mat-option *ngFor="let alignment of alignments" [value]="alignment">
                                         {{ alignment.name }}
                                     </mat-option>
                                 </mat-select>
@@ -248,7 +248,8 @@
                                 <div class="col">
                                     <mat-form-field appearance="outline" class="form-control">
                                         <mat-label>Hit points</mat-label>
-                                        <input matInput type="number" max="99" min="1" placeholder="Hit points" value=""
+                                        <input matInput type="number" max="99" min="1" placeholder="Hit points"
+                                            [value]="addMobForm.get('level').value | generateHp: addMobForm.get('attributes').get('constitution').value || 1"
                                             required formControlName="hitPoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('hitPoints').hasError('min') || addMobForm.get('stats').get('hitPoints').hasError('max')">
@@ -260,7 +261,8 @@
                                     <mat-form-field appearance="outline" class="form-control">
                                         <mat-label>Mana points</mat-label>
                                         <input type="number" max="99" min="1" matInput placeholder="Mana points"
-                                            value="" required formControlName="manaPoints">
+                                            [value]="addMobForm.get('level').value | generateMana: addMobForm.get('attributes').get('intelligence').value || 1"
+                                            required formControlName="manaPoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('manaPoints').hasError('min') || addMobForm.get('stats').get('manaPoints').hasError('max')">
                                             Mana Points must be between 1 and 99.
@@ -271,7 +273,8 @@
                                     <mat-form-field appearance="outline" class="form-control">
                                         <mat-label>Move Points</mat-label>
                                         <input type="number" max="99" min="1" matInput placeholder="Move points"
-                                            value="" required formControlName="movePoints">
+                                            [value]="addMobForm.get('level').value | generateMoves: addMobForm.get('attributes').get('dexterity').value || 1"
+                                            required formControlName="movePoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('movePoints').hasError('min') ||addMobForm.get('stats').get('movePoints').hasError('max')">
                                             Move Points must be between 1 and 99.

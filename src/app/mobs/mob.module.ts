@@ -23,6 +23,7 @@ import { HPFormulaPipe } from './pipes/hp-formula.pipe';
 import { ManaFormulaPipe } from './pipes/mana-formula.pipe';
 import { MovesFormulaPipe } from './pipes/moves-formula.pipe';
 import { EncumbranceFormulaPipe } from './pipes/encumbrance-formula.pipe';
+import { PositionPipe } from './pipes/position.pipe';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { EncumbranceFormulaPipe } from './pipes/encumbrance-formula.pipe';
         HPFormulaPipe,
         ManaFormulaPipe,
         MovesFormulaPipe,
-        EncumbranceFormulaPipe
+        EncumbranceFormulaPipe,
+        PositionPipe
     ],
 })
 export class MobModule { }

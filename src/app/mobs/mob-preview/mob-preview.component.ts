@@ -9,6 +9,12 @@ import {
     OnChanges,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { CharacterAppState } from 'src/app/characters/state/character.state';
+import { getInventory } from 'src/app/characters/state/character.selector';
+import { takeUntil, filter } from 'rxjs/operators';
+import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+import { Item } from 'src/app/items/interfaces/item.interface';
 
 
 @Component({
@@ -21,11 +27,23 @@ export class MobPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChange
     @Input() mobForm: FormGroup;
     componentActive = true;
 
-    constructor(private _changeRef: ChangeDetectorRef
+    constructor(private _changeRef: ChangeDetectorRef,
+        private store: Store<CharacterAppState>,
     ) { }
 
 
     ngOnInit() {
+
+        this.store
+            .pipe(
+                select(getInventory),
+                filter((val) => val != null),
+                takeUntil(componentDestroyed(this))
+            )
+            .subscribe((inventory: Item[]) => {
+                console.log(inventory);
+
+            });
     }
 
     ngOnDestroy(): void {
