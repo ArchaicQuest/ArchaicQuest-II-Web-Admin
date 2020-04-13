@@ -49,7 +49,7 @@
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col" *ngIf="neckItems.length">
+        <!-- <div class="col" *ngIf="neckItems.length">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Neck 2</mat-label>
                 <mat-select formControlName="neck2Eq" placeholder="Neck 2" [compareWith]="compareOptions"
@@ -60,7 +60,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-        </div>
+        </div> -->
     </div>
     <div class="row">
         <div class="col" *ngIf="bodyItems.length">
@@ -162,7 +162,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col" *ngIf="wristItems.length">
+        <!-- <div class="col" *ngIf="wristItems.length">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Wrist 2 - broken</mat-label>
                 <mat-select formControlName="wrist2Eq" placeholder="Wrist 2" [compareWith]="compareOptions">
@@ -172,7 +172,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-        </div>
+        </div> -->
         <div class="col" *ngIf="fingerItems.length">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Finger</mat-label>
@@ -180,12 +180,13 @@
                     (selectionChange)="fingerChange($event)">
                     <mat-option (click)="formGroup.get('fingerEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of fingerItems" [value]="item">
-                        {{ item.name }} {{item.uuid}}
+                        {{ item.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
         </div>
-        <div class="col" *ngIf="fingerItems.length">
+
+        <!-- <div class="col" *ngIf="fingerItems.length">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Finger 2</mat-label>
                 <mat-select formControlName="finger2Eq" placeholder="Finger 2" [compareWith]="compareOptions"
@@ -196,7 +197,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-        </div>
+        </div> -->
         <div class="col" *ngIf="heldItems.length">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Held</mat-label>

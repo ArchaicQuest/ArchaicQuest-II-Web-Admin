@@ -80,6 +80,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             case EqSlot.Finger: //2
                 equipped.finger = item;
                 break;
+
             case EqSlot.Floating:
                 equipped.floating = item;
                 break;
@@ -139,6 +140,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                 return equipped.feet;
             case EqSlot.Finger: //2
                 return equipped.finger;
+
             case EqSlot.Floating:
                 return equipped.floating;
             case EqSlot.Hands:
@@ -298,7 +300,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     onEQChange(selection, slot): void {
-        debugger;
+
         if (selection.value === '' || selection.value == null) {
             this.charStore.dispatch(new RemoveEquipment({
                 slot: slot,
@@ -316,12 +318,14 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     sheathChange(selection) {
-        this.resetEQDupe('wieldEq', selection.value.uuid);
+        const uuid = selection.value ? selection.value.uuid : '';
+        this.resetEQDupe('wieldEq', uuid);
         this.onEQChange(selection, EqSlot.Sheathed);
     }
 
     wieldChange(selection) {
-        this.resetEQDupe('sheathedEq', selection.value.uuid);
+        const uuid = selection.value ? selection.value.uuid : '';
+        this.resetEQDupe('sheathedEq', uuid);
         this.onEQChange(selection, EqSlot.Wielded);
     }
 
@@ -331,30 +335,35 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     headChange(selection) {
-        this.resetEQDupe('heldEq', selection.value.uuid);
+        const uuid = selection.value ? selection.value.uuid : '';
+        this.resetEQDupe('heldEq', uuid);
         this.onEQChange(selection, EqSlot.Head);
     }
 
     fingerChange(selection) {
-        this.resetEQDupe('finger2Eq', selection.value.uuid);
+        const uuid = selection.value ? selection.value.uuid : '';
+
+        this.resetEQDupe('finger2Eq', uuid);
 
         this.onEQChange(selection, EqSlot.Finger);
     }
 
-    finger2Change(selection) {
-        this.resetEQDupe('fingerEq', selection.value.uuid);
+    // finger2Change(selection) {
+    //     this.resetEQDupe('finger2Eq', selection.value.uuid);
 
-        this.onEQChange(selection, EqSlot.Finger);
-    }
+    //     this.onEQChange(selection, EqSlot.Finger2);
+    // }
 
     neckChange(selection) {
-        this.resetEQDupe('neck2Eq', selection.value.uuid);
+        const uuid = selection.value ? selection.value.uuid : '';
+        this.resetEQDupe('neck2Eq', uuid);
 
         this.onEQChange(selection, EqSlot.Neck);
     }
 
     neck2Change(selection) {
-        this.resetEQDupe('neckEq', selection.value.uuid);
+        const uuid = selection.value ? selection.value.uuid : '';
+        this.resetEQDupe('neckEq', uuid);
 
         this.onEQChange(selection, EqSlot.Neck);
     }

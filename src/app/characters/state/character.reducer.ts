@@ -98,8 +98,7 @@ export function characterReducer(state: CharacterState = intitalState,
         }
         case CharacterActionTypes.UpdateEquipment: {
 
-            console.log("wtf")
-            debugger;
+
             const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
 
 
@@ -122,6 +121,7 @@ export function characterReducer(state: CharacterState = intitalState,
         case CharacterActionTypes.RemoveEquipment: {
 
             debugger;
+
             let getItem = EquipmentComponent.returnEQ(action.payload.slot, state.mob.equipped)
             let updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
 
