@@ -15,6 +15,7 @@ import { getInventory } from 'src/app/characters/state/character.selector';
 import { takeUntil, filter } from 'rxjs/operators';
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 import { Item } from 'src/app/items/interfaces/item.interface';
+import { Equipment } from 'src/app/characters/interfaces/equipment.interface';
 
 
 @Component({
@@ -26,6 +27,8 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 export class MobPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChanges {
     @Input() mobForm: FormGroup;
     componentActive = true;
+    equipped: Equipment;
+
 
     constructor(private _changeRef: ChangeDetectorRef,
         private store: Store<CharacterAppState>,
@@ -43,6 +46,16 @@ export class MobPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChange
             .subscribe((inventory: Item[]) => {
                 console.log(inventory);
 
+            });
+
+
+        this.store
+            .pipe(
+                select(x => x.character.mob.equipped),
+                takeUntil(componentDestroyed(this))
+            ).subscribe(x => {
+                this.equipped = x;
+                console.log("xxx", this.equipped)
             });
     }
 
