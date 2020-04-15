@@ -8,7 +8,7 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { Equipment } from './equipment.interface';
 
 export interface Character {
-    id?: number;
+    id?: string;
     name: string;
     gender: string;
     race: string;
@@ -31,4 +31,7 @@ export interface Character {
     money?: Money;
     qffects?: Affects;
     config?: Config;
+    defaultAttack: string;
 }
+
+

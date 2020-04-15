@@ -24,6 +24,10 @@ import { ManaFormulaPipe } from './pipes/mana-formula.pipe';
 import { MovesFormulaPipe } from './pipes/moves-formula.pipe';
 import { EncumbranceFormulaPipe } from './pipes/encumbrance-formula.pipe';
 import { PositionPipe } from './pipes/position.pipe';
+import { ViewMobService } from './view-mobs/view-mobs.service';
+import { ViewMobsComponent } from './view-mobs/view-mobs.component';
+import { EditMobService } from './edit-mob/edit-mob.service';
+import { EditMobComponent } from './edit-mob/edit-mob.component';
 
 
 @NgModule({
@@ -45,7 +49,9 @@ import { PositionPipe } from './pipes/position.pipe';
     providers: [
         MobService,
         AddMobService,
-        ItemService
+        ItemService,
+        ViewMobService,
+        EditMobService
     ],
     declarations: [
         AddMobComponent,
@@ -57,7 +63,9 @@ import { PositionPipe } from './pipes/position.pipe';
         ManaFormulaPipe,
         MovesFormulaPipe,
         EncumbranceFormulaPipe,
-        PositionPipe
+        PositionPipe,
+        ViewMobsComponent,
+        EditMobComponent
     ],
 })
 export class MobModule { }

@@ -1,11 +1,11 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { AddMobService } from './add-mob.service';
+import { EditMobService } from './edit-mob.service';
 import { ActivatedRoute } from '@angular/router';
-import { Gender } from '../characters/interfaces/gender.interface';
+import { Gender } from '../../characters/interfaces/gender.interface';
 import { MatSelectChange } from '@angular/material';
-import { Race } from '../characters/interfaces/race.interface';
-import { Class } from '../characters/interfaces/class.interface';
+import { Race } from '../../characters/interfaces/race.interface';
+import { Class } from '../../characters/interfaces/class.interface';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import {
     take,
@@ -13,24 +13,27 @@ import {
     debounceTime,
     distinctUntilChanged,
     switchMap,
-    catchError
+    catchError,
+    takeUntil
 } from 'rxjs/operators';
-import { Alignment } from '../characters/interfaces/alignment.interface';
-import { Item } from '../items/interfaces/item.interface';
+import { Alignment } from '../../characters/interfaces/alignment.interface';
+import { Item } from '../../items/interfaces/item.interface';
 import { Observable, throwError } from 'rxjs';
-import { ItemService } from '../items/add-item/add-item.service';
+import { ItemService } from '../../items/add-item/add-item.service';
 import { Store } from '@ngrx/store';
-import { Mob } from './interfaces/mob.interface';
-import { CharacterAppState } from '../characters/state/character.state';
-import { SaveChar } from '../characters/state/character.actions';
-import { Status } from '../characters/interfaces/status.interface';
-import { Option } from '../shared/interfaces/option.interface';
-import { EquipmentComponent } from '../characters/equipment/equipment.component';
+import { Mob } from '../interfaces/mob.interface';
+import { CharacterAppState } from '../../characters/state/character.state';
+import { SaveChar } from '../../characters/state/character.actions';
+import { Status } from '../../characters/interfaces/status.interface';
+import { Option } from '../../shared/interfaces/option.interface';
+import { EquipmentComponent } from '../../characters/equipment/equipment.component';
+import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+
 
 @Component({
-    templateUrl: './add-mob.component.html'
+    templateUrl: './edit-mob.component.html'
 })
-export class AddMobComponent implements OnInit {
+export class EditMobComponent implements OnInit, OnDestroy {
     addMobForm: FormGroup;
     races: Race[];
     classes: Class[];
@@ -42,7 +45,7 @@ export class AddMobComponent implements OnInit {
     filteredItems: Observable<Item[]>;
     emotes: string[] = [''];
     constructor(
-        private mobService: AddMobService,
+        private mobService: EditMobService,
         private store: Store<CharacterAppState>,
         private route: ActivatedRoute,
         private ngZone: NgZone,
@@ -72,6 +75,72 @@ export class AddMobComponent implements OnInit {
         this.mobService.getClasses().subscribe((data: Race[]) => {
             this.classes = data;
         });
+
+        setTimeout(() => {
+
+
+
+            this.mobService.loadMob(this.route.snapshot.params['id']).pipe(
+                takeUntil(componentDestroyed(this))
+            ).subscribe(mob => {
+
+                console.log("loaded", mob);
+                console.log("x", mob.attributes.attribute['Strength'])
+                console.log("y", mob.className)
+
+                this.addMobForm.patchValue({
+                    alignment: mob.alignmentScore,
+                    armorRating: {
+                        armour: mob.armorRating.armour,
+                        magic: mob.armorRating.magic
+                    },
+                    inventory: [...mob.inventory],
+                    equipped: mob.equipped, //change store for inv to handle equipped items
+                    status: mob.status,
+                    attributes: {
+
+                        strength: mob.attributes.attribute['Strength'],
+                        dexterity: mob.attributes.attribute['Dexterity'],
+                        constitution: mob.attributes.attribute['Constitution'],
+                        wisdom: mob.attributes.attribute['Wisdom'],
+                        intelligence: mob.attributes.attribute['Intelligence'],
+                        charisma: mob.attributes.attribute['Charisma'],
+                        hitpoints: mob.attributes.attribute['Hitpoints'],
+                        mana: mob.attributes.attribute['Mana'],
+                        moves: mob.attributes.attribute['Moves']
+
+                    },
+                    class: mob.className,
+                    description: mob.description,
+                    gender: mob.gender,
+                    level: mob.level,
+                    stats: mob.status,
+                    maxStats: mob.status,
+                    money: { gold: mob.money.gold, copper: 0, silver: 0 },
+                    longName: mob.longName,
+                    name: mob.name,
+                    race: mob.race,
+                    attackType: mob.defaultAttack
+                });
+
+            });
+
+            this.addMobForm.updateValueAndValidity();
+
+            // tslint:disable-next-line: forin
+            for (const i in this.addMobForm.controls) {
+                this.addMobForm.controls[i].markAsTouched();
+                this.addMobForm.controls[i].updateValueAndValidity();
+            }
+
+
+        });
+    }
+
+    ngOnDestroy(): void {
+        //Called once, before the instance is destroyed.
+        //Add 'implements OnDestroy' to the class.
+
     }
 
     triggerDescriptionResize() {
@@ -124,6 +193,10 @@ export class AddMobComponent implements OnInit {
             .get('attributes')
             .get('charisma')
             .setValue(this.mobService.generateRandomStat());
+
+        setTimeout(() => {
+            this.addMobForm.updateValueAndValidity();
+        });
     }
 
     get getEmotesControl(): FormArray {
@@ -146,7 +219,7 @@ export class AddMobComponent implements OnInit {
         // this.equipmentComponent.GetEquipmentItemsFromInventory()
 
         const mob: Mob = {
-            alignmentScore: this.addMobForm.get('alignment').value,
+            alignmentScore: 0,
             armorRating: {
                 armour: 0,
                 magic: 0
@@ -190,7 +263,7 @@ export class AddMobComponent implements OnInit {
             longName: this.addMobForm.get('longName').value,
             name: this.addMobForm.get('name').value,
             race: this.addMobForm.get('race').value,
-            defaultAttack: this.addMobForm.get('attackType').value,
+            defaultAttack: this.addMobForm.get('attackType').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

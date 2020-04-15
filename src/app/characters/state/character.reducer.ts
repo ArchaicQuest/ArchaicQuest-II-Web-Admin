@@ -53,6 +53,7 @@ const intitalState: CharacterState = {
         race: '',
         stats: null,
         status: '',
+        defaultAttack: ''
 
 
     }
