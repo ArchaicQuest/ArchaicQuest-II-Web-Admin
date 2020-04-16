@@ -6,7 +6,7 @@ import { FormBuilder } from '@angular/forms';
 import { Store, State } from '@ngrx/store';
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
-import { GetInventory, AddToEquipment, RemoveFromInventory, RemoveFromEquipment, AddToInventory, IncreaseArmour, UpdateEquipment, RemoveEquipment } from '../state/character.actions';
+import { GetInventory, AddToEquipment, RemoveFromInventory, RemoveFromEquipment, AddToInventory, IncreaseArmour, UpdateEquipment, RemoveEquipment, UpdateEquipped } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
 import { Equipment } from '../interfaces/equipment.interface';
 @Component({
@@ -231,6 +231,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             switch (item.slot) {
                 case EqSlot.Arms:
                     this.armsItems = this.armsItems.concat(this.updateEQArray(item));
+
                     break;
                 case EqSlot.Body:
                     this.bodyItems = this.bodyItems.concat(this.updateEQArray(item));
@@ -279,6 +280,13 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                     break;
                 case EqSlot.Wielded:
                     this.wieldItems = this.wieldItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.charStore.dispatch(new UpdateEquipped({
+                            slot: item.slot,
+                            item: item
+                        }));
+                        this.formGroup.get('wieldEq').setValue(item);
+                    }
                     break;
                 //sheathedEq
                 default:

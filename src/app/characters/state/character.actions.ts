@@ -8,6 +8,7 @@ export enum CharacterActionTypes {
     RemoveFromInventory = '[Character] Remove Item from Inventory',
     AddToEquipment = '[Character] Add Item to equipment',
     UpdateEquipment = '[Character] Update equipment',
+    UpdateEquipped = '[Character] Update equipped item',
     RemoveEquipment = '[Character] Remove equipment',
     RemoveFromEquipment = '[Character] Remove Item from equipment',
     IncreaseArmour = '[Character] Increase Armour value',
@@ -33,6 +34,14 @@ export class InventoryUpdateSuccess implements Action {
 }
 export class UpdateEquipment implements Action {
     readonly type = CharacterActionTypes.UpdateEquipment;
+    constructor(public payload: {
+        slot: EqSlot,
+        item: Item
+    }) { }
+}
+
+export class UpdateEquipped implements Action {
+    readonly type = CharacterActionTypes.UpdateEquipped;
     constructor(public payload: {
         slot: EqSlot,
         item: Item
@@ -88,5 +97,6 @@ export type CharacterActions = AddToInventory
     | SaveChar
     | SaveCharSuccess
     | IncreaseArmour
-    | DecreaseArmour;
+    | DecreaseArmour
+    | UpdateEquipped;
 

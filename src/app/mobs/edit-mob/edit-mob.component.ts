@@ -88,6 +88,8 @@ export class EditMobComponent implements OnInit, OnDestroy {
                 console.log("x", mob.attributes.attribute['Strength'])
                 console.log("y", mob.className)
 
+                this.inventoryItems = [...mob.inventory];
+
                 this.addMobForm.patchValue({
                     alignment: mob.alignmentScore,
                     armorRating: {

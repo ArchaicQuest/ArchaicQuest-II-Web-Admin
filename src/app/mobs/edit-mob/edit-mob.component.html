@@ -274,9 +274,9 @@
                         </div>
 
                     </div>
-                    <div class="row">
+                    <div class="row" *ngIf="inventoryItems.length">
                         <div class="col">
-                            <app-inventory></app-inventory>
+                            <app-inventory [inventory]="inventoryItems"></app-inventory>
                         </div>
                         <div class="col">
                             <app-equipment></app-equipment>

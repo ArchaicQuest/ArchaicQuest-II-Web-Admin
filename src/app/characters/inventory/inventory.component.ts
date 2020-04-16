@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
+import { Component, OnInit, ViewChild, NgZone, Input } from '@angular/core';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from 'src/app/items/add-item/add-item.service';
@@ -17,6 +17,9 @@ import { getInventory } from '../state/character.selector';
 export class InventoryComponent implements OnInit {
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
+
+    @Input()
+    inventory: Item[];
 
     public formGroup = this.formBuilder.group({
         selectInventoryItem: [''],
@@ -49,6 +52,15 @@ export class InventoryComponent implements OnInit {
                 console.log(inventory);
                 this.inventoryItems = inventory;
             });
+
+
+        if (this.inventory.length > 0) {
+
+            this.inventory.forEach(item => {
+                this.charStore.dispatch(new AddToInventory(item));
+            });
+            // this.inventoryItems = [...this.inventory];
+        }
     }
 
     addItemToInventory() {

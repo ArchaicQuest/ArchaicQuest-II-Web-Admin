@@ -119,6 +119,19 @@ export function characterReducer(state: CharacterState = intitalState,
             };
         }
 
+        case CharacterActionTypes.UpdateEquipped: {
+
+
+            const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
+
+            return {
+                ...state,
+                mob: {
+                    ...state.mob,
+                    equipped: updatedEquipment
+                }
+            };
+        }
         case CharacterActionTypes.RemoveEquipment: {
 
             debugger;
