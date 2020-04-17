@@ -1,19 +1,9 @@
 <div [formGroup]="formGroup">
     <h2>Inventory</h2>
 
-    <div class="row">
-        <div class="col">
-            <ul>
-                <li *ngFor="let item of inventoryItems; let i = index">
-                    {{item.name}}
-                    {{item.uuid}}
-                    {{item.equipped ? '(Equipped)' : ''}}
-                    <a href="javascript:void(0)" (click)="removeItemFromInventory(i)">Remove</a></li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="row">
+
+    <div class="row" style="margin-bottom: 20px;">
         <div class="col">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Add item to inventory</mat-label>
@@ -29,17 +19,19 @@
                 item</a>
         </div>
 
-        <div class="col">
-            <mat-form-field appearance="outline" class="form-control">
-                <mat-label>Gold Pieces</mat-label>
-                <input type="number" placeholder="Gold Pieces" aria-label="Add gold coins" matInput
-                    formControlName="inventoryGP">
-                <mat-error
-                    *ngIf="formGroup.get('inventoryGP').hasError('min') || formGroup.get('inventoryGP').hasError('max')">
-                    Gold coins must be between 1 and 10,000.
-                </mat-error>
-            </mat-form-field>
-        </div>
+    </div>
 
+    <div class="row">
+        <div class="col">
+            <h2>Items</h2>
+            <ol style="margin-left:20px; padding:0;">
+                <li *ngFor="let item of inventoryItems; let i = index" style="margin-bottom: 8px;">
+                    <a href="javascript:void(0)" (click)="removeItemFromInventory(i)" class="fa fa-times"
+                        title="Remove item" style="color: tomato"></a>
+                    {{item.name}}
+                    {{item.equipped ? '(Equipped)' : ''}}
+                </li>
+            </ol>
+        </div>
     </div>
 </div>

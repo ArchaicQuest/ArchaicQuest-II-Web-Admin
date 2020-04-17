@@ -134,7 +134,7 @@ export function characterReducer(state: CharacterState = intitalState,
         }
         case CharacterActionTypes.RemoveEquipment: {
 
-            debugger;
+
 
             let getItem = EquipmentComponent.returnEQ(action.payload.slot, state.mob.equipped)
             let updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, state.mob.equipped);
@@ -143,6 +143,7 @@ export function characterReducer(state: CharacterState = intitalState,
                 getItem = EquipmentComponent.returnEQ(EqSlot.Sheathed, state.mob.equipped);
                 updatedEquipment = EquipmentComponent.mapItemToEQSlot(EqSlot.Sheathed, action.payload.item, state.mob.equipped);
             }
+
 
 
             const inventory = state.mob.inventory;
@@ -190,8 +191,9 @@ export function characterReducer(state: CharacterState = intitalState,
             return {
                 ...state,
                 mob: {
+                    ...state.mob,
                     armorRating: {
-                        armour: state.mob.armorRating.armour + action.payload,
+                        armour: action.payload,
                         magic: 0
                     }
                 }
@@ -201,10 +203,12 @@ export function characterReducer(state: CharacterState = intitalState,
             return {
                 ...state,
                 mob: {
+                    ...state.mob,
                     armorRating: {
-                        armour: state.mob.armorRating.armour - action.payload,
+                        armour: action.payload,
                         magic: 0
-                    }
+                    },
+
                 }
             };
         }

@@ -97,7 +97,7 @@
                                 <mat-label>Alignment</mat-label>
                                 <mat-select formControlName="alignment" placeholder="alignment" required
                                     (selectionChange)="selectAlignment($event)">
-                                    <mat-option *ngFor="let alignment of alignments" [value]="alignment.value">
+                                    <mat-option *ngFor="let alignment of alignments" [value]="alignment">
                                         {{ alignment.name }}
                                     </mat-option>
                                 </mat-select>
@@ -327,7 +327,7 @@
                     </div>
 
 
-                    <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Save
+                    <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Update
                         Mob</button>
                 </form>
             </div>

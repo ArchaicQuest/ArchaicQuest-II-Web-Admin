@@ -233,21 +233,7 @@
                     <mat-option (click)="
                     formGroup.get('wieldEq').reset()" value="">None</mat-option>
                     <mat-option *ngFor="let item of wieldItems" [value]="item">
-                        {{ item.name }} {{item.uuid}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div class="col" *ngIf="wieldItems.length">
-            <mat-form-field appearance="outline" class="form-control">
-                <mat-label>Sheathed</mat-label>
-                <mat-select formControlName="sheathedEq" placeholder="Sheathed" [compareWith]="compareOptions"
-                    (selectionChange)="sheathChange($event)" [value]="item?.uuid === item?.uuid">
-                    <mat-option (click)="
-                    formGroup.get('sheathedEq').reset()" value="">None</mat-option>
-
-                    <mat-option *ngFor="let item of wieldItems" [value]="item">
-                        {{ item.name }} {{item.uuid}}
+                        {{ item.name }}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

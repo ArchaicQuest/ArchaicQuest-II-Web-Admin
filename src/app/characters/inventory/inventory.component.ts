@@ -98,7 +98,7 @@ export class InventoryComponent implements OnInit {
         //let AC = this.inventoryItems.splice(index, 1)[0].armourRating.armour;
         //console.log("AC to remove,", AC)
         this.charStore.dispatch(new RemoveFromInventory(index));
-        //  this.charStore.dispatch(new DecreaseArmour(AC));
+        // this.charStore.dispatch(new DecreaseArmour(item.armourRating.armour));
 
 
     }

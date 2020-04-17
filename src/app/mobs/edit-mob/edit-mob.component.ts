@@ -44,6 +44,7 @@ export class EditMobComponent implements OnInit, OnDestroy {
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
     emotes: string[] = [''];
+    currentAlignment: any;
     constructor(
         private mobService: EditMobService,
         private store: Store<CharacterAppState>,
@@ -60,9 +61,7 @@ export class EditMobComponent implements OnInit, OnDestroy {
 
         this.statuses = this.mobService.getStatus();
 
-        this.mobService.getAlignment().subscribe((data: Alignment[]) => {
-            this.alignments = data;
-        });
+
 
         this.mobService.getDefaultAttackType().subscribe((data: Option[]) => {
             this.attackTypes = data;
@@ -87,6 +86,14 @@ export class EditMobComponent implements OnInit, OnDestroy {
                 console.log("loaded", mob);
                 console.log("x", mob.attributes.attribute['Strength'])
                 console.log("y", mob.className)
+
+                this.mobService.getAlignment().subscribe((data: Alignment[]) => {
+                    this.alignments = data;
+
+                    this.currentAlignment = this.alignments.find(x => x.value === +mob.alignmentScore);
+                    this.addMobForm.get('alignment').setValue(this.currentAlignment);
+                    this.addMobForm.get('alignment').updateValueAndValidity();
+                });
 
                 this.inventoryItems = [...mob.inventory];
 

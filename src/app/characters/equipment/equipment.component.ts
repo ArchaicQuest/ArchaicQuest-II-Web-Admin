@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Item } from 'src/app/items/interfaces/item.interface';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { ItemService } from 'src/app/items/add-item/add-item.service';
-import { FormBuilder } from '@angular/forms';
-import { Store, State } from '@ngrx/store';
+import { Item } from 'src/app/items/interfaces/item.interface';
+import { Equipment } from '../interfaces/equipment.interface';
+import { RemoveEquipment, UpdateEquipment, UpdateEquipped } from '../state/character.actions';
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
-import { GetInventory, AddToEquipment, RemoveFromInventory, RemoveFromEquipment, AddToInventory, IncreaseArmour, UpdateEquipment, RemoveEquipment, UpdateEquipped } from '../state/character.actions';
 import { EqSlot } from './equipment.enum';
-import { Equipment } from '../interfaces/equipment.interface';
 @Component({
     selector: 'app-equipment',
     templateUrl: './equipment.component.html',
@@ -211,6 +211,8 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         this.waistItems = [];
         this.wristItems = [];
         this.wieldItems = [];
+
+        this.formGroup.get('legsEq').setValue('');
     }
 
 
@@ -231,69 +233,126 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             switch (item.slot) {
                 case EqSlot.Arms:
                     this.armsItems = this.armsItems.concat(this.updateEQArray(item));
-
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'armsEq');
+                    }
                     break;
                 case EqSlot.Body:
                     this.bodyItems = this.bodyItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'bodyEq');
+                    }
                     break;
                 case EqSlot.Face:
                     this.faceItems = this.faceItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'faceEq');
+                    }
                     break;
                 case EqSlot.Feet:
                     this.feetItems = this.feetItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'feetEq');
+                    }
                     break;
                 case EqSlot.Finger:
                     this.fingerItems = this.fingerItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'fingerEq');
+                    }
                     break;
                 case EqSlot.Floating:
                     this.floatingItems = this.floatingItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'floatingEq');
+                    }
                     break;
                 case EqSlot.Hands:
                     this.handsItems = this.handsItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'handsEq');
+                    }
                     break;
                 case EqSlot.Held:
                     this.heldItems = this.headItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'heldEq');
+                    }
                     break;
                 case EqSlot.Head:
                     this.headItems = this.headItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'headEq');
+                    }
                     break;
                 case EqSlot.Light:
                     this.lightItems = this.lightItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'lightEq');
+                    }
                     break;
                 case EqSlot.Legs:
                     this.legsItems = this.legsItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'legsEq');
+                    }
                     break;
                 case EqSlot.Neck:
                     this.neckItems = this.neckItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'neckEq');
+                    }
                     break;
                 case EqSlot.Shield:
                     this.shieldItems = this.shieldItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'shieldEq');
+                    }
                     break;
                 case EqSlot.Torso:
                     this.torsoItems = this.torsoItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'torsoEq');
+                    }
                     break;
                 case EqSlot.Waist:
                     this.waistItems = this.waistItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'waistEq');
+                    }
                     break;
                 case EqSlot.Wrist:
                     this.wristItems = this.wristItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'wristEq');
+                    }
                     break;
                 case EqSlot.Wielded:
                     this.wieldItems = this.wieldItems.concat(this.updateEQArray(item));
                     if (item.equipped) {
-                        this.charStore.dispatch(new UpdateEquipped({
-                            slot: item.slot,
-                            item: item
-                        }));
-                        this.formGroup.get('wieldEq').setValue(item);
+                        this.updateWornEQ(item, 'wieldEq');
                     }
                     break;
-                //sheathedEq
+                case EqSlot.Sheathed:
+                    this.wieldItems = this.wieldItems.concat(this.updateEQArray(item));
+                    if (item.equipped) {
+                        this.updateWornEQ(item, 'sheathedEq');
+                    }
+                    break;
+
                 default:
                     console.log(`item slot ${item.slot} is not found`);
             }
         });
 
+    }
+
+    private updateWornEQ(item: Item, formField: string) {
+        this.charStore.dispatch(new UpdateEquipped({
+            slot: item.slot,
+            item: item
+        }));
+        this.formGroup.get(formField).setValue(item);
     }
 
     private resetEQDupe(itemSlot: string, itemUuid: string) {
@@ -327,7 +386,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
     sheathChange(selection) {
         const uuid = selection.value ? selection.value.uuid : '';
-        this.resetEQDupe('wieldEq', uuid);
+        //   this.resetEQDupe('wieldEq', uuid);
         this.onEQChange(selection, EqSlot.Sheathed);
     }
 
