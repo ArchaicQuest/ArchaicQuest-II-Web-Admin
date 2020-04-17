@@ -212,7 +212,11 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         this.wristItems = [];
         this.wieldItems = [];
 
-        this.formGroup.get('legsEq').setValue('');
+
+        Object.keys(this.formGroup.controls).forEach(key => {
+            this.formGroup.get(key).setValue('');
+        });
+
     }
 
 

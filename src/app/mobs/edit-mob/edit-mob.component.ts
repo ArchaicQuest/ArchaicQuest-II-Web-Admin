@@ -1,33 +1,25 @@
-import { Component, OnInit, ViewChild, NgZone, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { EditMobService } from './edit-mob.service';
-import { ActivatedRoute } from '@angular/router';
-import { Gender } from '../../characters/interfaces/gender.interface';
-import { MatSelectChange } from '@angular/material';
-import { Race } from '../../characters/interfaces/race.interface';
-import { Class } from '../../characters/interfaces/class.interface';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import {
-    take,
-    startWith,
-    debounceTime,
-    distinctUntilChanged,
-    switchMap,
-    catchError,
-    takeUntil
-} from 'rxjs/operators';
-import { Alignment } from '../../characters/interfaces/alignment.interface';
-import { Item } from '../../items/interfaces/item.interface';
-import { Observable, throwError } from 'rxjs';
-import { ItemService } from '../../items/add-item/add-item.service';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { MatSelectChange } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { Mob } from '../interfaces/mob.interface';
-import { CharacterAppState } from '../../characters/state/character.state';
-import { SaveChar } from '../../characters/state/character.actions';
-import { Status } from '../../characters/interfaces/status.interface';
-import { Option } from '../../shared/interfaces/option.interface';
-import { EquipmentComponent } from '../../characters/equipment/equipment.component';
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+import { Observable } from 'rxjs';
+import { take, takeUntil } from 'rxjs/operators';
+import { EquipmentComponent } from '../../characters/equipment/equipment.component';
+import { Alignment } from '../../characters/interfaces/alignment.interface';
+import { Class } from '../../characters/interfaces/class.interface';
+import { Gender } from '../../characters/interfaces/gender.interface';
+import { Race } from '../../characters/interfaces/race.interface';
+import { Status } from '../../characters/interfaces/status.interface';
+import { SaveChar } from '../../characters/state/character.actions';
+import { CharacterAppState } from '../../characters/state/character.state';
+import { Item } from '../../items/interfaces/item.interface';
+import { Option } from '../../shared/interfaces/option.interface';
+import { Mob } from '../interfaces/mob.interface';
+import { EditMobService } from './edit-mob.service';
+import { getAC } from 'src/app/characters/state/character.selector';
 
 
 @Component({
@@ -227,8 +219,11 @@ export class EditMobComponent implements OnInit, OnDestroy {
 
         // this.equipmentComponent.GetEquipmentItemsFromInventory()
 
+
+
+
         const mob: Mob = {
-            alignmentScore: 0,
+            alignmentScore: this.addMobForm.get('alignment').value.value,
             armorRating: {
                 armour: 0,
                 magic: 0
@@ -268,11 +263,12 @@ export class EditMobComponent implements OnInit, OnDestroy {
             level: this.addMobForm.get('level').value,
             stats: this.addMobForm.get('stats').value,
             maxStats: this.addMobForm.get('stats').value,
-            money: { gold: 0, copper: 0, silver: 0 },
+            money: { gold: Math.floor(this.addMobForm.get('level').value * 4.2), copper: 0, silver: 0 },
             longName: this.addMobForm.get('longName').value,
             name: this.addMobForm.get('name').value,
             race: this.addMobForm.get('race').value,
-            defaultAttack: this.addMobForm.get('attackType').value
+            defaultAttack: this.addMobForm.get('attackType').value,
+            id: this.route.snapshot.params['id']
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
@@ -282,7 +278,16 @@ export class EditMobComponent implements OnInit, OnDestroy {
         this.store.select(x => x.character.mob.equipped).subscribe(x => {
             mob.equipped = x;
         });
-        console.log(mob);
+
+        this.store
+            .select(getAC)
+            .subscribe((ac: any) => {
+
+                mob.armorRating.armour = ac.armour;
+                mob.armorRating.magic = Math.floor(ac.armour / 2);
+
+            });
+
         this.store.dispatch(new SaveChar(mob));
     }
 }

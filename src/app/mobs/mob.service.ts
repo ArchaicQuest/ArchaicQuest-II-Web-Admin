@@ -1,8 +1,8 @@
 import {
-  Validators,
-  FormBuilder,
-  FormGroup,
-  FormControl
+    Validators,
+    FormBuilder,
+    FormGroup,
+    FormControl
 } from '@angular/forms';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -13,17 +13,17 @@ import { Observable } from 'rxjs';
 import { Mob } from './interfaces/mob.interface';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 
 export class MobService {
-  private host = `${environment.hostAPI}`;
-  private autoCompleteUrl = `${this.host}/character/Mob?query=`;
+    private host = `${environment.hostAPI}`;
+    private autoCompleteUrl = `${this.host}character/Mob?query=`;
 
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  autocompleteMobs(query: string): Observable<Mob[]> {
-    return this.http.get<Mob[]>(`${this.autoCompleteUrl}${query}`);
-}
+    autocompleteMobs(query: string): Observable<Mob[]> {
+        return this.http.get<Mob[]>(`${this.autoCompleteUrl}${query}`);
+    }
 }
