@@ -262,7 +262,6 @@
                                     <mat-form-field appearance="outline" class="form-control">
                                         <mat-label>Move Points</mat-label>
                                         <input type="number" max="9999" min="1" matInput placeholder="Move points"
-                                            [value]="addMobForm.get('level').value | generateMoves: addMobForm.get('attributes').get('dexterity').value || 1"
                                             required formControlName="movePoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('movePoints').hasError('min') ||addMobForm.get('stats').get('movePoints').hasError('max')">

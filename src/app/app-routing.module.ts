@@ -1,7 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [
+    {
+        path: '',
+        loadChildren: './dashboard/dashboard.module#DashboardModule'
+    },
     {
         path: '',
         loadChildren: './items/item.module#ItemModule'
@@ -18,7 +23,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-      scrollPositionRestoration: 'top'
+        scrollPositionRestoration: 'top'
     })],
     exports: [RouterModule]
 })

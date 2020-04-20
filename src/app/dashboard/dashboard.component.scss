@@ -1,0 +1,29 @@
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 30px;
+}
+
+.col {
+    padding: 25px;
+    background: tomato;
+}
+
+.col-heading {
+    text-align: center;
+    font-size: 30px;
+    color: #fff;
+    margin: 0;
+    margin-bottom: 15px;
+}
+
+.col-count {
+    text-align: center;
+    font-size: 45px;
+    color: #fff;
+    margin: 0;
+}
+
+.col-content {
+    align-self: center;
+}

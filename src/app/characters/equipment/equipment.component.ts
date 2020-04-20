@@ -64,6 +64,11 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     ) { }
 
     static mapItemToEQSlot(EQSlot: EqSlot, item: Item, equipped: Equipment): Equipment {
+
+        if (equipped == null) {
+            return;
+        }
+
         switch (EQSlot) {
             case EqSlot.Arms:
                 equipped.arms = item;

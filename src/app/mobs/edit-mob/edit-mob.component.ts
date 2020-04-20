@@ -89,6 +89,10 @@ export class EditMobComponent implements OnInit, OnDestroy {
 
                 this.inventoryItems = [...mob.inventory];
 
+                this.addMobForm.get('stats').get('hitPoints').setValue(mob.attributes.attribute['Hitpoints']);
+                this.addMobForm.get('stats').get('manaPoints').setValue(mob.attributes.attribute['Mana']);
+                this.addMobForm.get('stats').get('movePoints').setValue(mob.attributes.attribute['Moves']);
+
                 this.addMobForm.patchValue({
                     alignment: mob.alignmentScore,
                     armorRating: {
@@ -133,6 +137,9 @@ export class EditMobComponent implements OnInit, OnDestroy {
                 this.addMobForm.controls[i].markAsTouched();
                 this.addMobForm.controls[i].updateValueAndValidity();
             }
+
+            this.addMobForm.get('status').markAsTouched();
+            this.addMobForm.get('status').updateValueAndValidity();
 
 
         });
@@ -283,11 +290,16 @@ export class EditMobComponent implements OnInit, OnDestroy {
             .select(getAC)
             .subscribe((ac: any) => {
 
+                if (ac == null) {
+                    return;
+                }
                 mob.armorRating.armour = ac.armour;
                 mob.armorRating.magic = Math.floor(ac.armour / 2);
 
             });
 
         this.store.dispatch(new SaveChar(mob));
+
+        window.location.href = window.location.href;
     }
 }

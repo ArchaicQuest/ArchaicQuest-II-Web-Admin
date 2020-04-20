@@ -1,23 +1,21 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
+import { MatCheckboxModule, MatExpansionModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatSidenavModule, MatTooltipModule } from '@angular/material';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { HttpClientModule } from '@angular/common/http';
-import { SideNavComponent } from './side-nav/side-nav.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule, MatButtonModule, MatSidenavModule, MatExpansionModule, MatTooltipModule } from '@angular/material';
-import { Shared } from './shared/shared';
-import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
-import { HeaderComponent } from './header/header.component';
-import { ReactiveFormsModule } from '@angular/forms';
-
 import { ToastrModule } from 'ngx-toastr';
+import { environment } from '../environments/environment';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { Shared } from './shared/shared';
 import { SharedService } from './shared/shared.service';
+import { SideNavComponent } from './side-nav/side-nav.component';
+import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
+
+
 
 @NgModule({
     declarations: [

@@ -33,6 +33,9 @@ export class ArmourClassComponent implements OnInit, OnChanges {
             .select(getAC)
             .subscribe((ac: any) => {
                 console.log("AC", ac);
+                if (ac == null) {
+                    return;
+                }
                 this.Defense = ac.armour;
 
             });

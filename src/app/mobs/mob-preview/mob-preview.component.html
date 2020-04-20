@@ -26,16 +26,16 @@
             <td class="cell-title">STR:</td>
             <td>{{mobForm.get('attributes').get('strength').value || 0}}({{mobForm.get('attributes').get('strength').value || 0}})
             </td>
-            <td class="cell-title">HitRoll:</td>
-            <td>5</td>
+            <td class="cell-title"></td> <!-- hit roll -->
+            <td></td>
             <td class="cell-title">Sex:</td>
             <td>{{mobForm.get('gender').value}}</td>
         </tr>
         <tr>
             <td class="cell-title">DEX:</td>
             <td>{{mobForm.get('attributes').get('dexterity').value || 0}}({{mobForm.get('attributes').get('dexterity').value || 0}})
-            <td class="cell-title">Damroll:</td>
-            <td>10</td>
+            <td class="cell-title"></td><!-- dam roll -->
+            <td></td>
             <td class="cell-title">Wimpy:</td>
             <td>15</td>
         </tr>
@@ -148,75 +148,75 @@
     <p class="room__description">{{mobForm.get('name').value}} is using:</p>
 
     <table style="border-top: 0 none;">
-        <tr *ngIf="equipped.light">
+        <tr *ngIf="equipped && equipped.light">
             <td class="cell-title"> &lsaquo;used as light&rsaquo;</td>
             <td>{{equipped.light.name}}</td>
         </tr>
-        <tr *ngIf="equipped.finger">
+        <tr *ngIf="equipped && equipped.finger">
             <td class="cell-title"> &lsaquo;worn on finger&rsaquo;</td>
             <td>{{equipped.finger.name}}</td>
         </tr>
-        <tr *ngIf="equipped.finger2">
+        <tr *ngIf="equipped && equipped.finger2">
             <td class="cell-title"> &lsaquo;worn on finger&rsaquo;</td>
             <td>{{equipped.finger2.name}}</td>
         </tr>
-        <tr *ngIf="equipped.neck">
+        <tr *ngIf="equipped && equipped.neck">
             <td class="cell-title"> &lsaquo;worn around neck&rsaquo;</td>
             <td>{{equipped.neck.name}}</td>
         </tr>
-        <tr *ngIf="equipped.neck2">
+        <tr *ngIf="equipped && equipped.neck2">
             <td class="cell-title"> &lsaquo;worn around neck&rsaquo;</td>
             <td>{{equipped.neck2.name}}</td>
         </tr>
-        <tr *ngIf="equipped.torso">
+        <tr *ngIf="equipped && equipped.torso">
             <td class="cell-title"> &lsaquo;worn around torso&rsaquo;</td>
             <td>{{equipped.torso.name}}</td>
         </tr>
-        <tr *ngIf="equipped.head">
+        <tr *ngIf="equipped && equipped.head">
             <td class="cell-title"> &lsaquo;worn around head&rsaquo;</td>
             <td>{{equipped.head.name}}</td>
         </tr>
-        <tr *ngIf="equipped.legs">
+        <tr *ngIf="equipped && equipped.legs">
             <td class="cell-title"> &lsaquo;worn around legs&rsaquo;</td>
             <td>{{equipped.legs.name}}</td>
         </tr>
-        <tr *ngIf="equipped.hands">
+        <tr *ngIf="equipped && equipped.hands">
             <td class="cell-title"> &lsaquo;worn around hands&rsaquo;</td>
             <td>{{equipped.hands.name}}</td>
         </tr>
-        <tr *ngIf="equipped.arms">
+        <tr *ngIf="equipped && equipped.arms">
             <td class="cell-title"> &lsaquo;worn around arms&rsaquo;</td>
             <td>{{equipped.arms.name}}</td>
         </tr>
-        <tr *ngIf="equipped.shield">
+        <tr *ngIf="equipped && equipped.shield">
             <td class="cell-title"> &lsaquo;worn around shield&rsaquo;</td>
             <td>{{equipped.shield.name}}</td>
         </tr>
-        <tr *ngIf="equipped.body">
+        <tr *ngIf="equipped && equipped.body">
             <td class="cell-title"> &lsaquo;worn about body&rsaquo;</td>
             <td>{{equipped.body.name}}</td>
         </tr>
-        <tr *ngIf="equipped.waist">
+        <tr *ngIf="equipped && equipped.waist">
             <td class="cell-title"> &lsaquo;worn about waist&rsaquo;</td>
             <td>{{equipped.waist.name}}</td>
         </tr>
-        <tr *ngIf="equipped.wrist">
+        <tr *ngIf="equipped && equipped.wrist">
             <td class="cell-title"> &lsaquo;worn around wrist&rsaquo;</td>
             <td>{{equipped.wrist.name}}</td>
         </tr>
-        <tr *ngIf="equipped.wrist2">
+        <tr *ngIf="equipped && equipped.wrist2">
             <td class="cell-title"> &lsaquo;worn around wrist&rsaquo;</td>
             <td>{{equipped.wrist2.name}}</td>
         </tr>
-        <tr *ngIf="equipped.wield">
+        <tr *ngIf="equipped && equipped.wield">
             <td class="cell-title"> &lsaquo;worn around wielded&rsaquo;</td>
             <td>{{equipped.wield.name}}</td>
         </tr>
-        <tr *ngIf="equipped.held">
+        <tr *ngIf="equipped && equipped.held">
             <td class="cell-title"> &lsaquo;worn around held&rsaquo;</td>
             <td>{{equipped.held.name}}</td>
         </tr>
-        <!-- <tr *ngIf="equipped.qu">
+        <!-- <tr *ngIf="equipped && equipped.qu">
             <td class="cell-title"> &lsaquo;worn as quiver&rsaquo;</td>
             <td>{{equipped.held.name}}</td>
         </tr> -->
