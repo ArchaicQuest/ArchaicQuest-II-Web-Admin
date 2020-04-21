@@ -12,7 +12,7 @@
         height: calc(100% - 65px);
     }
 
-    ::ng-deep header {
+    ::ng-deep header.title-bar {
         padding: 0 50px;
         height: 65px;
         background-color: #fff;
@@ -53,7 +53,7 @@
             padding: 15px;
         }
 
-        ::ng-deep header {
+        ::ng-deep header.title-bar {
             padding-left: 84px !important;
             transition: padding-left 0.3s;
         }
@@ -84,7 +84,7 @@
             transition: margin-left 0.3s;
         }
 
-        ::ng-deep header {
+        ::ng-deep header.title-bar {
             padding-left: 272px !important;
             transition: padding-left 0.3s;
         }
@@ -108,8 +108,8 @@
             min-width: 50px;
         }
 
-        .mat-expansion-panel-header .fa,
-        .mat-expansion-panel-header .ra {
+        .mat-expansion-panel-header.title-bar .fa,
+        .mat-expansion-panel-header.title-bar .ra {
             margin-right: 9px;
         }
 
@@ -118,7 +118,7 @@
             margin-right: 10px;
         }
 
-        .mat-expansion-panel-header {
+        .mat-expansion-panel-header.title-bar {
             border-radius: 0px;
 
             &:hover {

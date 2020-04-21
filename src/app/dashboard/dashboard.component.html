@@ -2,42 +2,34 @@
     <app-header>Dashboard</app-header>
 
     <div class="grid">
-        <div class="col">
-            <div class="col-content">
-                <p class="col-heading"><i class="fa fa-shield" aria-hidden="true"></i> Items</p>
-                <p class="col-count">55</p>
+        <div class="stat-card">
 
-                <!-- <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Item Menu">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <i class="fa fa-shield" aria-hidden="true"></i>
-                    <span>View Items</span>
-                </button>
-                <button mat-menu-item disabled>
-
-                    <span>Add ITems</span>
-                </button>
-
-            </mat-menu> -->
-            </div>
+            <p class="col-heading"><i class="fa fa-shield" aria-hidden="true"></i> Items</p>
+            <p class="col-count">55</p>
         </div>
-        <div class="col">
+        <div class="stat-card">
             <p class="col-heading"><i class="ra ra-fox" aria-hidden="true"></i> Mobs</p>
             <p class="col-count">195,000</p>
 
         </div>
-        <div class="col">
+        <div class="stat-card">
             <p class="col-heading"><i class="fa fa-map-signs" aria-hidden="true"></i> Areas / Rooms</p>
-            <p class="col-count">100,000,000 / 200,000,000</p>
+            <p class="col-count">999 / 10,000</p>
 
         </div>
-        <div class="col">
+        <div class="stat-card">
             <p class="col-heading"><i class="fa fa-question" aria-hidden="true"></i> Quests</p>
             <p class="col-count">275,000</p>
         </div>
     </div>
 
-
-</div>
+    <div class="grid-charts">
+        <div class="col">
+            <h2>number of Accounts</h2>
+            <app-line-chart></app-line-chart>
+        </div>
+        <div class="col">
+            <h2>Number of Characters</h2>
+            <app-line-chart></app-line-chart>
+        </div>
+    </div>

@@ -5,7 +5,7 @@ import { HeaderComponent } from "../header/header.component";
 import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @NgModule({
-    declarations: [HeaderComponent, DashboardComponent],
+    declarations: [HeaderComponent],
     imports: [CommonModule],
     exports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent]
 })

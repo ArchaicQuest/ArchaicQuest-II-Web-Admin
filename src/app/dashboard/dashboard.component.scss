@@ -1,10 +1,11 @@
 .grid {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 30px;
 }
 
-.col {
+.stat-card {
     padding: 25px;
     background: tomato;
 }
@@ -27,3 +28,23 @@
 .col-content {
     align-self: center;
 }
+
+.grid-charts {
+    display: grid;
+
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 30px;
+    margin-top: 30px;
+    overflow: hidden;
+
+    .col {
+        background-color: #1b1e27;
+        padding: 25px;
+        overflow-x: scroll;
+
+        h2 {
+            color: #fff;
+        }
+    }
+}
+///@extend
