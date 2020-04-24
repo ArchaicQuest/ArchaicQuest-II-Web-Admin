@@ -4,7 +4,7 @@
     height: 100%;
 
     .mat-drawer-container {
-        background: #fff;
+        background: $secondaryBrandColor;
     }
 
     .mat-drawer-content {
@@ -12,10 +12,19 @@
         height: calc(100% - 65px);
     }
 
+    .mat-sidenav-content {
+        background-color: $secondaryBrandColor;
+    }
+
     ::ng-deep header.title-bar {
         padding: 0 50px;
         height: 65px;
-        background-color: #fff;
+        background-color: $primaryBrandColor;
+        color: #fff;
+
+        .toggle-sidebar {
+            color: #fff;
+        }
     }
 
     .sidebar__logo {
@@ -41,6 +50,10 @@
             img {
                 display: none;
             }
+        }
+
+        .fa {
+            margin-right: 10px;
         }
 
         ::ng-deep .mat-expansion-indicator {

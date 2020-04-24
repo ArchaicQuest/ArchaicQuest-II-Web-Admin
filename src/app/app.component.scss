@@ -1,4 +1,7 @@
-html, body {
+@import "../variables.scss";
+
+html,
+body {
     height: 100%;
 }
 
@@ -6,33 +9,31 @@ html, body {
     height: 100%;
     display: flex;
     box-orient: horizontal;
-  }
-
-
-.main {
-  height: 100%;  /*allows both columns to span the full height of the browser window*/
-  flex: 1;
-  padding: 0 30px;
-  margin-left: 280px;
 }
 
+.main {
+    height: 100%; /*allows both columns to span the full height of the browser window*/
+    flex: 1;
+    padding: 0 30px;
+    margin-left: 280px;
+}
 
 .alert-warning {
-  color: #856404;
-  background-color: #fff3cd;
-  border-color: #ffeeba;
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
 }
 
 .alert {
-  position: relative;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid #0000;
-  border-radius: .25rem;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #0000;
+    border-radius: 0.25rem;
 }
 
 .alert-primary {
-  color: #004085;
-  background-color: #cce5ff;
-  border-color: #b8daff;
+    color: #004085;
+    background-color: #cce5ff;
+    border-color: #b8daff;
 }

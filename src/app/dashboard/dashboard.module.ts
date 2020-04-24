@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { dashboardRoutes } from './dashboard.routes';
 import { MatMenuModule } from '@angular/material/menu';
-import { MatIconModule } from '@angular/material';
+import { MatIconModule, MatTableModule, MatPaginatorModule } from '@angular/material';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { DashboardComponent } from './dashboard.component';
@@ -16,7 +16,9 @@ import { DashboardComponent } from './dashboard.component';
         RouterModule.forChild(dashboardRoutes),
         MatMenuModule,
         MatIconModule,
-        NgxChartsModule
+        NgxChartsModule,
+        MatTableModule,
+        MatPaginatorModule,
 
     ],
     providers: [
