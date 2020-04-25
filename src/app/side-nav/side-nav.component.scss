@@ -111,6 +111,11 @@
     border: none;
     overflow-x: hidden;
 
+    i.fa,
+    i.ra {
+        margin-right: 9px;
+    }
+
     ::ng-deep {
         .mat-drawer-inner-container {
             overflow-x: hidden;
@@ -121,6 +126,7 @@
             min-width: 50px;
         }
 
+        .mat-expansion-panel-header i,
         .mat-expansion-panel-header.title-bar .fa,
         .mat-expansion-panel-header.title-bar .ra {
             margin-right: 9px;
@@ -136,6 +142,15 @@
 
             &:hover {
                 background-color: $secondaryBrandColor !important;
+            }
+        }
+
+        .mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"]) .mat-expansion-panel-header:hover {
+            background: #f6d437 !important;
+            color: #222 !important;
+
+            .mat-expansion-indicator::after {
+                color: #222 !important;
             }
         }
 

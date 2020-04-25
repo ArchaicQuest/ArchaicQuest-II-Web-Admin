@@ -7,6 +7,7 @@ import { MatIconModule, MatTableModule, MatPaginatorModule } from '@angular/mate
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LineChartComponent } from './line-chart/line-chart.component';
 import { DashboardComponent } from './dashboard.component';
+import { DashboardService } from './dashboard.service';
 
 
 
@@ -22,7 +23,7 @@ import { DashboardComponent } from './dashboard.component';
 
     ],
     providers: [
-
+        DashboardService
     ],
     declarations: [
         DashboardComponent,
