@@ -1,172 +1,172 @@
 .room__addObjects {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .room__addObjects__section {
-  margin-bottom: 30px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 30px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 30px;
 }
 
 .addRoom__exits {
-  a {
-    display: none;
-    position: absolute;
-    bottom: 0px;
-    left: 15px;
-  }
-  .mat-raised-button {
-    margin: 25px 0;
-    width: 100%;
-    height: 60px;
-    border: 1px solid #ccc;
-    box-shadow: none;
-    &:hover {
-      background: #673ab7;
-      color: #fff;
-    }
-  }
-
-  .addRoom__exits__coords {
-    font-size: 12px;
-    margin-top: -18px;
-    display: block;
-  }
-
-  .col:hover {
     a {
-      display: inline;
+        display: none;
+        position: absolute;
+        bottom: 0px;
+        left: 15px;
     }
-  }
+    .mat-raised-button {
+        margin: 25px 0;
+        width: 100%;
+        height: 60px;
+        border: 1px solid #6f6e6e;
+        box-shadow: none;
+        &:hover {
+            background: #673ab7;
+            color: #fff;
+        }
+    }
+
+    .addRoom__exits__coords {
+        font-size: 12px;
+        margin-top: -18px;
+        display: block;
+    }
+
+    .col:hover {
+        a {
+            display: inline;
+        }
+    }
 }
 
 .section {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
 }
 
 .exit {
-  content: "";
-  border: 1px solid #ccc;
-  background: #ccc;
-  position: absolute;
-  margin: 0 auto;
-  left: 50%;
-  height: 24px;
-  top: -12px;
-  width: 4px;
-  &[class*="--oneWay"]:after {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 0 10px 10px 10px;
-    border-color: transparent transparent #ccc transparent;
     content: "";
+    border: 1px solid #ccc;
+    background: #ccc;
     position: absolute;
-  }
-
-  &.exit--invalid {
-    border: 1px solid red;
-    background: red;
-
-    &:after {
-      border-color: transparent transparent red transparent;
-    }
-  }
-
-  &.exit--north {
+    margin: 0 auto;
     left: 50%;
     height: 24px;
-    top: -10px;
-
-    &.exit--north--oneWay:after {
-      top: -11px;
-      left: -9px;
+    top: -12px;
+    width: 4px;
+    &[class*="--oneWay"]:after {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 10px 10px 10px;
+        border-color: transparent transparent #ccc transparent;
+        content: "";
+        position: absolute;
     }
-  }
-  &.exit--northEast {
-    left: 99%;
-    height: 40px;
-    top: -14%;
-    transform: rotate(-134deg);
 
-    &.exit--northEast--oneWay:after {
-      top: 38px;
-      left: -9px;
-      transform: rotate(180deg);
+    &.exit--invalid {
+        border: 1px solid red;
+        background: red;
+
+        &:after {
+            border-color: transparent transparent red transparent;
+        }
     }
-  }
 
-  &.exit--east {
-    left: 100%;
-    height: 33px;
-    top: 37%;
-    transform: rotate(90deg);
+    &.exit--north {
+        left: 50%;
+        height: 24px;
+        top: -10px;
 
-    &.exit--east--oneWay:after {
-      top: -3px;
-      left: -9px;
-      transform: rotate(0);
+        &.exit--north--oneWay:after {
+            top: -11px;
+            left: -9px;
+        }
     }
-  }
-  &.exit--southEast {
-    left: 100%;
-    height: 40px;
-    top: 81%;
-    transform: rotate(-44deg);
+    &.exit--northEast {
+        left: 99%;
+        height: 40px;
+        top: -14%;
+        transform: rotate(-134deg);
 
-    &.exit--southEast--oneWay:after {
-      top: 38px;
-      left: -9px;
-      transform: rotate(180deg);
+        &.exit--northEast--oneWay:after {
+            top: 38px;
+            left: -9px;
+            transform: rotate(180deg);
+        }
     }
-  }
-  &.exit--south {
-    left: 50%;
-    height: 30px;
-    top: 86%;
 
-    &.exit--south--oneWay:after {
-      top: 26px;
-      left: -9px;
-      transform: rotate(180deg);
+    &.exit--east {
+        left: 100%;
+        height: 33px;
+        top: 37%;
+        transform: rotate(90deg);
+
+        &.exit--east--oneWay:after {
+            top: -3px;
+            left: -9px;
+            transform: rotate(0);
+        }
     }
-  }
-  &.exit--southWest {
-    left: 0%;
-    height: 40px;
-    top: 81%;
-    transform: rotate(44deg);
+    &.exit--southEast {
+        left: 100%;
+        height: 40px;
+        top: 81%;
+        transform: rotate(-44deg);
 
-    &.exit--southWest--oneWay:after {
-      top: 38px;
-      left: -10px;
-      transform: rotate(180deg);
+        &.exit--southEast--oneWay:after {
+            top: 38px;
+            left: -9px;
+            transform: rotate(180deg);
+        }
     }
-  }
+    &.exit--south {
+        left: 50%;
+        height: 30px;
+        top: 86%;
 
-  &.exit--west {
-    left: 0%;
-    height: 24px;
-    top: 41%;
-    transform: rotate(90deg);
-
-    &.exit--west--oneWay:after {
-      top: 21px;
-      left: -9px;
-      transform: rotate(180deg);
+        &.exit--south--oneWay:after {
+            top: 26px;
+            left: -9px;
+            transform: rotate(180deg);
+        }
     }
-  }
+    &.exit--southWest {
+        left: 0%;
+        height: 40px;
+        top: 81%;
+        transform: rotate(44deg);
 
-  &.exit--northWest {
-    left: 0%;
-    height: 40px;
-    top: -20%;
-    transform: rotate(130deg);
-
-    &.exit--northWest--oneWay:after {
-      top: 33px;
-      left: -10px;
-      transform: rotate(180deg);
+        &.exit--southWest--oneWay:after {
+            top: 38px;
+            left: -10px;
+            transform: rotate(180deg);
+        }
     }
-  }
+
+    &.exit--west {
+        left: 0%;
+        height: 24px;
+        top: 41%;
+        transform: rotate(90deg);
+
+        &.exit--west--oneWay:after {
+            top: 21px;
+            left: -9px;
+            transform: rotate(180deg);
+        }
+    }
+
+    &.exit--northWest {
+        left: 0%;
+        height: 40px;
+        top: -20%;
+        transform: rotate(130deg);
+
+        &.exit--northWest--oneWay:after {
+            top: 33px;
+            left: -10px;
+            transform: rotate(180deg);
+        }
+    }
 }

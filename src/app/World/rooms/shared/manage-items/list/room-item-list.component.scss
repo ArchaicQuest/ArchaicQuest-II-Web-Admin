@@ -1,65 +1,56 @@
 table {
-  width: 100%;
+    width: 100%;
 }
 
 tr.example-detail-row {
-  height: 0;
-}
-
-tr.example-element-row:not(.example-expanded-row):hover {
-  background: #f5f5f5;
-}
-
-tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
+    height: 0;
 }
 
 .example-element-row td {
-  border-bottom-width: 0;
+    border-bottom-width: 0;
 }
 
 .example-element-detail {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
+    min-width: 80px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
 }
 
 .example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
 }
 
 .example-element-description {
-  padding: 16px;
+    padding: 16px;
 }
 
 .example-element-description-attribution {
-  opacity: 0.5;
+    opacity: 0.5;
 }
 
 .alert {
-  position: relative;
-  padding: .75rem 1.25rem;
-  margin-bottom: 1rem;
-  border: 1px solid #0000;
-  border-radius: .25rem;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid #0000;
+    border-radius: 0.25rem;
 }
 
 .alert-primary {
-  color: #111;
-  background-color: #eee;
-  border-color: #ccc;
+    color: #111;
+    background-color: #eee;
+    border-color: #ccc;
 }
 
-
 .add-button {
-    margin:30px 0;
+    margin: 30px 0;
 }

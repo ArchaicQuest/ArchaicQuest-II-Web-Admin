@@ -9,7 +9,7 @@ import { ViewItemsService } from './view-items.service';
 })
 export class ViewItemsComponent implements OnInit {
     items: Item[] = [];
-    displayedColumns: string[] = ['id', 'name', 'itemType', 'slot', 'description', 'examDesc', 'roomDesc', 'weaponType', 'attackType', 'armourType', 'itemFlag', 'questItem', 'actions'];
+    displayedColumns: string[] = ['id', 'name', 'itemType', 'slot', 'weaponType', 'attackType', 'armourType', 'questItem', 'actions'];
     dataSource: MatTableDataSource<Item>;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;

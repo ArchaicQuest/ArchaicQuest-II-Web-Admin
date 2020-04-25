@@ -28,6 +28,8 @@ import { DamageTypePipe } from './pipes/damage-type.pipe';
 import { ArmourTypePipe } from './pipes/armour-type.pipe';
 import { ContainerSizePipe } from './pipes/container-size.pipe';
 import { EditItemComponent } from './edit-item/edit-item.component';
+import { SlotTypePipe } from './pipes/slot-type.pipe';
+import { ItemTypePipe } from './pipes/item-type.pipe.';
 
 
 
@@ -68,6 +70,8 @@ import { EditItemComponent } from './edit-item/edit-item.component';
         AttackTypePipe,
         DamageTypePipe,
         ArmourTypePipe,
+        SlotTypePipe,
+        ItemTypePipe,
         ContainerSizePipe
 
     ],
