@@ -40,7 +40,7 @@
 
                         </tr>
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
-                            <td *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
+                            <td class="exit-map" *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
                                 <div class="exit exit--north  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north')}}"
                                     *ngIf="hasNorthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
@@ -90,7 +90,7 @@
             </div>
 
 
-            <div class="panel">
+            <div class="panel room-list-view">
                 <h2>Rooms</h2>
                 <mat-form-field appearance="outline" class="form-control">
                     <mat-label>Filter Rooms</mat-label>

@@ -1,154 +1,180 @@
 table {
-  width: 100%;
+    width: 100%;
 }
 
 .mat-form-field {
-  font-size: 14px;
-  width: 100%;
+    font-size: 14px;
+    width: 100%;
 }
 
 td {
-  padding: 20px;
+    padding: 20px;
 
-  button {
-    width: 100%;
-    min-width: 272px;
-  }
-
-  .exit {
-    content: "";
-    border: 1px solid #ccc;
-    background: #ccc;
-    position: absolute;
-    margin: 0 auto;
-    left: 50%;
-    height: 24px;
-    top: -12px;
-    width: 4px;
-    &[class*="--oneWay"]:after {
-      width: 0;
-      height: 0;
-      border-style: solid;
-      border-width: 0 10px 10px 10px;
-      border-color: transparent transparent #ccc transparent;
-      content: "";
-      position: absolute;
-
-
+    button {
+        width: 100%;
+        min-width: 272px;
     }
 
-    &.exit--invalid {
-      border: 1px solid red;
-      background: red;
-
-      &:after {
-        border-color: transparent transparent red transparent
-    }
-    }
-
-    &.exit--north {
+    .exit {
+        content: "";
+        border: 1px solid #ccc;
+        background: #ccc;
+        position: absolute;
+        margin: 0 auto;
         left: 50%;
         height: 24px;
-        top: -10px;
+        top: -12px;
+        width: 4px;
+        &[class*="--oneWay"]:after {
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 10px 10px 10px;
+            border-color: transparent transparent #ccc transparent;
+            content: "";
+            position: absolute;
+        }
 
-      &.exit--north--oneWay:after {
-        top: -11px;
-        left: -9px;
-      }
+        &.exit--invalid {
+            border: 1px solid red;
+            background: red;
+
+            &:after {
+                border-color: transparent transparent red transparent;
+            }
+        }
+
+        &.exit--north {
+            left: 50%;
+            height: 24px;
+            top: -10px;
+
+            &.exit--north--oneWay:after {
+                top: -11px;
+                left: -9px;
+            }
+        }
+        &.exit--northEast {
+            left: 99%;
+            height: 40px;
+            top: -14%;
+            transform: rotate(-134deg);
+
+            &.exit--northEast--oneWay:after {
+                top: 38px;
+                left: -9px;
+                transform: rotate(180deg);
+            }
+        }
+
+        &.exit--east {
+            left: 100%;
+            height: 33px;
+            top: 37%;
+            transform: rotate(90deg);
+
+            &.exit--east--oneWay:after {
+                top: -3px;
+                left: -9px;
+                transform: rotate(0);
+            }
+        }
+        &.exit--southEast {
+            left: 100%;
+            height: 40px;
+            top: 81%;
+            transform: rotate(-44deg);
+
+            &.exit--southEast--oneWay:after {
+                top: 38px;
+                left: -9px;
+                transform: rotate(180deg);
+            }
+        }
+        &.exit--south {
+            left: 50%;
+            height: 30px;
+            top: 86%;
+
+            &.exit--south--oneWay:after {
+                top: 26px;
+                left: -9px;
+                transform: rotate(180deg);
+            }
+        }
+        &.exit--southWest {
+            left: 0%;
+            height: 40px;
+            top: 81%;
+            transform: rotate(44deg);
+
+            &.exit--southWest--oneWay:after {
+                top: 38px;
+                left: -10px;
+                transform: rotate(180deg);
+            }
+        }
+
+        &.exit--west {
+            left: 0%;
+            height: 24px;
+            top: 41%;
+            transform: rotate(90deg);
+
+            &.exit--west--oneWay:after {
+                top: 21px;
+                left: -9px;
+                transform: rotate(180deg);
+            }
+        }
+
+        &.exit--northWest {
+            left: 0%;
+            height: 40px;
+            top: -20%;
+            transform: rotate(130deg);
+
+            &.exit--northWest--oneWay:after {
+                top: 33px;
+                left: -10px;
+                transform: rotate(180deg);
+            }
+        }
     }
-    &.exit--northEast {
-        left: 99%;
-        height: 40px;
-        top: -14%;
-        transform: rotate(-134deg);
-
-      &.exit--northEast--oneWay:after {
-        top: 38px;
-        left: -9px;
-        transform: rotate(180deg);
-      }
-    }
-
-    &.exit--east {
-      left: 100%;
-      height: 33px;
-      top: 37%;
-      transform: rotate(90deg);
-
-      &.exit--east--oneWay:after {
-        top: -3px;
-        left: -9px;
-        transform: rotate(0);
-      }
-    }
-    &.exit--southEast {
-      left: 100%;
-      height: 40px;
-      top: 81%;
-      transform: rotate(-44deg);
-
-      &.exit--southEast--oneWay:after {
-        top: 38px;
-        left: -9px;
-        transform: rotate(180deg);
-      }
-    }
-    &.exit--south {
-      left: 50%;
-      height: 30px;
-      top: 86%;
-
-
-      &.exit--south--oneWay:after {
-        top: 26px;
-        left: -9px;
-        transform: rotate(180deg);
-      }
-    }
-    &.exit--southWest {
-      left: 0%;
-      height: 40px;
-      top: 81%;
-      transform: rotate(44deg);
-
-      &.exit--southWest--oneWay:after {
-        top: 38px;
-        left: -10px;
-        transform: rotate(180deg);
-      }
-
-    }
-
-    &.exit--west {
-      left: 0%;
-      height: 24px;
-      top: 41%;
-      transform: rotate(90deg);
-
-      &.exit--west--oneWay:after {
-        top: 21px;
-        left: -9px;
-        transform: rotate(180deg);
-      }
-    }
-
-    &.exit--northWest {
-      left: 0%;
-      height: 40px;
-      top: -20%;
-      transform: rotate(130deg);
-
-      &.exit--northWest--oneWay:after {
-        top: 33px;
-        left: -10px;
-        transform: rotate(180deg);
-      }
-    }
-  }
 }
 
 td,
 th {
-  width: 25%;
-  position: relative;
+    width: 25%;
+    position: relative;
+}
+
+.room-list-view {
+    table {
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    th,
+    td {
+        overflow: hidden;
+        width: 200px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    .mat-column-id,
+    .mat-column-actions {
+        width: 100px;
+    }
+
+    .mat-column-name {
+        width: 300px;
+    }
+
+    .mat-table {
+        overflow-x: auto;
+    }
+    .mat-wrapper {
+        overflow-x: auto;
+    }
 }

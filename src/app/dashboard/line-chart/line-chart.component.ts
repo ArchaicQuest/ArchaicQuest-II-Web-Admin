@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LineChartComponent implements OnInit {
 
-    view: any[] = [700, 300];
+    view: any[] = [800, 400];
     data: any[];
     // options
     legend: boolean = true;
@@ -17,9 +17,9 @@ export class LineChartComponent implements OnInit {
     yAxis: boolean = true;
     showYAxisLabel: boolean = true;
     showXAxisLabel: boolean = true;
-    xAxisLabel: string = 'Year';
-    yAxisLabel: string = 'Population';
-    timeline: boolean = true;
+    xAxisLabel: string = 'Months';
+    yAxisLabel: string = 'Characters';
+    timeline: boolean = false;
 
     colorScheme = {
         domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
@@ -47,68 +47,60 @@ export class LineChartComponent implements OnInit {
     ngOnInit() {
         this.data = [
             {
-                "name": "Germany",
+                "name": "Accounts",
                 "series": [
                     {
-                        "name": "1990",
-                        "value": 62000000
+                        "name": "November 2019",
+                        "value": 3
                     },
                     {
-                        "name": "2010",
-                        "value": 73000000
+                        "name": "December 2019",
+                        "value": 11
                     },
                     {
-                        "name": "2011",
-                        "value": 89400000
-                    }
-                ]
-            },
-
-            {
-                "name": "USA",
-                "series": [
-                    {
-                        "name": "1990",
-                        "value": 250000000
+                        "name": "January 2020",
+                        "value": 5
                     },
                     {
-                        "name": "2010",
-                        "value": 309000000
+                        "name": "February 2020",
+                        "value": 88
                     },
                     {
-                        "name": "2011",
-                        "value": 311000000
-                    }
-                ]
-            },
-
-            {
-                "name": "France",
-                "series": [
-                    {
-                        "name": "1990",
-                        "value": 58000000
+                        "name": "March 2020",
+                        "value": 34
                     },
                     {
-                        "name": "2010",
-                        "value": 50000020
-                    },
-                    {
-                        "name": "2011",
-                        "value": 58000000
+                        "name": "April 2020",
+                        "value": 79
                     }
                 ]
             },
             {
-                "name": "UK",
+                "name": "Characters",
                 "series": [
                     {
-                        "name": "1990",
-                        "value": 57000000
+                        "name": "November 2019",
+                        "value": 5
                     },
                     {
-                        "name": "2010",
-                        "value": 62000000
+                        "name": "December 2019",
+                        "value": 60
+                    },
+                    {
+                        "name": "January 2020",
+                        "value": 4
+                    },
+                    {
+                        "name": "February 2020",
+                        "value": 2
+                    },
+                    {
+                        "name": "March 2020",
+                        "value": 110
+                    },
+                    {
+                        "name": "April 2020",
+                        "value": 25
                     }
                 ]
             }
