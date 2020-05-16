@@ -9,8 +9,7 @@
 
 <div *ngIf="dataSource.length != 0">
 
-    <table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" multiTemplateDataRows
-        class="mat-elevation-z8">
+    <table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" multiTemplateDataRows>
 
         <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;">
             <th mat-header-cell *matHeaderCellDef> {{column}} </th>

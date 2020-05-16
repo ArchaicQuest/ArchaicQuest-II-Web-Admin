@@ -4,7 +4,7 @@
     height: 100%;
 
     .mat-drawer-container {
-        background: #fff;
+        background: $secondaryBrandColor;
     }
 
     .mat-drawer-content {
@@ -12,10 +12,19 @@
         height: calc(100% - 65px);
     }
 
+    .mat-sidenav-content {
+        background-color: $secondaryBrandColor;
+    }
+
     ::ng-deep header.title-bar {
         padding: 0 50px;
         height: 65px;
-        background-color: #fff;
+        background-color: $primaryBrandColor;
+        color: #fff;
+
+        .toggle-sidebar {
+            color: #fff;
+        }
     }
 
     .sidebar__logo {
@@ -41,6 +50,10 @@
             img {
                 display: none;
             }
+        }
+
+        .fa {
+            margin-right: 10px;
         }
 
         ::ng-deep .mat-expansion-indicator {
@@ -98,6 +111,11 @@
     border: none;
     overflow-x: hidden;
 
+    i.fa,
+    i.ra {
+        margin-right: 9px;
+    }
+
     ::ng-deep {
         .mat-drawer-inner-container {
             overflow-x: hidden;
@@ -108,6 +126,7 @@
             min-width: 50px;
         }
 
+        .mat-expansion-panel-header i,
         .mat-expansion-panel-header.title-bar .fa,
         .mat-expansion-panel-header.title-bar .ra {
             margin-right: 9px;
@@ -123,6 +142,15 @@
 
             &:hover {
                 background-color: $secondaryBrandColor !important;
+            }
+        }
+
+        .mat-expansion-panel:not(.mat-expanded):not([aria-disabled="true"]) .mat-expansion-panel-header:hover {
+            background: #f6d437 !important;
+            color: #222 !important;
+
+            .mat-expansion-indicator::after {
+                color: #222 !important;
             }
         }
 

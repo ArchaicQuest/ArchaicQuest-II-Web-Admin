@@ -11,12 +11,12 @@
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
         </mat-form-field>
 
-        <div class="mat-elevation-z8">
+        <div class="mat-wrapper">
             <table mat-table [dataSource]="dataSource" matSort>
 
                 <!-- ID Column -->
                 <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="id"> ID </th>
                     <td mat-cell *matCellDef="let row"> {{row.id}} </td>
                 </ng-container>
 
@@ -27,62 +27,38 @@
                     <td mat-cell *matCellDef="let row"> {{row.name}} </td>
                 </ng-container>
 
-                <!-- description Column -->
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                    <td mat-cell *matCellDef="let row"> {{row.description?.look}} </td>
-                </ng-container>
-
-
-                <!-- description Column -->
-                <ng-container matColumnDef="examDesc">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Examination Description </th>
-                    <td mat-cell *matCellDef="let row"> {{row.description?.exam}} </td>
-                </ng-container>
-
-
-                <!-- description Column -->
-                <ng-container matColumnDef="roomDesc">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Room Description </th>
-                    <td mat-cell *matCellDef="let row"> {{row.description?.room}} </td>
-                </ng-container>
 
 
                 <!-- itemType Column -->
                 <ng-container matColumnDef="itemType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.itemType}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.itemType | itemType  }} </td>
                 </ng-container>
 
                 <!-- slot Column -->
                 <ng-container matColumnDef="slot">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Slot </th>
-                    <td mat-cell *matCellDef="let row"> {{row.slot}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.slot | slotType }} </td>
                 </ng-container>
 
                 <!-- armourType Column -->
                 <ng-container matColumnDef="armourType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header>Armour Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.armourType}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.armourType | armourType }} </td>
                 </ng-container>
 
                 <!-- weaponType Column -->
                 <ng-container matColumnDef="weaponType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Weapon Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.weaponType}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.weaponType | weaponType}} </td>
                 </ng-container>
 
                 <!-- QuestItem Column -->
                 <ng-container matColumnDef="attackType">
                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Attack Type </th>
-                    <td mat-cell *matCellDef="let row"> {{row.attackType}} </td>
+                    <td mat-cell *matCellDef="let row"> {{row.attackType | attackType}} </td>
                 </ng-container>
 
-                <!-- itemFlag Column -->
-                <ng-container matColumnDef="itemFlag">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Flags </th>
-                    <td mat-cell *matCellDef="let row"> {{row.flags}} </td>
-                </ng-container>
 
 
                 <!-- QuestItem Column -->
@@ -91,11 +67,12 @@
                     <td mat-cell *matCellDef="let row"> {{row.questItem}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="actions">
+                <ng-container matColumnDef="actions" stick>
                     <th mat-header-cell *matHeaderCellDef>
                         Actions
                     </th>
-                    <td mat-cell *matCellDef="let row"> <button mat-button [routerLink]="['/edit-item', row.id]">
+                    <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary" type="button"
+                            [routerLink]="['/edit-item', row.id]">
                             Edit
                         </button></td>
                 </ng-container>
@@ -104,8 +81,8 @@
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;">
                 </tr>
             </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
     </div>
 </div>

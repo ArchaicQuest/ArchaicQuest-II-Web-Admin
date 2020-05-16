@@ -7,7 +7,7 @@
 
 .stat-card {
     padding: 25px;
-    background: tomato;
+    background: #333;
 }
 
 .col-heading {
@@ -38,9 +38,9 @@
     overflow: hidden;
 
     .col {
-        background-color: #1b1e27;
+        background-color: #333;
         padding: 25px;
-        overflow-x: scroll;
+        overflow-x: auto;
 
         h2 {
             color: #fff;

@@ -3,7 +3,7 @@
        * Backgrounds
        */
     $color-bg-darkest: #13141b;
-    $color-bg-darker: #1b1e27;
+    $color-bg-darker: #333;
     $color-bg-dark: #232837;
     $color-bg-med: #2f3646;
     $color-bg-light: #455066;
@@ -168,4 +168,10 @@
         color: #fff !important;
         fill: #fff !important;
     }
+}
+
+.areachart-wrapper {
+    display: flex;
+    width: 100%;
+    height: 100%;
 }
