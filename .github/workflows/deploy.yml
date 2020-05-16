@@ -31,7 +31,7 @@ jobs:
     - name: Copy via ssh
       uses: garygrossgarten/github-action-scp@v0.5.3
       with:
-        local: dist\ArchaicQuestII
+        local: dist/ArchaicQuestII
         remote: ${{ secrets.REMOTE_TARGET_ADMIN }}
         host: ${{ secrets.SSH_HOST }}
         username: ${{ secrets.SSH_USER }}
