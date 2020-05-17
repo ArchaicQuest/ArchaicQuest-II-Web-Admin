@@ -27,7 +27,7 @@ jobs:
     - name: Install dependencies
       run: npm install
     - name: Build
-      run: npm run build --prod --build-optimizer 
+      run: npm run buildProd --prod
     - name: Copy via ssh
       uses: garygrossgarten/github-action-scp@v0.5.3
       with:
