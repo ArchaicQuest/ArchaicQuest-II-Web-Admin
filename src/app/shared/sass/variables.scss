@@ -24,8 +24,7 @@ $gray900: #212529;
 $black: #000;
 
 // Fonts
-$fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-  "Helvetica Neue", Arial, sans-serif; // From bootstrap
+$fontFamily: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; // From bootstrap
 
 $fontSizeXS: rem(12);
 $fontSizeSM: rem(14);
@@ -43,10 +42,10 @@ $h6FontSize: 1rem;
 
 // Breakpoints
 $breakpoints: (
-  "small": 480px,
-  "medium": 768px,
-  "large": 992px,
-  "extraLarge": 1200px
+    "small": 480px,
+    "medium": 768px,
+    "large": 992px,
+    "extraLarge": 1200px,
 );
 
 // Forms
@@ -55,6 +54,8 @@ $borderColor: $gray400;
 // Sidebar
 $sidebarWidthOpen: 100px;
 $sidebarWidthClosed: 64px;
+$sidebarWidthOpenMobile: 50px;
+$sidebarWidthClosedMobile: 42px;
 
 // Datetime
 $errorColor: $red;
@@ -69,17 +70,16 @@ $quickLinkEditColor: $green;
 $quickLinkDeleteColor: $red;
 $quickLinkAddColor: $secondaryBrandColor;
 
-
 // ***********
 // Synchronize colors and breakpoints with bootstrap and material
 
 // Bootstrap breakpoints
 $grid-breakpoints: (
-  xs: 0,
-  sm: map-get($breakpoints, "small"),
-  md: map-get($breakpoints, "medium"),
-  lg: map-get($breakpoints, "large"),
-  xl: map-get($breakpoints, "extraLarge")
+    xs: 0,
+    sm: map-get($breakpoints, "small"),
+    md: map-get($breakpoints, "medium"),
+    lg: map-get($breakpoints, "large"),
+    xl: map-get($breakpoints, "extraLarge"),
 );
 
 // Bootstrap colors
@@ -101,7 +101,6 @@ $gray-600: $gray600;
 $gray-700: $gray700;
 $gray-800: $gray800;
 $gray-900: $gray900;
-
 
 // Bootstrap font family
 $font-family-base: $fontFamily;

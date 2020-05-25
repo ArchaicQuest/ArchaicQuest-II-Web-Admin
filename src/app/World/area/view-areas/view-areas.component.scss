@@ -1,14 +1,21 @@
 table {
     width: 100%;
-  }
-  
-  .mat-form-field {
+}
+
+.mat-form-field {
     font-size: 14px;
     width: 100%;
-  }
-  
-  td, th {
-    width: 25%;
-  }
+}
 
- 
+td,
+th {
+    width: 25%;
+
+    button.mat-button:hover {
+        color: #fff !important;
+    }
+}
+
+button.mat-button:hover {
+    color: #fff !important;
+}

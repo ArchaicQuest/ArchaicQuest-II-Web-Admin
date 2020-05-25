@@ -18,9 +18,13 @@
 
     ::ng-deep header.title-bar {
         padding: 0 50px;
-        height: 65px;
+        height: 42px;
         background-color: $primaryBrandColor;
         color: #fff;
+
+        @media (min-width: 768px) {
+            height: 65px;
+        }
 
         .toggle-sidebar {
             color: #fff;
@@ -29,10 +33,15 @@
 
     .sidebar__logo {
         background-color: $secondaryBrandColor;
-        padding: 4px 30px;
+        padding: 9px 10px;
         display: block;
         border-bottom: 1px solid $primaryBrandColor;
-        height: 66px;
+        height: 42px;
+
+        @media (min-width: 768px) {
+            height: 65px;
+            padding: 4px 30px;
+        }
     }
 
     .mat-expansion-panel-spacing {
@@ -46,6 +55,11 @@
             background-repeat: no-repeat;
             background-position: center center;
             background-size: contain;
+            padding: 4px 0;
+            @media (min-width: 768px) {
+                padding: 4px 30px;
+                height: 66px;
+            }
 
             img {
                 display: none;
@@ -72,34 +86,53 @@
         }
 
         .sidebar__sidenav {
-            width: $sidebarWidthClosed;
+            width: $sidebarWidthClosedMobile;
             transition: width 0.3s;
+
+            @media (min-width: 768px) {
+                width: $sidebarWidthClosed;
+            }
         }
     }
 
     &.sidebar--open {
         .sidebar__sidenav {
-            width: 250px;
+            width: 175px;
             transition: width 0.3s;
+
+            @media (min-width: 768px) {
+                width: 250px;
+            }
         }
 
         .sidebar__logo img {
             max-width: 100%;
             margin: auto;
             display: block;
-            margin-top: 11px;
+
+            @media (min-width: 768px) {
+                margin-top: 11px;
+            }
         }
 
         ::ng-deep .mat-sidenav-content {
-            margin-left: 250px !important;
+            margin-left: 0px !important;
             margin-top: 65px;
             padding: 15px;
             transition: margin-left 0.3s;
+
+            @media (min-width: 768px) {
+                margin-left: 250px !important;
+            }
         }
 
         ::ng-deep header.title-bar {
             padding-left: 272px !important;
             transition: padding-left 0.3s;
+
+            @media (min-width: 768px) {
+                padding-left: 272px !important;
+            }
         }
     }
 }
@@ -124,6 +157,18 @@
         .mat-content {
             line-height: 1;
             min-width: 50px;
+        }
+
+        .mat-expansion-panel-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 0 14px;
+            border-radius: inherit;
+
+            @media (min-width: 768px) {
+                padding: 0 24px;
+            }
         }
 
         .mat-expansion-panel-header i,
@@ -200,7 +245,11 @@
 .sideNav__footer {
     position: absolute;
     bottom: 20px;
-    padding-left: 24px;
+    padding-left: 14px;
+
+    @media (min-width: 768px) {
+        padding-left: 24px;
+    }
 
     &-item {
         display: block;

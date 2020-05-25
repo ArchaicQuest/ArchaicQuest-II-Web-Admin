@@ -8,8 +8,12 @@ header {
     right: 0;
     left: 0;
     z-index: 1030;
-    height: 65px;
+    height: 42px;
     background-color: #333;
+
+    @media (min-width: 768px) {
+        height: 66px;
+    }
 }
 
 .toggle-sidebar {

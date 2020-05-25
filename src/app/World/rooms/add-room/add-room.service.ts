@@ -13,6 +13,7 @@ import { BehaviorSubject } from "rxjs";
 import { Mob } from "src/app/mobs/interfaces/mob.interface";
 import { Room } from "../interfaces/room.interface";
 import { tap, catchError } from "rxjs/operators";
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: "root"
@@ -26,7 +27,7 @@ export class RoomService {
         "Content-Type": "application/json"
     });
 
-    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+    constructor(private http: HttpClient, private formBuilder: FormBuilder, private toast: ToastrService) { }
 
     items: BehaviorSubject<Item[]> = new BehaviorSubject([]);
     mobs: BehaviorSubject<Mob[]> = new BehaviorSubject([]);
@@ -127,7 +128,9 @@ export class RoomService {
                 responseType: "text"
             })
             .pipe(tap(x => console.log(x)))
-            .subscribe();
+            .subscribe(response => {
+                this.toast.success(`Room ${data.title} saved successfully.`);
+            });
     }
     updateRoom(data: Room) {
         return this.http
@@ -136,7 +139,9 @@ export class RoomService {
                 responseType: "text"
             })
             .pipe(tap(x => console.log(x)))
-            .subscribe();
+            .subscribe(response => {
+                this.toast.success(`Room ${data.title} saved successfully.`);
+            });
     }
 
     isValidExit(x: number, y: number, z: number, areaId: number) {

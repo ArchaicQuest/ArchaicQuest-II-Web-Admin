@@ -161,6 +161,10 @@ th {
         width: 200px;
         text-overflow: ellipsis;
         white-space: nowrap;
+
+        button.mat-button:hover {
+            color: #fff !important;
+        }
     }
     .mat-column-id,
     .mat-column-actions {
@@ -176,5 +180,9 @@ th {
     }
     .mat-wrapper {
         overflow-x: auto;
+    }
+
+    button.mat-button:hover {
+        color: #fff !important;
     }
 }
