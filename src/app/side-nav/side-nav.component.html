@@ -1,21 +1,7 @@
-<!-- <nav>
-    <h2>ArchaicQuest II</h2>
-
-    <ul>
-        <li> <a class="nav-link" [routerLink]="['/']">Dashboard</a> </li>
-        <li> <a class="nav-link" [routerLink]="['/items']">Items</a> </li>
-        <li> <a class="nav-link" [routerLink]="['/add-mob']">Mobs</a> </li>
-        <li> <a class="nav-link" [routerLink]="['/add-room']">Rooms</a> </li>
-        <li> <a href="nav-link" [routerLink]="['/list-areas']">List Areas</a></li>
-        <li> <a class="nav-link" [routerLink]="['/add-area']">Areas</a> </li>
-    </ul>
-</nav> -->
-
-
 <mat-sidenav-container class="sidebar" [ngClass]="(expanded$ | async) ? 'sidebar--open' : 'sidebar--close'">
     <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="showNav">
         <a class="sidebar__logo" [routerLink]="'/'">
-            <img src="http://www.archaicquest.com/UI/Images/archaic-quest.png" alt="ArchaicQuest II" />
+            <img src="/assets/img/archaic-quest.png" alt="ArchaicQuest II" />
         </a>
 
         <mat-accordion>
