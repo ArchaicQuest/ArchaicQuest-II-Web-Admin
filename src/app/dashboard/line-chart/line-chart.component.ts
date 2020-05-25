@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LineChartComponent implements OnInit {
 
-    view: any[] = [800, 400];
+    view: any[] = [];
     data: any[];
     // options
     legend: boolean = true;
@@ -20,7 +20,7 @@ export class LineChartComponent implements OnInit {
     xAxisLabel: string = 'Months';
     yAxisLabel: string = 'Characters';
     timeline: boolean = false;
-
+    legendPosition = 'right';
     colorScheme = {
         domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
     };
@@ -29,7 +29,26 @@ export class LineChartComponent implements OnInit {
 
 
     constructor() {
+        this.view = [window.innerWidth / 1.25, 400];
 
+        if (window.innerWidth <= 768) {
+            this.showYAxisLabel = false;
+            this.showXAxisLabel = false;
+            this.legendPosition = 'below';
+        } else {
+            this.legendPosition = 'right';
+        }
+    }
+
+    onResize(event) {
+        this.view = [event.target.innerWidth / 1.25, 400];
+        if (event.target.innerWidth <= 768) {
+            this.showYAxisLabel = false;
+            this.showXAxisLabel = false;
+            this.legendPosition = 'below';
+        } else {
+            this.legendPosition = 'right';
+        }
     }
 
     onSelect(data): void {

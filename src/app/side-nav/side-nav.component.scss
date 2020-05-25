@@ -81,8 +81,12 @@
         }
 
         ::ng-deep header.title-bar {
-            padding-left: 84px !important;
+            padding-left: 42px !important;
             transition: padding-left 0.3s;
+
+            @media (min-width: 768px) {
+                padding-left: 84px !important;
+            }
         }
 
         .sidebar__sidenav {
@@ -127,7 +131,7 @@
         }
 
         ::ng-deep header.title-bar {
-            padding-left: 272px !important;
+            padding-left: 172px !important;
             transition: padding-left 0.3s;
 
             @media (min-width: 768px) {

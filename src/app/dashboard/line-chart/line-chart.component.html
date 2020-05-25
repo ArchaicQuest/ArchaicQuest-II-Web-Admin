@@ -1,8 +1,9 @@
 <div class="areachart-wrapper dark">
 
-    <ngx-charts-line-chart [view]="view" [scheme]=" colorScheme" [legend]="legend" [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis" [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel" [timeline]="timeline" [results]="data" (select)="onSelect($event)"
-        (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+    <ngx-charts-line-chart (window:resize)="onResize($event)" [view]="view" [scheme]=" colorScheme" [legend]="legend"
+        [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxis]="xAxis" [yAxis]="yAxis"
+        [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [timeline]="timeline" [results]="data"
+        [legendPosition]="legendPosition" (select)="onSelect($event)" (activate)="onActivate($event)"
+        (deactivate)="onDeactivate($event)">
     </ngx-charts-line-chart>
 </div>
