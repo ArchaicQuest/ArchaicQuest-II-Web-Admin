@@ -37,53 +37,23 @@
     <div class="grid-charts">
         <div class="col">
             <h2>Who's playing</h2>
-            <table mat-table [dataSource]="dataSource" matSort>
 
 
+            <div class="data-list">
+                <div class="data-list__data" *ngFor="let data of filteredArray">
+                    <h3>{{data.name}}</h3>
+                    <p>Lvl {{data.level}}</p>
+                    <p>{{data.race}}, {{data.class}}</p>
 
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-                </ng-container>
+                    <button mat-button [routerLink]="['/edit-mob',1]">view</button>
+                </div>
 
-                <ng-container matColumnDef="race">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Race </th>
-                    <td mat-cell *matCellDef="let row"> {{row.race}} </td>
-                </ng-container>
+            </div>
 
+            <mat-paginator [length]="players.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+                (page)="onPaginateChange($event)">
+            </mat-paginator>
 
-                <ng-container matColumnDef="class">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Class </th>
-                    <td mat-cell *matCellDef="let row"> {{row.class}} </td>
-                </ng-container>
-
-
-                <!-- description Column -->
-                <ng-container matColumnDef="level">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Level </th>
-                    <td mat-cell *matCellDef="let row"> {{row.level}} </td>
-                </ng-container>
-
-
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>
-                        Actions
-                    </th>
-                    <td mat-cell *matCellDef="let row"> <button mat-button [routerLink]="['/edit-mob', row.id]">
-                            view
-                        </button></td>
-                    <td mat-cell *matCellDef="let row"> <button mat-button [routerLink]="['/edit-mob', row.id]">
-                            Teleport
-                        </button></td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-                </tr>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
         </div>
         <div class="col">
             <h2>PvP</h2>

@@ -9,8 +9,8 @@ import { take } from 'rxjs/operators';
     styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-    displayedColumns: string[] = ['name', 'race', 'class', 'level', 'actions'];
-    dataSource: MatTableDataSource<any>;
+    //  displayedColumns: string[] = ['name', 'race', 'class', 'level', 'actions'];
+    //  dataSource: MatTableDataSource<any>;
     quickStats: QuickStats = {
         areaCount: 0,
         itemCount: 0,
@@ -19,38 +19,112 @@ export class DashboardComponent implements OnInit {
         roomCount: 0
     };
 
+    players: any;
+    filteredArray: any[] = []
+    defaultRecords: number = 2;
+    pageEvent: any;
     @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    //  @ViewChild(MatSort) sort: MatSort;
 
     constructor(private service: DashboardService) {
     }
 
     ngOnInit() {
-        this.dataSource = new MatTableDataSource([{
-            name: "liam",
-            class: "Mage",
-            race: "Elf",
+
+        this.players = [{
+            name: 'liam',
+            class: 'Mage',
+            race: 'Elf',
             level: 30
         }, {
-            name: "Kencori",
-            class: "Fighter",
-            race: "Gnome",
+            name: 'Kencori',
+            class: 'Fighter',
+            race: 'Gnome',
             level: 30
         }
             , {
-            name: "Malleus",
-            class: "Cleric",
-            race: "Dwarf",
+            name: 'Malleus',
+            class: 'Cleric',
+            race: 'Dwarf',
             level: 30
         }, {
-            name: "Apsalr",
-            class: "Rogue",
-            race: "Human",
+            name: 'Apsalr',
+            class: 'Rogue',
+            race: 'Human',
             level: 30
-        }])
+        },
+        {
+            name: 'liam',
+            class: 'Mage',
+            race: 'Elf',
+            level: 30
+        }, {
+            name: 'Kencori',
+            class: 'Fighter',
+            race: 'Gnome',
+            level: 30
+        }
+            , {
+            name: 'Malleus',
+            class: 'Cleric',
+            race: 'Dwarf',
+            level: 30
+        }, {
+            name: 'Apsalr',
+            class: 'Rogue',
+            race: 'Human',
+            level: 30
+        },
+        {
+            name: 'liam',
+            class: 'Mage',
+            race: 'Elf',
+            level: 30
+        }, {
+            name: 'Kencori',
+            class: 'Fighter',
+            race: 'Gnome',
+            level: 30
+        }
+            , {
+            name: 'Malleus',
+            class: 'Cleric',
+            race: 'Dwarf',
+            level: 30
+        }, {
+            name: 'Apsalr',
+            class: 'Rogue',
+            race: 'Human',
+            level: 30
+        }];
 
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
+        this.filteredArray = this.players.slice(0, this.defaultRecords);
+
+        // this.dataSource = new MatTableDataSource([{
+        //     name: "liam",
+        //     class: "Mage",
+        //     race: "Elf",
+        //     level: 30
+        // }, {
+        //     name: "Kencori",
+        //     class: "Fighter",
+        //     race: "Gnome",
+        //     level: 30
+        // }
+        //     , {
+        //     name: "Malleus",
+        //     class: "Cleric",
+        //     race: "Dwarf",
+        //     level: 30
+        // }, {
+        //     name: "Apsalr",
+        //     class: "Rogue",
+        //     race: "Human",
+        //     level: 30
+        // }])
+
+        // this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
 
 
         this.service.getQuickStats().pipe(take(1)).subscribe((x) => {
@@ -60,6 +134,12 @@ export class DashboardComponent implements OnInit {
             this.quickStats.questCount = x.questCount;
             this.quickStats.roomCount = x.roomCount;
         })
+    }
+
+    onPaginateChange(e) {
+        let firstCut = e.pageIndex * e.pageSize;
+        let secondCut = firstCut + e.pageSize;
+        this.filteredArray = this.players.slice(firstCut, secondCut);
     }
 
 
