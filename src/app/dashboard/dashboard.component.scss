@@ -72,9 +72,11 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
     gap: 15px;
+    max-height: 400px;
+    overflow-y: scroll;
 
     @media (min-width: 768px) {
-        -gap: 30px;
+        gap: 30px;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     }
     &__data {
@@ -85,6 +87,12 @@
 
         &:last-of-type {
             margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            &:last-of-type {
+                margin-bottom: 25px;
+            }
         }
 
         h3,
