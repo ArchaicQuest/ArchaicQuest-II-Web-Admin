@@ -63,6 +63,13 @@
 
         h2 {
             color: #fff;
+            font-size: 18px;
+            margin-top: 0;
+            @media (min-width: 768px) {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                font-size: 1.5em;
+                margin-top: 0;
+            }
         }
     }
 }

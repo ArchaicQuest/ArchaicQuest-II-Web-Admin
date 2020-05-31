@@ -1,0 +1,43 @@
+.data-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: scroll;
+
+    @media (min-width: 768px) {
+        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    &__data {
+        background: #111;
+        width: 100%;
+        padding: 25px;
+        margin-bottom: 25px;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            &:last-of-type {
+                margin-bottom: 25px;
+            }
+        }
+
+        h3,
+        p {
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+        }
+    }
+}

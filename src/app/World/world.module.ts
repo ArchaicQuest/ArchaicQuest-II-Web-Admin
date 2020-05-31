@@ -58,7 +58,7 @@ import { RoomPreviewComponent } from './rooms/room-preview/room-preview.componen
         MatTableModule,
         MatPaginatorModule,
         MatAutocompleteModule,
-        MatDialogModule
+        MatDialogModule,
     ],
     providers: [
         AreaService,

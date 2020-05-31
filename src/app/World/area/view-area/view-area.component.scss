@@ -143,46 +143,46 @@ td {
     }
 }
 
-td,
-th {
-    width: 25%;
-    position: relative;
-}
+// td,
+// th {
+//     width: 25%;
+//     position: relative;
+// }
 
-.room-list-view {
-    table {
-        width: 100%;
-        table-layout: fixed;
-    }
+// .room-list-view {
+//     table {
+//         width: 100%;
+//         table-layout: fixed;
+//     }
 
-    th,
-    td {
-        overflow: hidden;
-        width: 200px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
+//     th,
+//     td {
+//         overflow: hidden;
+//         width: 200px;
+//         text-overflow: ellipsis;
+//         white-space: nowrap;
 
-        button.mat-button:hover {
-            color: #fff !important;
-        }
-    }
-    .mat-column-id,
-    .mat-column-actions {
-        width: 100px;
-    }
+//         button.mat-button:hover {
+//             color: #fff !important;
+//         }
+//     }
+//     .mat-column-id,
+//     .mat-column-actions {
+//         width: 100px;
+//     }
 
-    .mat-column-name {
-        width: 300px;
-    }
+//     .mat-column-name {
+//         width: 300px;
+//     }
 
-    .mat-table {
-        overflow-x: auto;
-    }
-    .mat-wrapper {
-        overflow-x: auto;
-    }
+//     .mat-table {
+//         overflow-x: auto;
+//     }
+//     .mat-wrapper {
+//         overflow-x: auto;
+//     }
 
-    button.mat-button:hover {
-        color: #fff !important;
-    }
-}
+//     button.mat-button:hover {
+//         color: #fff !important;
+//     }
+// }

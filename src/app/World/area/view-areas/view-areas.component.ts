@@ -3,40 +3,33 @@ import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 
 import { Area } from '../interface/area.interface';
 import { ViewAreasService } from './view-areas.service';
+import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 
 @Component({
     templateUrl: './view-areas.component.html',
     styleUrls: ['./view-areas.component.scss']
 })
-export class ViewAreasComponent implements OnInit {
+export class ViewAreasComponent extends DataListComponent implements OnInit {
     areas: Area[] = [];
     displayedColumns: string[] = ['title', 'description', 'rooms', 'dateUpdated', 'actions'];
     dataSource: MatTableDataSource<Area>;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
-
     constructor(private service: ViewAreasService) {
-
+        super();
     }
 
     ngOnInit() {
 
         this.service.getItemTypes().subscribe((data) => {
-            this.areas = data;
-            console.log(data);
-            this.dataSource = new MatTableDataSource(this.areas);
-            this.dataSource.paginator = this.paginator;
-            this.dataSource.sort = this.sort;
+            this.data = data;
+            this.filteredata = this.data;
         });
+
     }
 
     applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
+        const result = this.data.filter(x => x.title.toLowerCase().includes(filterValue));
+        this.filteredata = result;
     }
 
 }

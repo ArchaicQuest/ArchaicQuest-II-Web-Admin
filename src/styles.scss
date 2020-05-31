@@ -43,6 +43,11 @@ a {
     background: #222 !important;
 }
 
+::ng-deep .mat-flat-button.mat-primary {
+    background-color: #f6d437 !important;
+    color: #222 !important;
+}
+
 .panel {
     background-color: #333; ///$secondaryBrandColor;
     border: 1px solid #111;
@@ -290,6 +295,11 @@ th {
 .mat-header-row {
     background-color: #000 !important;
 }
+
+.mat-paginator-outer-container {
+    border-top: 1px solid #000 !important;
+    background: #111 !important;
+}
 .mat-paginator,
 .mat-paginator-page-size .mat-select-trigger {
     color: #fff !important;
@@ -482,5 +492,71 @@ button,
 
     &:hover {
         background: #000 !important;
+    }
+}
+
+.line-clamp {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}
+
+///
+.data-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
+    gap: 15px;
+    max-height: 400px;
+    overflow-y: scroll;
+
+    @media (min-width: 768px) {
+        gap: 30px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    i.fa {
+        padding-right: 5px;
+        padding-bottom: 6px;
+    }
+
+    &__data {
+        background: #111;
+        width: 100%;
+        padding: 25px;
+        margin-bottom: 25px;
+
+        &__description {
+            margin: 20px 0 !important;
+            max-height: 91px;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        @media (min-width: 768px) {
+            &:last-of-type {
+                margin-bottom: 25px;
+            }
+        }
+
+        h3,
+        p {
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        p {
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 15px;
+            width: 100%;
+        }
     }
 }
