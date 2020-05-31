@@ -1,7 +1,7 @@
-table {
-    width: 100%;
+.panel button {
+    margin-top: 10px;
+    margin-bottom: 15px;
 }
-
 .mat-form-field {
     font-size: 14px;
     width: 100%;
@@ -9,7 +9,7 @@ table {
 
 .data-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
     gap: 15px;
     padding: 0;
     min-height: 76vh;
@@ -17,18 +17,18 @@ table {
 
     @media (min-width: 425px) {
         gap: 30px;
-        grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
     }
 
     @media (min-width: 768px) {
         gap: 30px;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
         padding: 25px 0 0 0;
     }
 
     @media (min-width: 1440px) {
         gap: 30px;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
         padding: 25px 0 0 0;
     }
 
