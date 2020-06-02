@@ -1,6 +1,6 @@
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
     grid-gap: 15px;
 
     @media (min-width: 768px) {
@@ -47,7 +47,7 @@
 
 .grid-charts {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(142px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
     grid-gap: 30px;
     margin-top: 30px;
     overflow: hidden;
