@@ -32,18 +32,20 @@ export class SideNavComponent implements OnInit, AfterViewInit {
 
     clearRoomCache() {
         this._sharedService.updateRoomCache().pipe(take(1)).subscribe((val) => {
-            console.log(val);
             this._toast.success(JSON.parse(val).toast);
         });
     }
 
 
     toggleSideNavPanelState(sidenavState: boolean) {
-        // this.viewPanels.forEach(panel => {
-        //     if (panel.expanded && !sidenavState) {
-        //         panel.close();
-        //     }
-        // });
+        setTimeout(() => {
+
+            this.viewPanels.forEach(panel => {
+                if (panel.expanded && !sidenavState) {
+                    panel.close();
+                }
+            });
+        })
     }
 
     ngAfterViewInit() {
