@@ -8,12 +8,13 @@ import { EditService } from '../edit-area/edit-area.service';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Room } from '../../rooms/interfaces/room.interface';
 import { debug } from 'util';
+import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 
 @Component({
     templateUrl: './view-area.component.html',
     styleUrls: ['./view-area.component.scss']
 })
-export class ViewAreaComponent implements OnInit {
+export class ViewAreaComponent extends DataListComponent implements OnInit {
     area: Area;
     roomTable: RoomTable = {};
     roomCount: 5;
@@ -27,17 +28,12 @@ export class ViewAreaComponent implements OnInit {
     errors: string[] = [];
 
     displayedColumns: string[] = ['id', 'name', 'coords'];
-    dataSource: MatTableDataSource<Room>;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
     constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute, private cd: ChangeDetectorRef) {
-
+        super();
     }
 
     ngOnInit() {
-        console.log("wtf")
-
 
         this.editAreaServices.getArea(this.route.snapshot.params['id']).subscribe(data => {
 
@@ -68,9 +64,9 @@ export class ViewAreaComponent implements OnInit {
             } else {
 
                 this.rooms = data.rooms;
-                this.dataSource = new MatTableDataSource(this.rooms);
-                this.dataSource.paginator = this.paginator;
-                this.dataSource.sort = this.sort;
+                this.data = this.rooms;
+                this.filteredata = this.rooms;
+
 
                 data.rooms.forEach(room => {
                     this.roomTable[this.service.getRoomID(room.coords)] = room;
@@ -117,11 +113,8 @@ export class ViewAreaComponent implements OnInit {
     }
 
     applyFilter(filterValue: string) {
-        this.dataSource.filter = filterValue.trim().toLowerCase();
-
-        if (this.dataSource.paginator) {
-            this.dataSource.paginator.firstPage();
-        }
+        const result = this.data.filter(x => x.title.toLowerCase().includes(filterValue));
+        this.filteredata = result;
     }
 
 

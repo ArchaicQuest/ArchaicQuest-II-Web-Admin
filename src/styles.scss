@@ -8,6 +8,19 @@
 
 @import "./variables.scss";
 
+html {
+    scrollbar-color: #666 #222;
+}
+
+::ng-deep *::-webkit-scrollbar-track {
+    background: #222; /* color of the tracking area */
+}
+::ng-deep *::-webkit-scrollbar-thumb {
+    background-color: #666; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+    border: 3px solid #222; /* creates padding around scroll thumb */
+}
+
 body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100vh;
@@ -196,6 +209,7 @@ P:last-of-type {
         td {
             height: 100px;
             width: 100px;
+            position: relative;
         }
     }
 }
@@ -504,14 +518,14 @@ button,
 ///
 .data-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(154px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(154px, 1fr));
     gap: 15px;
     max-height: 400px;
     overflow-y: scroll;
 
     @media (min-width: 768px) {
         gap: 30px;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     }
 
     i.fa {
