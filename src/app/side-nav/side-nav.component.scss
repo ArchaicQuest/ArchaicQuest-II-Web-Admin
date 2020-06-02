@@ -76,8 +76,13 @@
 
         ::ng-deep .mat-sidenav-content {
             transition: margin-left 0.3s;
-            margin-top: 65px;
-            padding: 15px;
+            margin-top: 52px;
+            padding: 0;
+
+            @media (min-width: 768px) {
+                margin-top: 65px;
+                padding: 15px;
+            }
         }
 
         ::ng-deep header.title-bar {
@@ -121,12 +126,14 @@
 
         ::ng-deep .mat-sidenav-content {
             margin-left: 0px !important;
-            margin-top: 65px;
-            padding: 15px;
+            margin-top: 52px;
+            padding: 0;
             transition: margin-left 0.3s;
 
             @media (min-width: 768px) {
                 margin-left: 250px !important;
+                margin-top: 65px;
+                padding: 15px;
             }
         }
 
