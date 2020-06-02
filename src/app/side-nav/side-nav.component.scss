@@ -3,6 +3,19 @@
 .sidebar {
     height: 100%;
 
+    &.sidebar--open .dark-overlay {
+        position: fixed;
+        background: rgba(000, 000, 000, 0.7);
+        width: 100%;
+        height: 100vh;
+        z-index: 999;
+        top: 0;
+        left: 0;
+    }
+    &.sidebar--close .dark-overlay {
+        display: none;
+    }
+
     .mat-drawer-container {
         background: $secondaryBrandColor;
     }

@@ -1,38 +1,40 @@
 <mat-sidenav-container class="sidebar" [ngClass]="(expanded$ | async) ? 'sidebar--open' : 'sidebar--close'">
+
     <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="showNav">
         <a class="sidebar__logo" [routerLink]="'/'">
             <img src="/assets/img/archaic-quest.png" alt="ArchaicQuest II" />
         </a>
 
         <mat-accordion>
-            <mat-expansion-panel (click)="toggleSidenav(true)">
-                <mat-expansion-panel-header matTooltip="Dashboard" matTooltipPosition="right">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Dashboard" matTooltipPosition="right"
+                    (click)="toggleSidenav(true)">
                     <i class="fa fa-home" aria-hidden="true"></i>
                     <span *ngIf="expanded$ | async">Home</span>
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
-                        <a [routerLink]="['/']">
+                        <a (click)="toggleSidenav(false)" [routerLink]="['/']">
                             <i class="fa fa-tachometer" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Dashboard</span>
                         </a>
                     </li>
                 </ul>
             </mat-expansion-panel>
-            <mat-expansion-panel (click)="toggleSidenav(true)">
-                <mat-expansion-panel-header matTooltip="Areas" matTooltipPosition="right">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Areas" matTooltipPosition="right" (click)="toggleSidenav(true)">
                     <i class="fa fa-map-signs" aria-hidden="true"></i>
                     <span *ngIf="expanded$ | async">Areas</span>
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
-                        <a [routerLink]="['/world/list-areas']">
+                        <a [routerLink]="['/world/list-areas']" (click)="toggleSidenav(false)">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">View Areas</span>
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="['/world/add-area']">
+                        <a [routerLink]="['/world/add-area']" (click)="toggleSidenav(false)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Create Area</span>
                         </a>
@@ -46,40 +48,40 @@
                     </li>
                 </ul>
             </mat-expansion-panel>
-            <mat-expansion-panel (click)="toggleSidenav(true)">
-                <mat-expansion-panel-header matTooltip="Items" matTooltipPosition="right">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Items" matTooltipPosition="right" (click)="toggleSidenav(true)">
                     <i class="fa fa-shield" aria-hidden="true"></i>
                     <span *ngIf="expanded$ | async">Items</span>
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
-                        <a [routerLink]="['/items']">
+                        <a [routerLink]="['/items']" (click)="toggleSidenav(false)">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">View Items</span>
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="['/add-item']">
+                        <a [routerLink]="['/add-item']" (click)="toggleSidenav(false)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Create Item</span>
                         </a>
                     </li>
                 </ul>
             </mat-expansion-panel>
-            <mat-expansion-panel (click)="toggleSidenav(true)">
-                <mat-expansion-panel-header matTooltip="Mobs" matTooltipPosition="right">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Mobs" matTooltipPosition="right" (click)="toggleSidenav(true)">
                     <i class="ra ra-fox " aria-hidden="true"></i>
                     <span *ngIf="expanded$ | async">Mobs</span>
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
-                        <a [routerLink]="['/mobs']">
+                        <a [routerLink]="['/mobs']" (click)="toggleSidenav(false)">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">View Mobs</span>
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="['/add-mob']">
+                        <a [routerLink]="['/add-mob']" (click)="toggleSidenav(false)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Create Mob</span>
                         </a>
@@ -99,6 +101,7 @@
     </mat-sidenav>
 
     <mat-sidenav-content>
+        <div class="dark-overlay" (click)="toggleSidenav(false)"></div>
         <ng-content></ng-content>
     </mat-sidenav-content>
 

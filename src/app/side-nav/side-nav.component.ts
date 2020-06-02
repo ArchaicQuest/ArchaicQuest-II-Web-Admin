@@ -55,7 +55,9 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     }
 
     toggleSidenav(forceOpen?: boolean) {
-        this._store$.dispatch(new ToggleSideNavSuccessAction(forceOpen));
+        setTimeout(() => {
+            this._store$.dispatch(new ToggleSideNavSuccessAction(forceOpen));
+        });
     }
 
     logout(event) {
