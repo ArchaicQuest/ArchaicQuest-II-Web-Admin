@@ -12,12 +12,13 @@
         <div class="row">
 
 
-            <div class="col">
+            <div class="col-4">
 
                 <button title="Add North West Exit" [disabled]="!northWestValidExit && exits.northWest == null"
                     mat-raised-button type="button" (click)="openExitDialog('North West')"
                     [color]="exits.northWest != null ? 'primary' : ''">
-                    North west
+                    <ng-container *ngIf="isMobileLayout">NW</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">North west</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('North West')}}
                     </span>
@@ -25,10 +26,11 @@
 
 
             </div>
-            <div class="col">
+            <div class="col-4">
                 <button [disabled]="!northValidExit && exits.north == null" title="Add North Exit" mat-raised-button
                     type="button" (click)="openExitDialog('North')" [color]="exits.north != null ? 'primary' : ''">
-                    North
+                    <ng-container *ngIf="isMobileLayout">N</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">North</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('North')}}
                     </span>
@@ -40,12 +42,14 @@
                     exit</a>
             </div>
 
-            <div class="col">
+            <div class="col-4">
 
                 <button title=" Add North East Exit" [disabled]="!northEastValidExit && exits.northEast == null"
                     mat-raised-button type="button" (click)="openExitDialog('North East')"
                     [color]="exits.northEast != null ? 'primary' : ''">
-                    North East
+                    <ng-container *ngIf="isMobileLayout">NE</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">North East</ng-container>
+
                     <span class="addRoom__exits__coords">
                         {{displayCoord('North East')}}
                     </span>
@@ -56,11 +60,12 @@
 
         <div class="row">
 
-            <div class="col">
+            <div class="col-4">
 
                 <button title="Add West Exit" [disabled]="!westValidExit && exits.west == null" mat-raised-button
                     type="button" (click)="openExitDialog('West')" [color]="exits.west != null ? 'primary' : ''">
-                    West
+                    <ng-container *ngIf="isMobileLayout">W</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">West</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('West')}}
                     </span>
@@ -68,20 +73,23 @@
 
             </div>
 
-            <div class="col">
+            <div class="col-4">
                 <button mat-raised-button type="button" disabled="true">
-                    Current Room
+                    <ng-container *ngIf="isMobileLayout">@</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">Current Room</ng-container>
+
                     <span class="addRoom__exits__coords">({{coords?.x}},
                         {{coords?.y}},
                         {{coords?.z}})</span>
                 </button>
             </div>
 
-            <div class="col">
+            <div class="col-4">
 
                 <button title="Add East Exit" [disabled]="!eastValidExit && exits.east == null" mat-raised-button
                     [color]="exits.east != null ? 'primary' : ''" type="button" (click)="openExitDialog('East')">
-                    East
+                    <ng-container *ngIf="isMobileLayout">E</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">East</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('East')}}
                     </span>
@@ -90,12 +98,14 @@
             </div>
         </div>
         <div class="row">
-            <div class="col">
+            <div class="col-4">
 
                 <button title="Add South West Exit" [disabled]="!southWestValidExit && exits.southWest == null"
                     mat-raised-button type="button" (click)="openExitDialog('South West')"
                     [color]="exits.southWest != null ? 'primary' : ''">
-                    South West
+                    <ng-container *ngIf="isMobileLayout">SW</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">South West</ng-container>
+
                     <span class="addRoom__exits__coords">
                         {{displayCoord('South West')}}
                     </span>
@@ -103,11 +113,12 @@
 
 
             </div>
-            <div class="col">
+            <div class="col-4">
 
                 <button title="Add South Exit" [disabled]="!southValidExit && exits.south == null" mat-raised-button
                     type="button" (click)="openExitDialog('South')" [color]="exits.south != null ? 'primary' : ''">
-                    South
+                    <ng-container *ngIf="isMobileLayout">S</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">South</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('South')}}
                     </span>
@@ -117,12 +128,13 @@
             </div>
 
 
-            <div class="col">
+            <div class="col-4">
 
                 <button title="Add South East Exit" [disabled]="!southEastValidExit && exits.southEast == null"
                     mat-raised-button type="button" (click)="openExitDialog('South East')"
                     [color]="exits.southEast != null ? 'primary' : ''">
-                    South East
+                    <ng-container *ngIf="isMobileLayout">SE</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">South East</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('South East')}}
                     </span>
@@ -134,10 +146,11 @@
         </div>
 
         <div class="row">
-            <div class="col">
+            <div class="col-4">
                 <button mat-raised-button type="button" [disabled]="exits.up == null" (click)="openExitDialog('Up')"
                     [color]="exits.up != null ? 'primary' : ''">
-                    Up
+                    <ng-container *ngIf="isMobileLayout">U</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">Up</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('Up')}}
                     </span>
@@ -146,10 +159,11 @@
 
             </div>
 
-            <div class="col">
+            <div class="col-4">
                 <button mat-raised-button type="button" [disabled]="exits.down == null" (click)="openExitDialog('Down')"
                     [color]="exits.down != null ? 'primary' : ''">
-                    Down
+                    <ng-container *ngIf="isMobileLayout">D</ng-container>
+                    <ng-container *ngIf="!isMobileLayout">Down</ng-container>
                     <span class="addRoom__exits__coords">
                         {{displayCoord('Down')}}
                     </span>
@@ -169,7 +183,7 @@
     </p>
 
     <div class="row">
-        <div class="col">
+        <div class="col-4">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>X:</mat-label>
                 <input matInput placeholder="X Coord" required formControlName="CoordX" />
@@ -178,7 +192,7 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <div class="col">
+        <div class="col-4">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Y:</mat-label>
                 <input matInput placeholder="Y Coord" required formControlName="CoordY" />
@@ -188,7 +202,7 @@
             </mat-form-field>
         </div>
 
-        <div class="col">
+        <div class="col-4">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Z:</mat-label>
                 <input matInput placeholder="Z Coord" required formControlName="CoordZ" />

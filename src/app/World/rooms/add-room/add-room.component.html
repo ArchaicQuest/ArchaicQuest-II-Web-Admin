@@ -1,7 +1,7 @@
 <div class="container-fluid new-rom">
     <app-header>Add new room</app-header>
     <div class="row">
-        <div class="col-7">
+        <div class="col col-md-7">
             <div class="panel">
                 <form novalidate [formGroup]="addRoomForm" (ngSubmit)="saveRoom()">
                     <h2>Room Information:</h2>
@@ -142,7 +142,7 @@
             </div>
         </div>
 
-        <div class="col-5">
+        <div class="col col-md-5">
             <app-room-preview-component [addRoomForm]="this.addRoomForm" [exits]="exits" [mobs]="mobs" [items]="items"
                 [roomObjects]="getRoomObjectsControl.controls">
             </app-room-preview-component>

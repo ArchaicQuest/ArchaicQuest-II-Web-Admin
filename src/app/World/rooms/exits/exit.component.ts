@@ -86,7 +86,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
     southValidExit = false;
     southWestValidExit = false;
     westValidExit = false;
-
+    isMobileLayout = false;
     constructor(
         private roomServices: RoomService,
         private editRoomService: EditRoomService,
@@ -103,6 +103,9 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
         console.log(this.route.snapshot.params);
         this.roomId = this.route.snapshot.params['roomId'];
 
+        this.isMobileLayout = window.innerWidth <= 425;
+
+        window.onresize = () => this.isMobileLayout = window.innerWidth <= 425;
 
     }
 
