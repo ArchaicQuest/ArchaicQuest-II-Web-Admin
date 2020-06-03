@@ -21,6 +21,13 @@
         height: 60px;
         border: 1px solid #6f6e6e;
         box-shadow: none;
+
+        @media (min-width: 768px) {
+            margin: 5px 0;
+            font-size: 12px;
+            padding: 0 5px;
+        }
+
         &:hover {
             background: #673ab7;
             color: #fff;

@@ -1,146 +1,151 @@
-<app-header>Add new room</app-header>
-<div class="row">
-    <div class="col-7">
-        <div class="panel">
-            <form novalidate [formGroup]="addRoomForm" (ngSubmit)="saveRoom()">
-                <h2>Room Information:</h2>
-                <div class="section">
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field appearance="outline" class="form-control">
-                                <mat-label>Title</mat-label>
-                                <input matInput placeholder="Title" value="" required formControlName="title" />
-                                <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
-                                    Room title is required.
-                                </mat-error>
-                            </mat-form-field>
+<div class="container-fluid new-rom">
+    <app-header>Add new room</app-header>
+    <div class="row">
+        <div class="col-7">
+            <div class="panel">
+                <form novalidate [formGroup]="addRoomForm" (ngSubmit)="saveRoom()">
+                    <h2>Room Information:</h2>
+                    <div class="section">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput placeholder="Title" value="" required formControlName="title" />
+                                    <mat-error *ngIf="addRoomForm.get('title').hasError('required')">
+                                        Room title is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Description</mat-label>
+                                    <textarea matInput placeholder="Title" cdkTextareaAutosize
+                                        #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        required formControlName="description"></textarea>
+                                    <mat-error *ngIf="addRoomForm.get('description').hasError('required')">
+                                        Room description is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field appearance="outline" class="form-control">
-                                <mat-label>Description</mat-label>
-                                <textarea matInput placeholder="Title" cdkTextareaAutosize
-                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                    required formControlName="description"></textarea>
-                                <mat-error *ngIf="addRoomForm.get('description').hasError('required')">
-                                    Room description is required.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                    </div>
-                </div>
-                <h2>Room Objects:</h2>
-                <p>
-                    These are used to add more Information about key items highlighted in
-                    the description.
-                </p>
-                <div class="section">
-                    <div class="row room__addObjects">
-                        <div class="col">
-                            <div class="room__addObjects__section" formArrayName="roomObjects" *ngFor="
+                    <h2>Room Objects:</h2>
+                    <p>
+                        These are used to add more Information about key items highlighted in
+                        the description.
+                    </p>
+                    <div class="section">
+                        <div class="row room__addObjects">
+                            <div class="col">
+                                <div class="room__addObjects__section" formArrayName="roomObjects" *ngFor="
                 let roomObject of getRoomObjectsControl.controls;
                 let i = index
               ">
-                                <div [formGroupName]="i">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Keyword</mat-label>
-                                        <input type="text" matInput placeholder="Keyword" formControlName="name" />
-                                    </mat-form-field>
+                                    <div [formGroupName]="i">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Keyword</mat-label>
+                                            <input type="text" matInput placeholder="Keyword" formControlName="name" />
+                                        </mat-form-field>
 
-                                    <div class="row">
-                                        <div class="col">
-                                            <mat-form-field appearance="outline" class="form-control">
-                                                <mat-label>Look</mat-label>
-                                                <textarea matInput placeholder="Basic description" cdkTextareaAutosize
-                                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2"
-                                                    cdkAutosizeMaxRows="20" formControlName="look"></textarea>
-                                            </mat-form-field>
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-form-field appearance="outline" class="form-control">
+                                                    <mat-label>Look</mat-label>
+                                                    <textarea matInput placeholder="Basic description"
+                                                        cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                        formControlName="look"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col">
+                                                <mat-form-field appearance="outline" class="form-control">
+                                                    <mat-label>Examine</mat-label>
+                                                    <textarea matInput placeholder="Detailed Description"
+                                                        cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                        formControlName="examine"></textarea>
+                                                </mat-form-field>
+                                            </div>
                                         </div>
-                                        <div class="col">
-                                            <mat-form-field appearance="outline" class="form-control">
-                                                <mat-label>Examine</mat-label>
-                                                <textarea matInput placeholder="Detailed Description"
-                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                    formControlName="examine"></textarea>
-                                            </mat-form-field>
+                                        <div class="row">
+                                            <div class="col">
+                                                <mat-form-field appearance="outline" class="form-control">
+                                                    <mat-label>Touch</mat-label>
+                                                    <textarea matInput placeholder="How does the object feel?"
+                                                        cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                        formControlName="touch"></textarea>
+                                                </mat-form-field>
+                                            </div>
+
+                                            <div class="col">
+                                                <mat-form-field appearance="outline" class="form-control">
+                                                    <mat-label>Taste</mat-label>
+                                                    <textarea matInput placeholder="How does the object taste?"
+                                                        cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                        formControlName="taste"></textarea>
+                                                </mat-form-field>
+                                            </div>
+                                            <div class="col">
+                                                <mat-form-field appearance="outline" class="form-control">
+                                                    <mat-label>Smell</mat-label>
+                                                    <textarea matInput placeholder="How does the object smell?"
+                                                        cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                                        formControlName="smell"></textarea>
+                                                </mat-form-field>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <mat-form-field appearance="outline" class="form-control">
-                                                <mat-label>Touch</mat-label>
-                                                <textarea matInput placeholder="How does the object feel?"
-                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                    formControlName="touch"></textarea>
-                                            </mat-form-field>
-                                        </div>
+                                    <button mat-raised-button (click)="removeRoomObject(i)">Remove</button>
+                                </div>
 
-                                        <div class="col">
-                                            <mat-form-field appearance="outline" class="form-control">
-                                                <mat-label>Taste</mat-label>
-                                                <textarea matInput placeholder="How does the object taste?"
-                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                    formControlName="taste"></textarea>
-                                            </mat-form-field>
-                                        </div>
-                                        <div class="col">
-                                            <mat-form-field appearance="outline" class="form-control">
-                                                <mat-label>Smell</mat-label>
-                                                <textarea matInput placeholder="How does the object smell?"
-                                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize"
-                                                    cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
-                                                    formControlName="smell"></textarea>
-                                            </mat-form-field>
-                                        </div>
+
+                                <div class="row">
+                                    <div class="col">
+                                        <button mat-raised-button color="primary" (click)="this.addRoomObject()">Add
+                                            another
+                                            Room
+                                            Object</button>
                                     </div>
+
                                 </div>
-                                <button mat-raised-button (click)="removeRoomObject(i)">Remove</button>
-                            </div>
-
-
-                            <div class="row">
-                                <div class="col">
-                                    <button mat-raised-button color="primary" (click)="this.addRoomObject()">Add another
-                                        Room
-                                        Object</button>
-                                </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="section">
-                    <h2>Items</h2>
+                    <div class="section">
+                        <h2>Items</h2>
 
-                    <app-item-list [data]="items"></app-item-list>
-                </div>
+                        <app-item-list [data]="items"></app-item-list>
+                    </div>
 
-                <div class="section">
-                    <h2>Mobs</h2>
+                    <div class="section">
+                        <h2>Mobs</h2>
 
-                    <app-mob-list [data]="mobs"></app-mob-list>
-                </div>
-
+                        <app-mob-list [data]="mobs"></app-mob-list>
+                    </div>
 
 
-                <div class="section">
-                    <app-exit-component (exitValueChange)="onExitValueChange($event)" [addRoomForm]="this.addRoomForm">
-                    </app-exit-component>
-                </div>
-                <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">
-                    Save Room
-                </button>
-            </form>
+
+                    <div class="section">
+                        <app-exit-component (exitValueChange)="onExitValueChange($event)"
+                            [addRoomForm]="this.addRoomForm">
+                        </app-exit-component>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">
+                        Save Room
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="col-5">
-        <app-room-preview-component [addRoomForm]="this.addRoomForm" [exits]="exits" [mobs]="mobs" [items]="items"
-            [roomObjects]="getRoomObjectsControl.controls">
-        </app-room-preview-component>
+        <div class="col-5">
+            <app-room-preview-component [addRoomForm]="this.addRoomForm" [exits]="exits" [mobs]="mobs" [items]="items"
+                [roomObjects]="getRoomObjectsControl.controls">
+            </app-room-preview-component>
+        </div>
     </div>
 </div>

@@ -165,7 +165,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     }
 
     addRoomObject() {
-        this.getRoomObjectsControl.push(this.roomServices.initRoomObject());
+        this.getRoomObjectsControl.push();
 
         console.log(this.roomServices.addRoomForm.value);
     }
