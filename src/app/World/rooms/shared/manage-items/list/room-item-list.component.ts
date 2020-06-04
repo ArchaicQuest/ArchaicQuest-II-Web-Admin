@@ -7,6 +7,7 @@ import { ItemSelectorComponent } from 'src/app/items/selectors/Item-selector/ite
 import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
 import { container } from '@angular/core/src/render3';
 import { Shared } from 'src/app/shared/shared';
+import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 
 
 @Component({
@@ -20,7 +21,7 @@ import { Shared } from 'src/app/shared/shared';
             transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
         ])]
 })
-export class RoomItemListComponent implements OnInit, OnChanges {
+export class RoomItemListComponent extends DataListComponent implements OnInit, OnChanges {
     @Input() data: Item[];
     @Input() container: Item | Item[];
     @Input() isInventory: Boolean;
@@ -32,25 +33,26 @@ export class RoomItemListComponent implements OnInit, OnChanges {
     dataSource = this.data || this.items;
     columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
     expandedElement: Item | null;
-    constructor(public dialog: MatDialog, public helpers: Shared) { }
+    constructor(public dialog: MatDialog, public helpers: Shared) { super(); }
 
 
     ngOnInit() {
-        console.log(this.data || this.items)
+        console.log("items", this.data || this.items)
 
     }
 
     ngOnChanges() {
-        this.dataSource = this.data;
+        this.filteredata = this.data;
     }
 
 
     addItem(item: Item) {
-
-        item.slot = this.mapSlot(item.slot);
+        console.log("item", item)
         let temp = this.dataSource.slice();
         temp.push(JSON.parse(JSON.stringify(item)));
-        this.dataSource = temp;
+        console.log(temp)
+        this.data = temp;
+        this.filteredata = this.data;
     }
 
 
@@ -73,7 +75,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
-        this.dataSource = JSON.parse(JSON.stringify(array));
+        this.filteredata = JSON.parse(JSON.stringify(array));
     }
 
 
@@ -83,7 +85,7 @@ export class RoomItemListComponent implements OnInit, OnChanges {
 
 
     ngAfterViewInit() {
-        this.dataSource = this.data;
+        this.filteredata = this.data;
 
     }
 

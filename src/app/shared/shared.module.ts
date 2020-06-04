@@ -5,10 +5,11 @@ import { HeaderComponent } from "../header/header.component";
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { DataListComponent } from './components/data-list/data-list.component';
 import { LineTruncationLibModule } from 'ngx-line-truncation';
+import { ItemTypePipe } from '../items/pipes/item-type.pipe.';
 
 @NgModule({
-    declarations: [HeaderComponent],
+    declarations: [HeaderComponent, ItemTypePipe],
     imports: [CommonModule, LineTruncationLibModule],
-    exports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent, LineTruncationLibModule]
+    exports: [CommonModule, FormsModule, ReactiveFormsModule, HeaderComponent, LineTruncationLibModule, ItemTypePipe]
 })
 export class SharedModule { }

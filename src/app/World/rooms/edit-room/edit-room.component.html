@@ -1,11 +1,11 @@
-<div class="container-fluid new-rom">
+<div class="container-fluid new-room">
     <app-header>Edit room</app-header>
     <div class="row">
         <div class="col-md-7 col">
             <div class="panel">
                 <form novalidate [formGroup]="addRoomForm" (ngSubmit)="saveRoom()">
                     <h2>Room Information:</h2>
-                    <div class="section">
+                    <div>
                         <div class="row">
                             <div class="col">
                                 <mat-form-field appearance="outline" class="form-control">
@@ -31,11 +31,13 @@
                             </div>
                         </div>
                     </div>
-                    <h2>Room Objects:</h2>
-                    <p>
-                        These are used to add more Information about key items highlighted in
-                        the description.
-                    </p>
+                    <div class="section">
+                        <h2>Room Objects:</h2>
+                        <p>
+                            These are used to add more Information about key items highlighted in
+                            the description.
+                        </p>
+                    </div>
                     <div class="section">
                         <div class="row room__addObjects">
                             <div class="col">
@@ -46,14 +48,16 @@
                                     <div [formGroupName]="i">
                                         <mat-form-field appearance="outline" class="form-control">
                                             <mat-label>Keyword</mat-label>
-                                            <input type="text" matInput placeholder="Keyword" formControlName="name" />
+                                            <input type="text" matInput placeholder="e.g table"
+                                                formControlName="name" />
                                         </mat-form-field>
 
                                         <div class="row">
                                             <div class="col">
                                                 <mat-form-field appearance="outline" class="form-control">
                                                     <mat-label>Look</mat-label>
-                                                    <textarea matInput placeholder="Basic description"
+                                                    <textarea matInput
+                                                        placeholder="e.g the table is made out of hard wood, upon the table you find..."
                                                         cdkTextareaAutosize #autosize="cdkTextareaAutosize"
                                                         cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
                                                         formControlName="look"></textarea>
@@ -62,7 +66,8 @@
                                             <div class="col">
                                                 <mat-form-field appearance="outline" class="form-control">
                                                     <mat-label>Examine</mat-label>
-                                                    <textarea matInput placeholder="Detailed Description"
+                                                    <textarea matInput
+                                                        placeholder="A more verbose description compared to look"
                                                         cdkTextareaAutosize #autosize="cdkTextareaAutosize"
                                                         cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
                                                         formControlName="examine"></textarea>
