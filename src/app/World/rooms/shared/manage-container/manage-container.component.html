@@ -1,0 +1,46 @@
+<h1 mat-dialog-title>Manage Container Items</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+
+
+
+            <app-item-selector (sendItemToParent)="addItemToContainer($event)"></app-item-selector>
+
+            <h2>Container Items</h2>
+            <div class="data-list">
+                <div class="data-list__data" *ngFor="let data of filteredata">
+                    <h3 [line-truncation]="2">{{data.name}}</h3>
+                    <p class="data-list__data__description" [line-truncation]="3">{{data.description.look}}</p>
+
+
+                    <div class="data-list__actions">
+
+                        <div class="row">
+                            <div class="col">
+                                <p><i class="ra ra-sword"></i> Lvl: {{data.level}} / {{data.itemType | itemType }}</p>
+                                <p><i class="fa fa-calendar"></i> {{data.dateUpdated | date: 'dd/MM/yyyy'}}</p>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+                                <a target="_blank" mat-raised-button color="primary"
+                                    [routerLink]="['/edit-item/', data.id]">
+                                    View
+                                </a>
+                            </div>
+
+                            <div class="col">
+                                <button mat-flat-button color="secondary" target="_blank"
+                                    [routerLink]="['/world/edit-area', data.id]">
+                                    Edit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

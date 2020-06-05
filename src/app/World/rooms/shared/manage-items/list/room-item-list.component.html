@@ -29,11 +29,19 @@
 
                 <div class="row">
                     <div class="col">
-                        <button mat-raised-button color="primary" [routerLink]="['/world/area', data.id]"> View
-                        </button>
+                        <a target="_blank" mat-raised-button color="primary" [routerLink]="['/edit-item/', data.id]">
+                            View
+                        </a>
                     </div>
                     <div class="col">
-                        <button mat-flat-button color="secondary" [routerLink]="['/world/edit-area', data.id]">
+                        <a target="_blank" mat-raised-button color="primary"
+                            (click)="openContainerDialog(data, data, 0)">
+                            View Container Items
+                        </a>
+                    </div>
+                    <div class="col">
+                        <button mat-flat-button color="secondary" target="_blank"
+                            [routerLink]="['/world/edit-area', data.id]">
                             Edit</button>
                     </div>
                 </div>

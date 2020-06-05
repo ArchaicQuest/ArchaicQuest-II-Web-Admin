@@ -8,6 +8,8 @@ import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
 import { container } from '@angular/core/src/render3';
 import { Shared } from 'src/app/shared/shared';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
+import { ManageContainerItemsComponent } from '../../manage-container-items/manage-container-items.component';
+import { ManageContainerComponent } from '../../manage-container/manage-container.component';
 
 
 @Component({
@@ -72,6 +74,20 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
         });
     }
 
+
+    openContainerDialog(item: Item, container: Item, index: number): void {
+        const dialogRef = this.dialog.open(ManageContainerComponent, {
+            height: '65%',
+            width: '50%',
+            data: {
+                item: item,
+                items: container,
+                containerIndex: index--
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => { });
+    }
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
