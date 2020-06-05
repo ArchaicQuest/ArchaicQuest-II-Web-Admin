@@ -31,10 +31,7 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
 
     items: Item[] = [];
 
-    //move
     dataSource = this.data || this.items;
-    columnsToDisplay = ['name', 'slot', 'level', 'questItem', 'container', 'actions'];
-    expandedElement: Item | null;
     constructor(public dialog: MatDialog, public helpers: Shared) { super(); }
 
 

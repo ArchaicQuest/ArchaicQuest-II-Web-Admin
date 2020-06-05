@@ -22,7 +22,7 @@ export class ManageContainerComponent extends DataListComponent implements OnIni
 
     ngOnInit() {
 
-        this.filteredata = this.data.item.containerItems || [];
+        this.filteredata = this.data.item.container.items || [];
 
     }
 
@@ -31,7 +31,9 @@ export class ManageContainerComponent extends DataListComponent implements OnIni
         console.log("i", item)
         console.log("ic", this.filteredata)
 
-        this.filteredata.push(item);
+        this.data.item.container.items.push(item);
+
+        // this.filteredata.push(item);
 
     }
 

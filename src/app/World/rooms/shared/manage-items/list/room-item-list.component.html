@@ -33,8 +33,8 @@
                             View
                         </a>
                     </div>
-                    <div class="col">
-                        <a target="_blank" mat-raised-button color="primary"
+                    <div class="col" *ngIf="data.itemType === 2">
+                        <a style="margin: 15px 0" target="_blank" mat-raised-button color="primary"
                             (click)="openContainerDialog(data, data, 0)">
                             View Container Items
                         </a>
@@ -48,58 +48,6 @@
             </div>
         </div>
     </div>
-
-    <!-- <table *ngIf="dataSource.length != 0" mat-table [dataSource]="dataSource" multiTemplateDataRows>
-
-        <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay;">
-            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-            <div *ngIf="column == 'actions'">
-                <td mat-cell *matCellDef="let k = dataIndex"> <button mat-button
-                        (click)="removeItem(dataSource, k)">{{k}}
-                        Edit</button> | <button mat-button (click)="removeItem(dataSource, k)">Remove
-                    </button></td>
-            </div>
-            <div *ngIf="column == 'container'">
-                <td mat-cell *matCellDef="let element">
-                    {{element.itemType == '2' ? 'True' : 'False'}}
-                </td>
-            </div>
-
-            <div *ngIf="column == 'slot'">
-                <td mat-cell *matCellDef="let element">
-                    {{mapSlot(element.slot)}} {{element.slot}}
-                </td>
-            </div>
-
-            <div *ngIf="column != 'actions' || column != 'container' || column != 'slot'">
-                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-            </div>
-        </ng-container>
-
-
-       
-        <ng-container matColumnDef="expandedDetail">
-            <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-                <div *ngIf="!disableContainerItems && element.itemType == '2'" class="example-element-detail"
-                    [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-                    <h2> Container Items</h2>
-                    <div>
-                        {{element | json }}
-                        <app-item-list [data]="element.container.items" [container]="element"></app-item-list>
-                    </div>
-                </div>
-            </td>
-        </ng-container>
-
-
-        <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-        <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
-            [class.example-expanded-row]="expandedElement === element"
-            (click)="expandedElement = expandedElement === element ? null : element">
-        </tr>
-        <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-    </table> -->
-
 
 
 </div>
