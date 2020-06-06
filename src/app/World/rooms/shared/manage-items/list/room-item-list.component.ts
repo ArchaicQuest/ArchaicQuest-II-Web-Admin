@@ -87,8 +87,11 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
     }
 
     removeItem(array: Item[], index: number) {
+
         this.helpers.removeItem(array, index);
-        this.filteredata = JSON.parse(JSON.stringify(array));
+
+        console.log("remove", array)
+        this.filteredata = [...array]
     }
 
 

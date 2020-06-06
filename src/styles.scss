@@ -538,6 +538,19 @@ button,
         width: 100%;
         padding: 25px;
         margin-bottom: 25px;
+        position: relative;
+
+        .fa-times-circle {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            font-size: 20px;
+            color: red;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
 
         &__description {
             margin: 20px 0 !important;
