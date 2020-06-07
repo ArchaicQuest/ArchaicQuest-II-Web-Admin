@@ -488,6 +488,14 @@ button,
     }
 }
 
+.mat-raised-button.mat-primary:disabled {
+    color: #111 !important;
+    opacity: 0.5;
+    &:hover {
+        background-color: #f6d437 !important;
+    }
+}
+
 .alert-primary {
     color: #fff !important;
     background-color: #222 !important;
