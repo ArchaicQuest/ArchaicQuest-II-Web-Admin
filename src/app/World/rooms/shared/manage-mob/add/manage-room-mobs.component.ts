@@ -33,7 +33,7 @@ export class ManageRoomMobsComponent implements OnInit {
 
 
     addMobToRoom(data: Mob) {
-        debugger;
+        //  debugger;
         this.roomServices.roomMobs(data);
 
         this.toastr.success(`${data.name} added successfully.`);

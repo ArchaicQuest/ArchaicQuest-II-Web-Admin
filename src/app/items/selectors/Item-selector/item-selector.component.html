@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col">
             <mat-form-field appearance="outline" class="form-control">
-                <mat-label>Add item to room</mat-label>
+                <mat-label>Add item</mat-label>
                 <input type="text" placeholder="Search for an item" aria-label="Assignee" matInput
                     formControlName="itemSearch" [matAutocomplete]="auto">
                 <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayItems">
@@ -11,8 +11,9 @@
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <a href="javascript:(0)" mat-raised-button color="primary" (click)="addItem()">Add
-                item</a>
+            <button href="javascript:(0)" mat-raised-button color="primary" (click)="addItem()"
+                [disabled]="formGroup.get('itemSearch').value == null">Add
+                item</button>
         </div>
     </div>
 </form>

@@ -6,6 +6,9 @@ import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { ManageRoomMobsComponent } from '../add/manage-room-mobs.component';
 import { Shared } from 'src/app/shared/shared';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
+import { ManageContainerComponent } from '../../manage-container/manage-container.component';
+import { ManageInventoryComponent } from '../manage-inventory/manage-inventory.component';
 
 
 @Component({
@@ -19,14 +22,12 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
             transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
         ])]
 })
-export class RoomMobListComponent implements OnInit, OnChanges {
+export class RoomMobListComponent extends DataListComponent implements OnInit, OnChanges {
     @Input() data: Mob[];
 
     //move
     dataSource = this.data;
-    columnsToDisplay = ['name',   'level',  'actions'];
-    expandedElement: Mob | null;
-    constructor(public dialog: MatDialog, public helpers: Shared) { }
+    constructor(public dialog: MatDialog, public helpers: Shared) { super(); }
 
 
     ngOnInit() {
@@ -34,7 +35,7 @@ export class RoomMobListComponent implements OnInit, OnChanges {
     }
 
     ngOnChanges() {
-        this.dataSource = this.data;
+        this.filteredata = this.data;
     }
 
 
@@ -44,6 +45,8 @@ export class RoomMobListComponent implements OnInit, OnChanges {
         let temp = this.dataSource.slice();
         temp.push(JSON.parse(JSON.stringify(item)));
         this.dataSource = temp;
+        this.data = temp;
+        this.filteredata = this.data;
     }
 
 
@@ -62,7 +65,7 @@ export class RoomMobListComponent implements OnInit, OnChanges {
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
-        this.dataSource = JSON.parse(JSON.stringify(array));
+        this.filteredata = [...array]
     }
 
 
@@ -72,12 +75,23 @@ export class RoomMobListComponent implements OnInit, OnChanges {
 
 
     ngAfterViewInit() {
-        this.dataSource = this.data;
+        this.filteredata = this.data;
 
     }
 
-    t() {
-        console.log("t");
+
+    openInventoryDialog(item: Item, container: Item, index: number): void {
+        const dialogRef = this.dialog.open(ManageInventoryComponent, {
+            height: '65%',
+            width: '50%',
+            data: {
+                item: item,
+                items: container,
+                containerIndex: index--
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => { });
     }
 
 

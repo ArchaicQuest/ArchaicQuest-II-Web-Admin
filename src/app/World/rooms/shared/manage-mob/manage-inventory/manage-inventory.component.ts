@@ -3,17 +3,18 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Component({
-    templateUrl: './manage-container.component.html'
+    templateUrl: './manage-inventory.component.html'
 })
-export class ManageContainerComponent extends DataListComponent implements OnInit {
+export class ManageInventoryComponent extends DataListComponent implements OnInit {
 
     constructor(
-        public dialogRef: MatDialogRef<ManageContainerComponent>,
+        public dialogRef: MatDialogRef<ManageInventoryComponent>,
         public helpers: Shared,
         @Inject(MAT_DIALOG_DATA) public data: {
-            item: Item,
+            item: Mob,
             items: Item[],
             containerIndex: number
         }) { super(); }
@@ -24,7 +25,7 @@ export class ManageContainerComponent extends DataListComponent implements OnIni
 
     ngOnInit() {
 
-        this.filteredata = this.data.item.container.items || [];
+        this.filteredata = this.data.item.inventory || [];
 
     }
 
@@ -33,11 +34,11 @@ export class ManageContainerComponent extends DataListComponent implements OnIni
         this.filteredata = [...array]
     }
 
-    addItemToContainer(item: Item) {
+    addItemToInventory(item: Item) {
         console.log("i", item)
         console.log("ic", this.filteredata)
 
-        this.data.item.container.items.push(item);
+        this.data.item.inventory.push(item);
 
         // this.filteredata.push(item);
 

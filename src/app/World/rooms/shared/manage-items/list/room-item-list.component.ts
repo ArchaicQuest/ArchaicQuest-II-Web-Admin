@@ -87,10 +87,7 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
     }
 
     removeItem(array: Item[], index: number) {
-
         this.helpers.removeItem(array, index);
-
-        console.log("remove", array)
         this.filteredata = [...array]
     }
 
@@ -103,10 +100,6 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
     ngAfterViewInit() {
         this.filteredata = this.data;
 
-    }
-
-    t() {
-        console.log("t");
     }
 
 

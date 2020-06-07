@@ -41,6 +41,7 @@ import { EditRoomService } from './rooms/edit-room/edit-room.service';
 import { ExitComponent } from './rooms/exits/exit.component';
 import { RoomPreviewComponent } from './rooms/room-preview/room-preview.component';
 import { ManageContainerComponent } from './rooms/shared/manage-container/manage-container.component';
+import { ManageInventoryComponent } from './rooms/shared/manage-mob/manage-inventory/manage-inventory.component';
 
 
 
@@ -71,7 +72,7 @@ import { ManageContainerComponent } from './rooms/shared/manage-container/manage
         RoomExitService
     ],
     entryComponents: [ManageContainerItemsComponent, ManageRoomItemsComponent, ManageRoomMobsComponent, RoomMobListComponent,
-        RoomItemListComponent, ManageMobComponent, ManageExitsComponent, ItemSelectorComponent, ManageContainerComponent],
+        RoomItemListComponent, ManageMobComponent, ManageExitsComponent, ItemSelectorComponent, ManageContainerComponent, ManageInventoryComponent],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
@@ -83,6 +84,7 @@ import { ManageContainerComponent } from './rooms/shared/manage-container/manage
         MobSelectorComponent,
         ManageContainerItemsComponent,
         ManageContainerComponent,
+        ManageInventoryComponent,
         ManageMobComponent,
         ManageExitsComponent,
         RoomItemListComponent,

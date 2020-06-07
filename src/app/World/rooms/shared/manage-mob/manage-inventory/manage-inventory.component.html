@@ -1,13 +1,13 @@
-<h1 mat-dialog-title>Manage Container Items</h1>
+<h1 mat-dialog-title>Manage Inventory</h1>
 <div mat-dialog-content>
     <div class="row">
         <div class="col">
 
 
 
-            <app-item-selector (sendItemToParent)="addItemToContainer($event)"></app-item-selector>
+            <app-item-selector (sendItemToParent)="addItemToInventory($event)"></app-item-selector>
 
-            <h2>Container Items</h2>
+            <h2>Inventory</h2>
             <div class="data-list">
                 <div class="data-list__data" *ngFor="let data of filteredata">
                     <a (click)="removeItem(filteredata, i)" class="fa fa-times-circle"></a>

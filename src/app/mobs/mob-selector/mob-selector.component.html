@@ -11,8 +11,9 @@
                     </mat-option>
                 </mat-autocomplete>
             </mat-form-field>
-            <a href="javascript:(0)" mat-raised-button color="primary" (click)="addMob()">Add
-                mob</a>
+            <button href="javascript:(0)" mat-raised-button color="primary" (click)="addMob()"
+                [disabled]="formGroup.get('search').value == null">Add
+                mob</button>
         </div>
     </div>
 </form>
