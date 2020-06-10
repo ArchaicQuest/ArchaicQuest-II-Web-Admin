@@ -61,6 +61,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     componentActive = true;
     addRoomForm: FormGroup;
     id: number;
+    areaId: number;
     coords: Coords;
     items: Item[] = [];
     mobs: Mob[] = [];
@@ -117,7 +118,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         this.addRoomForm = this.roomServices.addRoomForm;
 
         this.id = this.route.snapshot.params["id"];
-
+        this.areaId = this.route.snapshot.params["area"];
 
         this.roomServices.items.subscribe((value: Item[]) => {
             console.log(value);
@@ -207,7 +208,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     isExitValid(direction: string): string {
         console.log(this.coords)
         const coords = this.exitService.setExitCoord(direction, this.coords);
-        this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1).subscribe({
+        this.roomServices.isValidExit(coords.x, coords.y, coords.z, this.id).subscribe({
             next: x => {
                 return x;
             }

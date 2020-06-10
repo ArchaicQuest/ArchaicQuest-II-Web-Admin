@@ -113,6 +113,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
         if (this.roomId != null) {
             this.editRoomService.getRoom(+this.roomId).subscribe((value: Room) => {
+
                 this.exits = value.exits;
 
                 this.areaId = value.areaId;
@@ -290,11 +291,13 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
 
     openExitDialog(exitDirection: string): void {
+
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
             data: {
                 exit: exitDirection,
-                currentCoord: this.coords,
+                currentCoord: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.coords,
+                exitAreaId: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.areaId,
                 areaId: this.areaId
             }
         });
