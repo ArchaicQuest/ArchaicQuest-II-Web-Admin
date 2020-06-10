@@ -9,6 +9,9 @@ import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Room } from '../../rooms/interfaces/room.interface';
 import { debug } from 'util';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
+import { Shared } from 'src/app/shared/shared';
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs/operators';
 
 @Component({
     templateUrl: './view-area.component.html',
@@ -29,7 +32,13 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
 
     displayedColumns: string[] = ['id', 'name', 'coords'];
 
-    constructor(private service: ViewAreaService, private editAreaServices: EditService, private route: ActivatedRoute, private cd: ChangeDetectorRef) {
+    constructor(
+        private service: ViewAreaService,
+        private editAreaServices: EditService,
+        private route: ActivatedRoute,
+        private cd: ChangeDetectorRef,
+        private toastr: ToastrService,
+        public helpers: Shared) {
         super();
     }
 
@@ -115,6 +124,18 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     applyFilter(filterValue: string) {
         const result = this.data.filter(x => x.title.toLowerCase().includes(filterValue));
         this.filteredata = result;
+    }
+
+    removeItem(array: Room[], index: number, id: number) {
+        this.service.deleteRoom(id).pipe(take(1)).subscribe((deleted: any) => {
+
+            if (deleted) {
+                this.helpers.removeItem(array, index);
+                this.filteredata = [...array];
+
+                this.toastr.success(deleted.toast);
+            }
+        });
     }
 
 

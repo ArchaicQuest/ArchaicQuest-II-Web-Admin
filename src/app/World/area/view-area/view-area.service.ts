@@ -14,11 +14,16 @@ import { environment } from 'src/environments/environment';
 export class ViewAreaService {
     private host = environment.hostAPI;
     private getAreasUrl = `${this.host}World/Area`;
+    private deleteRoomUrl = `${this.host}World/Room`;
 
     constructor(private http: HttpClient) { }
 
     getItemTypes(): Observable<Area[]> {
         return this.http.get<Area[]>(this.getAreasUrl);
+    }
+
+    deleteRoom(id: number): Observable<boolean> {
+        return this.http.delete<boolean>(`${this.deleteRoomUrl}/${id}`);
     }
 
     getRoomID(coords: Coords) {

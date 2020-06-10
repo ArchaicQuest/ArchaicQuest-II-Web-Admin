@@ -292,12 +292,13 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
     openExitDialog(exitDirection: string): void {
 
+        console.log(`WTFMATE${exitDirection.toLowerCase().replace(/\s/g, '')}`);
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
             data: {
                 exit: exitDirection,
-                currentCoord: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.coords,
-                exitAreaId: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.areaId,
+                currentCoord: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.coords || this.coords,
+                exitAreaId: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.areaId || this.areaId,
                 areaId: this.areaId
             }
         });
