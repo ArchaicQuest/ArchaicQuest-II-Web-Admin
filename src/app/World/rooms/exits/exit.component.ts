@@ -76,6 +76,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
         up: null,
         west: null
     };
+    enableInvalidExits: false;
 
     northWestValid: false;
     northWestValidExit = false;
@@ -288,17 +289,25 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
         return this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1);
     }
 
+    enableInvalidRooms(evt) {
+        this.enableInvalidExits = evt.checked;
+    }
+
 
 
     openExitDialog(exitDirection: string): void {
 
-        console.log(`WTFMATE${exitDirection.toLowerCase().replace(/\s/g, '')}`);
+        var exit = exitDirection.split(' ');
+        var exit2 = exit.length >= 2 ? exit[1] : '';
+
+        var exitKey = exit[0].toLowerCase() + exit2;
+
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
             data: {
                 exit: exitDirection,
-                currentCoord: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.coords || this.coords,
-                exitAreaId: this.addRoomForm.get(`exits.${exitDirection.toLowerCase().replace(/\s/g, '')}`).value.areaId || this.areaId,
+                currentCoord: this.addRoomForm.get(`exits.${exitKey}`).value.coords || this.coords,
+                exitAreaId: this.addRoomForm.get(`exits.${exitKey}`).value.areaId || this.areaId,
                 areaId: this.areaId
             }
         });
