@@ -222,6 +222,7 @@ P:last-of-type {
     margin: 0;
     padding: 15px;
     min-height: 91vh;
+    overflow: auto;
 
     > * {
         max-width: 72ch;
