@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
         roomCount: 0
     };
 
-    players: any;
+    players: any[] = [];
     filteredArray: any[] = []
     defaultRecords: number = 10;
     pageEvent: any;
@@ -30,74 +30,20 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
 
-        this.players = [{
-            name: 'liam',
-            class: 'Mage',
-            race: 'Elf',
-            level: 30
-        }, {
-            name: 'Kencori',
-            class: 'Fighter',
-            race: 'Gnome',
-            level: 30
-        }
-            , {
-            name: 'Malleus',
-            class: 'Cleric',
-            race: 'Dwarf',
-            level: 30
-        }, {
-            name: 'Apsalr',
-            class: 'Rogue',
-            race: 'Human',
-            level: 30
-        },
-        {
-            name: 'liam',
-            class: 'Mage',
-            race: 'Elf',
-            level: 30
-        }, {
-            name: 'Kencori',
-            class: 'Fighter',
-            race: 'Gnome',
-            level: 30
-        }
-            , {
-            name: 'Malleus',
-            class: 'Cleric',
-            race: 'Dwarf',
-            level: 30
-        }, {
-            name: 'Apsalr',
-            class: 'Rogue',
-            race: 'Human',
-            level: 30
-        },
-        {
-            name: 'liam',
-            class: 'Mage',
-            race: 'Elf',
-            level: 30
-        }, {
-            name: 'Kencori',
-            class: 'Fighter',
-            race: 'Gnome',
-            level: 30
-        }
-            , {
-            name: 'Malleus',
-            class: 'Cleric',
-            race: 'Dwarf',
-            level: 30
-        }, {
-            name: 'Apsalr',
-            class: 'Rogue',
-            race: 'Human',
-            level: 30
-        }];
+        // TODO: setInterval to update every 30 seconds or whatever
+        this.service.getWhoList().pipe(take(1)).subscribe(who => {
 
-        this.filteredArray = this.players.slice(0, this.defaultRecords);
+            who.forEach(player => {
+                this.players.push({
+                    name: player['value'].name,
+                    class: player['value'].className,
+                    race: player['value'].race,
+                    level: player['value'].level
+                });
+            });
+
+            this.filteredArray = this.players.slice(0, this.defaultRecords);
+        });
 
 
         this.service.getQuickStats().pipe(take(1)).subscribe((x) => {
@@ -106,7 +52,7 @@ export class DashboardComponent implements OnInit {
             this.quickStats.mobCount = x.mobCount;
             this.quickStats.questCount = x.questCount;
             this.quickStats.roomCount = x.roomCount;
-        })
+        });
     }
 
     onPaginateChange(e) {

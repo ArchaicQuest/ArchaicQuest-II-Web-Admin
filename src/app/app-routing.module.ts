@@ -7,6 +7,10 @@ const routes: Routes = [
         loadChildren: './dashboard/dashboard.module#DashboardModule'
     },
     {
+        path: 'settings',
+        loadChildren: './settings/settings.module#SettingsModule'
+    },
+    {
         path: '',
         loadChildren: './items/item.module#ItemModule'
     },

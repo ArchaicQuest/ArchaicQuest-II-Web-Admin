@@ -32,7 +32,6 @@ export class AreaService {
 
     saveArea(data: Area) {
 
-        console.log('post this ', this.saveAreaUrl, data);
         this.http.post(this.saveAreaUrl, JSON.stringify(data), { headers: this.headers, responseType: 'text' })
             .subscribe(
                 response => {

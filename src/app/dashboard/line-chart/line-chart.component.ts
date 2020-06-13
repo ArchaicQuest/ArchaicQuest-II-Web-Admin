@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { DashboardService } from '../dashboard.service';
+import { take } from 'rxjs/operators';
 
 @Component({
     selector: 'app-line-chart',
@@ -28,7 +30,7 @@ export class LineChartComponent implements OnInit {
 
 
 
-    constructor() {
+    constructor(private service: DashboardService) {
         this.view = [window.innerWidth / 1.25, 400];
 
         if (window.innerWidth <= 768) {
@@ -64,68 +66,76 @@ export class LineChartComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.data = [
-            {
-                "name": "Accounts",
-                "series": [
-                    {
-                        "name": "November 2019",
-                        "value": 3
-                    },
-                    {
-                        "name": "December 2019",
-                        "value": 11
-                    },
-                    {
-                        "name": "January 2020",
-                        "value": 5
-                    },
-                    {
-                        "name": "February 2020",
-                        "value": 88
-                    },
-                    {
-                        "name": "March 2020",
-                        "value": 34
-                    },
-                    {
-                        "name": "April 2020",
-                        "value": 79
-                    }
-                ]
-            },
-            {
-                "name": "Characters",
-                "series": [
-                    {
-                        "name": "November 2019",
-                        "value": 5
-                    },
-                    {
-                        "name": "December 2019",
-                        "value": 60
-                    },
-                    {
-                        "name": "January 2020",
-                        "value": 4
-                    },
-                    {
-                        "name": "February 2020",
-                        "value": 2
-                    },
-                    {
-                        "name": "March 2020",
-                        "value": 110
-                    },
-                    {
-                        "name": "April 2020",
-                        "value": 25
-                    }
-                ]
-            }
-        ];
 
-        Object.assign(this, { data: this.data });
+        this.service.getAccountStats().pipe(take(1)).subscribe(stats => {
+
+            this.data = stats["data"];
+            Object.assign(this, { data: this.data });
+
+        });
+
+        // this.data = [
+        //     {
+        //         "name": "Accounts",
+        //         "series": [
+        //             {
+        //                 "name": "November 2019",
+        //                 "value": 3
+        //             },
+        //             {
+        //                 "name": "December 2019",
+        //                 "value": 11
+        //             },
+        //             {
+        //                 "name": "January 2020",
+        //                 "value": 5
+        //             },
+        //             {
+        //                 "name": "February 2020",
+        //                 "value": 88
+        //             },
+        //             {
+        //                 "name": "March 2020",
+        //                 "value": 34
+        //             },
+        //             {
+        //                 "name": "April 2020",
+        //                 "value": 79
+        //             }
+        //         ]
+        //     },
+        //     {
+        //         "name": "Characters",
+        //         "series": [
+        //             {
+        //                 "name": "November 2019",
+        //                 "value": 5
+        //             },
+        //             {
+        //                 "name": "December 2019",
+        //                 "value": 60
+        //             },
+        //             {
+        //                 "name": "January 2020",
+        //                 "value": 4
+        //             },
+        //             {
+        //                 "name": "February 2020",
+        //                 "value": 2
+        //             },
+        //             {
+        //                 "name": "March 2020",
+        //                 "value": 110
+        //             },
+        //             {
+        //                 "name": "April 2020",
+        //                 "value": 25
+        //             }
+        //         ]
+        //     }
+        // ];
+
+
     }
 
 

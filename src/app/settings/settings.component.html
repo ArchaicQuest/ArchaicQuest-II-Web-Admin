@@ -1,0 +1,60 @@
+<div class="container-fluid setttings">
+    <app-header>Settings</app-header>
+
+
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+
+                <form novalidate [formGroup]="settingsForm" (ngSubmit)="updateSettings()">
+                    <div>
+                        <mat-checkbox formControlName="doubleXp">Enable double XP</mat-checkbox>
+
+                    </div>
+                    <div>
+                        <mat-checkbox formControlName="doubleGains">Enable double Gains</mat-checkbox>
+                    </div>
+                    <div>
+                        <mat-checkbox formControlName="doubleQp">Enable double Quest Points</mat-checkbox>
+                    </div>
+                    <div>
+                        <mat-checkbox formControlName="pk">Enable Player Killing</mat-checkbox>
+                        {{this.settingsForm.get('pk').value}}
+                    </div>
+                    <div>
+                        <mat-checkbox formControlName="pt">Enable Player Thieving</mat-checkbox>
+                    </div>
+
+
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Starting Room</mat-label>
+                        <input matInput placeholder="Enter room id" formControlName="startingRoom">
+                    </mat-form-field>
+
+
+                    <div>
+                        <mat-form-field appearance="outline" class="form-control">
+                            <mat-label>Default Recall Room</mat-label>
+                            <input matInput placeholder="Enter room id" formControlName="recallRoom">
+                        </mat-form-field>
+                    </div>
+
+                    <button mat-raised-button color="primary" type="submit">Update Settings</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 
+
+<mat-form-field appearance="outline" class="form-control">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Item name" value="" required formControlName="name">
+    <mat-error *ngIf="itemForm.get('name').hasError('required')">
+        Item name is required.
+    </mat-error>
+</mat-form-field> -->
