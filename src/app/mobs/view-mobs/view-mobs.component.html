@@ -1,58 +1,60 @@
 <div class="container-fluid view-items">
     <app-header>View Mobs</app-header>
 
-    <div class="">
-        <button mat-flat-button color="primary" routerLink="/add-item">Add a new Mob</button>
-        <br />
-        <br />
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <div class="">
+                    <button mat-raised-button color="primary" routerLink="/add-mob">Add Mob</button>
+                    <br />
+                    <br />
 
 
-        <mat-form-field>
-            <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-        </mat-form-field>
-
-        <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource" matSort>
-
-                <!-- description Column -->
-                <ng-container matColumnDef="level">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Level </th>
-                    <td mat-cell *matCellDef="let row"> {{row.level}} </td>
-                </ng-container>
-
-
-
-                <!-- Name Column -->
-                <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
-                    <td mat-cell *matCellDef="let row"> {{row.name}} </td>
-                </ng-container>
-
-
-                <!-- description Column -->
-                <ng-container matColumnDef="description">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
-                    <td mat-cell *matCellDef="let row"> {{row.description}} </td>
-                </ng-container>
-
-
-
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef>
-                        Actions
-                    </th>
-                    <td mat-cell *matCellDef="let row"> <button mat-raised-button color="primary"
-                            [routerLink]="['/edit-mob', row.id]">
-                            Edit
-                        </button></td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;">
-                </tr>
-            </table>
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Filter Mobs</mat-label>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter mobs">
+                    </mat-form-field>
+                </div>
+            </div>
         </div>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-
     </div>
+
+
+    <div class="data-list">
+        <div class="data-list__data" *ngFor="let data of filteredata; let i = index;">
+
+            <h3 [line-truncation]="2">{{data.name}}</h3>
+            <p class="data-list__data__description" [line-truncation]="3">{{data.description}}</p>
+
+
+            <div class="data-list__actions">
+
+                <div class="row">
+                    <div class="col">
+                        <p><i class="ra ra-fox"></i>Level {{data.level}}</p>
+                        <p><i class="fa fa-calendar"></i> {{data.dateUpdated | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button mat-raised-button color="primary" [routerLink]="['/edit-mob', data.id]">
+                            View / Edit
+                        </button>
+                    </div>
+                    <div class="col">
+                        <button mat-flat-button color="secondary" (click)="delete(filteredata, i, data.id)">
+                            Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-paginator [length]="data?.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="onPaginateChange($event)">
+    </mat-paginator>
+
+
+
 </div>

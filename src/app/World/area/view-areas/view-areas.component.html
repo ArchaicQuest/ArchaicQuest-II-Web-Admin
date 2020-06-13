@@ -29,7 +29,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <p><i class="fa fa-sitemap"></i> {{data.rooms || 0}} rooms</p>
+                        <p><i class="fa fa-sitemap"></i> {{data?.rooms.length || 0}} rooms</p>
                         <p><i class="fa fa-calendar"></i> {{data.dateUpdated | date: 'dd/MM/yyyy'}}</p>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <mat-paginator [length]="data.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+    <mat-paginator [length]="data?.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
         (page)="onPaginateChange($event)">
     </mat-paginator>
 

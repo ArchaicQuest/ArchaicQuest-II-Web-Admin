@@ -18,4 +18,8 @@ export class ViewMobService {
         return this.http.get<Mob[]>(this.getUrl);
     }
 
+    delete(id: number): Observable<any> {
+        return this.http.delete<any>(`${this.host}mob/delete/${id}`);
+    }
+
 }

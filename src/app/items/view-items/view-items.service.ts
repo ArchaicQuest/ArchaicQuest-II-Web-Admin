@@ -19,4 +19,9 @@ export class ViewItemsService {
         return this.http.get<Item[]>(this.getItemsUrl);
     }
 
+    deleteItem(id: number): Observable<any> {
+        return this.http.delete<any>(`${this.host}item/delete/${id}`);
+    }
+
+
 }

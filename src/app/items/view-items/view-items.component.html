@@ -23,7 +23,7 @@
     </div>
 
     <div class="data-list">
-        <div class="data-list__data" *ngFor="let data of filteredata">
+        <div class="data-list__data" *ngFor="let data of filteredata; let i = index">
             <h3 [line-truncation]="2">{{data.name}}</h3>
             <p class="data-list__data__description" [line-truncation]="3">{{data.description?.look}}</p>
 
@@ -44,8 +44,7 @@
                         </button>
                     </div>
                     <div class="col">
-                        <button mat-raised-button color="secondary" [routerLink]="['/edit-item', data.id]" disabled
-                            title="Not implemented">
+                        <button mat-raised-button color="secondary" (click)="delete(filteredata, i, data.id)">
                             Delete</button>
                     </div>
                 </div>
