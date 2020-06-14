@@ -1,6 +1,7 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewEncapsulation, Directive } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 
+@Directive()
 export abstract class DataListComponent implements OnInit {
     data: any;
     filteredata: any[] = [];

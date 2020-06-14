@@ -2,16 +2,18 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { StoreModule } from '@ngrx/store';
 import { sidenavReducer } from './side-nav-reducers';
-import { MatSidenavModule, MatExpansionModule, MatTooltipModule } from '@angular/material';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    MatSidenavModule,
-    MatExpansionModule,
-    MatTooltipModule,
-    StoreModule.forFeature('sidenav', sidenavReducer),
-  ]
+    imports: [
+        CommonModule,
+        MatSidenavModule,
+        MatExpansionModule,
+        MatTooltipModule,
+        StoreModule.forFeature('sidenav', sidenavReducer),
+    ]
 })
 export class SidenavStoreModule {
 }
