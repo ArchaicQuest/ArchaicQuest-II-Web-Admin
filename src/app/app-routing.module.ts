@@ -4,23 +4,23 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./dashboard/dashboard.module#DashboardModule').then(m => m.LazyModule)
     },
     {
         path: 'settings',
-        loadChildren: './settings/settings.module#SettingsModule'
+        loadChildren: () => import('./settings/settings.module#SettingsModule').then(m => m.LazyModule)
     },
     {
         path: '',
-        loadChildren: './items/item.module#ItemModule'
+        loadChildren: () => import('./items/item.module#ItemModule').then(m => m.LazyModule)
     },
     {
         path: '',
-        loadChildren: './mobs/mob.module#MobModule'
+        loadChildren: () => import('./mobs/mob.module#MobModule').then(m => m.LazyModule)
     },
     {
         path: 'world',
-        loadChildren: './World/world.module#WorldModule'
+        loadChildren: () => import('./World/world.module#WorldModule').then(m => m.LazyModule)
     },
 ];
 
