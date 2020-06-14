@@ -14,7 +14,7 @@ import { RoomService } from "../add-room/add-room.service";
 import { ActivatedRoute } from "@angular/router";
 import {
     MatDialog
-} from "@angular/material";
+} from "@angular/material/dialog";
 import { CdkTextareaAutosize } from "@angular/cdk/text-field";
 import { take } from "rxjs/operators";
 

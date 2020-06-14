@@ -1,12 +1,13 @@
 import { Injectable, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 /* istanbul ignore next */
 export class CustomSelectorError {
     constructor(public hasError?: boolean, public errorMessage?: string) { }
 }
 
 @Injectable()
-export abstract class BaseSelectorComponent {
+export abstract class BaseSelectorComponent extends OnDestroyMixin {
     value: any;
     control: FormControl = new FormControl(this.value);
     formGroup: FormGroup;

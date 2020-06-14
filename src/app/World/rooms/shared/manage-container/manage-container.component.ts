@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { trigger, state, transition, animate, style } from '@angular/animations';
 import { Item } from 'src/app/items/interfaces/item.interface';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { ManageRoomMobsComponent } from '../add/manage-room-mobs.component';
 import { Shared } from 'src/app/shared/shared';

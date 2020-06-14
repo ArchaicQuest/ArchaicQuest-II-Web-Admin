@@ -5,10 +5,6 @@ import { mobRoutes } from './mob.routes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from '../shared/shared.module';
-import {
-    MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
-    MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule
-} from '@angular/material';
 import { AddMobService } from './add-mob.service';
 import { AddMobComponent } from './add-mob.component';
 import { ItemService } from '../items/add-item/add-item.service';
@@ -28,6 +24,14 @@ import { ViewMobService } from './view-mobs/view-mobs.service';
 import { ViewMobsComponent } from './view-mobs/view-mobs.component';
 import { EditMobService } from './edit-mob/edit-mob.service';
 import { EditMobComponent } from './edit-mob/edit-mob.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 @NgModule({

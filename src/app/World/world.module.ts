@@ -5,10 +5,6 @@ import { worldRoutes } from './world.routes';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { SharedModule } from '../shared/shared.module';
-import {
-    MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
-    MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule, MatDialogModule
-} from '@angular/material';
 import { InventoryComponent } from '../characters/inventory/inventory.component';
 import { characterReducer } from '../characters/state/character.reducer';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
@@ -42,6 +38,15 @@ import { ExitComponent } from './rooms/exits/exit.component';
 import { RoomPreviewComponent } from './rooms/room-preview/room-preview.component';
 import { ManageContainerComponent } from './rooms/shared/manage-container/manage-container.component';
 import { ManageInventoryComponent } from './rooms/shared/manage-mob/manage-inventory/manage-inventory.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 

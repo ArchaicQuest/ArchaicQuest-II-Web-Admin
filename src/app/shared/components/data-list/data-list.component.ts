@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation, Directive } from '@angular/core';
-import { MatPaginator } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 
 @Directive()
 export abstract class DataListComponent implements OnInit {

@@ -1,10 +1,10 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+import { componentDestroyed, OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 import { Observable } from 'rxjs';
 import { take, takeUntil } from 'rxjs/operators';
 import { EquipmentComponent } from '../../characters/equipment/equipment.component';
@@ -25,7 +25,7 @@ import { getAC } from 'src/app/characters/state/character.selector';
 @Component({
     templateUrl: './edit-mob.component.html'
 })
-export class EditMobComponent implements OnInit, OnDestroy {
+export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestroy {
     addMobForm: FormGroup;
     races: Race[];
     classes: Class[];
@@ -43,9 +43,9 @@ export class EditMobComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private ngZone: NgZone,
         private formBuilder: FormBuilder
-    ) { }
+    ) { super(); }
     @ViewChild(EquipmentComponent) equipmentComponent: EquipmentComponent;
-    @ViewChild('autosize') autosize: CdkTextareaAutosize;
+    @ViewChild('autosize', { static: true }) autosize: CdkTextareaAutosize;
 
     ngOnInit() {
         this.addMobForm = this.mobService.getAddMobForm();

@@ -9,16 +9,6 @@ import { addItemReducer } from "../state/add-item.reducer";
 import { StoreModule } from "@ngrx/store";
 import { AddItemEffects } from "../state/add-item.effects";
 import { EffectsModule } from '@ngrx/effects';
-import {
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatAutocompleteModule
-} from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ViewItemsComponent } from '../view-items/view-items.component';
@@ -31,6 +21,14 @@ import { ItemTypeSelectorComponent } from '../selectors/item-type/item-type-sele
 import { AttackTypeSelectorComponent } from '../selectors/attack-type/attack-type-selector.component';
 import { ItemSlotSelectorComponent } from '../selectors/item-slot/item-slot-selector.component';
 import { DamageTypeSelectorComponent } from '../selectors/damage-type/damage-type-selector.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 xdescribe('EditItemComponent', () => {
     let component: EditItemComponent;

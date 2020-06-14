@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-
+import { MatPaginator } from '@angular/material/paginator';
 
 import { Mob } from '../interfaces/mob.interface';
 import { ViewMobService } from './view-mobs.service';
@@ -15,11 +14,8 @@ import { take } from 'rxjs/operators';
 })
 export class ViewMobsComponent extends DataListComponent implements OnInit {
     items: Mob[] = [];
-    displayedColumns: string[] = ['name', 'level', 'description', 'actions'];
-    dataSource: MatTableDataSource<Mob>;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
-    @ViewChild(MatSort) sort: MatSort;
+    @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
     constructor(private viewMobsService: ViewMobService, private toastr: ToastrService,
         public helpers: Shared) {

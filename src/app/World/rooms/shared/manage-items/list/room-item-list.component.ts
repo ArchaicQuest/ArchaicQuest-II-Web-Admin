@@ -1,15 +1,12 @@
-import { Component, OnInit, Output, EventEmitter, Input, OnChanges } from '@angular/core';
-import { trigger, state, transition, animate, style } from '@angular/animations';
-import { Item } from 'src/app/items/interfaces/item.interface';
-import { MatDialog } from '@angular/material';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
-import { ItemSelectorComponent } from 'src/app/items/selectors/Item-selector/item-selector.component';
-import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
-import { container } from '@angular/core/src/render3';
-import { Shared } from 'src/app/shared/shared';
+import { Item } from 'src/app/items/interfaces/item.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
-import { ManageContainerItemsComponent } from '../../manage-container-items/manage-container-items.component';
+import { Shared } from 'src/app/shared/shared';
 import { ManageContainerComponent } from '../../manage-container/manage-container.component';
+import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
 
 
 @Component({
