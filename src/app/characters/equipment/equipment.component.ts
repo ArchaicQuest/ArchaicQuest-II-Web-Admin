@@ -9,6 +9,7 @@ import { RemoveEquipment, UpdateEquipment, UpdateEquipped } from '../state/chara
 import { getInventory } from '../state/character.selector';
 import { CharacterAppState } from '../state/character.state';
 import { EqSlot } from './equipment.enum';
+import { take } from 'rxjs/operators';
 @Component({
     selector: 'app-equipment',
     templateUrl: './equipment.component.html',
@@ -180,15 +181,6 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     get eqslot() { return EqSlot; }
     ngOnInit() {
 
-        this.charStore
-            .select(getInventory)
-            .subscribe((inventory: Item[]) => {
-
-                console.log(inventory);
-
-                console.log("change")
-
-            });
 
         this.charStore.select(x => x.character.mob.inventory).subscribe(x => {
             this.mapEquipmentDropDowns(x);
