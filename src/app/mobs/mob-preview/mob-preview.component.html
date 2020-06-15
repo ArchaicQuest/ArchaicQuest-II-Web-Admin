@@ -147,6 +147,7 @@
     <br />
     <p class="room__description">{{mobForm.get('name').value}} is using:</p>
 
+
     <table style="border-top: 0 none;">
         <tr *ngIf="equipped && equipped.light">
             <td class="cell-title"> &lsaquo;used as light&rsaquo;</td>
@@ -179,6 +180,10 @@
         <tr *ngIf="equipped && equipped.legs">
             <td class="cell-title"> &lsaquo;worn around legs&rsaquo;</td>
             <td>{{equipped.legs.name}}</td>
+        </tr>
+        <tr *ngIf="equipped && equipped.feet">
+            <td class="cell-title"> &lsaquo;worn on feet&rsaquo;</td>
+            <td>{{equipped.feet.name}}</td>
         </tr>
         <tr *ngIf="equipped && equipped.hands">
             <td class="cell-title"> &lsaquo;worn around hands&rsaquo;</td>

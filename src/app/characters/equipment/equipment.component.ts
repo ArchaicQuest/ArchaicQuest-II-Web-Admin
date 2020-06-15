@@ -186,6 +186,12 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             this.mapEquipmentDropDowns(x);
         });
 
+        this.charStore
+            .select(getInventory)
+            .subscribe((inventory: Item[]) => {
+                console.log(inventory);
+                console.log("change")
+            });
 
 
     }
@@ -395,6 +401,12 @@ export class EquipmentComponent implements OnInit, OnDestroy {
         const uuid = selection.value ? selection.value.uuid : '';
         this.resetEQDupe('sheathedEq', uuid);
         this.onEQChange(selection, EqSlot.Wielded);
+    }
+
+    feetChange(selection) {
+        const uuid = selection.value ? selection.value.uuid : '';
+        this.resetEQDupe('feetEq', uuid);
+        this.onEQChange(selection, EqSlot.Feet);
     }
 
     heldChange(selection) {

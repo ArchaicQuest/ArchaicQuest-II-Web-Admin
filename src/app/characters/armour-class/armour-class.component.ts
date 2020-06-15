@@ -40,10 +40,7 @@ export class ArmourClassComponent implements OnInit, OnChanges {
 
             });
 
-        this.equipment.valueChanges.subscribe(x => {
-            console.log("xoxox", x)
 
-        });
 
     }
 

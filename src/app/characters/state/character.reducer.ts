@@ -8,6 +8,7 @@ import { v4 } from 'uuid';
 import { CharacterState } from '../character.state';
 import { EquipmentComponent } from '../equipment/equipment.component';
 import { EqSlot } from '../equipment/equipment.enum';
+import { Item } from 'src/app/items/interfaces/item.interface';
 
 
 const intitalState: CharacterState = {
@@ -65,10 +66,13 @@ export function characterReducer(state: CharacterState = intitalState,
     switch (action.type) {
         case CharacterActionTypes.AddToInventory: {
 
-            var newItem = [action.payload].concat(state.mob.inventory);
 
-            let updateUuid = () => {
-                return newItem.map(i => {
+            let inventory: Item[] = JSON.parse(JSON.stringify(state.mob.inventory));
+
+            inventory.unshift(action.payload);
+
+            const updateUuid = () => {
+                return inventory.map(i => {
                     const temp = { ...i };
                     if (temp.uuid == null) {
                         temp.uuid = v4();
@@ -100,36 +104,29 @@ export function characterReducer(state: CharacterState = intitalState,
         }
         case CharacterActionTypes.UpdateEquipment: {
 
-
-            let mob = JSON.parse(JSON.stringify(state.mob.equipped));
-            const updatedEquipment = { ...EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, mob) };
-
+            let equipped: any = { ...state.mob.equipped };
+            const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, equipped);
 
 
 
-            const updatedInventory = state.mob.inventory.map(
-                i => {
-                    let temp = Object.assign({}, i);
-                    if (temp.id === action.payload.item.id) {
-                        temp.equipped = true;
-                    }
-                    return temp;
-                }
-            );
+            const inventory = JSON.parse(JSON.stringify(state.mob.inventory));
+            const itemIndex = inventory.findIndex(x => x.id === action.payload.item.id);
+            inventory[itemIndex].equipped = true;
+
 
             return {
                 ...state,
                 mob: {
                     ...state.mob,
-                    inventory: [...updatedInventory],
-                    equipped: { ...updatedEquipment }
+                    inventory: [...inventory],
+                    equipped: updatedEquipment
                 }
             };
         }
 
         case CharacterActionTypes.UpdateEquipped: {
 
-            let equipped = JSON.parse(JSON.stringify(state.mob.equipped));
+            let equipped: any = { ...state.mob.equipped };
             const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, equipped);
 
             return {
@@ -142,8 +139,8 @@ export function characterReducer(state: CharacterState = intitalState,
         }
         case CharacterActionTypes.RemoveEquipment: {
 
-            let equipped = JSON.parse(JSON.stringify(state.mob.equipped));
 
+            let equipped: any = { ...state.mob.equipped };
             let getItem = EquipmentComponent.returnEQ(action.payload.slot, equipped)
             let updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, equipped);
 
@@ -154,25 +151,18 @@ export function characterReducer(state: CharacterState = intitalState,
 
 
 
+            const inventory = JSON.parse(JSON.stringify(state.mob.inventory));
 
-            let updatedInventory = [];
             if (getItem != null) {
-                updatedInventory = state.mob.inventory.map(
-                    i => {
-                        let temp = Object.assign({}, i);
-                        if (temp.id === action.payload.item.id) {
-                            temp.equipped = true;
-                        }
-                        return temp;
-                    }
-                );
+                const itemIndex = inventory.findIndex(x => x.id === getItem.id);
+                inventory[itemIndex].equipped = false;
             }
 
             return {
                 ...state,
                 mob: {
                     ...state.mob,
-                    inventory: [...updatedInventory],
+                    inventory: [...inventory],
                     equipped: updatedEquipment
                 }
             };

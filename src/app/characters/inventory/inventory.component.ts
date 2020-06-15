@@ -49,7 +49,7 @@ export class InventoryComponent implements OnInit {
         this.charStore
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
-                console.log(inventory);
+                console.log("invent", inventory);
                 this.inventoryItems = inventory;
             });
 
