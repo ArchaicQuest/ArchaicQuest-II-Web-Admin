@@ -152,7 +152,8 @@
         <div class="col" *ngIf="wristItems.length">
             <mat-form-field appearance="outline" class="form-control">
                 <mat-label>Wrist 1</mat-label>
-                <mat-select formControlName="wristEq" placeholder="Wrist 1" [compareWith]="compareOptions">
+                <mat-select formControlName="wristEq" placeholder="Wrist 1" [compareWith]="compareOptions"
+                    (selectionChange)="onEQChange($event, eqslot.Wrist)">
                     <mat-option (click)="formGroup.get('wristEq').reset()">None</mat-option>
                     <mat-option *ngFor="let item of wristItems" [value]="item">
                         {{ item.name }}

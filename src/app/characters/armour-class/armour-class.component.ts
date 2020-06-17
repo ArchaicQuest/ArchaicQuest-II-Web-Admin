@@ -123,19 +123,25 @@ export class ArmourClassComponent implements OnInit, OnChanges {
     }
 
     private setArmourRating(value: Item): void {
-        this.Defense = 0;
 
-        Object.keys(this.equipment.controls).forEach(eqSlot => {
-
-            if (this.equipment.get(eqSlot).value != null && this.equipment.get(eqSlot).value.armourRating != null) {
+        setTimeout(() => {
 
 
-                this.Defense += (this.equipment.get(eqSlot).value as Item).armourRating.armour;
-                this.magicDefense += Math.floor((this.equipment.get(eqSlot).value as Item).armourRating.armour / 2)
-            }
+            this.Defense = 0;
+            this.magicDefense = 0;
+            Object.keys(this.equipment.controls).forEach(eqSlot => {
+
+                if (this.equipment.get(eqSlot).value != null && this.equipment.get(eqSlot).value.armourRating != null) {
+
+
+                    this.Defense += (this.equipment.get(eqSlot).value as Item).armourRating.armour;
+                    this.magicDefense += Math.floor((this.equipment.get(eqSlot).value as Item).armourRating.armour / 2)
+                }
+            });
+
+            this.charStore.dispatch(new IncreaseArmour(this.Defense));
+
         });
-
-        this.charStore.dispatch(new IncreaseArmour(this.Defense));
         // if (value != null) {
         //     this.Defense += value.armourRating.armour;
         //     this.magicDefense += value.armourRating.magic;

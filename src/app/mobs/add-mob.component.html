@@ -314,7 +314,8 @@
                                     <h2>Emotes</h2>
                                 </div>
                             </div>
-                            <div formArrayName="emotes" *ngFor="let emote of getEmotesControl.controls; let i=index">
+                            <div formArrayName="emotes" class="emotes"
+                                *ngFor="let emote of getEmotesControl.controls; let i=index">
 
                                 <mat-form-field appearance="outline" class="form-control" [formGroupName]="i">
                                     <mat-label>Emotes</mat-label>

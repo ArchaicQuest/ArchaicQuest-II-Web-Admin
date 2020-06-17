@@ -90,7 +90,8 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-
+                    </div>
+                    <div class="row">
 
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
@@ -311,7 +312,8 @@
                                     <h2>Emotes</h2>
                                 </div>
                             </div>
-                            <div formArrayName="emotes" *ngFor="let emote of getEmotesControl.controls; let i=index">
+                            <div formArrayName="emotes" class="emotes"
+                                *ngFor="let emote of getEmotesControl.controls; let i=index">
 
                                 <mat-form-field appearance="outline" class="form-control" [formGroupName]="i">
                                     <mat-label>Emotes</mat-label>
@@ -319,8 +321,13 @@
 
                                 </mat-form-field>
                                 <a class="btn btn-danger btn-sm" (click)="removeLink(i)">Remove</a>
+
                             </div>
-                            <a (click)="this.addEmote()">Add another emote</a>
+
+
+                            <button mat-flat-button color="secondary" (click)="this.addEmote()" type="button">Add
+                                another
+                                emote</button>
 
                         </div>
                     </div>

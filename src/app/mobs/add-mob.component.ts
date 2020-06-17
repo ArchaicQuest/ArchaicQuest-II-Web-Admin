@@ -28,7 +28,8 @@ import { Option } from '../shared/interfaces/option.interface';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
 
 @Component({
-    templateUrl: './add-mob.component.html'
+    templateUrl: './add-mob.component.html',
+    styleUrls: ['./mob.component.scss']
 })
 export class AddMobComponent implements OnInit {
     addMobForm: FormGroup;

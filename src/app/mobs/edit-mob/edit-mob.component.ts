@@ -23,7 +23,8 @@ import { getAC } from 'src/app/characters/state/character.selector';
 
 
 @Component({
-    templateUrl: './edit-mob.component.html'
+    templateUrl: './edit-mob.component.html',
+    styleUrls: ['../mob.component.scss']
 })
 export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestroy {
     addMobForm: FormGroup;

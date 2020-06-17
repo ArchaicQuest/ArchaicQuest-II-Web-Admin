@@ -135,6 +135,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
     }
 
     static returnEQ(EQSlot: EqSlot, equipped: Equipment): Item {
+
         switch (EQSlot) {
             case EqSlot.Arms:
                 return equipped.arms;
