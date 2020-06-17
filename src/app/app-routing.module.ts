@@ -22,6 +22,10 @@ const routes: Routes = [
         path: 'world',
         loadChildren: () => import('./World/world.module').then(m => m.WorldModule)
     },
+    {
+        path: 'skills-spells',
+        loadChildren: () => import('./skills-spells/skills-spells.module').then(m => m.SkillsSpellsModule)
+    }
 ];
 
 @NgModule({
