@@ -5,8 +5,129 @@
         <div class="col-8">
 
             <div class="panel">
-                <form novalidate [formGroup]="">
-                    <input type="hidden" formControlName="id">
+                <form novalidate [formGroup]="form">
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="Skill / spell name" value="" required
+                                    formControlName="name">
+                                <mat-error *ngIf="form.get('name').hasError('required')">
+                                    skill / spell name is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Help Text</mat-label>
+                                <textarea matInput placeholder="Description of skill / spell and how to use" value=""
+                                    required formControlName="description" cdkTextareaAutosize
+                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+                                    (selectionChange)="triggerDescriptionResize()">
+
+                  </textarea>
+                                <mat-error *ngIf="form.get('description').hasError('required')">
+                                    skill / spell description is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+                    <h2> Dice Roll</h2>
+                    <p>How many rolls of a dice and of which size e.g 1d6 is 1 roll and size 6.
+                        Modifier to add a value to the dice roll e.g 1d6+2</p>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Dice rolls</mat-label>
+                                <input matInput placeholder="Number of dices" value="" required formControlName="name">
+                                <mat-error *ngIf="form.get('diceRoll').hasError('required')">
+                                    dice roll is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Dice Size</mat-label>
+                                <input matInput placeholder="Size of dice" value="" required formControlName="name">
+                                <mat-error *ngIf="form.get('diceRoll').hasError('required')">
+                                    dice roll is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Dice Modifier</mat-label>
+                                <input matInput placeholder="Dice Modifier" value="" required formControlName="name">
+                                <mat-error *ngIf="form.get('diceRoll').hasError('required')">
+                                    dice roll is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+                    <h2>Effect</h2>
+                    <p>help text</p>
+
+                    <div formArrayName="effects" *ngFor="let address of form.controls.effects; let i=index">
+
+                        <span>Effect {{i + 1}}</span>
+
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Name of effect" value="" required
+                                        formControlName="name">
+                                    <mat-error *ngIf="form.get('effect.name').hasError('required')">
+                                        dice roll is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Duration</mat-label>
+                                    <input matInput placeholder="Duration of effect" value="" required
+                                        formControlName="name" type="number">
+                                    <mat-error *ngIf="form.get('name').hasError('required')">
+                                        duration is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Modifier</mat-label>
+                                    <input matInput placeholder="Modifier" value="" required formControlName="name"
+                                        type="number">
+                                    <mat-error *ngIf="form.get('name').hasError('required')">
+                                        Modifieris required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Effect Location</mat-label>
+                                    <mat-select formControlName="name" placeholder="Effect Location" required>
+                                        <mat-option *ngFor="let effect of effectLocations" [value]="effect.value">
+                                            {{ effect.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="form.get('name').hasError('required')">effect required
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
 
 
 

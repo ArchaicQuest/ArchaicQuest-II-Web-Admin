@@ -102,13 +102,13 @@
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
-                        <a [routerLink]="['/skills-spells']" (click)="toggleSidenav(false)">
+                        <a [routerLink]="['/skills-spells/view']" (click)="toggleSidenav(false)">
                             <i class="fa fa-search" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">View skills & spells</span>
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="['/add-skills-spells']" (click)="toggleSidenav(false)">
+                        <a [routerLink]="['/skills-spells/add']" (click)="toggleSidenav(false)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Create skills & spells</span>
                         </a>

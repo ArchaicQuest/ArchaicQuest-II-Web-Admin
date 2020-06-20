@@ -4,8 +4,8 @@ import { AddSkillsSpellComponent } from './add-skills-spells/add-skills-spells.c
 
 export const skillSpellsRoutes: Routes = [
     { path: '', component: ViewSkillsSpellsComponent },
-    { path: 'skills-spells', component: ViewSkillsSpellsComponent },
-    { path: 'add-skills-spells', component: AddSkillsSpellComponent },
+    { path: 'view', component: ViewSkillsSpellsComponent },
+    { path: 'add', component: AddSkillsSpellComponent },
     // { path: 'add-item', component: AddItemComponent },
     // { path: 'edit-item/:id', component: EditItemComponent },
     // { path: 'items/edit-item/:id', component: EditItemComponent },
