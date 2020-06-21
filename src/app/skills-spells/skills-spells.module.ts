@@ -14,6 +14,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ViewSkillSpellService } from './view-skills-spells/view-skills-spells.service';
 import { ViewSkillsSpellsComponent } from './view-skills-spells/view-skills-spells.component';
 import { AddSkillsSpellComponent } from './add-skills-spells/add-skills-spells.component';
+import { SkillSpellService } from './add-skills-spells/add-skills-spells.service';
 
 
 
@@ -33,7 +34,8 @@ import { AddSkillsSpellComponent } from './add-skills-spells/add-skills-spells.c
 
     ],
     providers: [
-        ViewSkillSpellService
+        ViewSkillSpellService,
+        SkillSpellService
     ],
     declarations: [
         ViewSkillsSpellsComponent,
