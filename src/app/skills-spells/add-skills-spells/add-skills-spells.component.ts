@@ -32,7 +32,7 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         ]),
         usableFromStatus: new FormGroup({}),
         messageStart: this.formBuilder.group({
-            toPlayer: ['', Validators.required],
+            ToPlayer: ['', Validators.required],
             ToTarget: ['', Validators.required],
             ToRoom: ['', Validators.required],
         }),

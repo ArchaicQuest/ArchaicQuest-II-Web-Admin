@@ -161,9 +161,106 @@
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Message to player</mat-label>
                                 <input matInput placeholder="Message to player" value="" required
-                                    formControlName="toPlayer">
-                                <mat-error *ngIf="form.get('messageStart').get('toPlayer').hasError('required')">
+                                    formControlName="ToPlayer">
+                                <mat-error *ngIf="form.get('messageStart').get('ToPlayer').hasError('required')">
                                     to player message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to Target</mat-label>
+                                <input matInput placeholder="Message to target" value="" required
+                                    formControlName="ToTarget">
+                                <mat-error *ngIf="form.get('messageStart').get('ToTarget').hasError('required')">
+                                    to target message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to Rooom</mat-label>
+                                <input matInput placeholder="Message to room" value="" required
+                                    formControlName="ToRoom">
+                                <mat-error *ngIf="form.get('messageStart').get('ToRoom').hasError('required')">
+                                    to room message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <h2>Message End</h2>
+                    <div class="row" formGroupName="messageEnd">
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to player</mat-label>
+                                <input matInput placeholder="Message to player" value="" required
+                                    formControlName="ToPlayer">
+                                <mat-error *ngIf="form.get('messageEnd').get('ToPlayer').hasError('required')">
+                                    to player message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to Target</mat-label>
+                                <input matInput placeholder="Message to target" value="" required
+                                    formControlName="ToTarget">
+                                <mat-error *ngIf="form.get('messageEnd').get('ToTarget').hasError('required')">
+                                    to target message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to Rooom</mat-label>
+                                <input matInput placeholder="Message to room" value="" required
+                                    formControlName="ToRoom">
+                                <mat-error *ngIf="form.get('messageEnd').get('ToRoom').hasError('required')">
+                                    to room message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <h2>Message Failure</h2>
+
+                    <div class="row" formGroupName="messageFailure">
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to player</mat-label>
+                                <input matInput placeholder="Message to player" value="" required
+                                    formControlName="ToPlayer">
+                                <mat-error *ngIf="form.get('messageFailure').get('ToPlayer').hasError('required')">
+                                    to player message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to Target</mat-label>
+                                <input matInput placeholder="Message to target" value="" required
+                                    formControlName="ToTarget">
+                                <mat-error *ngIf="form.get('messageFailure').get('ToTarget').hasError('required')">
+                                    to target message is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Message to Rooom</mat-label>
+                                <input matInput placeholder="Message to room" value="" required
+                                    formControlName="ToRoom">
+                                <mat-error *ngIf="form.get('messageFailure').get('ToRoom').hasError('required')">
+                                    to room message is required.
                                 </mat-error>
                             </mat-form-field>
                         </div>
