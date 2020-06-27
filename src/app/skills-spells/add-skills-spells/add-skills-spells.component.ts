@@ -10,6 +10,9 @@ import { EffectLocation } from '../interfaces/effect.interface';
 import { StatusEnum } from '../interfaces/status.enum';
 import { ItemType } from 'src/app/items/interfaces/item-type.interface';
 import { validTargets } from '../interfaces/targets.enum';
+import { Skill } from '../interfaces/skill.interface';
+import { SkillType } from '../interfaces/skill-type.interface';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -31,7 +34,6 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         diceRoll: ['', Validators.required],
         diceMaxSize: ['', Validators.required],
         effects: this.formBuilder.array([
-            this.initEffect()
         ]),
         usableFromStatus: new FormGroup({}),
         validTargets: new FormGroup({}),
@@ -44,7 +46,8 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
     constructor(
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
-        private service: SkillSpellService
+        private service: SkillSpellService,
+        private toastr: ToastrService
     ) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
@@ -146,6 +149,8 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         console.log(this.selectedStatusFlags);
     }
 
+    //valid targets
+
 
     get getValidTargetControl(): FormArray {
         return this.form.get('validTargets') as FormArray;
@@ -179,6 +184,33 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         this.ngZone.onStable
             .pipe(take(1))
             .subscribe(() => this.autosize.resizeToFitContent(true));
+    }
+
+    addSpell() {
+        const skill: Skill = {
+            id: -1,
+            name: this.form.get('name').value,
+            description: this.form.get('description').value,
+            damage: {
+                diceRoll: this.form.get('diceRoll').value,
+                diceMinSize: 1,
+                diceMaxSize: this.form.get('diceMaxSize').value
+            },
+            cost: {
+                hitPoints: 0,
+                moves: 0,
+                none: 0,
+                mana: 5
+            },
+            effect: null,
+            rounds: 1,
+            type: SkillType.Affect
+        }
+
+
+        this.service.postSkill(skill).pipe(take(1)).subscribe(x => {
+            console.log("success", x)
+        })
     }
 
 }

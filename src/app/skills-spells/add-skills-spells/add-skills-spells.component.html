@@ -45,7 +45,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Dice rolls</mat-label>
-                                <input matInput placeholder="Number of dices" value="" required formControlName="name">
+                                <input matInput placeholder="Number of dices" value="" required
+                                    formControlName="diceRoll">
                                 <mat-error *ngIf="form.get('diceRoll').hasError('required')">
                                     dice roll is required.
                                 </mat-error>
@@ -54,13 +55,14 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Dice Size</mat-label>
-                                <input matInput placeholder="Size of dice" value="" required formControlName="name">
-                                <mat-error *ngIf="form.get('diceRoll').hasError('required')">
+                                <input matInput placeholder="Size of dice" value="" required
+                                    formControlName="diceMaxSize">
+                                <mat-error *ngIf="form.get('diceMaxSize').hasError('required')">
                                     dice roll is required.
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <div class="col">
+                        <!-- <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Dice Modifier</mat-label>
                                 <input matInput placeholder="Dice Modifier" value="" required formControlName="name">
@@ -68,7 +70,7 @@
                                     dice roll is required.
                                 </mat-error>
                             </mat-form-field>
-                        </div>
+                        </div> -->
 
                     </div>
 
@@ -134,11 +136,11 @@
                                 </div>
                             </div>
                         </div>
-                        <div><a (click)="addEffect()">Add another effect</a></div>
+                        <div><a (click)="addEffect()" mat-raised-button color="secodary">Add effect</a></div>
                     </div>
 
-
-                    <h2>Status flags</h2>
+                    <!-- For now this isn't used-->
+                    <!-- <h2>Status flags</h2>
                     <p>From what status is a skill or spell usuable from</p>
                     <div class="section section--check-box">
                         <div class="row" [formGroup]="form.get('usableFromStatus')">
@@ -151,7 +153,7 @@
                                 </mat-checkbox>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
 
                     <h2>Valid Target</h2>
@@ -170,7 +172,8 @@
                     </div>
 
 
-                    <button mat-raised-button color="primary" type="submit">Add
+                    <button mat-raised-button color="primary" type="submit" (click)="addSpell()
+                    ">Add
                         Skill / Spell</button>
 
 

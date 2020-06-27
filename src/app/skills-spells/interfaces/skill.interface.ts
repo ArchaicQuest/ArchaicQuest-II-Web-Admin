@@ -11,12 +11,6 @@ export interface Skill {
     description: string;
     damage: Dice;
     effect: Effect;
-    requirements: Requirements;
-    skillStart: Messages;
-    skillAction: Messages[];
-    skillEnd: Messages;
-    skillFailure: Messages;
-    levelBasedMessages: LevelBasedMessages;
     rounds: number;
     cost: SkillCost;
     type: SkillType;
