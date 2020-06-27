@@ -9,6 +9,7 @@ import { take } from 'rxjs/operators';
 import { EffectLocation } from '../interfaces/effect.interface';
 import { StatusEnum } from '../interfaces/status.enum';
 import { ItemType } from 'src/app/items/interfaces/item-type.interface';
+import { validTargets } from '../interfaces/targets.enum';
 
 
 @Component({
@@ -21,31 +22,19 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
     public selectedStatusFlags: StatusEnum[] = [];
     public selectedStatus: StatusEnum;
     public statusFlags: ItemType[];
+    public selectedValidTargetFlags: validTargets[] = [];
+    public selectedValidTarget: validTargets;
+    public validTargetFlags: ItemType[];
     public form = this.formBuilder.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
         diceRoll: ['', Validators.required],
-        diceMinSize: ['', Validators.required],
         diceMaxSize: ['', Validators.required],
         effects: this.formBuilder.array([
             this.initEffect()
         ]),
         usableFromStatus: new FormGroup({}),
-        messageStart: this.formBuilder.group({
-            ToPlayer: ['', Validators.required],
-            ToTarget: ['', Validators.required],
-            ToRoom: ['', Validators.required],
-        }),
-        messageEnd: this.formBuilder.group({
-            ToPlayer: ['', Validators.required],
-            ToTarget: ['', Validators.required],
-            ToRoom: ['', Validators.required],
-        }),
-        messageFailure: this.formBuilder.group({
-            ToPlayer: ['', Validators.required],
-            ToTarget: ['', Validators.required],
-            ToRoom: ['', Validators.required],
-        }),
+        validTargets: new FormGroup({}),
         rounds: ['', Validators.required],
         cost: this.formBuilder.group({
             type: ['', Validators.required],
@@ -74,10 +63,25 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
                 return { name: StatusEnum[key], id: index === 0 ? 0 : 1 << index };
             });
 
+        this.validTargetFlags = Object.keys(validTargets)
+            .filter(value => isNaN(Number(value)) === false)
+            .map((key, index) => {
+                return { name: validTargets[key], id: index === 0 ? 0 : 1 << index };
+            });
+
+
+
         console.log(this.statusFlags)
 
         this.statusFlags.forEach(flag => {
             (this.form.controls['usableFromStatus'] as FormGroup).addControl(
+                flag.name,
+                new FormControl()
+            );
+        });
+
+        this.validTargetFlags.forEach(flag => {
+            (this.form.controls['validTargets'] as FormGroup).addControl(
                 flag.name,
                 new FormControl()
             );
@@ -140,6 +144,34 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         }
 
         console.log(this.selectedStatusFlags);
+    }
+
+
+    get getValidTargetControl(): FormArray {
+        return this.form.get('validTargets') as FormArray;
+    }
+
+    addValidTarget() {
+        this.getValidTargetControl.push(this.formBuilder.control(''));
+    }
+
+    hasValidTarget(flag: number): boolean {
+        return this.service.hasValidTargetFlag(flag, this.selectedValidTarget);
+    }
+
+    isValidTargetSet(value: number, flag: number): boolean {
+        return (value & flag) !== 0;
+    }
+
+    updateSelectedValidTarget(flag: number) {
+
+        if (this.selectedValidTargetFlags.length && this.selectedValidTargetFlags.includes(flag)) {
+            this.selectedValidTargetFlags = this.selectedValidTargetFlags.filter(flagToRemove => flagToRemove !== flag);
+        } else {
+            this.selectedValidTargetFlags.push(flag);
+        }
+
+        console.log("vf", this.selectedValidTargetFlags);
     }
 
 

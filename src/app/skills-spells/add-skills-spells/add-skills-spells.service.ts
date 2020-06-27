@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { StatusEnum } from '../interfaces/status.enum';
+import { validTargets } from '../interfaces/targets.enum';
 
 @Injectable({
     providedIn: 'root'
@@ -43,6 +44,35 @@ export class SkillSpellService {
         } else if (flag === StatusEnum.Mounted && this.isFlagSet(selectedFlag, StatusEnum.Mounted)) {
             return true;
         } else if (flag === StatusEnum.Stunned && this.isFlagSet(selectedFlag, StatusEnum.Stunned)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    hasValidTargetFlag(flag: number, selectedFlag: validTargets): boolean {
+
+        if (flag === validTargets.TargetFightSelf && this.isFlagSet(selectedFlag, validTargets.TargetFightSelf)) {
+            return true;
+        } else if (flag === validTargets.TargetFightVictim && this.isFlagSet(selectedFlag, validTargets.TargetFightVictim)) {
+            return true;
+        } else if (flag === validTargets.TargetIgnore && this.isFlagSet(selectedFlag, validTargets.TargetIgnore)) {
+            return true;
+        } else if (flag === validTargets.TargetNotSelf && this.isFlagSet(selectedFlag, validTargets.TargetNotSelf)) {
+            return true;
+        } else if (flag === validTargets.TargetObjectEquipped && this.isFlagSet(selectedFlag, validTargets.TargetObjectEquipped)) {
+            return true;
+        } else if (flag === validTargets.TargetObjectInventory && this.isFlagSet(selectedFlag, validTargets.TargetObjectInventory)) {
+            return true;
+        } else if (flag === validTargets.TargetObjectRoom && this.isFlagSet(selectedFlag, validTargets.TargetObjectRoom)) {
+            return true;
+        } else if (flag === validTargets.TargetObjectWorld && this.isFlagSet(selectedFlag, validTargets.TargetObjectWorld)) {
+            return true;
+        } else if (flag === validTargets.TargetPlayerRoom && this.isFlagSet(selectedFlag, validTargets.TargetPlayerRoom)) {
+            return true;
+        } else if (flag === validTargets.TargetPlayerWorld && this.isFlagSet(selectedFlag, validTargets.TargetPlayerWorld)) {
+            return true;
+        } else if (flag === validTargets.TargetSelfOnly && this.isFlagSet(selectedFlag, validTargets.TargetSelfOnly)) {
             return true;
         }
 
