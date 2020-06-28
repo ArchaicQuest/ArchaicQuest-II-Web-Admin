@@ -11,7 +11,7 @@ import { Skill } from '../interfaces/skill.interface';
 })
 export class ViewSkillSpellService {
     private host = environment.hostAPI;
-    private getUrl = `${this.host}Mob/Get`;
+    private getUrl = `${this.host}skill/Get`;
 
     constructor(private http: HttpClient) { }
 
@@ -20,7 +20,7 @@ export class ViewSkillSpellService {
     }
 
     delete(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.host}mob/delete/${id}`);
+        return this.http.delete<any>(`${this.host}skill/delete/${id}`);
     }
 
 }

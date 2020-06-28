@@ -25,6 +25,10 @@ const routes: Routes = [
     {
         path: 'skills-spells',
         loadChildren: () => import('./skills-spells/skills-spells.module').then(m => m.SkillsSpellsModule)
+    },
+    {
+        path: 'class',
+        loadChildren: () => import('./class/class.module').then(m => m.ClassModule)
     }
 ];
 

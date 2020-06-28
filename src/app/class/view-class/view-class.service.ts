@@ -2,24 +2,25 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from './node_modules/src/environments/environment';
-import { Mob } from '../interfaces/mob.interface';
+import { environment } from 'src/environments/environment';
+import { Skill } from '../interfaces/skill.interface';
+
 
 @Injectable({
     providedIn: 'root'
 })
-export class ViewMobService {
+export class ViewClassService {
     private host = environment.hostAPI;
-    private getUrl = `${this.host}Mob/Get`;
+    private getUrl = `${this.host}Character/Class`;
 
     constructor(private http: HttpClient) { }
 
-    getMobs(): Observable<Mob[]> {
-        return this.http.get<Mob[]>(this.getUrl);
+    getClasses(): Observable<any[]> {
+        return this.http.get<any[]>(this.getUrl);
     }
 
     delete(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.host}mob/delete/${id}`);
+        return this.http.delete<any>(`${this.host}skill/delete/${id}`);
     }
 
 }

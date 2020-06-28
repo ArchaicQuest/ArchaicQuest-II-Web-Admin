@@ -1,0 +1,37 @@
+<div class="client" [formGroup]="form">
+    <p class="room__description">Spell Preview:</p>
+
+    <table>
+        <!-- *ngIf="form.get('name').value" -->
+        <!-- <tr>
+            <td>Keywords</td>
+            <td>{{form.get('name').value}}</td>
+        </tr> -->
+        <tr>
+            <td>Name</td>
+            <td>{{form.get('name').value}}</td>
+        </tr>
+        <tr>
+            <td>Help Text</td>
+            <td> {{form.get('description').value}}</td>
+        </tr>
+        <tr>
+            <td>Dice roll</td>
+
+            <td>{{form.get('diceRoll').value || 1}}d{{form.get('diceMaxSize').value || 0}}
+            </td>
+        </tr>
+        <tr>
+            <td>Spell Cost</td>
+            <td>WIP</td>
+        </tr>
+
+    </table>
+
+    <p class="echo">Example:</p>
+
+    <p class="echo">> cast {{form.get('name').value}} </p>
+    <p class="room__description">You close your eyes and utter '{{form.get('name').value}}'.</p>
+    <p class="room__description">Your {{form.get('name').value}} hits Bob</p>
+
+</div>
