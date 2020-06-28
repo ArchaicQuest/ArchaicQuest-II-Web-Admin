@@ -22,6 +22,24 @@
             </td>
         </tr>
         <tr>
+            <td>Valid Targets</td>
+
+            <td>
+                <span *ngIf="form.get('validTargets.TargetPlayerRoom').value">
+                    Player in room
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+
+            <td>
+                <span *ngIf="form.get('validTargets.TargetPlayerWorld').value">
+                    Player somewhere in the world
+                </span>
+            </td>
+        </tr>
+        <tr>
             <td>Spell Cost</td>
             <td>WIP</td>
         </tr>

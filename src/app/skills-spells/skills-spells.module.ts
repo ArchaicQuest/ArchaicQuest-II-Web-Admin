@@ -16,6 +16,7 @@ import { ViewSkillsSpellsComponent } from './view-skills-spells/view-skills-spel
 import { AddSkillsSpellComponent } from './add-skills-spells/add-skills-spells.component';
 import { SkillSpellService } from './add-skills-spells/add-skills-spells.service';
 import { SpellPreviewComponent } from './spell-preview/spell-preview.component';
+import { ValidTargetPipe } from './pipes/valid-target.pipe';
 
 
 
@@ -41,7 +42,8 @@ import { SpellPreviewComponent } from './spell-preview/spell-preview.component';
     declarations: [
         ViewSkillsSpellsComponent,
         AddSkillsSpellComponent,
-        SpellPreviewComponent
+        SpellPreviewComponent,
+        ValidTargetPipe
     ],
 })
 export class SkillsSpellsModule { }

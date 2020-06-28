@@ -74,16 +74,30 @@
 
                     </div>
 
+                    <h2>Valid Target</h2>
+                    <p>What can the spell target?
+                        targets without any arguments</p>
+                    <div class="section section--check-box">
+                        <div class="row" [formGroup]="form.get('validTargets')">
+
+
+                            <div class="col-4" *ngFor="let flag of validTargetFlags">
+                                <mat-checkbox [title]="flag.name" [formControlName]="flag.name"
+                                    [checked]=hasValidTarget(flag.id) (change)=updateSelectedValidTarget(flag.id)>
+                                    {{flag.id | validTargetPipe}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
 
                     <h2>Effect</h2>
-                    <p>help text</p>
+                    <p>Does the spell apply any positive or negative affects on the victim?</p>
                     <div formArrayName="effects">
 
 
 
                         <div *ngFor="let effect of effects.controls; let i=index">
-
-                            <span>Effect {{i + 1}}</span>
 
 
                             <div class="row" [formGroupName]="i">
@@ -156,20 +170,7 @@
                     </div> -->
 
 
-                    <h2>Valid Target</h2>
-                    <p>What can the spell target</p>
-                    <div class="section section--check-box">
-                        <div class="row" [formGroup]="form.get('validTargets')">
 
-
-                            <div class="col-2" *ngFor="let flag of validTargetFlags">
-                                <mat-checkbox [title]="flag.name" [formControlName]="flag.name"
-                                    [checked]=hasValidTarget(flag.id) (change)=updateSelectedValidTarget(flag.id)>
-                                    {{flag.name}}
-                                </mat-checkbox>
-                            </div>
-                        </div>
-                    </div>
 
 
                     <button mat-raised-button color="primary" type="submit" (click)="addSpell()
