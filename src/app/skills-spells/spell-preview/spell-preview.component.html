@@ -24,18 +24,99 @@
         <tr>
             <td>Valid Targets</td>
 
-            <td>
-                <span *ngIf="form.get('validTargets.TargetPlayerRoom').value">
+            <td *ngIf="form.get('validTargets.TargetPlayerRoom').value">
+                <span>
                     Player in room
                 </span>
             </td>
         </tr>
-        <tr>
+        <tr *ngIf="form.get('validTargets.TargetIgnore').value">
             <td></td>
 
             <td>
-                <span *ngIf="form.get('validTargets.TargetPlayerWorld').value">
-                    Player somewhere in the world
+                <span>
+                    Ignore Target
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetPlayerWorld').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Player anywhere in the world
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetFightSelf').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Self in Fight (if no arguments)
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetFightVictim').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Current target in Fight (if no arguments)
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetSelfOnly').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Self Only
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetNotSelf').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Not self
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetObjectInventory').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Inventory Item
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetObjectRoom').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Room Item
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetObjectWorld').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Item in the world
+                </span>
+            </td>
+        </tr>
+        <tr *ngIf="form.get('validTargets.TargetObjectEquipped').value">
+            <td></td>
+
+            <td>
+                <span>
+                    Equipped Item
                 </span>
             </td>
         </tr>
@@ -46,9 +127,41 @@
 
     </table>
 
+
+
     <p class="echo">Example:</p>
 
-    <p class="echo">> cast {{form.get('name').value}} </p>
+    <p class="echo">> affects</p>
+
+
+
+    <table class="table-border">
+
+        <tr>
+            <td>Name</td>
+            <td>Duration</td>
+            <td>Affect</td>
+        </tr>
+
+        <tr *ngFor="let effect of effects.controls; let i=index">
+            <td>
+                {{effects.controls[i].get('name').value}}
+            </td>
+
+            <td>
+                {{effects.controls[i].get('duration').value}}
+            </td>
+
+            <td>
+                {{effects.controls[i].get('location').value}} {{effects.controls[i].get('modifier').value}}
+            </td>
+        </tr>
+
+
+    </table>
+
+
+    <p class=" echo">> cast {{form.get('name').value}} </p>
     <p class="room__description">You close your eyes and utter '{{form.get('name').value}}'.</p>
     <p class="room__description">Your {{form.get('name').value}} hits Bob</p>
 

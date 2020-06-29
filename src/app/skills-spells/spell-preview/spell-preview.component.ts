@@ -8,7 +8,7 @@ import {
     SimpleChanges,
     OnChanges,
 } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import { SkillSpellService } from '../add-skills-spells/add-skills-spells.service';
 
 
@@ -20,6 +20,7 @@ import { SkillSpellService } from '../add-skills-spells/add-skills-spells.servic
 
 export class SpellPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChanges {
     @Input() form: FormGroup;
+    @Input() effects: FormArray;
     componentActive = true;
 
     constructor(private service: SkillSpellService, private _changeRef: ChangeDetectorRef

@@ -93,15 +93,16 @@
 
                     <h2>Effect</h2>
                     <p>Does the spell apply any positive or negative affects on the victim?</p>
-                    <div formArrayName="effects">
+                    <div formArrayName="effects" class="spell-effects">
 
 
 
-                        <div *ngFor="let effect of effects.controls; let i=index">
+                        <div class="effects-item" *ngFor="let effect of effects.controls; let i=index">
 
 
                             <div class="row" [formGroupName]="i">
-                                <a (click)="removeItem(i)">Remove effect</a>
+
+                                <a (click)="removeItem(i)" class="fa fa-times-circle"></a>
                                 <div class="col">
                                     <mat-form-field appearance="outline" class="form-control">
                                         <mat-label>Name</mat-label>
@@ -150,7 +151,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div><a (click)="addEffect()" mat-raised-button color="secodary">Add effect</a></div>
+                        <div><button mat-raised-button color="secondary" (click)="addEffect()" type="button">Add
+                                effect</button></div>
                     </div>
 
                     <!-- For now this isn't used-->
@@ -183,7 +185,7 @@
             </div>
         </div>
         <div class="col-4">
-            <app-spell-preview-component [form]="form"></app-spell-preview-component>
+            <app-spell-preview-component [form]="form" [effects]="effects"></app-spell-preview-component>
         </div>
     </div>
 </div>
