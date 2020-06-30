@@ -18,6 +18,7 @@ import { SkillSpellService } from './add-skills-spells/add-skills-spells.service
 import { SpellPreviewComponent } from './spell-preview/spell-preview.component';
 import { ValidTargetPipe } from './pipes/valid-target.pipe';
 import { EffectLocationPipe } from './pipes/effect-location.pipe';
+import { EditSkillsSpellComponent } from './edit-skills-spells/edit-skills-spells.component';
 
 
 
@@ -41,6 +42,7 @@ import { EffectLocationPipe } from './pipes/effect-location.pipe';
         SkillSpellService
     ],
     declarations: [
+        EditSkillsSpellComponent,
         ViewSkillsSpellsComponent,
         AddSkillsSpellComponent,
         SpellPreviewComponent,
