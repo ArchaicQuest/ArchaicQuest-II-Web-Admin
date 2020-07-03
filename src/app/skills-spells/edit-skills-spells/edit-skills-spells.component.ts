@@ -84,13 +84,13 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             );
         });
 
+
         this.validTargetFlags.forEach(flag => {
             (this.form.controls['validTargets'] as FormGroup).addControl(
                 flag.name,
-                new FormControl()
+                new FormControl(false)
             );
         });
-
 
         console.log(this.effectLocations)
 
@@ -98,14 +98,26 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             takeUntil(componentDestroyed(this))
         ).subscribe(skill => {
 
-            console.log("loaded", skill);
-
             this.form.get('name').setValue(skill.name);
             this.form.get('description').setValue(skill.description);
             this.form.get('diceMaxSize').setValue(skill.damage.diceMaxSize);
             this.form.get('diceRoll').setValue(skill.damage.diceRoll);
-            this.form.get('effects').setValue(skill.effect);
-            this.form.get('validTargets').setValue(skill.validTargets);
+            //   this.form.get('effects').setValue(skill.effect);
+            // this.form.get('validTargets').setValue(skill.validTargets);
+
+            this.selectedValidTarget = skill.validTargets;
+
+
+
+
+
+            this.validTargetFlags.forEach(flag => {
+                this.hasValidTarget(flag.id);
+            });
+
+
+
+
 
         });
 
@@ -203,8 +215,10 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
     }
 
     addSpell() {
+
+        const targetFlags = this.selectedValidTargetFlags.reduce((a, b) => a + b, 0);
         const skill: Skill = {
-            id: -1,
+            id: this.route.snapshot.params['id'],
             name: this.form.get('name').value,
             description: this.form.get('description').value,
             damage: {
@@ -212,6 +226,7 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
                 diceMinSize: 1,
                 diceMaxSize: this.form.get('diceMaxSize').value
             },
+            validTargets: targetFlags,
             cost: {
                 hitPoints: 0,
                 moves: 0,

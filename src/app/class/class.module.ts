@@ -13,6 +13,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { ViewClassService } from './view-class/view-class.service';
 import { ViewClassComponent } from './view-class/view-class.component';
 import { classRoutes } from './class.routes';
+import { ClassService } from './add-class/add-class.service';
+import { AddClassComponent } from './add-class/add-class.component';
 
 
 
@@ -33,10 +35,12 @@ import { classRoutes } from './class.routes';
     ],
     providers: [
         ViewClassService,
+        ClassService
 
     ],
     declarations: [
-        ViewClassComponent
+        ViewClassComponent,
+        AddClassComponent
     ],
 })
 export class ClassModule { }

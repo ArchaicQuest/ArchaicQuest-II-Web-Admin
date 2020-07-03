@@ -5,14 +5,14 @@
         <div class="col">
             <div class="panel">
                 <div class="">
-                    <button mat-raised-button color="primary" routerLink="/add-mob">Add Skill or Spell</button>
+                    <button mat-raised-button color="primary" routerLink="/class/add">Add class</button>
                     <br />
                     <br />
 
 
                     <mat-form-field appearance="outline" class="form-control">
-                        <mat-label>Filter skills & spells</mat-label>
-                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter skills & spells">
+                        <mat-label>Filter class</mat-label>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter class">
                     </mat-form-field>
                 </div>
             </div>
@@ -38,7 +38,7 @@
 
                 <div class="row">
                     <div class="col">
-                        <button mat-raised-button color="primary" [routerLink]="['/edit-mob', data.id]">
+                        <button mat-raised-button color="primary" [routerLink]="['/class/edit', data.id]">
                             View / Edit
                         </button>
                     </div>
