@@ -4,7 +4,7 @@ import { Store, select } from '@ngrx/store';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { ActivatedRoute } from '@angular/router';
 import { componentDestroyed, OnDestroyMixin } from "@w11k/ngx-componentdestroyed";
-import { take } from 'rxjs/operators';
+import { take, startWith, map } from 'rxjs/operators';
 import { EffectLocation } from '../interfaces/effect.interface';
 import { StatusEnum } from '../interfaces/status.enum';
 import { ItemType } from 'src/app/items/interfaces/item-type.interface';
@@ -13,6 +13,7 @@ import { Skill } from '../interfaces/skill.interface';
 import { SkillType } from '../interfaces/skill-type.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ClassService } from './add-class.service';
+import { Observable } from 'rxjs';
 
 @Component({
     templateUrl: './add-class.component.html',
@@ -21,7 +22,8 @@ import { ClassService } from './add-class.service';
 export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnInit {
     componentActive = true;
     public attributeLocations: { name: string; value: number }[];
-
+    public skillSpellsList: Skill[] = [];
+    public filteredOptions: Observable<Skill[]>;
     public form = this.formBuilder.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
@@ -29,6 +31,7 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         diceMaxSize: ['', Validators.required],
         attributes: this.formBuilder.array([
         ]),
+        selectedSkill: [null],
     });
     constructor(
         private formBuilder: FormBuilder,
@@ -48,8 +51,30 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
             });
 
+        this.service.getSkillsSpells().pipe(take(1)).subscribe(x => this.skillSpellsList = [...x]);
+
+
+        this.filteredOptions = this.form.get('selectedSkill').valueChanges.pipe(
+            startWith(''),
+            map(value => this._filter(value))
+        );
+
+        setTimeout(() => {
+            this.form.get('selectedSkill').setValue(null);
+        });
     }
 
+    private _filter(value: string): Skill[] {
+
+        if (value == null) {
+            return this.skillSpellsList;
+        }
+
+
+        const filterValue = value.toLowerCase();
+        console.log(this.skillSpellsList.filter(x => x.name.toLowerCase().indexOf(filterValue) === 0));
+        return this.skillSpellsList.filter(x => x.name.toLowerCase().indexOf(filterValue) === 0);
+    }
 
     get attributes() {
         return this.form.get('attributes') as FormArray;

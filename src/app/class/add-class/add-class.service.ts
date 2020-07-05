@@ -5,14 +5,15 @@ import { environment } from 'src/environments/environment';
 import { StatusEnum } from '../interfaces/status.enum';
 import { validTargets } from '../interfaces/targets.enum';
 import { Skill } from '../interfaces/skill.interface';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClassService {
     private host = environment.hostAPI;
-    private postSkillUrl = `${this.host}skill/postSkill`;
-
+    private postClasslUrl = `${this.host}class/post`;
+    private getSkillUrl = `${this.host}skill/Get`;
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
     });
@@ -22,9 +23,14 @@ export class ClassService {
 
 
     public postSkill(item: Skill) {
-        return this.http.post(this.postSkillUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
+        return this.http.post(this.postClasslUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }
 
+
+
+    getSkillsSpells(): Observable<Skill[]> {
+        return this.http.get<Skill[]>(this.getSkillUrl);
+    }
 
 
 }
