@@ -11,10 +11,9 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Name</mat-label>
-                                <input matInput placeholder="Skill / spell name" value="" required
-                                    formControlName="name">
+                                <input matInput placeholder="Class Name" value="" required formControlName="name">
                                 <mat-error *ngIf="form.get('name').hasError('required')">
-                                    skill / spell name is required.
+                                    Class name is required.
                                 </mat-error>
                             </mat-form-field>
                         </div>
@@ -24,28 +23,27 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Help Text</mat-label>
-                                <textarea matInput placeholder="Description of skill / spell and how to use" value=""
-                                    required formControlName="description" cdkTextareaAutosize
-                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
+                                <textarea matInput placeholder="Description of class" value="" required
+                                    formControlName="description" cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                    cdkAutosizeMinRows="1" cdkAutosizeMaxRows="10"
                                     (selectionChange)="triggerDescriptionResize()">
 
                   </textarea>
                                 <mat-error *ngIf="form.get('description').hasError('required')">
-                                    skill / spell description is required.
+                                    class description is required.
                                 </mat-error>
                             </mat-form-field>
                         </div>
                     </div>
 
 
-                    <h2> Dice Roll</h2>
-                    <p>How many rolls of a dice and of which size e.g 1d6 is 1 roll and size 6.
-                        Modifier to add a value to the dice roll e.g 1d6+2</p>
+                    <h2>Hit Die</h2>
+                    <p>How many hitpoints can be gained per level</p>
                     <div class="row">
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Dice rolls</mat-label>
-                                <input matInput placeholder="Number of dices" value="" required
+                                <input matInput placeholder="Number of dices" value="1" required
                                     formControlName="diceRoll">
                                 <mat-error *ngIf="form.get('diceRoll').hasError('required')">
                                     dice roll is required.
@@ -62,16 +60,54 @@
                                 </mat-error>
                             </mat-form-field>
                         </div>
-                        <!-- <div class="col">
-                            <mat-form-field appearance="outline" class="form-control">
-                                <mat-label>Dice Modifier</mat-label>
-                                <input matInput placeholder="Dice Modifier" value="" required formControlName="name">
-                                <mat-error *ngIf="form.get('diceRoll').hasError('required')">
-                                    dice roll is required.
-                                </mat-error>
-                            </mat-form-field>
-                        </div> -->
 
+                    </div>
+
+                    <h2>Attribute Bonuses</h2>
+                    <p>Does this class grant bonuses to attribute stats?</p>
+                    <div formArrayName="attributes" class="class-attributes">
+
+
+
+                        <div class="attributes-item" *ngFor="let effect of attributes.controls; let i=index">
+
+
+                            <div class="row" [formGroupName]="i">
+
+                                <a (click)="removeItem(i)" class="fa fa-times-circle"></a>
+
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Attribute Bonus</mat-label>
+                                        <mat-select formControlName="attribute" placeholder="Attribute Bonus" required>
+                                            <mat-option *ngFor="let attribute of attributeLocations"
+                                                [value]="attribute.value">
+                                                {{ attribute.name }}
+                                            </mat-option>
+                                        </mat-select>
+                                        <mat-error *ngIf="attributes.controls[i].get('attribute').hasError('required')">
+                                            attribute required
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Value</mat-label>
+                                        <input matInput placeholder="value" value="" required formControlName="value"
+                                            type="number">
+                                        <mat-error *ngIf="attributes.controls[i].get('value').hasError('required')">
+                                            value required.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div><button mat-raised-button color="secondary" (click)="addEffect()" type="button">Add
+                                effect</button></div>
                     </div>
 
 
@@ -80,10 +116,8 @@
 
 
 
-
-                    <button mat-raised-button color="primary" type="submit" (click)="addSpell()
-                    ">Add
-                        Skill / Spell</button>
+                    <button mat-raised-button color="primary" type="submit">Add
+                        Class</button>
 
 
 

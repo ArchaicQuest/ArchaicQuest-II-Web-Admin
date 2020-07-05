@@ -14,28 +14,21 @@ import { SkillType } from '../interfaces/skill-type.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ClassService } from './add-class.service';
 
-
 @Component({
     templateUrl: './add-class.component.html',
     styleUrls: ['./add-class.component.scss'],
 })
 export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnInit {
     componentActive = true;
+    public attributeLocations: { name: string; value: number }[];
 
     public form = this.formBuilder.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
-        diceRoll: ['', Validators.required],
+        diceRoll: ['1', Validators.required],
         diceMaxSize: ['', Validators.required],
-        effects: this.formBuilder.array([
+        attributes: this.formBuilder.array([
         ]),
-        usableFromStatus: new FormGroup({}),
-        validTargets: new FormGroup({}),
-        rounds: ['', Validators.required],
-        cost: this.formBuilder.group({
-            type: ['', Validators.required],
-            value: ['', Validators.required],
-        }),
     });
     constructor(
         private formBuilder: FormBuilder,
@@ -49,15 +42,42 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
     ngOnInit() {
 
 
+        this.attributeLocations = Object.keys(EffectLocation)
+            .filter(value => isNaN(Number(value)) === false)
+            .map((key, index) => {
+                return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
+            });
 
     }
 
+
+    get attributes() {
+        return this.form.get('attributes') as FormArray;
+    }
+
+    initattributes() {
+        return this.formBuilder.group({
+            attribute: ['', Validators.required],
+            value: ['', Validators.required],
+        });
+
+    }
+
+    addEffect() {
+        const control = <FormArray>this.form.controls['attributes'];
+        control.push(this.initattributes());
+    }
+    removeItem(i: number) {
+        const control = <FormArray>this.form.controls['attributes'];
+        control.removeAt(i);
+    }
 
     triggerDescriptionResize() {
         this.ngZone.onStable
             .pipe(take(1))
             .subscribe(() => this.autosize.resizeToFitContent(true));
     }
+
 
     // addClass() {
     //     const skill: Skill = {
