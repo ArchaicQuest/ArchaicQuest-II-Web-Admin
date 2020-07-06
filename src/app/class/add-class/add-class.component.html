@@ -36,114 +36,130 @@
                         </div>
                     </div>
 
-
-                    <h2>Hit Die</h2>
-                    <p>How many hitpoints can be gained per level</p>
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field appearance="outline" class="form-control">
-                                <mat-label>Dice rolls</mat-label>
-                                <input matInput placeholder="Number of dices" value="1" required
-                                    formControlName="diceRoll">
-                                <mat-error *ngIf="form.get('diceRoll').hasError('required')">
-                                    dice roll is required.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-                        <div class="col">
-                            <mat-form-field appearance="outline" class="form-control">
-                                <mat-label>Dice Size</mat-label>
-                                <input matInput placeholder="Size of dice" value="" required
-                                    formControlName="diceMaxSize">
-                                <mat-error *ngIf="form.get('diceMaxSize').hasError('required')">
-                                    dice roll is required.
-                                </mat-error>
-                            </mat-form-field>
-                        </div>
-
-                    </div>
-
-                    <h2>Attribute Bonuses</h2>
-                    <p>Does this class grant bonuses to attribute stats?</p>
-                    <div formArrayName="attributes" class="class-attributes">
-
-
-
-                        <div class="attributes-item" *ngFor="let effect of attributes.controls; let i=index">
-
-
-                            <div class="row" [formGroupName]="i">
-
-                                <a (click)="removeItem(i)" class="fa fa-times-circle"></a>
-
-
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Attribute Bonus</mat-label>
-                                        <mat-select formControlName="attribute" placeholder="Attribute Bonus" required>
-                                            <mat-option *ngFor="let attribute of attributeLocations"
-                                                [value]="attribute.value">
-                                                {{ attribute.name }}
-                                            </mat-option>
-                                        </mat-select>
-                                        <mat-error *ngIf="attributes.controls[i].get('attribute').hasError('required')">
-                                            attribute required
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Value</mat-label>
-                                        <input matInput placeholder="value" value="" required formControlName="value"
-                                            type="number">
-                                        <mat-error *ngIf="attributes.controls[i].get('value').hasError('required')">
-                                            value required.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-
-
+                    <div class="section">
+                        <h2>Hit Die</h2>
+                        <p>How many hitpoints can be gained per level</p>
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Dice rolls</mat-label>
+                                    <input matInput placeholder="Number of dices" value="1" required
+                                        formControlName="diceRoll">
+                                    <mat-error *ngIf="form.get('diceRoll').hasError('required')">
+                                        dice roll is required.
+                                    </mat-error>
+                                </mat-form-field>
                             </div>
-                        </div>
-                        <div><button mat-raised-button color="secondary" (click)="addEffect()" type="button">Add
-                                effect</button></div>
-                    </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Dice Size</mat-label>
+                                    <input matInput placeholder="Size of dice" value="" required
+                                        formControlName="diceMaxSize">
+                                    <mat-error *ngIf="form.get('diceMaxSize').hasError('required')">
+                                        dice roll is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
 
-                    <h2>Add Skills &amp; spells</h2>
-                    <p>What skills or spells does this class learn at each level?</p>
-
-                    <div class="row">
-                        <div class="col">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Selected Skill/Spell</mat-label>
-                                <input type="text" placeholder="Pick one" aria-label="Number" matInput
-                                    formControlName="selectedSkill" [matAutocomplete]="auto">
-                                <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                                    <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill">
-                                        {{skill.name}}
-                                    </mat-option>
-                                </mat-autocomplete>
-                            </mat-form-field>
-                        </div>
-                        <div class="col">
-                            Level Obtained
                         </div>
                     </div>
+                    <div class="section">
+                        <h2>Attribute Bonuses</h2>
+                        <p>Does this class grant bonuses to attribute stats?</p>
+                        <div formArrayName="attributes" class="class-attributes">
 
-                    Current Skills &amp; Spells
 
-                    <div class="row">
-                        <div class="col-12">
-                            Level 1 : Magic Missile
-                        </div>
-                        <div class="col-12">
-                            Level 2 : Magic Missile
+
+                            <div class="attributes-item" *ngFor="let effect of attributes.controls; let i=index">
+
+
+                                <div class="row" [formGroupName]="i">
+
+                                    <a (click)="removeItem(i)" class="fa fa-times-circle"></a>
+
+
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Attribute Bonus</mat-label>
+                                            <mat-select formControlName="attribute" placeholder="Attribute Bonus"
+                                                required>
+                                                <mat-option *ngFor="let attribute of attributeLocations"
+                                                    [value]="attribute.value">
+                                                    {{ attribute.name }}
+                                                </mat-option>
+                                            </mat-select>
+                                            <mat-error
+                                                *ngIf="attributes.controls[i].get('attribute').hasError('required')">
+                                                attribute required
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Value</mat-label>
+                                            <input matInput placeholder="value" value="" required
+                                                formControlName="value" type="number">
+                                            <mat-error *ngIf="attributes.controls[i].get('value').hasError('required')">
+                                                value required.
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div><button mat-raised-button color="secondary" (click)="addEffect()" type="button">Add
+                                    effect</button></div>
                         </div>
                     </div>
 
+                    <div class="section">
+                        <h2>Add Skills &amp; spells</h2>
+                        <p>What skills or spells does this class learn at each level?</p>
+
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Selected Skill/Spell</mat-label>
+                                    <input type="text" placeholder="Pick one" aria-label="Number" matInput
+                                        formControlName="selectedSkill" [matAutocomplete]="auto">
+                                    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                                        <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill">
+                                            {{skill.name}}
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Level Obtained</mat-label>
+                                    <input matInput placeholder="Level Obtained" value="1" required
+                                        formControlName="selectedSkillLevel" type="number">
+
+                                </mat-form-field>
+                            </div>
+
+                        </div>
+                        <div><button mat-raised-button color="secondary" (click)="addSkill()" type="button">Add
+                                skill</button></div>
+                    </div>
+
+                    <div class="section">
+
+                        Current Skills &amp; Spells
 
 
+
+                        <div class="row">
+                            <div class="col-12" *ngFor="let skill of classSkillsList">
+                                Level {{skill.level}} : {{skill.skill.name}}
+                            </div>
+
+                        </div>
+
+
+                    </div>
 
 
                     <button mat-raised-button color="primary" type="submit">Add

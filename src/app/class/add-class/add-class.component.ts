@@ -24,6 +24,7 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
     public attributeLocations: { name: string; value: number }[];
     public skillSpellsList: Skill[] = [];
     public filteredOptions: Observable<Skill[]>;
+    public classSkillsList: { level: number, skill: Skill }[] = [];
     public form = this.formBuilder.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
@@ -32,6 +33,7 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         attributes: this.formBuilder.array([
         ]),
         selectedSkill: [null],
+        selectedSkillLevel: [''],
     });
     constructor(
         private formBuilder: FormBuilder,
@@ -51,17 +53,22 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
             });
 
-        this.service.getSkillsSpells().pipe(take(1)).subscribe(x => this.skillSpellsList = [...x]);
-
-
-        this.filteredOptions = this.form.get('selectedSkill').valueChanges.pipe(
-            startWith(''),
-            map(value => this._filter(value))
-        );
-
-        setTimeout(() => {
-            this.form.get('selectedSkill').setValue(null);
+        this.service.getSkillsSpells().pipe(take(1)).subscribe(x => {
+            this.skillSpellsList = [...x]
+            this.filteredOptions = this.form.get('selectedSkill').valueChanges.pipe(
+                startWith(''),
+                map(value => value ? this._filter(value) : this.skillSpellsList)
+            );
         });
+
+
+
+
+
+    }
+
+    displayFn(skill: Skill): string {
+        return skill && skill.name ? skill.name : '';
     }
 
     private _filter(value: string): Skill[] {
@@ -70,9 +77,8 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
             return this.skillSpellsList;
         }
 
-
         const filterValue = value.toLowerCase();
-        console.log(this.skillSpellsList.filter(x => x.name.toLowerCase().indexOf(filterValue) === 0));
+
         return this.skillSpellsList.filter(x => x.name.toLowerCase().indexOf(filterValue) === 0);
     }
 
@@ -101,6 +107,13 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.ngZone.onStable
             .pipe(take(1))
             .subscribe(() => this.autosize.resizeToFitContent(true));
+    }
+
+    addSkill() {
+        //   debugger;
+        const newSkill = [{ level: this.form.get('selectedSkillLevel').value, skill: this.form.get('selectedSkill').value }];
+        this.classSkillsList = this.classSkillsList.concat(...newSkill);
+        this.classSkillsList.sort((a, b) => a.level - b.level);
     }
 
 
