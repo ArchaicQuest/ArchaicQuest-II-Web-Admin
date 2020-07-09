@@ -1,7 +1,26 @@
 .section {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 
-  &.section--check-box {
-    margin-bottom: 50px;
-  }
+    &.section--check-box {
+        margin-bottom: 50px;
+    }
+}
+
+.attributes-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.fa-times-circle {
+    position: absolute;
+    top: -19px;
+    right: -14px;
+    font-size: 20px;
+    color: red;
+
+    &:hover {
+        cursor: pointer;
+        border-bottom: 0;
+        color: darkred;
+    }
 }

@@ -15,6 +15,7 @@ import { ViewClassComponent } from './view-class/view-class.component';
 import { classRoutes } from './class.routes';
 import { ClassService } from './add-class/add-class.service';
 import { AddClassComponent } from './add-class/add-class.component';
+import { ClassPreviewComponent } from './class-preview/class-preview.component';
 
 
 
@@ -40,6 +41,7 @@ import { AddClassComponent } from './add-class/add-class.component';
     ],
     declarations: [
         ViewClassComponent,
+        ClassPreviewComponent,
         AddClassComponent
     ],
 })

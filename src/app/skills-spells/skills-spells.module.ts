@@ -17,7 +17,6 @@ import { AddSkillsSpellComponent } from './add-skills-spells/add-skills-spells.c
 import { SkillSpellService } from './add-skills-spells/add-skills-spells.service';
 import { SpellPreviewComponent } from './spell-preview/spell-preview.component';
 import { ValidTargetPipe } from './pipes/valid-target.pipe';
-import { EffectLocationPipe } from './pipes/effect-location.pipe';
 import { EditSkillsSpellComponent } from './edit-skills-spells/edit-skills-spells.component';
 
 
@@ -46,8 +45,7 @@ import { EditSkillsSpellComponent } from './edit-skills-spells/edit-skills-spell
         ViewSkillsSpellsComponent,
         AddSkillsSpellComponent,
         SpellPreviewComponent,
-        ValidTargetPipe,
-        EffectLocationPipe
+        ValidTargetPipe
     ],
 })
 export class SkillsSpellsModule { }
