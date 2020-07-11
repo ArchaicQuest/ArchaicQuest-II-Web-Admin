@@ -9,6 +9,7 @@ import {
     OnChanges,
 } from '@angular/core';
 import { FormGroup, FormArray } from '@angular/forms';
+import { Skill } from 'src/app/skills-spells/interfaces/skill.interface';
 
 
 @Component({
@@ -20,6 +21,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 export class ClassPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChanges {
     @Input() form: FormGroup;
     @Input() attributes: FormArray;
+    @Input() classSkillsList: { level: number, skill: Skill }[];
     componentActive = true;
 
     constructor(private _changeRef: ChangeDetectorRef
@@ -41,10 +43,7 @@ export class ClassPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChan
         }
     }
 
-    ngOnChanges(changes: SimpleChanges) {
-        this.form = changes['form'].currentValue;
 
-    }
 
 
 

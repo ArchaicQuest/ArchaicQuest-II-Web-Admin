@@ -60,10 +60,16 @@
 
 
     </table>
+    <div *ngIf="classSkillsList != null">
+        <p class="echo">Skills & Spells</p>
 
 
-    <p class=" echo">> cast {{form.get('name').value}} </p>
-    <p class="room__description">You close your eyes and utter '{{form.get('name').value}}'.</p>
-    <p class="room__description">Your {{form.get('name').value}} hits Bob</p>
+        <div class="row skills">
+            <div class="col-12" *ngFor="let skill of classSkillsList">
+                Level {{skill.level}} : {{skill.skill.name}}
+            </div>
+
+        </div>
+    </div>
 
 </div>

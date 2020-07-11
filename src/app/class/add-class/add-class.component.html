@@ -38,7 +38,7 @@
 
                     <div class="section">
                         <h2>Hit Die</h2>
-                        <p>How many hitpoints can be gained per level</p>
+                        <p class="sub-title">How many hitpoints can be gained per level</p>
                         <div class="row">
                             <div class="col">
                                 <mat-form-field appearance="outline" class="form-control">
@@ -65,7 +65,7 @@
                     </div>
                     <div class="section">
                         <h2>Attribute Bonuses</h2>
-                        <p>Does this class grant bonuses to attribute stats?</p>
+                        <p class="sub-title">Does this class grant bonuses to attribute stats?</p>
                         <div formArrayName="attributes" class="class-attributes">
 
 
@@ -116,7 +116,7 @@
 
                     <div class="section">
                         <h2>Add Skills &amp; spells</h2>
-                        <p>What skills or spells does this class learn at each level?</p>
+                        <p class="sub-title">What skills or spells does this class learn at each level?</p>
 
                         <div class="row">
                             <div class="col">
@@ -171,7 +171,8 @@
             </div>
         </div>
         <div class="col-4">
-            <app-class-preview-component [form]="form" [attributes]="attributes"></app-class-preview-component>
+            <app-class-preview-component [form]="form" [attributes]="attributes" [classSkillsList]="classSkillsList">
+            </app-class-preview-component>
         </div>
     </div>
 </div>
