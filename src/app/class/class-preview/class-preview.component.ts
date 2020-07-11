@@ -18,7 +18,7 @@ import { Skill } from 'src/app/skills-spells/interfaces/skill.interface';
     styleUrls: ['./class-preview.component.scss']
 })
 
-export class ClassPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChanges {
+export class ClassPreviewComponent implements OnInit, OnDestroy, DoCheck {
     @Input() form: FormGroup;
     @Input() attributes: FormArray;
     @Input() classSkillsList: { level: number, skill: Skill }[];

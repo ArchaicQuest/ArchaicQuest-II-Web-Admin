@@ -6,13 +6,14 @@ import { StatusEnum } from '../interfaces/status.enum';
 import { validTargets } from '../interfaces/targets.enum';
 import { Skill } from '../interfaces/skill.interface';
 import { Observable } from 'rxjs';
+import { Class } from 'src/app/characters/interfaces/class.interface';
 
 @Injectable({
     providedIn: 'root'
 })
 export class ClassService {
     private host = environment.hostAPI;
-    private postClasslUrl = `${this.host}class/post`;
+    private postClasslUrl = `${this.host}Character/class`;
     private getSkillUrl = `${this.host}skill/Get`;
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -22,7 +23,7 @@ export class ClassService {
 
 
 
-    public postSkill(item: Skill) {
+    public postClass(item: Class) {
         return this.http.post(this.postClasslUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }
 

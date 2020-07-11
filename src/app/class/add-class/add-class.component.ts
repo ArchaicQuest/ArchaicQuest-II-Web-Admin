@@ -14,6 +14,7 @@ import { SkillType } from '../interfaces/skill-type.interface';
 import { ToastrService } from 'ngx-toastr';
 import { ClassService } from './add-class.service';
 import { Observable } from 'rxjs';
+import { Class, SkillList } from 'src/app/characters/interfaces/class.interface';
 
 @Component({
     templateUrl: './add-class.component.html',
@@ -117,31 +118,28 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
     }
 
 
-    // addClass() {
-    //     const skill: Skill = {
-    //         id: -1,
-    //         name: this.form.get('name').value,
-    //         description: this.form.get('description').value,
-    //         damage: {
-    //             diceRoll: this.form.get('diceRoll').value,
-    //             diceMinSize: 1,
-    //             diceMaxSize: this.form.get('diceMaxSize').value
-    //         },
-    //         cost: {
-    //             hitPoints: 0,
-    //             moves: 0,
-    //             none: 0,
-    //             mana: 5
-    //         },
-    //         effect: null,
-    //         rounds: 1,
-    //         type: SkillType.Affect
-    //     }
+    addClass() {
+
+        let skillList: SkillList[] = [];
+
+        this.classSkillsList.forEach(skill => {
+            skillList.push({
+                skillId: skill.skill.id,
+                Level: skill.level,
+                SkillName: skill.skill.name
+            });
+        });
+        const data: Class = {
+            id: -1,
+            name: this.form.get('name').value,
+            description: this.form.get('description').value,
+            skills: skillList
+        }
 
 
-    //     this.service.postSkill(skill).pipe(take(1)).subscribe(x => {
-    //         console.log("success", x)
-    //     })
-    // }
+        this.service.postClass(data).pipe(take(1)).subscribe(x => {
+            console.log("success", x)
+        })
+    }
 
 }
