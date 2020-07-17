@@ -70,8 +70,11 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
         this.validTargetFlags = Object.keys(validTargets)
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
-                return { name: validTargets[key], id: index === 0 ? 0 : 1 << index };
+                console.log("flag", index, " id ", key)
+                return { name: validTargets[key], id: parseInt(key, 10) };
             });
+
+        console.log(this.validTargetFlags)
 
 
 
@@ -106,15 +109,20 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             // this.form.get('validTargets').setValue(skill.validTargets);
 
             this.selectedValidTarget = skill.validTargets;
-
-
-
+            let validTarget: number;
+            let i = 0;
+            while (validTargets[validTarget = 1 << i++]) {
+                if (this.selectedValidTarget & validTarget) {
+                    this.selectedValidTargetFlags.push(validTarget)
+                }
+            }
 
 
             this.validTargetFlags.forEach(flag => {
-                this.hasValidTarget(flag.id);
+                if (this.hasValidTarget(flag.id)) {
+                    this.updateSelectedStatus(flag.id);
+                }
             });
-
 
 
 
@@ -198,7 +206,8 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
 
     updateSelectedValidTarget(flag: number) {
 
-        if (this.selectedValidTargetFlags.length && this.selectedValidTargetFlags.includes(flag)) {
+        debugger;
+        if (this.selectedValidTargetFlags.includes(flag)) {
             this.selectedValidTargetFlags = this.selectedValidTargetFlags.filter(flagToRemove => flagToRemove !== flag);
         } else {
             this.selectedValidTargetFlags.push(flag);
@@ -215,7 +224,7 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
     }
 
     addSpell() {
-
+        console.log("got flags", this.selectedValidTargetFlags)
         const targetFlags = this.selectedValidTargetFlags.reduce((a, b) => a + b, 0);
         const skill: Skill = {
             id: this.route.snapshot.params['id'],

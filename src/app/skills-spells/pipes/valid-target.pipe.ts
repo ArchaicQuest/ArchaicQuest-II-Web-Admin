@@ -4,31 +4,32 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ValidTargetPipe implements PipeTransform {
     transform(target: number): string {
 
+
         switch (target) {
             case 0:
                 return 'Ignore target';
-            case 1 << 1:
+            case 1:
                 return 'Player in room';
-            case 1 << 2:
+            case 2:
                 return 'Player anywhere';
-            case 1 << 3:
+            case 4:
                 return 'Self in Fight';
-            case 1 << 4:
+            case 8:
                 return 'Current target in Fight';
-            case 1 << 5:
+            case 16:
                 return 'Self Only';
-            case 1 << 6:
+            case 32:
                 return 'Not Self';
-            case 1 << 7:
+            case 64:
                 return 'Inventory Item';
-            case 1 << 8:
+            case 128:
                 return 'Room Item';
-            case 1 << 9:
+            case 256:
                 return 'Item in the world';
-            case 1 << 10:
+            case 512:
                 return 'Equipped Item';
             default:
-                return '';
+                return 'fail for ' + target;
         }
 
     }

@@ -57,6 +57,7 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         this.effectLocations = Object.keys(EffectLocation)
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
+                console.log("index", index)
                 return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
             });
 
@@ -69,7 +70,7 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
         this.validTargetFlags = Object.keys(validTargets)
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
-                return { name: validTargets[key], id: index === 0 ? 0 : 1 << index };
+                return { name: validTargets[key], id: parseInt(key, 10) };
             });
 
 
