@@ -16,6 +16,7 @@ import { classRoutes } from './class.routes';
 import { ClassService } from './add-class/add-class.service';
 import { AddClassComponent } from './add-class/add-class.component';
 import { ClassPreviewComponent } from './class-preview/class-preview.component';
+import { EditClassComponent } from './edit-class/edit-class.component';
 
 
 
@@ -42,7 +43,8 @@ import { ClassPreviewComponent } from './class-preview/class-preview.component';
     declarations: [
         ViewClassComponent,
         ClassPreviewComponent,
-        AddClassComponent
+        AddClassComponent,
+        EditClassComponent
     ],
 })
 export class ClassModule { }

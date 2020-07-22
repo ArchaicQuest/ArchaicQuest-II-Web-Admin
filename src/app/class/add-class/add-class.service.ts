@@ -13,7 +13,7 @@ import { Class } from 'src/app/characters/interfaces/class.interface';
 })
 export class ClassService {
     private host = environment.hostAPI;
-    private postClasslUrl = `${this.host}Character/class`;
+    private classlUrl = `${this.host}Character/class`;
     private getSkillUrl = `${this.host}skill/Get`;
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
@@ -24,12 +24,15 @@ export class ClassService {
 
 
     public postClass(item: Class) {
-        return this.http.post(this.postClasslUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
+        return this.http.post(this.classlUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }
 
 
+    public getClass(id: number) {
+        return this.http.get(`${this.classlUrl}/${id}`);
+    }
 
-    getSkillsSpells(): Observable<Skill[]> {
+    public getSkillsSpells(): Observable<Skill[]> {
         return this.http.get<Skill[]>(this.getSkillUrl);
     }
 
