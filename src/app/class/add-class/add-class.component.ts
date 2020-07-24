@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClassService } from './add-class.service';
 import { Observable } from 'rxjs';
 import { Class, SkillList } from 'src/app/characters/interfaces/class.interface';
+import { Shared } from 'src/app/shared/shared';
 
 @Component({
     templateUrl: './add-class.component.html',
@@ -40,7 +41,8 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
         private service: ClassService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        public helpers: Shared
     ) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
@@ -115,6 +117,11 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         const newSkill = [{ level: this.form.get('selectedSkillLevel').value, skill: this.form.get('selectedSkill').value }];
         this.classSkillsList = this.classSkillsList.concat(...newSkill);
         this.classSkillsList.sort((a, b) => a.level - b.level);
+    }
+
+    removeSpell(i: number) {
+        this.helpers.removeItem(this.classSkillsList, i);
+        this.classSkillsList = [...this.classSkillsList];
     }
 
 

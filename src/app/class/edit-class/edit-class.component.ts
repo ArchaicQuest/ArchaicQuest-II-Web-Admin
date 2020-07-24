@@ -15,6 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ClassService } from '../add-class/add-class.service';
 import { Observable } from 'rxjs';
 import { Class, SkillList } from 'src/app/characters/interfaces/class.interface';
+import { Shared } from 'src/app/shared/shared';
 
 @Component({
     templateUrl: './edit-class.component.html',
@@ -41,7 +42,8 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
         private ngZone: NgZone,
         private service: ClassService,
         private toastr: ToastrService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        public helpers: Shared
     ) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
@@ -143,6 +145,10 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
         control.removeAt(i);
     }
 
+    removeSpell(i: number) {
+        this.helpers.removeItem(this.classSkillsList, i);
+        this.classSkillsList = [...this.classSkillsList];
+    }
     triggerDescriptionResize() {
         this.ngZone.onStable
             .pipe(take(1))

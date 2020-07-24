@@ -25,6 +25,17 @@
     }
 }
 
+.spell-list {
+    position: relative;
+    margin-bottom: 5px;
+
+    .fa-times-circle {
+        position: relative;
+        top: 2px;
+        right: -11px;
+    }
+}
+
 .sub-title {
     margin: -10px 0 10px 0;
 }

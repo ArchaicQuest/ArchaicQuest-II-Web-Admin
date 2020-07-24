@@ -118,7 +118,7 @@
             <mat-expansion-panel>
                 <mat-expansion-panel-header matTooltip="Class" matTooltipPosition="right" (click)="toggleSidenav(true)">
                     <i class="ra ra-axe" aria-hidden="true"></i>
-                    <span *ngIf="expanded$ | async">Class (WIP)</span>
+                    <span *ngIf="expanded$ | async">Class</span>
                 </mat-expansion-panel-header>
                 <ul>
                     <li>
@@ -128,7 +128,7 @@
                         </a>
                     </li>
                     <li>
-                        <a [routerLink]="" (click)="toggleSidenav(false)">
+                        <a [routerLink]="['/class/add']" (click)="toggleSidenav(false)">
                             <i class="fa fa-plus" aria-hidden="true"></i>
                             <span *ngIf="expanded$ | async">Create class</span>
                         </a>

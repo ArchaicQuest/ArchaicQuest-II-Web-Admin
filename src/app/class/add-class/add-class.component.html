@@ -141,7 +141,8 @@
                             </div>
 
                         </div>
-                        <div><button mat-raised-button color="secondary" (click)="addSkill()" type="button">Add
+                        <div><button mat-raised-button color="secondary" (click)="addSkill()" type="button"
+                                [disabled]="form.get('selectedSkill').invalid || form.get('selectedSkillLevel').invalid">Add
                                 skill</button></div>
                     </div>
 
@@ -152,8 +153,12 @@
 
 
                         <div class="row">
-                            <div class="col-12" *ngFor="let skill of classSkillsList">
-                                Level {{skill.level}} : {{skill.skill.name}}
+                            <div class="col-12 spell-list" *ngFor="let skill of classSkillsList;  let i=index">
+
+                                Level {{skill.level}} :
+                                {{skill.skill?.name || skill.skill}}
+
+                                <a (click)="removeSpell(i)" class="fa fa-times-circle"></a>
                             </div>
 
                         </div>
