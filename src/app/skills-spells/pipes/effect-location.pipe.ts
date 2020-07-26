@@ -3,47 +3,47 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'effectLocationPipe' })
 export class EffectLocationPipe implements PipeTransform {
     transform(location: number): string {
-
+        console.log(location)
         switch (location) {
             case 0:
                 return 'None';
-            case 1 << 1:
+            case 1:
                 return 'Strength';
-            case 1 << 2:
+            case 2:
                 return 'Dexterity';
-            case 1 << 3:
+            case 4:
                 return 'Constitution';
-            case 1 << 4:
+            case 8:
                 return 'Intelligence';
-            case 1 << 5:
+            case 16:
                 return 'Wisdom';
-            case 1 << 6:
+            case 32:
                 return 'Charisma';
-            case 1 << 7:
+            case 64:
                 return 'Luck';
-            case 1 << 8:
+            case 128:
                 return 'Hitpoints';
-            case 1 << 9:
+            case 256:
                 return 'Mana';
-            case 1 << 10:
+            case 512:
                 return 'Moves';
-            case 1 << 11:
+            case 1024:
                 return 'Armour';
-            case 1 << 12:
+            case 2048:
                 return 'Hit roll';
-            case 1 << 13:
+            case 4096:
                 return 'Saving spell';
-            case 1 << 14:
+            case 8192:
                 return 'Damage Roll';
-            case 1 << 15:
+            case 16384:
                 return 'Gender';
-            case 1 << 16:
+            case 32768:
                 return 'Age';
-            case 1 << 17:
+            case 65536:
                 return 'Weight';
-            case 1 << 18:
+            case 131072:
                 return 'Height';
-            case 1 << 19:
+            case 2622144:
                 return 'Level';
             default:
                 return '';

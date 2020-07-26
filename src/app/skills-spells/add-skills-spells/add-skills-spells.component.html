@@ -141,7 +141,7 @@
                                         <mat-label>Effect Location</mat-label>
                                         <mat-select formControlName="location" placeholder="Effect Location" required>
                                             <mat-option *ngFor="let effect of effectLocations" [value]="effect.value">
-                                                {{ effect.name }}
+                                                {{ effect.name }} {{effect.value}}
                                             </mat-option>
                                         </mat-select>
                                         <mat-error *ngIf="effects.controls[i].get('location').hasError('required')">

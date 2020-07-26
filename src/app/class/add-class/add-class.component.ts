@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormArray, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormControl, Form } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { ActivatedRoute } from '@angular/router';
-import { componentDestroyed, OnDestroyMixin } from "@w11k/ngx-componentdestroyed";
+import { componentDestroyed, OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 import { take, startWith, map } from 'rxjs/operators';
 import { EffectLocation } from '../interfaces/effect.interface';
 import { StatusEnum } from '../interfaces/status.enum';
@@ -53,7 +53,7 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.attributeLocations = Object.keys(EffectLocation)
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
-                return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
+                return { name: EffectLocation[key], value: parseInt(key, 10) };
             });
 
         this.service.getSkillsSpells().pipe(take(1)).subscribe(x => {
@@ -63,10 +63,6 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 map(value => value ? this._filter(value) : this.skillSpellsList)
             );
         });
-
-
-
-
 
     }
 
@@ -136,16 +132,46 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 skillName: skill.skill.name
             });
         });
+
+        //  debugger;
+        console.log(this.attributes.controls);
+        (this.form.get('attributes') as FormArray).controls.find((control) => {
+            if (control.get('attribute').value === EffectLocation.Strength) {
+                console.log(control.get('value').value)
+                return control.get('value').value;
+            }
+
+        });
+
+
         const data: Class = {
             id: -1,
             name: this.form.get('name').value,
             description: this.form.get('description').value,
-            skills: skillList
+            attributeBonus: {
+                attribute: {
+                    'strength': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Strength),
+                    'dexterity': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Dexterity),
+                    'constitution': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Constitution),
+                    'wisdom': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Wisdom),
+                    'intelligence': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Intelligence),
+                    'charisma': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Charisma),
+                    'hitpoints': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Hitpoints),
+                    'mana': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Mana),
+                    'moves': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Moves),
+                }
+            },
+            skills: skillList,
+            hitDice: {
+                diceMinSize: 1,
+                diceRoll: 1,
+                diceMaxSize: this.form.get('diceMaxSize').value,
+            }
         }
 
 
         this.service.postClass(data).pipe(take(1)).subscribe(x => {
-            console.log("success", x)
+            console.log('success', x)
         })
     }
 

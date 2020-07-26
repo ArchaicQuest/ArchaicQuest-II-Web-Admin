@@ -58,7 +58,7 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
                 console.log("index", index)
-                return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
+                return { name: EffectLocation[key], value: parseInt(key, 10) };
             });
 
         this.statusFlags = Object.keys(StatusEnum)

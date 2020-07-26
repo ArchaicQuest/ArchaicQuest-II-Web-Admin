@@ -178,7 +178,25 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
             id: -1,
             name: this.form.get('name').value,
             description: this.form.get('description').value,
-            skills: skillList
+            attributeBonus: {
+                attribute: {
+                    'strength': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Strength),
+                    'dexterity': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Dexterity),
+                    'constitution': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Constitution),
+                    'wisdom': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Wisdom),
+                    'intelligence': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Intelligence),
+                    'charisma': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Charisma),
+                    'hitpoints': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Hitpoints),
+                    'mana': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Mana),
+                    'moves': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Moves),
+                }
+            },
+            skills: skillList,
+            hitDice: {
+                diceMinSize: 1,
+                diceRoll: 1,
+                diceMaxSize: this.form.get('diceMaxSize').value,
+            }
         }
 
 

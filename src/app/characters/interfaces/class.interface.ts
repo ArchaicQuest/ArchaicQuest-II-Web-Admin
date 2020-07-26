@@ -1,4 +1,5 @@
 import { Dice } from 'src/app/class/interfaces/dice.interface';
+import { Attributes } from './attributes.interface';
 
 export interface SkillList {
     skillId: number;
@@ -11,5 +12,6 @@ export interface Class {
     name: string;
     description: string;
     skills?: SkillList[];
+    attributeBonus?: Attributes;
     hitDice?: Dice;
 }
