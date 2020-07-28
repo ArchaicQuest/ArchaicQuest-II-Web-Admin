@@ -43,7 +43,8 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
         private service: ClassService,
         private toastr: ToastrService,
         private route: ActivatedRoute,
-        public helpers: Shared
+        private helpers: Shared,
+        private changeDetectorRef: ChangeDetectorRef
     ) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
@@ -54,7 +55,7 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
         this.attributeLocations = Object.keys(EffectLocation)
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
-                return { name: EffectLocation[key], value: index === 0 ? 0 : 1 << index };
+                return { name: EffectLocation[key], value: parseInt(key, 10) };
             });
 
         this.service.getSkillsSpells().pipe(take(1)).subscribe(x => {
@@ -79,35 +80,24 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
                 this.form.get('diceRoll').setValue(x.hitDice.diceRoll);
 
                 x.skills.forEach(skill => {
-
-                    this.addSkill(skill.level, skill.skillName);
+                    if (skill.skillName != null) {
+                        this.addSkill(skill.level, skill.skillName, skill.skillId);
+                    }
                 });
 
-                //  this.form.get('effects').setValue(x.skills);
-                // // this.form.get('validTargets').setValue(skill.validTargets);
 
-                // this.selectedValidTarget = skill.validTargets;
-                // let validTarget: number;
-                // let i = 0;
-                // while (validTargets[validTarget = 1 << i++]) {
-                //     if (this.selectedValidTarget & validTarget) {
-                //         this.selectedValidTargetFlags.push(validTarget)
-                //     }
-                // }
-
-
-                // this.validTargetFlags.forEach(flag => {
-                //     if (this.hasValidTarget(flag.id)) {
-                //         this.updateSelectedStatus(flag.id);
-                //     }
-                // });
-
-
+                for (const key of Object.keys(x.attributeBonus.attribute)) {
+                    if (x.attributeBonus.attribute[key] > 0) {
+                        this.addEffect(EffectLocation[key], x.attributeBonus.attribute[key]);
+                    }
+                }
+                this.changeDetectorRef.detectChanges();
             }
         });
 
 
     }
+
 
     displayFn(skill: Skill): string {
         return skill && skill.name ? skill.name : '';
@@ -128,17 +118,19 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
         return this.form.get('attributes') as FormArray;
     }
 
-    initattributes() {
+    initattributes(location: any = '', value: string = '') {
+
+        console.log(location, value)
         return this.formBuilder.group({
-            attribute: ['', Validators.required],
-            value: ['', Validators.required],
+            attribute: [location, Validators.required],
+            value: [value, Validators.required],
         });
 
     }
 
-    addEffect() {
+    addEffect(location: any = '', value: string = '') {
         const control = <FormArray>this.form.controls['attributes'];
-        control.push(this.initattributes());
+        control.push(this.initattributes(location, value));
     }
     removeItem(i: number) {
         const control = <FormArray>this.form.controls['attributes'];
@@ -155,9 +147,14 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
             .subscribe(() => this.autosize.resizeToFitContent(true));
     }
 
-    addSkill(level?: number, name?: string) {
+    addSkill(level?: number, name?: string, skillId?: number) {
         //   debugger;
-        const newSkill = [{ level: level || this.form.get('selectedSkillLevel').value, skill: name || this.form.get('selectedSkill').value }];
+        const newSkill = [
+            {
+                skillId: skillId,
+                level: level || this.form.get('selectedSkillLevel').value,
+                skill: name || this.form.get('selectedSkill').value
+            }];
         this.classSkillsList = this.classSkillsList.concat(...newSkill);
         this.classSkillsList.sort((a, b) => a.level - b.level);
     }
@@ -168,14 +165,17 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
         let skillList: SkillList[] = [];
 
         this.classSkillsList.forEach(skill => {
+
+            debugger;
             skillList.push({
                 skillId: skill.skill.id,
                 level: skill.level,
-                skillName: skill.skill.name
+                skillName: skill.skill.name || (skill.skill as unknown as string),
+
             });
         });
         const data: Class = {
-            id: -1,
+            id: this.route.snapshot.params['id'],
             name: this.form.get('name').value,
             description: this.form.get('description').value,
             attributeBonus: {
