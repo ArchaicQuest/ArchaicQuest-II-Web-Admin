@@ -1,0 +1,34 @@
+.section {
+    margin-bottom: 20px;
+
+    &.section--check-box {
+        margin-bottom: 50px;
+    }
+}
+
+.spell-effects {
+    margin: 20px 0;
+
+    button {
+        margin-bottom: 20px;
+    }
+}
+
+.effects-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.fa-times-circle {
+    position: absolute;
+    top: -19px;
+    right: -14px;
+    font-size: 20px;
+    color: red;
+
+    &:hover {
+        cursor: pointer;
+        border-bottom: 0;
+        color: darkred;
+    }
+}

@@ -1,13 +1,9 @@
-import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { MatSelectChange, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Coords } from 'src/app/shared/interfaces/coords.interface';
-import { Item } from 'src/app/items/interfaces/item.interface';
-import { RoomService } from '../../../add-room/add-room.service';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
+import { Item } from 'src/app/items/interfaces/item.interface';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { RoomService } from '../../../add-room/add-room.service';
 
 @Component({
     templateUrl: './manage-room-items.component.html'

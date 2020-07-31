@@ -5,7 +5,10 @@ import { MatMenuModule } from '@angular/material/menu';
 import { SettingsComponent } from './settings.component';
 import { SettingsService } from './settings.service';
 import { SettingsRoutes } from './settings.routes';
-import { MatFormFieldModule, MatCheckboxModule, MatInputModule, MatButtonModule } from '@angular/material';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
 
 
 

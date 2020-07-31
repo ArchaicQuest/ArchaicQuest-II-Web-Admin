@@ -13,7 +13,7 @@ import { Store, select } from '@ngrx/store';
 import { CharacterAppState } from 'src/app/characters/state/character.state';
 import { getInventory } from 'src/app/characters/state/character.selector';
 import { takeUntil, filter } from 'rxjs/operators';
-import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+import { componentDestroyed, OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Equipment } from 'src/app/characters/interfaces/equipment.interface';
 
@@ -24,7 +24,7 @@ import { Equipment } from 'src/app/characters/interfaces/equipment.interface';
     styleUrls: ['./mob-preview.component.scss']
 })
 
-export class MobPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChanges {
+export class MobPreviewComponent extends OnDestroyMixin implements OnInit, OnDestroy, DoCheck, OnChanges {
     @Input() mobForm: FormGroup;
     componentActive = true;
     equipped: Equipment;
@@ -32,7 +32,7 @@ export class MobPreviewComponent implements OnInit, OnDestroy, DoCheck, OnChange
 
     constructor(private _changeRef: ChangeDetectorRef,
         private store: Store<CharacterAppState>,
-    ) { }
+    ) { super(); }
 
 
     ngOnInit() {

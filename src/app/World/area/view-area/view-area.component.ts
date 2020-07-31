@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { Area, RoomTable } from '../interface/area.interface';
 import { ViewAreaService } from './view-area.service';
@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { EditService } from '../edit-area/edit-area.service';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Room } from '../../rooms/interfaces/room.interface';
-import { debug } from 'util';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';
 import { ToastrService } from 'ngx-toastr';

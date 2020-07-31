@@ -32,13 +32,13 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { FlagEnum } from '../interfaces/flags.enums';
 import { ItemService } from '../add-item/add-item.service';
-import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
+import { componentDestroyed, OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 
 @Component({
     templateUrl: './edit-item.component.html',
     styleUrls: ['./edit-item.component.scss']
 })
-export class EditItemComponent implements OnDestroy, OnInit, AfterViewInit {
+export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnInit, AfterViewInit {
     componentActive = true;
     itemForm: FormGroup;
     itemTypes: ItemType[];
@@ -75,8 +75,8 @@ export class EditItemComponent implements OnDestroy, OnInit, AfterViewInit {
         private store: Store<ItemAppState>,
         private itemService: ItemService,
         private route: ActivatedRoute
-    ) { }
-    @ViewChild('autosize')
+    ) { super(); }
+    @ViewChild('autosize', { static: true })
     autosize: CdkTextareaAutosize;
 
     ngOnInit() {

@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, FormArray } from '@angular/forms';
 import { AddMobService } from './add-mob.service';
 import { ActivatedRoute } from '@angular/router';
 import { Gender } from '../characters/interfaces/gender.interface';
-import { MatSelectChange } from '@angular/material';
+import { MatSelectChange } from '@angular/material/select';
 import { Race } from '../characters/interfaces/race.interface';
 import { Class } from '../characters/interfaces/class.interface';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
@@ -28,7 +28,8 @@ import { Option } from '../shared/interfaces/option.interface';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
 
 @Component({
-    templateUrl: './add-mob.component.html'
+    templateUrl: './add-mob.component.html',
+    styleUrls: ['./mob.component.scss']
 })
 export class AddMobComponent implements OnInit {
     addMobForm: FormGroup;

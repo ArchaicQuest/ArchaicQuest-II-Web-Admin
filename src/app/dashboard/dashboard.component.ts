@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 import { DashboardService } from './dashboard.service';
 import { QuickStats } from './quick-stats.interface';
 import { take } from 'rxjs/operators';

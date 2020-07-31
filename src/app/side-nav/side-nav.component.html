@@ -94,6 +94,47 @@
                     </li>
                 </ul>
             </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Skills & Spells" matTooltipPosition="right"
+                    (click)="toggleSidenav(true)">
+                    <i class="ra ra-flame-symbol" aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Skills & Spells (WIP)</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/skills-spells/view']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View skills & spells</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/skills-spells/add']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Create skills & spells</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Class" matTooltipPosition="right" (click)="toggleSidenav(true)">
+                    <i class="ra ra-axe" aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Class</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/class/view']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View classes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/class/add']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Create class</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
         </mat-accordion>
 
         <div class="sideNav__footer">

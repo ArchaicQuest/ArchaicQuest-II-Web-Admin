@@ -1,13 +1,4 @@
-import {
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatAutocompleteModule
-} from '@angular/material';
+
 import { ComponentFixture, async, TestBed } from '@angular/core/testing';
 import { of, Observable, EMPTY } from 'rxjs';
 import { GetWeaponTypes, GetWeaponTypesSuccess, AddItemActionTypes } from '../../state/add-item.actions';
@@ -31,6 +22,14 @@ import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, inject, Pipe, PipeTransform, 
 import { TestColdObservable } from 'jasmine-marbles/src/test-observables';
 import { ItemService } from '../../add-item/add-item.service';
 import { ItemTypeSelectorComponent } from './item-type-selector.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 export class TestActions extends Actions {
     constructor() {

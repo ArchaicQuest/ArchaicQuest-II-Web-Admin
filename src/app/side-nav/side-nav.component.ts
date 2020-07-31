@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, pipe } from 'rxjs';
-import { MatExpansionPanel } from '@angular/material';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { Store, select } from '@ngrx/store';
 import { SidenavState, selectSidenavVisibility } from './state/side-nav-state';
 import { ToggleSideNavSuccessAction } from './state/side-nav-actions';

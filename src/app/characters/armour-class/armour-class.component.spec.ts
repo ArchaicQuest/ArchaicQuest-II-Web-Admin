@@ -1,13 +1,12 @@
-import {
-    MatSelectModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatButtonModule,
-    MatPaginatorModule,
-    MatAutocompleteModule
-} from '@angular/material';
+
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { APP_BASE_HREF } from '@angular/common';
@@ -136,8 +135,8 @@ describe('Armour Rating Component', () => {
     it('should return armour rating', () => {
 
 
-      fixture.componentInstance.Defense = 0;
-      fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
 
         fixture.componentInstance['setArmourRating'](mockItemData);
 
@@ -149,8 +148,8 @@ describe('Armour Rating Component', () => {
 
     it('should update AC when light is equiped', () => {
 
-      fixture.componentInstance.Defense = 0;
-    fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
 
         fixture.componentInstance.equipment.get('lightEq').setValue(mockItemData);
 
@@ -161,156 +160,156 @@ describe('Armour Rating Component', () => {
 
     it('should update AC when helmet is equiped', () => {
 
-      fixture.componentInstance.Defense = 0;
-    fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
 
-      fixture.componentInstance.equipment.get('headEq').setValue(mockItemData);
+        fixture.componentInstance.equipment.get('headEq').setValue(mockItemData);
 
-      expect(fixture.componentInstance.Defense).toBe(5);
-      expect(fixture.componentInstance.magicDefense).toBe(3);
-  });
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-  it('should update AC when wasit eq is equiped', () => {
+    it('should update AC when wasit eq is equiped', () => {
 
-    fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
 
-    fixture.componentInstance.equipment.get('waistEq').setValue(mockItemData);
+        fixture.componentInstance.equipment.get('waistEq').setValue(mockItemData);
 
-    expect(fixture.componentInstance.Defense).toBe(5);
-    expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-  it('should update AC when neck item is equiped', () => {
+    it('should update AC when neck item is equiped', () => {
 
-    fixture.componentInstance.Defense = 0;
-    fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
 
-    fixture.componentInstance.equipment.get('neck2Eq').setValue(mockItemData);
+        fixture.componentInstance.equipment.get('neck2Eq').setValue(mockItemData);
 
-    expect(fixture.componentInstance.Defense).toBe(5);
-    expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when body item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('bodyEq').setValue(mockItemData);
+    it('should update AC when body item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('bodyEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when torso item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('torsoEq').setValue(mockItemData);
+    it('should update AC when torso item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('torsoEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when arms item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('armsEq').setValue(mockItemData);
+    it('should update AC when arms item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('armsEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
-
-
-
-it('should update AC when legs item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('legsEq').setValue(mockItemData);
-
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
 
-it('should update AC when wrist item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('wristEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+    it('should update AC when legs item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('legsEq').setValue(mockItemData);
 
-it('should update AC when wrist 2 item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('wrist2Eq').setValue(mockItemData);
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
 
-it('should update AC when finger item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('fingerEq').setValue(mockItemData);
+    it('should update AC when wrist item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('wristEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when finger 2 item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('finger2Eq').setValue(mockItemData);
+    it('should update AC when wrist 2 item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('wrist2Eq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when heldEq item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('heldEq').setValue(mockItemData);
+    it('should update AC when finger item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('fingerEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when shieldEq item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('shieldEq').setValue(mockItemData);
+    it('should update AC when finger 2 item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('finger2Eq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when wieldEq item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('wieldEq').setValue(mockItemData);
+    it('should update AC when heldEq item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('heldEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when sheathedEq item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('sheathedEq').setValue(mockItemData);
+    it('should update AC when shieldEq item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('shieldEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
-it('should update AC when floatingEq item is equiped', () => {
-  fixture.componentInstance.Defense = 0;
-  fixture.componentInstance.magicDefense = 0;
-  fixture.componentInstance.equipment.get('floatingEq').setValue(mockItemData);
+    it('should update AC when wieldEq item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('wieldEq').setValue(mockItemData);
 
-  expect(fixture.componentInstance.Defense).toBe(5);
-  expect(fixture.componentInstance.magicDefense).toBe(3);
-});
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
+
+    it('should update AC when sheathedEq item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('sheathedEq').setValue(mockItemData);
+
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
+
+    it('should update AC when floatingEq item is equiped', () => {
+        fixture.componentInstance.Defense = 0;
+        fixture.componentInstance.magicDefense = 0;
+        fixture.componentInstance.equipment.get('floatingEq').setValue(mockItemData);
+
+        expect(fixture.componentInstance.Defense).toBe(5);
+        expect(fixture.componentInstance.magicDefense).toBe(3);
+    });
 
 
     it('should return armour rating', () => {

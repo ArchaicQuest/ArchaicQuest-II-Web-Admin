@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { MatPaginator } from '@angular/material/paginator';
 
 import { Area } from '../interface/area.interface';
 import { ViewAreasService } from './view-areas.service';
@@ -11,8 +11,6 @@ import { DataListComponent } from 'src/app/shared/components/data-list/data-list
 })
 export class ViewAreasComponent extends DataListComponent implements OnInit {
     areas: Area[] = [];
-    displayedColumns: string[] = ['title', 'description', 'rooms', 'dateUpdated', 'actions'];
-    dataSource: MatTableDataSource<Area>;
 
     constructor(private service: ViewAreasService) {
         super();

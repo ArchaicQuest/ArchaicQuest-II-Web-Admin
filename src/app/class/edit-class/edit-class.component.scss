@@ -1,0 +1,41 @@
+.section {
+    margin-bottom: 20px;
+
+    &.section--check-box {
+        margin-bottom: 50px;
+    }
+}
+
+.attributes-item {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.fa-times-circle {
+    position: absolute;
+    top: -19px;
+    right: -14px;
+    font-size: 20px;
+    color: red;
+
+    &:hover {
+        cursor: pointer;
+        border-bottom: 0;
+        color: darkred;
+    }
+}
+
+.spell-list {
+    position: relative;
+    margin-bottom: 5px;
+
+    .fa-times-circle {
+        position: relative;
+        top: 2px;
+        right: -11px;
+    }
+}
+
+.sub-title {
+    margin: -10px 0 10px 0;
+}

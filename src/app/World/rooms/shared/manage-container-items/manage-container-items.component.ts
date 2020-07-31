@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Item } from 'src/app/items/interfaces/item.interface';
 
 @Component({

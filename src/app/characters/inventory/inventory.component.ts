@@ -39,17 +39,17 @@ export class InventoryComponent implements OnInit {
                 debounceTime(200),
                 distinctUntilChanged(),
                 switchMap(name => {
-                    if (typeof name !== 'string' || name == null) {
-                        return;
+                    if (typeof name === 'string' || name != null) {
+                        return this.filterItems(name);
                     }
-                    return this.filterItems(name);
+
                 })
             );
 
         this.charStore
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
-                console.log(inventory);
+                console.log("invent", inventory);
                 this.inventoryItems = inventory;
             });
 
@@ -65,16 +65,15 @@ export class InventoryComponent implements OnInit {
 
     addItemToInventory() {
         const item: Item = this.formGroup.get('selectInventoryItem').value;
-        if (item == null) {
-            return;
+        if (item != null) {
+
+            this.inventoryItems = this.inventoryItems.concat(item);
+
+            this.charStore.dispatch(new AddToInventory(item));
+
+            this.formGroup.get('selectInventoryItem').setValue('');
         }
-        this.inventoryItems = this.inventoryItems.concat(item);
 
-
-
-        this.charStore.dispatch(new AddToInventory(item));
-
-        this.formGroup.get('selectInventoryItem').reset();
     }
 
     private filterItems(value: string): Observable<Item[]> {

@@ -1,44 +1,19 @@
-import {
-    Component,
-    OnInit,
-    ViewChild,
-    NgZone,
-    OnDestroy,
-    ChangeDetectorRef,
-    Input,
-    AfterViewInit,
-    AfterContentInit,
-    EventEmitter,
-    Output
-} from '@angular/core';
-import {
-    FormGroup,
-    AbstractControl,
-    ControlContainer
-} from '@angular/forms';
-import { RoomService } from '../add-room/add-room.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AfterContentInit, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { AbstractControl, ControlContainer, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
-import {
-    MatDialog,
-} from '@angular/material';
-import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Coords } from 'src/app/shared/interfaces/coords.interface';
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from '@angular/animations';
-import { Exit } from '../interfaces/exit.interface';
-import { RoomExit } from '../interfaces/roomExit.interface';
-import { Room } from '../interfaces/room.interface';
-import { Shared } from 'src/app/shared/shared';
-import { ManageExitsComponent } from '../shared/room-exits/manage-exits.component';
-
-import { RoomExitService } from '../shared/room-exits/manage-exits.service';
 import { Observable } from 'rxjs';
+import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Shared } from 'src/app/shared/shared';
+import { RoomService } from '../add-room/add-room.service';
 import { EditRoomService } from '../edit-room/edit-room.service';
+import { Exit } from '../interfaces/exit.interface';
+import { Room } from '../interfaces/room.interface';
+import { RoomExit } from '../interfaces/roomExit.interface';
+import { ManageExitsComponent } from '../shared/room-exits/manage-exits.component';
+import { RoomExitService } from '../shared/room-exits/manage-exits.service';
+
 
 @Component({
     selector: 'app-exit-component',

@@ -8,10 +8,6 @@ import { addItemReducer } from './state/add-item.reducer';
 import { AddItemEffects } from './state/add-item.effects';
 import { SharedModule } from '../shared/shared.module';
 import { AddItemComponent } from './add-item/add-item.component';
-import {
-    MatFormFieldModule, MatInputModule, MatSelectModule, MatCheckboxModule,
-    MatButtonModule, MatTableModule, MatPaginatorModule, MatAutocompleteModule
-} from '@angular/material';
 import { ViewItemsComponent } from './view-items/view-items.component';
 import { ItemTypeSelectorComponent } from './selectors/item-type/item-type-selector.component';
 import { WeaponTypeSelectorComponent } from './selectors/weapon-type/weapon-type-selector.component';
@@ -29,6 +25,14 @@ import { ArmourTypePipe } from './pipes/armour-type.pipe';
 import { ContainerSizePipe } from './pipes/container-size.pipe';
 import { EditItemComponent } from './edit-item/edit-item.component';
 import { SlotTypePipe } from './pipes/slot-type.pipe';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 

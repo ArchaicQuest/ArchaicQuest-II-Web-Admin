@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, NgZone, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Item } from 'src/app/items/interfaces/item.interface';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';
-import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 
 @Component({
     templateUrl: './manage-inventory.component.html'

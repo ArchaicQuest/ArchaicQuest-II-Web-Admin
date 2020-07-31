@@ -4,29 +4,37 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
-        loadChildren: './dashboard/dashboard.module#DashboardModule'
+        loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
         path: 'settings',
-        loadChildren: './settings/settings.module#SettingsModule'
+        loadChildren: () => import('./settings/settings.module').then(m => m.SettingsModule)
     },
     {
         path: '',
-        loadChildren: './items/item.module#ItemModule'
+        loadChildren: () => import('./items/item.module').then(m => m.ItemModule)
     },
     {
         path: '',
-        loadChildren: './mobs/mob.module#MobModule'
+        loadChildren: () => import('./mobs/mob.module').then(m => m.MobModule)
     },
     {
         path: 'world',
-        loadChildren: './World/world.module#WorldModule'
+        loadChildren: () => import('./World/world.module').then(m => m.WorldModule)
     },
+    {
+        path: 'skills-spells',
+        loadChildren: () => import('./skills-spells/skills-spells.module').then(m => m.SkillsSpellsModule)
+    },
+    {
+        path: 'class',
+        loadChildren: () => import('./class/class.module').then(m => m.ClassModule)
+    }
 ];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes, {
-        scrollPositionRestoration: 'top'
+        scrollPositionRestoration: 'enabled'
     })],
     exports: [RouterModule]
 })

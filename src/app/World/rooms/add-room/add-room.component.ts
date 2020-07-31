@@ -1,47 +1,24 @@
-import {
-    Component,
-    OnInit,
-    ViewChild,
-    NgZone,
-    OnDestroy,
-    ChangeDetectorRef,
-    SimpleChanges
-} from "@angular/core";
-import { FormGroup, FormControl, FormBuilder, FormArray } from "@angular/forms";
-import { RoomService } from "./add-room.service";
-import { ActivatedRoute } from "@angular/router";
-import {
-    MatSelectChange,
-    MatDialogRef,
-    MatDialog,
-    MatTableDataSource
-} from "@angular/material";
-import { CdkTextareaAutosize } from "@angular/cdk/text-field";
-import { take } from "rxjs/operators";
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { CdkTextareaAutosize } from '@angular/cdk/text-field';
+import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormGroup } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/operators';
+import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
+import { Item } from 'src/app/items/interfaces/item.interface';
+import { Mob } from 'src/app/mobs/interfaces/mob.interface';
+import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Shared } from 'src/app/shared/shared';
+import { Room } from '../interfaces/room.interface';
+import { RoomExit } from '../interfaces/roomExit.interface';
+import { RoomObject } from '../interfaces/roomObject.interface';
+import { ManageContainerItemsComponent } from '../shared/manage-container-items/manage-container-items.component';
+import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
+import { RoomExitService } from '../shared/room-exits/manage-exits.service';
+import { RoomService } from './add-room.service';
 
-import { Store } from "@ngrx/store";
-import { Coords } from "src/app/shared/interfaces/coords.interface";
-import { Item } from "src/app/items/interfaces/item.interface";
-import { ManageContainerItemsComponent } from "../shared/manage-container-items/manage-container-items.component";
-import { ItemModule } from "src/app/items/item.module";
-import { Mob } from "src/app/mobs/interfaces/mob.interface";
-import { ManageMobComponent } from "../shared/manage-mob/manage-mob.component";
-import { ManageExitsComponent } from "../shared/room-exits/manage-exits.component";
-import {
-    trigger,
-    state,
-    style,
-    animate,
-    transition
-} from "@angular/animations";
-import { ItemSlotEnum } from "src/app/items/interfaces/item-slot.enum";
-import { Exit } from "../interfaces/exit.interface";
-import { jsonpCallbackContext } from "@angular/common/http/src/module";
-import { RoomExit } from "../interfaces/roomExit.interface";
-import { Room } from "../interfaces/room.interface";
-import { RoomObject } from "../interfaces/roomObject.interface";
-import { Shared } from "src/app/shared/shared";
-import { RoomExitService } from "../shared/room-exits/manage-exits.service";
+
 
 @Component({
     templateUrl: "./add-room.component.html",
@@ -217,64 +194,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         return 'false';
     }
 
-    // openExitDialog(exitDirection: string): void {
-    //     const dialogRef = this.dialog.open(ManageExitsComponent, {
-    //         width: "450px",
-    //         data: { exit: exitDirection, currentCoord: this.coords, areaId: this.id }
-    //     });
 
-    //     dialogRef.afterClosed().subscribe((result: Exit) => {
-    //         if (result == null) {
-    //             return;
-    //         }
-
-    //         switch (result.name) {
-    //             case "North":
-    //                 this.exits.north = result;
-    //                 this.addRoomForm.get("exits.north").setValue(result);
-    //                 break;
-    //             case "North East":
-    //                 this.exits.northEast = result;
-    //                 this.addRoomForm.get("exits.northEast").setValue(result);
-    //                 break;
-    //             case "East":
-    //                 this.exits.east = result;
-    //                 this.addRoomForm.get("exits.east").setValue(result);
-    //                 break;
-    //             case "South East":
-    //                 this.exits.southEast = result;
-    //                 this.addRoomForm.get("exits.southEast").setValue(result);
-    //                 break;
-    //             case "South":
-    //                 this.exits.south = result;
-    //                 this.addRoomForm.get("exits.south").setValue(result);
-    //                 break;
-    //             case "South West":
-    //                 this.exits.southWest = result;
-    //                 this.addRoomForm.get("exits.southWest").setValue(result);
-    //                 break;
-    //             case "West":
-    //                 this.exits.west = result;
-    //                 this.addRoomForm.get("exits.west").setValue(result);
-    //                 break;
-    //             case "North West":
-    //                 this.exits.northWest = result;
-    //                 this.addRoomForm.get("exits.northWest").setValue(result);
-    //                 break;
-    //             case "Up":
-    //                 this.exits.up = result;
-    //                 this.addRoomForm.get("exits.up").setValue(result);
-    //                 break;
-    //             case "Down":
-    //                 this.exits.down = result;
-    //                 this.addRoomForm.get("exits.down").setValue(result);
-    //                 break;
-    //         }
-
-    //         console.log("exit ", this.exits);
-    //         console.log(result);
-    //     });
-    // }
 
 
 

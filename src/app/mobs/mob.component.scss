@@ -1,0 +1,14 @@
+.emotes {
+    position: relative;
+    margin-bottom: 15px;
+
+    a {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+button[type="submit"] {
+    margin-top: 40px;
+}
