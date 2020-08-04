@@ -33,7 +33,7 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         diceRoll: ['1', Validators.required],
         diceMaxSize: ['', Validators.required],
         attributes: this.formBuilder.array([
-        ]),
+        ]), 
         selectedSkill: [null],
         selectedSkillLevel: [''],
     });
