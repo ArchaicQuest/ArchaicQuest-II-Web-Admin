@@ -131,6 +131,10 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             this.addRoomForm.get("title").setValue(value.title);
             this.addRoomForm.get("description").setValue(value.description);
 
+            value.items.forEach(item => {
+                this.roomServices.roomItems(item);
+            });
+
             this.coords = {
                 x: value.coords.x,
                 y: value.coords.y,

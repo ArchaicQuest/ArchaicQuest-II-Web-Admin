@@ -34,7 +34,6 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
 
     ngOnInit() {
         console.log("items", this.data || this.items)
-
     }
 
     ngOnChanges() {
