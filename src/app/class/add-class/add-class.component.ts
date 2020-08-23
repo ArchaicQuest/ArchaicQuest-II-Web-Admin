@@ -33,7 +33,7 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
         diceRoll: ['1', Validators.required],
         diceMaxSize: ['', Validators.required],
         attributes: this.formBuilder.array([
-        ]), 
+        ]),
         selectedSkill: [null],
         selectedSkillLevel: [''],
     });
@@ -159,6 +159,8 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
                     'hitpoints': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Hitpoints),
                     'mana': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Mana),
                     'moves': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Moves),
+                    'hitRoll': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.HitRoll),
+                    'DamageRoll': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.DamageRoll),
                 }
             },
             skills: skillList,

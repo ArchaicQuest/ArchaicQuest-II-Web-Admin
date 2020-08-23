@@ -189,6 +189,8 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
                     'hitpoints': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Hitpoints),
                     'mana': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Mana),
                     'moves': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.Moves),
+                    'hitRoll': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.HitRoll),
+                    'DamageRoll': this.service.getEffectValue((this.form.get('attributes') as FormArray), EffectLocation.DamageRoll),
                 }
             },
             skills: skillList,

@@ -9,6 +9,8 @@ export interface Attributes {
         hitpoints: number;
         mana: number;
         moves: number;
+        hitRoll: number,
+        DamageRoll: number
     };
 }
 

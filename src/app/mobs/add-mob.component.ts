@@ -142,7 +142,7 @@ export class AddMobComponent implements OnInit {
     }
 
     addMob() {
-        // todo inventory and EQ
+        // todo inventory and E
 
         // this.equipmentComponent.GetEquipmentItemsFromInventory()
 
@@ -165,7 +165,9 @@ export class AddMobComponent implements OnInit {
                     charisma: this.addMobForm.get('attributes').get('charisma').value,
                     hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
                     mana: this.addMobForm.get('stats').get('manaPoints').value,
-                    moves: this.addMobForm.get('stats').get('movePoints').value
+                    moves: this.addMobForm.get('stats').get('movePoints').value,
+                    hitRoll: 2,
+                    DamageRoll: 2,
                 }
             },
             maxAttributes: {
@@ -178,7 +180,9 @@ export class AddMobComponent implements OnInit {
                     charisma: this.addMobForm.get('attributes').get('charisma').value,
                     hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
                     mana: this.addMobForm.get('stats').get('manaPoints').value,
-                    moves: this.addMobForm.get('stats').get('movePoints').value
+                    moves: this.addMobForm.get('stats').get('movePoints').value,
+                    hitRoll: 2,
+                    DamageRoll: 2,
                 }
             },
             className: this.addMobForm.get('class').value,

@@ -1,6 +1,6 @@
 export interface ItemModifier {
     hitRoll?: number;
-    damRoll?: number;
+    DamageRoll?: number;
     saves?: number;
     hp?: number;
     mana?: number;

@@ -249,7 +249,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     charisma: this.addMobForm.get('attributes').get('charisma').value,
                     hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
                     mana: this.addMobForm.get('stats').get('manaPoints').value,
-                    moves: this.addMobForm.get('stats').get('movePoints').value
+                    moves: this.addMobForm.get('stats').get('movePoints').value,
+                    hitRoll: 2,
+                    DamageRoll: 2,
                 }
             },
             maxAttributes: {
@@ -262,7 +264,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     charisma: this.addMobForm.get('attributes').get('charisma').value,
                     hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
                     mana: this.addMobForm.get('stats').get('manaPoints').value,
-                    moves: this.addMobForm.get('stats').get('movePoints').value
+                    moves: this.addMobForm.get('stats').get('movePoints').value,
+                    hitRoll: 2,
+                    DamageRoll: 2,
                 }
             },
             className: this.addMobForm.get('class').value,
@@ -301,6 +305,6 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
         this.store.dispatch(new SaveChar(mob));
 
-        window.location.href = window.location.href;
+
     }
 }

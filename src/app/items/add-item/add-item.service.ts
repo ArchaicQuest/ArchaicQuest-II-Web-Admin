@@ -46,7 +46,7 @@ export class ItemService {
         acSlash: [''],
         acMagic: [''],
         hitRoll: [''],
-        damRoll: [''],
+        DamageRoll: [''],
         saves: [''],
         hpMod: [''],
         manaMod: [''],

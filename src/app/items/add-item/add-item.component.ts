@@ -107,7 +107,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             acSlash: [''],
             acMagic: [''],
             hitRoll: [''],
-            damRoll: [''],
+            DamageRoll: [''],
             saves: [''],
             hpMod: [''],
             manaMod: [''],
@@ -461,7 +461,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             keywords: [],
             level: this.itemForm.get('level').value || 1,
             modifier: {
-                damRoll: this.itemForm.get('damRoll').value || 0,
+                DamageRoll: this.itemForm.get('DamageRoll').value || 0,
                 hitRoll: this.itemForm.get('hitRoll').value || 0,
                 hp: this.itemForm.get('hpMod').value || 0,
                 mana: this.itemForm.get('manaMod').value || 0,
