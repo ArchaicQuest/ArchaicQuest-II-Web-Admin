@@ -14,6 +14,7 @@ import { Mob } from "src/app/mobs/interfaces/mob.interface";
 import { Room } from "../interfaces/room.interface";
 import { tap, catchError } from "rxjs/operators";
 import { ToastrService } from 'ngx-toastr';
+import { RoomObject } from '../interfaces/roomObject.interface';
 
 @Injectable({
     providedIn: "root"
@@ -35,7 +36,7 @@ export class RoomService {
         id: [""],
         title: ["", Validators.required],
         description: ["", Validators.required],
-        roomObjects: this.formBuilder.array([this.initRoomObject()]),
+        roomObjects: this.formBuilder.array([this.initRoomObject(null)]),
         updateMessage: [""],
         instantRepop: [false],
         mobs: [],
@@ -60,15 +61,27 @@ export class RoomService {
     //     emote: ''
     // });
 
-    initRoomObject() {
+    initRoomObject(roomObj: RoomObject) {
+        if (roomObj == null) {
+            return this.formBuilder.group({
+                name: new FormControl(""),
+                look: new FormControl(""),
+                examine: new FormControl(""),
+                touch: new FormControl(""),
+                smell: new FormControl(""),
+                taste: new FormControl("")
+            });
+        }
+
         return this.formBuilder.group({
-            name: new FormControl(""),
-            look: new FormControl(""),
-            examine: new FormControl(""),
-            touch: new FormControl(""),
-            smell: new FormControl(""),
-            taste: new FormControl("")
+            name: new FormControl(roomObj.name),
+            look: new FormControl(roomObj.look),
+            examine: new FormControl(roomObj.examine),
+            touch: new FormControl(roomObj.touch),
+            smell: new FormControl(roomObj.smell),
+            taste: new FormControl(roomObj.taste)
         });
+
     }
 
     roomItemsUpdate(item: Item) {

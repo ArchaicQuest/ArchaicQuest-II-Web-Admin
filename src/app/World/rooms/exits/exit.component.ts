@@ -261,7 +261,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
     isExitValid(direction: string): Observable<string> {
         const coords = this.exitService.setExitCoord(direction, this.coords);
 
-        return this.roomServices.isValidExit(coords.x, coords.y, coords.z, 1);
+        return this.roomServices.isValidExit(coords.x, coords.y, coords.z, this.areaId);
     }
 
     enableInvalidRooms(evt) {

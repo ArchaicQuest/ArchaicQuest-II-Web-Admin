@@ -4,6 +4,6 @@ export interface RoomObject {
     touch: string;
     smell: string;
     look: string;
-    exam: string;
+    examine: string;
 
 }

@@ -141,19 +141,22 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 z: value.coords.z
             };
 
+
             if (value.roomObjects.length) {
-                for (let index = 0; index < value.roomObjects.length - 1; index++) {
-                    this.addRoomObject();
+                //this is a hack to remove the first object section as
+                // it's added by this.roomServices.addRoomForm;
+                // so what happens is you have a blank object
+                // followed by the other objects with data
+                // so just removed the first instance, quickest solution
+                this.getRoomObjectsControl.removeAt(0);
+                for (let index = 0; index < value.roomObjects.length; index++) {
+                    this.addRoomObject(value.roomObjects[index]);
                 }
 
-                (<FormArray>this.addRoomForm.controls["roomObjects"]).setValue(
-                    value.roomObjects
-                );
             }
 
         });
 
-        console.log(this.southValidExit);
     }
 
 
@@ -168,8 +171,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         return this.addRoomForm.get("roomObjects") as FormArray;
     }
 
-    addRoomObject() {
-        this.getRoomObjectsControl.push(this.roomServices.initRoomObject());
+    addRoomObject(roomObj: RoomObject) {
+        debugger;
+        this.getRoomObjectsControl.push(this.roomServices.initRoomObject(roomObj));
 
         console.log(this.roomServices.addRoomForm.value);
     }
