@@ -40,4 +40,32 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <h3>Upload an area.
+                </h3>
+
+                <form novalidate>
+                    <div class="row">
+                        <div class="col">
+                            <button mat-raised-button color="primary" (click)="uploadFile.click()" type="button">
+                                Choose area file
+                            </button>
+
+                            <p>Selected file: {{fileName}}</p>
+
+                        </div>
+                    </div>
+
+                    <input style="display: none" #uploadFile id="uploadFile" type="file" (change)="fileChange($event)"
+                        placeholder="Upload area json file" accept=".json">
+
+                </form>
+                <button mat-raised-button color="primary" type="button" (click)="uploadToServer()">Upload
+                    Area</button>
+            </div>
+        </div>
+    </div>
 </div>

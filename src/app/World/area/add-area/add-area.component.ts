@@ -17,6 +17,8 @@ import { Area } from '../interface/area.interface';
 })
 export class AddAreaComponent implements OnInit {
     addRoomForm: FormGroup;
+    fileName: string;
+    file: File;
     constructor(
         private areaServices: AreaService,
         private ngZone: NgZone,
@@ -44,6 +46,20 @@ export class AddAreaComponent implements OnInit {
         };
 
         this.areaServices.saveArea(data);
+    }
+
+    fileChange(event) {
+        let fileList: FileList = event.target.files;
+        if (fileList.length > 0) {
+            this.file = fileList[0];
+            this.fileName = this.file.name;
+        }
+    }
+
+    uploadToServer() {
+
+        this.areaServices.uploadFile(this.file)
+
     }
 
 }

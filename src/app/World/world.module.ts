@@ -47,6 +47,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 
@@ -66,6 +67,7 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatPaginatorModule,
         MatAutocompleteModule,
         MatDialogModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         AreaService,

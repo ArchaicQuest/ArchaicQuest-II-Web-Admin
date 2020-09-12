@@ -11,6 +11,7 @@ import { DataListComponent } from 'src/app/shared/components/data-list/data-list
 import { Shared } from 'src/app/shared/shared';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
     templateUrl: './view-area.component.html',
@@ -28,7 +29,8 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     totalRow: number;
     rooms: Room[] = [];
     errors: string[] = [];
-
+    downloadJsonHref: SafeUrl;
+    exporting: boolean;
     displayedColumns: string[] = ['id', 'name', 'coords'];
 
     constructor(
@@ -37,6 +39,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
         private route: ActivatedRoute,
         private cd: ChangeDetectorRef,
         private toastr: ToastrService,
+        private sanitizer: DomSanitizer,
         public helpers: Shared) {
         super();
     }
@@ -44,6 +47,8 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     ngOnInit() {
 
         this.editAreaServices.getArea(this.route.snapshot.params['id']).subscribe(data => {
+
+            //  this.exportRoom(JSON.stringify(data));
 
             const startingCoords: Coords = {
                 x: 0,
@@ -187,7 +192,40 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
         return exitClass;
     }
 
+    download(blob, filename) {
+        this.exporting = true;
+        if (window.navigator.msSaveOrOpenBlob) // IE10+
+            window.navigator.msSaveOrOpenBlob(blob, filename);
+        else { // Others
+            var a = document.createElement("a"),
+                url = URL.createObjectURL(blob);
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            setTimeout(function () {
+                document.body.removeChild(a);
+                window.URL.revokeObjectURL(url);
 
+            }, 0);
 
+            // random number
+            setTimeout(() => {
+                this.exporting = false;
+            }, 1500);
+        }
+    }
+
+    exportRoom() {
+
+        const file = new Blob([JSON.stringify(this.area)], { type: 'text/json' });
+        this.download(file, `${this.area.title}.json`);
+    }
+
+    //  this.GenerateRoomLayout();
 
 }
+
+
+
+

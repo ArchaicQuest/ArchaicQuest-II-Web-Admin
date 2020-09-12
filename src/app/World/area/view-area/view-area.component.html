@@ -16,14 +16,26 @@
                         <p>{{area.description}}</p>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col">
+                <div class="row justify-content-start">
+                    <div class="col col-md-1">
                         <br />
                         <button mat-raised-button [routerLink]="['/world/edit-area/', area.id]">Edit
                             Area</button>
 
                     </div>
+                    <div class="col col-md-1">
+                        <br />
+                        <div class="button-container">
+                            <div class="spinner-container" *ngIf="exporting">
+                                <mat-spinner diameter="24"></mat-spinner>
+                            </div>
+                            <a href="javascript:void(0)" mat-raised-button color="secondary" (click)="exportRoom()"
+                                [disabled]="exporting">Export
+                                Area</a>
+                        </div>
+                    </div>
                 </div>
+
 
             </div>
 

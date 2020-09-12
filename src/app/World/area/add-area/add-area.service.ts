@@ -18,6 +18,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 export class AreaService {
     private host = `${environment.hostAPI}`;
     private saveAreaUrl = `${this.host}World/Area`;
+    private uploadAreaUrl = `${this.host}World/Area/UploadArea`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
@@ -39,6 +40,22 @@ export class AreaService {
                 },
                 err => console.log(err)
             );
+    }
+
+    uploadFile(file: File) {
+        let headers = new HttpHeaders();
+        /** In Angular 5, including the header Content-Type can invalidate your request */
+        headers.append('Content-Disposition', 'multipart/form-data');
+        // headers.append('Accept', 'application/json');
+
+        const formData: FormData = new FormData();
+        formData.append('file', file, file.name);
+
+        this.http.post(`${this.uploadAreaUrl}`, formData, { headers: headers })
+            .subscribe(
+                data => console.log('success'),
+                error => console.log(error)
+            )
     }
 
 }
