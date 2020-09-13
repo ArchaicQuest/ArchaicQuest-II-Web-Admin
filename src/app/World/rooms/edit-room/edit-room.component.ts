@@ -31,7 +31,7 @@ import {
 } from "@angular/animations";
 import { ItemSlotEnum } from "src/app/items/interfaces/item-slot.enum";
 import { RoomExit } from "./../interfaces/roomExit.interface";
-import { Room } from "./../interfaces/room.interface";
+import { Room, RoomTypes } from "./../interfaces/room.interface";
 import { RoomObject } from "./../interfaces/roomObject.interface";
 import { Shared } from "src/app/shared/shared";
 import { ManageMobComponent } from "../shared/manage-mob/manage-mob.component";
@@ -96,6 +96,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     southValidExit = false;
     southWestValidExit = false;
     westValidExit = false;
+    RoomTypes: { name: string; value: number }[];
 
     constructor(
         private roomServices: RoomService,
@@ -141,6 +142,14 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 z: value.coords.z
             };
 
+            this.RoomTypes = Object.keys(RoomTypes)
+                .filter(value => isNaN(Number(value)) === false)
+                .map((key, index) => {
+
+                    console.log("rm type", index === 0 ? 0 : 1 << index)
+                    return { name: RoomTypes[key], value: index === 0 ? 0 : 1 << index };
+                });
+
 
             if (value.roomObjects.length) {
                 //this is a hack to remove the first object section as
@@ -155,9 +164,26 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
             }
 
+            if (value.emotes.length) {
+                //this is a hack to remove the first object section as
+                // it's added by this.roomServices.addRoomForm;
+                // so what happens is you have a blank object
+                // followed by the other objects with data
+                // so just removed the first instance, quickest solution
+                this.getEmotesControl.removeAt(0);
+                for (let index = 0; index < value.emotes.length; index++) {
+                    this.addEmote(value.emotes[index]);
+                }
+
+            }
+
+
+
         });
 
     }
+
+
 
 
     triggerDescriptionResize() {
@@ -172,7 +198,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     }
 
     addRoomObject(roomObj: RoomObject) {
-        debugger;
+
         this.getRoomObjectsControl.push(this.roomServices.initRoomObject(roomObj));
 
         console.log(this.roomServices.addRoomForm.value);
@@ -255,6 +281,19 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         };
     }
 
+    get getEmotesControl(): FormArray {
+        return this.addRoomForm.get('emotes') as FormArray;
+    }
+
+    addEmote(data: string) {
+        this.getEmotesControl.push(this.roomServices.initEmote(data));
+    }
+
+    removeLink(i: number) {
+        this.getEmotesControl.removeAt(i);
+    }
+
+
     saveRoom() {
         //TODO
         /*
@@ -299,12 +338,18 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             },
             instantRepop: false,
             players: null,
-            updateMessage: "nothing"
+            updateMessage: "nothing",
+            type: this.addRoomForm.get("type").value
         };
 
         this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
             data.roomObjects.push(roomObj);
         });
+
+        this.getEmotesControl.value.forEach((emote: { emote: string }) => {
+            data.emotes.push(emote.emote);
+        });
+
 
         this.roomServices.updateRoom(data);
     }

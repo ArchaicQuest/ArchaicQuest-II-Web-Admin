@@ -21,4 +21,16 @@ export interface Room {
     roomObjects: RoomObject[];
     updateMessage: string;
     instantRepop: boolean;
+    type: number;
+}
+
+export enum RoomTypes {
+    Standard = 0,
+    Shop = 1 << 0,
+    Guild = 1 << 1,
+    Town = 1 << 2,
+    Water = 1 << 3,
+    River = 1 << 4,
+    Sea = 1 << 5,
+    PointOfInterest = 1 << 6
 }

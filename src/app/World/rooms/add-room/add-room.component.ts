@@ -10,7 +10,7 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
 import { Shared } from 'src/app/shared/shared';
-import { Room } from '../interfaces/room.interface';
+import { Room, RoomTypes } from '../interfaces/room.interface';
 import { RoomExit } from '../interfaces/roomExit.interface';
 import { RoomObject } from '../interfaces/roomObject.interface';
 import { ManageContainerItemsComponent } from '../shared/manage-container-items/manage-container-items.component';
@@ -63,7 +63,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     southValidExit = false;
     southWestValidExit = false;
     westValidExit = false;
-
+    RoomTypes: { name: string; value: number }[];
 
     //move
     // dataSource = this.items;
@@ -106,6 +106,13 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             console.log(value);
             this.mobs = value;
         });
+
+        this.RoomTypes = Object.keys(RoomTypes)
+            .filter(value => isNaN(Number(value)) === false)
+            .map((key, index) => {
+                return { name: RoomTypes[key], value: index === 0 ? 0 : 1 << index };
+            });
+
 
     }
 
@@ -261,7 +268,8 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             },
             instantRepop: false,
             players: null,
-            updateMessage: "nothing"
+            updateMessage: "nothing",
+            type: this.addRoomForm.get("type").value
         };
 
         this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {

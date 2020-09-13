@@ -13,6 +13,7 @@ export interface Character {
     gender: string;
     race: string;
     className: string;
+    emotes: string[];
     inventory: Item[];
     equipped: Equipment;
     level: string;

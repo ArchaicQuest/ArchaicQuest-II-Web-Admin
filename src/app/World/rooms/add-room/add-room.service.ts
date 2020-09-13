@@ -43,6 +43,7 @@ export class RoomService {
         CoordX: ["", Validators.required],
         CoordY: ["", Validators.required],
         CoordZ: ["", Validators.required],
+        emotes: this.formBuilder.array([this.initEmote()]),
         exits: this.formBuilder.group({
             north: [""],
             northEast: [""],
@@ -54,12 +55,15 @@ export class RoomService {
             northWest: [""],
             up: [""],
             down: [""]
-        })
+        }),
+        type: [0]
     });
 
-    // return this.formBuilder.group({
-    //     emote: ''
-    // });
+    initEmote(data: string = '') {
+        return this.formBuilder.group({
+            emote: data
+        });
+    }
 
     initRoomObject(roomObj: RoomObject) {
         if (roomObj == null) {

@@ -95,9 +95,9 @@ export class EditMobService {
         return this.addMobForm;
     }
 
-    initEmote() {
+    initEmote(data: string = '') {
         return this.formBuilder.group({
-            emote: ''
+            emote: data
         });
     }
 

@@ -17,6 +17,7 @@ const intitalState: CharacterState = {
             armour: 0,
             magic: 0.
         },
+        emotes: [],
         inventory: [],
         equipped: {
             arms: null,

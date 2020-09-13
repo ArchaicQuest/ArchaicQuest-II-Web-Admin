@@ -129,7 +129,22 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     attackType: mob.defaultAttack
                 });
 
+                if (mob.emotes.length) {
+                    //this is a hack to remove the first object section as
+                    // it's added by this.roomServices.addRoomForm;
+                    // so what happens is you have a blank object
+                    // followed by the other objects with data
+                    // so just removed the first instance, quickest solution
+                    this.getEmotesControl.removeAt(0);
+                    for (let index = 0; index < mob.emotes.length; index++) {
+                        this.addEmote(mob.emotes[index]);
+                    }
+
+                }
+
             });
+
+
 
             this.addMobForm.updateValueAndValidity();
 
@@ -212,8 +227,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         return this.addMobForm.get('emotes') as FormArray;
     }
 
-    addEmote() {
-        this.getEmotesControl.push(this.mobService.initEmote());
+    addEmote(data: string) {
+        this.getEmotesControl.push(this.mobService.initEmote(data));
 
         console.log(this.mobService.addMobForm.value);
     }
@@ -237,6 +252,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 magic: 0
             },
             inventory: [],
+            emotes: [],
             equipped: null, //change store for inv to handle equipped items
             status: this.addMobForm.get('status').value,
             attributes: {
@@ -302,6 +318,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 mob.armorRating.magic = Math.floor(ac.armour / 2);
 
             });
+
+        this.getEmotesControl.value.forEach((emote: { emote: string }) => {
+            mob.emotes.push(emote.emote);
+        });
+
+
 
         this.store.dispatch(new SaveChar(mob));
 
