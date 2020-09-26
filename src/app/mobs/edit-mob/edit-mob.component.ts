@@ -20,6 +20,7 @@ import { Option } from '../../shared/interfaces/option.interface';
 import { Mob } from '../interfaces/mob.interface';
 import { EditMobService } from './edit-mob.service';
 import { getAC } from 'src/app/characters/state/character.selector';
+import { CodeModel } from '@ngstack/code-editor';
 
 
 @Component({
@@ -38,6 +39,21 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     filteredItems: Observable<Item[]>;
     emotes: string[] = [''];
     currentAlignment: any;
+    panelOpenState = false;
+    theme = 'vs-dark';
+
+    codeModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua.json',
+        value: '',
+    };
+
+    options = {
+        contextmenu: true,
+        minimap: {
+            enabled: false,
+        },
+    };
     constructor(
         private mobService: EditMobService,
         private store: Store<CharacterAppState>,
@@ -47,6 +63,10 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     ) { super(); }
     @ViewChild(EquipmentComponent) equipmentComponent: EquipmentComponent;
     @ViewChild('autosize', { static: true }) autosize: CdkTextareaAutosize;
+
+    onCodeChanged(value) {
+        console.log('CODE', value);
+    }
 
     ngOnInit() {
         this.addMobForm = this.mobService.getAddMobForm();
@@ -126,7 +146,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     longName: mob.longName,
                     name: mob.name,
                     race: mob.race,
-                    attackType: mob.defaultAttack
+                    attackType: mob.defaultAttack,
+                    commands: mob.commands
                 });
 
                 if (mob.emotes.length) {
@@ -296,7 +317,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             name: this.addMobForm.get('name').value,
             race: this.addMobForm.get('race').value,
             defaultAttack: this.addMobForm.get('attackType').value,
-            id: this.route.snapshot.params['id']
+            id: this.route.snapshot.params['id'],
+            commands: this.addMobForm.get('commands').value,
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

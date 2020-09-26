@@ -32,7 +32,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import { MatExpansionModule } from '@angular/material/expansion';
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 @NgModule({
     imports: [
@@ -48,7 +49,9 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatButtonModule,
         MatTableModule,
         MatPaginatorModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatExpansionModule,
+        CodeEditorModule.forChild()
     ],
     providers: [
         MobService,

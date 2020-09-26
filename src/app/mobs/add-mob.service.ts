@@ -61,6 +61,7 @@ export class AddMobService {
         greetMessage: [''],
         emotes: this.formBuilder.array([this.initEmote()]),
         level: ['', [Validators.min(1), Validators.max(99)]],
+        path: [''],
         stats: new FormGroup({
             hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
             manaPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),

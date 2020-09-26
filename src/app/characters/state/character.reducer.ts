@@ -42,6 +42,7 @@ const intitalState: CharacterState = {
             wrist2: null,
             wrist: null
         },
+        commands: null,
         alignmentScore: 0,
         attributes: null,
         className: '',

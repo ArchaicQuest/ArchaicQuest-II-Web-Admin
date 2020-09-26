@@ -328,6 +328,26 @@
 
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Commands</h2>
+                                </div>
+                            </div>
+                            <div formArrayName="commands" class="emotes">
+
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>commands</mat-label>
+                                    <input type="text" matInput placeholder="commands. e.g n;e;s;w;n"
+                                        formControlName="commands" />
+
+                                </mat-form-field>
+
+                            </div>
+
+                        </div>
+                    </div>
 
 
                     <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Save

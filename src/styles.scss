@@ -623,3 +623,18 @@ a.mat-raised-button {
     display: inline-block;
     position: relative;
   } 
+
+  .editor-accordion .mat-expansion-panel-header {
+      background: #111!important;
+      border-radius: 0!important;
+      .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+          color: #fff!important;
+      }
+
+
+  }
+
+  .editor-accordion .mat-expansion-panel-body {
+    background: #1e1e1e!important;
+    padding-top:20px;
+  }

@@ -6,6 +6,7 @@ import { Config } from './config.interface';
 import { ArmourRating } from 'src/app/items/interfaces/armourRating.interface';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Equipment } from './equipment.interface';
+import { Events } from './events.interface';
 
 export interface Character {
     id?: string;
@@ -33,6 +34,8 @@ export interface Character {
     qffects?: Affects;
     config?: Config;
     defaultAttack: string;
+    commands: string;
+    events?: Events;
 }
 
 

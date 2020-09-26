@@ -20,7 +20,7 @@ import { Shared } from './shared/shared';
 import { SharedService } from './shared/shared.service';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
-
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 
 @NgModule({
@@ -33,6 +33,7 @@ import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,
+        CodeEditorModule.forRoot(),
         EffectsModule.forRoot([]),
         StoreModule.forRoot({}),
         StoreDevtoolsModule.instrument({

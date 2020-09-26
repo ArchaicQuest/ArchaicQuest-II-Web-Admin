@@ -197,6 +197,7 @@ export class AddMobComponent implements OnInit {
             name: this.addMobForm.get('name').value,
             race: this.addMobForm.get('race').value,
             defaultAttack: this.addMobForm.get('attackType').value,
+            commands: this.addMobForm.get('commands').value,
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

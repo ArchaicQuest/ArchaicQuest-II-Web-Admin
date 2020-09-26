@@ -80,7 +80,8 @@ export class EditMobService {
                 Validators.max(99)
             ]),
             charisma: new FormControl('', [Validators.min(1), Validators.max(99)])
-        })
+        }),
+        commands: ['']
     });
 
     saveMob(mob: Mob) {

@@ -331,7 +331,70 @@
 
                         </div>
                     </div>
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Commands</h2>
+                                </div>
+                            </div>
+                            <div>
 
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>commands</mat-label>
+                                    <input type="text" matInput placeholder="commands. e.g n;e;s;w;n"
+                                        formControlName="commands" />
+
+                                </mat-form-field>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Events</h2>
+                                </div>
+                            </div>
+                            <div class="editor-accordion">
+
+                                <mat-accordion>
+                                    <mat-expansion-panel hideToggle>
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Enter
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                This event fires when a player or mob enters the room.
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <ngs-code-editor [theme]="theme" [codeModel]="codeModel" [options]="options"
+                                            (valueChanged)="onCodeChanged($event)">
+                                        </ngs-code-editor>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Leave
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                This event fires when a player or mob leaves the room.
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <p>I'm visible because I am open</p>
+                                    </mat-expansion-panel>
+                                </mat-accordion>
+
+                            </div>
+
+                        </div>
+                    </div>
 
                     <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Update
                         Mob</button>
