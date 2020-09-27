@@ -81,7 +81,12 @@ export class EditMobService {
             ]),
             charisma: new FormControl('', [Validators.min(1), Validators.max(99)])
         }),
-        commands: ['']
+        commands: [''],
+        events: new FormGroup({
+            enter: new FormControl(''),
+            leave: new FormControl(''),
+
+        }),
     });
 
     saveMob(mob: Mob) {

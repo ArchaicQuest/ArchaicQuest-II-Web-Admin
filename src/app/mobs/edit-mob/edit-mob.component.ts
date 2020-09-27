@@ -42,7 +42,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     panelOpenState = false;
     theme = 'vs-dark';
 
-    codeModel: CodeModel = {
+    onEnterModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua.json',
+        value: '',
+    };
+    onLeaveModel: CodeModel = {
         language: 'lua',
         uri: 'lua.json',
         value: '',
@@ -66,6 +71,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
     onCodeChanged(value) {
         console.log('CODE', value);
+        this.addMobForm.get('events').get('enter').setValue(value);
+    }
+
+    onLeaveChanged(value) {
+        console.log('CODE', value);
+        this.addMobForm.get('events').get('enter').setValue(value);
     }
 
     ngOnInit() {
@@ -147,8 +158,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     name: mob.name,
                     race: mob.race,
                     attackType: mob.defaultAttack,
-                    commands: mob.commands
+                    commands: mob.commands,
+                    events: mob.events
                 });
+
+                this.onEnterModel.value = mob.events.enter;
+
 
                 if (mob.emotes.length) {
                     //this is a hack to remove the first object section as
@@ -319,6 +334,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             defaultAttack: this.addMobForm.get('attackType').value,
             id: this.route.snapshot.params['id'],
             commands: this.addMobForm.get('commands').value,
+            events: {
+                enter: this.addMobForm.get('events').get('enter').value,
+            }
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

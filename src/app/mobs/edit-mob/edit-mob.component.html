@@ -373,7 +373,7 @@
                                                 This event fires when a player or mob enters the room.
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
-                                        <ngs-code-editor [theme]="theme" [codeModel]="codeModel" [options]="options"
+                                        <ngs-code-editor [theme]="theme" [codeModel]="onEnterModel"
                                             (valueChanged)="onCodeChanged($event)">
                                         </ngs-code-editor>
                                     </mat-expansion-panel>
@@ -387,7 +387,8 @@
                                                 This event fires when a player or mob leaves the room.
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
-                                        <p>I'm visible because I am open</p>
+                                        <ngs-code-editor [theme]="theme" [codeModel]="onLeaveModel"
+                                            (valueChanged)="onLeaveChanged($event)"></ngs-code-editor>
                                     </mat-expansion-panel>
                                 </mat-accordion>
 
