@@ -37,7 +37,7 @@
     "font-awesome": "^4.7.0",
     "ngx-line-truncation": "^1.6.4",
     "ngx-toastr": "^12.1.0",
-    "npm": "^6.14.5",
+    "npm": "^6.14.6",
     "rpg-awesome": "^0.2.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.0",
