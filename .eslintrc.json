@@ -4,7 +4,7 @@
         "es2021": true
     },
     "extends": [
-        "airbnb-base"
+        "eslint:recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -15,5 +15,8 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "no-unused-vars": "off", //too many to fix
+        "no-undef": "off", // too many to fix
+        "no-useless-escape": "off"
     }
 }

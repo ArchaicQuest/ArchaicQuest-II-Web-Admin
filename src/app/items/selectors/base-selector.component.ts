@@ -9,7 +9,7 @@ export class CustomSelectorError {
 @Injectable()
 export abstract class BaseSelectorComponent extends OnDestroyMixin {
     value: any;
-    control: FormControl = new FormControl(this.value);
+    control: FormControl = new FormControl();
     formGroup: FormGroup;
 
     updateFormControl(formProperty: string, changes: SimpleChanges) {

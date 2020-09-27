@@ -206,7 +206,6 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
 
     updateSelectedValidTarget(flag: number) {
 
-        debugger;
         if (this.selectedValidTargetFlags.includes(flag)) {
             this.selectedValidTargetFlags = this.selectedValidTargetFlags.filter(flagToRemove => flagToRemove !== flag);
         } else {

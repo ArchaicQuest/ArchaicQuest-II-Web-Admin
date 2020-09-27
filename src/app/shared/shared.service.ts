@@ -22,4 +22,4 @@ export class SharedService {
         return this.http.post(this.updateRoomCacheURL, {}, { headers: this.headers, responseType: 'text' });
     }
 
-};
+}

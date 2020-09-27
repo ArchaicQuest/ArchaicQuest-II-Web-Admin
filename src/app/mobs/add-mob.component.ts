@@ -26,6 +26,7 @@ import { SaveChar } from '../characters/state/character.actions';
 import { Status } from '../characters/interfaces/status.interface';
 import { Option } from '../shared/interfaces/option.interface';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
+import { CodeModel } from '@ngstack/code-editor';
 
 @Component({
     templateUrl: './add-mob.component.html',
@@ -42,6 +43,26 @@ export class AddMobComponent implements OnInit {
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
     emotes: string[] = [''];
+    panelOpenState = false;
+    theme = 'vs-dark';
+
+    onEnterModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua.json',
+        value: 'xx',
+    };
+    onLeaveModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua2.json',
+        value: '',
+    };
+
+    options = {
+        contextmenu: true,
+        minimap: {
+            enabled: false,
+        },
+    };
     constructor(
         private mobService: AddMobService,
         private store: Store<CharacterAppState>,
@@ -51,6 +72,17 @@ export class AddMobComponent implements OnInit {
     ) { }
     @ViewChild(EquipmentComponent) equipmentComponent: EquipmentComponent;
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
+
+    onCodeChanged(value) {
+        console.log('CODE', value);
+        this.addMobForm.get('events').get('enter').setValue(value);
+    }
+
+    onLeaveChanged(value) {
+        console.log('CODE', value);
+        this.addMobForm.get('events').get('enter').setValue(value);
+    }
+
 
     ngOnInit() {
         this.addMobForm = this.mobService.getAddMobForm();
@@ -198,6 +230,9 @@ export class AddMobComponent implements OnInit {
             race: this.addMobForm.get('race').value,
             defaultAttack: this.addMobForm.get('attackType').value,
             commands: this.addMobForm.get('commands').value,
+            events: {
+                enter: this.addMobForm.get('events').get('enter').value,
+            }
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
