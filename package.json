@@ -7,7 +7,8 @@
         "build": "ng build",
         "buildProd": "ng build --prod --aot",
         "test": "ng test --no-watch --code-coverage",
-        "lint": "ng lint",
+        "lint": "npx eslint --ext .ts",
+        "lint:fix": "eslint --fix --ext .ts, .",
         "e2e": "ng e2e",
         "postinstall": "ngcc"
     },
@@ -51,8 +52,14 @@
         "@types/jasmine": "^3.5.10",
         "@types/jasminewd2": "^2.0.8",
         "@types/node": "^12.11.1",
+        "@typescript-eslint/eslint-plugin": "^4.2.0",
+        "@typescript-eslint/parser": "^4.2.0",
         "angular-testing-library": "0.1.0",
         "codelyzer": "^5.1.2",
+        "eslint": "^7.10.0",
+        "eslint-config-airbnb-base": "^14.2.0",
+        "eslint-plugin-import": "^2.22.0",
+        "eslint-plugin-sonarjs": "^0.5.0",
         "jasmine-core": "~3.5.0",
         "jasmine-marbles": "^0.6.0",
         "jasmine-spec-reporter": "~5.0.2",
@@ -64,8 +71,6 @@
         "protractor": "^7.0.0",
         "sonar-scanner": "^3.1.0",
         "ts-node": "^8.10.2",
-        "tslint": "~6.1.2",
-        "tslint-sonarts": "^1.9.0",
         "typescript": "^3.6.4"
     }
 }

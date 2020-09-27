@@ -69,7 +69,7 @@ export function characterReducer(state: CharacterState = intitalState,
         case CharacterActionTypes.AddToInventory: {
 
 
-            let inventory: Item[] = JSON.parse(JSON.stringify(state.mob.inventory));
+            const inventory: Item[] = JSON.parse(JSON.stringify(state.mob.inventory));
 
             inventory.unshift(action.payload);
 
@@ -106,7 +106,7 @@ export function characterReducer(state: CharacterState = intitalState,
         }
         case CharacterActionTypes.UpdateEquipment: {
 
-            let equipped: any = { ...state.mob.equipped };
+            const equipped: any = { ...state.mob.equipped };
             const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, equipped);
 
 
@@ -128,7 +128,7 @@ export function characterReducer(state: CharacterState = intitalState,
 
         case CharacterActionTypes.UpdateEquipped: {
 
-            let equipped: any = { ...state.mob.equipped };
+            const equipped: any = { ...state.mob.equipped };
             const updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, equipped);
 
             return {
@@ -142,8 +142,8 @@ export function characterReducer(state: CharacterState = intitalState,
         case CharacterActionTypes.RemoveEquipment: {
 
 
-            let equipped: any = { ...state.mob.equipped };
-            let getItem = EquipmentComponent.returnEQ(action.payload.slot, equipped)
+            const equipped: any = { ...state.mob.equipped };
+            let getItem = EquipmentComponent.returnEQ(action.payload.slot, equipped);
             let updatedEquipment = EquipmentComponent.mapItemToEQSlot(action.payload.slot, action.payload.item, equipped);
 
             if (action.payload.slot === EqSlot.Wielded && getItem == null) {

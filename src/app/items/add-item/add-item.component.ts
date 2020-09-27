@@ -41,7 +41,7 @@ import { Observable } from 'rxjs';
 import { ItemService } from './add-item.service';
 import { ActivatedRoute } from '@angular/router';
 import { FlagEnum } from '../interfaces/flags.enums';
-import { componentDestroyed, OnDestroyMixin } from "@w11k/ngx-componentdestroyed";
+import { componentDestroyed, OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 
 
 @Component({
@@ -180,7 +180,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             .pipe(
                 takeUntil(componentDestroyed(this))
             ).subscribe(value => {
-                console.log("container", value)
+                console.log('container', value);
                 this.containerCanBeLocked = !this.containerCanBeLocked;
                 if (!this.containerCanBeLocked) {
                     this.itemForm.get('containerLocked').setValue(false);
@@ -315,7 +315,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         this.componentActive = false;
         this.changeDetector.detach();
         this.itemForm = null;
-        console.log("??")
+        console.log('??');
     }
 
     triggerResize() {

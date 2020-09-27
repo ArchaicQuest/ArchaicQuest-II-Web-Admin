@@ -33,7 +33,7 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
 
 
     ngOnInit() {
-        console.log("items", this.data || this.items)
+        console.log('items', this.data || this.items);
     }
 
     ngOnChanges() {
@@ -42,10 +42,10 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
 
 
     addItem(item: Item) {
-        console.log("item", item)
-        let temp = this.dataSource.slice();
+        console.log('item', item);
+        const temp = this.dataSource.slice();
         temp.push(JSON.parse(JSON.stringify(item)));
-        console.log(temp)
+        console.log(temp);
         this.data = temp;
         this.filteredata = this.data;
     }
@@ -84,7 +84,7 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
-        this.filteredata = [...array]
+        this.filteredata = [...array];
     }
 
 

@@ -107,9 +107,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 takeUntil(componentDestroyed(this))
             ).subscribe(mob => {
 
-                console.log("loaded", mob);
-                console.log("x", mob.attributes.attribute['Strength'])
-                console.log("y", mob.className)
+                console.log('loaded', mob);
+                console.log('x', mob.attributes.attribute['Strength']);
+                console.log('y', mob.className);
 
                 this.mobService.getAlignment().subscribe((data: Alignment[]) => {
                     this.alignments = data;
@@ -132,7 +132,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                         magic: mob.armorRating.magic
                     },
                     inventory: [...mob.inventory],
-                    equipped: mob.equipped, //change store for inv to handle equipped items
+                    equipped: mob.equipped, // change store for inv to handle equipped items
                     status: mob.status,
                     attributes: {
 
@@ -166,7 +166,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
 
                 if (mob.emotes.length) {
-                    //this is a hack to remove the first object section as
+                    // this is a hack to remove the first object section as
                     // it's added by this.roomServices.addRoomForm;
                     // so what happens is you have a blank object
                     // followed by the other objects with data
@@ -198,8 +198,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     }
 
     ngOnDestroy(): void {
-        //Called once, before the instance is destroyed.
-        //Add 'implements OnDestroy' to the class.
+        // Called once, before the instance is destroyed.
+        // Add 'implements OnDestroy' to the class.
 
     }
 
@@ -289,7 +289,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             },
             inventory: [],
             emotes: [],
-            equipped: null, //change store for inv to handle equipped items
+            equipped: null, // change store for inv to handle equipped items
             status: this.addMobForm.get('status').value,
             attributes: {
                 attribute: {

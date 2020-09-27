@@ -56,7 +56,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
                 z: 0
             };
 
-            let startingRoom: Room = {
+            const startingRoom: Room = {
                 coords: startingCoords,
                 title: 'add room',
                 roomObjects: null,
@@ -87,9 +87,9 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
                 });
 
 
-                console.log(this.roomTable["{x:0,y:1,z:0}"])
-                console.log("-----------------------------------------------")
-                console.log(this.roomTable["{x:1,y:1,z:0}"])
+                console.log(this.roomTable['{x:0,y:1,z:0}']);
+                console.log('-----------------------------------------------');
+                console.log(this.roomTable['{x:1,y:1,z:0}']);
             }
 
             this.area = {
@@ -109,17 +109,17 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
             this.minValueOfX = Math.min(...this.rooms.map(room => room.coords.x), 0) - 1;
             this.minValueOfY = Math.min(...this.rooms.map(room => room.coords.y), 0) - 1;
 
-            console.log("mx x", this.maxValueOfX)
-            console.log("mx y", this.maxValueOfY)
+            console.log('mx x', this.maxValueOfX);
+            console.log('mx y', this.maxValueOfY);
 
-            console.log("mn x", this.minValueOfX)
-            console.log("mn y", this.minValueOfY)
+            console.log('mn x', this.minValueOfX);
+            console.log('mn y', this.minValueOfY);
 
             this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
             this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
 
-            console.log("totalRow", this.totalRow)
-            console.log("totalCol", this.totalCol)
+            console.log('totalRow', this.totalRow);
+            console.log('totalCol', this.totalCol);
 
         });
 
@@ -195,10 +195,11 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
 
     download(blob, filename) {
         this.exporting = true;
-        if (window.navigator.msSaveOrOpenBlob) // IE10+
+        if (window.navigator.msSaveOrOpenBlob) { // IE10+
             window.navigator.msSaveOrOpenBlob(blob, filename);
+        }
         else { // Others
-            var a = document.createElement("a"),
+            const a = document.createElement('a'),
                 url = URL.createObjectURL(blob);
             a.href = url;
             a.download = filename;

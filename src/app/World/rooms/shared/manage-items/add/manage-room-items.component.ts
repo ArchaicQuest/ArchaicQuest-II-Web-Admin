@@ -30,7 +30,7 @@ export class ManageRoomItemsComponent implements OnInit {
     }
 
     addItemToContainer(item: Item, container: Item) {
-        console.log(item)
+        console.log(item);
 
         container.container.items.push(item);
 

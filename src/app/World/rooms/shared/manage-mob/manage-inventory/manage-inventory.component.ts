@@ -31,12 +31,12 @@ export class ManageInventoryComponent extends DataListComponent implements OnIni
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
-        this.filteredata = [...array]
+        this.filteredata = [...array];
     }
 
     addItemToInventory(item: Item) {
-        console.log("i", item)
-        console.log("ic", this.filteredata)
+        console.log('i', item);
+        console.log('ic', this.filteredata);
 
         this.data.item.inventory.push(item);
 

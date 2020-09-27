@@ -10,7 +10,7 @@ import {
     ChangeDetectorRef,
     AfterViewInit,
     AfterViewChecked
-} from "@angular/core";
+} from '@angular/core';
 
 import {
     ControlValueAccessor,
@@ -19,18 +19,18 @@ import {
     FormBuilder,
     ControlContainer,
     NgForm
-} from "@angular/forms";
-import { ItemType } from "../../interfaces/item-type.interface";
-import { Store, select } from "@ngrx/store";
-import { ItemAppState } from "../../state/add-item.state";
-import { getWeaponTypes, getItemTypes } from "../../state/add-item.selector";
-import { takeWhile, takeUntil, take } from "rxjs/operators";
-import { GetItemTypes } from "../../state/add-item.actions";
-import { BaseSelectorComponent } from "../base-selector.component";
+} from '@angular/forms';
+import { ItemType } from '../../interfaces/item-type.interface';
+import { Store, select } from '@ngrx/store';
+import { ItemAppState } from '../../state/add-item.state';
+import { getWeaponTypes, getItemTypes } from '../../state/add-item.selector';
+import { takeWhile, takeUntil, take } from 'rxjs/operators';
+import { GetItemTypes } from '../../state/add-item.actions';
+import { BaseSelectorComponent } from '../base-selector.component';
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 
 @Component({
-    selector: "app-item-type-selector",
+    selector: 'app-item-type-selector',
     templateUrl: './item-type-selector.component.html',
     viewProviders: [{ provide: ControlContainer, useExisting: NgForm }],
     providers: [

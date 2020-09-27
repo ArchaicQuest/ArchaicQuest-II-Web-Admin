@@ -36,7 +36,7 @@ export class ManageExitsComponent implements OnInit {
         this.exitDirection = this.data.exit;
         this.currentCoord = JSON.parse(JSON.stringify(this.data.currentCoord));
 
-        /*  
+        /*
             TODO: Override Exit safety checks
             still an issue here for maze rooms where we want exits to go in a nonsensical way
             maybe add a checkbox to the modal to override the safety checks so the user can enter

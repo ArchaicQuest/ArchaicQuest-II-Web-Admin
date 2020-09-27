@@ -154,7 +154,7 @@ export class AddMobComponent implements OnInit {
             },
             emotes: [],
             inventory: [],
-            equipped: null, //change store for inv to handle equipped items
+            equipped: null, // change store for inv to handle equipped items
             status: this.addMobForm.get('status').value,
             attributes: {
                 attribute: {

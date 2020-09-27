@@ -10,4 +10,4 @@ export enum validTargets {
     TargetObjectRoom = 1 << 7,
     TargetObjectWorld = 1 << 8,
     TargetObjectEquipped = 1 << 9
-};
+}

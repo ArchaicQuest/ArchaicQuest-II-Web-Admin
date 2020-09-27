@@ -55,7 +55,7 @@ export class ViewAreaService {
     }
 
     isTwoWayExit(rooms: RoomTable, currentRoom: Coords, exit: string) {
-        console.log(exit)
+        console.log(exit);
 
         const room = rooms[this.getRoomID(currentRoom)];
 
@@ -84,7 +84,7 @@ export class ViewAreaService {
     }
 
     HasValidExit(rooms: RoomTable, currentRoom: Coords, exit: string) {
-        console.log(exit)
+        console.log(exit);
 
         const room = rooms[this.getRoomID(currentRoom)];
 

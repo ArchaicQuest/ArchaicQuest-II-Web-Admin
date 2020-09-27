@@ -19,8 +19,8 @@ export class DashboardComponent implements OnInit {
     };
 
     players: any[] = [];
-    filteredArray: any[] = []
-    defaultRecords: number = 10;
+    filteredArray: any[] = [];
+    defaultRecords = 10;
     pageEvent: any;
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -56,8 +56,8 @@ export class DashboardComponent implements OnInit {
     }
 
     onPaginateChange(e) {
-        let firstCut = e.pageIndex * e.pageSize;
-        let secondCut = firstCut + e.pageSize;
+        const firstCut = e.pageIndex * e.pageSize;
+        const secondCut = firstCut + e.pageSize;
         this.filteredArray = this.players.slice(firstCut, secondCut);
     }
 

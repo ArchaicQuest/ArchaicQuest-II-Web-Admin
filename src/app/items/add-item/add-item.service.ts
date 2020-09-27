@@ -203,7 +203,7 @@ export class ItemService {
     }
 
     addItem(item: Item): any {
-        console.log("post this ", item);
+        console.log('post this ', item);
         return this.http.post(this.addItemUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }
 

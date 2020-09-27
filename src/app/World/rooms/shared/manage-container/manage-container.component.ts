@@ -30,12 +30,12 @@ export class ManageContainerComponent extends DataListComponent implements OnIni
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
-        this.filteredata = [...array]
+        this.filteredata = [...array];
     }
 
     addItemToContainer(item: Item) {
-        console.log("i", item)
-        console.log("ic", this.filteredata)
+        console.log('i', item);
+        console.log('ic', this.filteredata);
 
         this.data.item.container.items.push(item);
 

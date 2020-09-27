@@ -11,16 +11,16 @@ import {
     AfterViewChecked,
     AfterViewInit,
     AfterContentChecked
-} from "@angular/core";
+} from '@angular/core';
 
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
     NG_VALIDATORS,
     FormBuilder
-} from "@angular/forms";
-import { ItemType } from "../../interfaces/item-type.interface";
-import { Store, select } from "@ngrx/store";
+} from '@angular/forms';
+import { ItemType } from '../../interfaces/item-type.interface';
+import { Store, select } from '@ngrx/store';
 import { ItemAppState } from '../../state/add-item.state';
 import { getWeaponTypes, getItemTypes, getItemSlotTypes } from '../../state/add-item.selector';
 import { takeWhile, takeUntil, take } from 'rxjs/operators';

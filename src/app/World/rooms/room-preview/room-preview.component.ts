@@ -26,7 +26,7 @@ export class RoomPreviewComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        console.log(this.addRoomForm)
+        console.log(this.addRoomForm);
     }
 
     ngOnDestroy(): void {

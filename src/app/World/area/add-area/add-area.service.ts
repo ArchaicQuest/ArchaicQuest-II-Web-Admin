@@ -43,7 +43,7 @@ export class AreaService {
     }
 
     uploadFile(file: File) {
-        let headers = new HttpHeaders();
+        const headers = new HttpHeaders();
         /** In Angular 5, including the header Content-Type can invalidate your request */
         headers.append('Content-Disposition', 'multipart/form-data');
         // headers.append('Accept', 'application/json');
@@ -55,7 +55,7 @@ export class AreaService {
             .subscribe(
                 data => console.log('success'),
                 error => console.log(error)
-            )
+            );
     }
 
 }

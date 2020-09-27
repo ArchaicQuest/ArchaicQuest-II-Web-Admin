@@ -55,7 +55,7 @@ export class MobPreviewComponent extends OnDestroyMixin implements OnInit, OnDes
                 takeUntil(componentDestroyed(this))
             ).subscribe(x => {
                 this.equipped = x;
-                console.log("xxx", this.equipped)
+                console.log('xxx', this.equipped);
             });
     }
 

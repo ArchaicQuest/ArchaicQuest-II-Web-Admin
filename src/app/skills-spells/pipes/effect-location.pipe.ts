@@ -3,7 +3,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 @Pipe({ name: 'effectLocationPipe' })
 export class EffectLocationPipe implements PipeTransform {
     transform(location: number): string {
-        console.log(location)
+        console.log(location);
         switch (location) {
             case 0:
                 return 'None';

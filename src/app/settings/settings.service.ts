@@ -22,7 +22,7 @@ export class SettingsService {
     }
 
     updateSettings(data: Settings) {
-        console.log("settings", JSON.stringify(data))
+        console.log('settings', JSON.stringify(data));
         return this.http.post(`${this.host}config`, JSON.stringify(data), { headers: this.headers });
 
     }

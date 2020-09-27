@@ -32,7 +32,7 @@ export class ArmourClassComponent implements OnInit, OnChanges {
         this.charStore
             .select(getAC)
             .subscribe((ac: any) => {
-                console.log("AC", ac);
+                console.log('AC', ac);
                 if (ac == null) {
                     return;
                 }
@@ -49,7 +49,7 @@ export class ArmourClassComponent implements OnInit, OnChanges {
         this.setArmourRating(null);
     }
 
-    //save currecnt ac in memory and use to decrease ac?
+    // save currecnt ac in memory and use to decrease ac?
 
     subscribeToEQChanges(): void {
         this.equipment.get('lightEq').valueChanges.subscribe((value: Item) => {
@@ -135,7 +135,7 @@ export class ArmourClassComponent implements OnInit, OnChanges {
 
 
                     this.Defense += (this.equipment.get(eqSlot).value as Item).armourRating.armour;
-                    this.magicDefense += Math.floor((this.equipment.get(eqSlot).value as Item).armourRating.armour / 2)
+                    this.magicDefense += Math.floor((this.equipment.get(eqSlot).value as Item).armourRating.armour / 2);
                 }
             });
 

@@ -83,7 +83,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             case EqSlot.Feet:
                 equipped.feet = item;
                 break;
-            case EqSlot.Finger: //2
+            case EqSlot.Finger: // 2
                 equipped.finger = item;
                 break;
 
@@ -117,7 +117,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             case EqSlot.Waist:
                 equipped.waist = item;
                 break;
-            case EqSlot.Wrist: //2
+            case EqSlot.Wrist: // 2
                 equipped.wrist = item;
                 break;
             case EqSlot.Wielded:
@@ -145,7 +145,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                 return equipped.face;
             case EqSlot.Feet:
                 return equipped.feet;
-            case EqSlot.Finger: //2
+            case EqSlot.Finger: // 2
                 return equipped.finger;
 
             case EqSlot.Floating:
@@ -168,7 +168,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
                 return equipped.torso;
             case EqSlot.Waist:
                 return equipped.waist;
-            case EqSlot.Wrist: //2
+            case EqSlot.Wrist: // 2
                 return equipped.wrist;
             case EqSlot.Wielded:
                 return equipped.wield;
@@ -191,7 +191,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
                 console.log(inventory);
-                console.log("change")
+                console.log('change');
             });
 
 

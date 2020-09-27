@@ -1,5 +1,5 @@
-import { Item } from "./interfaces/item.interface";
-import { ItemType } from "./interfaces/item-type.interface";
+import { Item } from './interfaces/item.interface';
+import { ItemType } from './interfaces/item-type.interface';
 
 export interface ItemState {
     items: Item[];

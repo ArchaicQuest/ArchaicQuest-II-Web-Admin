@@ -25,13 +25,13 @@ import { ManageInventoryComponent } from '../manage-inventory/manage-inventory.c
 export class RoomMobListComponent extends DataListComponent implements OnInit, OnChanges {
     @Input() data: Mob[];
 
-    //move
+    // move
     dataSource = this.data;
     constructor(public dialog: MatDialog, public helpers: Shared) { super(); }
 
 
     ngOnInit() {
-        console.log(this.data)
+        console.log(this.data);
     }
 
     ngOnChanges() {
@@ -42,7 +42,7 @@ export class RoomMobListComponent extends DataListComponent implements OnInit, O
     addItem(item: Item) {
 
         item.slot = this.mapSlot(item.slot);
-        let temp = this.dataSource.slice();
+        const temp = this.dataSource.slice();
         temp.push(JSON.parse(JSON.stringify(item)));
         this.dataSource = temp;
         this.data = temp;
@@ -65,7 +65,7 @@ export class RoomMobListComponent extends DataListComponent implements OnInit, O
 
     removeItem(array: Item[], index: number) {
         this.helpers.removeItem(array, index);
-        this.filteredata = [...array]
+        this.filteredata = [...array];
     }
 
 

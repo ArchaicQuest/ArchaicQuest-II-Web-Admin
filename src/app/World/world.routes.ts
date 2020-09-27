@@ -16,5 +16,5 @@ export const worldRoutes: Routes = [
 
     { path: 'area/:id/edit-room/:roomId', component: EditRoomComponent },
 
-    //http://localhost:1337/world/area/2/add-room/-1/3/0
+    // http://localhost:1337/world/area/2/add-room/-1/3/0
 ];

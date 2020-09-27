@@ -1,4 +1,4 @@
-import { createSelector, createFeatureSelector } from "@ngrx/store";
+import { createSelector, createFeatureSelector } from '@ngrx/store';
 
 export interface SidenavState {
   visible: boolean;

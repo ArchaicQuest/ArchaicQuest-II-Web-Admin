@@ -102,7 +102,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
                 console.log('real', this.coords);
 
-                console.log(this.addRoomForm)
+                console.log(this.addRoomForm);
 
                 this.addRoomForm.get('CoordX').setValue(value.coords.x);
                 this.addRoomForm.get('CoordY').setValue(value.coords.y);
@@ -188,18 +188,18 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
             });
         } else {
-            this.areaId = this.route.snapshot.params["id"],
+            this.areaId = this.route.snapshot.params['id'],
                 this.coords = {
-                    x: this.route.snapshot.params["x"],
-                    y: this.route.snapshot.params["y"],
-                    z: this.route.snapshot.params["z"]
+                    x: this.route.snapshot.params['x'],
+                    y: this.route.snapshot.params['y'],
+                    z: this.route.snapshot.params['z']
                 };
 
-            console.log("add", this.coords)
+            console.log('add', this.coords);
 
-            this.addRoomForm.get("CoordX").setValue(this.coords.x);
-            this.addRoomForm.get("CoordY").setValue(this.coords.y);
-            this.addRoomForm.get("CoordZ").setValue(this.coords.z);
+            this.addRoomForm.get('CoordX').setValue(this.coords.x);
+            this.addRoomForm.get('CoordY').setValue(this.coords.y);
+            this.addRoomForm.get('CoordZ').setValue(this.coords.z);
 
             this.isExitValid('North West').subscribe({
                 next: res => {
@@ -272,10 +272,10 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
     openExitDialog(exitDirection: string): void {
 
-        var exit = exitDirection.split(' ');
-        var exit2 = exit.length >= 2 ? exit[1] : '';
+        let exit = exitDirection.split(' ');
+        let exit2 = exit.length >= 2 ? exit[1] : '';
 
-        var exitKey = exit[0].toLowerCase() + exit2;
+        let exitKey = exit[0].toLowerCase() + exit2;
 
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',

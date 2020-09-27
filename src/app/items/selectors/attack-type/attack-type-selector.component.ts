@@ -8,27 +8,27 @@ import {
     SimpleChanges,
     AfterContentInit,
     AfterViewInit
-} from "@angular/core";
+} from '@angular/core';
 
 import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
     NG_VALIDATORS,
     FormBuilder
-} from "@angular/forms";
-import { ItemType } from "../../interfaces/item-type.interface";
-import { Store, select } from "@ngrx/store";
-import { ItemAppState } from "../../state/add-item.state";
-import { getAttackTypes } from "../../state/add-item.selector";
-import { takeWhile, takeUntil } from "rxjs/operators";
-import { GetAttackTypes } from "../../state/add-item.actions";
-import { BaseSelectorComponent } from "../base-selector.component";
+} from '@angular/forms';
+import { ItemType } from '../../interfaces/item-type.interface';
+import { Store, select } from '@ngrx/store';
+import { ItemAppState } from '../../state/add-item.state';
+import { getAttackTypes } from '../../state/add-item.selector';
+import { takeWhile, takeUntil } from 'rxjs/operators';
+import { GetAttackTypes } from '../../state/add-item.actions';
+import { BaseSelectorComponent } from '../base-selector.component';
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
 
 
 @Component({
-    selector: "app-attack-type-selector",
-    templateUrl: "./attack-type-selector.component.html",
+    selector: 'app-attack-type-selector',
+    templateUrl: './attack-type-selector.component.html',
     providers: [
         {
             provide: NG_VALUE_ACCESSOR,

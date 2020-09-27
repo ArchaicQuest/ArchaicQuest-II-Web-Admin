@@ -49,7 +49,7 @@ export class InventoryComponent implements OnInit {
         this.charStore
             .select(getInventory)
             .subscribe((inventory: Item[]) => {
-                console.log("invent", inventory);
+                console.log('invent', inventory);
                 this.inventoryItems = inventory;
             });
 
@@ -94,8 +94,8 @@ export class InventoryComponent implements OnInit {
 
 
         // const deletedItem:Item = this.inventoryItems.splice(index, 1);
-        //let AC = this.inventoryItems.splice(index, 1)[0].armourRating.armour;
-        //console.log("AC to remove,", AC)
+        // let AC = this.inventoryItems.splice(index, 1)[0].armourRating.armour;
+        // console.log("AC to remove,", AC)
         this.charStore.dispatch(new RemoveFromInventory(index));
         // this.charStore.dispatch(new DecreaseArmour(item.armourRating.armour));
 

@@ -49,7 +49,7 @@ export class AddAreaComponent implements OnInit {
     }
 
     fileChange(event) {
-        let fileList: FileList = event.target.files;
+        const fileList: FileList = event.target.files;
         if (fileList.length > 0) {
             this.file = fileList[0];
             this.fileName = this.file.name;
@@ -58,7 +58,7 @@ export class AddAreaComponent implements OnInit {
 
     uploadToServer() {
 
-        this.areaServices.uploadFile(this.file)
+        this.areaServices.uploadFile(this.file);
 
     }
 

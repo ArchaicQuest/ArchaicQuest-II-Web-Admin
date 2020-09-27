@@ -169,7 +169,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             takeUntil(componentDestroyed(this))
         ).subscribe(value => {
 
-            console.log("container", value)
+            console.log('container', value);
             this.containerCanBeLocked = !this.containerCanBeLocked;
             if (!this.containerCanBeLocked) {
                 this.itemForm.get('containerLocked').setValue(false);
@@ -206,7 +206,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             this.selectedItem = item;
 
 
-            console.log("selectedItem", item)
+            console.log('selectedItem', item);
 
             this.selectedFlag = item.itemFlag;
 
@@ -426,7 +426,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 invalid.push(name);
             }
         }
-        console.log("invalid:", invalid);
+        console.log('invalid:', invalid);
     }
     get getFlagControl(): FormArray {
         return this.itemForm.get('flags') as FormArray;
@@ -483,7 +483,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.componentActive = false;
         this.changeDetector.detach();
         this.itemForm = null;
-        console.log("??")
+        console.log('??');
     }
 
     triggerResize() {
@@ -551,7 +551,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             this.selectedFlags.push(flag);
         }
 
-        console.log("selected flags", this.selectedFlags);
+        console.log('selected flags', this.selectedFlags);
     }
 
     calculateAverageDamage(min = 1, max = 1) {

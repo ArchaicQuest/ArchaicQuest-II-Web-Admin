@@ -12,16 +12,16 @@ export class LineChartComponent implements OnInit {
     view: any[] = [];
     data: any[];
     // options
-    legend: boolean = true;
-    showLabels: boolean = true;
-    animations: boolean = true;
-    xAxis: boolean = true;
-    yAxis: boolean = true;
-    showYAxisLabel: boolean = true;
-    showXAxisLabel: boolean = true;
-    xAxisLabel: string = 'Months';
-    yAxisLabel: string = 'Characters';
-    timeline: boolean = false;
+    legend = true;
+    showLabels = true;
+    animations = true;
+    xAxis = true;
+    yAxis = true;
+    showYAxisLabel = true;
+    showXAxisLabel = true;
+    xAxisLabel = 'Months';
+    yAxisLabel = 'Characters';
+    timeline = false;
     legendPosition = 'right';
     colorScheme = {
         domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
@@ -69,7 +69,7 @@ export class LineChartComponent implements OnInit {
 
         this.service.getAccountStats().pipe(take(1)).subscribe(stats => {
 
-            this.data = stats["data"];
+            this.data = stats['data'];
             Object.assign(this, { data: this.data });
 
         });
