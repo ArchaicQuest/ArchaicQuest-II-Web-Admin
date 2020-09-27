@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, NgZone, OnDestroy, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
 import { ActivatedRoute } from '@angular/router';
@@ -45,11 +45,11 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     onEnterModel: CodeModel = {
         language: 'lua',
         uri: 'lua.json',
-        value: '',
+        value: 'xx',
     };
     onLeaveModel: CodeModel = {
         language: 'lua',
-        uri: 'lua.json',
+        uri: 'lua2.json',
         value: '',
     };
 
@@ -64,7 +64,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         private store: Store<CharacterAppState>,
         private route: ActivatedRoute,
         private ngZone: NgZone,
-        private formBuilder: FormBuilder
+        private changeDetector: ChangeDetectorRef
     ) { super(); }
     @ViewChild(EquipmentComponent) equipmentComponent: EquipmentComponent;
     @ViewChild('autosize', { static: true }) autosize: CdkTextareaAutosize;
@@ -84,7 +84,6 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         this.genders = this.mobService.getGender();
 
         this.statuses = this.mobService.getStatus();
-
 
 
         this.mobService.getDefaultAttackType().subscribe((data: Option[]) => {
@@ -162,8 +161,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     events: mob.events
                 });
 
-                this.onEnterModel.value = mob.events.enter;
-
+                this.onEnterModel = {
+                    language: 'lua',
+                    uri: 'lua.json',
+                    value: mob.events.enter,
+                };
+                this.changeDetector.detectChanges();
 
                 if (mob.emotes.length) {
                     // this is a hack to remove the first object section as

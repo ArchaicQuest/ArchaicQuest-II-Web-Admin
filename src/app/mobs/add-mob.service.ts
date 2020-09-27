@@ -80,7 +80,13 @@ export class AddMobService {
                 Validators.max(99)
             ]),
             charisma: new FormControl('', [Validators.min(1), Validators.max(99)])
-        })
+        }),
+        commands: [''],
+        events: new FormGroup({
+            enter: new FormControl(''),
+            leave: new FormControl(''),
+
+        }),
     });
 
     saveMob(mob: Mob) {

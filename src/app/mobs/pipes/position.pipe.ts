@@ -19,15 +19,15 @@ export class PositionPipe implements PipeTransform {
                 return 'Incapitated';
             case 6:
                 return 'Dead';
-            case 6:
-                return 'Ghost';
             case 7:
-                return 'Busy';
+                return 'Ghost';
             case 8:
-                return 'Floating';
+                return 'Busy';
             case 9:
-                return 'Standing';
+                return 'Floating';
             case 10:
+                return 'Standing';
+            case 11:
                 return 'Stunned';
             default:
                 return 'Standing';
