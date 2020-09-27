@@ -53,6 +53,13 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         value: '',
     };
 
+    actModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua3.json',
+        value: '',
+    };
+
+
     options = {
         contextmenu: true,
         minimap: {
@@ -70,13 +77,14 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     @ViewChild('autosize', { static: true }) autosize: CdkTextareaAutosize;
 
     onCodeChanged(value) {
-        console.log('CODE', value);
         this.addMobForm.get('events').get('enter').setValue(value);
     }
 
     onLeaveChanged(value) {
-        console.log('CODE', value);
-        this.addMobForm.get('events').get('enter').setValue(value);
+        this.addMobForm.get('events').get('leave').setValue(value);
+    }
+    actChanged(value) {
+        this.addMobForm.get('events').get('act').setValue(value);
     }
 
     ngOnInit() {
@@ -165,6 +173,19 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     language: 'lua',
                     uri: 'lua.json',
                     value: mob.events.enter,
+                };
+
+                this.onLeaveModel = {
+                    language: 'lua',
+                    uri: 'lua2.json',
+                    value: mob.events.leave,
+                };
+
+
+                this.actModel = {
+                    language: 'lua',
+                    uri: 'lua3.json',
+                    value: mob.events.act,
                 };
                 this.changeDetector.detectChanges();
 
@@ -339,6 +360,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             commands: this.addMobForm.get('commands').value,
             events: {
                 enter: this.addMobForm.get('events').get('enter').value,
+                leave: this.addMobForm.get('events').get('leave').value,
+                act: this.addMobForm.get('events').get('act').value,
             }
         };
 

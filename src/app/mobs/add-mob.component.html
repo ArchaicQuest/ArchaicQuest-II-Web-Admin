@@ -362,6 +362,40 @@
                                     <mat-expansion-panel hideToggle>
                                         <mat-expansion-panel-header>
                                             <mat-panel-title>
+                                                Help
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                What functions are available to be called by the Lua script
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+
+                                        <h2>Say</h2>
+
+                                        Make mobs say a message using obj.Say()
+                                        <pre>
+obj.Say("Hello World", 250, room, player)
+
+param 1: text to send to the player
+param 2: delay to send in ms
+param 3: room object
+param 4: player object
+
+Output:
+Hello world
+                                        </pre>
+                                        If you want to say bob says "hello" you would need to do this:
+                                        <pre>
+Example:
+obj.Say(obj.getName(mob) .. "says Hello", 250, room, player)
+
+Output:
+Bob says Hello
+</pre>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
                                                 Enter
                                             </mat-panel-title>
                                             <mat-panel-description>
@@ -384,6 +418,19 @@
                                         </mat-expansion-panel-header>
                                         <ngs-code-editor [theme]="theme" [codeModel]="onLeaveModel"
                                             (valueChanged)="onLeaveChanged($event)"></ngs-code-editor>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Act
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                This event fires when a player says, emotes or yells
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <ngs-code-editor [theme]="theme" [codeModel]="actModel"
+                                            (valueChanged)="actChanged($event)"></ngs-code-editor>
                                     </mat-expansion-panel>
                                 </mat-accordion>
 

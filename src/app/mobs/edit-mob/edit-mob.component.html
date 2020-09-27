@@ -373,7 +373,7 @@
                                                 This event fires when a player or mob enters the room.
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
-                                        <ngs-code-editor [theme]="theme" [codeModel]="onEnterModel"
+                                        <ngs-code-editor [theme]="theme" [codeModel]="onEnterModel" [options]="options"
                                             (valueChanged)="onCodeChanged($event)">
                                         </ngs-code-editor>
                                     </mat-expansion-panel>
@@ -389,6 +389,19 @@
                                         </mat-expansion-panel-header>
                                         <ngs-code-editor [theme]="theme" [codeModel]="onLeaveModel"
                                             (valueChanged)="onLeaveChanged($event)"></ngs-code-editor>
+                                    </mat-expansion-panel>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Act
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                This event fires when a player says, emotes or yells
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <ngs-code-editor [theme]="theme" [codeModel]="actModel"
+                                            (valueChanged)="actChanged($event)"></ngs-code-editor>
                                     </mat-expansion-panel>
                                 </mat-accordion>
 

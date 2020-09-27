@@ -637,4 +637,14 @@ a.mat-raised-button {
   .editor-accordion .mat-expansion-panel-body {
     background: #1e1e1e!important;
     padding-top:20px;
+    color: #fff;
+    p, h3, h2 {
+        color: #fff;
+    }
+
+    pre {
+        font-size: 14px;
+background: #111;
+padding: 20px;
+    }
   }

@@ -42,6 +42,7 @@ export class AddMobComponent implements OnInit {
     attackTypes: Option[];
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
+    currentAlignment: any;
     emotes: string[] = [''];
     panelOpenState = false;
     theme = 'vs-dark';
@@ -49,11 +50,16 @@ export class AddMobComponent implements OnInit {
     onEnterModel: CodeModel = {
         language: 'lua',
         uri: 'lua.json',
-        value: 'xx',
+        value: '',
     };
     onLeaveModel: CodeModel = {
         language: 'lua',
         uri: 'lua2.json',
+        value: '',
+    };
+    actModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua3.json',
         value: '',
     };
 
@@ -74,14 +80,16 @@ export class AddMobComponent implements OnInit {
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
     onCodeChanged(value) {
-        console.log('CODE', value);
         this.addMobForm.get('events').get('enter').setValue(value);
     }
 
     onLeaveChanged(value) {
-        console.log('CODE', value);
-        this.addMobForm.get('events').get('enter').setValue(value);
+        this.addMobForm.get('events').get('leave').setValue(value);
     }
+    actChanged(value) {
+        this.addMobForm.get('events').get('act').setValue(value);
+    }
+
 
 
     ngOnInit() {
@@ -232,6 +240,8 @@ export class AddMobComponent implements OnInit {
             commands: this.addMobForm.get('commands').value,
             events: {
                 enter: this.addMobForm.get('events').get('enter').value,
+                leave: this.addMobForm.get('events').get('leave').value,
+                act: this.addMobForm.get('events').get('act').value,
             }
         };
 
