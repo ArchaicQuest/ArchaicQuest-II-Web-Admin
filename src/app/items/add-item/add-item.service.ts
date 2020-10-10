@@ -69,7 +69,8 @@ export class ItemService {
         containerCanOpen: [''],
         lockStrength: [''],
         containerSize: [''],
-        selectContainerKey: ['']
+        selectContainerKey: [''],
+        isHiddenInRoom: [false],
     });
 
     private headers = new HttpHeaders({

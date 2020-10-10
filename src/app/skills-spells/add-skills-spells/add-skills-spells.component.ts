@@ -13,6 +13,7 @@ import { validTargets } from '../interfaces/targets.enum';
 import { Skill } from '../interfaces/skill.interface';
 import { SkillType } from '../interfaces/skill-type.interface';
 import { ToastrService } from 'ngx-toastr';
+import { CodeModel } from '@ngstack/code-editor';
 
 
 @Component({
@@ -42,7 +43,22 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
             type: ['', Validators.required],
             value: ['', Validators.required],
         }),
+        formula: ['']
     });
+    formulaModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua.json',
+        value: '',
+    };
+
+
+    options = {
+        contextmenu: true,
+        minimap: {
+            enabled: false,
+        },
+    };
+    theme = 'vs-dark';
     constructor(
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
@@ -51,6 +67,10 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
     ) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
+
+    formulaChanged(value) {
+        this.form.get('formula').setValue(value);
+    }
 
     ngOnInit() {
 
@@ -192,6 +212,7 @@ export class AddSkillsSpellComponent extends OnDestroyMixin implements OnDestroy
             id: -1,
             name: this.form.get('name').value,
             description: this.form.get('description').value,
+            formula: this.form.get('formula').value,
             damage: {
                 diceRoll: this.form.get('diceRoll').value,
                 diceMinSize: 1,

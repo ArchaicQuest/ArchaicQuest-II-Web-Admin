@@ -59,6 +59,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         value: '',
     };
 
+    giveModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua4.json',
+        value: '',
+    };
+
 
     options = {
         contextmenu: true,
@@ -85,6 +91,10 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     }
     actChanged(value) {
         this.addMobForm.get('events').get('act').setValue(value);
+    }
+
+    giveChanged(value) {
+        this.addMobForm.get('events').get('give').setValue(value);
     }
 
     ngOnInit() {
@@ -166,7 +176,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     race: mob.race,
                     attackType: mob.defaultAttack,
                     commands: mob.commands,
-                    events: mob.events
+                    events: mob.events,
+                    roam: mob.roam
                 });
 
                 this.onEnterModel = {
@@ -186,6 +197,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     language: 'lua',
                     uri: 'lua3.json',
                     value: mob.events.act,
+                };
+
+                this.giveModel = {
+                    language: 'lua',
+                    uri: 'lua4.json',
+                    value: mob.events.give,
                 };
                 this.changeDetector.detectChanges();
 
@@ -362,7 +379,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 enter: this.addMobForm.get('events').get('enter').value,
                 leave: this.addMobForm.get('events').get('leave').value,
                 act: this.addMobForm.get('events').get('act').value,
-            }
+                give: this.addMobForm.get('events').get('give').value,
+            },
+            roam: this.addMobForm.get('roam').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

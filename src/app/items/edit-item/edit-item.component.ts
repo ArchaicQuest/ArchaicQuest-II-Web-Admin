@@ -67,7 +67,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     currentItemTypeValue: any;
     currentItemSlotValue: any;
     currentArmourTypeValue: any;
-
+    isHiddenInRoom: boolean;
     constructor(
         private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
@@ -122,7 +122,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             containerCanOpen: [''],
             lockStrength: [''],
             containerSize: [''],
-            selectContainerKey: ['']
+            selectContainerKey: [''],
+            isHiddenInRoom: [false]
         });
 
 
@@ -345,7 +346,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 containerGP: item.container ? item.container.goldPieces : 0,
                 lockStrength: item.container ? item.container.lockDifficulty : 0,
                 containerSize: item.container ? item.container.size : 0,
-                selectContainerKey: item.container ? keyName != null ? keyName.name : '' : ''
+                selectContainerKey: item.container ? keyName != null ? keyName.name : '' : '',
+                isHiddenInRoom: item.isHiddenInRoom
 
             });
 
@@ -608,7 +610,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 taste: this.itemForm.get('tasteDescription').value,
                 touch: this.itemForm.get('touchDescription').value
             },
-            armourType: this.itemForm.get('armourType').value || 0,
+            armourType: this.itemForm.get('armourType').value.id || 0,
             armourRating: {
                 armour: this.itemForm.get('acPierce').value || 1,
                 magic: Math.floor(this.itemForm.get('acPierce').value / 2) || 0
@@ -626,7 +628,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             forageRank: 0,
             hidden: false,
             infinite: false,
-            isHiddenInRoom: false,
+            isHiddenInRoom: this.itemForm.get('isHiddenInRoom').value || false,
             itemFlag: flags,
             keywords: [],
             level: this.itemForm.get('level').value || 1,

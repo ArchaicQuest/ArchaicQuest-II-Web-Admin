@@ -62,6 +62,11 @@ export class AddMobComponent implements OnInit {
         uri: 'lua3.json',
         value: '',
     };
+    giveModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua4.json',
+        value: '',
+    };
 
     options = {
         contextmenu: true,
@@ -88,6 +93,9 @@ export class AddMobComponent implements OnInit {
     }
     actChanged(value) {
         this.addMobForm.get('events').get('act').setValue(value);
+    }
+    giveChanged(value) {
+        this.addMobForm.get('events').get('give').setValue(value);
     }
 
 
@@ -242,7 +250,9 @@ export class AddMobComponent implements OnInit {
                 enter: this.addMobForm.get('events').get('enter').value,
                 leave: this.addMobForm.get('events').get('leave').value,
                 act: this.addMobForm.get('events').get('act').value,
-            }
+                give: this.addMobForm.get('events').get('give').value,
+            },
+            roam: this.addMobForm.get('roam').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

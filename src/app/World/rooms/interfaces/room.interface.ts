@@ -32,5 +32,8 @@ export enum RoomTypes {
     Water = 1 << 3,
     River = 1 << 4,
     Sea = 1 << 5,
-    PointOfInterest = 1 << 6
+    PointOfInterest = 1 << 6,
+    Field = 1 << 8,
+    Forest = 1 << 9,
+    Desert = 1 << 10,
 }

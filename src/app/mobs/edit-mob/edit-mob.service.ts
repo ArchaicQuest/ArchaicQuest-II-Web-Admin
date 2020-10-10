@@ -86,7 +86,9 @@ export class EditMobService {
             enter: new FormControl(''),
             leave: new FormControl(''),
             act: new FormControl(''),
+            give: new FormControl(''),
         }),
+        roam: new FormControl(false)
     });
 
     saveMob(mob: Mob) {

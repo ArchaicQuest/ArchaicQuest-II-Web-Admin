@@ -229,6 +229,7 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             id: this.route.snapshot.params['id'],
             name: this.form.get('name').value,
             description: this.form.get('description').value,
+            formula: "",
             damage: {
                 diceRoll: this.form.get('diceRoll').value,
                 diceMinSize: 1,

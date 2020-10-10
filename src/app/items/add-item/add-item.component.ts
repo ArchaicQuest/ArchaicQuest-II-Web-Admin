@@ -456,7 +456,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             forageRank: 0,
             hidden: false,
             infinite: false,
-            isHiddenInRoom: false,
+            isHiddenInRoom: this.itemForm.get('isHiddenInRoom').value || false,
             itemFlag: flags,
             keywords: [],
             level: this.itemForm.get('level').value || 1,

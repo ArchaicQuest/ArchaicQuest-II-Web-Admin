@@ -35,6 +35,7 @@ export interface Character {
     config?: Config;
     defaultAttack: string;
     commands: string;
+    roam?: boolean;
     events?: Events;
 }
 

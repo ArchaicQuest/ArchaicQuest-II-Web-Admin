@@ -36,6 +36,7 @@ export class ManageExitsComponent implements OnInit {
         this.exitDirection = this.data.exit;
         this.currentCoord = JSON.parse(JSON.stringify(this.data.currentCoord));
 
+        console.log("This ", this.currentCoord)
         /*
             TODO: Override Exit safety checks
             still an issue here for maze rooms where we want exits to go in a nonsensical way
@@ -55,6 +56,7 @@ export class ManageExitsComponent implements OnInit {
         } else {
             this.form.get('areaId').setValue(this.data.exitAreaId);
         }
+        console.log("setting y to ", this.exitCoord.y)
         this.form.get('name').setValue(this.data.exit);
         this.form.get('coordX').setValue(this.exitCoord.x);
         this.form.get('coordY').setValue(this.exitCoord.y);

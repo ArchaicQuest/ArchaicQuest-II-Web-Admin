@@ -287,6 +287,8 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
             }
         });
 
+        console.log("exit popup", this.addRoomForm.get(`exits.${exitKey}`).value.coords || this.coords)
+
         dialogRef.afterClosed().subscribe((result: Exit) => {
             if (result == null) {
                 return;

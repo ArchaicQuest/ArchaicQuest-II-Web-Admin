@@ -74,6 +74,20 @@
 
                     </div>
 
+
+                    <h2>Formula</h2>
+                    <p>Using dice rolls is not enough, some spells should be influenced by the characters attributes
+                        and/or the victims.</p>
+                    <div class="row">
+                        <div class="col">
+                            <ngs-code-editor [theme]="theme" [codeModel]="formulaModel"
+                                (valueChanged)="formulaChanged($event)"></ngs-code-editor>
+                        </div>
+
+                    </div>
+                    <br />
+
+
                     <h2>Valid Target</h2>
                     <p>What can the spell target?
                         targets without any arguments</p>

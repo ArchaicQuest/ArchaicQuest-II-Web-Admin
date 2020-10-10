@@ -5,8 +5,8 @@ import { OnDestroyMixin } from '@w11k/ngx-componentdestroyed';
 export class CustomSelectorError {
     constructor(public hasError?: boolean, public errorMessage?: string) { }
 }
-
 @Injectable()
+
 export abstract class BaseSelectorComponent extends OnDestroyMixin {
     value: any;
     control: FormControl = new FormControl();

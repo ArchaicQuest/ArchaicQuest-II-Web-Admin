@@ -18,6 +18,7 @@ import { SkillSpellService } from './add-skills-spells/add-skills-spells.service
 import { SpellPreviewComponent } from './spell-preview/spell-preview.component';
 import { ValidTargetPipe } from './pipes/valid-target.pipe';
 import { EditSkillsSpellComponent } from './edit-skills-spells/edit-skills-spells.component';
+import { CodeEditorModule } from '@ngstack/code-editor';
 
 
 
@@ -26,6 +27,7 @@ import { EditSkillsSpellComponent } from './edit-skills-spells/edit-skills-spell
         SharedModule,
         ReactiveFormsModule,
         RouterModule.forChild(skillSpellsRoutes),
+        CodeEditorModule.forChild(),
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,

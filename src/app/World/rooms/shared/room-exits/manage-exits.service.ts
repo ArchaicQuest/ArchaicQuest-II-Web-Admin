@@ -57,8 +57,10 @@ export class RoomExitService {
 
     setExitCoord(exitDirection: string, currentCoord: Coords) {
         const newCoord = { ...currentCoord };
+
         switch (exitDirection) {
             case 'North':
+
                 newCoord.y++;
                 break;
             case 'North East':
@@ -94,6 +96,7 @@ export class RoomExitService {
                 break;
 
         }
+
 
         return newCoord;
     }

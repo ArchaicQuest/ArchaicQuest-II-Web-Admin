@@ -20,6 +20,7 @@ import { Status } from '../characters/interfaces/status.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Option } from '../shared/interfaces/option.interface';
+import { GetFlagsSuccess } from '../items/state/add-item.actions';
 
 @Injectable({
     providedIn: 'root'
@@ -82,10 +83,12 @@ export class AddMobService {
             charisma: new FormControl('', [Validators.min(1), Validators.max(99)])
         }),
         commands: [''],
+        roam: [false],
         events: new FormGroup({
             enter: new FormControl(''),
             leave: new FormControl(''),
             act: new FormControl(''),
+            give: new FormControl(''),
         }),
     });
 

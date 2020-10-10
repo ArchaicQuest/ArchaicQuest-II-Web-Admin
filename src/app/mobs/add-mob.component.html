@@ -391,6 +391,20 @@ obj.Say(obj.getName(mob) .. "says Hello", 250, room, player)
 Output:
 Bob says Hello
 </pre>
+
+
+                                        <h2>Get Name</h2>
+                                        Returns the name of the player or mob, based on the parameter passed in.
+
+                                        <pre>
+obj.getName(player)
+
+param 1: mob or player object
+
+Output:
+Bob
+</pre>
+
                                     </mat-expansion-panel>
                                     <mat-expansion-panel (opened)="panelOpenState = true"
                                         (closed)="panelOpenState = false">
@@ -432,13 +446,61 @@ Bob says Hello
                                         <ngs-code-editor [theme]="theme" [codeModel]="actModel"
                                             (valueChanged)="actChanged($event)"></ngs-code-editor>
                                     </mat-expansion-panel>
+                                    <mat-expansion-panel (opened)="panelOpenState = true"
+                                        (closed)="panelOpenState = false">
+                                        <mat-expansion-panel-header>
+                                            <mat-panel-title>
+                                                Give
+                                            </mat-panel-title>
+                                            <mat-panel-description>
+                                                This event fires when the mob receives an item
+                                            </mat-panel-description>
+                                        </mat-expansion-panel-header>
+                                        <ngs-code-editor [theme]="theme" [codeModel]="giveModel"
+                                            (valueChanged)="giveChanged($event)"></ngs-code-editor>
+                                    </mat-expansion-panel>
                                 </mat-accordion>
 
                             </div>
 
                         </div>
-                    </div>
 
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Options</h2>
+                                </div>
+                            </div>
+                            <div class="col">
+
+
+                                <mat-checkbox title="Enable mob to roam" formControlName="roam">Roam (Mob will randomly
+                                    move around)
+                                </mat-checkbox>
+
+
+                            </div>
+
+                            <div class="col">
+
+                                <mat-checkbox title="Updates every place that uses this mob" formControlName="updateAll"
+                                    disabled checked=true>Update all instances
+                                </mat-checkbox>
+
+
+                                <p>Currently disabled as editing a mob will update every instance of that mob so be
+                                    careful of making changes you don't intend to be global if the mob is generic and
+                                    used in several places.</p>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
 
 
                     <button mat-raised-button color="primary" type="submit" [disabled]="addMobForm.invalid">Save

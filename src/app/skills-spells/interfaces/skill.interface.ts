@@ -10,6 +10,7 @@ export interface Skill {
     id?: number;
     name: string;
     description: string;
+    formula: string;
     damage: Dice;
     effect: Effect;
     rounds: number;
