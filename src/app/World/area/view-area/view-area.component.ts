@@ -145,6 +145,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
 
 
     isRoom(room: Coords) {
+
         return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y && x.title !== 'add room');
     }
 
@@ -160,6 +161,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     }
 
     hasNorthExit(currentRoom: Coords) {
+
         return this.isRoom(currentRoom) && this.service.hasNorthExit(this.roomTable, currentRoom);
     }
     hasNorthEastExit(currentRoom: Coords) {
@@ -185,6 +187,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     }
 
     setRoomClass(coord: Coords, exitDirection: string): string {
+
         let exitClass = '';
 
         exitClass += this.isValidExit(coord, exitDirection) ? ' exit--valid ' : ' exit--invalid ';

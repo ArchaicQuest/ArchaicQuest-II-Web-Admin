@@ -21,6 +21,8 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Option } from '../shared/interfaces/option.interface';
 import { GetFlagsSuccess } from '../items/state/add-item.actions';
+import { ToastrService } from 'ngx-toastr';
+import { async } from '@angular/core/testing';
 
 @Injectable({
     providedIn: 'root'
@@ -46,7 +48,7 @@ export class AddMobService {
         'Content-Type': 'application/json'
     });
 
-    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+    constructor(private http: HttpClient, private formBuilder: FormBuilder, private toast: ToastrService) { }
 
     public addMobForm = this.formBuilder.group({
         id: [''],
@@ -93,11 +95,16 @@ export class AddMobService {
     });
 
     saveMob(mob: Mob) {
-        console.log('post this ', mob);
+
+        setTimeout(() => {
+            this.toast.success(`Mob ${mob.name} saved successfully.`);
+        }, 250);
+
         return this.http.post(this.saveMobUrl, JSON.stringify(mob), {
             headers: this.headers,
             responseType: 'text'
         });
+
     }
 
     getAddMobForm() {

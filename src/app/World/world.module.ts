@@ -48,6 +48,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastExitPipe, hasSouthExitPipe, hasSouthWestExitPipe, hasWestExitPipe, hasNorthWestExitPipe, isRoomPipe, setRoomClassPipe } from './rooms/pipes/valid-exit.pipe';
 
 
 
@@ -99,7 +100,17 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
         ManageRoomMobsComponent,
         RoomMobListComponent,
         ExitComponent,
-        RoomPreviewComponent
+        RoomPreviewComponent,
+        hasNorthExitPipe,
+        hasNorthEastExitPipe,
+        hasEastExitPipe,
+        hasSouthEastExitPipe,
+        hasSouthExitPipe,
+        hasSouthWestExitPipe,
+        hasWestExitPipe,
+        hasNorthWestExitPipe,
+        isRoomPipe,
+        setRoomClassPipe
 
     ],
 })

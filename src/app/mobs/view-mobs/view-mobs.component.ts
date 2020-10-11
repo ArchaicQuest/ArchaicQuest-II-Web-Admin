@@ -32,7 +32,9 @@ export class ViewMobsComponent extends DataListComponent implements OnInit {
 
 
     applyFilter(filterValue: string) {
-        const result = this.data.filter(x => x.title.toLowerCase().includes(filterValue));
+
+        const result = this.data.filter(x => x.name.toLowerCase().includes(filterValue));
+
         this.filteredata = result;
     }
 

@@ -7,6 +7,7 @@ import { Item } from '../interfaces/item.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FlagEnum } from '../interfaces/flags.enums';
 import { environment } from 'src/environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root'
@@ -77,7 +78,7 @@ export class ItemService {
         'Content-Type': 'application/json',
     });
 
-    constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
+    constructor(private http: HttpClient, private formBuilder: FormBuilder, private toast: ToastrService) { }
 
     getItemTypes(): Observable<ItemType[]> {
         return this.http.get<ItemType[]>(this.itemTypeUrl);
@@ -204,7 +205,9 @@ export class ItemService {
     }
 
     addItem(item: Item): any {
-        console.log('post this ', item);
+        setTimeout(() => {
+            this.toast.success(`Mob ${item.name} saved successfully.`);
+        }, 250);
         return this.http.post(this.addItemUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }
 

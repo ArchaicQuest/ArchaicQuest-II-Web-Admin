@@ -83,10 +83,12 @@ export class ViewAreaService {
     }
 
     HasValidExit(rooms: RoomTable, currentRoom: Coords, exit: string) {
-        console.log(exit);
+        // console.log(exit);
+        //  debugger;
 
         const room = rooms[this.getRoomID(currentRoom)];
 
+        if (room == null) { return; }
 
         if (!!room.exits[exit] && !!room.exits[exit].coords) {
 
@@ -119,11 +121,11 @@ export class ViewAreaService {
         return true;
     }
     hasNorthExit(rooms: RoomTable, currentRoom: Coords) {
-
+        console.log("north hit")
         const room = rooms[this.getRoomID(currentRoom)];
-
+        // debugger;
         if (room == null || room.exits.north == null || room.exits.north.coords == null) {
-            return;
+            return false;
         }
         return true;
     }
@@ -137,6 +139,7 @@ export class ViewAreaService {
         return true;
     }
     hasEastExit(rooms: RoomTable, currentRoom: Coords) {
+        console.log("east hit")
         const room = rooms[this.getRoomID(currentRoom)];
 
         if (room == null || room.exits.east == null || room.exits.east.coords == null) {

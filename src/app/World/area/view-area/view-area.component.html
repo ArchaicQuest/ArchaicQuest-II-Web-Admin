@@ -54,45 +54,50 @@
                         <tr *ngFor="let row of ' '.repeat(totalRow).split(''); let y = index">
                             <td class="exit-map" *ngFor="let row of ' '.repeat(totalCol).split(''); let i = index">
 
-                                <div class="exit exit--north  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'north')}}"
-                                    *ngIf="hasNorthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+                                <div class="exit exit--north  {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | setRoomClass :'north':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasNorthExit:rooms :roomTable)">
+                                </div>
 
                                 <!-- Two way {{isTwoWayExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})}} -->
-                                <div class="exit exit--northEast  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'northEast')}}"
-                                    *ngIf="hasNorthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                <div class="exit exit--northEast  {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | setRoomClass :'northEast':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasNorthEastExit:rooms :roomTable)">
                                 </div>
 
-                                <div class="exit exit--east  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'east')}}"
-                                    *ngIf="hasEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
-                                <div class="exit exit--southEast  {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'southEast')}}"
-                                    *ngIf="hasSouthEastExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                <div class="exit exit--east  {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | setRoomClass :'east':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasEastExit:rooms :roomTable)">
+                                </div>
+                                <div class="exit exit--southEast  {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}  | setRoomClass :'southEast':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasSouthEastExit:rooms :roomTable)">
+                                    >
                                 </div>
 
-                                <div class="exit exit--south {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'south')}}"
-                                    *ngIf="hasSouthExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
-
-                                <div class="exit exit--southWest {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'southWest')}}"
-                                    *ngIf="hasSouthWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                <div class="exit exit--south {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | setRoomClass :'south':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasSouthExit:rooms :roomTable)">
                                 </div>
 
-                                <div class="exit exit--west {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'west')}}"
-                                    *ngIf="hasWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"></div>
+                                <div class="exit exit--southWest {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | setRoomClass :'southWest':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasSouthWestExit:rooms :roomTable)">
+                                </div>
 
-                                <div class="exit exit--northWest {{setRoomClass({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}, 'northWest')}}"
-                                    *ngIf="hasNorthWestExit({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">
+                                <div class="exit exit--west {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}| setRoomClass :'west':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasWestExit:rooms :roomTable)">
+                                </div>
+
+                                <div class="exit exit--northWest {{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}| setRoomClass :'northWest':roomTable)}}"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} |hasNorthWestExit:rooms :roomTable)">
                                 </div>
 
 
 
                                 <button mat-raised-button
-                                    [routerLink]="['/world/area/' + area.id + '/edit-room',isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).id]"
-                                    *ngIf="isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})"
-                                    color="primary">{{isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0}).title}}
+                                    [routerLink]="['/world/area/' + area.id + '/edit-room',({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | isRoom:rooms :'id')]"
+                                    *ngIf="({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | isRoom: rooms)"
+                                    color="primary">{{({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | isRoom:rooms)}}
                                     <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}} )</button>
 
                                 <button mat-raised-button
                                     [routerLink]="['/world/area/' + area.id + '/add-room', i + this.minValueOfX, this.maxValueOfY - y, 0]"
-                                    *ngIf="!isRoom({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0})">Add
+                                    *ngIf="!({x: i + this.minValueOfX, y:this.maxValueOfY - y, z:0} | isRoom: rooms)">Add
                                     Room <br /> ({{ i + this.minValueOfX}}, {{this.maxValueOfY - y}})</button>
                             </td>
                         </tr>
