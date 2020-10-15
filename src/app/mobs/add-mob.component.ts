@@ -265,4 +265,10 @@ export class AddMobComponent implements OnInit {
         console.log(mob);
         this.store.dispatch(new SaveChar(mob));
     }
+
+    ngOnDestroy(): void {
+        this.mobService.clearCache();
+        this.getEmotesControl.clear();
+
+    }
 }

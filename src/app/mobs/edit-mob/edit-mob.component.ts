@@ -239,8 +239,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     }
 
     ngOnDestroy(): void {
-        // Called once, before the instance is destroyed.
-        // Add 'implements OnDestroy' to the class.
+        this.mobService.clearCache();
+        this.getEmotesControl.clear();
 
     }
 

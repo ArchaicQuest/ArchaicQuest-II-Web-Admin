@@ -109,6 +109,14 @@ export class EditMobService {
         });
     }
 
+
+    clearCache() {
+
+        this.addMobForm.reset();
+
+    }
+
+
     getGender(): Gender[] {
         return [
             {
