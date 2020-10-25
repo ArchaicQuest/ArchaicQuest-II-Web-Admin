@@ -20,7 +20,8 @@
     </div>
 
     <div class="data-list">
-        <div class="data-list__data" *ngFor="let data of filteredata">
+        <div class="data-list__data" *ngFor="let data of filteredata;  let i=index">
+            <a (click)="removeArea(i)" class="fa fa-times-circle"></a>
             <h3 [line-truncation]="2">{{data.title}}</h3>
             <p class="data-list__data__description" [line-truncation]="3">{{data.description}}</p>
 

@@ -18,4 +18,9 @@ export class ViewAreasService {
         return this.http.get<Area[]>(this.getAreasUrl);
     }
 
+    delete(id: number): Observable<any> {
+        debugger;
+        return this.http.delete<any>(`${this.getAreasUrl}/delete/${id}`);
+    }
+
 }

@@ -130,7 +130,9 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             containerCanOpen: [''],
             lockStrength: [''],
             containerSize: [''],
-            selectContainerKey: ['']
+            selectContainerKey: [''],
+            isHiddenInRoom: [false],
+            isStuckInRoom: [false],
         });
 
 
@@ -470,10 +472,10 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
                 saves: this.itemForm.get('saves').value || 0,
             },
             questItem: false,
-            stuck: false,
             uses: 0,
             weight: 5,
-            equipped: false
+            equipped: false,
+            stuck: this.itemForm.get('isStuckInRoom').value || false,
         };
 
         this.store.dispatch(new PostItem(item));

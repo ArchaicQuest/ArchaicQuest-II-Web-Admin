@@ -123,7 +123,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             lockStrength: [''],
             containerSize: [''],
             selectContainerKey: [''],
-            isHiddenInRoom: [false]
+            isHiddenInRoom: [false],
+            isStuckInRoom: [false]
         });
 
 
@@ -308,8 +309,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 id: item.id,
                 name: item.name,
                 knownByName: item.knownByName,
-                itemType: this.currentItemTypeValue,
-                itemSlotType: this.currentItemSlotValue,
+                itemType: item.itemType,
+                itemSlotType: item.slot,
                 level: item.level,
                 weaponType: item.weaponType,
                 attackType: item.attackType,
@@ -347,7 +348,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 lockStrength: item.container ? item.container.lockDifficulty : 0,
                 containerSize: item.container ? item.container.size : 0,
                 selectContainerKey: item.container ? keyName != null ? keyName.name : '' : '',
-                isHiddenInRoom: item.isHiddenInRoom
+                isHiddenInRoom: item.isHiddenInRoom,
+                isStuckInRoom: item.stuck
 
             });
 
@@ -371,7 +373,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 for (const i in this.itemForm.controls) {
                     this.itemForm.controls[i].markAsTouched();
                     this.itemForm.controls[i].updateValueAndValidity();
+
+
                 }
+
+
 
             });
 
@@ -642,7 +648,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 saves: this.itemForm.get('saves').value || 0,
             },
             questItem: false,
-            stuck: false,
+            stuck: this.itemForm.get('isStuckInRoom').value || false,
             uses: 0,
             weight: 5,
             equipped: false

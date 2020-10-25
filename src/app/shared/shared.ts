@@ -9,7 +9,7 @@ export class Shared {
     }
 
     removeItem<T>(array: Array<T>, index: number) {
-        array.splice(index, 1);
+        return array.splice(index, 1);
     }
 
     createNewObj<T>(obj: T) {
