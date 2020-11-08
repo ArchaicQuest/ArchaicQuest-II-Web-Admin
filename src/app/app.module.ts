@@ -21,6 +21,7 @@ import { SharedService } from './shared/shared.service';
 import { SideNavComponent } from './side-nav/side-nav.component';
 import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
         SideNavComponent,
     ],
     imports: [
-        //  ReactiveFormsModule,
+        ReactiveFormsModule,
         BrowserModule,
         AppRoutingModule,
         HttpClientModule,

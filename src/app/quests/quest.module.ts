@@ -7,34 +7,38 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
-import { SocialsService } from './socials.service';
-import { SocialsComponent } from './socials.component';
-import { SocialsRoutes } from './socials.routes';
-import { ViewSocialsComponent } from './view-socials/view-socias.component';
+
 import { MatPaginatorModule } from '@angular/material/paginator';
-import { ReactiveFormsModule } from '@angular/forms';
+import { QuestService } from './quest.service';
+import { QuestRoutes } from './quest.routes';
+import { ViewQuestsComponent } from './view-quests/view-quests.component';
+import { QuestComponent } from './quest.component';
+import { MatSelectModule } from '@angular/material/select';
+import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-selector.component';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
     imports: [
         SharedModule,
-        RouterModule.forChild(SocialsRoutes),
-        ReactiveFormsModule,
+        RouterModule.forChild(QuestRoutes),
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,
         MatCheckboxModule,
         MatButtonModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatSelectModule,
+        ReactiveFormsModule
     ],
     providers: [
-        SocialsService
+        QuestService,
     ],
     declarations: [
-        SocialsComponent,
-        ViewSocialsComponent
+        QuestComponent,
+        ViewQuestsComponent,
 
     ],
 })
-export class SocialsModule { }
+export class QuestModule { }
