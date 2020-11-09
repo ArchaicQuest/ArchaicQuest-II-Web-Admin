@@ -19,7 +19,7 @@ export class QuestService {
     constructor(private http: HttpClient) { }
 
     getQuest() {
-        return this.http.get<IQuest>(`${this.host}quests`);
+        return this.http.get<IQuest[]>(`${this.host}Quest/GetQuests`);
     }
 
     getAreaName() {
@@ -46,9 +46,9 @@ export class QuestService {
         }]
     }
 
-    updateQuests(data: IQuest) {
-        console.log("settings", JSON.stringify(data))
-        return this.http.post(`${this.host}quests`, JSON.stringify(data), { headers: this.headers });
+    AddQuest(data: IQuest) {
+        console.log("quest", JSON.stringify(data))
+        return this.http.post(`${this.host}quest`, JSON.stringify(data), { headers: this.headers });
 
     }
     delete(id: number): Observable<any> {

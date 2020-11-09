@@ -23,16 +23,16 @@
     <div class="data-list">
         <div class="data-list__data" *ngFor="let data of filteredata; let i = index;">
 
-            <h3 [line-truncation]="2">{{data.key}}</h3>
-            <p class="data-list__data__description" [line-truncation]="3">{{data.value.CharNoTarget}}</p>
+            <h3 [line-truncation]="2">{{data.title}}</h3>
+            <p class="data-list__data__description" [line-truncation]="3">{{data.description}}</p>
 
 
             <div class="data-list__actions">
 
                 <div class="row">
                     <div class="col">
-                        <p><i class="ra ra-fox"></i></p>
-                        <p><i class="fa fa-calendar"></i></p>
+                        <p><i class="fa fa-map-signs"></i>{{data.area}}</p>
+                        <p><i class="fa fa-calendar"></i> {{data.dateUpdated | date: 'dd/MM/yyyy'}}</p>
                     </div>
                 </div>
 

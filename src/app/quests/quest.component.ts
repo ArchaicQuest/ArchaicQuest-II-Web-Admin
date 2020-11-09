@@ -60,5 +60,27 @@ export class QuestComponent implements OnInit {
         this.service.delete(areaToDelete[0].id);
     }
 
+    addQuest() {
+        var questObj: IQuest = {
+            Title: this.questForm.get('title').value,
+            Id: -1,
+            Area: this.questForm.get('area').value,
+            Description: this.questForm.get('description').value,
+            Type: this.questForm.get('type').value,
+            ExpGain: this.questForm.get('expGain').value,
+            GoldGain: this.questForm.get('goldGain').value,
+            ItemGain: this.items,
+
+        }
+
+        this.service.AddQuest(questObj).pipe(take(1)).subscribe(response => {
+            this.toast.success(`quest added successfully.`);
+        },
+            err => console.log(err));
+
+
+
+    }
+
 
 }

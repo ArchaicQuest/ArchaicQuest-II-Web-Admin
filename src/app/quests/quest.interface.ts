@@ -1,7 +1,7 @@
 import { Item } from '../items/interfaces/item.interface';
 
 export interface IQuest {
-    Id: string;
+    Id: number;
     Title: string;
     Type: string;
     Description: string;
@@ -9,7 +9,6 @@ export interface IQuest {
     ExpGain: number;
     GoldGain: number;
     ItemGain: Item[];
-    Rewards: string[];
 }
 
 
