@@ -80,7 +80,7 @@ import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastEx
         ViewAreasComponent,
         ViewAreaComponent,
         EditAreaComponent,
-        MobSelectorComponent,
+        //MobSelectorComponent,
         ManageContainerItemsComponent,
         ManageContainerComponent,
         ManageInventoryComponent,

@@ -11,13 +11,14 @@ import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-sel
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.component';
 
 @NgModule({
-    declarations: [HeaderComponent, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent],
+    declarations: [HeaderComponent, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MobSelectorComponent],
     imports: [CommonModule, LineTruncationLibModule, MatFormFieldModule,
         MatInputModule,
         MatAutocompleteModule, ReactiveFormsModule],
-    exports: [CommonModule, HeaderComponent, LineTruncationLibModule, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MatFormFieldModule,
+    exports: [CommonModule, HeaderComponent, LineTruncationLibModule, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MobSelectorComponent, MatFormFieldModule,
         MatInputModule, ReactiveFormsModule,
         MatAutocompleteModule]
 })

@@ -3,12 +3,13 @@ import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
-import { IQuest } from './quest.interface';
+import { IQuest, KillQuest } from './quest.interface';
 import { QuestService } from './quest.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Option } from '../shared/interfaces/option.interface';
 import { Item } from '../items/interfaces/item.interface';
 import { Shared } from '../shared/shared';
+import { Mob } from '../mobs/interfaces/mob.interface';
 
 @Component({
     templateUrl: './quest.component.html',
@@ -20,6 +21,8 @@ export class QuestComponent implements OnInit {
     public areaList: string[];
     public questTypes: Option[];
     public items: Item[] = [];
+    public mobs: Mob[] = [];
+    public mobsToKill: KillQuest[] = [];
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
 
@@ -35,7 +38,9 @@ export class QuestComponent implements OnInit {
             rewards: "",
             expGain: "",
             goldGain: "",
-            itemGain: ""
+            itemGain: "",
+            mobCount: "",
+            mobToKill: ""
         });
 
         this.service.getAreaName().pipe(take(1)).subscribe(data => {
@@ -53,14 +58,34 @@ export class QuestComponent implements OnInit {
 
     }
 
+    addMob() {
+
+        //   debugger;
+        var mobKill: KillQuest = {
+            Name: this.questForm.get('mobToKill').value,
+            Count: this.questForm.get('mobCount').value
+        }
+
+        this.mobsToKill = this.mobsToKill.concat(mobKill);
+
+    }
+
     removeItem(index: number) {
         var areaToDelete = (this.helpers.removeItem(this.items, index) as Item[]);
         this.items = [...this.items];
 
-        this.service.delete(areaToDelete[0].id);
+
+    }
+
+    removeMob(index: number) {
+        (this.helpers.removeItem(this.mobsToKill, index) as KillQuest[]);
+        this.mobsToKill = [...this.mobsToKill];
+
     }
 
     addQuest() {
+
+
         var questObj: IQuest = {
             Title: this.questForm.get('title').value,
             Id: -1,
@@ -70,6 +95,7 @@ export class QuestComponent implements OnInit {
             ExpGain: this.questForm.get('expGain').value,
             GoldGain: this.questForm.get('goldGain').value,
             ItemGain: this.items,
+            MobsToKill: this.mobsToKill
 
         }
 

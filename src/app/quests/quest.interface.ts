@@ -9,6 +9,11 @@ export interface IQuest {
     ExpGain: number;
     GoldGain: number;
     ItemGain: Item[];
+    MobsToKill: KillQuest[];
 }
 
 
+export interface KillQuest {
+    Name: string;
+    Count: number;
+}

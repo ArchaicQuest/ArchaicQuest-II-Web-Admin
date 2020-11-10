@@ -52,6 +52,52 @@
                             </mat-form-field>
                         </div>
                     </div>
+                    <h2>Mobs to kill</h2>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Mob to kill</mat-label>
+                                <input matInput placeholder="Mob to kill" formControlName="mobToKill">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Amount to kill</mat-label>
+                                <input matInput placeholder="Amount to kill" formControlName="mobCount">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button color="primary" type="button" (click)="addMob()">Add Mob</button>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="data-list">
+                                <div class="data-list__data" *ngFor="let mob of mobsToKill;  let i=index">
+                                    <a (click)="removeMob(i)" class="fa fa-times-circle"></a>
+                                    <h3 [line-truncation]="2">{{mob?.Name}}</h3>
+
+
+                                    <div class="data-list__actions">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><i class="fa fa-skull"></i> {{mob?.Count}}</p>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h2>Rewards</h2>
 
                     <div class="row">
                         <div class="col">
