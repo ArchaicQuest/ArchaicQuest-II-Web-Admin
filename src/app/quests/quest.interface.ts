@@ -1,19 +1,19 @@
 import { Item } from '../items/interfaces/item.interface';
 
 export interface IQuest {
-    Id: number;
-    Title: string;
-    Type: string;
-    Description: string;
-    Area: string;
-    ExpGain: number;
-    GoldGain: number;
-    ItemGain: Item[];
-    MobsToKill: KillQuest[];
+    id: number;
+    title: string;
+    type: string;
+    description: string;
+    area: string;
+    expGain: number;
+    goldGain: number;
+    itemGain: Item[];
+    mobsToKill: KillQuest[];
 }
 
 
 export interface KillQuest {
-    Name: string;
-    Count: number;
+    name: string;
+    count: number;
 }

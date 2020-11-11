@@ -22,6 +22,10 @@ export class QuestService {
         return this.http.get<IQuest[]>(`${this.host}Quest/GetQuests`);
     }
 
+    LoadQuest(id: number) {
+        return this.http.get<IQuest>(`${this.host}Quest/?id=${id}`);
+    }
+
     getAreaName() {
         return this.http.get<string[]>(`${this.host}World/Area/List`);
     }

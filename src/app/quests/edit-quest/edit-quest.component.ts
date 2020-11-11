@@ -3,19 +3,20 @@ import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
-import { IQuest, KillQuest } from './quest.interface';
-import { QuestService } from './quest.service';
+import { IQuest, KillQuest } from '../quest.interface';
+import { QuestService } from '../quest.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Option } from '../shared/interfaces/option.interface';
-import { Item } from '../items/interfaces/item.interface';
-import { Shared } from '../shared/shared';
-import { Mob } from '../mobs/interfaces/mob.interface';
+import { Option } from '../../shared/interfaces/option.interface';
+import { Item } from '../../items/interfaces/item.interface';
+import { Shared } from '../../shared/shared';
+import { Mob } from '../../mobs/interfaces/mob.interface';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
-    templateUrl: './quest.component.html',
-    styleUrls: ['./quest.component.scss']
+    templateUrl: './edit-quest.component.html',
+    styleUrls: ['./edit-quest.component.scss']
 })
-export class QuestComponent implements OnInit {
+export class EditQuestComponent implements OnInit {
 
     public questForm: FormGroup;
     public areaList: string[];
@@ -26,7 +27,7 @@ export class QuestComponent implements OnInit {
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
 
-    constructor(private service: QuestService, private formBuilder: FormBuilder, private toast: ToastrService, private helpers: Shared) {
+    constructor(private service: QuestService, private formBuilder: FormBuilder, private toast: ToastrService, private helpers: Shared, private route: ActivatedRoute) {
     }
 
     ngOnInit() {
@@ -48,9 +49,25 @@ export class QuestComponent implements OnInit {
         })
 
         this.questTypes = this.service.questTypes();
+        setTimeout(() => {
+            this.service.LoadQuest(this.route.snapshot.params['id'])
+                .pipe(take(1))
+                .subscribe(q => {
+                    this.questForm.get('title').setValue(q.title);
+                    this.questForm.get('type').setValue(q.type);
+                    this.questForm.get('description').setValue(q.description);
+                    this.questForm.get('area').setValue(q.area);
+                    this.questForm.get('expGain').setValue(q.expGain);
+                    this.questForm.get('goldGain').setValue(q.goldGain);
 
+                    this.items = q.itemGain;
+                    this.mobsToKill = q.mobsToKill;
+                });
+
+        });
 
     }
+
 
     addItem(item: Item) {
         console.log(item)

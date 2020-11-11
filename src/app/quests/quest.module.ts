@@ -16,6 +16,7 @@ import { QuestComponent } from './quest.component';
 import { MatSelectModule } from '@angular/material/select';
 import { ItemSelectorComponent } from '../items/selectors/Item-selector/item-selector.component';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditQuestComponent } from './edit-quest/edit-quest.component';
 
 
 
@@ -38,6 +39,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
     declarations: [
         QuestComponent,
         ViewQuestsComponent,
+        EditQuestComponent
 
     ],
 })
