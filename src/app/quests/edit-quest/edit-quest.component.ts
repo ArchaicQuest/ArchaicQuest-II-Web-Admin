@@ -105,7 +105,7 @@ export class EditQuestComponent implements OnInit {
 
         var questObj: IQuest = {
             title: this.questForm.get('title').value,
-            id: -1,
+            id: this.route.snapshot.params['id'],
             area: this.questForm.get('area').value,
             description: this.questForm.get('description').value,
             type: this.questForm.get('type').value,
