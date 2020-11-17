@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ToastrService } from 'ngx-toastr';
 import { Coords } from 'src/app/shared/interfaces/coords.interface';
+import { Exit } from '../../interfaces/exit.interface';
 import { RoomExitService } from './manage-exits.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class ManageExitsComponent implements OnInit {
             exit: string,
             currentCoord: Coords,
             exitAreaId: number,
-            areaId: number
+            areaId: number,
+            obj: Exit
         }) {
         this.form = this.exitService.addExitForm;
     }
@@ -61,7 +63,15 @@ export class ManageExitsComponent implements OnInit {
         this.form.get('coordX').setValue(this.exitCoord.x);
         this.form.get('coordY').setValue(this.exitCoord.y);
         this.form.get('coordZ').setValue(this.exitCoord.z);
-
+        this.form.get('door').setValue(this.data.obj.door);
+        this.form.get('keyword').setValue(this.data.obj.keyword);
+        this.form.get('closed').setValue(this.data.obj.closed);
+        this.form.get('locked').setValue(this.data.obj.locked);
+        this.form.get('pickProof').setValue(this.data.obj.pickProof);
+        this.form.get('noPass').setValue(this.data.obj.noPass);
+        this.form.get('noScan').setValue(this.data.obj.noScan);
+        this.form.get('hidden').setValue(this.data.obj.hidden);
+        this.form.get('lockId').setValue(this.data.obj.lockId);
     }
 
 
@@ -72,6 +82,15 @@ export class ManageExitsComponent implements OnInit {
         this.dialogRef.close(this.exitService.returnExitObj());
 
     }
+
+    removeExit() {
+
+        this.toastr.success(`Exit removed successfully.`);
+
+        this.dialogRef.close({ exit: this.exitDirection });
+
+    }
+
 
 
 }

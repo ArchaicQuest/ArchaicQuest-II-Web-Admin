@@ -57,6 +57,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     showArmourSection = false;
     showBookSection = false;
     showContainerSection = false;
+    showKeySection = false;
     containerItems: Item[] = [];
     options: Item[] = [];
     filteredOptions: Observable<Item[]>;
@@ -124,7 +125,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             containerSize: [''],
             selectContainerKey: [''],
             isHiddenInRoom: [false],
-            isStuckInRoom: [false]
+            isStuckInRoom: [false],
+            keyId: ['']
         });
 
 
@@ -349,7 +351,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 containerSize: item.container ? item.container.size : 0,
                 selectContainerKey: item.container ? keyName != null ? keyName.name : '' : '',
                 isHiddenInRoom: item.isHiddenInRoom,
-                isStuckInRoom: item.stuck
+                isStuckInRoom: item.stuck,
+                keyId: item.keyId
 
             });
 
@@ -525,6 +528,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
         this.itemForm.get('containerSize').disable();
+        this.showKeySection = false;
 
         if (itemType === 0) {
             this.showArmourSection = true;
@@ -543,6 +547,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         } else if (itemType === 2) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
+        }
+        else if (itemType === 6) {
+            this.showKeySection = true;
+
         }
         setTimeout(() => {
             this.itemForm.updateValueAndValidity();

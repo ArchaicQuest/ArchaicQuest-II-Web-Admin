@@ -280,6 +280,29 @@
 
                     </div>
 
+                    <div *ngIf="showKeySection">
+                        <h2>Key Id</h2>
+                        <p>You will need to copy and paste this in the associated key field for doors and
+                            containers</p><br />
+                        <div class="section">
+                            <div class="row">
+                                <div class="col">
+
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Key ID</mat-label>
+                                        <input matInput type="text" placeholder="Key Id" formControlName="keyId"
+                                            readonly>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
 
 
                     <!-- todo: Redo this section, it's too limiting-->
