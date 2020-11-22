@@ -23,6 +23,9 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     constructor(private _store$: Store<SidenavState>, private _sharedService: SharedService, private _toast: ToastrService) { }
 
     ngOnInit() {
+
+        this.showNav = false; //this.authenticationService.currentUserValue != null;
+
         this.expanded$ = this._store$.pipe(select(selectSidenavVisibility));
     }
 

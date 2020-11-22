@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row">
+        <div class="col">
+
+            <div class="panel">
+
+                <form novalidate [formGroup]="loginForm" (submit)="login()">
+
+                    <h2>Login</h2>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Username</mat-label>
+                                <input matInput placeholder="Username" value="" required formControlName="username">
+                                <mat-error *ngIf="loginForm.get('username').hasError('required')">
+                                    Username is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Password</mat-label>
+                                <input matInput placeholder="Password" value="" required formControlName="password">
+                                <mat-error *ngIf="loginForm.get('password').hasError('required')">
+                                    Password is required.
+                                </mat-error>
+                                <mat-hint align="start"><strong>Can't remember your login? Speak to the MUD
+                                        Admin.</strong> </mat-hint>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">Log
+                        in</button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>

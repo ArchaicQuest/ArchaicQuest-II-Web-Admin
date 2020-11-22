@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -22,7 +22,8 @@ import { SideNavComponent } from './side-nav/side-nav.component';
 import { SidenavStoreModule } from './side-nav/state/side-nav.store.module';
 import { CodeEditorModule } from '@ngstack/code-editor';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { ErrorInterceptor } from './shared/services/error-interceptor.service';
+import { JwtInterceptor } from './shared/services/jwt-interceptor.service';
 
 @NgModule({
     declarations: [
@@ -55,7 +56,8 @@ import { ReactiveFormsModule } from '@angular/forms';
             positionClass: 'toast-bottom-center'
         })
     ],
-    providers: [Shared, SharedService],
+    providers: [Shared, SharedService
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
