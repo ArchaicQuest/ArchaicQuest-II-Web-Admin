@@ -1,6 +1,6 @@
 <mat-sidenav-container class="sidebar" [ngClass]="(expanded$ | async) ? 'sidebar--open' : 'sidebar--close'">
 
-    <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="showNav">
+    <mat-sidenav #sidenav mode="side" opened="true" class="sidebar__sidenav" *ngIf="(showNav$ | async)">
         <a class="sidebar__logo" [routerLink]="'/'">
             <img src="/assets/img/archaic-quest.png" alt="ArchaicQuest II" />
         </a>
@@ -186,7 +186,7 @@
 
         <div class="sideNav__footer">
 
-            <a href="#0" class="sideNav__footer-item sideNav__footer-item--link" (click)="logout($event)"
+            <a href="javascript:void(0)" class="sideNav__footer-item sideNav__footer-item--link" (click)="logout()"
                 matTooltip="Log out" matTooltipPosition="right">
                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                 <span *ngIf="expanded$ | async">Log out</span>

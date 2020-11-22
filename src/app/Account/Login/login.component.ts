@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         }
         this.authService.login(user.username, user.password).pipe(take(1)).subscribe((x) => {
             console.log("sucess", x)
-            this.router.navigateByUrl('/');
+            location.href = "/";
         }, () => {
             this.toast.error("Username or password is incorrect.");
         });

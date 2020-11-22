@@ -2,12 +2,13 @@ import { Component, OnInit, ViewChildren, QueryList, AfterViewInit, ChangeDetect
 import { Observable, pipe } from 'rxjs';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Store, select } from '@ngrx/store';
-import { SidenavState, selectSidenavVisibility } from './state/side-nav-state';
-import { ToggleSideNavSuccessAction } from './state/side-nav-actions';
+import { SidenavState, selectSidenavVisibility, selectSidenavIsAuth } from './state/side-nav-state';
+import { ToggleSideNavIsAuthSuccessAction, ToggleSideNavSuccessAction } from './state/side-nav-actions';
 import { SharedService } from '../shared/shared.service';
 import { take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { AuthenticationService } from '../account/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-side-nav',
@@ -16,28 +17,29 @@ import { AuthenticationService } from '../account/authentication.service';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SideNavComponent implements OnInit, AfterViewInit {
-    showNav = true;
+    showNav$: Observable<boolean>;
     expanded$: Observable<boolean>;
     @ViewChildren(MatExpansionPanel)
     viewPanels: QueryList<MatExpansionPanel>;
 
-    constructor(private _store$: Store<SidenavState>, private _sharedService: SharedService, private _toast: ToastrService, private authenticationService: AuthenticationService) { }
+    constructor(private _store$: Store<SidenavState>, private _sharedService: SharedService, private _toast: ToastrService, private authenticationService: AuthenticationService, private router: Router) { }
 
     ngOnInit() {
 
-        this.showNav = this.authenticationService.currentUserValue != null;
 
+        this.showNav$ = this._store$.pipe(select(selectSidenavIsAuth));
         this.expanded$ = this._store$.pipe(select(selectSidenavVisibility));
 
-        this.authenticationService.currentUser.subscribe((x) => {
-            console.log("nav", x)
-            if (x != null) {
-                this.showNav = true;
-            }
+        const user = localStorage.getItem("currentUser");
 
-        })
+        if (user != null) {
+            this._store$.dispatch(new ToggleSideNavIsAuthSuccessAction(true))
+        }
+
 
     }
+
+
 
     showSidenavIfAuth() {
         //show nav if logged in     
@@ -61,10 +63,18 @@ export class SideNavComponent implements OnInit, AfterViewInit {
         })
     }
 
+    ngAfterViewChecked(): void {
+        //Called after every check of the component's view. Applies to components only.
+        //Add 'implements AfterViewChecked' to the class.
+
+
+    }
+
     ngAfterViewInit() {
         this.expanded$.subscribe(e => {
             this.toggleSideNavPanelState(e);
         });
+
     }
 
     toggleSidenav(forceOpen?: boolean) {
@@ -73,8 +83,8 @@ export class SideNavComponent implements OnInit, AfterViewInit {
         });
     }
 
-    logout(event) {
-        // log out
+    logout() {
+        this.authenticationService.logout();
     }
 
 }
