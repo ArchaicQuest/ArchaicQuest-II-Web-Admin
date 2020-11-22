@@ -7,6 +7,7 @@ import { ToggleSideNavSuccessAction } from './state/side-nav-actions';
 import { SharedService } from '../shared/shared.service';
 import { take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { AuthenticationService } from '../account/authentication.service';
 
 @Component({
     selector: 'app-side-nav',
@@ -20,17 +21,26 @@ export class SideNavComponent implements OnInit, AfterViewInit {
     @ViewChildren(MatExpansionPanel)
     viewPanels: QueryList<MatExpansionPanel>;
 
-    constructor(private _store$: Store<SidenavState>, private _sharedService: SharedService, private _toast: ToastrService) { }
+    constructor(private _store$: Store<SidenavState>, private _sharedService: SharedService, private _toast: ToastrService, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
 
-        this.showNav = false; //this.authenticationService.currentUserValue != null;
+        this.showNav = this.authenticationService.currentUserValue != null;
 
         this.expanded$ = this._store$.pipe(select(selectSidenavVisibility));
+
+        this.authenticationService.currentUser.subscribe((x) => {
+            console.log("nav", x)
+            if (x != null) {
+                this.showNav = true;
+            }
+
+        })
+
     }
 
     showSidenavIfAuth() {
-        //show nav if logged in
+        //show nav if logged in     
     }
 
     clearRoomCache() {

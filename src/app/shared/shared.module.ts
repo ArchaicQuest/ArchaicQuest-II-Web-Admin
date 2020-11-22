@@ -12,10 +12,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
 import { MobSelectorComponent } from '../mobs/mob-selector/mob-selector.component';
-import { AuthenticationService } from '../Account/authentication.service';
+import { AuthenticationService } from '../account/authentication.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './services/error-interceptor.service';
 import { JwtInterceptor } from './services/jwt-interceptor.service';
+import { AuthGuard } from '../account/auth-guard.service';
 
 @NgModule({
     declarations: [HeaderComponent, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MobSelectorComponent],
@@ -25,7 +26,8 @@ import { JwtInterceptor } from './services/jwt-interceptor.service';
     exports: [CommonModule, HeaderComponent, LineTruncationLibModule, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MobSelectorComponent, MatFormFieldModule,
         MatInputModule, ReactiveFormsModule,
         MatAutocompleteModule],
-    providers: [{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, AuthenticationService]
+    providers: [AuthGuard,
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, AuthenticationService]
 })
 export class SharedModule { }

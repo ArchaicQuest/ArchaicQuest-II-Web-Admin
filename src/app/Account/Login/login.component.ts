@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, NgZone } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, FormArray, RequiredValidator, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
 
     constructor(
-        private service: LoginService,
+        private router: Router,
         private formBuilder: FormBuilder,
         private toast: ToastrService,
         private authService: AuthenticationService
@@ -40,7 +41,8 @@ export class LoginComponent implements OnInit {
             password: this.loginForm.get('password').value
         }
         this.authService.login(user.username, user.password).pipe(take(1)).subscribe((x) => {
-            console.log("auth", x);
+            console.log("sucess", x)
+            this.router.navigateByUrl('/');
         }, () => {
             this.toast.error("Username or password is incorrect.");
         });

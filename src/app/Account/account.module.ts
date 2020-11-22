@@ -5,8 +5,8 @@ import { SharedModule } from '../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { LoginService } from './Login/login.service';
-import { LoginComponent } from './Login/login.component';
+import { LoginService } from './login/login.service';
+import { LoginComponent } from './login/login.component';
 import { accountRoutes } from './account.routes';
 
 @NgModule({
