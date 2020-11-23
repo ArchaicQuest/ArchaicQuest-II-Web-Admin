@@ -56,7 +56,8 @@ import { JwtInterceptor } from './shared/services/jwt-interceptor.service';
             positionClass: 'toast-bottom-center'
         })
     ],
-    providers: [Shared, SharedService
+    providers: [Shared, SharedService, { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]
 })
