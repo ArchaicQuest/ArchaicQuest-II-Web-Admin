@@ -5,7 +5,6 @@ import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs/operators';
 import { AuthenticationService } from '../authentication.service';
 import { User } from '../interface/user.interface';
-import { LoginService } from './login.service';
 
 
 @Component({

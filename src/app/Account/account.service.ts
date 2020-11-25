@@ -1,26 +1,18 @@
-import {
-    FormBuilder
-} from '@angular/forms';
+
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { ToastrService } from 'ngx-toastr';
-import { User } from '../interface/user.interface';
+import { User } from './interface/user.interface';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
     providedIn: 'root'
 })
-/*
-  todo
-  ----
-  money
-  inventory / Worn / wielded items
-  active affects
-  emotes
-*/
-export class LoginService {
+
+export class AccountService {
     private host = `${environment.hostAPI}`;
-    private authUrl = `${this.host}Account/authenticate`;
+    private getUsersUrl = `${this.host}Account/getusers`;
 
 
     private headers = new HttpHeaders({
@@ -30,7 +22,13 @@ export class LoginService {
     constructor(private http: HttpClient) { }
 
 
+    getUsers(): Observable<User[]> {
+        return this.http.get<User[]>(this.getUsersUrl);
+    }
 
+    deleteUser(id: number): Observable<User[]> {
+        return this.http.get<User[]>(this.getUsersUrl);
+    }
 
 
 }

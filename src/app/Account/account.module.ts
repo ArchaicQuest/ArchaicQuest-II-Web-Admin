@@ -5,9 +5,11 @@ import { SharedModule } from '../shared/shared.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { LoginService } from './login/login.service';
 import { LoginComponent } from './login/login.component';
 import { accountRoutes } from './account.routes';
+import { ManageAccountsComponent } from './manage/manage.component';
+import { AccountService } from './account.service';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
     imports: [
@@ -17,12 +19,14 @@ import { accountRoutes } from './account.routes';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
+        MatTableModule
     ],
     providers: [
-        LoginService,
+        AccountService,
     ],
     declarations: [
-        LoginComponent
+        LoginComponent,
+        ManageAccountsComponent
     ],
 })
 export class LoginModule { }

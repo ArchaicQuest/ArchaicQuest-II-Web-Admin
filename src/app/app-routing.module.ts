@@ -40,7 +40,7 @@ const routes: Routes = [
         loadChildren: () => import('./quests/quest.module').then(m => m.QuestModule)
     },
     {
-        path: 'login',
+        path: 'account',
         loadChildren: () => import('./account/account.module').then(m => m.LoginModule)
     }
 ];
