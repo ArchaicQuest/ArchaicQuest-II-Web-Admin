@@ -38,30 +38,23 @@ export class ManageAccountsComponent implements OnInit {
     }
 
     addUser() {
-        // const settings: Settings = {
-        //     id: 1,
-        //     doubleXp: this.settingsForm.get('doubleXp').value,
-        //     doubleGains: this.settingsForm.get('doubleGains').value,
-        //     doubleQuestPoints: this.settingsForm.get('doubleQp').value,
-        //     pkAllowed: this.settingsForm.get('pk').value,
-        //     playerThievingAllowed: this.settingsForm.get('pt').value,
-        //     startingRoom: this.settingsForm.get('startingRoom').value,
-        //     defaultRecallRoom: this.settingsForm.get('recallRoom').value,
-        //     maxIdleTime: 300000,
-        //     maxNpcCorpseTime: 5,
-        //     maxPcCorpseTime: 10,
-        //     minLevelCanShout: 3,
-        //     playerTick: 500,
-        //     updateTick: 1000
 
-        // };
-
-        // this.service.updateSettings(settings).pipe(take(1)).subscribe(response => {
-        //     this.toast.success(`Settings Updated Successfully.`);
-        // },
-        //     err => console.log(err));
+        this.service.addUser(this.addAccountForm.get('username').value, this.addAccountForm.get('password').value).pipe(take(1)).subscribe(response => {
+            this.toast.success(`User Updated Successfully.`);
+        },
+            err => this.toast.error(err));
 
     }
+
+    deleteUser(id: number) {
+
+        this.service.deleteUser(id).pipe(take(1)).subscribe(response => {
+            this.toast.success(`User deleted successfully.`);
+        },
+            err => this.toast.error(err));
+
+    }
+
 
 
 }

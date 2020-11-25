@@ -18,7 +18,7 @@
                     <div>
                         <mat-form-field appearance="outline" class="form-control">
                             <mat-label>Password</mat-label>
-                            <input matInput placeholder="Password" formControlName="password">
+                            <input matInput placeholder="Password" formControlName="password" type="password">
                         </mat-form-field>
                     </div>
                     <!-- 
@@ -67,7 +67,7 @@
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element"> <button style="margin-right: 10px;" mat-raised-button
                                 color="primary" type="submit">Edit</button> <button mat-raised-button color="secondary"
-                                type="submit">Delete</button> </td>
+                                type="button" (click)="deleteUser(element.id)">Delete</button> </td>
                     </ng-container>
 
                     <!-- role Column

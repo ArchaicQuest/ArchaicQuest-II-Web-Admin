@@ -26,8 +26,12 @@ export class AccountService {
         return this.http.get<User[]>(this.getUsersUrl);
     }
 
-    deleteUser(id: number): Observable<User[]> {
-        return this.http.get<User[]>(this.getUsersUrl);
+    deleteUser(id: number) {
+        return this.http.post<User>(`${environment.hostAPI}Account/deleteuser`, { id });
+    }
+
+    addUser(username: string, password: string) {
+        return this.http.post<User>(`${environment.hostAPI}Account/adduser`, { username, password, role: '' });
     }
 
 

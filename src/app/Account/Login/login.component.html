@@ -22,7 +22,8 @@
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
                                 <mat-label>Password</mat-label>
-                                <input matInput placeholder="Password" value="" required formControlName="password">
+                                <input matInput placeholder="Password" value="" required formControlName="password"
+                                    type="password">
                                 <mat-error *ngIf="loginForm.get('password').hasError('required')">
                                     Password is required.
                                 </mat-error>
