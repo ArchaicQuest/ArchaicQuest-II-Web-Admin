@@ -7,12 +7,11 @@
   }
   
  
-  
-  td.mat-column-star {
-    width: 20px;
+ 
+  td, th {
+    width: 20%!important;
     padding-right: 8px;
-  }
-
+}
   .panel {
       overflow-y: auto;
   }
