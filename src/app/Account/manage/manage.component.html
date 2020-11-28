@@ -49,52 +49,53 @@
             <div class="panel">
                 <h2>Users</h2>
 
-                <table mat-table [dataSource]="dataSource">
+                <div class="table-wrapper">
+                    <table mat-table [dataSource]="dataSource">
 
 
-                    <!-- username Column -->
-                    <ng-container matColumnDef="username">
-                        <th mat-header-cell *matHeaderCellDef> Username </th>
-                        <td mat-cell *matCellDef="let element"> {{element.username}} </td>
-                    </ng-container>
+                        <!-- username Column -->
+                        <ng-container matColumnDef="username">
+                            <th mat-header-cell *matHeaderCellDef> Username </th>
+                            <td mat-cell *matCellDef="let element"> {{element.username}} </td>
+                        </ng-container>
 
 
-                    <!-- role Column -->
-                    <ng-container matColumnDef="role">
-                        <th mat-header-cell *matHeaderCellDef> Role </th>
-                        <td mat-cell *matCellDef="let element"> {{element.role}} </td>
-                    </ng-container>
+                        <!-- role Column -->
+                        <ng-container matColumnDef="role">
+                            <th mat-header-cell *matHeaderCellDef> Role </th>
+                            <td mat-cell *matCellDef="let element"> {{element.role}} </td>
+                        </ng-container>
 
-                    <ng-container matColumnDef="contributions">
-                        <th mat-header-cell *matHeaderCellDef>Contributions</th>
-                        <td mat-cell *matCellDef="let element"> {{element.contributions}} </td>
-                    </ng-container>
-
-
-                    <ng-container matColumnDef="lastActive">
-                        <th mat-header-cell *matHeaderCellDef> Last Active </th>
-                        <td mat-cell *matCellDef="let element"> {{element.lastActive | date: 'dd/MM/yyyy'}} </td>
-                    </ng-container>
+                        <ng-container matColumnDef="contributions">
+                            <th mat-header-cell *matHeaderCellDef>Contributions</th>
+                            <td mat-cell *matCellDef="let element"> {{element.contributions}} </td>
+                        </ng-container>
 
 
-                    <ng-container matColumnDef="actions">
-                        <th mat-header-cell *matHeaderCellDef> Actions </th>
-                        <td mat-cell *matCellDef="let element"> <button style="margin-right: 10px;" mat-raised-button
-                                color="primary" type="button" (click)="editUser(element)"
-                                *ngIf="element.canEdit">Edit</button>
-
-                            <button *ngIf="element.id != 1 && element.canDelete" mat-raised-button color="secondary"
-                                type="button" (click)="deleteUser(element.id)">Delete</button> </td>
-                    </ng-container>
+                        <ng-container matColumnDef="lastActive">
+                            <th mat-header-cell *matHeaderCellDef> Last Active </th>
+                            <td mat-cell *matCellDef="let element"> {{element.lastActive | date: 'dd/MM/yyyy'}} </td>
+                        </ng-container>
 
 
+                        <ng-container matColumnDef="actions">
+                            <th mat-header-cell *matHeaderCellDef> Actions </th>
+                            <td mat-cell *matCellDef="let element"> <button style="margin-right: 10px;"
+                                    mat-raised-button color="primary" type="button" (click)="editUser(element)"
+                                    *ngIf="element.canEdit">Edit</button>
+
+                                <button *ngIf="element.id != 1 && element.canDelete" mat-raised-button color="secondary"
+                                    type="button" (click)="deleteUser(element.id)">Delete</button> </td>
+                        </ng-container>
 
 
 
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-                </table>
 
+
+                        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                    </table>
+                </div>
 
             </div>
         </div>
