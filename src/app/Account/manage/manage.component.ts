@@ -5,6 +5,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../account.service';
 import { User } from '../interface/user.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { EditUserComponent } from './edit/edit-user-modal.component';
 
 @Component({
     templateUrl: './manage.component.html',
@@ -14,10 +16,20 @@ export class ManageAccountsComponent implements OnInit {
 
     public addAccountForm: FormGroup;
     public users: User[];
-    public displayedColumns: string[] = ['id', 'username', 'actions'];
+    public displayedColumns: string[] = ['username', 'role', 'lastActive', 'contributions', 'actions'];
     public dataSource: User[];
 
-    constructor(private formBuilder: FormBuilder, private toast: ToastrService, private service: AccountService) {
+    constructor(private formBuilder: FormBuilder, private toast: ToastrService, private service: AccountService, private dialog: MatDialog) {
+    }
+
+    editUser(user: User) {
+        this.dialog.open(EditUserComponent, {
+            data: {
+                username: user.username,
+                id: user.id,
+                role: user.role
+            }
+        });
     }
 
     ngOnInit() {

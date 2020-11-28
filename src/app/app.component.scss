@@ -37,3 +37,11 @@ body {
     background-color: #cce5ff;
     border-color: #b8daff;
 }
+
+input[type="text"]:disabled {
+    color:#ccc!important;
+
+    *:hover {
+        cursor: not-allowed;
+    }
+}

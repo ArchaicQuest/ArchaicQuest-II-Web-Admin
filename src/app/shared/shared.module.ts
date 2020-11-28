@@ -17,6 +17,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ErrorInterceptor } from './services/error-interceptor.service';
 import { JwtInterceptor } from './services/jwt-interceptor.service';
 import { AuthGuard } from '../account/auth-guard.service';
+import { Shared } from './shared';
 
 @NgModule({
     declarations: [HeaderComponent, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MobSelectorComponent],
@@ -26,7 +27,7 @@ import { AuthGuard } from '../account/auth-guard.service';
     exports: [CommonModule, HeaderComponent, LineTruncationLibModule, ItemTypePipe, EffectLocationPipe, ItemSelectorComponent, MobSelectorComponent, MatFormFieldModule,
         MatInputModule, ReactiveFormsModule,
         MatAutocompleteModule],
-    providers: [AuthGuard,
+    providers: [AuthGuard, Shared,
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true }, AuthenticationService]
 })

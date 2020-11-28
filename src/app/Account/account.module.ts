@@ -10,6 +10,9 @@ import { accountRoutes } from './account.routes';
 import { ManageAccountsComponent } from './manage/manage.component';
 import { AccountService } from './account.service';
 import { MatTableModule } from '@angular/material/table';
+import { EditUserComponent } from './manage/edit/edit-user-modal.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
     imports: [
@@ -19,13 +22,16 @@ import { MatTableModule } from '@angular/material/table';
         MatFormFieldModule,
         MatInputModule,
         MatButtonModule,
-        MatTableModule
+        MatTableModule,
+        MatDialogModule,
+        MatSelectModule
     ],
     providers: [
         AccountService,
     ],
     declarations: [
         LoginComponent,
+        EditUserComponent,
         ManageAccountsComponent
     ],
 })

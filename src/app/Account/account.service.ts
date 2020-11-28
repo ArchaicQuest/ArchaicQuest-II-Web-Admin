@@ -27,12 +27,16 @@ export class AccountService {
     }
 
     deleteUser(id: number) {
-        return this.http.post<User>(`${environment.hostAPI}Account/deleteuser`, { id });
+        return this.http.post<User>(`${environment.hostAPI}Account/deleteuser`, id);
     }
 
     addUser(username: string, password: string) {
         return this.http.post<User>(`${environment.hostAPI}Account/adduser`, { username, password, role: '' });
     }
 
+    editUser(id: number, username: string, password: string, role: string) {
+        return this.http.post<User>(`${environment.hostAPI}Account/edituser`, { id, username, password, role });
 
+
+    }
 }
