@@ -13,6 +13,8 @@ import { MatTableModule } from '@angular/material/table';
 import { EditUserComponent } from './manage/edit/edit-user-modal.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { DBTypePipe } from './pipe/db-type.pipe';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
     imports: [
@@ -24,15 +26,17 @@ import { MatSelectModule } from '@angular/material/select';
         MatButtonModule,
         MatTableModule,
         MatDialogModule,
-        MatSelectModule
+        MatSelectModule,
+        MatPaginatorModule
     ],
     providers: [
-        AccountService,
+        AccountService
     ],
     declarations: [
         LoginComponent,
         EditUserComponent,
-        ManageAccountsComponent
+        ManageAccountsComponent,
+        DBTypePipe
     ],
 })
 export class LoginModule { }

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { User } from './interface/user.interface';
 import { Observable } from 'rxjs';
+import { Log } from './interface/log.interface';
 
 
 @Injectable({
@@ -37,6 +38,9 @@ export class AccountService {
     editUser(id: number, username: string, password: string, role: string) {
         return this.http.post<User>(`${environment.hostAPI}Account/edituser`, { id, username, password, role });
 
+    }
 
+    getLogs(): Observable<Log[]> {
+        return this.http.get<Log[]>(`${environment.hostAPI}Account/logs`);
     }
 }

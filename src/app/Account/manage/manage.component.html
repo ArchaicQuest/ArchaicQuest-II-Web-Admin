@@ -95,6 +95,52 @@
                         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
+
+                    <mat-paginator [length]="users?.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+                        showFirstLastButtons>
+                    </mat-paginator>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+
+            <div class="panel">
+                <h2>Logs</h2>
+
+                <div class="table-wrapper">
+                    <table mat-table [dataSource]="logData">
+
+
+                        <!-- username Column -->
+                        <ng-container matColumnDef="username">
+                            <th mat-header-cell *matHeaderCellDef> Username </th>
+                            <td mat-cell *matCellDef="let element"> {{element.userName}} </td>
+                        </ng-container>
+
+
+                        <!-- role Column -->
+                        <ng-container matColumnDef="details">
+                            <th mat-header-cell *matHeaderCellDef> Details </th>
+                            <td mat-cell *matCellDef="let element">Modified: {{element.type | DBType}}
+                                {{element.detail}} </td>
+                        </ng-container>
+
+                        <ng-container matColumnDef="created">
+                            <th mat-header-cell *matHeaderCellDef>Date</th>
+                            <td mat-cell *matCellDef="let element"> {{element.created | date: 'dd/MM/yyyy'}} </td>
+                        </ng-container>
+
+
+                        <tr mat-header-row *matHeaderRowDef="logCols"></tr>
+                        <tr mat-row *matRowDef="let row; columns: logCols;"></tr>
+                    </table>
+                    <mat-paginator [length]="logs?.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
+                        showFirstLastButtons>
+                    </mat-paginator>
                 </div>
 
             </div>

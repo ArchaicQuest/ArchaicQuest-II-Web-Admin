@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { take } from 'rxjs/operators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -7,6 +7,9 @@ import { AccountService } from '../account.service';
 import { User } from '../interface/user.interface';
 import { MatDialog } from '@angular/material/dialog';
 import { EditUserComponent } from './edit/edit-user-modal.component';
+import { Log } from '../interface/log.interface';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     templateUrl: './manage.component.html',
@@ -17,7 +20,13 @@ export class ManageAccountsComponent implements OnInit {
     public addAccountForm: FormGroup;
     public users: User[];
     public displayedColumns: string[] = ['username', 'role', 'lastActive', 'contributions', 'actions'];
-    public dataSource: User[];
+    public dataSource: MatTableDataSource<User>;
+
+    public logs: Log[];
+    public logCols: string[] = ['username', 'details', 'created'];
+    public logData: MatTableDataSource<Log>;
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
 
     constructor(private formBuilder: FormBuilder, private toast: ToastrService, private service: AccountService, private dialog: MatDialog) {
     }
@@ -31,6 +40,17 @@ export class ManageAccountsComponent implements OnInit {
             }
         });
     }
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.logData.paginator = this.paginator;
+        });
+
+        setTimeout(() => {
+            this.dataSource.paginator = this.paginator;
+        });
+
+
+    }
 
     ngOnInit() {
         this.addAccountForm = this.formBuilder.group({
@@ -42,9 +62,13 @@ export class ManageAccountsComponent implements OnInit {
 
         this.service.getUsers().pipe(take(1)).subscribe((users) => {
             this.users = users;
-            this.dataSource = users;
+            this.dataSource = new MatTableDataSource(users);
         })
 
+        this.service.getLogs().pipe(take(1)).subscribe((log) => {
+            this.logs = log;
+            this.logData = new MatTableDataSource(log);
+        })
 
 
     }
