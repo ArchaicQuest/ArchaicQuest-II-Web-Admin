@@ -27,7 +27,8 @@ export class ManageAccountsComponent implements OnInit {
     public logCols: string[] = ['username', 'details', 'created'];
     public logData: MatTableDataSource<Log>;
 
-    @ViewChildren(MatPaginator) paginator: QueryList<MatPaginator>;
+    @ViewChild('paginator') paginator: MatPaginator;
+    @ViewChild('paginator2') paginator2: MatPaginator;
 
     constructor(private formBuilder: FormBuilder, private toast: ToastrService, private service: AccountService, private dialog: MatDialog, private helpers: Shared) {
     }
@@ -43,18 +44,13 @@ export class ManageAccountsComponent implements OnInit {
     }
     ngAfterViewInit() {
 
-
-
-        this.paginator.forEach(paginator => {
-            console.log(paginator)
-        })
         setTimeout(() => {
-            this.dataSource.paginator = this.paginator[0];
+            this.dataSource.paginator = this.paginator;
         });
 
 
         setTimeout(() => {
-            this.logData.paginator = this.paginator[1];
+            this.logData.paginator = this.paginator2;
         });
 
 

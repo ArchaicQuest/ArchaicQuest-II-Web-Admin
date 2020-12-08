@@ -101,8 +101,8 @@
                         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                     </table>
 
-                    <mat-paginator [length]="users?.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
-                        showFirstLastButtons>
+                    <mat-paginator #paginator [length]="users?.length" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
                     </mat-paginator>
                 </div>
 
@@ -143,8 +143,8 @@
                         <tr mat-header-row *matHeaderRowDef="logCols"></tr>
                         <tr mat-row *matRowDef="let row; columns: logCols;"></tr>
                     </table>
-                    <mat-paginator [length]="logs?.length" [pageSize]="5" [pageSizeOptions]="[5, 10, 25, 100]"
-                        showFirstLastButtons>
+                    <mat-paginator #paginator2 [length]="logs?.length" [pageSize]="5"
+                        [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons>
                     </mat-paginator>
                 </div>
 
