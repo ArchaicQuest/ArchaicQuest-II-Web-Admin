@@ -42,6 +42,6 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
         this._store$.dispatch(new ToggleSideNavIsAuthSuccessAction(false));
-        location.href = "/login";
+        location.href = "account/login";
     }
 }

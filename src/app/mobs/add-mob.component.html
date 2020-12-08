@@ -143,11 +143,7 @@
                                 <div class="col">
                                     <h2>Attributes</h2>
                                 </div>
-                                <div class="col">
-                                    <button mat-raised-button color="secondary" type="button" (click)="generateStats()"
-                                        class="float-right">Randomise
-                                        Attributes</button>
-                                </div>
+
                             </div>
                             <div class="row">
                                 <div class="col">
@@ -243,7 +239,7 @@
                                             required formControlName="hitPoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('hitPoints').hasError('min') || addMobForm.get('stats').get('hitPoints').hasError('max')">
-                                            Hit points must be between 1 and 99.
+                                            Hit points must be between 1 and 99999.
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -255,7 +251,7 @@
                                             required formControlName="manaPoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('manaPoints').hasError('min') || addMobForm.get('stats').get('manaPoints').hasError('max')">
-                                            Mana Points must be between 1 and 99.
+                                            Mana Points must be between 1 and 99999.
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -267,7 +263,7 @@
                                             required formControlName="movePoints">
                                         <mat-error
                                             *ngIf="addMobForm.get('stats').get('movePoints').hasError('min') ||addMobForm.get('stats').get('movePoints').hasError('max')">
-                                            Move Points must be between 1 and 99.
+                                            Move Points must be between 1 and 99999.
                                         </mat-error>
                                     </mat-form-field>
                                 </div>
@@ -322,9 +318,9 @@
                                     <input type="text" matInput placeholder="emote" formControlName="emote" />
 
                                 </mat-form-field>
-                                <a class="btn btn-danger btn-sm" (click)="removeLink(i)">Remove</a>
+                                <a class="btn btn-danger btn-sm  " (click)="removeLink(i)">Remove</a>
                             </div>
-                            <a (click)="this.addEmote()">Add another emote</a>
+                            <a mat-raised-button (click)="this.addEmote()" class="add-emote-btn">Add another emote</a>
 
                         </div>
                     </div>

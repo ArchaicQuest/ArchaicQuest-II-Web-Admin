@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { take } from 'rxjs/operators';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../account.service';
@@ -10,6 +10,7 @@ import { EditUserComponent } from './edit/edit-user-modal.component';
 import { Log } from '../interface/log.interface';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Shared } from 'src/app/shared/shared';
 
 @Component({
     templateUrl: './manage.component.html',
@@ -26,9 +27,9 @@ export class ManageAccountsComponent implements OnInit {
     public logCols: string[] = ['username', 'details', 'created'];
     public logData: MatTableDataSource<Log>;
 
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChildren(MatPaginator) paginator: QueryList<MatPaginator>;
 
-    constructor(private formBuilder: FormBuilder, private toast: ToastrService, private service: AccountService, private dialog: MatDialog) {
+    constructor(private formBuilder: FormBuilder, private toast: ToastrService, private service: AccountService, private dialog: MatDialog, private helpers: Shared) {
     }
 
     editUser(user: User) {
@@ -41,12 +42,19 @@ export class ManageAccountsComponent implements OnInit {
         });
     }
     ngAfterViewInit() {
+
+
+
+        this.paginator.forEach(paginator => {
+            console.log(paginator)
+        })
         setTimeout(() => {
-            this.logData.paginator = this.paginator;
+            this.dataSource.paginator = this.paginator[0];
         });
 
+
         setTimeout(() => {
-            this.dataSource.paginator = this.paginator;
+            this.logData.paginator = this.paginator[1];
         });
 
 
@@ -54,9 +62,9 @@ export class ManageAccountsComponent implements OnInit {
 
     ngOnInit() {
         this.addAccountForm = this.formBuilder.group({
-            username: [''],
-            password: [''],
-            role: [''],
+            username: ['', Validators.required],
+            password: ['', Validators.required],
+            role: ['', Validators.required],
 
         });
 
@@ -75,7 +83,7 @@ export class ManageAccountsComponent implements OnInit {
 
     addUser() {
 
-        this.service.addUser(this.addAccountForm.get('username').value, this.addAccountForm.get('password').value).pipe(take(1)).subscribe(response => {
+        this.service.addUser(this.addAccountForm.get('username').value, this.addAccountForm.get('password').value, this.addAccountForm.get('role').value).pipe(take(1)).subscribe(response => {
             this.toast.success(`User Updated Successfully.`);
         },
             err => this.toast.error(err));
@@ -89,6 +97,10 @@ export class ManageAccountsComponent implements OnInit {
         },
             err => this.toast.error(err));
 
+    }
+
+    isAdmin() {
+        return this.helpers.isAdmin();
     }
 
 
