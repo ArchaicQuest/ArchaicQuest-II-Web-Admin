@@ -1,0 +1,17 @@
+
+.table-wrapper {
+     
+    min-width: 550px;
+    max-width: 100%;
+    overflow: auto;
+  }
+  
+ 
+ 
+  td, th {
+    width: 20%!important;
+    padding-right: 8px;
+}
+  .panel {
+      overflow-y: auto;
+  }

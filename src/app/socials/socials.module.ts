@@ -12,6 +12,7 @@ import { SocialsComponent } from './socials.component';
 import { SocialsRoutes } from './socials.routes';
 import { ViewSocialsComponent } from './view-socials/view-socias.component';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -19,6 +20,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     imports: [
         SharedModule,
         RouterModule.forChild(SocialsRoutes),
+        ReactiveFormsModule,
         MatMenuModule,
         MatFormFieldModule,
         MatInputModule,

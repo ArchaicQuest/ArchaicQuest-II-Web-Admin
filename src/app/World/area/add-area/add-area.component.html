@@ -47,7 +47,7 @@
                 <h3>Upload an area.
                 </h3>
 
-                <form novalidate>
+                <form novalidate [formGroup]="addRoomForm" (ngSubmit)="uploadToServer()">
                     <div class="row">
                         <div class="col">
                             <button mat-raised-button color="primary" (click)="uploadFile.click()" type="button">
@@ -61,10 +61,10 @@
 
                     <input style="display: none" #uploadFile id="uploadFile" type="file" (change)="fileChange($event)"
                         placeholder="Upload area json file" accept=".json">
-
+                    <button mat-raised-button color="primary" type="button">Upload
+                        Area</button>
                 </form>
-                <button mat-raised-button color="primary" type="button" (click)="uploadToServer()">Upload
-                    Area</button>
+
             </div>
         </div>
     </div>

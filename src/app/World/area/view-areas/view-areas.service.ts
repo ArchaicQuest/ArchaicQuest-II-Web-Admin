@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
     providedIn: 'root'
 })
+
 export class ViewAreasService {
     private host = environment.hostAPI;
     private getAreasUrl = `${this.host}World/Area`;

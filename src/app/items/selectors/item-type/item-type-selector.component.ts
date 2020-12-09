@@ -52,7 +52,7 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
     itemTypes: ItemType[];
     @Input() currentValue = null;
 
-    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef, ) {
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef,) {
         super();
 
         this.formGroup = this.fb.group({
@@ -87,14 +87,8 @@ export class ItemTypeSelectorComponent extends BaseSelectorComponent
 
     ngAfterViewInit(): void {
         this.control.setValue(this.currentValue, { emitEvent: true });
-
         this.control.updateValueAndValidity();
-
-
     }
-
-
-
 
     ngOnDestroy(): void {
         this.componentActive = false;

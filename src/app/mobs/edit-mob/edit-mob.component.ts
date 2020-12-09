@@ -244,6 +244,52 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
     }
 
+    generateStats() {
+
+        const mobLevel = this.addMobForm.get('level').value || 2;
+        const mobCon = this.addMobForm.get('attributes').get('constitution').value || 0;
+        const HP = Math.floor((mobLevel * mobCon) / 2);
+        const mobDex = this.addMobForm.get('attributes').get('dexterity').value || 0;
+        const Move = Math.floor((mobLevel * mobDex) / 2 * 2);
+        const mobInt = this.addMobForm.get('attributes').get('intelligence').value || 0;
+        const Mana = Math.floor((mobLevel * mobInt) / 2 * 2);
+        this.addMobForm.get('stats').get('hitPoints').setValue(HP)
+        this.addMobForm.get('stats').get('manaPoints').setValue(Mana)
+        this.addMobForm.get('stats').get('movePoints').setValue(Move)
+    }
+    getRaceAttributes(raceName: string) {
+        return this.races.find((x) => x.name === raceName);
+    }
+
+    generateAttributes(raceName: string) {
+
+        const stats = this.getRaceAttributes(raceName) as any;
+        this.addMobForm
+            .get('attributes')
+            .get('strength')
+            .setValue(stats.attributes.attribute.Strength);
+        this.addMobForm
+            .get('attributes')
+            .get('dexterity')
+            .setValue(stats.attributes.attribute.Dexterity);
+        this.addMobForm
+            .get('attributes')
+            .get('constitution')
+            .setValue(stats.attributes.attribute.Constitution);
+        this.addMobForm
+            .get('attributes')
+            .get('wisdom')
+            .setValue(stats.attributes.attribute.Wisdom);
+        this.addMobForm
+            .get('attributes')
+            .get('intelligence')
+            .setValue(stats.attributes.attribute.Intelligence);
+        this.addMobForm
+            .get('attributes')
+            .get('charisma')
+            .setValue(stats.attributes.attribute.Charisma);
+    }
+
     triggerDescriptionResize() {
         // Wait for changes to be applied, then trigger textarea resize.
         this.ngZone.onStable
@@ -257,6 +303,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
     selectRace(data: MatSelectChange) {
         console.log('race', data.value);
+        this.generateAttributes(data.value)
     }
 
     selectClass(data: MatSelectChange) {
@@ -269,36 +316,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     selectStatus(data: MatSelectChange) {
         console.log('status', data.value);
     }
-    generateStats() {
-        this.addMobForm
-            .get('attributes')
-            .get('strength')
-            .setValue(this.mobService.generateRandomStat());
-        this.addMobForm
-            .get('attributes')
-            .get('dexterity')
-            .setValue(this.mobService.generateRandomStat());
-        this.addMobForm
-            .get('attributes')
-            .get('constitution')
-            .setValue(this.mobService.generateRandomStat());
-        this.addMobForm
-            .get('attributes')
-            .get('wisdom')
-            .setValue(this.mobService.generateRandomStat());
-        this.addMobForm
-            .get('attributes')
-            .get('intelligence')
-            .setValue(this.mobService.generateRandomStat());
-        this.addMobForm
-            .get('attributes')
-            .get('charisma')
-            .setValue(this.mobService.generateRandomStat());
 
-        setTimeout(() => {
-            this.addMobForm.updateValueAndValidity();
-        });
-    }
 
     get getEmotesControl(): FormArray {
         return this.addMobForm.get('emotes') as FormArray;

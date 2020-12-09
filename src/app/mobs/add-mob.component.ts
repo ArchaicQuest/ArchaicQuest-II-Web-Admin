@@ -135,7 +135,8 @@ export class AddMobComponent implements OnInit {
     }
 
     selectRace(data: MatSelectChange) {
-        console.log('race', data.value);
+        console.log('race', data);
+        this.generateAttributes(data.value)
     }
 
     selectClass(data: MatSelectChange) {
@@ -148,31 +149,47 @@ export class AddMobComponent implements OnInit {
     selectStatus(data: MatSelectChange) {
         console.log('status', data.value);
     }
-    generateStats() {
+    generateAttributes(raceName: string) {
+
+        const stats = this.getRaceAttributes(raceName) as any;
         this.addMobForm
             .get('attributes')
             .get('strength')
-            .setValue(this.mobService.generateRandomStat());
+            .setValue(stats.attributes.attribute.Strength);
         this.addMobForm
             .get('attributes')
             .get('dexterity')
-            .setValue(this.mobService.generateRandomStat());
+            .setValue(stats.attributes.attribute.Dexterity);
         this.addMobForm
             .get('attributes')
             .get('constitution')
-            .setValue(this.mobService.generateRandomStat());
+            .setValue(stats.attributes.attribute.Constitution);
         this.addMobForm
             .get('attributes')
             .get('wisdom')
-            .setValue(this.mobService.generateRandomStat());
+            .setValue(stats.attributes.attribute.Wisdom);
         this.addMobForm
             .get('attributes')
             .get('intelligence')
-            .setValue(this.mobService.generateRandomStat());
+            .setValue(stats.attributes.attribute.Intelligence);
         this.addMobForm
             .get('attributes')
             .get('charisma')
-            .setValue(this.mobService.generateRandomStat());
+            .setValue(stats.attributes.attribute.Charisma);
+    }
+
+    generateStats() {
+
+        const mobLevel = this.addMobForm.get('level').value || 2;
+        const mobCon = this.addMobForm.get('attributes').get('constitution').value || 0;
+        const HP = Math.floor((mobLevel * mobCon) / 2);
+        const mobDex = this.addMobForm.get('attributes').get('dexterity').value || 0;
+        const Move = Math.floor((mobLevel * mobDex) / 2 * 2);
+        const mobInt = this.addMobForm.get('attributes').get('intelligence').value || 0;
+        const Mana = Math.floor((mobLevel * mobInt) / 2 * 2);
+        this.addMobForm.get('stats').get('hitPoints').setValue(HP)
+        this.addMobForm.get('stats').get('manaPoints').setValue(Mana)
+        this.addMobForm.get('stats').get('movePoints').setValue(Move)
     }
 
     get getEmotesControl(): FormArray {
@@ -187,6 +204,10 @@ export class AddMobComponent implements OnInit {
 
     removeLink(i: number) {
         this.getEmotesControl.removeAt(i);
+    }
+
+    getRaceAttributes(raceName: string) {
+        return this.races.find((x) => x.name === raceName);
     }
 
     addMob() {

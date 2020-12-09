@@ -1,0 +1,8 @@
+input[disabled] {
+    color:#ccc!important;
+
+    &:hover {
+        cursor: not-allowed;
+    }
+}
+

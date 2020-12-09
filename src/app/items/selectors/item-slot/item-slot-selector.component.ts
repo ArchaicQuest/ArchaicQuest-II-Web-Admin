@@ -45,12 +45,12 @@ import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
     ]
 })
 export class ItemSlotSelectorComponent extends BaseSelectorComponent
-    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterContentChecked {
+    implements OnInit, OnDestroy, ControlValueAccessor, OnChanges, AfterViewInit {
     componentActive = true;
     itemSlots: ItemType[];
     @Input() currentValue = null;
 
-    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef, ) {
+    constructor(private store: Store<ItemAppState>, private fb: FormBuilder, private changeDetector: ChangeDetectorRef,) {
         super();
 
         this.formGroup = this.fb.group({
@@ -79,26 +79,10 @@ export class ItemSlotSelectorComponent extends BaseSelectorComponent
             });
     }
 
-
-
-    ngAfterContentChecked(): void {
-        this.control.setValue(this.currentValue);
-
+    ngAfterViewInit(): void {
+        this.control.setValue(this.currentValue, { emitEvent: true });
         this.control.updateValueAndValidity();
-
     }
-
-    // ngAfterViewChecked(): void {
-    //     setTimeout(() => {
-
-    //         // this.control.setValue(this.currentValue);
-    //         // this.formGroup.get('itemType').setValue(this.currentValue);
-    //         this.control.updateValueAndValidity();
-    //         // this.formGroup.get('itemType').updateValueAndValidity();
-    //         //   this.changeDetector.markForCheck();
-    //     });
-
-    // }
 
     ngOnDestroy(): void {
         this.componentActive = false;

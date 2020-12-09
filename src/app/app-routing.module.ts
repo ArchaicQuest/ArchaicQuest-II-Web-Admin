@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
     {
         path: '',
+
         loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule)
     },
     {
@@ -33,6 +34,14 @@ const routes: Routes = [
     {
         path: 'socials',
         loadChildren: () => import('./socials/socials.module').then(m => m.SocialsModule)
+    },
+    {
+        path: 'quests',
+        loadChildren: () => import('./quests/quest.module').then(m => m.QuestModule)
+    },
+    {
+        path: 'account',
+        loadChildren: () => import('./account/account.module').then(m => m.LoginModule)
     }
 ];
 

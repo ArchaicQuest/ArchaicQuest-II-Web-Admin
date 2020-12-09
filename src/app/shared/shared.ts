@@ -1,5 +1,6 @@
 import { Item } from '../items/interfaces/item.interface';
 import { Injectable } from '@angular/core';
+import { User } from '../Account/interface/user.interface';
 
 @Injectable()
 export class Shared {
@@ -14,6 +15,10 @@ export class Shared {
 
     createNewObj<T>(obj: T) {
         return JSON.parse(JSON.stringify(obj));
+    }
+
+    isAdmin(): boolean {
+        return (JSON.parse(localStorage.getItem("currentUser")) as User).role === "Admin";
     }
 
 }

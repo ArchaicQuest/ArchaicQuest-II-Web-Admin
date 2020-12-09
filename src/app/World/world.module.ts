@@ -46,10 +46,11 @@ import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastEx
 @NgModule({
     imports: [
         SharedModule,
-        ReactiveFormsModule,
+        //  ReactiveFormsModule,
         RouterModule.forChild(worldRoutes),
         // StoreModule.forFeature('character', characterReducer),
         // EffectsModule.forFeature([CharacterEffects]),
+        //  ReactiveFormsModule,
         MatSelectModule,
         MatFormFieldModule,
         MatInputModule,
@@ -71,7 +72,7 @@ import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastEx
         RoomExitService
     ],
     entryComponents: [ManageContainerItemsComponent, ManageRoomItemsComponent, ManageRoomMobsComponent, RoomMobListComponent,
-        RoomItemListComponent, ManageMobComponent, ManageExitsComponent, ItemSelectorComponent, ManageContainerComponent, ManageInventoryComponent],
+        RoomItemListComponent, ManageMobComponent, ManageExitsComponent, ManageContainerComponent, ManageInventoryComponent],
     declarations: [
         AddAreaComponent,
         AddRoomComponent,
@@ -79,8 +80,7 @@ import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastEx
         ViewAreasComponent,
         ViewAreaComponent,
         EditAreaComponent,
-        ItemSelectorComponent,
-        MobSelectorComponent,
+        //MobSelectorComponent,
         ManageContainerItemsComponent,
         ManageContainerComponent,
         ManageInventoryComponent,

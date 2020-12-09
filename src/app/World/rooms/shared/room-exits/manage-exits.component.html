@@ -141,12 +141,22 @@
                     </div>
                 </div>
 
-
-
-                <button mat-raised-button color="primary" type="submit">
-                    Add exit
-                </button>
             </div>
+            <div class="row">
+
+                <div class="col">
+
+                    <button mat-raised-button color="primary" type="submit">
+                        Add exit
+                    </button>
+                </div>
+                <div class="col">
+                    <button mat-raised-button color="secondary" type="button" (click)="removeExit()">
+                        Remove exit
+                    </button>
+                </div>
+            </div>
+
         </div>
     </form>
 </div>

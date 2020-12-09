@@ -277,13 +277,16 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
         let exitKey = exit[0].toLowerCase() + exit2;
 
+        console.log("oo ", this.exits[exitDirection.toLowerCase()])
+
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
             data: {
                 exit: exitDirection,
-                currentCoord: this.addRoomForm.get(`exits.${exitKey}`).value.coords || this.coords,
+                currentCoord: this.coords,
                 exitAreaId: this.addRoomForm.get(`exits.${exitKey}`).value.areaId || this.areaId,
-                areaId: this.areaId
+                areaId: this.areaId,
+                obj: this.exits[exitDirection.toLowerCase()]
             }
         });
 
@@ -291,6 +294,56 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
         dialogRef.afterClosed().subscribe((result: Exit) => {
             if (result == null) {
+                return;
+            }
+
+            if ((result as any).exit != null) {
+                // remove exit
+
+                switch ((result as any).exit) {
+                    case 'North':
+                        this.exits.north = null;
+                        //this.addRoomForm.get('exits.north').setValue(null);
+                        break;
+                    case 'North East':
+                        this.exits.northEast = result;
+                        this.addRoomForm.get('exits.northEast').setValue(result);
+                        break;
+                    case 'East':
+                        this.exits.east = result;
+                        this.addRoomForm.get('exits.east').setValue(result);
+                        break;
+                    case 'South East':
+                        this.exits.southEast = result;
+                        this.addRoomForm.get('exits.southEast').setValue(result);
+                        break;
+                    case 'South':
+                        this.exits.south = result;
+                        this.addRoomForm.get('exits.south').setValue(result);
+                        break;
+                    case 'South West':
+                        this.exits.southWest = result;
+                        this.addRoomForm.get('exits.southWest').setValue(result);
+                        break;
+                    case 'West':
+                        this.exits.west = result;
+                        this.addRoomForm.get('exits.west').setValue(result);
+                        break;
+                    case 'North West':
+                        this.exits.northWest = result;
+                        this.addRoomForm.get('exits.northWest').setValue(result);
+                        break;
+                    case 'Up':
+                        this.exits.up = result;
+                        this.addRoomForm.get('exits.up').setValue(result);
+                        break;
+                    case 'Down':
+                        this.exits.down = result;
+                        this.addRoomForm.get('exits.down').setValue(result);
+                        break;
+                }
+
+                this.exitValueChange.emit(this.exits);
                 return;
             }
 

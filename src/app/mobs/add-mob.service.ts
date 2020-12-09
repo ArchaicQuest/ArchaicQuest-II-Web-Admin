@@ -66,9 +66,9 @@ export class AddMobService {
         level: ['', [Validators.min(1), Validators.max(99)]],
         path: [''],
         stats: new FormGroup({
-            hitPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
-            manaPoints: new FormControl('', [Validators.min(1), Validators.max(99)]),
-            movePoints: new FormControl('', [Validators.min(1), Validators.max(99)])
+            hitPoints: new FormControl('', [Validators.min(1), Validators.max(99999)]),
+            manaPoints: new FormControl('', [Validators.min(1), Validators.max(99999)]),
+            movePoints: new FormControl('', [Validators.min(1), Validators.max(99999)])
         }),
         attributes: new FormGroup({
             strength: new FormControl('', [Validators.min(1), Validators.max(99)]),
@@ -213,6 +213,6 @@ export class AddMobService {
     generateRandomStat(): number {
         const min = 12;
         const max = 20;
-        return Math.floor(Math.random() * (max - min) + min);
+        return 99999;
     }
 }

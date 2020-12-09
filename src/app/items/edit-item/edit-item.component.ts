@@ -57,6 +57,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     showArmourSection = false;
     showBookSection = false;
     showContainerSection = false;
+    showKeySection = false;
     containerItems: Item[] = [];
     options: Item[] = [];
     filteredOptions: Observable<Item[]>;
@@ -124,7 +125,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             containerSize: [''],
             selectContainerKey: [''],
             isHiddenInRoom: [false],
-            isStuckInRoom: [false]
+            isStuckInRoom: [false],
+            keyId: ['']
         });
 
 
@@ -303,13 +305,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
                 });
 
-
-
             this.itemForm.patchValue({
                 id: item.id,
                 name: item.name,
                 knownByName: item.knownByName,
-                itemType: item.itemType,
+                // itemType: item.itemType,
                 itemSlotType: item.slot,
                 level: item.level,
                 weaponType: item.weaponType,
@@ -317,7 +317,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 damageType: item.damageType,
                 minDamage: item.damage ? item.damage.minimum : 0,
                 maxDamage: item.damage ? item.damage.maximum : 0,
-                armourType: item.armourType,
+                // armourType: item.armourType,
                 acPierce: item.armourRating ? item.armourRating.armour : 0,
                 acBash: item.armourRating ? item.armourRating.armour : 0,
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
@@ -349,7 +349,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 containerSize: item.container ? item.container.size : 0,
                 selectContainerKey: item.container ? keyName != null ? keyName.name : '' : '',
                 isHiddenInRoom: item.isHiddenInRoom,
-                isStuckInRoom: item.stuck
+                isStuckInRoom: item.stuck,
+                keyId: item.keyId
 
             });
 
@@ -368,7 +369,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
 
 
-                this.itemForm.updateValueAndValidity();
+
                 // tslint:disable-next-line: forin
                 for (const i in this.itemForm.controls) {
                     this.itemForm.controls[i].markAsTouched();
@@ -377,7 +378,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
                 }
 
-
+                this.itemForm.updateValueAndValidity();
 
             });
 
@@ -392,19 +393,40 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             takeUntil(componentDestroyed(this))
         ).subscribe(value => {
             this.toggleItemSection(value);
+
+
+            setTimeout(() => {
+                // this.itemForm.markAsDirty();
+                // this.itemForm.markAsTouched();
+                // this.itemForm.markAsPending();
+
+
+
+                this.itemForm.get('armourType').updateValueAndValidity();
+                this.itemForm.get('itemSlotType').updateValueAndValidity();
+                this.itemForm.get('weaponType').updateValueAndValidity();
+                this.itemForm.get('attackType').updateValueAndValidity();
+                this.itemForm.get('damageType').updateValueAndValidity();
+
+
+                // this.itemForm.updateValueAndValidity();
+
+            });
         });
 
     }
 
     ngAfterViewInit() {
-        this.itemForm.get('itemType').updateValueAndValidity();
-        this.itemForm.get('armourType').updateValueAndValidity();
-        this.itemForm.get('itemSlotType').updateValueAndValidity();
-        this.itemForm.get('weaponType').updateValueAndValidity();
-        this.itemForm.get('attackType').updateValueAndValidity();
-        this.itemForm.get('damageType').updateValueAndValidity();
+        setTimeout(() => {
+            this.itemForm.get('itemType').updateValueAndValidity();
+            this.itemForm.get('armourType').updateValueAndValidity();
+            this.itemForm.get('itemSlotType').updateValueAndValidity();
+            this.itemForm.get('weaponType').updateValueAndValidity();
+            this.itemForm.get('attackType').updateValueAndValidity();
+            this.itemForm.get('damageType').updateValueAndValidity();
 
-        this.itemForm.updateValueAndValidity();
+            this.itemForm.updateValueAndValidity();
+        });
     }
 
     private _filter(value: string): Observable<Item[]> {
@@ -525,6 +547,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
         this.itemForm.get('containerSize').disable();
+        this.showKeySection = false;
 
         if (itemType === 0) {
             this.showArmourSection = true;
@@ -543,6 +566,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         } else if (itemType === 2) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
+        }
+        else if (itemType === 6) {
+            this.showKeySection = true;
+
         }
         setTimeout(() => {
             this.itemForm.updateValueAndValidity();

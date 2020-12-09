@@ -1,0 +1,177 @@
+<div class="container-fluid setttings">
+    <app-header>Edit Quest</app-header>
+
+
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+
+                <form novalidate [formGroup]="questForm" (submit)="addQuest()">
+                    <div class="row">
+                        <div class="col-12">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Title</mat-label>
+                                <input matInput placeholder="Quest title" formControlName="title">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput placeholder="Description" cdkTextareaAutosize
+                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                    required formControlName="description"></textarea>
+                                <!-- <mat-error *ngIf="addRoomForm.get('description').hasError('required')">
+                                    Room description is required.
+                                </mat-error> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Type</mat-label>
+                                <mat-select formControlName="type" placeholder="Quest Type">
+                                    <mat-option *ngFor="let type of questTypes" [value]="type.id">
+                                        {{ type.name }}
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Area</mat-label>
+                                <mat-select formControlName="area" placeholder="Room Type">
+                                    <mat-option *ngFor="let area of areaList" [value]="area">
+                                        {{ area }}
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <h2>Mobs to kill</h2>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Mob to kill</mat-label>
+                                <input matInput placeholder="Mob to kill" formControlName="mobToKill">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Amount to kill</mat-label>
+                                <input matInput placeholder="Amount to kill" formControlName="mobCount">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button color="primary" type="button" (click)="addMob()">Add Mob</button>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="data-list">
+                                <div class="data-list__data" *ngFor="let mob of mobsToKill;  let i=index">
+                                    <a (click)="removeMob(i)" class="fa fa-times-circle"></a>
+                                    <h3 [line-truncation]="2">{{mob?.name}}</h3>
+
+
+                                    <div class="data-list__actions">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><i class="fa fa-skull"></i> {{mob?.count}}</p>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <h2>Rewards</h2>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Experience Points Gain</mat-label>
+                                <input matInput placeholder="Amount of EXP to gain" formControlName="expGain">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Gold Gain</mat-label>
+                                <input matInput placeholder="Gold to gain" formControlName="goldGain">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <app-item-selector (sendItemToParent)="addItem($event)"></app-item-selector>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="data-list">
+                                <div class="data-list__data" *ngFor="let item of items;  let i=index">
+                                    <a (click)="removeItem(i)" class="fa fa-times-circle"></a>
+                                    <h3 [line-truncation]="2">{{item.name}}</h3>
+                                    <p class="data-list__data__description" [line-truncation]="3">
+                                        {{item.description.look}}
+                                    </p>
+
+
+                                    <div class="data-list__actions">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p><i class="fa fa-info"></i> {{item.itemType | itemType}}</p>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <!-- <button mat-raised-button color="primary"
+                                                    [routerLink]="['/edit-item', item.id]"> View /
+                                                    Edit
+                                                </button> -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button color="primary" type="submit">Update Quest</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- 
+
+<mat-form-field appearance="outline" class="form-control">
+    <mat-label>Name</mat-label>
+    <input matInput placeholder="Item name" value="" required formControlName="name">
+    <mat-error *ngIf="itemForm.get('name').hasError('required')">
+        Item name is required.
+    </mat-error>
+</mat-form-field> -->

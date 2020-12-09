@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MovesFormulaPipe implements PipeTransform {
     transform(level: number, dex: number): number {
 
-        return Math.ceil((dex * 1.5) + (level * dex));
+        return Math.ceil(level * dex / 2 * 2);
 
     }
 }
