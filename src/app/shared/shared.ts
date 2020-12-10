@@ -1,6 +1,6 @@
 import { Item } from '../items/interfaces/item.interface';
 import { Injectable } from '@angular/core';
-import { User } from '../Account/interface/user.interface';
+import { User } from '../account/interface/user.interface';
 
 @Injectable()
 export class Shared {
