@@ -72,6 +72,7 @@ export class ItemService {
         containerSize: [''],
         selectContainerKey: [''],
         isHiddenInRoom: [false],
+        value: ['']
     });
 
     private headers = new HttpHeaders({

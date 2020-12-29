@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, NgZone, Input } from '@angular/core';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from 'src/app/items/add-item/add-item.service';
-import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { startWith, debounceTime, distinctUntilChanged, switchMap, take } from 'rxjs/operators';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Store } from '@ngrx/store';
-import { AddToInventory, RemoveFromInventory, DecreaseArmour, RemoveEquipment } from '../state/character.actions';
+import { AddToInventory, RemoveFromInventory, DecreaseArmour, RemoveEquipment, ClearInventory } from '../state/character.actions';
 import { CharacterAppState } from '../state/character.state';
 import { v4 } from 'uuid';
 import { getInventory } from '../state/character.selector';
@@ -85,6 +85,7 @@ export class InventoryComponent implements OnInit {
     }
     removeItemFromInventory(index: number) {
 
+
         const item: Item = this.inventoryItems[index];
 
         this.charStore.dispatch(new RemoveEquipment({
@@ -102,4 +103,8 @@ export class InventoryComponent implements OnInit {
 
     }
 
+    ngOnDestroy(): void {
+        this.inventoryItems = [];
+        this.charStore.dispatch(new ClearInventory());
+    }
 }

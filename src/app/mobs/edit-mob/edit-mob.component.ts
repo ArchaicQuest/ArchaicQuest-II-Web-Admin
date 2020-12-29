@@ -13,7 +13,7 @@ import { Class } from '../../characters/interfaces/class.interface';
 import { Gender } from '../../characters/interfaces/gender.interface';
 import { Race } from '../../characters/interfaces/race.interface';
 import { Status } from '../../characters/interfaces/status.interface';
-import { SaveChar } from '../../characters/state/character.actions';
+import { ClearInventory, RemoveFromInventory, SaveChar } from '../../characters/state/character.actions';
 import { CharacterAppState } from '../../characters/state/character.state';
 import { Item } from '../../items/interfaces/item.interface';
 import { Option } from '../../shared/interfaces/option.interface';
@@ -177,7 +177,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     attackType: mob.defaultAttack,
                     commands: mob.commands,
                     events: mob.events,
-                    roam: mob.roam
+                    roam: mob.roam,
+                    shopkeeper: mob.shopkeeper
                 });
 
                 this.onEnterModel = {
@@ -241,7 +242,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     ngOnDestroy(): void {
         this.mobService.clearCache();
         this.getEmotesControl.clear();
-
+        this.store.dispatch(new ClearInventory());
     }
 
     generateStats() {
@@ -399,7 +400,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 act: this.addMobForm.get('events').get('act').value,
                 give: this.addMobForm.get('events').get('give').value,
             },
-            roam: this.addMobForm.get('roam').value
+            roam: this.addMobForm.get('roam').value,
+            shopkeeper: this.addMobForm.get('shopkeeper').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

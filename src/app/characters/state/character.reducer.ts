@@ -104,6 +104,17 @@ export function characterReducer(state: CharacterState = intitalState,
                 }
             };
         }
+        case CharacterActionTypes.ClearInventory: {
+
+
+            return {
+                ...state,
+                mob: {
+                    ...state.mob,
+                    inventory: [],
+                }
+            };
+        }
         case CharacterActionTypes.UpdateEquipment: {
 
             const equipped: any = { ...state.mob.equipped };

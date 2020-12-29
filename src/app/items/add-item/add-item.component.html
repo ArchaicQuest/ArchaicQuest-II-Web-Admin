@@ -22,21 +22,29 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-3">
                                 <app-item-type-selector formControlName="itemType"
                                     [currentValue]="currentItemTypeValue"></app-item-type-selector>
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <app-item-slot-selector formControlName="itemSlotType"
                                     [currentValue]="this.itemForm.get('itemSlotType').value">
                                 </app-item-slot-selector>
 
                             </div>
-                            <div class="col-4">
+                            <div class="col-3">
                                 <mat-form-field appearance="outline">
                                     <mat-label>Minimum Level</mat-label>
                                     <input matInput type="number" placeholder="Minimum Level" formControlName="level">
                                     <mat-hint align="start"><strong>The level player needs to use this item</strong>
+                                    </mat-hint>
+                                </mat-form-field>
+                            </div>
+                            <div class="col-3">
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Value</mat-label>
+                                    <input matInput type="number" placeholder="Item worth" formControlName="value">
+                                    <mat-hint align="start"><strong>How much to buy from vendor. Minus markup</strong>
                                     </mat-hint>
                                 </mat-form-field>
                             </div>

@@ -39,4 +39,5 @@ export interface Item {
     armourRating: ArmourRating;
     armourType: number;
     equipped: boolean;
+    value?: number;
 }

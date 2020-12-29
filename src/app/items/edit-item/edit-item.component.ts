@@ -126,7 +126,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             selectContainerKey: [''],
             isHiddenInRoom: [false],
             isStuckInRoom: [false],
-            keyId: ['']
+            keyId: [''],
+            value: ['']
         });
 
 
@@ -350,7 +351,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 selectContainerKey: item.container ? keyName != null ? keyName.name : '' : '',
                 isHiddenInRoom: item.isHiddenInRoom,
                 isStuckInRoom: item.stuck,
-                keyId: item.keyId
+                keyId: item.keyId,
+                value: item.value
 
             });
 
@@ -678,7 +680,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             stuck: this.itemForm.get('isStuckInRoom').value || false,
             uses: 0,
             weight: 5,
-            equipped: false
+            equipped: false,
+            value: this.itemForm.get('value').value || this.itemForm.get('level').value * 100,
         };
 
         this.store.dispatch(new PostItem(item));

@@ -22,7 +22,7 @@ import { ItemService } from '../items/add-item/add-item.service';
 import { Store } from '@ngrx/store';
 import { Mob } from './interfaces/mob.interface';
 import { CharacterAppState } from '../characters/state/character.state';
-import { SaveChar } from '../characters/state/character.actions';
+import { ClearInventory, SaveChar } from '../characters/state/character.actions';
 import { Status } from '../characters/interfaces/status.interface';
 import { Option } from '../shared/interfaces/option.interface';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
@@ -273,7 +273,8 @@ export class AddMobComponent implements OnInit {
                 act: this.addMobForm.get('events').get('act').value,
                 give: this.addMobForm.get('events').get('give').value,
             },
-            roam: this.addMobForm.get('roam').value
+            roam: this.addMobForm.get('roam').value,
+            shopkeeper: this.addMobForm.get('shopkeeper').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
@@ -290,6 +291,8 @@ export class AddMobComponent implements OnInit {
     ngOnDestroy(): void {
         this.mobService.clearCache();
         this.getEmotesControl.clear();
+        this.inventoryItems = [];
+        this.store.dispatch(new ClearInventory());
 
     }
 }
