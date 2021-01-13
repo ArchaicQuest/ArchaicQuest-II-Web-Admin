@@ -1,0 +1,40 @@
+<div class="container-fluid view-items">
+    <app-header>Edit Help</app-header>
+
+    <div class="row">
+        <div class="col-8">
+
+            <div class="panel">
+                <form novalidate [formGroup]="form" (ngSubmit)="addHelp()">
+                    <input type="hidden" formControlName="id">
+                    <h2>Item Information:</h2>
+                    <div class="section">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput placeholder="Item name" value="" required formControlName="name">
+                                    <mat-error *ngIf="form.get('name').hasError('required')">
+                                        Item name is required.
+                                    </mat-error>
+                                </mat-form-field>
+                                <mat-checkbox formControlName="knownByName">Known by name?</mat-checkbox>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Add
+                        Help</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-4">
+            <app-help-preview-component [itemForm]="form"></app-help-preview-component>
+        </div>
+    </div>
+</div>

@@ -1,10 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnChanges, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';
+import { EditObjectJsonComponent } from '../../edit-object-json/edit-object-json.component';
 import { ManageContainerComponent } from '../../manage-container/manage-container.component';
 import { ManageRoomItemsComponent } from '../add/manage-room-items.component';
 
@@ -29,7 +30,7 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
     items: Item[] = [];
 
     dataSource = this.data || this.items;
-    constructor(public dialog: MatDialog, public helpers: Shared) { super(); }
+    constructor(public dialog: MatDialog, public helpers: Shared, private cd: ChangeDetectorRef) { super(); }
 
 
     ngOnInit() {
@@ -70,7 +71,7 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
 
     openContainerDialog(item: Item, container: Item, index: number): void {
         const dialogRef = this.dialog.open(ManageContainerComponent, {
-            height: '65%',
+            height: '85%',
             width: '50%',
             data: {
                 item: item,
@@ -80,6 +81,31 @@ export class RoomItemListComponent extends DataListComponent implements OnInit, 
         });
 
         dialogRef.afterClosed().subscribe(result => { });
+    }
+
+    openEditDialog(item: Item, index: number): void {
+        const dialogRef = this.dialog.open(EditObjectJsonComponent, {
+            height: '85%',
+            width: '50%',
+            data: {
+                item: item,
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log("closed", result)
+
+            if (!result) {
+                return
+            }
+
+            var updatedItem = JSON.parse(result);
+            item = updatedItem;
+            item.equipped = updatedItem.equipped;
+
+            this.filteredata[index] = updatedItem;
+
+        });
     }
 
     removeItem(array: Item[], index: number) {

@@ -650,3 +650,7 @@ background: #111;
 padding: 20px;
     }
   }
+
+  ::ng-deep ngx-monaco-editor {
+    height: 100% !important;
+  }

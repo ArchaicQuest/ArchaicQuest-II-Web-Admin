@@ -40,6 +40,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastExitPipe, hasSouthExitPipe, hasSouthWestExitPipe, hasWestExitPipe, hasNorthWestExitPipe, isRoomPipe, setRoomClassPipe } from './rooms/pipes/valid-exit.pipe';
+import { CodeEditorModule } from '@ngstack/code-editor';
+import { EditObjectJsonComponent } from './rooms/shared/edit-object-json/edit-object-json.component';
 
 
 
@@ -60,7 +62,8 @@ import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastEx
         MatPaginatorModule,
         MatAutocompleteModule,
         MatDialogModule,
-        MatProgressSpinnerModule
+        MatProgressSpinnerModule,
+        CodeEditorModule.forChild()
     ],
     providers: [
         AreaService,
@@ -80,6 +83,7 @@ import { hasNorthExitPipe, hasNorthEastExitPipe, hasEastExitPipe, hasSouthEastEx
         ViewAreasComponent,
         ViewAreaComponent,
         EditAreaComponent,
+        EditObjectJsonComponent,
         //MobSelectorComponent,
         ManageContainerItemsComponent,
         ManageContainerComponent,

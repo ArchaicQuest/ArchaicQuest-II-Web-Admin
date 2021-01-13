@@ -1,0 +1,30 @@
+<h1 mat-dialog-title>Edit JSON Object</h1>
+<div mat-dialog-content>
+    <div class="row">
+        <div class="col">
+
+            <ngs-code-editor [ngStyle]="{ 'height': '700px' }" theme="vs-dark" [(codeModel)]="itemModel"
+                [options]="options" (valueChanged)="onCodeChanged($event)">
+            </ngs-code-editor>
+
+
+
+        </div>
+
+    </div>
+
+
+</div>
+<div mat-dialog-actions>
+    <div class="row">
+        <div class="col-12">
+            <p>Only use this to toggle boolean values. Any other edits you want to make, you're better off creating a
+                new item.</p>
+
+            <a target="_blank" mat-raised-button color="primary" (click)="onClose()"
+                style="max-width: 150px; margin-top: 20px;">
+                Save & Close
+            </a>
+        </div>
+    </div>
+</div>

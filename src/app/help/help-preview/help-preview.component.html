@@ -1,0 +1,44 @@
+<div class="client" [formGroup]="itemForm">
+    <p class="room__description">Item Preview:</p>
+
+    <table>
+        <!-- *ngIf="itemForm.get('name').value" -->
+        <!-- <tr>
+            <td>Keywords</td>
+            <td>{{itemForm.get('name').value}}</td>
+        </tr> -->
+        <tr>
+            <td>Name</td>
+            <td>{{itemForm.get('name').value}}</td>
+        </tr>
+        <tr>
+            <td>Type</td>
+            <td> {{itemForm.get('itemType').value != null ? itemForm.get('itemType').value.name : 'undefined'}}</td>
+        </tr>
+        <tr>
+            <td>Slot</td>
+
+            <td> {{itemForm.get('itemSlotType').value != null ? itemForm.get('itemSlotType').value.name : 'undefined'}}
+            </td>
+        </tr>
+        <tr>
+            <td>Level</td>
+            <td> {{itemForm.get('level').value}}</td>
+        </tr>
+
+    </table>
+
+    <p class="echo">> look</p>
+
+    <p class="room__description">{{itemForm.get('lookDescription').value}}</p>
+    <p class="echo">> exam</p>
+    <p class="room__description">{{itemForm.get('examDescription').value}}</p>
+    <p class="echo">> room</p>
+    <p class="room__description">{{itemForm.get('roomDescription').value}}</p>
+    <p class="echo">> smell</p>
+    <p class="room__description">{{itemForm.get('smellDescription').value}}</p>
+    <p class="echo">> touch</p>
+    <p class="room__description">{{itemForm.get('touchDescription').value}}</p>
+    <p class="echo">> taste</p>
+    <p class="room__description">{{itemForm.get('tasteDescription').value}}</p>
+</div>
