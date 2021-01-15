@@ -1,17 +1,27 @@
+
+.help-section {
 table {
     color: #fff;
     width: 100%;
 
     td {
         padding: 3px 10px;
-
+    width: inherit;
         &:first-of-type {
             border-right: 1px white dashed;
+            width: 170px;
         }
     }
-    border: 1px white dashed;
+    border-top: 1px white dashed;
+    border-bottom: 1px white dashed;
 
-    .stat-line td {
-        border-top: 1px white dashed;
-    }
+     
+}
+
+pre {
+    color: #fff;
+}
+
+border-bottom:  1px white dashed;
+padding-bottom: 15px;
 }

@@ -4,8 +4,8 @@ export interface Help {
     title: string;
     keywords: string;
     briefDescription: string;
-    Description: string;
-    RelatedHelpFiles: string;
+    description: string;
+    relatedHelpFiles: string;
     DateCreated?: Date;
     DateUpdated?: Date;
 

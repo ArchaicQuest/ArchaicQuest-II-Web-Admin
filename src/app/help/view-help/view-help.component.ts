@@ -12,7 +12,7 @@ import { ViewHelpService } from './view-help.service';
 })
 export class ViewHelpComponent extends DataListComponent implements OnInit {
     items: Help[] = [];
-    displayedColumns: string[] = ['id', 'name', 'actions'];
+    displayedColumns: string[] = ['id', 'title', 'actions'];
 
     constructor(private viewItemsService: ViewHelpService, private toastr: ToastrService,
         public helpers: Shared) {
@@ -21,7 +21,7 @@ export class ViewHelpComponent extends DataListComponent implements OnInit {
 
     ngOnInit() {
 
-        this.viewItemsService.getItemTypes().subscribe((items) => {
+        this.viewItemsService.getHelpFiles().subscribe((items) => {
 
             this.data = items;
             this.filteredata = this.data;
@@ -29,7 +29,7 @@ export class ViewHelpComponent extends DataListComponent implements OnInit {
     }
 
     applyFilter(filterValue: string) {
-        const result = this.data.filter(x => x.name.toLowerCase().includes(filterValue));
+        const result = this.data.filter(x => x.title.toLowerCase().includes(filterValue));
         this.filteredata = result;
     }
 

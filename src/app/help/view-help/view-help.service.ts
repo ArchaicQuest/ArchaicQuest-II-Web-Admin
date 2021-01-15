@@ -10,16 +10,16 @@ import { Help } from '../interfaces/help.interface';
 })
 export class ViewHelpService {
     private host = environment.hostAPI;
-    private getItemsUrl = `${this.host}Item/Get`;
+    private getHelpUrl = `${this.host}help`;
 
     constructor(private http: HttpClient) { }
 
-    getItemTypes(): Observable<Help[]> {
-        return this.http.get<Help[]>(this.getItemsUrl);
+    getHelpFiles(): Observable<Help[]> {
+        return this.http.get<Help[]>(this.getHelpUrl);
     }
 
     deleteItem(id: number): Observable<any> {
-        return this.http.delete<any>(`${this.host}item/delete/${id}`);
+        return this.http.delete<any>(`${this.host}help/delete/${id}`);
     }
 
 

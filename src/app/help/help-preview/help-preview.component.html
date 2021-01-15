@@ -1,44 +1,32 @@
 <div class="client" [formGroup]="itemForm">
-    <p class="room__description">Item Preview:</p>
+    <p class="room__description">Help Preview:</p>
 
-    <table>
-        <!-- *ngIf="itemForm.get('name').value" -->
-        <!-- <tr>
-            <td>Keywords</td>
-            <td>{{itemForm.get('name').value}}</td>
-        </tr> -->
-        <tr>
-            <td>Name</td>
-            <td>{{itemForm.get('name').value}}</td>
-        </tr>
-        <tr>
-            <td>Type</td>
-            <td> {{itemForm.get('itemType').value != null ? itemForm.get('itemType').value.name : 'undefined'}}</td>
-        </tr>
-        <tr>
-            <td>Slot</td>
+    <div class="help-section" style="margin-bottom: 40px;">
+        <table>
+            <tr>
+                <td>Help Keywords</td>
+                <td>{{itemForm.get('keywords').value}}</td>
+            </tr>
+            <tr>
+                <td>Related Helps</td>
+                <td>{{itemForm.get('relatedHelpFiles').value}}</td>
+            </tr>
 
-            <td> {{itemForm.get('itemSlotType').value != null ? itemForm.get('itemSlotType').value.name : 'undefined'}}
-            </td>
-        </tr>
-        <tr>
-            <td>Level</td>
-            <td> {{itemForm.get('level').value}}</td>
-        </tr>
 
-    </table>
+        </table>
 
-    <p class="echo">> look</p>
+        <pre>{{itemForm.get('description').value}}</pre>
+    </div>
 
-    <p class="room__description">{{itemForm.get('lookDescription').value}}</p>
-    <p class="echo">> exam</p>
-    <p class="room__description">{{itemForm.get('examDescription').value}}</p>
-    <p class="echo">> room</p>
-    <p class="room__description">{{itemForm.get('roomDescription').value}}</p>
-    <p class="echo">> smell</p>
-    <p class="room__description">{{itemForm.get('smellDescription').value}}</p>
-    <p class="echo">> touch</p>
-    <p class="room__description">{{itemForm.get('touchDescription').value}}</p>
-    <p class="echo">> taste</p>
-    <p class="room__description">{{itemForm.get('tasteDescription').value}}</p>
+    <p class="room__description">Help List view Preview:</p>
+    <div class="help-section" style="border-bottom: 0 none;">
+        <table>
+            <tr>
+                <td style="width:170px">{{itemForm.get('title').value}}</td>
+                <td>{{itemForm.get('briefDescription').value}}</td>
+            </tr>
+        </table>
+    </div>
+
+
 </div>

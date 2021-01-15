@@ -24,22 +24,22 @@
 
     <div class="data-list">
         <div class="data-list__data" *ngFor="let data of filteredata; let i = index">
-            <h3 [line-truncation]="2">{{data.name}}</h3>
-            <p class="data-list__data__description" [line-truncation]="3">{{data.description?.look}}</p>
+            <h3 [line-truncation]="2">{{data.title}}</h3>
+            <p class="data-list__data__description" [line-truncation]="3">{{data.description}}</p>
 
 
             <div class="data-list__actions">
 
                 <div class="row">
                     <div class="col">
-                        <p><i class="fa fa-info"></i> {{data.itemType | itemType}}</p>
+                        <p><i class="fa fa-info"></i> {{data.briefDescription }}</p>
                         <p><i class="fa fa-calendar"></i> {{data.dateUpdated | date: 'dd/MM/yyyy'}}</p>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col">
-                        <button mat-raised-button color="primary" [routerLink]="['/edit-item', data.id]"> View /
+                        <button mat-raised-button color="primary" [routerLink]="['/help/edit', data.id]"> View /
                             Edit
                         </button>
                     </div>
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <mat-paginator [length]="data.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+    <mat-paginator [length]="data?.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
         (page)="onPaginateChange($event)">
     </mat-paginator>
 

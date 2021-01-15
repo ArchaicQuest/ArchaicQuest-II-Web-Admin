@@ -11,25 +11,23 @@ import { Help } from '../interfaces/help.interface';
 })
 export class HelpService {
     private host = environment.hostAPI;
-    private itemTypeUrl = `${this.host}item/ReturnItemTypes`;
-    private addItemUrl = `${this.host}item/PostItem`;
+    private addHelpUrl = `${this.host}help`;
+    private getHelpUrl = `${this.host}help/GetHelpById`;
 
     private headers = new HttpHeaders({
         'Content-Type': 'application/json',
     });
 
-    constructor(private http: HttpClient, private toast: ToastrService) { }
+    constructor(private http: HttpClient) { }
 
-    getItemTypes(): Observable<Help[]> {
-        return this.http.get<Help[]>(this.itemTypeUrl);
+
+    add(help: Help): any {
+
+        return this.http.post(this.addHelpUrl, JSON.stringify(help), { headers: this.headers, responseType: 'text' });
     }
 
-
-    addItem(item: Help): any {
-        setTimeout(() => {
-            this.toast.success(`Mob ${item.title} saved successfully.`);
-        }, 250);
-        return this.http.post(this.addItemUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
+    getHelp(id: number): Observable<Help> {
+        return this.http.get<Help>(`${this.getHelpUrl}/${id}`);
     }
 
 }

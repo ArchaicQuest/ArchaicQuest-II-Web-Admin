@@ -8,6 +8,7 @@ import { HelpService } from './add-help.service';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { take } from 'rxjs/operators';
 import { Help } from '../interfaces/help.interface';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -23,6 +24,7 @@ export class AddHelpComponent extends OnDestroyMixin implements OnDestroy, OnIni
         private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
+        private toast: ToastrService,
         private service: HelpService) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
@@ -34,10 +36,9 @@ export class AddHelpComponent extends OnDestroyMixin implements OnDestroy, OnIni
             title: ['', Validators.required],
             keywords: ['', Validators.required],
             briefDescription: ['', Validators.required],
-            Description: ['', Validators.required],
-            RelatedHelpFiles: ['', Validators.required],
-            DateCreated: ['', Validators.required],
-            DateUpdated: ['', Validators.required],
+            description: ['', Validators.required],
+            relatedHelpFiles: [''],
+
         });
     }
 
@@ -60,12 +61,17 @@ export class AddHelpComponent extends OnDestroyMixin implements OnDestroy, OnIni
     addHelp() {
 
         const help: Help = {
-            Description: '',
-            RelatedHelpFiles: '',
-            briefDescription: '',
-            keywords: '',
-            title: '',
+            description: this.form.get('description').value,
+            relatedHelpFiles: this.form.get('relatedHelpFiles').value,
+            briefDescription: this.form.get('briefDescription').value,
+            keywords: this.form.get('keywords').value,
+            title: this.form.get('title').value,
+            id: -1
         };
+
+        this.service.add(help).pipe(take(1)).subscribe((x) => {
+            this.toast.success(x.toast);
+        })
 
     }
 }
