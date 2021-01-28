@@ -37,6 +37,7 @@ export interface Character {
     commands: string;
     roam?: boolean;
     shopkeeper?: boolean;
+    trainer?: boolean;
     events?: Events;
 }
 

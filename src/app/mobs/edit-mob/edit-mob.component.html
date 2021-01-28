@@ -397,7 +397,7 @@
                                                 This event fires when a player says, emotes or yells
                                             </mat-panel-description>
                                         </mat-expansion-panel-header>
-                                        <ngs-code-editor [theme]="theme" [codeModel]="actModel"
+                                        <ngs-code-editor [theme]="theme" [codeModel]="actModel" [options]="options"
                                             (valueChanged)="actChanged($event)"></ngs-code-editor>
                                     </mat-expansion-panel>
                                     <mat-expansion-panel (opened)="panelOpenState = true"
@@ -442,6 +442,16 @@
 
                                 <mat-checkbox title="Enable mob to be shop keeper" formControlName="shopkeeper">Is
                                     Shopkeeper
+                                </mat-checkbox>
+
+
+                            </div>
+
+                            <div class="col">
+
+
+                                <mat-checkbox title="Enable mob to be trainer" formControlName="trainer">Is
+                                    Trainer
                                 </mat-checkbox>
 
 

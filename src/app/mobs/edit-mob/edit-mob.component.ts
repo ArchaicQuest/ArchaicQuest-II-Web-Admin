@@ -68,6 +68,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
     options = {
         contextmenu: true,
+        wordWrap: 'wordWrapColumn',
         minimap: {
             enabled: false,
         },
@@ -178,7 +179,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     commands: mob.commands,
                     events: mob.events,
                     roam: mob.roam,
-                    shopkeeper: mob.shopkeeper
+                    shopkeeper: mob.shopkeeper,
+                    trainer: mob.trainer
                 });
 
                 this.onEnterModel = {
@@ -401,7 +403,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 give: this.addMobForm.get('events').get('give').value,
             },
             roam: this.addMobForm.get('roam').value,
-            shopkeeper: this.addMobForm.get('shopkeeper').value
+            shopkeeper: this.addMobForm.get('shopkeeper').value,
+            trainer: this.addMobForm.get('trainer').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

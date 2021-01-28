@@ -274,7 +274,8 @@ export class AddMobComponent implements OnInit {
                 give: this.addMobForm.get('events').get('give').value,
             },
             roam: this.addMobForm.get('roam').value,
-            shopkeeper: this.addMobForm.get('shopkeeper').value
+            shopkeeper: this.addMobForm.get('shopkeeper').value,
+            trainer: this.addMobForm.get('trainer').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
