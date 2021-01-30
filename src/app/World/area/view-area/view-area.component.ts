@@ -32,6 +32,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     downloadJsonHref: SafeUrl;
     exporting: boolean;
     displayedColumns: string[] = ['id', 'name', 'coords'];
+    zaxis: number = 0;
 
     constructor(
         private service: ViewAreaService,
@@ -53,7 +54,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
             const startingCoords: Coords = {
                 x: 0,
                 y: 0,
-                z: 0
+                z: this.zaxis
             };
 
             const startingRoom: Room = {
@@ -123,7 +124,19 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
 
         });
 
-        //  this.GenerateRoomLayout();
+
+    }
+
+    increaseZaxis() {
+        this.zaxis += 1;
+    }
+    decreaseZaxis() {
+        this.zaxis -= 1;
+
+        this.data = this.rooms;
+        this.filteredata = this.rooms;
+
+
     }
 
     applyFilter(filterValue: string) {
@@ -146,7 +159,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
 
     isRoom(room: Coords) {
 
-        return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y && x.title !== 'add room');
+        return this.rooms.find(x => x.coords.x === room.x && x.coords.y === room.y && x.coords.z === room.z && x.title !== 'add room');
     }
 
     isTwoWayExit(room: Coords, exitDir: string) {
