@@ -166,7 +166,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         ).subscribe(value => {
             this.containerCanBeOpened = !this.containerCanBeOpened;
             if (!this.containerCanBeOpened) {
-                this.itemForm.get('containerOpen').setValue(false);
+                //    this.itemForm.get('containerOpen').setValue(false);
             }
         });
 
@@ -645,7 +645,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 taste: this.itemForm.get('tasteDescription').value,
                 touch: this.itemForm.get('touchDescription').value
             },
-            armourType: this.itemForm.get('armourType').value.id || 0,
+            armourType: this.itemForm.get('armourType').value?.id || 0,
             armourRating: {
                 armour: this.itemForm.get('acPierce').value || 1,
                 magic: Math.floor(this.itemForm.get('acPierce').value / 2) || 0
