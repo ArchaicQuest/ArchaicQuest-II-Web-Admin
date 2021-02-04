@@ -18,40 +18,46 @@
             </div>
         </div>
     </div>
+    <mat-spinner *ngIf="!loaded"></mat-spinner>
 
-    <div class="data-list">
-        <div class="data-list__data" *ngFor="let data of filteredata;  let i=index">
-            <a (click)="removeArea(i)" class="fa fa-times-circle"></a>
-            <h3 [line-truncation]="2">{{data.title}}</h3>
-            <p class="data-list__data__description" [line-truncation]="3">{{data.description}}</p>
+    <div *ngIf="loaded">
+        <div class="data-list">
 
 
-            <div class="data-list__actions">
+            <div class="data-list__data" *ngFor="let data of filteredata; let i=index">
+                <a (click)="removeArea(i)" class="fa fa-times-circle"></a>
+                <h3 [line-truncation]="2">{{data?.title}}</h3>
+                <p class="data-list__data__description" [line-truncation]="3">{{data?.description}}</p>
 
-                <div class="row">
-                    <div class="col">
-                        <p><i class="fa fa-sitemap"></i> {{data?.rooms.length || 0}} rooms</p>
-                        <p><i class="fa fa-calendar"></i> {{data.dateUpdated | date: 'dd/MM/yyyy'}}</p>
+
+                <div class="data-list__actions">
+
+                    <div class="row">
+                        <div class="col">
+                            <p><i class="fa fa-sitemap"></i> {{data?.rooms.length || 0}} rooms</p>
+                            <p><i class="fa fa-calendar"></i> {{data?.dateUpdated | date: 'dd/MM/yyyy'}}</p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col">
-                        <button mat-raised-button color="primary" [routerLink]="['/world/area', data.id]"> View
-                        </button>
-                    </div>
-                    <div class="col">
-                        <button mat-flat-button color="secondary" [routerLink]="['/world/edit-area', data.id]">
-                            Edit</button>
+                    <div class="row">
+                        <div class="col">
+                            <button mat-raised-button color="primary" [routerLink]="['/world/area', data?.id]"> View
+                            </button>
+                        </div>
+                        <div class="col">
+                            <button mat-flat-button color="secondary" [routerLink]="['/world/edit-area', data?.id]">
+                                Edit</button>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
+
+        <mat-paginator [length]="data?.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+            (page)="onPaginateChange($event)">
+        </mat-paginator>
+
+
     </div>
-
-    <mat-paginator [length]="data?.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
-        (page)="onPaginateChange($event)">
-    </mat-paginator>
-
-
 </div>

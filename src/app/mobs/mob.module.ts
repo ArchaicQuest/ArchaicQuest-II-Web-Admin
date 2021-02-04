@@ -34,6 +34,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
     imports: [
@@ -51,6 +52,7 @@ import { CodeEditorModule } from '@ngstack/code-editor';
         MatPaginatorModule,
         MatAutocompleteModule,
         MatExpansionModule,
+        MatProgressSpinnerModule,
         CodeEditorModule.forChild()
     ],
     providers: [

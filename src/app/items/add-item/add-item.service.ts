@@ -207,7 +207,7 @@ export class ItemService {
 
     addItem(item: Item): any {
         setTimeout(() => {
-            this.toast.success(`Mob ${item.name} saved successfully.`);
+            this.toast.success(`${item.name} saved successfully.`);
         }, 250);
         return this.http.post(this.addItemUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }

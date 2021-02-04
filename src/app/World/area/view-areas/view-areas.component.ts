@@ -12,7 +12,7 @@ import { Shared } from 'src/app/shared/shared';
 })
 export class ViewAreasComponent extends DataListComponent implements OnInit {
     areas: Area[] = [];
-
+    loaded = false;
     constructor(private service: ViewAreasService,
         private helpers: Shared) {
         super();
@@ -21,8 +21,10 @@ export class ViewAreasComponent extends DataListComponent implements OnInit {
     ngOnInit() {
 
         this.service.getItemTypes().subscribe((data) => {
+            this.loaded = true;
             this.data = data;
             this.filteredata = this.data;
+
         });
 
     }
