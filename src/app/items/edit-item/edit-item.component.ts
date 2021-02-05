@@ -69,6 +69,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     currentItemSlotValue: any;
     currentArmourTypeValue: any;
     isHiddenInRoom: boolean;
+    showPortalSection = false;
     constructor(
         private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
@@ -127,7 +128,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             isHiddenInRoom: [false],
             isStuckInRoom: [false],
             keyId: [''],
-            value: ['']
+            value: [''],
+            portalName: [''],
+            portalDestination: [''],
+            portalEnterDescriptions: [''],
+            portalEnterRoomDescription: ['']
         });
 
 
@@ -546,6 +551,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.itemForm.get('maxDamage').disable();
         this.showWeaponSection = false;
         this.showBookSection = false;
+        this.showPortalSection = false;
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
         this.itemForm.get('containerSize').disable();
@@ -571,6 +577,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         }
         else if (itemType === 6) {
             this.showKeySection = true;
+
+        }
+        else if (itemType === 15) {
+            this.showPortalSection = true;
 
         }
         setTimeout(() => {
@@ -682,6 +692,12 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             weight: 5,
             equipped: false,
             value: this.itemForm.get('value').value || this.itemForm.get('level').value * 100,
+            portal: {
+                name: this.itemForm.get('portalName').value,
+                enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
+                destination: this.itemForm.get('portalDestination').value,
+                enterDescription: this.itemForm.get('portalEnterDescription').value,
+            }
         };
 
         this.store.dispatch(new PostItem(item));

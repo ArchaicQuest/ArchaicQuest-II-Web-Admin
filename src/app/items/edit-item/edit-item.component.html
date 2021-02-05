@@ -51,6 +51,56 @@
                         </div>
                     </div>
 
+
+                    <div *ngIf="showPortalSection">
+                        <h2>Portal</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Name</mat-label>
+                                        <input matInput type="text" placeholder="Portal Name"
+                                            formControlName="portalName">
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Destination</mat-label>
+                                        <input matInput type="text" placeholder="Destination"
+                                            formControlName="portalDestination">
+                                        <mat-hint>areaId + y + x + z coords. e.g "1000"</mat-hint>
+                                    </mat-form-field>
+                                </div>
+
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter portal Description</mat-label>
+                                        <input matInput type="text" placeholder="Enter portal description"
+                                            formControlName="portalEnterDescription">
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-6">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Enter Room Description</mat-label>
+                                        <input matInput type="text" placeholder="Enter room description"
+                                            formControlName="portalEnterRoomDescription">
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
                     <div *ngIf="showWeaponSection">
                         <h2>Weapon</h2>
                         <div class="section">
