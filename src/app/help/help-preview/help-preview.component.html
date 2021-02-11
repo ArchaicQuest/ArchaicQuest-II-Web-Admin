@@ -1,0 +1,32 @@
+<div class="client" [formGroup]="itemForm">
+    <p class="room__description">Help Preview:</p>
+
+    <div class="help-section" style="margin-bottom: 40px;">
+        <table>
+            <tr>
+                <td>Help Keywords</td>
+                <td>{{itemForm.get('keywords').value}}</td>
+            </tr>
+            <tr>
+                <td>Related Helps</td>
+                <td>{{itemForm.get('relatedHelpFiles').value}}</td>
+            </tr>
+
+
+        </table>
+
+        <pre>{{itemForm.get('description').value}}</pre>
+    </div>
+
+    <p class="room__description">Help List view Preview:</p>
+    <div class="help-section" style="border-bottom: 0 none;">
+        <table>
+            <tr>
+                <td style="width:170px">{{itemForm.get('title').value}}</td>
+                <td>{{itemForm.get('briefDescription').value}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+</div>

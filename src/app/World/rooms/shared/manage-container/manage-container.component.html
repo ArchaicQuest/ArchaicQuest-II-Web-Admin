@@ -41,6 +41,19 @@
                     </div>
                 </div>
             </div>
+
+
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+
+            <form [formGroup]="itemobjForm">
+                <ngs-code-editor theme="vs-dark" [(codeModel)]="itemModel" [options]="options"
+                    (valueChanged)="onCodeChanged($event)">
+                </ngs-code-editor>
+            </form>
         </div>
     </div>
 

@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild, NgZone, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray } from '@angular/forms';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { FormControl } from '@angular/forms';
 import {
     takeWhile,
     take,
     startWith,
-    map,
     switchMap,
     debounceTime,
     distinctUntilChanged,
@@ -16,24 +15,11 @@ import {
 import { ItemType } from '../interfaces/item-type.interface';
 import { ItemAppState } from '../state/add-item.state';
 import {
-    GetItemTypes,
-    GetItemSlotTypes,
-    GetArmourTypes,
     PostItem,
-    PostItemSuccess,
-    GetFlags,
-    GetWeaponTypes,
-    GetDamageTypes,
-    GetAttackTypes
+    GetFlags
 } from '../state/add-item.actions';
 import {
-    getItemTypes,
-    getItemSlotTypes,
-    getArmourTypes,
-    getFlags,
-    getWeaponTypes,
-    getDamageTypes,
-    getAttackTypes
+    getFlags
 } from '../state/add-item.selector';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { Item } from '../interfaces/item.interface';
@@ -66,6 +52,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
     showWeaponSection = false;
     showArmourSection = false;
     showBookSection = false;
+    showPortalSection = false;
     showContainerSection = false;
     containerItems: Item[] = [];
     options: Item[] = [];
@@ -81,9 +68,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
         private store: Store<ItemAppState>,
-        private itemService: ItemService,
-        private route: ActivatedRoute
-    ) { super(); }
+        private itemService: ItemService) { super(); }
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
 
@@ -133,6 +118,11 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             selectContainerKey: [''],
             isHiddenInRoom: [false],
             isStuckInRoom: [false],
+            value: [''],
+            portalName: [''],
+            portalDestination: [''],
+            portalEnterDescription: [''],
+            portalEnterRoomDescription: ['']
         });
 
 
@@ -171,7 +161,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         this.itemForm.get('containerCanOpen').valueChanges
             .pipe(
                 takeUntil(componentDestroyed(this))
-            ).subscribe(value => {
+            ).subscribe(() => {
                 this.containerCanBeOpened = !this.containerCanBeOpened;
                 if (!this.containerCanBeOpened) {
                     this.itemForm.get('containerOpen').setValue(false);
@@ -348,6 +338,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         this.showBookSection = false;
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
+        this.showPortalSection = false;
         this.itemForm.get('containerSize').disable();
 
         if (itemType === 0) {
@@ -367,6 +358,10 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         } else if (itemType === 2) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
+        }
+        else if (itemType === 15) {
+            this.showPortalSection = true;
+
         }
 
         this.itemForm.updateValueAndValidity();
@@ -476,6 +471,13 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             weight: 5,
             equipped: false,
             stuck: this.itemForm.get('isStuckInRoom').value || false,
+            value: this.itemForm.get('value').value || this.itemForm.get('level').value * 100,
+            portal: {
+                name: this.itemForm.get('portalName').value,
+                enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
+                destination: this.itemForm.get('portalDestination').value,
+                enterDescription: this.itemForm.get('portalEnterDescription').value,
+            }
         };
 
         this.store.dispatch(new PostItem(item));

@@ -13,7 +13,7 @@ import { Class } from '../../characters/interfaces/class.interface';
 import { Gender } from '../../characters/interfaces/gender.interface';
 import { Race } from '../../characters/interfaces/race.interface';
 import { Status } from '../../characters/interfaces/status.interface';
-import { SaveChar } from '../../characters/state/character.actions';
+import { AddToInventory, ClearInventory, RemoveFromInventory, SaveChar } from '../../characters/state/character.actions';
 import { CharacterAppState } from '../../characters/state/character.state';
 import { Item } from '../../items/interfaces/item.interface';
 import { Option } from '../../shared/interfaces/option.interface';
@@ -40,6 +40,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     emotes: string[] = [''];
     currentAlignment: any;
     panelOpenState = false;
+    loaded = false;
     theme = 'vs-dark';
 
     onEnterModel: CodeModel = {
@@ -68,6 +69,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
     options = {
         contextmenu: true,
+        wordWrap: 'wordWrapColumn',
         minimap: {
             enabled: false,
         },
@@ -124,6 +126,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 takeUntil(componentDestroyed(this))
             ).subscribe(mob => {
 
+                this.loaded = true;
+
                 console.log('loaded', mob);
                 console.log('x', mob.attributes.attribute['Strength']);
                 console.log('y', mob.className);
@@ -136,7 +140,10 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     this.addMobForm.get('alignment').updateValueAndValidity();
                 });
 
-                this.inventoryItems = [...mob.inventory];
+
+                mob.inventory.forEach(element => {
+                    this.store.dispatch(new AddToInventory(element));
+                });
 
                 this.addMobForm.get('stats').get('hitPoints').setValue(mob.attributes.attribute['Hitpoints']);
                 this.addMobForm.get('stats').get('manaPoints').setValue(mob.attributes.attribute['Mana']);
@@ -177,7 +184,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     attackType: mob.defaultAttack,
                     commands: mob.commands,
                     events: mob.events,
-                    roam: mob.roam
+                    roam: mob.roam,
+                    shopkeeper: mob.shopkeeper,
+                    trainer: mob.trainer
                 });
 
                 this.onEnterModel = {
@@ -241,7 +250,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     ngOnDestroy(): void {
         this.mobService.clearCache();
         this.getEmotesControl.clear();
-
+        this.store.dispatch(new ClearInventory());
     }
 
     generateStats() {
@@ -399,7 +408,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 act: this.addMobForm.get('events').get('act').value,
                 give: this.addMobForm.get('events').get('give').value,
             },
-            roam: this.addMobForm.get('roam').value
+            roam: this.addMobForm.get('roam').value,
+            shopkeeper: this.addMobForm.get('shopkeeper').value,
+            trainer: this.addMobForm.get('trainer').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {

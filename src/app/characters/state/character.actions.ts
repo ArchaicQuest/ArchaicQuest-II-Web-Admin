@@ -6,6 +6,7 @@ import { EqSlot } from '../equipment/equipment.enum';
 export enum CharacterActionTypes {
     AddToInventory = '[Character] Add Item to Inventory',
     RemoveFromInventory = '[Character] Remove Item from Inventory',
+    ClearInventory = '[Character] Clear Inventory',
     AddToEquipment = '[Character] Add Item to equipment',
     UpdateEquipment = '[Character] Update equipment',
     UpdateEquipped = '[Character] Update equipped item',
@@ -26,6 +27,10 @@ export class AddToInventory implements Action {
 export class RemoveFromInventory implements Action {
     readonly type = CharacterActionTypes.RemoveFromInventory;
     constructor(public itemIndex: number) { }
+}
+export class ClearInventory implements Action {
+    readonly type = CharacterActionTypes.ClearInventory;
+    constructor() { }
 }
 
 export class InventoryUpdateSuccess implements Action {
@@ -98,5 +103,6 @@ export type CharacterActions = AddToInventory
     | SaveCharSuccess
     | IncreaseArmour
     | DecreaseArmour
-    | UpdateEquipped;
+    | UpdateEquipped
+    | ClearInventory;
 

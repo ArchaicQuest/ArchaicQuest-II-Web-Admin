@@ -36,6 +36,8 @@ export interface Character {
     defaultAttack: string;
     commands: string;
     roam?: boolean;
+    shopkeeper?: boolean;
+    trainer?: boolean;
     events?: Events;
 }
 

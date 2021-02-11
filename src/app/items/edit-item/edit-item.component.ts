@@ -69,6 +69,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     currentItemSlotValue: any;
     currentArmourTypeValue: any;
     isHiddenInRoom: boolean;
+    showPortalSection = false;
     constructor(
         private changeDetector: ChangeDetectorRef,
         private formBuilder: FormBuilder,
@@ -126,7 +127,12 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             selectContainerKey: [''],
             isHiddenInRoom: [false],
             isStuckInRoom: [false],
-            keyId: ['']
+            keyId: [''],
+            value: [''],
+            portalName: [''],
+            portalDestination: [''],
+            portalEnterDescriptions: [''],
+            portalEnterRoomDescription: ['']
         });
 
 
@@ -165,7 +171,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         ).subscribe(value => {
             this.containerCanBeOpened = !this.containerCanBeOpened;
             if (!this.containerCanBeOpened) {
-                this.itemForm.get('containerOpen').setValue(false);
+                //    this.itemForm.get('containerOpen').setValue(false);
             }
         });
 
@@ -350,7 +356,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 selectContainerKey: item.container ? keyName != null ? keyName.name : '' : '',
                 isHiddenInRoom: item.isHiddenInRoom,
                 isStuckInRoom: item.stuck,
-                keyId: item.keyId
+                keyId: item.keyId,
+                value: item.value
 
             });
 
@@ -544,6 +551,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.itemForm.get('maxDamage').disable();
         this.showWeaponSection = false;
         this.showBookSection = false;
+        this.showPortalSection = false;
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
         this.itemForm.get('containerSize').disable();
@@ -569,6 +577,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         }
         else if (itemType === 6) {
             this.showKeySection = true;
+
+        }
+        else if (itemType === 15) {
+            this.showPortalSection = true;
 
         }
         setTimeout(() => {
@@ -643,7 +655,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 taste: this.itemForm.get('tasteDescription').value,
                 touch: this.itemForm.get('touchDescription').value
             },
-            armourType: this.itemForm.get('armourType').value.id || 0,
+            armourType: this.itemForm.get('armourType').value?.id || 0,
             armourRating: {
                 armour: this.itemForm.get('acPierce').value || 1,
                 magic: Math.floor(this.itemForm.get('acPierce').value / 2) || 0
@@ -678,7 +690,14 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             stuck: this.itemForm.get('isStuckInRoom').value || false,
             uses: 0,
             weight: 5,
-            equipped: false
+            equipped: false,
+            value: this.itemForm.get('value').value || this.itemForm.get('level').value * 100,
+            portal: {
+                name: this.itemForm.get('portalName').value,
+                enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
+                destination: this.itemForm.get('portalDestination').value,
+                enterDescription: this.itemForm.get('portalEnterDescription').value,
+            }
         };
 
         this.store.dispatch(new PostItem(item));

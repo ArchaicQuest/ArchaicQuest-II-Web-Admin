@@ -1,0 +1,97 @@
+<div class="container-fluid view-items">
+    <app-header>Edit Help</app-header>
+
+    <div class="row">
+        <div class="col-8">
+
+            <div class="panel">
+                <form novalidate [formGroup]="form" (ngSubmit)="addHelp()">
+                    <input type="hidden" formControlName="id">
+                    <!-- <h2>Help File:</h2> -->
+                    <div class="section">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Title</mat-label>
+                                    <input matInput placeholder="Item name" value="" required formControlName="title">
+                                    <mat-error *ngIf="form.get('title').hasError('required')">
+                                        Title is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Keywords</mat-label>
+                                    <input matInput placeholder="Item name" value="" required
+                                        formControlName="keywords">
+                                    <mat-hint>Comma separated list of keywords</mat-hint>
+
+                                    <mat-error *ngIf="form.get('keywords').hasError('required')">
+                                        keywords are required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Brief Description</mat-label>
+                                    <input matInput placeholder="Brief Description" value="" required
+                                        formControlName="briefDescription">
+                                    <mat-error *ngIf="form.get('briefDescription').hasError('required')">
+                                        Brief Description is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                            <div class="col">
+
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Related Helpfiles</mat-label>
+                                    <input matInput placeholder="Related Helpfiles" value="" required
+                                        formControlName="relatedHelpFiles">
+
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col">
+
+                                <mat-form-field appearance="outline">
+                                    <mat-label>Description</mat-label>
+                                    <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
+                                        cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                        formControlName="description"></textarea>
+                                    <mat-error *ngIf="form.get('description').hasError('required')">
+                                        Description is required.
+                                    </mat-error>
+                                </mat-form-field>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+
+
+
+
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Add
+                        Help</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-4">
+            <app-help-preview-component [itemForm]="form"></app-help-preview-component>
+        </div>
+    </div>
+</div>

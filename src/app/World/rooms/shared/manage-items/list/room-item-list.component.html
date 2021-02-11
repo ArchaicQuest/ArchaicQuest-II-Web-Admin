@@ -41,10 +41,13 @@
                         </a>
                     </div>
                     <div class="col">
-                        <button mat-flat-button color="secondary" target="_blank"
-                            [routerLink]="['/world/edit-area', data.id]">
-                            Edit</button>
+                        <a style="margin: 15px 0" target="_blank" mat-raised-button color="primary"
+                            (click)="openEditDialog(data, i)">
+                            Edit Item (advanced)
+                        </a>
                     </div>
+
+
                 </div>
             </div>
         </div>

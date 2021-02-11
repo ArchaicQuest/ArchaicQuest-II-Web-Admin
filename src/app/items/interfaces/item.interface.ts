@@ -39,4 +39,14 @@ export interface Item {
     armourRating: ArmourRating;
     armourType: number;
     equipped: boolean;
+    value?: number;
+    portal: Portal;
+}
+
+
+export interface Portal {
+    name: string;
+    destination: string;
+    enterDescription: string;
+    enterDescriptionRoom: string;
 }

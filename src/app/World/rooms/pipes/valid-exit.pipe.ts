@@ -122,7 +122,7 @@ export class isRoomPipe implements PipeTransform {
 
     transform(coords: Coords, rooms: Room[], prop: string = ""): string {
 
-        const isRoom = rooms.find(x => x.coords.x === coords.x && x.coords.y === coords.y && x.title !== 'add room');
+        const isRoom = rooms.find(x => x.coords.x === coords.x && x.coords.y === coords.y && x.coords.z === coords.z && x.title !== 'add room');
 
         return isRoom ? isRoom[prop] || isRoom.title : "";
     }

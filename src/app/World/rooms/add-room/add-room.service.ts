@@ -39,6 +39,7 @@ export class RoomService {
         roomObjects: this.formBuilder.array([this.initRoomObject(null)]),
         updateMessage: [''],
         instantRepop: [false],
+        terrain: [''],
         mobs: [],
         CoordX: ['', Validators.required],
         CoordY: ['', Validators.required],
@@ -56,7 +57,8 @@ export class RoomService {
             up: [''],
             down: ['']
         }),
-        type: [0]
+        type: [0],
+        terrainType: [0]
     });
 
     initEmote(data: string = '') {

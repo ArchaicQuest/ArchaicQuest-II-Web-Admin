@@ -501,6 +501,15 @@ button,
     }
 }
 
+.mat-spinner {
+    margin: 0 auto;
+}
+
+.mat-progress-spinner circle, .mat-spinner circle {
+    stroke: #f6d437 !important;
+   
+}
+
 .alert-primary {
     color: #fff !important;
     background-color: #222 !important;
@@ -649,4 +658,8 @@ a.mat-raised-button {
 background: #111;
 padding: 20px;
     }
+  }
+
+  ::ng-deep ngx-monaco-editor {
+    height: 100% !important;
   }

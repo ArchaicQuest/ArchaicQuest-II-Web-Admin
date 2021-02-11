@@ -21,6 +21,7 @@ import { BaseSelectorComponent } from '../base-selector.component';
 import { Observable } from 'rxjs';
 import { Item } from '../../interfaces/item.interface';
 import { ItemService } from '../../add-item/add-item.service';
+import { getItemTypes } from '../../state/add-item.selector';
 
 @Component({
     selector: 'app-item-selector',
@@ -46,7 +47,7 @@ export class ItemSelectorComponent extends BaseSelectorComponent
 
     @Input() currentValue = '';
     @Output() sendItemToParent = new EventEmitter<Item>();
-    constructor(private fb: FormBuilder, private itemService: ItemService, ) {
+    constructor(private fb: FormBuilder, private itemService: ItemService,) {
         super();
 
     }
@@ -58,7 +59,8 @@ export class ItemSelectorComponent extends BaseSelectorComponent
     ngOnInit() {
 
         this.formGroup = this.fb.group({
-            itemSearch: this.control
+            itemSearch: this.control,
+            value: ['']
         });
 
         this.filteredItems = this.formGroup
@@ -85,7 +87,12 @@ export class ItemSelectorComponent extends BaseSelectorComponent
     }
 
     addItem() {
-        //  const newObj = Object.create(this.control.value);
+
+
+        if (this.control.value.itemType === 14) {
+            (this.control.value as Item).value = this.formGroup.get('value').value;
+        }
+
         this.sendItemToParent.emit(this.control.value);
     }
 

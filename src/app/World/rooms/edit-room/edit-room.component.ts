@@ -31,7 +31,7 @@ import {
 } from '@angular/animations';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { RoomExit } from './../interfaces/roomExit.interface';
-import { Room, RoomTypes } from './../interfaces/room.interface';
+import { Room, RoomTypes, TerrainTypes } from './../interfaces/room.interface';
 import { RoomObject } from './../interfaces/roomObject.interface';
 import { Shared } from 'src/app/shared/shared';
 import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
@@ -97,6 +97,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     southWestValidExit = false;
     westValidExit = false;
     RoomTypes: { name: string; value: number }[];
+    TerrainTypes: { name: string; value: number }[];
 
     constructor(
         private roomServices: RoomService,
@@ -132,6 +133,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             this.addRoomForm.get('title').setValue(value.title);
             this.addRoomForm.get('description').setValue(value.description);
             this.addRoomForm.get('type').setValue(value.type);
+            this.addRoomForm.get('terrain').setValue(value.terrain);
 
             value.items.forEach(item => {
                 this.roomServices.roomItems(item);
@@ -149,6 +151,12 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
                     console.log('rm type', index === 0 ? 0 : 1 << index);
                     return { name: RoomTypes[key], value: index === 0 ? 0 : 1 << index };
+                });
+
+            this.TerrainTypes = Object.keys(TerrainTypes)
+                .filter(value => isNaN(Number(value)) === false)
+                .map((key, index) => {
+                    return { name: TerrainTypes[key], value: index };
                 });
 
 
@@ -340,7 +348,8 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             instantRepop: false,
             players: null,
             updateMessage: 'nothing',
-            type: this.addRoomForm.get('type').value
+            type: this.addRoomForm.get('type').value,
+            terrain: this.addRoomForm.get('terrainType').value,
         };
 
         this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {

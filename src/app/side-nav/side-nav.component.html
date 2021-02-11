@@ -167,6 +167,27 @@
                     </li>
                 </ul>
             </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="Socials" matTooltipPosition="right"
+                    (click)="toggleSidenav(true)">
+                    <i style="width:15px" class="fa fa-question" aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Help Files</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/help']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View Help Files</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/help/add']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-plus" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">Create Help File</span>
+                        </a>
+                    </li>
+                </ul>
+            </mat-expansion-panel>
             <!-- <mat-expansion-panel>
                 <mat-expansion-panel-header matTooltip="Socials" matTooltipPosition="right"
                     (click)="toggleSidenav(true)">
