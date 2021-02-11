@@ -22,6 +22,7 @@ export interface Room {
     updateMessage: string;
     instantRepop: boolean;
     type: number;
+    terrain: number;
 }
 
 export enum RoomTypes {
@@ -36,4 +37,18 @@ export enum RoomTypes {
     Field = 1 << 8,
     Forest = 1 << 9,
     Desert = 1 << 10,
+}
+
+export enum TerrainTypes {
+    Inside, //no weather
+    City,
+    Field,
+    Forest,
+    Hills,
+    Mountain,
+    Water,
+    Underwater,
+    Air,
+    Desert,
+    Underground //no weather
 }

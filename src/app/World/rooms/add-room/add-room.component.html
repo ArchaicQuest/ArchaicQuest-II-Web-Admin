@@ -120,11 +120,15 @@
                     </div>
 
                     <div class="section">
-                        <h2>Room Type:</h2>
+                        <h2>Room &amp; Terrain Type:</h2>
                         <p>
-                            Changes the room colour in the map and may affect how the player can interact with the room.
-                            Example: River will mean the play can fish/swim. Shop means it will show up a shop on the
+                            Room Type changes the room colour in the map and may affect how the player can interact with
+                            the room.
+                            Example: River will mean the player can fish/swim. Shop means it will show up a shop on the
                             map.
+
+                            Terrain affects the experience of the player, if set to inside then no weather messages will
+                            be sent to the player
                         </p>
 
                         <div class="row">
@@ -133,6 +137,17 @@
                                     <mat-label>Room Type</mat-label>
                                     <mat-select formControlName="type" placeholder="Room Type">
                                         <mat-option *ngFor="let type of RoomTypes" [value]="type.value">
+                                            {{ type.name }}
+                                        </mat-option>
+                                    </mat-select>
+
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Terrain Type</mat-label>
+                                    <mat-select formControlName="terrainType" placeholder="Terrain Type">
+                                        <mat-option *ngFor="let type of TerrainTypes" [value]="type.value">
                                             {{ type.name }}
                                         </mat-option>
                                     </mat-select>
