@@ -69,7 +69,8 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
                 mobs: null,
                 instantRepop: false,
                 updateMessage: '',
-                type: 0
+                type: 0,
+                terrain: 0
             };
 
 
