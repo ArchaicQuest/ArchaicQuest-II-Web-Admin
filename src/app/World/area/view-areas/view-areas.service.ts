@@ -20,7 +20,7 @@ export class ViewAreasService {
     }
 
     delete(id: number): Observable<any> {
-        debugger;
+
         return this.http.delete<any>(`${this.getAreasUrl}/delete/${id}`);
     }
 
