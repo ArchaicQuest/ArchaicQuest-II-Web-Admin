@@ -88,10 +88,6 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
                     this.roomTable[this.service.getRoomID(room.coords)] = room;
                 });
 
-
-                console.log(this.roomTable['{x:0,y:1,z:0}']);
-                console.log('-----------------------------------------------');
-                console.log(this.roomTable['{x:1,y:1,z:0}']);
             }
 
             this.area = {
@@ -111,17 +107,9 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
             this.minValueOfX = Math.min(...this.rooms.map(room => room.coords.x), 0) - 1;
             this.minValueOfY = Math.min(...this.rooms.map(room => room.coords.y), 0) - 1;
 
-            console.log('mx x', this.maxValueOfX);
-            console.log('mx y', this.maxValueOfY);
-
-            console.log('mn x', this.minValueOfX);
-            console.log('mn y', this.minValueOfY);
 
             this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
             this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
-
-            console.log('totalRow', this.totalRow);
-            console.log('totalCol', this.totalCol);
 
         });
 

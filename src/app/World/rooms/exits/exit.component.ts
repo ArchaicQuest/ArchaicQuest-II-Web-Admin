@@ -76,7 +76,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
     ngOnInit() {
         this.addRoomForm = <FormGroup>this.controlContainer.control;
-        console.log(this.route.snapshot.params);
+
         this.roomId = this.route.snapshot.params['roomId'];
 
         this.isMobileLayout = window.innerWidth <= 425;
@@ -100,9 +100,6 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
                     z: value.coords.z
                 };
 
-                console.log('real', this.coords);
-
-                console.log(this.addRoomForm);
 
                 this.addRoomForm.get('CoordX').setValue(value.coords.x);
                 this.addRoomForm.get('CoordY').setValue(value.coords.y);
@@ -195,7 +192,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
                     z: this.route.snapshot.params['z']
                 };
 
-            console.log('add', this.coords);
+
 
             this.addRoomForm.get('CoordX').setValue(this.coords.x);
             this.addRoomForm.get('CoordY').setValue(this.coords.y);
@@ -277,7 +274,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
         let exitKey = exit[0].toLowerCase() + exit2;
 
-        console.log("oo ", this.exits[exitDirection.toLowerCase()])
+
 
         const dialogRef = this.dialog.open(ManageExitsComponent, {
             width: '450px',
@@ -290,56 +287,55 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
             }
         });
 
-        console.log("exit popup", this.addRoomForm.get(`exits.${exitKey}`).value.coords || this.coords)
+
 
         dialogRef.afterClosed().subscribe((result: Exit) => {
             if (result == null) {
                 return;
             }
 
-            if ((result as any).exit != null) {
-                // remove exit
+            if (Object.prototype.hasOwnProperty.call((result as any), 'exit')) {
 
-                switch ((result as any).exit) {
+                switch ((result as any).exit.name) {
                     case 'North':
                         this.exits.north = null;
-                        //this.addRoomForm.get('exits.north').setValue(null);
+                        this.addRoomForm.get('exits.north').setValue(null);
                         break;
                     case 'North East':
-                        this.exits.northEast = result;
-                        this.addRoomForm.get('exits.northEast').setValue(result);
+                        this.exits.northEast = null;
+                        this.addRoomForm.get('exits.northEast').setValue(null);
                         break;
                     case 'East':
-                        this.exits.east = result;
-                        this.addRoomForm.get('exits.east').setValue(result);
+                        this.exits.east = null;
+                        this.addRoomForm.get('exits.east').setValue(null);
                         break;
                     case 'South East':
-                        this.exits.southEast = result;
-                        this.addRoomForm.get('exits.southEast').setValue(result);
+                        this.exits.southEast = null;
+                        this.addRoomForm.get('exits.southEast').setValue(null);
                         break;
                     case 'South':
-                        this.exits.south = result;
-                        this.addRoomForm.get('exits.south').setValue(result);
+                        this.exits.south = null;
+                        this.addRoomForm.get('exits.south').setValue(null);
                         break;
                     case 'South West':
-                        this.exits.southWest = result;
-                        this.addRoomForm.get('exits.southWest').setValue(result);
+                        this.exits.southWest = null;
+                        this.addRoomForm.get('exits.southWest').setValue(null);
                         break;
                     case 'West':
-                        this.exits.west = result;
-                        this.addRoomForm.get('exits.west').setValue(result);
+                        this.exits.west = null;
+                        this.addRoomForm.get('exits.west').setValue(null);
                         break;
                     case 'North West':
-                        this.exits.northWest = result;
-                        this.addRoomForm.get('exits.northWest').setValue(result);
+                        this.exits.northWest = null;
+                        this.addRoomForm.get('exits.northWest').setValue(null);
                         break;
                     case 'Up':
-                        this.exits.up = result;
-                        this.addRoomForm.get('exits.up').setValue(result);
+                        this.exits.up = null;
+                        this.addRoomForm.get('exits.up').setValue(null);
                         break;
                     case 'Down':
-                        this.exits.down = result;
-                        this.addRoomForm.get('exits.down').setValue(result);
+                        this.exits.down = null;
+                        this.addRoomForm.get('exits.down').setValue(null);
                         break;
                 }
 
@@ -390,8 +386,6 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
                     break;
             }
 
-            console.log('exit ', this.exits);
-            console.log(result);
 
             // Subscribed in the add-room component
             this.exitValueChange.emit(this.exits);

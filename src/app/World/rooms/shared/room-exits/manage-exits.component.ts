@@ -83,11 +83,11 @@ export class ManageExitsComponent implements OnInit {
 
     }
 
-    removeExit() {
+    removeExit(exitDirection: string) {
 
         this.toastr.success(`Exit removed successfully.`);
 
-        this.dialogRef.close({ exit: this.exitDirection });
+        this.dialogRef.close({ exit: { name: exitDirection } });
 
     }
 
