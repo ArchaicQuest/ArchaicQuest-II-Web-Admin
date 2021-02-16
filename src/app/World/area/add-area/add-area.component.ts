@@ -57,7 +57,7 @@ export class AddAreaComponent implements OnInit {
     }
 
     uploadToServer() {
-
+        console.log(1)
         this.areaServices.uploadFile(this.file);
 
     }

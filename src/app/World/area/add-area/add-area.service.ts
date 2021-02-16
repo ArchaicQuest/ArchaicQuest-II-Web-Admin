@@ -47,7 +47,7 @@ export class AreaService {
         /** In Angular 5, including the header Content-Type can invalidate your request */
         headers.append('Content-Disposition', 'multipart/form-data');
         // headers.append('Accept', 'application/json');
-
+        debugger;
         const formData: FormData = new FormData();
         formData.append('file', file, file.name);
 
