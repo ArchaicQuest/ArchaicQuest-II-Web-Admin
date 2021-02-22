@@ -281,7 +281,7 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
             data: {
                 exit: exitDirection,
                 currentCoord: this.coords,
-                exitAreaId: this.addRoomForm.get(`exits.${exitKey}`).value.areaId || this.areaId,
+                exitAreaId: this.addRoomForm.get(`exits.${exitKey}`).value?.areaId || this.areaId,
                 areaId: this.areaId,
                 obj: this.exits[exitDirection.toLowerCase()]
             }

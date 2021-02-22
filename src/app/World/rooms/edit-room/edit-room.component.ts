@@ -270,6 +270,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     }
 
     onExitValueChange(newValue) {
+        console.log("new exit", newValue)
         this.exits = newValue;
     }
 
@@ -318,7 +319,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
             WTF is Players?
             */
-
+        console.log("post", this.addRoomForm.get('exits.east').value,)
         const data: Room = {
             id: this.roomId,
             roomObjects: [],

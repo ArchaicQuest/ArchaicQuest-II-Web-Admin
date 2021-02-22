@@ -14,4 +14,8 @@ export interface Settings {
     playerTick: number;
     updateTick: number;
     startingRoom: number;
+    postToDiscord?: boolean;
+    channelDiscordWebHookURL?: string;
+    eventsDiscordWebHookURL?: string;
+    errorDiscordWebHookURL?: string;
 }

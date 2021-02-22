@@ -39,6 +39,40 @@
                         </mat-form-field>
                     </div>
 
+                    <div>
+                        <mat-checkbox formControlName="postToDiscord">Enable posting to discord</mat-checkbox>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Channel events webhook URL</mat-label>
+                                <input matInput placeholder="Enter channel webhook url"
+                                    formControlName="channelDiscordWebHookURL">
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Game events webhook URL</mat-label>
+                                <input matInput placeholder="Enter game events webhook url"
+                                    formControlName="eventsDiscordWebHookURL">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Error events webhook URL</mat-label>
+                                <input matInput placeholder="Enter error webhook url"
+                                    formControlName="errorDiscordWebHookURL">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+
+
+
                     <button mat-raised-button color="primary" type="submit">Update Settings</button>
 
                 </form>

@@ -23,6 +23,10 @@ html {
     border: 3px solid #222; /* creates padding around scroll thumb */
 }
 
+.data-list {
+    transform: translateZ(0);
+}
+
 body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100vh;

@@ -24,7 +24,11 @@ export class SettingsComponent implements OnInit {
             pk: [],
             pt: [],
             startingRoom: [],
-            recallRoom: []
+            recallRoom: [],
+            postToDiscord: [],
+            channelDiscordWebHookURL: [''],
+            eventsDiscordWebHookURL: [''],
+            errorDiscordWebHookURL: ['']
         });
 
 
@@ -36,6 +40,11 @@ export class SettingsComponent implements OnInit {
             this.settingsForm.get('pt').setValue(val.playerThievingAllowed);
             this.settingsForm.get('startingRoom').setValue(val.startingRoom);
             this.settingsForm.get('recallRoom').setValue(val.defaultRecallRoom);
+            this.settingsForm.get('postToDiscord').setValue(val.postToDiscord);
+            this.settingsForm.get('channelDiscordWebHookURL').setValue(val.channelDiscordWebHookURL);
+            this.settingsForm.get('eventsDiscordWebHookURL').setValue(val.eventsDiscordWebHookURL);
+            this.settingsForm.get('errorDiscordWebHookURL').setValue(val.errorDiscordWebHookURL);
+
         });
 
     }
@@ -55,8 +64,11 @@ export class SettingsComponent implements OnInit {
             maxPcCorpseTime: 10,
             minLevelCanShout: 3,
             playerTick: 500,
-            updateTick: 1000
-
+            updateTick: 1000,
+            postToDiscord: this.settingsForm.get('postToDiscord').value,
+            channelDiscordWebHookURL: this.settingsForm.get('channelDiscordWebHookURL').value,
+            eventsDiscordWebHookURL: this.settingsForm.get('eventsDiscordWebHookURL').value,
+            errorDiscordWebHookURL: this.settingsForm.get('errorDiscordWebHookURL').value
         };
 
         this.service.updateSettings(settings).pipe(take(1)).subscribe(response => {
