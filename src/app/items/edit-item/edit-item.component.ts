@@ -309,6 +309,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                     this.itemForm.get('armourType').setValue(this.currentArmourTypeValue);
                     this.itemForm.get('armourType').updateValueAndValidity();
 
+
                 });
 
             this.itemForm.patchValue({
@@ -589,6 +590,13 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
             this.findInvalidControls();
         });
+
+        setTimeout(() => {
+            this.itemForm.updateValueAndValidity();
+
+
+            this.findInvalidControls();
+        }, 500);
     }
 
     updateSelectedFlags(flag: number) {
@@ -696,7 +704,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 name: this.itemForm.get('portalName').value,
                 enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
                 destination: this.itemForm.get('portalDestination').value,
-                enterDescription: this.itemForm.get('portalEnterDescription').value,
+                enterDescription: this.itemForm.get('portalEnterDescriptions').value,
             }
         };
 

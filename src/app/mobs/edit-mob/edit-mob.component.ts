@@ -213,7 +213,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     uri: 'lua4.json',
                     value: mob.events.give,
                 };
-                this.changeDetector.detectChanges();
+                // this.changeDetector.detectChanges();
 
                 if (mob.emotes.length) {
                     // this is a hack to remove the first object section as
@@ -223,7 +223,10 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     // so just removed the first instance, quickest solution
                     this.getEmotesControl.removeAt(0);
                     for (let index = 0; index < mob.emotes.length; index++) {
-                        this.addEmote(mob.emotes[index]);
+                        if (mob.emotes[index] != null) {
+                            this.addEmote(mob.emotes[index]);
+                        }
+
                     }
 
                 }
@@ -232,7 +235,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
 
 
-            this.addMobForm.updateValueAndValidity();
+            //  this.addMobForm.updateValueAndValidity();
 
             // tslint:disable-next-line: forin
             for (const i in this.addMobForm.controls) {

@@ -81,8 +81,8 @@
 
         <tr class="stat-line" *ngIf="itemForm.get('itemType').value?.id == 0">
             <td>Armor Type</td>
-            <td>
-                {{itemForm.get('armourType').value.id | armourType: itemForm.get('armourType').value.id  }}
+            <td> {{itemForm.get('itemType').value | json}}
+                {{itemForm.get('armourType').value | armourType: itemForm.get('armourType').value }}
             </td>
 
             <td></td>
@@ -115,7 +115,7 @@
         <tr *ngIf="itemForm.get('itemType').value?.id == 11">
             <td>Attack Type</td>
             <td>
-                {{itemForm.get('attackType').value | attackType: itemForm.get('attackType').value  }}
+                {{itemForm.get('attackType').value | attackType: itemForm.get('attackType').value }}
             </td>
 
             <td></td>
@@ -131,7 +131,8 @@
         <tr *ngIf="itemForm.get('itemType').value?.id == 11">
             <td>Damage</td>
             <td>
-                {{ itemForm.get('minDamage').value || 0}}-{{itemForm.get('maxDamage').value || 0}}({{ itemForm.get('minDamage').value | averageDamage: itemForm.get('maxDamage').value }})
+                {{ itemForm.get('minDamage').value || 0}}-{{itemForm.get('maxDamage').value || 0}}({{
+                itemForm.get('minDamage').value | averageDamage: itemForm.get('maxDamage').value }})
             </td>
 
             <td></td>
@@ -153,9 +154,9 @@
             <td></td>
         </tr>
 
-        <tr class="stat-line">
+        <!-- <tr class="stat-line" *ngIf="itemForm.get('flags')">
             <td>flags</td>
-            <td>
+            <td> {{itemForm.get('flags.Antievil').value}}
                 <span *ngIf="itemForm.get('flags.Antievil').value">
                     Anti Evil
                 </span>
@@ -163,42 +164,42 @@
 
             <td></td>
         </tr>
-        <tr>
+        <tr *ngIf="itemForm.get('flags')">
             <td></td>
             <td>
                 <span *ngIf="itemForm.get('flags.Antigood').value">Anti Good</span>
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Antineutral').value">
+        <tr *ngIf="itemForm.get('flags')">
             <td></td>
             <td>
-                Anti Neutral
+                <span *ngIf="itemForm.get('flags.Antigood').value">Anti Neutral</span>
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Bless').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Bless').value">
             <td></td>
             <td>
                 Bless
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Container').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Container').value">
             <td></td>
             <td>
                 Container
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Container').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Container').value">
             <td></td>
             <td>
                 Container
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Cursed').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Cursed').value">
             <td></td>
             <td>
                 Cursed
@@ -206,83 +207,83 @@
             <td></td>
         </tr>
 
-        <tr *ngIf="itemForm.get('flags.Equipable').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Equipable').value">
             <td></td>
             <td>
                 Equipable
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Evil').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Evil').value">
             <td></td>
             <td>
                 Evil
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Glow').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Glow').value">
             <td></td>
             <td>
                 Glow
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Holy').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Holy').value">
             <td></td>
             <td>
                 Holy
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Hum').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Hum').value">
             <td></td>
             <td>
                 Hum
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Invis').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Invis').value">
             <td></td>
             <td>
                 Invis
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Nodrop').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Nodrop').value">
             <td></td>
             <td>
                 No Drop
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Nolocate').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Nolocate').value">
             <td></td>
             <td>
                 No Locate
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Noremove').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Noremove').value">
             <td></td>
             <td>
                 No Remove
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.QuestItem').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.QuestItem').value">
             <td></td>
             <td>
                 Quest Item
             </td>
             <td></td>
         </tr>
-        <tr *ngIf="itemForm.get('flags.Vampric').value">
+        <tr *ngIf="itemForm.get('flags') && itemForm.get('flags.Vampric').value">
             <td></td>
             <td>
                 Vampric
             </td>
             <td></td>
-        </tr>
+        </tr> -->
     </table>
 
     <p class="echo">> look</p>
