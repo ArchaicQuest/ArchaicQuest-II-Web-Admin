@@ -122,7 +122,9 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             portalName: [''],
             portalDestination: [''],
             portalEnterDescription: [''],
-            portalEnterRoomDescription: ['']
+            portalEnterRoomDescription: [''],
+            condition: [''],
+            weight: ['']
         });
 
 
@@ -446,7 +448,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
                 minimum: this.itemForm.get('minDamage').value || 1
             },
             weaponType: this.itemForm.get('weaponType').value || 0,
-            condition: 1,
+            condition: this.itemForm.get('condition').value || 0,
             containerItems: [],
             damageType: this.itemForm.get('damageType').value || 0,
             decayTimer: 2,
@@ -468,7 +470,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             },
             questItem: false,
             uses: 0,
-            weight: 5,
+            weight: this.itemForm.get('weight').value || 1,
             equipped: false,
             stuck: this.itemForm.get('isStuckInRoom').value || false,
             value: this.itemForm.get('value').value || this.itemForm.get('level').value * 100,
