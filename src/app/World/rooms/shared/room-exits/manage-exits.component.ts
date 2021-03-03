@@ -58,11 +58,31 @@ export class ManageExitsComponent implements OnInit {
         } else {
             this.form.get('areaId').setValue(this.data.exitAreaId);
         }
+
+
+        // eslint-disable-next-line no-prototype-builtins
+        if (this.data.obj && this.data.obj.coords.x === this.exitCoord.x || this.data.obj == null) {
+            this.form.get('coordX').setValue(this.exitCoord.x);
+        } else {
+            this.form.get('coordX').setValue(this.data.obj.coords.x);
+        }
+
+        // eslint-disable-next-line no-prototype-builtins
+        if (this.data.obj && this.data.obj.coords.y === this.exitCoord.y || this.data.obj == null) {
+            this.form.get('coordY').setValue(this.exitCoord.y);
+        } else {
+            this.form.get('coordY').setValue(this.data.obj.coords.y);
+        }
+
+        // eslint-disable-next-line no-prototype-builtins
+        if (this.data.obj && this.data.obj.coords.z === this.exitCoord.z || this.data.obj == null) {
+            this.form.get('coordZ').setValue(this.exitCoord.z);
+        } else {
+            this.form.get('coordZ').setValue(this.data.obj.coords.z);
+        }
         console.log("setting y to ", this.exitCoord.y)
         this.form.get('name').setValue(this.data.exit);
-        this.form.get('coordX').setValue(this.exitCoord.x);
-        this.form.get('coordY').setValue(this.exitCoord.y);
-        this.form.get('coordZ').setValue(this.exitCoord.z);
+
         this.form.get('door').setValue(this.data.obj.door);
         this.form.get('keyword').setValue(this.data.obj.keyword);
         this.form.get('closed').setValue(this.data.obj.closed);

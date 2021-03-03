@@ -5,7 +5,7 @@
         Exits will need to be added to both rooms to be two way,
         and share the same key for any doors, all properties must match too.
     </p>
-    <p>Coordinates shown are (x,y,z)</p>
+    <p>Coordinates shown are (area id, x, y, z)</p>
     <p>
         <mat-checkbox (change)="enableInvalidRooms($event)" [checked]="enableInvalidExits">Allow invalid exits;
         </mat-checkbox>
@@ -87,7 +87,7 @@
                     <ng-container *ngIf="isMobileLayout">@</ng-container>
                     <ng-container *ngIf="!isMobileLayout">Current Room</ng-container>
 
-                    <span class="addRoom__exits__coords">({{coords?.x}},
+                    <span class="addRoom__exits__coords">({{areaId}}, {{coords?.x}},
                         {{coords?.y}},
                         {{coords?.z}})</span>
                 </button>

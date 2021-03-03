@@ -251,8 +251,13 @@ export class ExitComponent implements OnInit, OnDestroy, AfterContentInit {
 
     displayCoord(direction: string) {
         const coords = this.exitService.setExitCoord(direction, this.coords);
+        const exitCoord = this.exits[direction.toLowerCase()] as Exit;
 
-        return `(${coords.x}, ${coords.y}, ${coords.z})`;
+        if (exitCoord != null) {
+            return `(${exitCoord.areaId}, ${exitCoord.coords.x}, ${exitCoord.coords.y}, ${exitCoord.coords.z})`;
+        }
+        return `(${this.areaId}, ${coords.x}, ${coords.y}, ${coords.z})`;
+
     }
 
     isExitValid(direction: string): Observable<string> {
