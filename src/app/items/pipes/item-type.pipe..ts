@@ -29,6 +29,19 @@ export class ItemTypePipe implements PipeTransform {
                 return 'Repair';
             case 11:
                 return 'Weapon';
+            case 12:
+                return 'Seating';
+            case 13:
+                return 'Inanimate';
+            case 14:
+                return 'Money';
+            case 15:
+                return 'Portal';
+            case 16:
+                return 'Crafting';
+            case 17:
+                return 'Material';
+
             default:
                 return '';
         }

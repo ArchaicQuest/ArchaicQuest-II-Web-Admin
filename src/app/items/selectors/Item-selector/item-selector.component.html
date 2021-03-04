@@ -15,12 +15,14 @@
     </div>
     <div class="row">
         <div class="col">
-            <mat-form-field appearance="outline">
-                <mat-label>Coin Value</mat-label>
-                <input matInput type="number" placeholder="Number of coins" formControlName="value">
-                <mat-hint align="start"><strong>Number of coins</strong>
-                </mat-hint>
-            </mat-form-field>
+            <div style="display: none;">
+                <mat-form-field appearance="outline">
+                    <mat-label>Coin Value</mat-label>
+                    <input matInput type="number" placeholder="Number of coins" formControlName="value">
+                    <mat-hint align="start"><strong>Number of coins</strong>
+                    </mat-hint>
+                </mat-form-field>
+            </div>
             <button href="javascript:(0)" mat-raised-button color="primary" (click)="addItem()"
                 [disabled]="formGroup.get('itemSearch').value == null">Add
                 item</button>

@@ -1,0 +1,119 @@
+<div class="container-fluid setttings">
+    <app-header>Edit Crafting Recipes</app-header>
+
+
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+
+                <form novalidate [formGroup]="form" (submit)="addCraftingRecipes()">
+                    <div class="row">
+                        <div class="col-12">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Title</mat-label>
+                                <input matInput placeholder="Quest title" formControlName="title">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput placeholder="Description" cdkTextareaAutosize
+                                    #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20"
+                                    required formControlName="description"></textarea>
+                                <!-- <mat-error *ngIf="addRoomForm.get('description').hasError('required')">
+                                    Room description is required.
+                                </mat-error> -->
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+
+                            <h2>Materials</h2>
+
+                            <div formArrayName="materials" class="materials"
+                                *ngFor="let material of getMaterialControl; let i=index">
+                                <div class="row" [formGroupName]="i">
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Material</mat-label>
+                                            <input type="text" matInput placeholder="Full name of the material"
+                                                formControlName="material" />
+                                        </mat-form-field>
+                                    </div>
+
+                                    <div class="col">
+                                        <mat-form-field appearance="outline" class="form-control">
+                                            <mat-label>Quantity</mat-label>
+                                            <input min="1" type="number" matInput placeholder="Quantity"
+                                                formControlName="quantity" />
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <a mat-flat-button color="secondary" class="btn btn-danger btn-sm"
+                                    (click)="removeMaterial(i)">Remove</a>
+
+                            </div>
+
+
+                            <button mat-raised-button color="primary" (click)="this.addMaterial(null)" type="button">Add
+                                another
+
+                                Material</button>
+
+
+                        </div>
+
+                        <div class="col">
+                            <h2>Crafted Item</h2>
+
+                            <div class="row">
+                                <div class="col">
+                                    <app-item-selector (sendItemToParent)="addItem($event)" [hideValue]="true">
+                                    </app-item-selector>
+                                </div>
+                            </div>
+
+
+                            <div class="row craftedItem" *ngIf="item != null">
+                                <div class="col">
+                                    <div class="data-list">
+                                        <div class="data-list__data">
+                                            <a (click)="removeItem()" class="fa fa-times-circle"></a>
+                                            <h3 [line-truncation]="2">{{item?.name}}</h3>
+                                            <p class="data-list__data__description" [line-truncation]="3">
+                                                {{item?.description.look}}
+                                            </p>
+
+
+                                            <div class="data-list__actions">
+
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <p><i class="fa fa-info"></i> {{item?.itemType | itemType}}</p>
+
+                                                    </div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
+                    <button class="submit" mat-raised-button color="primary" type="submit">Add crafting recipe</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+</div>

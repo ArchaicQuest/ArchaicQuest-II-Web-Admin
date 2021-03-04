@@ -14,7 +14,8 @@ import {
     ControlValueAccessor,
     NG_VALUE_ACCESSOR,
     NG_VALIDATORS,
-    FormBuilder
+    FormBuilder,
+    FormControl
 } from '@angular/forms';
 import { startWith, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { BaseSelectorComponent } from '../base-selector.component';
@@ -46,6 +47,8 @@ export class ItemSelectorComponent extends BaseSelectorComponent
     filteredItems: Observable<Item[]>;
 
     @Input() currentValue = '';
+
+    @Input() hideValue = false;
     @Output() sendItemToParent = new EventEmitter<Item>();
     constructor(private fb: FormBuilder, private itemService: ItemService,) {
         super();
@@ -53,14 +56,17 @@ export class ItemSelectorComponent extends BaseSelectorComponent
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        this.updateFormControl('itemSearch', changes);
+        console.log(changes)
+        // if (changes) {
+        //     this.updateFormControl('itemSearch', changes);
+        // }
     }
 
     ngOnInit() {
 
         this.formGroup = this.fb.group({
             itemSearch: this.control,
-            value: ['']
+            value: [0]
         });
 
         this.filteredItems = this.formGroup
