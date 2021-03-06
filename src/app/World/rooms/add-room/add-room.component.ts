@@ -3,7 +3,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { Item } from 'src/app/items/interfaces/item.interface';
@@ -37,6 +37,7 @@ import { RoomService } from './add-room.service';
 export class AddRoomComponent implements OnInit, OnDestroy {
     componentActive = true;
     addRoomForm: FormGroup;
+    disableButton = false;
     id: number;
     areaId: number;
     coords: Coords;
@@ -85,6 +86,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         public dialog: MatDialog,
         public shared: Shared,
+        private router: Router,
         private cdRef: ChangeDetectorRef,
         private exitService: RoomExitService
     ) { }
@@ -231,6 +233,7 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     }
 
     saveRoom() {
+        this.disableButton = true;
         // TODO
         /*
             Create room object interface, loop over this.getRoomObjectsControl
@@ -283,5 +286,6 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         });
 
         this.roomServices.saveRoom(data);
+        this.router.navigate(['/world/area/' + this.id])
     }
 }

@@ -12,7 +12,7 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { BehaviorSubject } from 'rxjs';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { Room } from '../interfaces/room.interface';
-import { tap, catchError } from 'rxjs/operators';
+import { tap, catchError, take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { RoomObject } from '../interfaces/roomObject.interface';
 
@@ -187,6 +187,7 @@ export class RoomService {
                 headers: this.headers,
                 responseType: 'text'
             })
+            .pipe(take(1))
             .pipe(tap(x => console.log(x)))
             .subscribe(response => {
                 this.toast.success(`Room ${data.title} saved successfully.`);

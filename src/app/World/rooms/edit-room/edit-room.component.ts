@@ -11,7 +11,7 @@ import {
     FormArray
 } from '@angular/forms';
 import { RoomService } from '../add-room/add-room.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     MatDialog
 } from '@angular/material/dialog';
@@ -58,6 +58,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     areaId: number;
     roomId: number;
     coords: Coords;
+    disableButton = false;
     items: Item[] = [];
     mobs: Mob[] = [];
     exits: RoomExit = {
@@ -104,6 +105,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         private editRoomService: EditRoomService,
         private ngZone: NgZone,
         private route: ActivatedRoute,
+        private router: Router,
         public dialog: MatDialog,
         public shared: Shared) { }
 
@@ -305,6 +307,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
 
     saveRoom() {
+        this.disableButton = true;
         // TODO
         /*
             Create room object interface, loop over this.getRoomObjectsControl
@@ -363,5 +366,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
 
         this.roomServices.updateRoom(data);
+        this.router.navigate(['/world/area/' + this.id])
+
     }
 }

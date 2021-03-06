@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewChild, ChangeDetectorRef, OnDestroy, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { Area, RoomTable } from '../interface/area.interface';
@@ -15,7 +15,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
     templateUrl: './view-area.component.html',
-    styleUrls: ['./view-area.component.scss']
+    styleUrls: ['./view-area.component.scss'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ViewAreaComponent extends DataListComponent implements OnInit {
     area: Area;
@@ -110,6 +111,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
 
             this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
             this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
+
 
         });
 

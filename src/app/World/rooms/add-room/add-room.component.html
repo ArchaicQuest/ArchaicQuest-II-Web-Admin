@@ -175,7 +175,8 @@
                             [addRoomForm]="this.addRoomForm">
                         </app-exit-component>
                     </div>
-                    <button mat-raised-button color="primary" type="submit" [disabled]="addRoomForm.invalid">
+                    <button mat-raised-button color="primary" type="submit"
+                        [disabled]="addRoomForm.invalid || disableButton">
                         Save Room
                     </button>
                 </form>
