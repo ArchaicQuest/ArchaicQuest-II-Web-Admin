@@ -122,6 +122,36 @@ export class RoomService {
         this.addRoomForm.get('exits.southEast').setValue('');
         this.addRoomForm.get('exits.up').setValue('');
         this.addRoomForm.get('exits.down').setValue('');
+
+        this.addRoomForm = this.formBuilder.group({
+            id: [''],
+            title: ['', Validators.required],
+            description: ['', Validators.required],
+            roomObjects: this.formBuilder.array([this.initRoomObject(null)]),
+            updateMessage: [''],
+            instantRepop: [false],
+            terrain: [''],
+            mobs: [],
+            CoordX: ['', Validators.required],
+            CoordY: ['', Validators.required],
+            CoordZ: ['', Validators.required],
+            emotes: this.formBuilder.array([this.initEmote()]),
+            exits: this.formBuilder.group({
+                north: [''],
+                northEast: [''],
+                east: [''],
+                southEast: [''],
+                south: [''],
+                southWest: [''],
+                west: [''],
+                northWest: [''],
+                up: [''],
+                down: ['']
+            }),
+            type: [0],
+            terrainType: [0]
+        });
+
     }
     getRroomItems() {
         console.log(this.items);
