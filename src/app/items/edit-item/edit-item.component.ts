@@ -335,7 +335,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 pageCount: item.book.pages.length,
                 pages: item.book.pages,
                 hitRoll: item.modifier.hitRoll,
-                DamageRoll: item.modifier.DamageRoll,
+                DamageRoll: item.modifier.damRoll,
                 saves: item.modifier.saves,
                 hpMod: item.modifier.hp,
                 manaMod: item.modifier.mana,
@@ -576,7 +576,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         } else if (itemType === 1) {
             this.showBookSection = true;
             this.itemForm.get('pageCount').enable();
-        } else if (itemType === 2) {
+        } else if (itemType === 2 || itemType === 18) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
         }
@@ -690,7 +690,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             keywords: [],
             level: this.itemForm.get('level').value || 1,
             modifier: {
-                DamageRoll: this.itemForm.get('DamageRoll').value || 0,
+                damRoll: this.itemForm.get('DamageRoll').value || 0,
                 hitRoll: this.itemForm.get('hitRoll').value || 0,
                 hp: this.itemForm.get('hpMod').value || 0,
                 mana: this.itemForm.get('manaMod').value || 0,

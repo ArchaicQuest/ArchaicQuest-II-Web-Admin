@@ -26,6 +26,12 @@
                                 </mat-error> -->
                             </mat-form-field>
                         </div>
+
+                        <!-- <div class="col">
+                            <mat-checkbox formControlName="presentInRoom" title="is material present in the room">
+                                Material required to be present in
+                                the room</mat-checkbox>
+                        </div> -->
                     </div>
                     <div class="row">
                         <div class="col">
@@ -73,6 +79,11 @@
                                 <div class="col">
                                     <app-item-selector (sendItemToParent)="addItem($event)" [hideValue]="true">
                                     </app-item-selector>
+                                </div>
+                                <div class="col">
+                                    <mat-checkbox formControlName="createdItemDropsInRoom"
+                                        title="Crafted item will drop in room instead of inventory">Crafted Item to drop
+                                        in room</mat-checkbox>
                                 </div>
                             </div>
 

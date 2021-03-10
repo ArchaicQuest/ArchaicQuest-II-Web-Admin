@@ -33,6 +33,7 @@ export class CraftingRecipesComponent implements OnInit {
             title: "",
             description: "",
             createdItem: '',
+            createdItemDropsInRoom: '',
             materials: this.formBuilder.array([this.initMaterial()]),
         });
 
@@ -65,7 +66,8 @@ export class CraftingRecipesComponent implements OnInit {
     initMaterial() {
         return this.formBuilder.group({
             material: '',
-            quantity: '1'
+            quantity: '1',
+            presentInRoom: false
         });
     }
 
@@ -94,6 +96,7 @@ export class CraftingRecipesComponent implements OnInit {
             title: this.form.get('title').value,
             id: -1,
             description: this.form.get('description').value,
+            createdItemDropsInRoom: this.form.get('description').value,
             craftingMaterials: this.getMaterials(),
             createdItem: this.item,
         }

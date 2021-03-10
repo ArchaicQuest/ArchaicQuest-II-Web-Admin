@@ -6,6 +6,7 @@ export interface ICraftingRecipes {
     description: string;
     craftingMaterials: CraftingMaterials[];
     createdItem: Item;
+    createdItemDropsInRoom: boolean;
 }
 
 
@@ -13,4 +14,5 @@ export interface ICraftingRecipes {
 export interface CraftingMaterials {
     material: string;
     quantity: number
+    presentInRoom: boolean
 }

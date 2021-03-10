@@ -49,6 +49,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
     containerCanBeLocked = false;
     lockStrength: ItemType[];
     pages: number[] = [];
+    showModifiers = false;
     showWeaponSection = false;
     showArmourSection = false;
     showBookSection = false;
@@ -98,6 +99,12 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             manaMod: [''],
             movesMod: [''],
             spellMod: [''],
+            strength: [''],
+            dexterity: [''],
+            constitution: [''],
+            intelligence: [''],
+            wisdom: [''],
+            charisma: [''],
             pageCount: [1],
             pages: new FormGroup({}),
             flags: new FormGroup({}),
@@ -341,6 +348,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
         this.showPortalSection = false;
+        this.showModifiers = false;
         this.itemForm.get('containerSize').disable();
 
         if (itemType === 0) {
@@ -357,12 +365,16 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         } else if (itemType === 1) {
             this.showBookSection = true;
             this.itemForm.get('pageCount').enable();
-        } else if (itemType === 2) {
+        } else if (itemType === 2 || itemType === 18) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
         }
         else if (itemType === 15) {
             this.showPortalSection = true;
+
+        }
+        else if (itemType === 4) {
+            this.showModifiers = true;
 
         }
 
@@ -460,13 +472,20 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             keywords: [],
             level: this.itemForm.get('level').value || 1,
             modifier: {
-                DamageRoll: this.itemForm.get('DamageRoll').value || 0,
+                damRoll: this.itemForm.get('DamageRoll').value || 0,
                 hitRoll: this.itemForm.get('hitRoll').value || 0,
                 hp: this.itemForm.get('hpMod').value || 0,
                 mana: this.itemForm.get('manaMod').value || 0,
                 moves: this.itemForm.get('movesMod').value || 0,
                 spellDam: this.itemForm.get('spellMod').value || 0,
                 saves: this.itemForm.get('saves').value || 0,
+                strength: this.itemForm.get('strength').value || 0,
+                dexterity: this.itemForm.get('dexterity').value || 0,
+                constitution: this.itemForm.get('constitution').value || 0,
+                intelligence: this.itemForm.get('intelligence').value || 0,
+                wisdom: this.itemForm.get('wisdom').value || 0,
+                charisma: this.itemForm.get('charisma').value || 0,
+
             },
             questItem: false,
             uses: 0,

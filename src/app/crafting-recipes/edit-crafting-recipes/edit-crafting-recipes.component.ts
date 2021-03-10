@@ -31,6 +31,7 @@ export class EditCraftingRecipesComponent implements OnInit {
             title: "",
             description: "",
             createdItem: '',
+            createdItemDropsInRoom: '',
             materials: this.formBuilder.array([]),
         });
 
@@ -41,6 +42,7 @@ export class EditCraftingRecipesComponent implements OnInit {
                     this.form.get('title').setValue(q.title);
                     this.form.get('description').setValue(q.description);
                     this.form.get('createdItem').setValue(q.createdItem);
+                    this.form.get('createdItemDropsInRoom').setValue(q.createdItemDropsInRoom);
 
                     console.log("i", q.createdItem)
                     this.addItem(q.createdItem);
@@ -99,12 +101,14 @@ export class EditCraftingRecipesComponent implements OnInit {
         if (data == null) {
             return this.formBuilder.group({
                 material: '',
-                quantity: '1'
+                quantity: '1',
+                presentInRoom: false
             });
         }
         return this.formBuilder.group({
             material: data.material,
-            quantity: data.quantity
+            quantity: data.quantity,
+            presentInRoom: data.presentInRoom
         });
 
     }
@@ -117,7 +121,8 @@ export class EditCraftingRecipesComponent implements OnInit {
             materials.push(
                 {
                     material: x.get('material').value,
-                    quantity: x.get('quantity').value
+                    quantity: x.get('quantity').value,
+                    presentInRoom: x.get('presentInRoom').value
                 }
             )
         })
@@ -134,6 +139,7 @@ export class EditCraftingRecipesComponent implements OnInit {
             title: this.form.get('title').value,
             id: this.route.snapshot.params['id'],
             description: this.form.get('description').value,
+            createdItemDropsInRoom: this.form.get('createdItemDropsInRoom').value,
             craftingMaterials: this.getMaterials(),
             createdItem: this.item,
         }

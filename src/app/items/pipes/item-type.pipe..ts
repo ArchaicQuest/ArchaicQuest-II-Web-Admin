@@ -41,6 +41,19 @@ export class ItemTypePipe implements PipeTransform {
                 return 'Crafting';
             case 17:
                 return 'Material';
+            case 18:
+                return 'Cooking';
+            case 19:
+                return 'Furnace';
+            case 20:
+                return 'SpinningWheel';
+            case 21:
+                return 'Anvil';
+            case 22:
+                return 'MortarAndPestle';
+            case 23:
+                return 'Cooked';
+
 
             default:
                 return '';
