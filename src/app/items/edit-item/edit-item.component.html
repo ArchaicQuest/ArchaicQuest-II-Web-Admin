@@ -363,57 +363,108 @@
 
 
 
-                    <!-- todo: Redo this section, it's too limiting-->
-                    <!-- <h2>Modifiers</h2>
-                    <div class="section">
-                        <div class="row">
-                            <div class="col-4">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Hit roll</mat-label>
-                                    <input matInput type="number" placeholder="Hit roll" formControlName="hitRoll">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-4">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Damage roll</mat-label>
-                                    <input matInput type="number" placeholder="Damage roll" formControlName="DamageRoll">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-4">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>Saves</mat-label>
-                                    <input matInput type="number" placeholder="Saves" formControlName="saves">
-                                </mat-form-field>
+                    <div *ngIf="showModifiers">
+                        <h2>Consumables buff/debuff</h2>
+                        <div class="section">
+
+                            <div class="row">
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Strength</mat-label>
+                                                <input matInput type="number" placeholder="+/- Strength"
+                                                    formControlName="strength">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Dexterity</mat-label>
+                                                <input matInput type="number" placeholder="+/- Dexterity"
+                                                    formControlName="dexterity">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Constitution</mat-label>
+                                                <input matInput type="number" placeholder="+/- Constitution"
+                                                    formControlName="constitution">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Intelligence</mat-label>
+                                                <input matInput type="number" placeholder="+/- Intelligence"
+                                                    formControlName="intelligence">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Wisdom</mat-label>
+                                                <input matInput type="number" placeholder="+/- Wisdom"
+                                                    formControlName="wisdom">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Charisma</mat-label>
+                                                <input matInput type="number" placeholder="+/- Charisma"
+                                                    formControlName="charisma">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Hit roll</mat-label>
+                                                <input matInput type="number" placeholder="+/- Hit roll"
+                                                    formControlName="hitRoll">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Damage roll</mat-label>
+                                                <input matInput type="number" placeholder="+/- Damage roll"
+                                                    formControlName="DamageRoll">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>Saves</mat-label>
+                                                <input matInput type="number" placeholder="+/- Saves"
+                                                    formControlName="saves">
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>+/- HP</mat-label>
+                                                <input matInput type="number" placeholder="+/- HP"
+                                                    formControlName="hpMod">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>+/- Mana</mat-label>
+                                                <input matInput type="number" placeholder="+/- Mana"
+                                                    formControlName="manaMod">
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col-4">
+                                            <mat-form-field appearance="outline">
+                                                <mat-label>+/- Moves</mat-label>
+                                                <input matInput type="number" placeholder="+/- Moves"
+                                                    formControlName="movesMod">
+                                            </mat-form-field>
+                                        </div>
+
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-3">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>+/- HP</mat-label>
-                                    <input matInput type="number" placeholder="+/- HP" formControlName="hpMod">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-3">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>+/- Mana</mat-label>
-                                    <input matInput type="number" placeholder="+/- Mana" formControlName="manaMod">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-3">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>+/- Moves</mat-label>
-                                    <input matInput type="number" placeholder="+/- Moves" formControlName="movesMod">
-                                </mat-form-field>
-                            </div>
-                            <div class="col-3">
-                                <mat-form-field appearance="outline">
-                                    <mat-label>+/- Spell Damage</mat-label>
-                                    <input matInput type="number" placeholder="+/- Spell Damage"
-                                        formControlName="spellMod">
-                                </mat-form-field>
-                            </div>
-                        </div>
-                    </div> -->
+                    </div>
 
 
                     <h2>Item flags</h2>

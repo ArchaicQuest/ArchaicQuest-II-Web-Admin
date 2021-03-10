@@ -53,6 +53,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     containerCanBeLocked = false;
     lockStrength: ItemType[];
     pages: number[] = [];
+    showModifiers = false;
     showWeaponSection = false;
     showArmourSection = false;
     showBookSection = false;
@@ -107,6 +108,12 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             manaMod: [''],
             movesMod: [''],
             spellMod: [''],
+            strength: [''],
+            dexterity: [''],
+            constitution: [''],
+            intelligence: [''],
+            wisdom: [''],
+            charisma: [''],
             pageCount: [1],
             pages: new FormGroup({}),
             flags: new FormGroup({}),
@@ -557,6 +564,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.showWeaponSection = false;
         this.showBookSection = false;
         this.showPortalSection = false;
+        this.showModifiers = false;
         this.itemForm.get('pageCount').disable();
         this.showContainerSection = false;
         this.itemForm.get('containerSize').disable();
@@ -586,6 +594,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         }
         else if (itemType === 15) {
             this.showPortalSection = true;
+
+        }
+        else if (itemType === 4) {
+            this.showModifiers = true;
 
         }
         setTimeout(() => {
