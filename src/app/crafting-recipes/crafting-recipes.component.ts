@@ -33,7 +33,7 @@ export class CraftingRecipesComponent implements OnInit {
             title: "",
             description: "",
             createdItem: '',
-            createdItemDropsInRoom: '',
+            createdItemDropsInRoom: false,
             materials: this.formBuilder.array([this.initMaterial()]),
         });
 
@@ -91,12 +91,13 @@ export class CraftingRecipesComponent implements OnInit {
 
     addCraftingRecipes() {
 
+        console.log("drop ", this.form.get('createdItemDropsInRoom').value)
 
         var obj: ICraftingRecipes = {
             title: this.form.get('title').value,
             id: -1,
             description: this.form.get('description').value,
-            createdItemDropsInRoom: this.form.get('description').value,
+            createdItemDropsInRoom: this.form.get('createdItemDropsInRoom').value,
             craftingMaterials: this.getMaterials(),
             createdItem: this.item,
         }
