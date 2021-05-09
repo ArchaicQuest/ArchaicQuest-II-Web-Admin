@@ -1,17 +1,72 @@
 
 export interface Effect {
     name: string;
-    duration: EffectModifier;
+    duration: number;
     modifier: EffectModifier;
     accumulate: boolean;
-    location: EffectLocation;
+    location: SkillEffectLocation;
 }
 
 export interface EffectModifier {
-    value: number;
-    positiveEffect: boolean;
+    hitRoll?: number;
+    damRoll?: number;
+    saves?: number;
+    hp?: number;
+    mana?: number;
+    moves?: number;
+    spellDam?: number;
+    strength?: number;
+    dexterity?: number;
+    constitution?: number;
+    intelligence?: number;
+    wisdom?: number;
+    charisma?: number;
 }
 
+export enum SkillEffectLocation {
+    Strength,
+    Dexterity,
+    Constitution,
+    Wisdom,
+    Intelligence,
+    Charisma,
+    HitPoints,
+    Mana,
+    Moves,
+    HitRoll,
+    DamRoll,
+    Invis,
+    DetectInvis,
+    Blind,
+    Flying,
+    Floating,
+    Infravision,
+    Poison,
+    ArmorClass,
+    Curse,
+    DetectAlign,
+    DetectEvil,
+    DetectNeutral,
+    DetectGood,
+    DetectSneak,
+    DetectHidden,
+    ProtectEvil,
+    ProtectNeutral,
+    ProtectGood,
+    Sanctuary,
+    Sleep,
+    Waterwalk,
+    Hidden,
+    Sneak,
+    NonDetect,
+    Charm,
+    Silence,
+    Darkness,
+    Dispell,
+    Frozen,
+    Burnt,
+    Undead
+}
 
 export enum EffectLocation {
     None = 0,

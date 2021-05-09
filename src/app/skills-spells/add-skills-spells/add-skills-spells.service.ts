@@ -6,6 +6,7 @@ import { StatusEnum } from '../interfaces/status.enum';
 import { validTargets } from '../interfaces/targets.enum';
 import { Skill } from '../interfaces/skill.interface';
 import { Observable } from 'rxjs';
+import { SkillType } from '../interfaces/skill-type.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -76,6 +77,35 @@ export class SkillSpellService {
         } else if (flag === validTargets.TargetPlayerWorld && this.isFlagSet(selectedFlag, validTargets.TargetPlayerWorld)) {
             return true;
         } else if (flag === validTargets.TargetSelfOnly && this.isFlagSet(selectedFlag, validTargets.TargetSelfOnly)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    hasSkillTypeFlag(flag: number, selectedFlag: SkillType): boolean {
+
+        if (flag === SkillType.Affect && this.isFlagSet(selectedFlag, SkillType.Affect)) {
+            return true;
+        } else if (flag === SkillType.Travel && this.isFlagSet(selectedFlag, SkillType.Travel)) {
+            return true;
+        } else if (flag === SkillType.Creation && this.isFlagSet(selectedFlag, SkillType.Creation)) {
+            return true;
+        } else if (flag === SkillType.Summon && this.isFlagSet(selectedFlag, SkillType.Summon)) {
+            return true;
+        } else if (flag === SkillType.Passive && this.isFlagSet(selectedFlag, SkillType.Passive)) {
+            return true;
+        } else if (flag === SkillType.Damage && this.isFlagSet(selectedFlag, SkillType.Damage)) {
+            return true;
+        } else if (flag === SkillType.AreaEffect && this.isFlagSet(selectedFlag, SkillType.AreaEffect)) {
+            return true;
+        } else if (flag === SkillType.RemoveEffect && this.isFlagSet(selectedFlag, SkillType.RemoveEffect)) {
+            return true;
+        } else if (flag === SkillType.AlterObject && this.isFlagSet(selectedFlag, SkillType.AlterObject)) {
+            return true;
+        } else if (flag === SkillType.GroupSpell && this.isFlagSet(selectedFlag, SkillType.GroupSpell)) {
+            return true;
+        } else if (flag === SkillType.AnimateDead && this.isFlagSet(selectedFlag, SkillType.AnimateDead)) {
             return true;
         }
 

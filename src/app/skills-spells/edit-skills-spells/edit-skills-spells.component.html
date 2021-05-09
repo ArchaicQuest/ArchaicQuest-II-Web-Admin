@@ -74,6 +74,67 @@
 
                     </div>
 
+                    <h2>Cost</h2>
+                    <p>How much it costs to use skill/spell: (cost - (1 * self.level)) > 10 ? (cost - (1 * self.level))
+                        : 10</p>
+                    <div class="row" formGroupName="cost">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Mana</mat-label>
+                                <input matInput placeholder="Mana" value="" required formControlName="mana">
+
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Moves</mat-label>
+                                <input matInput placeholder="Moves" value="" required formControlName="moves">
+
+                            </mat-form-field>
+                        </div>
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>HP</mat-label>
+                                <input matInput placeholder="HP" value="" required formControlName="hp">
+
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+                    <h2>Formula</h2>
+                    <p>Using dice rolls is not enough, some spells should be influenced by the characters attributes
+                        and/or the victims.</p>
+                    <div class="row">
+                        <div class="col">
+                            <ngs-code-editor [theme]="theme" [codeModel]="formulaModel"
+                                (valueChanged)="formulaChanged($event)"></ngs-code-editor>
+                        </div>
+
+                    </div>
+                    <br />
+
+
+
+
+                    <h2>Skill Type</h2>
+                    <p>What can the spell target?
+                        targets without any arguments</p>
+                    <div class="section section--check-box">
+                        <div class="row" [formGroup]="form.get('skillTypes')">
+
+
+                            <div class="col-4" *ngFor="let flag of skillTypeFlags">
+                                <mat-checkbox [title]="flag.name" [formControlName]="flag.name"
+                                    [checked]=hasSkillType(flag.id) (change)=updateSelectedSkillType(flag.id)>
+                                    {{flag.id | skillTypesPipe}}
+                                </mat-checkbox>
+                            </div>
+                        </div>
+                    </div>
+
+
                     <h2>Valid Target</h2>
                     <p>What can the spell target?
                         targets without any arguments</p>
@@ -90,15 +151,186 @@
                         </div>
                     </div>
 
+                    <h2>Skill Messages</h2>
+                    <div class="row" *ngIf="!isAttackingSkill">
+                        <div class="col">
+                            <h3>Hit </h3>
+                            <p>Messages that get sent upon successful hit.</p>
+
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To player</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            required formControlName="skillHitToPlayerMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To target</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            required formControlName="skillHitToTargetMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To room</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            required formControlName="skillHitToRoomMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="col">
+                            <h3>Miss </h3>
+                            <p>Messages that get sent upon miss.</p>
+
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To player</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            value="" required formControlName="skillMissToPlayerMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To target</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            value="" required formControlName="skillMissToTargetMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To room</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            value="" required formControlName="skillMissToRoomMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div> -->
+
+                    <div class="row">
+                        <div class="col">
+                            <h3>Death</h3>
+                            <p>Messages that get sent upon death of target.</p>
+
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To player</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            value="" required formControlName="skillDeathToPlayerMsg"
+                                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To target</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            value="" required formControlName="skillDeathToTargetMsg"
+                                            cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>To room</mat-label>
+                                        <textarea matInput placeholder="message to player that used the skill/spell"
+                                            value="" required formControlName="skillDeathToRoomMsg" cdkTextareaAutosize
+                                            #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                            cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                          </textarea>
+
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline">
+                                <mat-label>Saving Throw</mat-label>
+
+                                <mat-select formControlName="savingThrow" placeholder="Saving Throw"
+                                    [compareWith]="compareFn">
+                                    <mat-option value="Reflex">
+                                        Reflex (Dexterity check)
+                                    </mat-option>
+                                    <mat-option value="Mental">
+                                        Mental (intelligence check)
+                                    </mat-option>
+                                    <mat-option value="Fortitude">
+                                        Fortitude (constitution check)
+                                    </mat-option>
+                                </mat-select>
+
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
 
                     <h2>Effect</h2>
                     <p>Does the spell apply any positive or negative affects on the victim?</p>
                     <div formArrayName="effects" class="spell-effects">
 
-
-
                         <div class="effects-item" *ngFor="let effect of effects.controls; let i=index">
-
 
                             <div class="row" [formGroupName]="i">
 

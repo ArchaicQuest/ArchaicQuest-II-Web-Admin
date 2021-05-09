@@ -19,6 +19,7 @@ import { SpellPreviewComponent } from './spell-preview/spell-preview.component';
 import { ValidTargetPipe } from './pipes/valid-target.pipe';
 import { EditSkillsSpellComponent } from './edit-skills-spells/edit-skills-spells.component';
 import { CodeEditorModule } from '@ngstack/code-editor';
+import { SkillTypePipe } from './pipes/skill-types.pipes';
 
 
 
@@ -47,7 +48,8 @@ import { CodeEditorModule } from '@ngstack/code-editor';
         ViewSkillsSpellsComponent,
         AddSkillsSpellComponent,
         SpellPreviewComponent,
-        ValidTargetPipe
+        ValidTargetPipe,
+        SkillTypePipe
     ],
 })
 export class SkillsSpellsModule { }

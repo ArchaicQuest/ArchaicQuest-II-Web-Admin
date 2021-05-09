@@ -1,7 +1,7 @@
 export interface Messages {
-    ToPlayer: string;
-    ToTarget: string;
-    ToRoom: string;
+    toPlayer: string;
+    toTarget: string;
+    toRoom: string;
 }
 
 export interface LevelBasedMessages {

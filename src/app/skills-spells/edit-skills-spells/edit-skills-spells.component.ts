@@ -13,6 +13,7 @@ import { validTargets } from '../interfaces/targets.enum';
 import { Skill } from '../interfaces/skill.interface';
 import { SkillType } from '../interfaces/skill-type.interface';
 import { ToastrService } from 'ngx-toastr';
+import { CodeModel } from '@ngstack/code-editor';
 
 
 @Component({
@@ -28,6 +29,10 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
     public selectedValidTargetFlags: validTargets[] = [];
     public selectedValidTarget: validTargets;
     public validTargetFlags: ItemType[];
+    public selectedSkillTypeFlags: SkillType[] = [];
+    public selectedSkillType: SkillType;
+    public skillTypeFlags: ItemType[];
+    public isAttackingSkill: boolean;
     public form = this.formBuilder.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
@@ -37,12 +42,40 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
         ]),
         usableFromStatus: new FormGroup({}),
         validTargets: new FormGroup({}),
+        skillTypes: new FormGroup({}),
         rounds: ['', Validators.required],
+        savingThrow: [''],
+        skillHitToPlayerMsg: [''],
+        skillHitToRoomMsg: [''],
+        skillHitToTargetMsg: [''],
+        skillMissToPlayerMsg: [''],
+        skillMissToRoomMsg: [''],
+        skillMissToTargetMsg: [''],
+        skillDeathToPlayerMsg: [''],
+        skillDeathToRoomMsg: [''],
+        skillDeathToTargetMsg: [''],
         cost: this.formBuilder.group({
-            type: ['', Validators.required],
-            value: ['', Validators.required],
+            hp: [''],
+            mana: [''],
+            moves: [''],
         }),
+        formula: ['']
     });
+    formulaModel: CodeModel = {
+        language: 'lua',
+        uri: 'lua.json',
+        value: '',
+    };
+
+
+    options = {
+        contextmenu: true,
+        minimap: {
+            enabled: false,
+        },
+    };
+    theme = 'vs-dark';
+
     constructor(
         private formBuilder: FormBuilder,
         private ngZone: NgZone,
@@ -50,9 +83,15 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
         private toastr: ToastrService,
         private route: ActivatedRoute,
     ) { super(); }
-    @ViewChild('autosize')
-    autosize: CdkTextareaAutosize;
 
+    @ViewChild('autosize', { static: true }) autosize: CdkTextareaAutosize;
+    formulaChanged(value) {
+        this.form.get('formula').setValue(value);
+    }
+
+    compareFn(x: any, y: any): boolean {
+        return x && y ? x === y : x === y;
+    }
     ngOnInit() {
 
         this.effectLocations = Object.keys(EffectLocation)
@@ -70,11 +109,17 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
         this.validTargetFlags = Object.keys(validTargets)
             .filter(value => isNaN(Number(value)) === false)
             .map((key, index) => {
-                console.log("flag", index, " id ", key)
                 return { name: validTargets[key], id: parseInt(key, 10) };
             });
 
-        console.log(this.validTargetFlags)
+        this.skillTypeFlags = Object.keys(SkillType)
+            .filter(value => isNaN(Number(value)) === false)
+            .map((key, index) => {
+                console.log("flag", index, " id ", SkillType[key])
+                return { name: SkillType[key], id: parseInt(key, 10) };
+            });
+
+        console.log(this.skillTypeFlags)
 
 
 
@@ -95,6 +140,14 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             );
         });
 
+
+        this.skillTypeFlags.forEach(flag => {
+            (this.form.controls['skillTypes'] as FormGroup).addControl(
+                flag.name,
+                new FormControl(false)
+            );
+        });
+
         console.log(this.effectLocations)
 
         this.service.getSkill(this.route.snapshot.params['id']).pipe(
@@ -105,8 +158,37 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             this.form.get('description').setValue(skill.description);
             this.form.get('diceMaxSize').setValue(skill.damage.diceMaxSize);
             this.form.get('diceRoll').setValue(skill.damage.diceRoll);
-            //   this.form.get('effects').setValue(skill.effect);
-            // this.form.get('validTargets').setValue(skill.validTargets);
+
+            console.log("sk", skill.skillMessage.hit.toPlayer)
+            this.form.get('skillHitToPlayerMsg').setValue(skill.skillMessage.hit.toPlayer);
+            this.form.get('skillHitToTargetMsg').setValue(skill.skillMessage.hit.toTarget);
+            this.form.get('skillHitToRoomMsg').setValue(skill.skillMessage.hit.toRoom);
+
+            this.form.get('skillDeathToPlayerMsg').setValue(skill.skillMessage.death.toPlayer);
+            this.form.get('skillDeathToTargetMsg').setValue(skill.skillMessage.death.toTarget);
+            this.form.get('skillDeathToRoomMsg').setValue(skill.skillMessage.death.toRoom);
+
+            this.form.get('skillMissToPlayerMsg').setValue(skill.skillMessage.miss.toPlayer);
+            this.form.get('skillMissToTargetMsg').setValue(skill.skillMessage.miss.toTarget);
+            this.form.get('skillMissToRoomMsg').setValue(skill.skillMessage.miss.toRoom);
+
+            this.form.get('cost').get('hp').setValue(skill.cost.table['HitPoints'])
+            this.form.get('cost').get('mana').setValue(skill.cost.table['Mana'])
+            this.form.get('cost').get('moves').setValue(skill.cost.table['Moves'])
+
+            this.form.get('formula').setValue(skill.formula);
+
+            if (skill.savingThrow.mental) {
+                this.form.get('savingThrow').setValue("Mental");
+            }
+            if (skill.savingThrow.reflex) {
+                this.form.get('savingThrow').setValue("Reflex");
+            }
+            if (skill.savingThrow.strength) {
+                this.form.get('savingThrow').setValue("Fortitude");
+            }
+
+            //  this.form.get('savingThrow').setValue(skill.SavingThrow.reflex ? 'Reflex' : false);
 
             this.selectedValidTarget = skill.validTargets;
             let validTarget: number;
@@ -123,6 +205,26 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
                     this.updateSelectedStatus(flag.id);
                 }
             });
+
+            this.selectedSkillType = skill.type;
+            let skillType: number;
+            let y = 0;
+            while (SkillType[skillType = 1 << y++]) {
+                if (this.selectedSkillType & skillType) {
+                    this.selectedSkillTypeFlags.push(skillType)
+                }
+            }
+
+
+            this.skillTypeFlags.forEach(flag => {
+                if (this.hasSkillType(flag.id)) {
+                    if (flag.id == 32) {
+                        this.isAttackingSkill = true;
+                    }
+                    this.updateSelectedStatus(flag.id);
+                }
+            });
+
 
 
 
@@ -216,6 +318,43 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
     }
 
 
+    //Skill types
+
+
+    get getSkillTypeControl(): FormArray {
+        return this.form.get('validTargets') as FormArray;
+    }
+
+    addSkillType() {
+        this.getSkillTypeControl.push(this.formBuilder.control(''));
+    }
+
+    hasSkillType(flag: number): boolean {
+        return this.service.hasSkillTypeFlag(flag, this.selectedSkillType);
+    }
+
+    isSkillTypeSet(value: number, flag: number): boolean {
+        return (value & flag) !== 0;
+    }
+
+    updateSelectedSkillType(flag: number) {
+
+        if (this.selectedSkillTypeFlags.includes(flag)) {
+            if (flag == 32) {
+                this.isAttackingSkill = false;
+            }
+            this.selectedSkillTypeFlags = this.selectedSkillTypeFlags.filter(flagToRemove => flagToRemove !== flag);
+        } else {
+            this.selectedSkillTypeFlags.push(flag);
+            if (flag == 32) {
+                this.isAttackingSkill = true;
+            }
+        }
+
+        console.log("stf", this.selectedSkillTypeFlags);
+    }
+
+
     triggerDescriptionResize() {
         this.ngZone.onStable
             .pipe(take(1))
@@ -225,6 +364,8 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
     addSpell() {
         console.log("got flags", this.selectedValidTargetFlags)
         const targetFlags = this.selectedValidTargetFlags.reduce((a, b) => a + b, 0);
+        const selectedTypeFlags = this.selectedSkillTypeFlags.reduce((a, b) => a + b, 0);
+
         const skill: Skill = {
             id: this.route.snapshot.params['id'],
             name: this.form.get('name').value,
@@ -237,14 +378,39 @@ export class EditSkillsSpellComponent extends OnDestroyMixin implements OnDestro
             },
             validTargets: targetFlags,
             cost: {
-                hitPoints: 0,
-                moves: 0,
-                none: 0,
-                mana: 5
+                table: {
+                    hitPoints: this.form.get('cost').get('hp').value,
+                    moves: this.form.get('cost').get('moves').value,
+                    none: 0,
+                    mana: this.form.get('cost').get('mana').value,
+                }
             },
             effect: null,
             rounds: 1,
-            type: SkillType.Affect
+            type: selectedTypeFlags,
+            skillMessage: {
+                death: {
+                    toPlayer: this.form.get("skillDeathToPlayerMsg").value,
+                    toRoom: this.form.get("skillDeathToRoomMsg").value,
+                    toTarget: this.form.get("skillDeathToTargetMsg").value,
+                },
+                hit: {
+                    toPlayer: this.form.get("skillHitToPlayerMsg").value,
+                    toRoom: this.form.get("skillHitToRoomMsg").value,
+                    toTarget: this.form.get("skillHitToTargetMsg").value,
+                },
+                miss: {
+                    toPlayer: this.form.get("skillMissToPlayerMsg").value,
+                    toRoom: this.form.get("skillMissToRoomMsg").value,
+                    toTarget: this.form.get("skillMissToTargetMsg").value,
+                }
+            },
+            startsCombat: true,
+            savingThrow: {
+                mental: this.form.get("savingThrow").value === 'Mental' ? true : false,
+                reflex: this.form.get("savingThrow").value === 'Reflex' ? true : false,
+                strength: this.form.get("savingThrow").value === 'Fortitude' ? true : false,
+            }
         }
 
 
