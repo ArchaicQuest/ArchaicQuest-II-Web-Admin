@@ -167,6 +167,7 @@ export class RoomService {
     }
 
     roomMobs(mob: Mob) {
+
         this.mobs.next([...this.mobs.getValue(), mob]);
     }
 

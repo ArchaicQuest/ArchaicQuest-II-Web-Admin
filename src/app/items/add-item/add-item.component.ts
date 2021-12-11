@@ -125,6 +125,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             selectContainerKey: [''],
             isHiddenInRoom: [false],
             isStuckInRoom: [false],
+            isTwoHanded: [false],
             value: [''],
             portalName: [''],
             portalDestination: [''],
@@ -488,6 +489,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
 
             },
             questItem: false,
+            isTwoHanded: this.itemForm.get('isTwoHanded').value || false,
             uses: 0,
             weight: this.itemForm.get('weight').value || 1,
             equipped: false,

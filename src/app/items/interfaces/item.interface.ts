@@ -41,6 +41,7 @@ export interface Item {
     equipped: boolean;
     value?: number;
     portal: Portal;
+    isTwoHanded: boolean;
 }
 
 

@@ -26,7 +26,7 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
     public attributeLocations: { name: string; value: number }[];
     public skillSpellsList: Skill[] = [];
     public filteredOptions: Observable<Skill[]>;
-    public classSkillsList: { level: number, skill: Skill }[] = [];
+    public classSkillsList: { level: number, skill: string, skillId: number }[] = [];
     public form = this.formBuilder.group({
         name: ['', Validators.required],
         description: ['', Validators.required],
@@ -49,6 +49,17 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
     @ViewChild('autosize')
     autosize: CdkTextareaAutosize;
 
+    setSkillsDropDown() {
+        this.service.getSkillsSpells().pipe().subscribe(x => {
+            this.skillSpellsList = [...x]
+
+            this.filteredOptions = this.form.get('selectedSkill').valueChanges.pipe(
+                startWith(''),
+                map(value => value ? this._filter(value) : this.skillSpellsList)
+            );
+        });
+    }
+
     ngOnInit() {
 
 
@@ -58,8 +69,9 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
                 return { name: EffectLocation[key], value: parseInt(key, 10) };
             });
 
-        this.service.getSkillsSpells().pipe(take(1)).subscribe(x => {
+        this.service.getSkillsSpells().pipe().subscribe(x => {
             this.skillSpellsList = [...x]
+
             this.filteredOptions = this.form.get('selectedSkill').valueChanges.pipe(
                 startWith(''),
                 map(value => value ? this._filter(value) : this.skillSpellsList)
@@ -91,13 +103,16 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
                         this.addEffect(EffectLocation[key], x.attributeBonus.attribute[key]);
                     }
                 }
+
+
+
+
                 this.changeDetectorRef.detectChanges();
             }
         });
 
 
     }
-
 
     displayFn(skill: Skill): string {
         return skill && skill.name ? skill.name : '';
@@ -106,12 +121,11 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
     private _filter(value: string): Skill[] {
 
         if (value == null) {
-            return this.skillSpellsList;
+            return this.skillSpellsList
         }
 
-        const filterValue = value.toLowerCase();
 
-        return this.skillSpellsList.filter(x => x.name.toLowerCase().indexOf(filterValue) === 0);
+        return this.skillSpellsList.filter(x => x.name.toLowerCase().indexOf(value) === 0);
     }
 
     get attributes() {
@@ -157,20 +171,32 @@ export class EditClassComponent extends OnDestroyMixin implements OnDestroy, OnI
             }];
         this.classSkillsList = this.classSkillsList.concat(...newSkill);
         this.classSkillsList.sort((a, b) => a.level - b.level);
+
+
+        this.form.get('selectedSkill').setValue('');
+
+
+
+
     }
 
+    isSelectedSkill(skill: Skill) {
+
+        // tslint:disable-next-line
+        return this.classSkillsList.some(x => x.skill === skill.name);
+    }
 
     addClass() {
 
         let skillList: SkillList[] = [];
 
-        this.classSkillsList.forEach(skill => {
+        this.classSkillsList.forEach((skill) => {
 
-            debugger;
+
             skillList.push({
-                skillId: skill.skill.id,
+                skillId: skill.skill['id'],
                 level: skill.level,
-                skillName: skill.skill.name || (skill.skill as unknown as string),
+                skillName: skill.skill['name'] || (skill.skill as unknown as string),
 
             });
         });

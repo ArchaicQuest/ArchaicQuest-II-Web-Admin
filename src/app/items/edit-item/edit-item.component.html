@@ -182,6 +182,11 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <mat-checkbox formControlName="isTwoHanded" title="Is a two handed weapon">
+                                    Is Two-handed</mat-checkbox>
+                            </div>
                         </div>
                     </div>
                     <div *ngIf="showBookSection">
@@ -193,7 +198,8 @@
                                     <mat-form-field appearance="outline">
                                         <mat-label>Number of pages</mat-label>
                                         <input matInput type="number" placeholder="Number of pages"
-                                            formControlName="pageCount" required>
+                                            formControlName="pagesCount" [value]="itemForm.get('pageCount').value"
+                                            required>
                                         <mat-error *ngIf="itemForm.get('pageCount').hasError('required')">
                                             Number of pages is required.
                                         </mat-error>
@@ -205,6 +211,7 @@
                             </div>
 
                             <div class="row" [formGroup]="itemForm.get('pages')">
+
                                 <div class="col-12" *ngFor="let page of pages; let i = index;">
 
                                     <mat-form-field appearance="outline">
@@ -212,9 +219,11 @@
                                         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
                                             cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="page{{i}}"
                                             [value]="selectedItem?.book?.pages[i]"></textarea>
+                                        <mat-hint align="start"><strong>Markdown accepted.</strong>
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
-                                <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addPage()"
+                                <a mat-raised-button color="secondary" (click)="addPage()"
                                     *ngIf="pages.length + 1 <= itemForm.get('pageCount').value">Add
                                     another page</a>
                             </div>

@@ -65,7 +65,8 @@ export enum SkillEffectLocation {
     Dispell,
     Frozen,
     Burnt,
-    Undead
+    Undead,
+    Berserk
 }
 
 export enum EffectLocation {

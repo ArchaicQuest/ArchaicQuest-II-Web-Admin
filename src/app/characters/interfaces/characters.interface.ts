@@ -8,6 +8,17 @@ import { Item } from 'src/app/items/interfaces/item.interface';
 import { Equipment } from './equipment.interface';
 import { Events } from './events.interface';
 
+
+export interface Mount {
+    name: string;
+    mountedBy: string;
+    isMount: boolean;
+}
+export interface SpellList {
+    name: string;
+    cost: string;
+}
+
 export interface Character {
     id?: string;
     name: string;
@@ -39,6 +50,6 @@ export interface Character {
     shopkeeper?: boolean;
     trainer?: boolean;
     events?: Events;
+    isMount?: Mount;
+    spellList?: SpellList[]
 }
-
-

@@ -125,9 +125,11 @@
                                     <input type="text" placeholder="Pick one" aria-label="Number" matInput
                                         formControlName="selectedSkill" [matAutocomplete]="auto">
                                     <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
-                                        <mat-option *ngFor="let skill of filteredOptions | async" [value]="skill">
-                                            {{skill.name}}
-                                        </mat-option>
+                                        <ng-container *ngFor="let skill of filteredOptions | async">
+                                            <mat-option *ngIf="!isSelectedSkill(skill)" [value]="skill">
+                                                {{skill.name}}
+                                            </mat-option>
+                                        </ng-container>
                                     </mat-autocomplete>
                                 </mat-form-field>
                             </div>

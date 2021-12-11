@@ -88,6 +88,7 @@ export class AddMobService {
         roam: [false],
         shopkeeper: [false],
         trainer: [false],
+        isMount: [false],
         events: new FormGroup({
             enter: new FormControl(''),
             leave: new FormControl(''),

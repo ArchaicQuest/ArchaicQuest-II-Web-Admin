@@ -24,7 +24,8 @@
         </tr>
         <tr>
             <td class="cell-title">STR:</td>
-            <td>{{mobForm.get('attributes').get('strength').value || 0}}({{mobForm.get('attributes').get('strength').value || 0}})
+            <td>{{mobForm.get('attributes').get('strength').value ||
+                0}}({{mobForm.get('attributes').get('strength').value || 0}})
             </td>
             <td class="cell-title"></td> <!-- hit roll -->
             <td></td>
@@ -33,7 +34,8 @@
         </tr>
         <tr>
             <td class="cell-title">DEX:</td>
-            <td>{{mobForm.get('attributes').get('dexterity').value || 0}}({{mobForm.get('attributes').get('dexterity').value || 0}})
+            <td>{{mobForm.get('attributes').get('dexterity').value ||
+                0}}({{mobForm.get('attributes').get('dexterity').value || 0}})
             <td class="cell-title"></td><!-- dam roll -->
             <td></td>
             <td class="cell-title">Wimpy:</td>
@@ -41,7 +43,8 @@
         </tr>
         <tr>
             <td class="cell-title">Con:</td>
-            <td>{{mobForm.get('attributes').get('constitution').value || 0}}({{mobForm.get('attributes').get('constitution').value || 0}})
+            <td>{{mobForm.get('attributes').get('constitution').value ||
+                0}}({{mobForm.get('attributes').get('constitution').value || 0}})
             <td class="cell-title">Align:</td>
             <td>{{mobForm.get('alignment').value.name}}</td>
             <td></td>
@@ -49,7 +52,8 @@
         </tr>
         <tr>
             <td class="cell-title">Int:</td>
-            <td>{{mobForm.get('attributes').get('intelligence').value || 0}}({{mobForm.get('attributes').get('intelligence').value || 0}})
+            <td>{{mobForm.get('attributes').get('intelligence').value ||
+                0}}({{mobForm.get('attributes').get('intelligence').value || 0}})
             <td class="cell-title">Armour:</td>
             <td>well-crafted</td>
             <td></td>
@@ -57,7 +61,8 @@
         </tr>
         <tr>
             <td class="cell-title">Wis:</td>
-            <td>{{mobForm.get('attributes').get('wisdom').value || 0}}({{mobForm.get('attributes').get('wisdom').value || 0}})
+            <td>{{mobForm.get('attributes').get('wisdom').value || 0}}({{mobForm.get('attributes').get('wisdom').value
+                || 0}})
             <td class="cell-title">Pos'n:</td>
             <td>{{mobForm.get('status').value | position}} </td>
             <td></td>
@@ -65,7 +70,8 @@
         </tr>
         <tr>
             <td class="cell-title">Cha:</td>
-            <td>{{mobForm.get('attributes').get('charisma').value || 0}}({{mobForm.get('attributes').get('charisma').value || 0}})
+            <td>{{mobForm.get('attributes').get('charisma').value ||
+                0}}({{mobForm.get('attributes').get('charisma').value || 0}})
             <td class="cell-title">Style:</td>
             <td>Standard</td>
             <td></td>
@@ -95,9 +101,11 @@
                 {{mobForm.get('level').value | generateHp: mobForm.get('attributes').get('constitution').value || 1}}
             </td>
             <td class="cell-title">weight:</td>
-            <td> {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance: mobForm.get('attributes').get('strength').value || 1 }}
+            <td> {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance:
+                mobForm.get('attributes').get('strength').value || 1 }}
                 (max:
-                {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance: mobForm.get('attributes').get('strength').value || 1 }})
+                {{mobForm.get('attributes').get('strength').value || 1 | generateWeightAllowance:
+                mobForm.get('attributes').get('strength').value || 1 }})
             </td>
         </tr>
         <tr>
@@ -234,10 +242,10 @@
 
 
     <p class="echo">> room</p>
-    <p class="room__description">{{mobForm.get('name').value}} is here.</p>
+    <p class="room__description">{{mobForm.get('name')?.value}} is here.</p>
 
     <p class="echo">> emotes</p>
-    <p class="room__description">{{mobForm.get('name').value}} is here.</p>
+    <p class="room__description">{{mobForm.get('name')?.value}} is here.</p>
 
 
 

@@ -134,6 +134,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             selectContainerKey: [''],
             isHiddenInRoom: [false],
             isStuckInRoom: [false],
+            isTwoHanded: [false],
             keyId: [''],
             value: [''],
             portalName: [''],
@@ -339,7 +340,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
                 acMagic: item.armourRating ? item.armourRating.magic : 0,
 
-                pageCount: item.book.pages.length,
+                pageCount: item.book.pageCount,
                 pages: item.book.pages,
                 hitRoll: item.modifier.hitRoll,
                 DamageRoll: item.modifier.damRoll,
@@ -369,7 +370,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 keyId: item.keyId,
                 value: item.value,
                 condition: item.condition,
-                weight: item.weight
+                weight: item.weight,
+                isTwoHanded: item.isTwoHanded
+
+
 
             });
 
@@ -403,7 +407,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
         });
 
-        if (this.selectedItem == null) {
+        if (this.selectedItem != null) {
             this.addPage();
         }
 
@@ -428,7 +432,12 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 this.itemForm.get('damageType').updateValueAndValidity();
 
 
-                // this.itemForm.updateValueAndValidity();
+                // for (const i in this.itemForm.controls) {
+                //     this.itemForm.controls[i].markAsTouched();
+                //     this.itemForm.controls[i].updateValueAndValidity();
+
+
+                // }
 
             });
         });
@@ -506,10 +515,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         console.log('page count', this.pages.length);
         this.pages.push(1);
         let i = 0;
+        console.log(this.selectedItem)
         this.pages.forEach(() => {
             (this.itemForm.controls['pages'] as FormGroup).addControl(
                 `page${i}`,
-                new FormControl(this.selectedItem != null ? this.selectedItem.book.pages[i] : '')
+                new FormControl(this.selectedItem != null ? this.selectedItem.book.pages[i] : 'wtf')
             );
             i++;
         });
@@ -715,6 +725,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             uses: 0,
             weight: this.itemForm.get('weight').value || 1,
             equipped: false,
+            isTwoHanded: this.itemForm.get('isTwoHanded').value || false,
             value: this.itemForm.get('value').value || this.itemForm.get('level').value * 100,
             portal: {
                 name: this.itemForm.get('portalName').value,

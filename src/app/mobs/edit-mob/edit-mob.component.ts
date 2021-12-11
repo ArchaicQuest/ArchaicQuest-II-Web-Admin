@@ -21,6 +21,7 @@ import { Mob } from '../interfaces/mob.interface';
 import { EditMobService } from './edit-mob.service';
 import { getAC } from 'src/app/characters/state/character.selector';
 import { CodeModel } from '@ngstack/code-editor';
+import { SpellList } from 'src/app/characters/interfaces/characters.interface';
 
 
 @Component({
@@ -38,6 +39,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
     inventoryItems: Item[] = [];
     filteredItems: Observable<Item[]>;
     emotes: string[] = [''];
+    spellList: SpellList[] = [];
     currentAlignment: any;
     panelOpenState = false;
     loaded = false;
@@ -186,7 +188,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     events: mob.events,
                     roam: mob.roam,
                     shopkeeper: mob.shopkeeper,
-                    trainer: mob.trainer
+                    trainer: mob.trainer,
+                    isMount: mob?.isMount
                 });
 
                 this.onEnterModel = {
@@ -225,6 +228,24 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     for (let index = 0; index < mob.emotes.length; index++) {
                         if (mob.emotes[index] != null) {
                             this.addEmote(mob.emotes[index]);
+                        }
+
+                    }
+
+                }
+
+                if (mob.spellList.length) {
+                    // this is a hack to remove the first object section as
+                    // it's added by this.roomServices.addRoomForm;
+                    // so what happens is you have a blank object
+                    // followed by the other objects with data
+                    // so just removed the first instance, quickest solution
+                    this.getSpellListControl.removeAt(0);
+
+
+                    for (let index = 0; index < mob.spellList.length; index++) {
+                        if (mob.spellList[index] != null) {
+                            this.addSpellToList(mob.spellList[index].name, mob.spellList[index].cost);
                         }
 
                     }
@@ -344,6 +365,21 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         this.getEmotesControl.removeAt(i);
     }
 
+    get getSpellListControl(): FormArray {
+        return this.addMobForm.get('spellList') as FormArray;
+    }
+
+    addSpellToList(name: string = "", cost: string = "") {
+        this.getSpellListControl.push(this.mobService.initSpellList(name, cost));
+
+        console.log(this.mobService.addMobForm.value);
+    }
+
+
+    removeSpellListLink(i: number) {
+        this.getSpellListControl.removeAt(i);
+    }
+
     addMob() {
         // todo inventory and EQ
 
@@ -413,7 +449,10 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             },
             roam: this.addMobForm.get('roam').value,
             shopkeeper: this.addMobForm.get('shopkeeper').value,
-            trainer: this.addMobForm.get('trainer').value
+            trainer: this.addMobForm.get('trainer').value,
+            isMount: this.addMobForm.get('isMount').value || false,
+            spellList: []
+
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
@@ -438,6 +477,12 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
 
         this.getEmotesControl.value.forEach((emote: { emote: string }) => {
             mob.emotes.push(emote.emote);
+        });
+
+
+        this.getSpellListControl.value.forEach((spellList: SpellList) => {
+
+            mob.spellList.push(spellList);
         });
 
 

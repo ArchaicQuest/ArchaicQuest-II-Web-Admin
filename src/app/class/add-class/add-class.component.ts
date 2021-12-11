@@ -57,7 +57,11 @@ export class AddClassComponent extends OnDestroyMixin implements OnDestroy, OnIn
             });
 
         this.service.getSkillsSpells().pipe(take(1)).subscribe(x => {
-            this.skillSpellsList = [...x]
+            this.skillSpellsList = [...x].filter((y) => {
+
+                console.log("what" + this.classSkillsList.find(x => x.skill.name == y.name))
+                return this.classSkillsList.find(x => x.skill.name == y.name) !== null
+            })
             this.filteredOptions = this.form.get('selectedSkill').valueChanges.pipe(
                 startWith(''),
                 map(value => value ? this._filter(value) : this.skillSpellsList)

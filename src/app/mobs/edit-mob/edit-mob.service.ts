@@ -20,6 +20,7 @@ import { Status } from '../../characters/interfaces/status.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Option } from '../../shared/interfaces/option.interface';
+import { SpellList } from 'src/app/characters/interfaces/characters.interface';
 
 @Injectable({
     providedIn: 'root'
@@ -61,6 +62,7 @@ export class EditMobService {
         description: ['', Validators.required],
         greetMessage: [''],
         emotes: this.formBuilder.array([this.initEmote()]),
+        spellList: this.formBuilder.array([this.initSpellList()]),
         level: ['', [Validators.min(1), Validators.max(99)]],
         stats: new FormGroup({
             hitPoints: new FormControl('', [Validators.min(1), Validators.max(9999)]),
@@ -90,7 +92,9 @@ export class EditMobService {
         }),
         roam: new FormControl(false),
         shopkeeper: new FormControl(false),
-        trainer: new FormControl(false)
+        trainer: new FormControl(false),
+        isMount: new FormControl(false),
+
     });
 
     saveMob(mob: Mob) {
@@ -108,6 +112,13 @@ export class EditMobService {
     initEmote(data: string = '') {
         return this.formBuilder.group({
             emote: data
+        });
+    }
+
+    initSpellList(name: string = "", cost: string = "") {
+        return this.formBuilder.group({
+            name: name,
+            cost: cost
         });
     }
 

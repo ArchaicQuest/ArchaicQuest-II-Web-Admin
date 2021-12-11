@@ -129,9 +129,16 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
         this.editRoomService.getRoom(this.roomId).subscribe((value: Room) => {
             this.mobs = value.mobs;
+
+            value.mobs.forEach(x => {
+                this.roomServices.roomMobs(x);
+            });
+
             this.items = value.items;
             this.areaId = value.areaId;
             this.exits = value.exits;
+
+
             this.addRoomForm.get('title').setValue(value.title);
             this.addRoomForm.get('description').setValue(value.description);
             this.addRoomForm.get('type').setValue(value.type);

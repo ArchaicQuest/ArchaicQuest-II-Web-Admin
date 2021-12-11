@@ -148,6 +148,11 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <mat-checkbox formControlName="isTwoHanded" title="Is a two handed weapon">
+                                    Is Two-handed</mat-checkbox>
+                            </div>
                         </div>
 
 
@@ -211,6 +216,8 @@
                                         <textarea matInput cdkTextareaAutosize #autosize="cdkTextareaAutosize"
                                             cdkAutosizeMinRows="2" cdkAutosizeMaxRows="20" formControlName="page{{i}}"
                                             [value]="selectedItem?.book?.pages[i]"></textarea>
+                                        <mat-hint align="start"><strong>Markdown accepted.</strong>
+                                        </mat-hint>
                                     </mat-form-field>
                                 </div>
                                 <a href="javascript:(0)" mat-raised-button color="secondary" (click)="addPage()"
@@ -544,6 +551,7 @@
                                     <input matInput type="number" placeholder="Weight" formControlName="weight">
                                 </mat-form-field>
                             </div>
+
 
                         </div>
                     </div>
