@@ -289,6 +289,11 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         this.addMobForm.get('stats').get('hitPoints').setValue(HP)
         this.addMobForm.get('stats').get('manaPoints').setValue(Mana)
         this.addMobForm.get('stats').get('movePoints').setValue(Move)
+
+        this.addMobForm.get('attributes').updateValueAndValidity()
+        this.addMobForm.get('stats').get('hitPoints').updateValueAndValidity()
+        this.addMobForm.get('stats').get('manaPoints').updateValueAndValidity()
+        this.addMobForm.get('stats').get('movePoints').updateValueAndValidity()
     }
     getRaceAttributes(raceName: string) {
         return this.races.find((x) => x.name === raceName);
@@ -321,6 +326,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             .get('attributes')
             .get('charisma')
             .setValue(stats.attributes.attribute.Charisma);
+
+        this.generateStats()
     }
 
     triggerDescriptionResize() {

@@ -66,8 +66,8 @@ export class EditMobService {
         level: ['', [Validators.min(1), Validators.max(99)]],
         stats: new FormGroup({
             hitPoints: new FormControl('', [Validators.min(1), Validators.max(9999)]),
-            manaPoints: new FormControl('', [Validators.min(1), Validators.max(999)]),
-            movePoints: new FormControl('', [Validators.min(1), Validators.max(999)])
+            manaPoints: new FormControl('', [Validators.min(1), Validators.max(9999)]),
+            movePoints: new FormControl('', [Validators.min(1), Validators.max(9999)])
         }),
         attributes: new FormGroup({
             strength: new FormControl('', [Validators.min(1), Validators.max(99)]),

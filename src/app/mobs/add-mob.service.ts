@@ -63,6 +63,7 @@ export class AddMobService {
         description: ['', Validators.required],
         greetMessage: [''],
         emotes: this.formBuilder.array([this.initEmote()]),
+        spellList: this.formBuilder.array([this.initSpellList()]),
         level: ['', [Validators.min(1), Validators.max(99)]],
         path: [''],
         stats: new FormGroup({
@@ -119,6 +120,13 @@ export class AddMobService {
 
     getAddMobForm() {
         return this.addMobForm;
+    }
+
+    initSpellList(name: string = "", cost: string = "") {
+        return this.formBuilder.group({
+            name: name,
+            cost: cost
+        });
     }
 
     initEmote() {

@@ -27,6 +27,7 @@ import { Status } from '../characters/interfaces/status.interface';
 import { Option } from '../shared/interfaces/option.interface';
 import { EquipmentComponent } from '../characters/equipment/equipment.component';
 import { CodeModel } from '@ngstack/code-editor';
+import { SpellList } from '../characters/interfaces/characters.interface';
 
 @Component({
     templateUrl: './add-mob.component.html',
@@ -44,6 +45,7 @@ export class AddMobComponent implements OnInit {
     filteredItems: Observable<Item[]>;
     currentAlignment: any;
     emotes: string[] = [''];
+    spellList: SpellList[] = [];
     panelOpenState = false;
     theme = 'vs-dark';
 
@@ -176,6 +178,13 @@ export class AddMobComponent implements OnInit {
             .get('attributes')
             .get('charisma')
             .setValue(stats.attributes.attribute.Charisma);
+
+        this.addMobForm.get('attributes').updateValueAndValidity()
+        this.addMobForm.get('stats').get('hitPoints').updateValueAndValidity()
+        this.addMobForm.get('stats').get('manaPoints').updateValueAndValidity()
+        this.addMobForm.get('stats').get('movePoints').updateValueAndValidity()
+
+        this.generateStats()
     }
 
     generateStats() {
@@ -190,6 +199,10 @@ export class AddMobComponent implements OnInit {
         this.addMobForm.get('stats').get('hitPoints').setValue(HP)
         this.addMobForm.get('stats').get('manaPoints').setValue(Mana)
         this.addMobForm.get('stats').get('movePoints').setValue(Move)
+
+        this.addMobForm.get('stats').get('hitPoints').updateValueAndValidity()
+        this.addMobForm.get('stats').get('manaPoints').updateValueAndValidity()
+        this.addMobForm.get('stats').get('movePoints').updateValueAndValidity()
     }
 
     get getEmotesControl(): FormArray {
@@ -204,6 +217,21 @@ export class AddMobComponent implements OnInit {
 
     removeLink(i: number) {
         this.getEmotesControl.removeAt(i);
+    }
+
+    get getSpellListControl(): FormArray {
+        return this.addMobForm.get('spellList') as FormArray;
+    }
+
+    addSpellToList(name: string = "", cost: string = "") {
+        this.getSpellListControl.push(this.mobService.initSpellList(name, cost));
+
+        console.log(this.mobService.addMobForm.value);
+    }
+
+
+    removeSpellListLink(i: number) {
+        this.getSpellListControl.removeAt(i);
     }
 
     getRaceAttributes(raceName: string) {
@@ -277,6 +305,7 @@ export class AddMobComponent implements OnInit {
             shopkeeper: this.addMobForm.get('shopkeeper').value,
             trainer: this.addMobForm.get('trainer').value,
             isMount: this.addMobForm.get('isMount').value,
+            spellList: []
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
@@ -286,8 +315,14 @@ export class AddMobComponent implements OnInit {
         this.store.select(x => x.character.mob.equipped).subscribe(x => {
             mob.equipped = x;
         });
+
+
+        this.getSpellListControl.value.forEach((spellList: SpellList) => {
+
+            mob.spellList.push(spellList);
+        });
         console.log(mob);
-        this.store.dispatch(new SaveChar(mob));
+        //this.store.dispatch(new SaveChar(mob));
     }
 
     ngOnDestroy(): void {

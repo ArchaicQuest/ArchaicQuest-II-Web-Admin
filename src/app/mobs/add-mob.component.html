@@ -328,6 +328,40 @@
                         <div class="col">
                             <div class="row align-items-center">
                                 <div class="col">
+                                    <h2>Mob Spell list</h2>
+                                </div>
+                            </div>
+                            <div formArrayName="spellList" class="emotes"
+                                *ngFor="let spellname of getSpellListControl.controls; let i=index">
+
+                                <mat-form-field appearance="outline" class="form-control" [formGroupName]="i">
+                                    <mat-label>Spell Name</mat-label>
+                                    <input type="text" matInput placeholder="Spell Name" formControlName="name" />
+
+                                </mat-form-field>
+
+
+                                <mat-form-field appearance="outline" class="form-control" [formGroupName]="i">
+                                    <mat-label>Spell cost</mat-label>
+                                    <input type="text" matInput placeholder="Spell cost" formControlName="cost" />
+
+                                </mat-form-field>
+                                <a class="btn btn-danger btn-sm" (click)="removeSpellListLink(i)">Remove</a>
+
+                            </div>
+
+
+                            <button mat-flat-button color="secondary" (click)="this.addSpellToList(null)"
+                                type="button">Add
+                                another
+                                spell</button>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
                                     <h2>Commands</h2>
                                 </div>
                             </div>
