@@ -372,8 +372,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         });
 
 
-        this.roomServices.updateRoom(data);
-        this.router.navigate(['/world/area/' + this.id])
+        this.roomServices.updateRoom(data, this.id);
+    
+           // this.router.navigate(['/world/area/' + this.id])
 
     }
 }

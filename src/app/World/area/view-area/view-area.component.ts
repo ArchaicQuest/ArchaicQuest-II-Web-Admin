@@ -42,6 +42,7 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
         private cd: ChangeDetectorRef,
         private toastr: ToastrService,
         private sanitizer: DomSanitizer,
+        private toast: ToastrService,
         public helpers: Shared) {
         super();
     }
@@ -112,6 +113,12 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
             this.totalRow = Math.abs(this.maxValueOfY) + Math.abs(this.minValueOfY) + 1;
             this.totalCol = Math.abs(this.maxValueOfX) + Math.abs(this.minValueOfX) + 1;
 
+            var url = new URL(window.location.href);
+            var toastMessage = url.searchParams.get("saved");
+            
+            if(toastMessage != null) {
+                 this.toast.success(toastMessage);
+            }
 
         });
 

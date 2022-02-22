@@ -2,6 +2,10 @@ table {
     width: 100%;
 }
 
+html:not(:hover), body:not(:hover){
+    background-color:#000000;
+}
+
 .mat-form-field {
     font-size: 14px;
     width: 100%;
