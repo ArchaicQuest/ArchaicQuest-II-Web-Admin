@@ -5,6 +5,7 @@ import { Area } from '../interface/area.interface';
 import { ViewAreasService } from './view-areas.service';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';
+import { take } from 'rxjs/operators';
 
 @Component({
     templateUrl: './view-areas.component.html',
@@ -20,7 +21,7 @@ export class ViewAreasComponent extends DataListComponent implements OnInit {
 
     ngOnInit() {
 
-        this.service.getItemTypes().subscribe((data) => {
+        this.service.getItemTypes().pipe(take(1)).subscribe((data) => {
             this.loaded = true;
             this.data = data;
             this.filteredata = this.data;

@@ -182,7 +182,7 @@ export class RoomService {
                 this.toast.success(`Room ${data.title} saved successfully.`);
             });
     }
-    updateRoom(data: Room) {
+    updateRoom(data: Room, roomId: number) {
         return this.http
             .put(`${this.saveRoomUrl}${data.id}`, JSON.stringify(data), {
                 headers: this.headers,
@@ -191,7 +191,7 @@ export class RoomService {
             .pipe(take(1))
             .pipe(tap(x => console.log(x)))
             .subscribe(response => {
-                this.toast.success(`Room ${data.title} saved successfully.`);
+                window.location.href = `/world/area/${roomId}?saved=Room ${data.title} saved successfully.`
             });
     }
 

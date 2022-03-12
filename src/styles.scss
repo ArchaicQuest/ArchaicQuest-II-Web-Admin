@@ -14,6 +14,10 @@ html {
     scrollbar-color: #666 #222;
 }
 
+html:not(:hover), body:not(:hover){
+    background-color:#000000;
+}
+
 ::ng-deep *::-webkit-scrollbar-track {
     background: #222; /* color of the tracking area */
 }
