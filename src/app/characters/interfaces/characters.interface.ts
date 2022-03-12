@@ -16,7 +16,7 @@ export interface Mount {
 }
 export interface SpellList {
     name: string;
-    cost: string;
+    cost: number;
 }
 
 export interface Character {
@@ -51,5 +51,7 @@ export interface Character {
     trainer?: boolean;
     events?: Events;
     isMount?: Mount;
-    spellList?: SpellList[]
+    spellList?: SpellList[];
+    enterEmote?: string;
+    leaveEmote?: string;
 }

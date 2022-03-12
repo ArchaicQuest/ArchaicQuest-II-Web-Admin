@@ -62,6 +62,8 @@ export class AddMobService {
         attackType: ['', Validators.required],
         description: ['', Validators.required],
         greetMessage: [''],
+        enterEmote: [''],
+        leaveEmote: [''],
         emotes: this.formBuilder.array([this.initEmote()]),
         spellList: this.formBuilder.array([this.initSpellList()]),
         level: ['', [Validators.min(1), Validators.max(99)]],

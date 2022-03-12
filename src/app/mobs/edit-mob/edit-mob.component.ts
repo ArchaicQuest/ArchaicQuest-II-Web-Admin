@@ -189,7 +189,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     roam: mob.roam,
                     shopkeeper: mob.shopkeeper,
                     trainer: mob.trainer,
-                    isMount: mob?.isMount
+                    isMount: mob?.isMount,
+                    enterEmote: mob.enterEmote,
+                    leaveEmote: mob.leaveEmote
                 });
 
                 this.onEnterModel = {
@@ -376,7 +378,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         return this.addMobForm.get('spellList') as FormArray;
     }
 
-    addSpellToList(name: string = "", cost: string = "") {
+    addSpellToList(name: string = "", cost: number = 0) {
         this.getSpellListControl.push(this.mobService.initSpellList(name, cost));
 
         console.log(this.mobService.addMobForm.value);
@@ -458,6 +460,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             shopkeeper: this.addMobForm.get('shopkeeper').value,
             trainer: this.addMobForm.get('trainer').value,
             isMount: this.addMobForm.get('isMount').value || false,
+            enterEmote: this.addMobForm.get('enterEmote').value || false,
+            leaveEmote: this.addMobForm.get('leaveEmote').value || false,
             spellList: []
 
         };
