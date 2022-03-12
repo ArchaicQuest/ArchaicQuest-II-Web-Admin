@@ -51,5 +51,14 @@ export interface Character {
     trainer?: boolean;
     events?: Events;
     isMount?: Mount;
-    spellList?: SpellList[]
+    spellList?: SpellList[];
+    practices?: number;
+    mobKills?: number;
+    mobDeaths?: number;
+    playerKills?: number;
+    playerDeaths?: number;
+    questPoints?: number;
+    idle?: boolean;
+    AFK?: boolean;
+
 }
