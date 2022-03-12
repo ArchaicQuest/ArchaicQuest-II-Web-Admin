@@ -10,6 +10,7 @@ export interface IQuest {
     goldGain: number;
     itemGain: Item[];
     mobsToKill: KillQuest[];
+    itemsToGet: KillQuest[];
 }
 
 

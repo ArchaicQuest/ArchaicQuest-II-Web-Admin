@@ -16,7 +16,7 @@ export interface Mount {
 }
 export interface SpellList {
     name: string;
-    cost: string;
+    cost: number;
 }
 
 export interface Character {
@@ -60,5 +60,6 @@ export interface Character {
     questPoints?: number;
     idle?: boolean;
     AFK?: boolean;
-
+    enterEmote?: string;
+    leaveEmote?: string;
 }

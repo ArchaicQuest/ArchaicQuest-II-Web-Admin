@@ -24,6 +24,7 @@ export class EditQuestComponent implements OnInit {
     public items: Item[] = [];
     public mobs: Mob[] = [];
     public mobsToKill: KillQuest[] = [];
+    public itemsToFind: KillQuest[] = [];
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
 
@@ -41,7 +42,9 @@ export class EditQuestComponent implements OnInit {
             goldGain: "",
             itemGain: "",
             mobCount: "",
-            mobToKill: ""
+            mobToKill: "",
+            itemToFind: "",
+            itemToFindCount: ""
         });
 
         this.service.getAreaName().pipe(take(1)).subscribe(data => {
@@ -62,16 +65,28 @@ export class EditQuestComponent implements OnInit {
 
                     this.items = q.itemGain;
                     this.mobsToKill = q.mobsToKill;
+                    this.itemsToFind = q.itemsToGet;
                 });
 
         });
 
     }
 
+    addQuestItem() {
+        var mobKill: KillQuest = {
+            name: this.questForm.get('itemToFind').value,
+            count: this.questForm.get('itemToFindCount').value
+        }
+
+        this.itemsToFind = this.itemsToFind.concat(mobKill);
+
+    }
+
 
     addItem(item: Item) {
-        console.log(item)
+        // console.log(item)
         this.items.push(item);
+
 
     }
 
@@ -84,6 +99,15 @@ export class EditQuestComponent implements OnInit {
         }
 
         this.mobsToKill = this.mobsToKill.concat(mobKill);
+
+    }
+
+    removeQuestItem(index: number) {
+        // var areaToDelete = (this.helpers.removeItem(this.items, index) as Item[]);
+        // this.items = [...this.items];
+
+        (this.helpers.removeItem(this.itemsToFind, index) as KillQuest[]);
+        this.itemsToFind = [...this.itemsToFind];
 
     }
 
@@ -112,7 +136,8 @@ export class EditQuestComponent implements OnInit {
             expGain: this.questForm.get('expGain').value,
             goldGain: this.questForm.get('goldGain').value,
             itemGain: this.items,
-            mobsToKill: this.mobsToKill
+            mobsToKill: this.mobsToKill,
+            itemsToGet: this.itemsToFind
 
         }
 

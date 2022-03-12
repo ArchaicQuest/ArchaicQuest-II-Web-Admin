@@ -1,17 +1,17 @@
 <div class="container-fluid view-items">
-    <app-header>View Items</app-header>
+    <app-header>View Help files</app-header>
 
     <div class="row">
         <div class="col">
             <div class="panel">
                 <div class="">
-                    <button mat-raised-button color="primary" routerLink="/add-item">Add Item</button>
+                    <button mat-raised-button color="primary" routerLink="/add">Add Help file</button>
                     <br />
                     <br />
 
 
                     <mat-form-field appearance="outline" class="form-control">
-                        <mat-label>Filter Items</mat-label>
+                        <mat-label>Filter help files</mat-label>
                         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search item by name">
                     </mat-form-field>
 

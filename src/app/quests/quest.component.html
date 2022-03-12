@@ -96,6 +96,52 @@
                         </div>
                     </div>
 
+                    <!-- item list -->
+                    <h2>Items to find</h2>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Item to find</mat-label>
+                                <input matInput placeholder="Item to find" formControlName="itemToFind">
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Amount to find</mat-label>
+                                <input matInput placeholder="Amount to find" formControlName="itemToFindCount">
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <button mat-raised-button color="primary" type="button" (click)="addQuestItem()">Add Item</button>
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="data-list">
+                                <div class="data-list__data" *ngFor="let item of itemsToFind;  let i=index">
+                                    <a (click)="removeQuestItem(i)" class="fa fa-times-circle"></a>
+                                    <h3 [line-truncation]="2">{{item?.name}}</h3>
+
+
+                                    <div class="data-list__actions">
+
+                                        <div class="row">
+                                            <div class="col">
+                                                <p>Find: {{item?.count}}x</p>
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- /mob list -->
 
                     <h2>Rewards</h2>
 

@@ -94,6 +94,8 @@ export class EditMobService {
         shopkeeper: new FormControl(false),
         trainer: new FormControl(false),
         isMount: new FormControl(false),
+        enterEmote: [''],
+        leaveEmote: [''],
 
     });
 
@@ -115,7 +117,7 @@ export class EditMobService {
         });
     }
 
-    initSpellList(name: string = "", cost: string = "") {
+    initSpellList(name: string = "", cost: number = 0) {
         return this.formBuilder.group({
             name: name,
             cost: cost

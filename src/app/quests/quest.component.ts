@@ -23,6 +23,7 @@ export class QuestComponent implements OnInit {
     public items: Item[] = [];
     public mobs: Mob[] = [];
     public mobsToKill: KillQuest[] = [];
+    public itemsToFind: KillQuest[] = [];
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
 
 
@@ -40,7 +41,9 @@ export class QuestComponent implements OnInit {
             goldGain: "",
             itemGain: "",
             mobCount: "",
-            mobToKill: ""
+            mobToKill: "",
+            itemToFind: "",
+            itemToFindCount: ""
         });
 
         this.service.getAreaName().pipe(take(1)).subscribe(data => {
@@ -51,6 +54,18 @@ export class QuestComponent implements OnInit {
 
 
     }
+
+
+    addQuestItem() {
+        var mobKill: KillQuest = {
+            name: this.questForm.get('itemToFind').value,
+            count: this.questForm.get('itemToFindCount').value
+        }
+
+        this.itemsToFind = this.itemsToFind.concat(mobKill);
+
+    }
+
 
     addItem(item: Item) {
         console.log(item)
@@ -77,6 +92,15 @@ export class QuestComponent implements OnInit {
 
     }
 
+    removeQuestItem(index: number) {
+        // var areaToDelete = (this.helpers.removeItem(this.items, index) as Item[]);
+        // this.items = [...this.items];
+
+        (this.helpers.removeItem(this.itemsToFind, index) as KillQuest[]);
+        this.itemsToFind = [...this.itemsToFind];
+
+    }
+
     removeMob(index: number) {
         (this.helpers.removeItem(this.mobsToKill, index) as KillQuest[]);
         this.mobsToKill = [...this.mobsToKill];
@@ -95,7 +119,8 @@ export class QuestComponent implements OnInit {
             expGain: this.questForm.get('expGain').value,
             goldGain: this.questForm.get('goldGain').value,
             itemGain: this.items,
-            mobsToKill: this.mobsToKill
+            mobsToKill: this.mobsToKill,
+            itemsToGet: this.itemsToFind
 
         }
 
