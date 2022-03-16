@@ -264,8 +264,8 @@ export class AddMobComponent implements OnInit {
           hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
           mana: this.addMobForm.get('stats').get('manaPoints').value,
           moves: this.addMobForm.get('stats').get('movePoints').value,
-          hitRoll: 2,
-          DamageRoll: 2,
+          hitRoll: this.addMobForm.get('attributes').get('hitRoll').value,
+          DamageRoll: this.addMobForm.get('attributes').get('damRoll').value
         }
       },
       maxAttributes: {
@@ -279,8 +279,8 @@ export class AddMobComponent implements OnInit {
           hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
           mana: this.addMobForm.get('stats').get('manaPoints').value,
           moves: this.addMobForm.get('stats').get('movePoints').value,
-          hitRoll: 2,
-          DamageRoll: 2,
+          hitRoll: this.addMobForm.get('attributes').get('hitRoll').value,
+          DamageRoll: this.addMobForm.get('attributes').get('damRoll').value
         }
       },
       className: this.addMobForm.get('class').value,

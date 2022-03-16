@@ -81,7 +81,9 @@ export class EditMobService {
                 Validators.min(1),
                 Validators.max(99)
             ]),
-            charisma: new FormControl('', [Validators.min(1), Validators.max(99)])
+            charisma: new FormControl('', [Validators.min(1), Validators.max(99)]),
+            damRoll: new FormControl('', [Validators.min(1), Validators.max(999)]),
+            hitRoll: new FormControl('', [Validators.min(1), Validators.max(999)])
         }),
         commands: [''],
         events: new FormGroup({

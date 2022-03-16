@@ -170,7 +170,9 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                         charisma: mob.attributes.attribute['Charisma'],
                         hitpoints: mob.attributes.attribute['Hitpoints'],
                         mana: mob.attributes.attribute['Mana'],
-                        moves: mob.attributes.attribute['Moves']
+                        moves: mob.attributes.attribute['Moves'],
+                        damRoll: mob.attributes.attribute['DamageRoll'],
+                        hitRoll: mob.attributes.attribute['HitRoll']
 
                     },
                     class: mob.className,
@@ -419,8 +421,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
                     mana: this.addMobForm.get('stats').get('manaPoints').value,
                     moves: this.addMobForm.get('stats').get('movePoints').value,
-                    hitRoll: 2,
-                    DamageRoll: 2,
+                    hitRoll: this.addMobForm.get('attributes').get('hitRoll').value,
+                    DamageRoll: this.addMobForm.get('attributes').get('damRoll').value
                 }
             },
             maxAttributes: {
@@ -434,8 +436,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     hitpoints: this.addMobForm.get('stats').get('hitPoints').value,
                     mana: this.addMobForm.get('stats').get('manaPoints').value,
                     moves: this.addMobForm.get('stats').get('movePoints').value,
-                    hitRoll: 2,
-                    DamageRoll: 2,
+                    hitRoll: this.addMobForm.get('attributes').get('hitRoll').value,
+                    DamageRoll: this.addMobForm.get('attributes').get('damRoll').value
                 }
             },
             className: this.addMobForm.get('class').value,
