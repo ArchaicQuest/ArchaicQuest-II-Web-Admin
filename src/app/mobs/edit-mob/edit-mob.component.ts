@@ -191,7 +191,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     trainer: mob.trainer,
                     isMount: mob?.isMount,
                     enterEmote: mob.enterEmote,
-                    leaveEmote: mob.leaveEmote
+                    leaveEmote: mob.leaveEmote,
+
                 });
 
                 this.onEnterModel = {
@@ -460,8 +461,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             shopkeeper: this.addMobForm.get('shopkeeper').value,
             trainer: this.addMobForm.get('trainer').value,
             isMount: this.addMobForm.get('isMount').value || false,
-            enterEmote: this.addMobForm.get('enterEmote').value || false,
-            leaveEmote: this.addMobForm.get('leaveEmote').value || false,
+            enterEmote: this.addMobForm.get('enterEmote').value || "",
+            leaveEmote: this.addMobForm.get('leaveEmote').value || "",
             spellList: []
 
         };

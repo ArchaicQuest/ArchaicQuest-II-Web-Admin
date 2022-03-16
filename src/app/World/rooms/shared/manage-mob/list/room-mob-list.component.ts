@@ -9,6 +9,7 @@ import { Mob } from 'src/app/mobs/interfaces/mob.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { ManageContainerComponent } from '../../manage-container/manage-container.component';
 import { ManageInventoryComponent } from '../manage-inventory/manage-inventory.component';
+import { EditObjectJsonComponent } from '../../edit-object-json/edit-object-json.component';
 
 
 @Component({
@@ -47,6 +48,31 @@ export class RoomMobListComponent extends DataListComponent implements OnInit, O
         this.dataSource = temp;
         this.data = temp;
         this.filteredata = this.data;
+    }
+
+    openEditDialog(item: Mob, index: number): void {
+        const dialogRef = this.dialog.open(EditObjectJsonComponent, {
+            height: '85%',
+            width: '50%',
+            data: {
+                item: item,
+            }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            console.log("closed", result)
+
+            if (!result) {
+                return
+            }
+
+            var updatedItem = JSON.parse(result);
+            item = updatedItem;
+
+
+            this.filteredata[index] = updatedItem;
+
+        });
     }
 
 
