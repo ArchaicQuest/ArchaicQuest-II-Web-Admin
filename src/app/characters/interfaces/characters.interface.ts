@@ -52,6 +52,14 @@ export interface Character {
     events?: Events;
     isMount?: Mount;
     spellList?: SpellList[];
+    practices?: number;
+    mobKills?: number;
+    mobDeaths?: number;
+    playerKills?: number;
+    playerDeaths?: number;
+    questPoints?: number;
+    idle?: boolean;
+    AFK?: boolean;
     enterEmote?: string;
     leaveEmote?: string;
 }

@@ -215,6 +215,32 @@
                                     </mat-form-field>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Dam Roll</mat-label>
+                                        <input type="number" max="999" min="1" matInput
+                                            placeholder="Dam Roll - boost damage" value="" required
+                                            formControlName="damRoll">
+                                        <mat-error
+                                            *ngIf="addMobForm.get('attributes').get('damRoll').hasError('min') ||addMobForm.get('attributes').get('damRoll').hasError('max')">
+                                            charisma must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Hit Role</mat-label>
+                                        <input type="number" max="999" min="1" matInput
+                                            placeholder="Hit roll - boost to hit chance" value="" required
+                                            formControlName="hitRoll">
+                                        <mat-error
+                                            *ngIf="addMobForm.get('attributes').get('hitRoll').hasError('min') ||addMobForm.get('attributes').get('hitRoll').hasError('max')">
+                                            charisma must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
                         </div>
                     </div>
 
