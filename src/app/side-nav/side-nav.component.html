@@ -132,6 +132,22 @@
                 </ul>
             </mat-expansion-panel>
             <mat-expansion-panel>
+                <mat-expansion-panel-header matTooltip="View Players" matTooltipPosition="right"
+                    (click)="toggleSidenav(true)">
+                    <i class="ra ra-player " aria-hidden="true"></i>
+                    <span *ngIf="expanded$ | async">Players</span>
+                </mat-expansion-panel-header>
+                <ul>
+                    <li>
+                        <a [routerLink]="['/player/accounts/']" (click)="toggleSidenav(false)">
+                            <i class="fa fa-search" aria-hidden="true"></i>
+                            <span *ngIf="expanded$ | async">View Accounts</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </mat-expansion-panel>
+            <mat-expansion-panel>
                 <mat-expansion-panel-header matTooltip="Skills & Spells" matTooltipPosition="right"
                     (click)="toggleSidenav(true)">
                     <i class="ra ra-flame-symbol" aria-hidden="true"></i>

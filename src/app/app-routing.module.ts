@@ -20,6 +20,10 @@ const routes: Routes = [
         loadChildren: () => import('./mobs/mob.module').then(m => m.MobModule)
     },
     {
+        path: 'player',
+        loadChildren: () => import('./players/player.module').then(m => m.PlayersModule)
+    },
+    {
         path: 'world',
         loadChildren: () => import('./World/world.module').then(m => m.WorldModule)
     },

@@ -1,0 +1,61 @@
+<div class="container-fluid view-items">
+    <app-header>View Accounts</app-header>
+
+    <div class="row">
+        <div class="col">
+            <div class="panel">
+                <div class="">
+                    <button mat-raised-button color="primary" routerLink="/add-mob">Add Mob</button>
+                    <br />
+                    <br />
+
+
+                    <mat-form-field appearance="outline" class="form-control">
+                        <mat-label>Filter Accounts</mat-label>
+                        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter accounts">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="data-list">
+        <div class="data-list__data" *ngFor="let data of filteredata; let i = index;">
+
+            <h3 [line-truncation]="2">{{data.email}}</h3>
+            <p class="data-list__data__description" [line-truncation]="3">total play time
+                {{data.characters?.stats?.totalPlayTime}}</p>
+
+
+            <div class="data-list__actions">
+
+                <div class="row">
+                    <div class="col">
+                        <p><i class="ra ra-player"></i>char count {{data.characters?.length}}</p>
+                        <p><i class="fa fa-calendar"></i> {{data.dateJoined | date: 'dd/MM/yyyy'}}</p>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <button mat-raised-button color="primary" [routerLink]="['/player/view', data.id]">
+                            View / Edit
+                        </button>
+                    </div>
+                    <!-- <div class="col">
+                        <button mat-flat-button color="secondary" (click)="delete(filteredata, i, data.id)">
+                            Delete</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <mat-paginator [length]="data?.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="onPaginateChange($event)">
+    </mat-paginator>
+
+
+
+</div>

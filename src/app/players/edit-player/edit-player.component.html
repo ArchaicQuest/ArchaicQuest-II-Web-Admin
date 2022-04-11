@@ -1,0 +1,273 @@
+<div class="container-fluid view-items">
+    <app-header>Edit Player</app-header>
+
+    <div class="row">
+        <div class="col col-lg-7">
+
+
+            <div class="panel">
+                <mat-spinner *ngIf="!loaded"></mat-spinner>
+
+                <form *ngIf="loaded" novalidate [formGroup]="playerForm" (ngSubmit)="addMob()">
+                    <input type="hidden" formControlName="id">
+                    <h2>Basic Information</h2>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Name</mat-label>
+                                <input matInput placeholder="e.g Goblin" required formControlName="name">
+                                <mat-error *ngIf="playerForm.get('name').hasError('required')">
+                                    Mob name is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col" formGroupName="attributes">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Attributes</h2>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Strength</mat-label>
+                                        <input matInput type="number" max="99" min="1" placeholder="Strength" required
+                                            formControlName="strength">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('strength').hasError('min') || playerForm.get('attributes').get('strength').hasError('max')">
+                                            strength must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Dexterity</mat-label>
+                                        <input type="number" max="99" min="1" matInput placeholder="Dexterity" required
+                                            formControlName="dexterity">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('dexterity').hasError('min') || playerForm.get('attributes').get('dexterity').hasError('max')">
+                                            Dexterity must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Constitution</mat-label>
+                                        <input type="number" max="99" min="1" matInput placeholder="Constitution"
+                                            required formControlName="constitution">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('constitution').hasError('min')||playerForm.get('attributes').get('constitution').hasError('max')">
+                                            constitution must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Wisdom</mat-label>
+                                        <input type="number" max="99" min="1" matInput placeholder="Wisdom" required
+                                            formControlName="wisdom">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('wisdom').hasError('min') ||playerForm.get('attributes').get('wisdom').hasError('max')">
+                                            wisdom must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Intelligence</mat-label>
+                                        <input type="number" max="99" min="1" matInput placeholder="Intelligence"
+                                            required formControlName="intelligence">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('intelligence').hasError('min') ||playerForm.get('attributes').get('intelligence').hasError('max')">
+                                            intelligence must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Charisma</mat-label>
+                                        <input type="number" max="99" min="1" matInput placeholder="Charisma" required
+                                            formControlName="charisma">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('charisma').hasError('min') ||playerForm.get('attributes').get('charisma').hasError('max')">
+                                            charisma must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Dam Roll</mat-label>
+                                        <input type="number" max="999" min="1" matInput
+                                            placeholder="Dam Roll - boost damage" value="" required
+                                            formControlName="damRoll">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('damRoll').hasError('min') ||playerForm.get('attributes').get('damRoll').hasError('max')">
+                                            charisma must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Hit Role</mat-label>
+                                        <input type="number" max="999" min="1" matInput
+                                            placeholder="Hit roll - boost to hit chance" value="" required
+                                            formControlName="hitRoll">
+                                        <mat-error
+                                            *ngIf="playerForm.get('attributes').get('hitRoll').hasError('min') ||playerForm.get('attributes').get('hitRoll').hasError('max')">
+                                            charisma must be between 1 and 99.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col" formGroupName="stats">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Stats</h2>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Hit points</mat-label>
+                                        <input matInput type="number" max="9999" min="1" placeholder="Hit points"
+                                            [value]="playerForm.get('level').value || 1" required
+                                            formControlName="hitPoints">
+                                        <mat-error
+                                            *ngIf="playerForm.get('stats').get('hitPoints').hasError('min') || playerForm.get('stats').get('hitPoints').hasError('max')">
+                                            Hit points must be between 1 and 9999.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Mana points</mat-label>
+                                        <input type="number" max="9999" min="1" matInput placeholder="Mana points"
+                                            [value]="playerForm.get('level').value  || 1" required
+                                            formControlName="manaPoints">
+                                        <mat-error
+                                            *ngIf="playerForm.get('stats').get('manaPoints').hasError('min') || playerForm.get('stats').get('manaPoints').hasError('max')">
+                                            Mana Points must be between 1 and 9999.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field appearance="outline" class="form-control">
+                                        <mat-label>Move Points</mat-label>
+                                        <input type="number" max="9999" min="1" matInput placeholder="Move points"
+                                            [value]="playerForm.get('level').value  || 1" required
+                                            formControlName="movePoints">
+                                        <mat-error
+                                            *ngIf="playerForm.get('stats').get('movePoints').hasError('min') ||playerForm.get('stats').get('movePoints').hasError('max')">
+                                            Move Points must be between 1 and 9999.
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <app-inventory [inventory]="inventoryItems"></app-inventory>
+                        </div>
+                        <div class="col">
+                            <app-equipment></app-equipment>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Description</h2>
+                                </div>
+                            </div>
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput placeholder="Description" required formControlName="description"
+                                    cdkTextareaAutosize #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="1"
+                                    cdkAutosizeMaxRows="10" (selectionChange)="triggerDescriptionResize()">
+
+                      </textarea>
+                                <mat-error *ngIf="playerForm.get('description').hasError('required')">
+                                    Mob description is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div class="col">
+
+                            <h2>Enter / Leave Emotes</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Enter Room</mat-label>
+                                <input type="text" matInput placeholder="commands. e.g n;e;s;w;n"
+                                    formControlName="enterEmote" />
+
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col">
+
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Leave Room</mat-label>
+                                <input type="text" matInput placeholder="commands. e.g n;e;s;w;n"
+                                    formControlName="leaveEmote" />
+
+                            </mat-form-field>
+
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col">
+
+                            <h2>Command Log</h2>
+
+                            <p *ngFor="let log of commandLog">{{log}}</p>
+                        </div>
+                    </div>
+
+
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="playerForm.invalid">Update
+                        Player</button>
+                </form>
+            </div>
+        </div>
+        <div class="col col-lg-5">
+            <!-- <app-mob-preview-component [mobForm]="playerForm"></app-mob-preview-component> -->
+        </div>
+    </div>
+</div>
