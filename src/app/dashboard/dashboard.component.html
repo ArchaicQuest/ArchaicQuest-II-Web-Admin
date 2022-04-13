@@ -1,62 +1,62 @@
 <div class="container-fluid dashboard">
-    <app-header>Dashboard</app-header>
+  <app-header>Dashboard</app-header>
 
-    <div class="grid">
-        <div class="stat-card">
+  <div class="grid">
+    <div class="stat-card">
 
-            <p class="col-heading"><i class="fa fa-shield" aria-hidden="true"></i> Items</p>
-            <p class="col-count">{{quickStats.itemCount | number}}</p>
-        </div>
-        <div class="stat-card">
-            <p class="col-heading"><i class="ra ra-fox" aria-hidden="true"></i> Mobs</p>
-            <p class="col-count">{{quickStats.mobCount  | number}}</p>
-
-        </div>
-        <div class="stat-card">
-            <p class="col-heading"><i class="fa fa-map-signs" aria-hidden="true"></i> Areas / Rooms</p>
-            <p class="col-count">{{quickStats.areaCount | number}} / {{quickStats.roomCount | number}}</p>
-
-        </div>
-        <div class="stat-card">
-            <p class="col-heading"><i class="fa fa-question" aria-hidden="true"></i> Quests</p>
-            <p class="col-count">{{quickStats.questCount | number}}</p>
-        </div>
+      <p class="col-heading"><i class="fa fa-shield" aria-hidden="true"></i> Items</p>
+      <p class="col-count">{{quickStats.itemCount | number}}</p>
     </div>
+    <div class="stat-card">
+      <p class="col-heading"><i class="ra ra-fox" aria-hidden="true"></i> Mobs</p>
+      <p class="col-count">{{quickStats.mobCount | number}}</p>
 
-    <div class="grid-charts">
-        <div class="col">
-            <h2>New Players</h2>
-            <app-line-chart></app-line-chart>
-        </div>
-        <div class="col">
-            <h2>PvE</h2>
-            <app-line-chart></app-line-chart>
-        </div>
     </div>
+    <div class="stat-card">
+      <p class="col-heading"><i class="fa fa-map-signs" aria-hidden="true"></i> Areas / Rooms</p>
+      <p class="col-count">{{quickStats.areaCount | number}} / {{quickStats.roomCount | number}}</p>
 
-    <div class="grid-charts">
-        <div class="col">
-            <h2>Who's playing</h2>
-
-
-            <div class="data-list">
-                <div class="data-list__data" *ngFor="let data of filteredArray">
-                    <h3>{{data.name}}</h3>
-                    <p>Lvl {{data.level}}</p>
-                    <p>{{data.race}}, {{data.class}}</p>
-
-                    <button mat-button [routerLink]="['/edit-mob',1]">view</button>
-                </div>
-
-            </div>
-
-            <mat-paginator [length]="players.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
-                (page)="onPaginateChange($event)">
-            </mat-paginator>
-
-        </div>
-        <div class="col">
-            <h2>PvP</h2>
-            <app-line-chart></app-line-chart>
-        </div>
     </div>
+    <div class="stat-card">
+      <p class="col-heading"><i class="fa fa-question" aria-hidden="true"></i> Quests</p>
+      <p class="col-count">{{quickStats.questCount | number}}</p>
+    </div>
+  </div>
+
+  <div class="grid-charts">
+    <div class="col">
+      <h2>New Players</h2>
+      <app-line-chart showAccountData="true"></app-line-chart>
+    </div>
+    <div class="col">
+      <h2>Daily Logins</h2>
+      <app-line-chart showLoginData="true"></app-line-chart>
+    </div>
+  </div>
+
+  <div class="grid-charts">
+    <div class="col">
+      <h2>Who's playing</h2>
+
+
+      <div class="data-list">
+        <div class="data-list__data" *ngFor="let data of filteredArray">
+          <h3>{{data.name}}</h3>
+          <p>Lvl {{data.level}}</p>
+          <p>{{data.race}}, {{data.class}}</p>
+
+          <button mat-button [routerLink]="['/edit-mob',1]">view</button>
+        </div>
+
+      </div>
+
+      <mat-paginator [length]="players.length" [pageSize]="defaultRecords" [pageSizeOptions]="[5, 10, 25, 100]"
+        (page)="onPaginateChange($event)">
+      </mat-paginator>
+
+    </div>
+    <div class="col">
+      <h2>Mob Kills / Player Deaths</h2>
+      <app-line-chart showMobKills="true"></app-line-chart>
+    </div>
+  </div>

@@ -8,24 +8,32 @@ import { Character } from '../characters/interfaces/characters.interface';
 import { LineChart } from './line-chart/line-chart.interface';
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class DashboardService {
-    private host = environment.hostAPI;
+  private host = environment.hostAPI;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    getQuickStats() {
-        return this.http.get<QuickStats>(`${this.host}dashboard/quickStats`);
-    }
+  getQuickStats() {
+    return this.http.get<QuickStats>(`${this.host}dashboard/quickStats`);
+  }
 
-    getWhoList() {
-        return this.http.get<Character[]>(`${this.host}dashboard/who`);
-    }
+  getWhoList() {
+    return this.http.get<Character[]>(`${this.host}dashboard/who`);
+  }
 
 
-    getAccountStats() {
-        return this.http.get<LineChart[]>(`${this.host}dashboard/AccountStats`);
-    }
+  getAccountStats() {
+    return this.http.get<LineChart[]>(`${this.host}dashboard/AccountStats`);
+  }
+
+  getAccountLoginStats() {
+    return this.http.get<LineChart[]>(`${this.host}dashboard/Logins`);
+  }
+
+  getMobKillStats() {
+    return this.http.get<LineChart[]>(`${this.host}dashboard/MobKills`);
+  }
 }
 
