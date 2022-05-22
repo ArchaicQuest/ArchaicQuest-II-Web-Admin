@@ -14,7 +14,7 @@ import { environment } from 'src/environments/environment';
 export class ViewAreaService {
     private host = environment.hostAPI;
     private getAreasUrl = `${this.host}World/Area`;
-    private deleteRoomUrl = `${this.host}World/Room`;
+    private deleteRoomUrl = `${this.host}World/Room/Delete`;
 
     constructor(private http: HttpClient) { }
 

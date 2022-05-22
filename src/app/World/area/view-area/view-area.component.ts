@@ -10,7 +10,7 @@ import { Room } from '../../rooms/interfaces/room.interface';
 import { DataListComponent } from 'src/app/shared/components/data-list/data-list.component';
 import { Shared } from 'src/app/shared/shared';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs/operators';
+import { filter, take } from 'rxjs/operators';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -138,7 +138,23 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
     }
 
     applyFilter(filterValue: string) {
-        const result = this.data.filter(x => x.title.toLowerCase().includes(filterValue));
+        const result = this.data.filter((x:Room)=> x.title.toLowerCase().includes(filterValue));
+        this.filteredata = result;
+    }
+
+    applyCoordsFilter(filterValue: string) {
+        var coords = filterValue.split(",");
+        if(coords.length <= 2) {
+            return
+        }
+
+        var filterCords:Coords = {
+            x:+coords[0],
+            y:+coords[1],
+            z:+coords[2]
+        }
+     
+        const result = this.data.filter((x:Room) => x.coords.x == filterCords.x && x.coords.y == filterCords.y && x.coords.z == filterCords.z);
         this.filteredata = result;
     }
 
