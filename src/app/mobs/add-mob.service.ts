@@ -94,6 +94,7 @@ export class AddMobService {
         shopkeeper: [false],
         trainer: [false],
         isMount: [false],
+        isHiddenScriptMob: [false],
         events: new FormGroup({
             enter: new FormControl(''),
             leave: new FormControl(''),

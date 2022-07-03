@@ -305,6 +305,7 @@ export class AddMobComponent implements OnInit {
       shopkeeper: this.addMobForm.get('shopkeeper').value,
       trainer: this.addMobForm.get('trainer').value,
       isMount: this.addMobForm.get('isMount').value,
+      isHiddenScriptMob: this.addMobForm.get('isHiddenScriptMob').value,
       spellList: []
     };
 

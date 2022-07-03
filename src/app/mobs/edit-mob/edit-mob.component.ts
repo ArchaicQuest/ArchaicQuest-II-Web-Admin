@@ -192,6 +192,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                     shopkeeper: mob.shopkeeper,
                     trainer: mob.trainer,
                     isMount: mob?.isMount,
+                    isHiddenScriptMob: mob?.isHiddenScriptMob,
                     enterEmote: mob.enterEmote,
                     leaveEmote: mob.leaveEmote,
 
@@ -463,6 +464,7 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             shopkeeper: this.addMobForm.get('shopkeeper').value,
             trainer: this.addMobForm.get('trainer').value,
             isMount: this.addMobForm.get('isMount').value || false,
+            isHiddenScriptMob: this.addMobForm.get('isHiddenScriptMob').value || false,
             enterEmote: this.addMobForm.get('enterEmote').value || "",
             leaveEmote: this.addMobForm.get('leaveEmote').value || "",
             spellList: []

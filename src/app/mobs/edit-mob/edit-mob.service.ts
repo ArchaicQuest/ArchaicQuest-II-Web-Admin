@@ -96,6 +96,7 @@ export class EditMobService {
         shopkeeper: new FormControl(false),
         trainer: new FormControl(false),
         isMount: new FormControl(false),
+        isHiddenScriptMob: new FormControl(false),
         enterEmote: [''],
         leaveEmote: [''],
 

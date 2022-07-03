@@ -51,6 +51,7 @@ export interface Character {
     trainer?: boolean;
     events?: Events;
     isMount?: Mount;
+    isHiddenScriptMob?: boolean;
     spellList?: SpellList[];
     practices?: number;
     mobKills?: number;

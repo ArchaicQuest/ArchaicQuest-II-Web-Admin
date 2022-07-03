@@ -32,6 +32,43 @@
                         </div>
                     </div>
                     <div class="section">
+                        <h2>Coords:</h2>
+                        <p>
+                            Edit coords to move room
+                        </p>
+                    </div>
+                    <div class="section">
+                        <div class="row">
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>X</mat-label>
+                                    <input matInput placeholder="X" value="" required formControlName="CoordX" />
+                                    <mat-error *ngIf="addRoomForm.get('CoordX').hasError('required')">
+                                        Coord X is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Y</mat-label>
+                                    <input matInput placeholder="Y" value="" required formControlName="CoordY" />
+                                    <mat-error *ngIf="addRoomForm.get('CoordY').hasError('required')">
+                                        Coord Y is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                            <div class="col">
+                                <mat-form-field appearance="outline" class="form-control">
+                                    <mat-label>Z</mat-label>
+                                    <input matInput placeholder="Z" value="" required formControlName="CoordZ" />
+                                    <mat-error *ngIf="addRoomForm.get('CoordZ').hasError('required')">
+                                        Coord Z is required.
+                                    </mat-error>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="section">
                         <h2>Room Objects:</h2>
                         <p>
                             These are used to add more Information about key items highlighted in
