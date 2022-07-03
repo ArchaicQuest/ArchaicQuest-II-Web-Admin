@@ -122,16 +122,29 @@
 
             </div>
 
-            <!-- 
+             
             <div class="panel room-list-view">
                 <h2>Rooms</h2>
-                <mat-form-field appearance="outline" class="form-control">
+
+                <div class="row">
+
+                  <div class="col">
+<mat-form-field appearance="outline" class="form-control">
                     <mat-label>Filter Rooms</mat-label>
                     <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter rooms">
                 </mat-form-field>
 
+                  </div>
+                  <div class="col">
+<mat-form-field appearance="outline" class="form-control">
+                    <mat-label>Filter Coords</mat-label>
+                    <input matInput (keyup)="applyCoordsFilter($event.target.value)" placeholder="Filter coords">
+                </mat-form-field>
+                  </div>
+                </div>
+                
                 <div class="data-list">
-                    <div class="data-list__data" *ngFor="let data of filteredata; let i = index;">
+                    <div class="data-list__data" *ngFor="let data of filteredata | slice:0:5; let i = index;">
                         <a (click)="removeItem(filteredata, i, data.id)" class="fa fa-times-circle"></a>
                         <h3 [line-truncation]="2">{{data.title}}</h3>
                         <p class="data-list__data__description" [line-truncation]="3">{{data.description}}</p>
@@ -165,7 +178,7 @@
                 </div>
 
 
-            </div> -->
+            </div> 
         </div>
     </div>
 </div>
