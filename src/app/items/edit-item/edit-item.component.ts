@@ -101,8 +101,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             acBash: [''],
             acSlash: [''],
             acMagic: [''],
+            acMod: [''],
+            acMagicMod: [''],
             hitRoll: [''],
-            DamageRoll: [''],
+            damageRoll: [''],
             saves: [''],
             hpMod: [''],
             manaMod: [''],
@@ -322,6 +324,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
                 });
 
+console.log(item)
+
             this.itemForm.patchValue({
                 id: item.id,
                 name: item.name,
@@ -340,15 +344,25 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 acSlash: item.armourRating ? item.armourRating.armour : 0,
                 acMagic: item.armourRating ? item.armourRating.magic : 0,
 
-                pageCount: item.book.pageCount,
-                pages: item.book.pages,
-                hitRoll: item.modifier.hitRoll,
-                DamageRoll: item.modifier.damRoll,
-                saves: item.modifier.saves,
+                // mod Attributes
+                strength: item.modifier.strength,
+                dexterity: item.modifier.dexterity,
+                constitution: item.modifier.constitution,
+                intelligence: item.modifier.intelligence,
+                wisdom: item.modifier.wisdom,
+                charisma: item.modifier.charisma,
                 hpMod: item.modifier.hp,
                 manaMod: item.modifier.mana,
                 movesMod: item.modifier.moves,
+                damageRoll: item.modifier.damRoll,
+                hitRoll: item.modifier.hitRoll,
                 spellMod: item.modifier.spellDam,
+                acMagicMod: item.modifier.acMagicMod,
+                acMod: item.modifier.acMod,
+                pageCount: item.book.pageCount,
+                pages: item.book.pages,
+                DamageRoll: item.modifier.damRoll,
+                saves: item.modifier.saves,
                 flags: item.itemFlag ? item.itemFlag : [],
                 lookDescription: item.description.look,
                 roomDescription: item.description.room,
@@ -372,9 +386,6 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 condition: item.condition,
                 weight: item.weight,
                 isTwoHanded: item.isTwoHanded
-
-
-
             });
 
             setTimeout(() => {
@@ -658,6 +669,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
 
         console.log('FLAGS' + flags);
 
+        console.log(this.itemForm.value);
+
         console.log(this.itemForm.get('roomDescription').value);
         const item: Item = {
             id: this.itemForm.get('id').value || -1,
@@ -711,15 +724,22 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
             itemFlag: flags,
             keywords: [],
             level: this.itemForm.get('level').value || 1,
-            modifier: {
-                damRoll: this.itemForm.get('DamageRoll').value || 0,
-                hitRoll: this.itemForm.get('hitRoll').value || 0,
-                hp: this.itemForm.get('hpMod').value || 0,
-                mana: this.itemForm.get('manaMod').value || 0,
-                moves: this.itemForm.get('movesMod').value || 0,
-                spellDam: this.itemForm.get('spellMod').value || 0,
-                saves: this.itemForm.get('saves').value || 0,
-            },
+            modifier: {                      
+                strength: this.itemForm.get('strength').value || 0,
+            dexterity: this.itemForm.get('dexterity').value || 0,
+            constitution: this.itemForm.get('constitution').value || 0,
+            intelligence: this.itemForm.get('intelligence').value || 0,
+            wisdom: this.itemForm.get('wisdom').value || 0,
+            charisma: this.itemForm.get('charisma').value || 0,
+            hp: this.itemForm.get('hpMod').value || 0,
+            mana: this.itemForm.get('manaMod').value || 0,
+            moves: this.itemForm.get('movesMod').value || 0,
+            damRoll: this.itemForm.get('damageRoll').value || 0,
+            hitRoll: this.itemForm.get('hitRoll').value || 0,
+            spellDam: this.itemForm.get('spellMod').value || 0,
+            acMagicMod:this.itemForm.get('acMagicMod').value || 0,
+            acMod: this.itemForm.get('acMod').value || 0,
+        },
             questItem: false,
             stuck: this.itemForm.get('isStuckInRoom').value || false,
             uses: 0,
@@ -732,7 +752,9 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
                 enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
                 destination: this.itemForm.get('portalDestination').value,
                 enterDescription: this.itemForm.get('portalEnterDescriptions').value,
-            }
+            },
+                         // mod Attributes
+   
         };
 
         this.store.dispatch(new PostItem(item));

@@ -3,7 +3,7 @@ export interface ItemModifier {
     damRoll?: number;
     saves?: number;
     hp?: number;
-    mana?: number;
+    mana: number;
     moves?: number;
     spellDam?: number;
     strength?: number;
@@ -12,5 +12,7 @@ export interface ItemModifier {
     intelligence?: number;
     wisdom?: number;
     charisma?: number;
-
+    acMagicMod?: number;
+    acMod?: number;
+    damageRoll?: number; 
 }
