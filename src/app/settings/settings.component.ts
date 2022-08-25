@@ -28,7 +28,8 @@ export class SettingsComponent implements OnInit {
             postToDiscord: [],
             channelDiscordWebHookURL: [''],
             eventsDiscordWebHookURL: [''],
-            errorDiscordWebHookURL: ['']
+            errorDiscordWebHookURL: [''],
+            postMarkKey: ['']
         });
 
 
@@ -44,6 +45,7 @@ export class SettingsComponent implements OnInit {
             this.settingsForm.get('channelDiscordWebHookURL').setValue(val.channelDiscordWebHookURL);
             this.settingsForm.get('eventsDiscordWebHookURL').setValue(val.eventsDiscordWebHookURL);
             this.settingsForm.get('errorDiscordWebHookURL').setValue(val.errorDiscordWebHookURL);
+            this.settingsForm.get('postMarkKey').setValue(val.postMarkKey);
 
         });
 
@@ -68,7 +70,8 @@ export class SettingsComponent implements OnInit {
             postToDiscord: this.settingsForm.get('postToDiscord').value,
             channelDiscordWebHookURL: this.settingsForm.get('channelDiscordWebHookURL').value,
             eventsDiscordWebHookURL: this.settingsForm.get('eventsDiscordWebHookURL').value,
-            errorDiscordWebHookURL: this.settingsForm.get('errorDiscordWebHookURL').value
+            errorDiscordWebHookURL: this.settingsForm.get('errorDiscordWebHookURL').value,
+            postMarkKey:this.settingsForm.get('postMarkKey').value,
         };
 
         this.service.updateSettings(settings).pipe(take(1)).subscribe(response => {

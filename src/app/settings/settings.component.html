@@ -26,12 +26,13 @@
                     </div>
 
 
-                    <mat-form-field appearance="outline" class="form-control">
+                    <mat-form-field appearance="outline" class="form-control" style="margin-bottom: 15px;">
                         <mat-label>Starting Room</mat-label>
                         <input matInput placeholder="Enter room id" formControlName="startingRoom">
+                        <mat-hint style="color:silver!important;">This is the room the game will load for a new player. The id is 1000 which is area id: 1, x: 0, y: 0, z: 0</mat-hint>
+
                     </mat-form-field>
-
-
+              
                     <div>
                         <mat-form-field appearance="outline" class="form-control">
                             <mat-label>Default Recall Room</mat-label>
@@ -66,6 +67,16 @@
                                 <mat-label>Error events webhook URL</mat-label>
                                 <input matInput placeholder="Enter error webhook url"
                                     formControlName="errorDiscordWebHookURL">
+                            </mat-form-field>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <mat-form-field appearance="outline" class="form-control">
+                                <mat-label>Postmark key</mat-label>
+                                <input matInput placeholder="Enter postmark key"
+                                    formControlName="postMarkKey">
                             </mat-form-field>
                         </div>
 

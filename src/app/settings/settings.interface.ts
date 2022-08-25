@@ -18,4 +18,5 @@ export interface Settings {
     channelDiscordWebHookURL?: string;
     eventsDiscordWebHookURL?: string;
     errorDiscordWebHookURL?: string;
+    postMarkKey?: string;
 }
