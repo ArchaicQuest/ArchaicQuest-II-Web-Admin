@@ -3,7 +3,7 @@ import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { ItemType } from '../interfaces/item-type.interface';
 import { Observable } from 'rxjs';
-import { Item } from '../interfaces/item.interface';
+import { Item, ItemData } from '../interfaces/item.interface';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { FlagEnum } from '../interfaces/flags.enums';
 import { environment } from 'src/environments/environment';
@@ -205,9 +205,9 @@ export class ItemService {
         return (value & flag) !== 0;
     }
 
-    addItem(item: Item): any {
+    addItem(item: ItemData): any {
         setTimeout(() => {
-            this.toast.success(`${item.name} saved successfully.`);
+            this.toast.success(`${item.item.name} saved successfully.`);
         }, 250);
         return this.http.post(this.addItemUrl, JSON.stringify(item), { headers: this.headers, responseType: 'text' });
     }

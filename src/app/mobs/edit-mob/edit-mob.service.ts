@@ -99,6 +99,7 @@ export class EditMobService {
         isHiddenScriptMob: new FormControl(false),
         enterEmote: [''],
         leaveEmote: [''],
+        updateAllInstances: [false]
 
     });
 

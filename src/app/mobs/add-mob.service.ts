@@ -15,7 +15,7 @@ import { ClassEnums } from '../characters/enums/class.enums';
 import { Class } from '../characters/interfaces/class.interface';
 import { Alignment } from '../characters/interfaces/alignment.interface';
 import { AlignmentEnums } from '../characters/enums/alignment.enum';
-import { Mob } from './interfaces/mob.interface';
+import { Mob, MobData } from './interfaces/mob.interface';
 import { Status } from '../characters/interfaces/status.interface';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -103,10 +103,10 @@ export class AddMobService {
         }),
     });
 
-    saveMob(mob: Mob) {
+    saveMob(mob: MobData) {
 
         setTimeout(() => {
-            this.toast.success(`Mob ${mob.name} saved successfully.`);
+            this.toast.success(`Mob ${mob.mob.name} saved successfully.`);
         }, 250);
 
         return this.http.post(this.saveMobUrl, JSON.stringify(mob), {

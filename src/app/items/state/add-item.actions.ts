@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 import { ItemType } from '../interfaces/item-type.interface';
-import { Item } from '../interfaces/item.interface';
+import { Item, ItemData } from '../interfaces/item.interface';
 
 export enum AddItemActionTypes {
     GetItemTypes = '[Add Item] Get Item Types',
@@ -143,7 +143,7 @@ export class GetWeaponTypesFail implements Action {
 
 
 export class PostItem implements Action {
-    constructor(public payload: Item) { }
+    constructor(public payload: ItemData) { }
     readonly type = AddItemActionTypes.PostItem;
 }
 

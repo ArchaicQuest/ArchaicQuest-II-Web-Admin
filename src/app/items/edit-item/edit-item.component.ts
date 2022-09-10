@@ -26,7 +26,7 @@ import {
   getArmourTypes
 } from '../state/add-item.selector';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Item } from '../interfaces/item.interface';
+import { Item, ItemData } from '../interfaces/item.interface';
 import { Observable } from 'rxjs';
 
 import { ActivatedRoute } from '@angular/router';
@@ -144,7 +144,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       portalEnterDescriptions: [''],
       portalEnterRoomDescription: [''],
       condition: [''],
-      weight: ['']
+      weight: [''],
+      updateAllInstances: ['']
     });
 
 
@@ -676,7 +677,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     console.log(this.itemForm.value);
 
     console.log(this.itemForm.get('roomDescription').value);
-    const item: Item = {
+    const item: ItemData = {
+      item: {
       id: this.itemForm.get('id').value || -1,
       name: this.itemForm.get('name').value,
       knownByName: this.itemForm.get('knownByName').value || false,
@@ -757,8 +759,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         destination: this.itemForm.get('portalDestination').value,
         enterDescription: this.itemForm.get('portalEnterDescriptions').value,
       },
-      // mod Attributes
-
+      },
+    updateAllInstances:  this.itemForm.get('updateAllInstances').value,
     };
 
     this.store.dispatch(new PostItem(item));

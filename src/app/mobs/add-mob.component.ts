@@ -20,7 +20,7 @@ import { Item } from '../items/interfaces/item.interface';
 import { Observable, throwError } from 'rxjs';
 import { ItemService } from '../items/add-item/add-item.service';
 import { Store } from '@ngrx/store';
-import { Mob } from './interfaces/mob.interface';
+import { Mob, MobData } from './interfaces/mob.interface';
 import { CharacterAppState } from '../characters/state/character.state';
 import { ClearInventory, SaveChar } from '../characters/state/character.actions';
 import { Status } from '../characters/interfaces/status.interface';
@@ -243,7 +243,8 @@ export class AddMobComponent implements OnInit {
 
     // this.equipmentComponent.GetEquipmentItemsFromInventory()
 
-    const mob: Mob = {
+    const mob: MobData = {
+      mob: {
       alignmentScore: this.addMobForm.get('alignment').value,
       armorRating: {
         armour: 0,
@@ -307,21 +308,23 @@ export class AddMobComponent implements OnInit {
       isMount: this.addMobForm.get('isMount').value,
       isHiddenScriptMob: this.addMobForm.get('isHiddenScriptMob').value,
       spellList: []
-    };
+    },
+    updateAllInstances: false
+  }
 
     this.store.select(x => x.character.mob.inventory).subscribe(x => {
-      mob.inventory = x;
+      mob.mob.inventory = x;
     });
 
     this.store.select(x => x.character.mob.equipped).subscribe(x => {
-      mob.equipped = x;
+      mob.mob.equipped = x;
     });
 
 
     this.getSpellListControl.value.forEach((spellList: SpellList) => {
 
       spellList.cost = +spellList.cost;
-      mob.spellList.push(spellList);
+      mob.mob.spellList.push(spellList);
     });
     console.log(mob);
     this.store.dispatch(new SaveChar(mob));

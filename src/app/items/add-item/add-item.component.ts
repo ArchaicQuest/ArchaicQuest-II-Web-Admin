@@ -22,7 +22,7 @@ import {
     getFlags
 } from '../state/add-item.selector';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { Item } from '../interfaces/item.interface';
+import { Item, ItemData } from '../interfaces/item.interface';
 import { Observable } from 'rxjs';
 import { ItemService } from './add-item.service';
 import { ActivatedRoute } from '@angular/router';
@@ -422,7 +422,8 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         console.log('FLAGS' + flags);
 
         console.log(this.itemForm.get('roomDescription').value);
-        const item: Item = {
+        const item: ItemData = {
+            item: {
             id: this.itemForm.get('id').value || -1,
             name: this.itemForm.get('name').value,
             knownByName: this.itemForm.get('knownByName').value || false,
@@ -504,6 +505,8 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
                 destination: this.itemForm.get('portalDestination').value,
                 enterDescription: this.itemForm.get('portalEnterDescription').value,
             }
+        },
+        updateAllInstances: false
         };
 
         this.store.dispatch(new PostItem(item));

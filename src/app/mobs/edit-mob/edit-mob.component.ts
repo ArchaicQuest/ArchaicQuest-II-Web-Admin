@@ -17,7 +17,7 @@ import { AddToInventory, ClearInventory, RemoveFromInventory, SaveChar } from '.
 import { CharacterAppState } from '../../characters/state/character.state';
 import { Item } from '../../items/interfaces/item.interface';
 import { Option } from '../../shared/interfaces/option.interface';
-import { Mob } from '../interfaces/mob.interface';
+import { Mob, MobData } from '../interfaces/mob.interface';
 import { EditMobService } from './edit-mob.service';
 import { getAC } from 'src/app/characters/state/character.selector';
 import { CodeModel } from '@ngstack/code-editor';
@@ -399,9 +399,8 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
         // this.equipmentComponent.GetEquipmentItemsFromInventory()
 
 
-
-
-        const mob: Mob = {
+        let mob: MobData = {
+            mob: {
             alignmentScore: this.addMobForm.get('alignment').value.value,
             armorRating: {
                 armour: 0,
@@ -468,15 +467,21 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
             enterEmote: this.addMobForm.get('enterEmote').value || "",
             leaveEmote: this.addMobForm.get('leaveEmote').value || "",
             spellList: []
-
+        },
+        updateAllInstances: this.addMobForm.get('updateAllInstances').value
         };
 
         this.store.select(x => x.character.mob.inventory).subscribe(x => {
-            mob.inventory = x;
+
+            console.log('store', x)
+            Object.assign(mob.mob, {inventory: x});
+
+            mob.mob.inventory = x;
+         
         });
 
         this.store.select(x => x.character.mob.equipped).subscribe(x => {
-            mob.equipped = x;
+            Object.assign(mob.mob, {equipped: x});
         });
 
         this.store
@@ -486,24 +491,24 @@ export class EditMobComponent extends OnDestroyMixin implements OnInit, OnDestro
                 if (ac == null) {
                     return;
                 }
-                mob.armorRating.armour = ac.armour;
-                mob.armorRating.magic = Math.floor(ac.armour / 2);
-
+                Object.assign(mob.mob.armorRating.armour, {armour: ac.armour, magic:  Math.floor(ac.armour / 2)});
+         
             });
 
         this.getEmotesControl.value.forEach((emote: { emote: string }) => {
-            mob.emotes.push(emote.emote);
+            mob.mob.emotes.push(emote.emote);
+
         });
 
 
         this.getSpellListControl.value.forEach((spellList: SpellList) => {
 
-            mob.spellList.push(spellList);
+            mob.mob.spellList.push(spellList);
         });
 
 
-
-        this.store.dispatch(new SaveChar(mob));
+    console.log('mob data ', mob)
+     this.store.dispatch(new SaveChar(mob));
 
 
     }

@@ -184,6 +184,7 @@ export class EquipmentComponent implements OnInit, OnDestroy {
 
 
         this.charStore.select(x => x.character.mob.inventory).subscribe(x => {
+            console.log('eqDD', x)
             this.mapEquipmentDropDowns(x);
         });
 

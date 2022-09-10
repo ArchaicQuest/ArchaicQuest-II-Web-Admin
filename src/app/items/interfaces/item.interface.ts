@@ -6,6 +6,11 @@ import { Book } from './book.interface';
 import { Container } from './container.interface';
 import { EqSlot } from 'src/app/characters/equipment/equipment.enum';
 
+
+export interface ItemData {
+    item: Item,
+    updateAllInstances: boolean
+}
 export interface Item {
     uuid?: any;
     id?: number;

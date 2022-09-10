@@ -193,7 +193,7 @@ export function characterReducer(state: CharacterState = intitalState,
         case CharacterActionTypes.SaveCharacter: {
             return {
                 ...state,
-                mob: action.payload
+                mob: action.payload.mob
             };
         }
         case CharacterActionTypes.SaveCharacterSuccess: {
