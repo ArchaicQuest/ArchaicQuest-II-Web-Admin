@@ -184,8 +184,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             .pipe(
                 takeUntil(componentDestroyed(this))
             ).subscribe(value => {
-                console.log('container', value);
-                this.containerCanBeLocked = !this.containerCanBeLocked;
+                this.containerCanBeLocked = value;
                 if (!this.containerCanBeLocked) {
                     this.itemForm.get('containerLocked').setValue(false);
                 }
@@ -368,9 +367,16 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         } else if (itemType === 1) {
             this.showBookSection = true;
             this.itemForm.get('pageCount').enable();
-        } else if (itemType === 2 || itemType === 18) {
+        } else if (itemType === 2 || itemType === 18 || itemType == 5) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
+            if(itemType === 5) {
+                // forage type
+                this.itemForm.get('containerOpen').setValue(true);
+                this.itemForm.get('containerCanLock').setValue(false);
+             this.containerCanBeLocked = false;
+             this.itemForm.updateValueAndValidity();
+              }
         }
         else if (itemType === 15) {
             this.showPortalSection = true;
