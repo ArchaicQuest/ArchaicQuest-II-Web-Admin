@@ -50,6 +50,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
     lockStrength: ItemType[];
     pages: number[] = [];
     showModifiers = false;
+    showSpellSection = false;
     showWeaponSection = false;
     showArmourSection = false;
     showBookSection = false;
@@ -134,7 +135,9 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             portalEnterDescription: [''],
             portalEnterRoomDescription: [''],
             condition: [''],
-            weight: ['']
+            weight: [''],
+            spellName: [''],
+            spellLevel: ['']
         });
 
 
@@ -184,8 +187,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             .pipe(
                 takeUntil(componentDestroyed(this))
             ).subscribe(value => {
-                console.log('container', value);
-                this.containerCanBeLocked = !this.containerCanBeLocked;
+                this.containerCanBeLocked = value;
                 if (!this.containerCanBeLocked) {
                     this.itemForm.get('containerLocked').setValue(false);
                 }
@@ -353,6 +355,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         this.showPortalSection = false;
         this.showModifiers = false;
         this.itemForm.get('containerSize').disable();
+        this.showSpellSection = false;
 
         if (itemType === 0) {
             this.showArmourSection = true;
@@ -368,9 +371,16 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         } else if (itemType === 1) {
             this.showBookSection = true;
             this.itemForm.get('pageCount').enable();
-        } else if (itemType === 2 || itemType === 18) {
+        } else if (itemType === 2 || itemType === 18 || itemType == 5) {
             this.showContainerSection = true;
             this.itemForm.get('containerSize').enable();
+            if(itemType === 5) {
+                // forage type
+                this.itemForm.get('containerOpen').setValue(true);
+                this.itemForm.get('containerCanLock').setValue(false);
+             this.containerCanBeLocked = false;
+             this.itemForm.updateValueAndValidity();
+              }
         }
         else if (itemType === 15) {
             this.showPortalSection = true;
@@ -378,6 +388,10 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         }
         else if (itemType === 4) {
             this.showModifiers = true;
+
+        }
+        else if (itemType === 9) {
+            this.showSpellSection = true;
 
         }
 
@@ -504,7 +518,9 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
                 enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
                 destination: this.itemForm.get('portalDestination').value,
                 enterDescription: this.itemForm.get('portalEnterDescription').value,
-            }
+            },
+            spellLevel: this.itemForm.get('spellLevel').value || 0,
+            spellName : this.itemForm.get('spellName').value || '',
         },
         updateAllInstances: false
         };

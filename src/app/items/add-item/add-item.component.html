@@ -188,6 +188,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div *ngIf="showSpellSection">
+                        <h2>Spell</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Spell Name</mat-label>
+                                        <input matInput type="text" placeholder="Spell Name" formControlName="spellName">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Spell Level</mat-label>
+                                        <input matInput type="number" placeholder="Spell Level"
+                                            formControlName="spellLevel"
+                                            [value]="this.itemForm.get('spellLevel').value">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div *ngIf="showBookSection">
                         <h2>Book</h2>
                         <div class="section">
@@ -228,7 +251,9 @@
                     </div>
 
                     <div *ngIf="showContainerSection">
-                        <h2>Container</h2>
+
+                 
+                        <h2> {{itemForm.get('itemType')?.value?.id != 5 ? 'Container' : 'Forage'}}</h2>
                         <div class="section">
                             <div class="row">
                                 <div class="col">
@@ -244,7 +269,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            <div class="row" *ngIf="itemForm.get('itemType').value.id != 5">
                                 <div class="col">
 
                                     <mat-checkbox formControlName="containerCanOpen">Can Open</mat-checkbox>
@@ -268,7 +293,9 @@
                                 </div>
                             </div>
 
-                            <div *ngIf="containerCanBeLocked">
+                        
+                        
+                            <div [hidden]="!containerCanBeLocked">
                                 <div class="row">
                                     <div class="col">
 
@@ -302,7 +329,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <strong>Container Items</strong>
+                                    <strong>{{itemForm?.get('itemType').value.id != 5 ? 'Container Items' : 'Forage Items'}}</strong>
                                     <ul>
                                         <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a
                                                 href="javascript:void(0)"
@@ -330,9 +357,9 @@
                                         (click)="addItemToContainer()">Add
                                         item</button>
                                 </div>
-                                <div class="col">
+                                <div class="col"  *ngIf="itemForm.get('itemType').value.id != 5">
                                     <mat-form-field class="example-full-width" appearance="outline">
-                                        <mat-label>dd Gold pieces</mat-label>
+                                        <mat-label>Add Gold pieces</mat-label>
                                         <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins"
                                             matInput formControlName="containerGP">
                                     </mat-form-field>

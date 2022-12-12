@@ -47,6 +47,8 @@ export interface Item {
     value?: number;
     portal: Portal;
     isTwoHanded: boolean;
+    spellName?: string;
+    spellLevel?: number;
 }
 
 

@@ -56,6 +56,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
   showModifiers = false;
   showWeaponSection = false;
   showArmourSection = false;
+  showSpellSection = false;
   showBookSection = false;
   showContainerSection = false;
   showKeySection = false;
@@ -145,7 +146,9 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       portalEnterRoomDescription: [''],
       condition: [''],
       weight: [''],
-      updateAllInstances: ['']
+      updateAllInstances: [''],
+      spellName: [''],
+      spellLevel: ['']
     });
 
 
@@ -192,8 +195,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       takeUntil(componentDestroyed(this))
     ).subscribe(value => {
 
-      console.log('container', value);
-      this.containerCanBeLocked = !this.containerCanBeLocked;
+     this.containerCanBeLocked = value;
       if (!this.containerCanBeLocked) {
         this.itemForm.get('containerLocked').setValue(false);
       }
@@ -390,7 +392,9 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         value: item.value,
         condition: item.condition,
         weight: item.weight,
-        isTwoHanded: item.isTwoHanded
+        isTwoHanded: item.isTwoHanded,
+        spellName: item.spellName,
+        spellLevel: item.spellLevel
       });
 
       setTimeout(() => {
@@ -446,8 +450,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.itemForm.get('weaponType').updateValueAndValidity();
         this.itemForm.get('attackType').updateValueAndValidity();
         this.itemForm.get('damageType').updateValueAndValidity();
+        this.itemForm.get('spellName').updateValueAndValidity();
 
-
+        // spellName: item.spellName,
+        // spellLevel: item.spellLevel
         // for (const i in this.itemForm.controls) {
         //     this.itemForm.controls[i].markAsTouched();
         //     this.itemForm.controls[i].updateValueAndValidity();
@@ -468,6 +474,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       this.itemForm.get('weaponType').updateValueAndValidity();
       this.itemForm.get('attackType').updateValueAndValidity();
       this.itemForm.get('damageType').updateValueAndValidity();
+      this.itemForm.get('spellName').updateValueAndValidity();
 
       this.itemForm.updateValueAndValidity();
     });
@@ -587,6 +594,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     this.itemForm.get('damageType').disable();
     this.itemForm.get('minDamage').disable();
     this.itemForm.get('maxDamage').disable();
+    this.showSpellSection = false;
     this.showWeaponSection = false;
     this.showBookSection = false;
     this.showPortalSection = false;
@@ -610,9 +618,20 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     } else if (itemType === 1) {
       this.showBookSection = true;
       this.itemForm.get('pageCount').enable();
-    } else if (itemType === 2 || itemType === 18) {
+    } else if (itemType === 2 || itemType === 18 || itemType === 5) {
+      console.log(itemType)
       this.showContainerSection = true;
       this.itemForm.get('containerSize').enable();
+          if(itemType === 5) {
+            // forage type
+     
+            this.itemForm.get('containerOpen').setValue(true);
+
+            this.itemForm.get('containerCanLock').setValue(false);
+         this.containerCanBeLocked = false;
+         this.itemForm.updateValueAndValidity();
+          }
+
     }
     else if (itemType === 6) {
       this.showKeySection = true;
@@ -626,6 +645,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       this.showModifiers = true;
 
     }
+    else if (itemType === 9) {
+      this.showSpellSection = true;
+
+  }
+
     setTimeout(() => {
       this.itemForm.updateValueAndValidity();
 
@@ -759,8 +783,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         destination: this.itemForm.get('portalDestination').value,
         enterDescription: this.itemForm.get('portalEnterDescriptions').value,
       },
+      spellLevel: this.itemForm.get('spellLevel').value || 0,
+      spellName : this.itemForm.get('spellName').value || '',
       },
-    updateAllInstances:  this.itemForm.get('updateAllInstances').value,
+    updateAllInstances:  this.itemForm.get('updateAllInstances').value || false,
+  
     };
 
     this.store.dispatch(new PostItem(item));
