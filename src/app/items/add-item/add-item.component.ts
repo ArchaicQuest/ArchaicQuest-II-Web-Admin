@@ -50,6 +50,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
     lockStrength: ItemType[];
     pages: number[] = [];
     showModifiers = false;
+    showSpellSection = false;
     showWeaponSection = false;
     showArmourSection = false;
     showBookSection = false;
@@ -134,7 +135,9 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             portalEnterDescription: [''],
             portalEnterRoomDescription: [''],
             condition: [''],
-            weight: ['']
+            weight: [''],
+            spellName: [''],
+            spellLevel: ['']
         });
 
 
@@ -352,6 +355,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         this.showPortalSection = false;
         this.showModifiers = false;
         this.itemForm.get('containerSize').disable();
+        this.showSpellSection = false;
 
         if (itemType === 0) {
             this.showArmourSection = true;
@@ -384,6 +388,10 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
         }
         else if (itemType === 4) {
             this.showModifiers = true;
+
+        }
+        else if (itemType === 9) {
+            this.showSpellSection = true;
 
         }
 
@@ -510,7 +518,9 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
                 enterDescriptionRoom: this.itemForm.get('portalEnterRoomDescription').value,
                 destination: this.itemForm.get('portalDestination').value,
                 enterDescription: this.itemForm.get('portalEnterDescription').value,
-            }
+            },
+            spellLevel: this.itemForm.get('spellLevel').value || 0,
+            spellName : this.itemForm.get('spellName').value || '',
         },
         updateAllInstances: false
         };

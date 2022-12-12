@@ -188,6 +188,29 @@
                             </div>
                         </div>
                     </div>
+
+                    <div *ngIf="showSpellSection">
+                        <h2>Spell</h2>
+                        <div class="section">
+                            <div class="row">
+                                <div class="col">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Spell Name</mat-label>
+                                        <input matInput type="text" placeholder="Spell Name" formControlName="spellName">
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col">
+                                    <mat-form-field appearance="outline">
+                                        <mat-label>Spell Level</mat-label>
+                                        <input matInput type="number" placeholder="Spell Level"
+                                            formControlName="spellLevel"
+                                            [value]="this.itemForm.get('spellLevel').value">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <div *ngIf="showBookSection">
                         <h2>Book</h2>
                         <div class="section">

@@ -56,6 +56,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
   showModifiers = false;
   showWeaponSection = false;
   showArmourSection = false;
+  showSpellSection = false;
   showBookSection = false;
   showContainerSection = false;
   showKeySection = false;
@@ -145,7 +146,9 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       portalEnterRoomDescription: [''],
       condition: [''],
       weight: [''],
-      updateAllInstances: ['']
+      updateAllInstances: [''],
+      spellName: [''],
+      spellLevel: ['']
     });
 
 
@@ -389,7 +392,9 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         value: item.value,
         condition: item.condition,
         weight: item.weight,
-        isTwoHanded: item.isTwoHanded
+        isTwoHanded: item.isTwoHanded,
+        spellName: item.spellName,
+        spellLevel: item.spellLevel
       });
 
       setTimeout(() => {
@@ -445,8 +450,10 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         this.itemForm.get('weaponType').updateValueAndValidity();
         this.itemForm.get('attackType').updateValueAndValidity();
         this.itemForm.get('damageType').updateValueAndValidity();
+        this.itemForm.get('spellName').updateValueAndValidity();
 
-
+        // spellName: item.spellName,
+        // spellLevel: item.spellLevel
         // for (const i in this.itemForm.controls) {
         //     this.itemForm.controls[i].markAsTouched();
         //     this.itemForm.controls[i].updateValueAndValidity();
@@ -467,6 +474,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       this.itemForm.get('weaponType').updateValueAndValidity();
       this.itemForm.get('attackType').updateValueAndValidity();
       this.itemForm.get('damageType').updateValueAndValidity();
+      this.itemForm.get('spellName').updateValueAndValidity();
 
       this.itemForm.updateValueAndValidity();
     });
@@ -586,6 +594,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     this.itemForm.get('damageType').disable();
     this.itemForm.get('minDamage').disable();
     this.itemForm.get('maxDamage').disable();
+    this.showSpellSection = false;
     this.showWeaponSection = false;
     this.showBookSection = false;
     this.showPortalSection = false;
@@ -636,6 +645,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       this.showModifiers = true;
 
     }
+    else if (itemType === 9) {
+      this.showSpellSection = true;
+
+  }
+
     setTimeout(() => {
       this.itemForm.updateValueAndValidity();
 
@@ -769,8 +783,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         destination: this.itemForm.get('portalDestination').value,
         enterDescription: this.itemForm.get('portalEnterDescriptions').value,
       },
+      spellLevel: this.itemForm.get('spellLevel').value || 0,
+      spellName : this.itemForm.get('spellName').value || '',
       },
     updateAllInstances:  this.itemForm.get('updateAllInstances').value || false,
+  
     };
 
     this.store.dispatch(new PostItem(item));
