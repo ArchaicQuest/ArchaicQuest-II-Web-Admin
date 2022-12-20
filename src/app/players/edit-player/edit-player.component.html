@@ -8,9 +8,12 @@
             <div class="panel">
                 <mat-spinner *ngIf="!loaded"></mat-spinner>
 
-                <form *ngIf="loaded" novalidate [formGroup]="playerForm" (ngSubmit)="addMob()">
-                    <input type="hidden" formControlName="id">
+                <form *ngIf="loaded" novalidate [formGroup]="playerForm" (ngSubmit)="editPlayer()">
+                 
                     <h2>Basic Information</h2>
+
+                    <p>Entering the fields below updates the JSON object, but editing the JSON object does not change these fields.</p>
+                    <br />
                     <div class="row">
                         <div class="col">
                             <mat-form-field appearance="outline" class="form-control">
@@ -25,176 +28,7 @@
 
                     </div>
 
-
-                    <div class="row">
-
-                        <div class="col" formGroupName="attributes">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h2>Attributes</h2>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Strength</mat-label>
-                                        <input matInput type="number" max="99" min="1" placeholder="Strength" required
-                                            formControlName="strength">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('strength').hasError('min') || playerForm.get('attributes').get('strength').hasError('max')">
-                                            strength must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Dexterity</mat-label>
-                                        <input type="number" max="99" min="1" matInput placeholder="Dexterity" required
-                                            formControlName="dexterity">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('dexterity').hasError('min') || playerForm.get('attributes').get('dexterity').hasError('max')">
-                                            Dexterity must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Constitution</mat-label>
-                                        <input type="number" max="99" min="1" matInput placeholder="Constitution"
-                                            required formControlName="constitution">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('constitution').hasError('min')||playerForm.get('attributes').get('constitution').hasError('max')">
-                                            constitution must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Wisdom</mat-label>
-                                        <input type="number" max="99" min="1" matInput placeholder="Wisdom" required
-                                            formControlName="wisdom">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('wisdom').hasError('min') ||playerForm.get('attributes').get('wisdom').hasError('max')">
-                                            wisdom must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Intelligence</mat-label>
-                                        <input type="number" max="99" min="1" matInput placeholder="Intelligence"
-                                            required formControlName="intelligence">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('intelligence').hasError('min') ||playerForm.get('attributes').get('intelligence').hasError('max')">
-                                            intelligence must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Charisma</mat-label>
-                                        <input type="number" max="99" min="1" matInput placeholder="Charisma" required
-                                            formControlName="charisma">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('charisma').hasError('min') ||playerForm.get('attributes').get('charisma').hasError('max')">
-                                            charisma must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Dam Roll</mat-label>
-                                        <input type="number" max="999" min="1" matInput
-                                            placeholder="Dam Roll - boost damage" value="" required
-                                            formControlName="damRoll">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('damRoll').hasError('min') ||playerForm.get('attributes').get('damRoll').hasError('max')">
-                                            charisma must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Hit Role</mat-label>
-                                        <input type="number" max="999" min="1" matInput
-                                            placeholder="Hit roll - boost to hit chance" value="" required
-                                            formControlName="hitRoll">
-                                        <mat-error
-                                            *ngIf="playerForm.get('attributes').get('hitRoll').hasError('min') ||playerForm.get('attributes').get('hitRoll').hasError('max')">
-                                            charisma must be between 1 and 99.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col" formGroupName="stats">
-                            <div class="row align-items-center">
-                                <div class="col">
-                                    <h2>Stats</h2>
-                                </div>
-
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Hit points</mat-label>
-                                        <input matInput type="number" max="9999" min="1" placeholder="Hit points"
-                                            [value]="playerForm.get('level').value || 1" required
-                                            formControlName="hitPoints">
-                                        <mat-error
-                                            *ngIf="playerForm.get('stats').get('hitPoints').hasError('min') || playerForm.get('stats').get('hitPoints').hasError('max')">
-                                            Hit points must be between 1 and 9999.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Mana points</mat-label>
-                                        <input type="number" max="9999" min="1" matInput placeholder="Mana points"
-                                            [value]="playerForm.get('level').value  || 1" required
-                                            formControlName="manaPoints">
-                                        <mat-error
-                                            *ngIf="playerForm.get('stats').get('manaPoints').hasError('min') || playerForm.get('stats').get('manaPoints').hasError('max')">
-                                            Mana Points must be between 1 and 9999.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field appearance="outline" class="form-control">
-                                        <mat-label>Move Points</mat-label>
-                                        <input type="number" max="9999" min="1" matInput placeholder="Move points"
-                                            [value]="playerForm.get('level').value  || 1" required
-                                            formControlName="movePoints">
-                                        <mat-error
-                                            *ngIf="playerForm.get('stats').get('movePoints').hasError('min') ||playerForm.get('stats').get('movePoints').hasError('max')">
-                                            Move Points must be between 1 and 9999.
-                                        </mat-error>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <app-inventory [inventory]="inventoryItems"></app-inventory>
-                        </div>
-                        <div class="col">
-                            <app-equipment></app-equipment>
-                        </div>
-
-
-                    </div>
-
-
+ 
                     <div class="row">
                         <div class="col">
                             <div class="row align-items-center">
@@ -248,17 +82,37 @@
                         </div>
                     </div>
 
-                    <br />
-
                     <div class="row">
                         <div class="col">
+                            <h2>Set Role</h2>
 
-                            <h2>Command Log</h2>
-
-                            <p *ngFor="let log of commandLog">{{log}}</p>
+                            <mat-form-field appearance="outline">
+                                <mat-label>Role</mat-label>
+                                <mat-select placeholder="Role" formControlName="userRole">
+                                    <mat-option value="1">
+                                        Player
+                                    </mat-option>
+                                    <mat-option value="2">
+                                        Builder
+                                    </mat-option>
+                                    <mat-option value="2">
+                                        Staff
+                                    </mat-option>
+                                    <mat-option value="4">
+                                        Admin
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
                         </div>
                     </div>
 
+                    <br />
+
+                 <h2>Edit Player JSON Object</h2>
+                    <ngs-code-editor [ngStyle]="{ 'height': '700px' }" theme="vs-dark" [(codeModel)]="itemModel"
+                    [options]="options" (valueChanged)="onCodeChanged($event)">
+                </ngs-code-editor>
+    
 
 
                     <button mat-raised-button color="primary" type="submit" [disabled]="playerForm.invalid">Update
@@ -267,7 +121,15 @@
             </div>
         </div>
         <div class="col col-lg-5">
-            <!-- <app-mob-preview-component [mobForm]="playerForm"></app-mob-preview-component> -->
+            <div class="client">
+          
+                        <h2 style="color:white">Command Log</h2>
+
+                        <div style="max-height:100vh; overflow: scroll">
+                        <p *ngFor="let log of commandLog">{{log}}</p>
+                
+                </div>
+            </div>
         </div>
     </div>
 </div>

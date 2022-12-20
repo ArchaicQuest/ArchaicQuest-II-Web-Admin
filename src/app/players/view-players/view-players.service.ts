@@ -11,11 +11,14 @@ import { Account, Player } from '../../mobs/interfaces/mob.interface';
 export class ViewPlayerService {
     private host = environment.hostAPI;
     private getUrl = `${this.host}character/Player`;
+    private editPlayer = `${this.host}character/edit-player`;
+    private headers = new HttpHeaders({
+        'Content-Type': 'application/json'
+    });
 
     constructor(private http: HttpClient) { }
 
     getPlayers(id: string): Observable<Player[]> {
-        console.log("wtf")
         return this.http.get<Player[]>(this.getUrl + '/' + id);
     }
     getAccounts(): Observable<Account[]> {
@@ -26,9 +29,8 @@ export class ViewPlayerService {
         return this.http.get<Player>(`${this.host}character/viewPlayer/${id}`);
     }
 
-
-    // delete(id: number): Observable<any> {
-    //     return this.http.delete<any>(`${this.host}mob/delete/${id}`);
-    // }
+    savePlayerEdit(playerData: string) {
+        return this.http.post<Player>(this.editPlayer, playerData, {headers: this.headers})
+    }
 
 }

@@ -23,6 +23,8 @@ import { SpellList } from 'src/app/characters/interfaces/characters.interface';
 import { ViewPlayerService } from '../view-players/view-players.service';
 import { ViewMobService } from 'src/app/mobs/view-mobs/view-mobs.service';
 import { EditMobService } from '../../mobs/edit-mob/edit-mob.service';
+import { Player } from 'src/app/mobs/interfaces/mob.interface';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -46,6 +48,7 @@ export class EditPlayerComponent extends OnDestroyMixin implements OnInit, OnDes
     loaded = false;
     theme = 'vs-dark';
     commandLog = [];
+    playerObj: Player = null;
     constructor(
         private playerService: ViewPlayerService,
         private mobService: EditMobService,
@@ -53,54 +56,35 @@ export class EditPlayerComponent extends OnDestroyMixin implements OnInit, OnDes
         private route: ActivatedRoute,
         private ngZone: NgZone,
         private changeDetector: ChangeDetectorRef,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private toast: ToastrService
     ) { super(); }
     @ViewChild(EquipmentComponent) equipmentComponent: EquipmentComponent;
     @ViewChild('autosize', { static: true }) autosize: CdkTextareaAutosize;
 
-    logModel: CodeModel = {
+    itemModel: CodeModel = {
         language: 'json',
-        uri: 'lua.json',
-        value: 'xx',
+        uri: 'json.json',
+        value: '',
     };
+    options = {
+        contextmenu: true,
+        minimap: {
+            enabled: false,
+        },
+    };
+
     ngOnInit() {
 
-        this.playerForm = this.formBuilder.group({
-            id: [''],
-            name: ['', Validators.required],
-            longName: ['', Validators.required],
-            gender: ['', Validators.required],
-            race: ['', Validators.required],
-            class: ['', Validators.required],
-            alignment: ['', Validators.required],
-            status: [1, Validators.required],
-            description: ['', Validators.required],
-            level: ['', [Validators.min(1), Validators.max(99)]],
-            stats: new FormGroup({
-                hitPoints: new FormControl('', [Validators.min(1), Validators.max(9999)]),
-                manaPoints: new FormControl('', [Validators.min(1), Validators.max(9999)]),
-                movePoints: new FormControl('', [Validators.min(1), Validators.max(9999)])
-            }),
-            attributes: new FormGroup({
-                strength: new FormControl('', [Validators.min(1), Validators.max(99)]),
-                dexterity: new FormControl('', [Validators.min(1), Validators.max(99)]),
-                constitution: new FormControl('', [
-                    Validators.min(1),
-                    Validators.max(99)
-                ]),
-                wisdom: new FormControl('', [Validators.min(1), Validators.max(99)]),
-                intelligence: new FormControl('', [
-                    Validators.min(1),
-                    Validators.max(99)
-                ]),
-                charisma: new FormControl('', [Validators.min(1), Validators.max(99)]),
-                damRoll: new FormControl('', [Validators.min(1), Validators.max(999)]),
-                hitRoll: new FormControl('', [Validators.min(1), Validators.max(999)])
-            }),
 
+
+        this.playerForm = this.formBuilder.group({
+           
+            name: ['', Validators.required],
+            description: ['', Validators.required],
             enterEmote: [''],
             leaveEmote: [''],
-            commandLog: ['']
+            userRole: [''],
 
         });
 
@@ -108,103 +92,104 @@ export class EditPlayerComponent extends OnDestroyMixin implements OnInit, OnDes
         setTimeout(() => {
 
 
-
             this.playerService.getPlayer(this.route.snapshot.params['id']).pipe(
                 takeUntil(componentDestroyed(this))
             ).subscribe(mob => {
 
+                this.playerObj = mob;
+
+               // this.itemModel.value = JSON.stringify(mob, null, 4)
+
                 this.loaded = true;
-
-                console.log('loaded', mob);
-                console.log('x', mob.attributes.attribute['Strength']);
-                console.log('y', mob.className);
-
-                this.mobService.getAlignment().subscribe((data: Alignment[]) => {
-                    this.alignments = data;
-
-                    this.currentAlignment = this.alignments.find(x => x.value === +mob.alignmentScore);
-                    this.playerForm.get('alignment').setValue(this.currentAlignment);
-                    this.playerForm.get('alignment').updateValueAndValidity();
-                });
-
-
-                mob.inventory.forEach(element => {
-                    this.store.dispatch(new AddToInventory(element));
-                });
-
-                this.playerForm.get('stats').get('hitPoints').setValue(mob.attributes.attribute['Hitpoints']);
-                this.playerForm.get('stats').get('manaPoints').setValue(mob.attributes.attribute['Mana']);
-                this.playerForm.get('stats').get('movePoints').setValue(mob.attributes.attribute['Moves']);
-                console.log(mob.commandLog)
 
                 this.commandLog = mob.commandLog;
                 this.playerForm.patchValue({
-                    alignment: mob.alignmentScore,
-                    armorRating: {
-                        armour: mob.armorRating.armour,
-                        magic: mob.armorRating.magic
-                    },
-                    inventory: [...mob.inventory],
-                    equipped: mob.equipped, // change store for inv to handle equipped items
-                    status: mob.status,
-                    attributes: {
-
-                        strength: mob.attributes.attribute['Strength'],
-                        dexterity: mob.attributes.attribute['Dexterity'],
-                        constitution: mob.attributes.attribute['Constitution'],
-                        wisdom: mob.attributes.attribute['Wisdom'],
-                        intelligence: mob.attributes.attribute['Intelligence'],
-                        charisma: mob.attributes.attribute['Charisma'],
-                        hitpoints: mob.attributes.attribute['Hitpoints'],
-                        mana: mob.attributes.attribute['Mana'],
-                        moves: mob.attributes.attribute['Moves'],
-                        damRoll: mob.attributes.attribute['DamageRoll'],
-                        hitRoll: mob.attributes.attribute['HitRoll']
-
-                    },
-                    class: mob.className,
                     description: mob.description,
-                    gender: mob.gender,
-                    level: mob.level,
-                    stats: mob.status,
-                    maxStats: mob.status,
-                    longName: mob.longName,
                     name: mob.name,
-                    race: mob.race,
                     enterEmote: mob.enterEmote,
                     leaveEmote: mob.leaveEmote,
-                    commandLog: mob.commandLog
-
+                    userRole: mob.userRole.toString(),
                 });
-
-
 
             });
 
 
-
-            //  this.playerForm.updateValueAndValidity();
-
-            // tslint:disable-next-line: forin
-            for (const i in this.playerForm.controls) {
-                this.playerForm.controls[i].markAsTouched();
-                this.playerForm.controls[i].updateValueAndValidity();
-            }
-
-            this.playerForm.get('status').markAsTouched();
-            this.playerForm.get('status').updateValueAndValidity();
-
-
         });
+       
+         setTimeout(() => {
+            this.playerForm.updateValueAndValidity();
+      
+      console.log(this.playerForm.getRawValue())
+            this.findInvalidControls();
+          });
+
+          this.playerForm.get('name').valueChanges.pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(val => {
+      
+            this.playerObj.name = val
+    
+            this.itemModel = JSON.parse(JSON.stringify(this.itemModel));
+            this.itemModel.value = JSON.stringify(this.playerObj, null, 4);
+            
+          });
+
+          this.playerForm.get('description').valueChanges.pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(val => {
+      
+            this.playerObj.description = val
+    
+            this.itemModel = JSON.parse(JSON.stringify(this.itemModel));
+            this.itemModel.value = JSON.stringify(this.playerObj, null, 4);
+            
+          });
+      
+          this.playerForm.get('enterEmote').valueChanges.pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(val => {
+      
+            this.playerObj.enterEmote = val
+    
+            this.itemModel = JSON.parse(JSON.stringify(this.itemModel));
+            this.itemModel.value = JSON.stringify(this.playerObj, null, 4);
+            
+          });
+
+               
+          this.playerForm.get('leaveEmote').valueChanges.pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(val => {
+      
+            this.playerObj.leaveEmote = val
+    
+            this.itemModel = JSON.parse(JSON.stringify(this.itemModel));
+            this.itemModel.value = JSON.stringify(this.playerObj, null, 4);
+            
+          });
+
+                         
+          this.playerForm.get('userRole').valueChanges.pipe(
+            takeUntil(componentDestroyed(this))
+        ).subscribe(val => {
+      
+            this.playerObj.userRole = +val
+    
+            this.itemModel = JSON.parse(JSON.stringify(this.itemModel));
+            this.itemModel.value = JSON.stringify(this.playerObj, null, 4);
+            
+          });
     }
 
+   
     ngOnDestroy(): void {
 
         this.store.dispatch(new ClearInventory());
     }
 
     onCodeChanged(value) {
-        this.playerForm.get('commandLog').setValue(value);
+      
+       this.playerObj = JSON.parse(value)
     }
 
 
@@ -215,10 +200,33 @@ export class EditPlayerComponent extends OnDestroyMixin implements OnInit, OnDes
             .subscribe(() => this.autosize.resizeToFitContent(true));
     }
 
-    addMob() {
+    editPlayer() {
 
+ 
+        let playerData = JSON.stringify(this.playerObj);
+
+            this.playerService.savePlayerEdit(playerData).pipe(take(1)).subscribe((x) => {
+           
+                if(x != null) {
+                this.toast.success(`Player updated successfully.`);
+                }
+                else {
+                    this.toast.error(`Something went wrong.`);
+                }
+            }
+            )
     }
 
+    public findInvalidControls() {
+        const invalid = [];
+        const controls = this.playerForm.controls;
+        for (const name in controls) {
+          if (controls[name].invalid) {
+            invalid.push(name);
+          }
+        }
+        console.log('invalid:', invalid);
+      }
 
 
 

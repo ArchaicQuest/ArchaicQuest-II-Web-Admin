@@ -14,6 +14,7 @@ export interface Mob extends Character {
 export interface Player extends Character {
     longName: string;
     commandLog: string[];
+    userRole: number;
 }
 
 export interface Stats {
