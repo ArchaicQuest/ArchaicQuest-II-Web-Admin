@@ -67,7 +67,8 @@ export class CraftingRecipesComponent implements OnInit {
         return this.formBuilder.group({
             material: '',
             quantity: '1',
-            presentInRoom: false
+            presentInRoom: false,
+            restoreOnFailedCraft: false
         });
     }
 
@@ -79,7 +80,8 @@ export class CraftingRecipesComponent implements OnInit {
             materials.push(
                 {
                     material: x.get('material').value,
-                    quantity: x.get('quantity').value
+                    quantity: x.get('quantity').value,
+                    restoreOnFailedCraft: x.get('restoreOnFailedCraft').value ?? false
                 }
             )
         })

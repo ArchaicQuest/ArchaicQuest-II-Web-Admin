@@ -15,4 +15,5 @@ export interface CraftingMaterials {
     material: string;
     quantity: number
     presentInRoom: boolean
+    restoreOnFailedCraft: boolean
 }

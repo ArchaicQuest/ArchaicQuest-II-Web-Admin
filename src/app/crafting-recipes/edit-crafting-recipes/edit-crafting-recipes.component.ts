@@ -102,13 +102,15 @@ export class EditCraftingRecipesComponent implements OnInit {
             return this.formBuilder.group({
                 material: '',
                 quantity: '1',
-                presentInRoom: false
+                presentInRoom: false,
+                restoreOnFailedCraft: false
             });
         }
         return this.formBuilder.group({
             material: data.material,
             quantity: data.quantity,
-            presentInRoom: data.presentInRoom
+            presentInRoom: data.presentInRoom,
+            restoreOnFailedCraft: data.restoreOnFailedCraft
         });
 
     }
@@ -122,7 +124,8 @@ export class EditCraftingRecipesComponent implements OnInit {
                 {
                     material: x.get('material').value,
                     quantity: x.get('quantity').value,
-                    presentInRoom: x.get('presentInRoom').value
+                    presentInRoom: x.get('presentInRoom').value,
+                    restoreOnFailedCraft: x.get('restoreOnFailedCraft').value ?? false
                 }
             )
         })
