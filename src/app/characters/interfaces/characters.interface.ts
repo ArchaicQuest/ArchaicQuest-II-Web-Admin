@@ -46,6 +46,7 @@ export interface Character {
     config?: Config;
     defaultAttack: string;
     commands: string;
+    aggro?: boolean;
     roam?: boolean;
     shopkeeper?: boolean;
     trainer?: boolean;

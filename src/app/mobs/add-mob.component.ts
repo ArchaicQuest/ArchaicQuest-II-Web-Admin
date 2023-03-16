@@ -302,6 +302,7 @@ export class AddMobComponent implements OnInit {
         act: this.addMobForm.get('events').get('act').value,
         give: this.addMobForm.get('events').get('give').value,
       },
+      aggro: this.addMobForm.get('aggro').value,
       roam: this.addMobForm.get('roam').value,
       shopkeeper: this.addMobForm.get('shopkeeper').value,
       trainer: this.addMobForm.get('trainer').value,

@@ -90,6 +90,7 @@ export class AddMobService {
             hitRoll: new FormControl('', [Validators.min(1), Validators.max(999)])
         }),
         commands: [''],
+        aggro: [false],
         roam: [false],
         shopkeeper: [false],
         trainer: [false],

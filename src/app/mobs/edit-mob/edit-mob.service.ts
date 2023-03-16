@@ -92,6 +92,7 @@ export class EditMobService {
             act: new FormControl(''),
             give: new FormControl(''),
         }),
+        aggro: new FormControl(false),
         roam: new FormControl(false),
         shopkeeper: new FormControl(false),
         trainer: new FormControl(false),
