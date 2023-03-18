@@ -11,7 +11,7 @@ import { Account, Player } from '../../mobs/interfaces/mob.interface';
 export class ViewPlayerService {
     private host = environment.hostAPI;
     private getUrl = `${this.host}character/Player`;
-    private editPlayer = `${this.host}character/edit-player`;
+    private editPlayer = `${this.host}character/update`;
     private headers = new HttpHeaders({
         'Content-Type': 'application/json'
     });

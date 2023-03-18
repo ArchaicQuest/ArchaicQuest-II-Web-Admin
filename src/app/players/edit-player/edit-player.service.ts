@@ -35,7 +35,7 @@ import { SpellList } from 'src/app/characters/interfaces/characters.interface';
 */
 export class EditPlayerService {
     private host = `${environment.hostAPI}`;
-    private saveMobUrl = `${this.host}Character/Mob`;
+    private saveMobUrl = `${this.host}Character/update`;
     private getRacesUrl = `${this.host}Character/Race`;
     private getClassesUrl = `${this.host}Character/Class`;
     private getAttackTypesUrl = `${this.host}Character/AttackType`;
