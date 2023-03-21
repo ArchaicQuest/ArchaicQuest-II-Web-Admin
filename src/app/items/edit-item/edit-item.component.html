@@ -252,10 +252,10 @@
                     </div>
 
                     <div *ngIf="showContainerSection">
-                        <h2> {{itemForm.get('itemType')?.value?.id != 5 ? 'Container' : 'Forage'}}</h2>
+                        <h2> {{itemForm?.get('itemType').value.id != 5 && itemForm?.get('itemType').value.id != 28 && itemForm.get('itemType').value.id != 29 ? 'Container' : 'Forage'}}</h2>
                         <div class="section">
                             <div class="row">
-                                <div class="col" *ngIf="itemForm.get('itemType').value.id != 5">
+                                <div class="col" *ngIf="itemForm?.get('itemType').value.id != 5 && itemForm?.get('itemType').value.id != 28 && itemForm.get('itemType').value.id != 29">
                                     <mat-form-field appearance="outline">
                                         <mat-label>Container size</mat-label>
                                         <mat-select placeholder="Container size" formControlName="containerSize"
@@ -268,7 +268,7 @@
                                 </div>
                             </div>
 
-                            <div class="row" *ngIf="itemForm.get('itemType').value.id != 5">
+                            <div class="row" *ngIf="itemForm?.get('itemType').value.id != 5 && itemForm?.get('itemType').value.id != 28 && itemForm.get('itemType').value.id != 29">
                                 <div class="col">
 
                                     <mat-checkbox formControlName="containerCanOpen">Can Open</mat-checkbox>
@@ -327,7 +327,7 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <strong>{{itemForm?.get('itemType').value.id != 5 ? 'Container Items' : 'Forage Items'}}</strong>
+                                    <strong>{{itemForm?.get('itemType').value.id != 5 && itemForm?.get('itemType').value.id != 28  && itemForm.get('itemType').value.id != 29 ? 'Container Items' : 'Forage Items'}}</strong>
                                     <ul>
                                         <li *ngFor="let item of containerItems; let i = index">{{item.name}} <a
                                                 href="javascript:void(0)"
@@ -355,7 +355,7 @@
                                         (click)="addItemToContainer()">Add
                                         item</button>
                                 </div>
-                                <div class="col" *ngIf="itemForm.get('itemType').value.id != 5">
+                                <div class="col" *ngIf="itemForm?.get('itemType').value.id != 5 && itemForm?.get('itemType').value.id != 28 && itemForm.get('itemType').value.id != 29">
                                     <mat-form-field class="example-full-width" appearance="outline">
                                         <mat-label>Gold pieces</mat-label>
                                         <input type="number" placeholder="add Gold pieces" aria-label="Add gold coins"

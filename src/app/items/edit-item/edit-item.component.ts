@@ -618,11 +618,11 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
     } else if (itemType === 1) {
       this.showBookSection = true;
       this.itemForm.get('pageCount').enable();
-    } else if (itemType === 2 || itemType === 18 || itemType === 5) {
+    } else if (itemType === 2 || itemType === 18 || itemType === 5 || itemType === 28 || itemType === 29) {
       console.log(itemType)
       this.showContainerSection = true;
       this.itemForm.get('containerSize').enable();
-          if(itemType === 5) {
+          if(itemType === 5 || itemType === 28 || itemType == 29) {
             // forage type
      
             this.itemForm.get('containerOpen').setValue(true);
