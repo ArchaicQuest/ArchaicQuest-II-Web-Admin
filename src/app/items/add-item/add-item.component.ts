@@ -137,7 +137,8 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             condition: [''],
             weight: [''],
             spellName: [''],
-            spellLevel: ['']
+            spellLevel: [''],
+            uses: ['']
         });
 
 
@@ -509,7 +510,7 @@ export class AddItemComponent extends OnDestroyMixin implements OnDestroy, OnIni
             },
             questItem: false,
             isTwoHanded: this.itemForm.get('isTwoHanded').value || false,
-            uses: 0,
+            uses: this.itemForm.get('uses').value || 1,
             weight: this.itemForm.get('weight').value || 1,
             equipped: false,
             stuck: this.itemForm.get('isStuckInRoom').value || false,

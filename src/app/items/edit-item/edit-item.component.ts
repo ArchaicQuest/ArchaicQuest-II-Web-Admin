@@ -148,7 +148,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       weight: [''],
       updateAllInstances: [''],
       spellName: [''],
-      spellLevel: ['']
+      spellLevel: [''],
+      uses: ['']
     });
 
 
@@ -394,7 +395,8 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
         weight: item.weight,
         isTwoHanded: item.isTwoHanded,
         spellName: item.spellName,
-        spellLevel: item.spellLevel
+        spellLevel: item.spellLevel,
+        uses: item.uses
       });
 
       setTimeout(() => {
@@ -772,7 +774,7 @@ export class EditItemComponent extends OnDestroyMixin implements OnDestroy, OnIn
       },
       questItem: false,
       stuck: this.itemForm.get('isStuckInRoom').value || false,
-      uses: 0,
+      uses: this.itemForm.get('uses').value || 1,
       weight: this.itemForm.get('weight').value || 1,
       equipped: false,
       isTwoHanded: this.itemForm.get('isTwoHanded').value || false,
