@@ -20,7 +20,7 @@ import { ItemType } from '../../interfaces/item-type.interface';
 import { Store, select } from '@ngrx/store';
 import { ItemAppState } from '../../state/add-item.state';
 import { getWeaponTypes } from '../../state/add-item.selector';
-import { takeWhile, takeUntil } from 'rxjs/operators';
+import { takeWhile, takeUntil, filter, map } from 'rxjs/operators';
 import { GetWeaponTypes } from '../../state/add-item.actions';
 import { BaseSelectorComponent } from '../base-selector.component';
 import { componentDestroyed } from '@w11k/ngx-componentdestroyed';
@@ -62,12 +62,17 @@ export class WeaponTypeSelectorComponent extends BaseSelectorComponent
     ngOnInit() {
         this.store.dispatch(new GetWeaponTypes());
 
+        const allowedWeapons = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
         this.store
             .pipe(
                 select(getWeaponTypes),
+                map((weaponTypes) =>
+                weaponTypes.filter((wt) => allowedWeapons.includes(wt.id))
+                ),
                 takeUntil(componentDestroyed(this))
             )
             .subscribe((weaponTypes: any) => {
+  
                 this.weaponTypes = weaponTypes;
 
                 this.control.setValue(this.currentValue);
