@@ -1,10 +1,11 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { ChangeDetectorRef, Component, NgZone, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { RoomFlagEnum } from 'src/app/items/interfaces/flags.enums';
 import { ItemSlotEnum } from 'src/app/items/interfaces/item-slot.enum';
 import { Item } from 'src/app/items/interfaces/item.interface';
 import { Mob } from 'src/app/mobs/interfaces/mob.interface';
@@ -66,7 +67,9 @@ export class AddRoomComponent implements OnInit, OnDestroy {
     westValidExit = false;
     RoomTypes: { name: string; value: number }[];
     TerrainTypes: { name: string; value: number }[];
-
+    roomFlags: any[];
+    selectedFlag: RoomFlagEnum;
+    selectedFlags: RoomFlagEnum[] = [];
     // move
     // dataSource = this.items;
     columnsToDisplay = [
@@ -88,7 +91,8 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         public shared: Shared,
         private router: Router,
         private cdRef: ChangeDetectorRef,
-        private exitService: RoomExitService
+        private exitService: RoomExitService,
+        private formbuilder: FormBuilder
     ) { }
 
     @ViewChild('autosize') autosize: CdkTextareaAutosize;
@@ -104,6 +108,20 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             console.log(value);
             this.items = value;
         });
+
+
+        this.roomServices.getRoomFlags().pipe(take(1)).subscribe((x: []) => {
+           this.roomFlags = x;
+
+           this.roomFlags.forEach(y => {
+            let control = {};
+            control[y.name];
+            this.getFlagControl.push(this.formbuilder.control(control));
+           });
+        
+           
+         
+        })
 
         this.roomServices.mobs.subscribe((value: Mob[]) => {
             console.log(value);
@@ -227,6 +245,46 @@ export class AddRoomComponent implements OnInit, OnDestroy {
         console.log('t');
     }
 
+
+    hasFlag(flag: number): boolean {
+        return this.selectedFlags.includes(flag);
+    }
+
+    isFlagSet(value: number, flag: number): boolean {
+        return (value & flag) !== 0;
+    }
+
+    get getFlagControl(): FormArray {
+        return this.addRoomForm.get('flags') as FormArray;
+    }
+
+
+    addFlag() {
+        this.getFlagControl.push(this.formbuilder.control(''));
+    }
+
+    updateSelectedFlags(flag: number) {
+        if (this.selectedFlags.length && this.selectedFlags.includes(flag)) {
+          this.selectedFlags = this.selectedFlags.filter(flagToRemove => flagToRemove !== flag);
+        } else {
+          this.selectedFlags.push(flag);
+        }
+
+      }
+
+      get getEmotesControl(): FormArray {
+        return this.addRoomForm.get('emotes') as FormArray;
+    }
+
+    addEmote(data: string) {
+        this.getEmotesControl.push(this.roomServices.initEmote(data));
+    }
+
+    removeLink(i: number) {
+        this.getEmotesControl.removeAt(i);
+    }
+
+
     ngOnDestroy(): void {
         this.componentActive = false;
         this.roomServices.clearCache();
@@ -279,11 +337,18 @@ export class AddRoomComponent implements OnInit, OnDestroy {
             updateMessage: 'nothing',
             type: this.addRoomForm.get('type').value,
             terrain: this.addRoomForm.get('terrainType').value,
+            roomFlags: this.selectedFlags
         };
 
         this.getRoomObjectsControl.value.forEach((roomObj: RoomObject) => {
             data.roomObjects.push(roomObj);
         });
+
+        this.getEmotesControl.value.forEach((emote: { emote: string }) => {
+            data.emotes.push(emote.emote);
+        });
+
+     
 
         this.roomServices.saveRoom(data);
         this.router.navigate(['/world/area/' + this.id])

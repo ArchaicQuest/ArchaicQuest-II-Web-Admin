@@ -23,6 +23,7 @@ export interface Room {
     instantRepop: boolean;
     type: number;
     terrain: number;
+    roomFlags: number[];
 }
 
 export enum RoomTypes {

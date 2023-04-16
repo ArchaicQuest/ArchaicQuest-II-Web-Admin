@@ -155,6 +155,17 @@
                                 </mat-form-field>
                             </div>
                         </div>
+
+                        <h2>Room flags</h2>
+                        <div class="section section--check-box">
+                            <div class="row" [formGroup]="addRoomForm.get('flags')">
+                                <div class="col-2" *ngFor="let flag of roomFlags">
+                                    <mat-checkbox [title]="flag.name" [formControlName]="flag.name"
+                                        [checked]=hasFlag(flag.id) (change)=updateSelectedFlags(flag.id)>{{flag.name}}
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="section">
                         <h2>Items</h2>
@@ -168,6 +179,27 @@
                         <app-mob-list [data]="mobs"></app-mob-list>
                     </div>
 
+                    <div class="row">
+                        <div class="col">
+                            <div class="row align-items-center">
+                                <div class="col">
+                                    <h2>Emotes</h2>
+                                </div>
+                            </div>
+                            <div formArrayName="emotes" class="emotes"
+                                *ngFor="let emote of getEmotesControl.controls; let i=index">
+
+                                <mat-form-field appearance="outline" class="form-control" [formGroupName]="i">
+                                    <mat-label>Emotes</mat-label>
+                                    <input type="text" matInput placeholder="emote" formControlName="emote" />
+
+                                </mat-form-field>
+                                <a class="btn btn-danger btn-sm" (click)="removeLink(i)">Remove</a>
+                            </div>
+                            <a (click)="this.addEmote('')">Add another emote</a>
+
+                        </div>
+                    </div>
 
 
                     <div class="section">

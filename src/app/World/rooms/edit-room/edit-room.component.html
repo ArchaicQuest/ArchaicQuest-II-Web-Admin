@@ -196,6 +196,17 @@
                                 </mat-form-field>
                             </div>
                         </div>
+
+                        <h2>Room flags</h2>
+                        <div class="section section--check-box">
+                            <div class="row" [formGroup]="addRoomForm.get('flags')">
+                                <div class="col-2" *ngFor="let flag of roomFlags">
+                                    <mat-checkbox [title]="flag.name" [formControlName]="flag.name"
+                                        [checked]=hasFlag(flag.id) (change)=updateSelectedFlags(flag.id)>{{flag.name}}
+                                    </mat-checkbox>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="section">

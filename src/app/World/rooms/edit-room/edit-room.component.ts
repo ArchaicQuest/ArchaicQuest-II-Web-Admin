@@ -8,7 +8,8 @@ import {
 } from '@angular/core';
 import {
     FormGroup,
-    FormArray
+    FormArray,
+    FormBuilder
 } from '@angular/forms';
 import { RoomService } from '../add-room/add-room.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -36,6 +37,7 @@ import { RoomObject } from './../interfaces/roomObject.interface';
 import { Shared } from 'src/app/shared/shared';
 import { ManageMobComponent } from '../shared/manage-mob/manage-mob.component';
 import { EditRoomService } from './edit-room.service';
+import { RoomFlagEnum } from 'src/app/items/interfaces/flags.enums';
 
 @Component({
     templateUrl: './edit-room.component.html',
@@ -99,10 +101,14 @@ export class EditRoomComponent implements OnInit, OnDestroy {
     westValidExit = false;
     RoomTypes: { name: string; value: number }[];
     TerrainTypes: { name: string; value: number }[];
+    roomFlags: any[];
+    selectedFlag: RoomFlagEnum;
+    selectedFlags: RoomFlagEnum[] = [];
 
     constructor(
         private roomServices: RoomService,
         private editRoomService: EditRoomService,
+        private formbuilder: FormBuilder,
         private ngZone: NgZone,
         private route: ActivatedRoute,
         private router: Router,
@@ -126,6 +132,9 @@ export class EditRoomComponent implements OnInit, OnDestroy {
         this.roomServices.mobs.subscribe((value: Mob[]) => {
             this.mobs = value;
         });
+
+  
+        
 
         this.editRoomService.getRoom(this.roomId).subscribe((value: Room) => {
             this.mobs = value.mobs;
@@ -153,6 +162,15 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 y: value.coords.y,
                 z: value.coords.z
             };
+
+            this.selectedFlags = value.roomFlags;
+
+            this.roomServices.getRoomFlags().pipe(take(1)).subscribe((x: []) => {
+
+                console.log("ROOM FLAGS", x)
+               this.roomFlags = x;
+    
+            })
 
             this.RoomTypes = Object.keys(RoomTypes)
                 .filter(value => isNaN(Number(value)) === false)
@@ -201,8 +219,31 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
     }
 
+    hasFlag(flag: number): boolean {
+        return this.selectedFlags.includes(flag);
+    }
+
+    isFlagSet(value: number, flag: number): boolean {
+        return (value & flag) !== 0;
+    }
+
+    get getFlagControl(): FormArray {
+        return this.addRoomForm.get('flags') as FormArray;
+    }
 
 
+    addFlag() {
+        this.getFlagControl.push(this.formbuilder.control(''));
+    }
+
+    updateSelectedFlags(flag: number) {
+        if (this.selectedFlags.length && this.selectedFlags.includes(flag)) {
+          this.selectedFlags = this.selectedFlags.filter(flagToRemove => flagToRemove !== flag);
+        } else {
+          this.selectedFlags.push(flag);
+        }
+
+      }
 
     triggerDescriptionResize() {
         // Wait for changes to be applied, then trigger textarea resize.
@@ -329,6 +370,13 @@ export class EditRoomComponent implements OnInit, OnDestroy {
 
             WTF is Players?
             */
+
+            let flags: any;
+
+    flags = this.selectedFlags;
+
+    console.log('FLAGS' + flags);
+
         console.log("post", this.addRoomForm.get('exits.east').value,)
         const data: Room = {
             id: this.roomId,
@@ -357,6 +405,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
                 down: this.addRoomForm.get('exits.down').value
             },
             instantRepop: false,
+            roomFlags: flags,
             players: null,
             updateMessage: 'nothing',
             type: this.addRoomForm.get('type').value,
@@ -371,6 +420,7 @@ export class EditRoomComponent implements OnInit, OnDestroy {
             data.emotes.push(emote.emote);
         });
 
+     
 
         this.roomServices.updateRoom(data, this.id);
     

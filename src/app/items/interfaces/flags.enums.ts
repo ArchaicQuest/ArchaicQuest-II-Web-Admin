@@ -18,3 +18,9 @@ export enum FlagEnum {
   QuestItem = 1 << 15,
   Vampric = 1 << 16, // Drains hp on hoit
 }
+
+
+export enum RoomFlagEnum {
+  Donation = 0,
+  Healing = 1, // zap if align -350 & lower
+}

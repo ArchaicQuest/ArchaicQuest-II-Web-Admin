@@ -72,7 +72,8 @@ export class ViewAreaComponent extends DataListComponent implements OnInit {
                 instantRepop: false,
                 updateMessage: '',
                 type: 0,
-                terrain: 0
+                terrain: 0,
+                roomFlags: []
             };
 
 

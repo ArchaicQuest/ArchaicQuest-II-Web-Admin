@@ -15,6 +15,7 @@ import { Room } from '../interfaces/room.interface';
 import { tap, catchError, take } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { RoomObject } from '../interfaces/roomObject.interface';
+import { RoomFlagEnum } from 'src/app/items/interfaces/flags.enums';
 
 @Injectable({
     providedIn: 'root'
@@ -58,8 +59,26 @@ export class RoomService {
             down: ['']
         }),
         type: [0],
-        terrainType: [0]
+        terrainType: [0],
+        flags: new FormGroup({}),
     });
+
+
+    hasFlag(flag: number, selectedFlag: RoomFlagEnum): boolean {
+
+        if (flag === RoomFlagEnum.Donation && this.isFlagSet(selectedFlag, RoomFlagEnum.Donation)) {
+            return true;
+        } else if (flag === RoomFlagEnum.Healing && this.isFlagSet(selectedFlag, RoomFlagEnum.Healing)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private isFlagSet(value: number, flag: number): boolean {
+        return (value & flag) !== 0;
+    }
+
 
     initEmote(data: string = '') {
         return this.formBuilder.group({
@@ -183,6 +202,8 @@ export class RoomService {
             });
     }
     updateRoom(data: Room, roomId: number) {
+
+        console.log("dd", JSON.stringify(data));
         return this.http
             .put(`${this.saveRoomUrl}${data.id}`, JSON.stringify(data), {
                 headers: this.headers,
@@ -206,5 +227,11 @@ export class RoomService {
 
     removeExit(exit: string) {
         this.addRoomForm.get('exits.north').setValue('');
+    }
+
+    getRoomFlags() {
+        return this.http.get(`${this.host}World/Room/ReturnFlagTypes`, {
+            headers: this.headers,
+        });
     }
 }
